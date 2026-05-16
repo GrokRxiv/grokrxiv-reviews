@@ -1,0 +1,282 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\title{\textbackslash{}sysname: A Distributed Architecture for Parallelizable Agentic Workflows}
+\date{}
+\begin{document}
+\maketitle
+
+\noindent\textbf{arXiv:} \href{https://arxiv.org/abs/2605.15132}{2605.15132} \quad \textbf{Field:} cs.AI\\
+
+\section*{TL;DR}
+This paper proposes the Agent-Parallel Workload Architecture (APWA), a distributed multi-agent system designed to handle large, parallelizable agentic tasks by decomposing complex queries into non-interfering subproblems that can be executed independently and simultaneously. The core motivation—that existing LLM-based multi-agent systems hit reasoning, coordination, and computational bottlenecks at scale—is well-grounded in the community's experience. The architectural idea of eliminating cross-agent communication for embarrassingly parallel workloads is conceptually clean and potentially significant. However, the review is severely hampered by the limited material provided: no code, no datasets, no formal definitions, no experimental protocols, no statistical results, and no citations are visible. Technical claims about non-interference, dynamic decomposition correctness, and the assertion that prior systems 'fail completely' are partially supported at best. Reproducibility is critically low across all dimensions (code, data, evaluation, compute, hyperparameters). The novelty score is high, but the absence of rigorous evaluation and missing foundational references substantially undermine confidence in the work's contributions.
+
+\textbf{Recommendation:} Major revision \quad \textbf{Confidence:} 72\%\\
+
+\section*{Strengths}
+\begin{itemize}[leftmargin=*]
+  \item The core architectural insight—decomposing agentic workloads into non-interfering subproblems to achieve embarrassingly parallel execution—is conceptually novel and addresses a real, recognized scalability limitation in existing multi-agent LLM frameworks.
+  \item The system is explicitly designed for heterogeneous data types and diverse parallel processing patterns, suggesting broad applicability across domains.
+  \item The novelty reviewer rates the work as 'significant' with a high novelty score (0.8/1.0), and the differentiation from prior art (AutoGen, LangChain, Tree-of-Thoughts) is clearly articulated.
+  \item The problem framing—underutilization of parallel compute in LLM inference for agentic workflows—is timely and practically important as LLM deployments scale.
+  \item The system reportedly succeeds on tasks where prior systems fail entirely, suggesting a meaningful capability extension.
+\end{itemize}
+
+\section*{Weaknesses}
+\begin{itemize}[leftmargin=*]
+  \item Reproducibility is critically deficient: no code, datasets, prompts, baseline implementations, experimental protocols, or statistical procedures are provided or referenced. The reproducibility score is 0.18/1.0.
+  \item The claim of 'non-interfering subproblem decomposition' lacks formal definition and any formal or empirical verification of independence guarantees. This is the central technical claim and it remains unsubstantiated.
+  \item The assertion that prior systems 'fail completely' is unqualified—no failure criteria, scaling curves, or comparison methodology are described.
+  \item Dynamic query decomposition accuracy, planning latency, and failure modes (e.g., missed dependencies) are not reported or analyzable from the provided material.
+  \item No citations are present in the supplied material; several foundational references (Attention Is All You Need, GPT-3, ReAct, Generative Agents) are missing, reducing the paper's situating of itself within the broader literature.
+  \item The claim that parallel computing primitives in LLMs are 'underutilized' overstates the case, as frameworks like AutoGen and LangGraph do offer parallel constructs; this distinction is not acknowledged.
+  \item Technical reviewer confidence is only 0.4, reflecting that the bulk of the paper (background, system description, evaluation) was not visible, making a definitive correctness assessment impossible.
+  \item No ablation studies, sensitivity analyses, or failure case analyses are apparent from the provided material.
+\end{itemize}
+
+\section*{Open Questions}
+\begin{itemize}[leftmargin=*]
+  \item How is 'non-interference' formally defined, and what is the algorithmic procedure for verifying that a decomposed subproblem set satisfies this property? What class of workloads is guaranteed to be safely decomposable?
+  \item What are the exact failure criteria used to claim that prior systems 'fail completely'? Please provide scaling curves with confidence intervals for both APWA and the baselines.
+  \item What are the decomposition accuracy metrics (e.g., rate of incorrectly identified independent subproblems, missed dependencies) and what is the planning overhead introduced by the decomposition step?
+  \item Will code, agent configurations, prompts, benchmark tasks, and evaluation scripts be made publicly available? If not, what prevents release?
+  \item Which LLM models, versions, temperature settings, and hardware environments were used in experiments? How sensitive are results to these choices?
+  \item How does APWA handle cases where an apparently parallelizable workload has latent dependencies that are only revealed at execution time? What is the fallback mechanism?
+  \item Can you clarify which specific parallel constructs in AutoGen, LangGraph, or other frameworks are insufficient, and provide a direct empirical comparison against these frameworks on the same benchmarks?
+  \item What datasets and task suites were used to evaluate breadth-of-domain claims? Are these standard benchmarks or custom workloads, and are they publicly available?
+\end{itemize}
+
+\section*{Per-Agent Reviews}
+\subsection*{citation (\texttt{gemini-2.5-flash})}
+\begin{verbatim}
+{
+  "confidence": 0.8,
+  "entries": [],
+  "missing_references": [
+    {
+      "reason": "This paper introduces the Transformer architecture, which is foundational to Large Language Models (LLMs) and thus highly relevant to the underlying technology of the multi-agent systems discussed.",
+      "title": "Attention Is All You Need"
+    },
+    {
+      "reason": "This work introduced GPT-3, demonstrating the remarkable abilities of LLMs in solving complex tasks, which is a premise for the multi-agent systems discussed in the paper.",
+      "title": "Language Models are Few-Shot Learners"
+    },
+    {
+      "reason": "This paper presents a prominent framework for LLM-based agents that combines reasoning and acting, directly relevant to the 'agentic workflows' and 'reasoning bottlenecks' discussed.",
+      "title": "ReAct: Synergizing Reasoning and Acting in Language Models"
+    },
+    {
+      "reason": "Given the focus on 'distributed architecture' and 'parallelizable agentic workflows' that decompose tasks into 'non-interfering subproblems', foundational work in distributed parallel processing like MapReduce is highly relevant for context and comparison.",
+      "title": "MapReduce: Simplified Data Processing on Large Clusters"
+    },
+    {
+      "reason": "This paper explores the creation of believable multi-agent systems using LLMs, which is directly relevant to the 'autonomous multi-agent systems' and their capabilities.",
+      "title": "Generative Agents: Interactive Simulacra of Human Behavior"
+    }
+  ],
+  "summary": "No explicit citations were provided in the input text for auditing. However, based on the paper's title and abstract, several key foundational and related works in large language models, multi-agent systems, and distributed computing are identified as likely missing references that would provide essential context or comparative analysis."
+}
+\end{verbatim}
+
+\subsection*{meta_reviewer (\texttt{claude-sonnet-4-6})}
+\begin{verbatim}
+{
+  "confidence": 0.72,
+  "questions": [
+    "How is 'non-interference' formally defined, and what is the algorithmic procedure for verifying that a decomposed subproblem set satisfies this property? What class of workloads is guaranteed to be safely decomposable?",
+    "What are the exact failure criteria used to claim that prior systems 'fail completely'? Please provide scaling curves with confidence intervals for both APWA and the baselines.",
+    "What are the decomposition accuracy metrics (e.g., rate of incorrectly identified independent subproblems, missed dependencies) and what is the planning overhead introduced by the decomposition step?",
+    "Will code, agent configurations, prompts, benchmark tasks, and evaluation scripts be made publicly available? If not, what prevents release?",
+    "Which LLM models, versions, temperature settings, and hardware environments were used in experiments? How sensitive are results to these choices?",
+    "How does APWA handle cases where an apparently parallelizable workload has latent dependencies that are only revealed at execution time? What is the fallback mechanism?",
+    "Can you clarify which specific parallel constructs in AutoGen, LangGraph, or other frameworks are insufficient, and provide a direct empirical comparison against these frameworks on the same benchmarks?",
+    "What datasets and task suites were used to evaluate breadth-of-domain claims? Are these standard benchmarks or custom workloads, and are they publicly available?"
+  ],
+  "recommendation": "major_revision",
+  "strengths": [
+    "The core architectural insight—decomposing agentic workloads into non-interfering subproblems to achieve embarrassingly parallel execution—is conceptually novel and addresses a real, recognized scalability limitation in existing multi-agent LLM frameworks.",
+    "The system is explicitly designed for heterogeneous data types and diverse parallel processing patterns, suggesting broad applicability across domains.",
+    "The novelty reviewer rates the work as 'significant' with a high novelty score (0.8/1.0), and the differentiation from prior art (AutoGen, LangChain, Tree-of-Thoughts) is clearly articulated.",
+    "The problem framing—underutilization of parallel compute in LLM inference for agentic workflows—is timely and practically important as LLM deployments scale.",
+    "The system reportedly succeeds on tasks where prior systems fail entirely, suggesting a meaningful capability extension."
+  ],
+  "summary": "This paper proposes the Agent-Parallel Workload Architecture (APWA), a distributed multi-agent system designed to handle large, parallelizable agentic tasks by decomposing complex queries into non-interfering subproblems that can be executed independently and simultaneously. The core motivation—that existing LLM-based multi-agent systems hit reasoning, coordination, and computational bottlenecks at scale—is well-grounded in the community's experience. The architectural idea of eliminating cross-agent communication for embarrassingly parallel workloads is conceptually clean and potentially significant. However, the review is severely hampered by the limited material provided: no code, no datasets, no formal definitions, no experimental protocols, no statistical results, and no citations are visible. Technical claims about non-interference, dynamic decomposition correctness, and the assertion that prior systems 'fail completely' are partially supported at best. Reproducibility is critically low across all dimensions (code, data, evaluation, compute, hyperparameters). The novelty score is high, but the absence of rigorous evaluation and missing foundational references substantially undermine confidence in the work's contributions.",
+  "weaknesses": [
+    "Reproducibility is critically deficient: no code, datasets, prompts, baseline implementations, experimental protocols, or statistical procedures are provided or referenced. The reproducibility score is 0.18/1.0.",
+    "The claim of 'non-interfering subproblem decomposition' lacks formal definition and any formal or empirical verification of independence guarantees. This is the central technical claim and it remains unsubstantiated.",
+    "The assertion that prior systems 'fail completely' is unqualified—no failure criteria, scaling curves, or comparison methodology are described.",
+    "Dynamic query decomposition accuracy, planning latency, and failure modes (e.g., missed dependencies) are not reported or analyzable from the provided material.",
+    "No citations are present in the supplied material; several foundational references (Attention Is All You Need, GPT-3, ReAct, Generative Agents) are missing, reducing the paper's situating of itself within the broader literature.",
+    "The claim that parallel computing primitives in LLMs are 'underutilized' overstates the case, as frameworks like AutoGen and LangGraph do offer parallel constructs; this distinction is not acknowledged.",
+    "Technical reviewer confidence is only 0.4, reflecting that the bulk of the paper (background, system description, evaluation) was not visible, making a definitive correctness assessment impossible.",
+    "No ablation studies, sensitivity analyses, or failure case analyses are apparent from the provided material."
+  ]
+}
+\end{verbatim}
+
+\subsection*{novelty (\texttt{gemini-2.5-flash})}
+\begin{verbatim}
+{
+  "confidence": 4,
+  "missing_prior_art": [],
+  "novelty_score": 0.8,
+  "related_work": [
+    {
+      "citation_key": null,
+      "delta": "AutoGen focuses on flexible, conversational multi-agent systems with rich communication patterns. \n\nsysname differentiates itself by specifically targeting heavily parallelizable agentic workloads, emphasizing decomposition into non-interfering subproblems for distributed, independent execution to achieve high-throughput scaling, which is a different architectural goal than AutoGen's communication-centric approach.",
+      "relation": "competing",
+      "title": "AutoGen: Enabling Next-Gen LLM Applications with Multi-Agent Conversation Framework"
+    },
+    {
+      "citation_key": null,
+      "delta": "LangChain provides a general framework for building LLM applications and agents, offering tools for orchestration, memory, and tool use. \n\nsysname builds upon the general concept of agentic workflows but introduces a specific distributed architecture designed for scaling *parallelizable* agentic tasks by decomposing them into independently executable subproblems, a higher-level architectural concern beyond LangChain's core offerings.",
+      "relation": "prior_art",
+      "title": "LangChain: Building applications with LLMs through composability"
+    },
+    {
+      "citation_key": null,
+      "delta": "Tree-of-Thought (and similar methods like Chain-of-Thought) are reasoning primitives that enable LLMs to decompose and explore problem spaces internally. \n\nsysname leverages the *concept* of decomposition but applies it at an *architectural level* to enable *distributed, parallel execution* of these decomposed subproblems across independent resources, which is distinct from how ToT operates within a single agent's reasoning process.",
+      "relation": "prior_art",
+      "title": "Tree of Thoughts: Deliberate Problem Solving with Large Language Models"
+    }
+  ],
+  "verdict": "significant"
+}
+\end{verbatim}
+
+\subsection*{reproducibility (\texttt{gpt-5.5})}
+\begin{verbatim}
+{
+  "code_availability": "unspecified",
+  "code_url": null,
+  "concerns": [
+    {
+      "area": "code",
+      "description": "No code repository, release statement, or implementation availability information is provided in the supplied material, despite the work describing a distributed system architecture whose behavior likely depends on implementation details.",
+      "severity": "major"
+    },
+    {
+      "area": "data",
+      "description": "No datasets, benchmark tasks, prompts, workloads, or evaluation inputs are identified as publicly available in the supplied material.",
+      "severity": "major"
+    },
+    {
+      "area": "evaluation",
+      "description": "The abstract claims scalability and comparisons to prior systems, but the supplied material does not specify metrics, baselines, task suites, statistical procedures, or exact experimental protocols needed to reproduce the evaluation.",
+      "severity": "major"
+    },
+    {
+      "area": "compute",
+      "description": "The distributed architecture likely depends on hardware scale, LLM provider/model choice, parallel execution resources, and networking setup, but these are not specified in the supplied material.",
+      "severity": "major"
+    },
+    {
+      "area": "hyperparameters",
+      "description": "No information is provided about LLM versions, prompts, agent configuration, decomposition policies, scheduling parameters, temperature settings, retry logic, or other parameters that may materially affect results.",
+      "severity": "major"
+    }
+  ],
+  "confidence": 0.72,
+  "data_availability": "unspecified",
+  "data_url": null,
+  "environment": null,
+  "reproducibility_score": 0.18
+}
+\end{verbatim}
+
+\subsection*{summary (\texttt{claude-haiku-4-5-20251001})}
+\begin{verbatim}
+{
+  "audience": "Researchers and practitioners working on multi-agent systems, distributed AI systems, and large-scale task automation using language models",
+  "key_contributions": [
+    "A distributed multi-agent architecture specifically designed for parallelizable agentic workflows that eliminates cross-communication bottlenecks",
+    "Automatic decomposition of complex queries into non-interfering subproblems that can be processed independently in parallel",
+    "Support for heterogeneous data types and diverse parallel processing patterns across multiple application domains",
+    "Empirical demonstration that the system scales to larger tasks where prior multi-agent systems fail completely"
+  ],
+  "plain_language_summary": "Large language model-based autonomous agents can solve complex problems, but they struggle when tasks become very large or complex because they hit bottlenecks in reasoning, coordination, and computational resources. Even though the underlying LLMs have parallel processing capabilities, existing multi-agent systems don't effectively use them for tasks that could be split into independent pieces.\n\nThis paper introduces a new system architecture called the Agent-Parallel Workload Architecture (APWA) that is specifically designed to handle large tasks that can be broken down into independent subproblems. The key insight is that many complex tasks don't require agents to constantly communicate with each other—instead, they can be decomposed into separate pieces that different agents can work on simultaneously using different computing resources. APWA automatically figures out how to break down complex queries into these parallelizable workflows and handles different types of data and processing patterns.\n\nThe researchers demonstrate that APWA can successfully tackle larger and more complex tasks than previous systems, particularly in scenarios where existing approaches fail entirely. The system achieves this by eliminating unnecessary cross-communication between agents and allowing truly parallel execution of independent subproblems.",
+  "tldr": "A distributed architecture that enables LLM-based multi-agent systems to efficiently handle large, parallelizable tasks by decomposing them into independent subproblems that can be solved simultaneously without requiring agents to communicate with each other."
+}
+\end{verbatim}
+
+\subsection*{technical_correctness (\texttt{claude-opus-4-7})}
+\begin{verbatim}
+{
+  "claims": [
+    {
+      "assessment": "partially_supported",
+      "claim": "Existing multi-agent LLM systems hit reasoning, coordination, and computational scaling bottlenecks as task size/complexity grows.",
+      "evidence": "This is a widely observed phenomenon in the multi-agent LLM literature (e.g., context bloat, coordination overhead), but the abstract does not provide quantitative substantiation; supporting evidence would be in Background/Related work which is not visible.",
+      "id": "C1",
+      "location": "Abstract; Introduction",
+      "severity": "minor",
+      "suggested_fix": "Cite specific prior empirical results documenting these bottlenecks and quantify them."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "\\sysname enables parallel execution by decomposing workflows into non-interfering subproblems processable with independent resources and no cross-communication.",
+      "evidence": "Plausible as a design pattern (embarrassingly parallel decomposition), but correctness depends on whether the decomposition is actually verifiable as non-interfering for arbitrary agentic workloads. Without seeing the algorithm and formal guarantees, claim of 'non-interfering' decomposition for general workflows is strong.",
+      "id": "C2",
+      "location": "Abstract; The \\sysname System",
+      "severity": "major",
+      "suggested_fix": "Define non-interference formally, characterize the class of workloads to which it applies, and provide either proofs or empirical verification of independence."
+    },
+    {
+      "assessment": "unsupported",
+      "claim": "\\sysname supports heterogeneous data and parallel processing patterns across a wide breadth of domains.",
+      "evidence": "Breadth claim cannot be assessed from headings alone; evaluation section would need to span multiple domains and data modalities.",
+      "id": "C3",
+      "location": "Abstract",
+      "severity": "minor",
+      "suggested_fix": "Tabulate supported patterns (map, reduce, scatter-gather, pipeline) and demonstrate each in evaluation."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "\\sysname dynamically decomposes complex queries into parallelizable workflows.",
+      "evidence": "Dynamic decomposition by an LLM planner is feasible but error-prone; correctness, completeness, and overhead of decomposition need empirical evidence not visible from headings.",
+      "id": "C4",
+      "location": "Abstract; The \\sysname System",
+      "severity": "major",
+      "suggested_fix": "Report decomposition accuracy, planning latency, and failure modes (e.g., missed dependencies)."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "\\sysname scales on larger tasks in settings where prior systems fail completely.",
+      "evidence": "'Fail completely' is a strong claim; whether baselines truly fail vs. simply perform worse depends on chosen baselines, task sizes, and resource budgets. Without access to evaluation details, only partially supportable.",
+      "id": "C5",
+      "location": "Abstract; Evaluation",
+      "severity": "major",
+      "suggested_fix": "Clearly define failure criteria (timeout, OOM, accuracy threshold), use strong baselines, and report scaling curves with confidence intervals."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Parallel computing and reasoning primitives in underlying LLMs are available but underutilized by existing multi-agent systems.",
+      "evidence": "LLM serving systems do support batch/parallel inference, and many agent frameworks under-exploit this; however, frameworks like AutoGen, LangGraph, and others do offer parallel constructs, so the claim is partly overstated.",
+      "id": "C6",
+      "location": "Introduction",
+      "severity": "minor",
+      "suggested_fix": "Acknowledge existing parallel constructs in prior frameworks and clarify which specific primitives are underutilized."
+    }
+  ],
+  "confidence": 0.4,
+  "overall_correctness": "mostly_sound"
+}
+\end{verbatim}
+
+\section*{Corrections}
+% corrections rendered from corrections table; empty on first publish
+No corrections have been recorded.
+
+\section*{Bibliography}
+No bibliography extracted.
+
+% \bibliographystyle{plain}
+% \bibliography{references}
+\end{document}
