@@ -1,0 +1,292 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\title{Generalized Fourier Transforms for Momentum-Space Construction on Riemannian Manifolds}
+\date{}
+\begin{document}
+\maketitle
+
+\noindent\textbf{arXiv:} \href{https://arxiv.org/abs/2605.00403}{2605.00403} \quad \textbf{Field:} math-ph\\
+
+\section*{TL;DR}
+This paper develops a Generalized Fourier Transform (GFT) on arbitrary Riemannian manifolds, with the principal contribution being a systematic framework for resolving spectral degeneracy of the Laplace-Beltrami operator via symmetry-adapted maximal Abelian commuting sets (MASAs) constructed from geometric differential operators and Killing data. The paper proves a Parseval-Plancherel theorem for the GFT, introduces a dual classification scheme (MASA completeness/Stäckel separability and topology of the momentum label space), and clarifies the role of true isometries versus coordinate/gauge freedom in determining momentum labelings. Reviewers generally find the goals ambitious and well-motivated, the main claims plausible and consistent with known spectral theory, and the organizational framework novel in its generality. However, several significant gaps were identified: the existence of a fiberwise MASA from Killing data is only guaranteed on sufficiently symmetric manifolds, and the paper does not adequately address the generic (low-symmetry) case; uniqueness of the GFT (up to MASA resolution) requires explicit caveats about phase conventions and measurable section choices; the constructive algorithm's termination and completeness conditions are not verified from the abstract/headings; the connection to Stäckel separability is asserted rather than proved; and the paper lacks citations to directly relevant foundational literature (Helgason, Birrell–Davies, geometric quantization). The reproducibility assessment is limited by the absence of code and the impossibility of fully evaluating proofs from the abstract alone. Overall, the paper represents a significant and potentially impactful theoretical contribution, but requires major revision to address mathematical gaps, improve rigor, and situate itself properly within the existing literature.
+
+\textbf{Recommendation:} Major revision \quad \textbf{Confidence:} 72\%\\
+
+\section*{Strengths}
+\begin{itemize}[leftmargin=*]
+  \item Ambitious and well-motivated generalization of Fourier analysis to arbitrary Riemannian manifolds, addressing a genuine need in mathematical physics and geometric analysis.
+  \item Systematic use of MASAs constructed from geometric/Killing data to resolve spectral degeneracy is a coherent and novel organizing principle for the momentum-space problem on curved manifolds.
+  \item Proof of a Parseval-Plancherel theorem for the GFT is a solid mathematical anchor for the framework.
+  \item Dual classification scheme (MASA completeness/Stäckel separability and topological structure of momentum label space) provides a useful organizing taxonomy for the space of GFTs.
+  \item Correct and insightful distinction between unitary changes induced by true isometries and inequivalent (but unitarily equivalent) momentum labelings arising from gauge/coordinate freedom.
+  \item Clear relevance to downstream dynamical applications (curved-space mode decompositions, quantum fields on curved spacetime, heat/wave equations on manifolds).
+  \item The novelty assessment finds the contribution 'significant' relative to prior art, particularly in providing a general and constructive method beyond specific symmetric-space constructions.
+\end{itemize}
+
+\section*{Weaknesses}
+\begin{itemize}[leftmargin=*]
+  \item The claim that a fiberwise MASA can always be constructed from Killing data is not valid for generic Riemannian manifolds with trivial or small isometry groups; the paper must clearly delineate the class of manifolds for which the construction is effective and discuss fallback strategies for the low-symmetry case.
+  \item Uniqueness of the GFT up to MASA resolution is stated without explicit treatment of the necessary caveats: measurable selection of eigenspaces, phase/sign conventions on joint spectrum fibers, and the dependence on the choice of MASA itself.
+  \item The equivalence between MASA completeness and Stäckel separability is asserted as a classification principle but apparently not proved; precise theorem statements with proofs or citations are needed.
+  \item The constructive algorithm for generating commuting operators is not shown to terminate or be complete in general; worked examples beyond standard cases (e.g., beyond R\^{}3, S\^{}2) appear absent.
+  \item No citations are provided in the abstract or visible structure; foundational and closely related literature (Helgason's harmonic analysis on symmetric spaces, Birrell–Davies on QFT in curved spacetime, geometric quantization) is not referenced, making it impossible to assess how the paper situates itself relative to prior work.
+  \item Reproducibility of the theoretical results depends entirely on the completeness of proofs in the full paper body, which cannot be assessed from the abstract and headings alone; no code is provided for any algorithmic component.
+  \item The paper is described as foundational for 'subsequent work' on dynamical applications, but no concrete examples or applications are demonstrated, weakening the immediate impact assessment.
+\end{itemize}
+
+\section*{Open Questions}
+\begin{itemize}[leftmargin=*]
+  \item For Riemannian manifolds with trivial isometry group, how does the proposed MASA construction proceed? Is there a well-defined fallback, or is the framework restricted to manifolds with sufficient symmetry?
+  \item Can the authors state precisely in what sense the GFT is unique once a MASA is fixed? Specifically, what freedom remains (e.g., phase conventions, measurable section choices) and how is it controlled?
+  \item Is the equivalence between MASA completeness and Stäckel separability a theorem proven in the paper, or is it a conjecture/organizational principle? If proven, what are the precise hypotheses?
+  \item What are the termination and completeness guarantees for the constructive algorithm generating commuting operators? Can the authors provide at least one worked example on a non-trivially symmetric manifold beyond R\^{}3 and S\^{}2?
+  \item How does this framework relate to Helgason's harmonic analysis on symmetric spaces—does it recover known results in that special case, and what is genuinely new?
+  \item What is the relationship between the proposed GFT and the mode decompositions used in quantum field theory on curved spacetime (e.g., Birrell–Davies)? Does the framework resolve or clarify the Bogoliubov transformation ambiguity in that context?
+  \item The paper distinguishes true isometries from coordinate freedom; how does this map onto the notion of diffeomorphism invariance versus choice of foliation in general relativity?
+  \item Are there manifolds for which the momentum label space F is necessarily mixed (partly discrete, partly continuous) that serve as illustrative non-trivial examples?
+\end{itemize}
+
+\section*{Per-Agent Reviews}
+\subsection*{citation (\texttt{gemini-2.5-flash})}
+\begin{verbatim}
+{
+  "confidence": 1.0,
+  "entries": [],
+  "missing_references": [],
+  "summary": "No explicit citations were found in the provided paper title, abstract, or section headings. The phrase \"dynamical applications are developed in the subsequent work\" refers to future work and is not a reference to an existing publication."
+}
+\end{verbatim}
+
+\subsection*{meta_reviewer (\texttt{claude-sonnet-4-6})}
+\begin{verbatim}
+{
+  "confidence": 0.72,
+  "questions": [
+    "For Riemannian manifolds with trivial isometry group, how does the proposed MASA construction proceed? Is there a well-defined fallback, or is the framework restricted to manifolds with sufficient symmetry?",
+    "Can the authors state precisely in what sense the GFT is unique once a MASA is fixed? Specifically, what freedom remains (e.g., phase conventions, measurable section choices) and how is it controlled?",
+    "Is the equivalence between MASA completeness and Stäckel separability a theorem proven in the paper, or is it a conjecture/organizational principle? If proven, what are the precise hypotheses?",
+    "What are the termination and completeness guarantees for the constructive algorithm generating commuting operators? Can the authors provide at least one worked example on a non-trivially symmetric manifold beyond R^3 and S^2?",
+    "How does this framework relate to Helgason's harmonic analysis on symmetric spaces—does it recover known results in that special case, and what is genuinely new?",
+    "What is the relationship between the proposed GFT and the mode decompositions used in quantum field theory on curved spacetime (e.g., Birrell–Davies)? Does the framework resolve or clarify the Bogoliubov transformation ambiguity in that context?",
+    "The paper distinguishes true isometries from coordinate freedom; how does this map onto the notion of diffeomorphism invariance versus choice of foliation in general relativity?",
+    "Are there manifolds for which the momentum label space F is necessarily mixed (partly discrete, partly continuous) that serve as illustrative non-trivial examples?"
+  ],
+  "recommendation": "major_revision",
+  "strengths": [
+    "Ambitious and well-motivated generalization of Fourier analysis to arbitrary Riemannian manifolds, addressing a genuine need in mathematical physics and geometric analysis.",
+    "Systematic use of MASAs constructed from geometric/Killing data to resolve spectral degeneracy is a coherent and novel organizing principle for the momentum-space problem on curved manifolds.",
+    "Proof of a Parseval-Plancherel theorem for the GFT is a solid mathematical anchor for the framework.",
+    "Dual classification scheme (MASA completeness/Stäckel separability and topological structure of momentum label space) provides a useful organizing taxonomy for the space of GFTs.",
+    "Correct and insightful distinction between unitary changes induced by true isometries and inequivalent (but unitarily equivalent) momentum labelings arising from gauge/coordinate freedom.",
+    "Clear relevance to downstream dynamical applications (curved-space mode decompositions, quantum fields on curved spacetime, heat/wave equations on manifolds).",
+    "The novelty assessment finds the contribution 'significant' relative to prior art, particularly in providing a general and constructive method beyond specific symmetric-space constructions."
+  ],
+  "summary": "This paper develops a Generalized Fourier Transform (GFT) on arbitrary Riemannian manifolds, with the principal contribution being a systematic framework for resolving spectral degeneracy of the Laplace-Beltrami operator via symmetry-adapted maximal Abelian commuting sets (MASAs) constructed from geometric differential operators and Killing data. The paper proves a Parseval-Plancherel theorem for the GFT, introduces a dual classification scheme (MASA completeness/Stäckel separability and topology of the momentum label space), and clarifies the role of true isometries versus coordinate/gauge freedom in determining momentum labelings. Reviewers generally find the goals ambitious and well-motivated, the main claims plausible and consistent with known spectral theory, and the organizational framework novel in its generality. However, several significant gaps were identified: the existence of a fiberwise MASA from Killing data is only guaranteed on sufficiently symmetric manifolds, and the paper does not adequately address the generic (low-symmetry) case; uniqueness of the GFT (up to MASA resolution) requires explicit caveats about phase conventions and measurable section choices; the constructive algorithm's termination and completeness conditions are not verified from the abstract/headings; the connection to Stäckel separability is asserted rather than proved; and the paper lacks citations to directly relevant foundational literature (Helgason, Birrell–Davies, geometric quantization). The reproducibility assessment is limited by the absence of code and the impossibility of fully evaluating proofs from the abstract alone. Overall, the paper represents a significant and potentially impactful theoretical contribution, but requires major revision to address mathematical gaps, improve rigor, and situate itself properly within the existing literature.",
+  "weaknesses": [
+    "The claim that a fiberwise MASA can always be constructed from Killing data is not valid for generic Riemannian manifolds with trivial or small isometry groups; the paper must clearly delineate the class of manifolds for which the construction is effective and discuss fallback strategies for the low-symmetry case.",
+    "Uniqueness of the GFT up to MASA resolution is stated without explicit treatment of the necessary caveats: measurable selection of eigenspaces, phase/sign conventions on joint spectrum fibers, and the dependence on the choice of MASA itself.",
+    "The equivalence between MASA completeness and Stäckel separability is asserted as a classification principle but apparently not proved; precise theorem statements with proofs or citations are needed.",
+    "The constructive algorithm for generating commuting operators is not shown to terminate or be complete in general; worked examples beyond standard cases (e.g., beyond R^3, S^2) appear absent.",
+    "No citations are provided in the abstract or visible structure; foundational and closely related literature (Helgason's harmonic analysis on symmetric spaces, Birrell–Davies on QFT in curved spacetime, geometric quantization) is not referenced, making it impossible to assess how the paper situates itself relative to prior work.",
+    "Reproducibility of the theoretical results depends entirely on the completeness of proofs in the full paper body, which cannot be assessed from the abstract and headings alone; no code is provided for any algorithmic component.",
+    "The paper is described as foundational for 'subsequent work' on dynamical applications, but no concrete examples or applications are demonstrated, weakening the immediate impact assessment."
+  ]
+}
+\end{verbatim}
+
+\subsection*{novelty (\texttt{gemini-2.5-flash})}
+\begin{verbatim}
+{
+  "confidence": 5,
+  "missing_prior_art": [
+    {
+      "reason": "This foundational text provides extensive coverage of Fourier analysis, Radon transforms, and harmonic analysis on symmetric spaces, which are highly relevant special cases of curved manifolds. A direct comparison or discussion of how the proposed general framework relates to or extends Helgason's specific results would strengthen the paper's context.",
+      "title": "Groups and Geometric Analysis by Sigurdur Helgason"
+    },
+    {
+      "reason": "Geometric quantization deals with constructing quantum theories on manifolds, often involving the use of geometric operators, symmetries, and the resolution of ambiguities. The paper's use of geometric differential operators and symmetry-adapted bases for defining momentum space has conceptual overlaps with this field, and a discussion of its relation could provide further context.",
+      "title": "Geometric Quantization (e.g., Woodhouse, Sniatycki)"
+    },
+    {
+      "reason": "This field directly addresses the definition and interpretation of momentum and energy operators, as well as mode decompositions, in curved backgrounds. The paper's goal of providing a foundation for 'curved-space mode decompositions' makes this body of work highly relevant for comparison and contextualization.",
+      "title": "Quantum Mechanics in Curved Spacetime (e.g., Birrell & Davies)"
+    }
+  ],
+  "novelty_score": 0.7,
+  "related_work": [
+    {
+      "citation_key": null,
+      "delta": "This paper utilizes the spectral decomposition of the Laplace-Beltrami operator as the foundation for defining the Generalized Fourier Transform (GFT), but extends this framework to systematically address and resolve spectral degeneracy for the explicit construction of momentum space labels on general Riemannian manifolds.",
+      "relation": "prior_art",
+      "title": "Spectral Theory of the Laplace-Beltrami Operator on Riemannian Manifolds"
+    },
+    {
+      "citation_key": null,
+      "delta": "While prior work has extensively developed Fourier analysis on specific classes of curved spaces like symmetric spaces, this paper aims for a more general framework applicable to *any* Riemannian manifold, providing a systematic and constructive method for resolving degeneracy in momentum space beyond the specific constructions available for highly symmetric cases.",
+      "relation": "prior_art",
+      "title": "Harmonic Analysis and Fourier Transforms on Symmetric Spaces"
+    },
+    {
+      "citation_key": null,
+      "delta": "The paper builds upon the concept of using commuting operators for separation of variables, but specifically applies and generalizes this idea to construct a *fiberwise maximal Abelian commuting set (MASA)* from *geometric differential operators* (especially Killing data) to resolve spectral degeneracy and define momentum space labels on general Riemannian manifolds, offering a constructive algorithm.",
+      "relation": "prior_art",
+      "title": "Separation of Variables and Stäckel Systems in Classical and Quantum Mechanics"
+    },
+    {
+      "citation_key": null,
+      "delta": "This paper leverages the theoretical concept of MASAs to define complete sets of commuting operators. Its novelty lies in providing a *constructive algorithm* for generating such a MASA from *geometric data* (e.g., Killing vectors) specifically for the purpose of resolving spectral degeneracy in the context of Generalized Fourier Transforms on Riemannian manifolds.",
+      "relation": "prior_art",
+      "title": "Maximal Abelian Subalgebras (MASA) in Operator Theory"
+    }
+  ],
+  "verdict": "significant"
+}
+\end{verbatim}
+
+\subsection*{reproducibility (\texttt{gpt-5.5})}
+\begin{verbatim}
+{
+  "code_availability": "unspecified",
+  "code_url": null,
+  "concerns": [
+    {
+      "area": "code",
+      "description": "No code or implementation is indicated for the constructive algorithm for generating commuting operators or momentum-label spaces, so computational reproduction of examples or algorithms may require independent implementation from the text.",
+      "severity": "major"
+    },
+    {
+      "area": "data",
+      "description": "No datasets are indicated; this appears to be a primarily theoretical work, so data availability is likely not applicable but is unspecified.",
+      "severity": "info"
+    },
+    {
+      "area": "evaluation",
+      "description": "Reproducibility depends on the completeness of the mathematical proofs, definitions, and worked examples in the full paper; this cannot be fully assessed from the abstract and section headings alone.",
+      "severity": "major"
+    }
+  ],
+  "confidence": 0.35,
+  "data_availability": "unspecified",
+  "data_url": null,
+  "environment": null,
+  "reproducibility_score": 0.6
+}
+\end{verbatim}
+
+\subsection*{summary (\texttt{claude-haiku-4-5-20251001})}
+\begin{verbatim}
+{
+  "audience": "Mathematicians and theoretical physicists working on harmonic analysis, differential geometry, quantum mechanics on curved spaces, and mode decomposition methods; researchers in general relativity and geometric analysis who need tools for analyzing functions on curved manifolds.",
+  "key_contributions": [
+    "Develops a rigorous Generalized Fourier Transform (GFT) on arbitrary Riemannian manifolds with minimal requirements, proving it satisfies the Parseval-Plancherel theorem",
+    "Resolves spectral degeneracy in curved spaces using symmetry-adapted maximal Abelian commuting sets (MASAs) constructed from geometric differential operators and Killing vectors",
+    "Provides a constructive algorithm for generating commuting operators that reflect the geometric symmetries of the manifold",
+    "Establishes a dual classification scheme for momentum spaces based on MASA completeness/Stäckel separability and topological properties",
+    "Clarifies the distinction between unitary transformations from true isometries (which preserve GFT structure) and coordinate/gauge choices (which may produce inequivalent momentum labelings while remaining unitarily equivalent)",
+    "Demonstrates that different momentum space constructions (e.g., Cartesian vs. spherical) are related by coordinate freedom rather than fundamental differences"
+  ],
+  "plain_language_summary": "Fourier analysis is a fundamental mathematical tool that decomposes functions into simpler wave-like components, with applications ranging from signal processing to quantum mechanics. However, this technique was developed for flat spaces like ordinary 3D space. This paper addresses how to generalize Fourier analysis to curved spaces (Riemannian manifolds), which are important in physics and geometry. The key challenge is that on curved spaces, the notion of 'momentum space'—the space of wave frequencies—becomes ambiguous due to spectral degeneracy: multiple different wave patterns can have the same energy. The authors resolve this by using geometric symmetries of the curved space. They construct special sets of mathematical operators (called maximal Abelian commuting sets or MASAs) derived from the space's symmetries, particularly from Killing vector fields that represent geometric symmetries. These operators act like 'quantum numbers' that distinguish between degenerate states. The paper proves that their generalized Fourier transform satisfies the classical Parseval-Plancherel theorem (which ensures energy is preserved under the transform) and provides an algorithm for constructing the necessary symmetry-adapted operators. The authors also clarify that different choices of coordinate systems or symmetry resolutions can lead to different-looking momentum space labelings (like Cartesian versus spherical coordinates) while remaining mathematically equivalent.",
+  "tldr": "This paper extends Fourier analysis to curved spaces by developing a generalized Fourier transform that uses geometric symmetries to resolve ambiguities in defining momentum space on Riemannian manifolds."
+}
+\end{verbatim}
+
+\subsection*{technical_correctness (\texttt{claude-opus-4-7})}
+\begin{verbatim}
+{
+  "claims": [
+    {
+      "assessment": "supported",
+      "claim": "The Generalized Fourier Transform (GFT) defined via spectral decomposition on a Riemannian manifold Σ, under the assumptions of being an isometric isomorphism with kernel diagonalizing the Laplace-Beltrami operator, satisfies a generalized Parseval-Plancherel theorem.",
+      "evidence": "This is essentially a restatement of standard spectral theorem results for self-adjoint operators; the Parseval-Plancherel identity follows immediately from the isometric isomorphism assumption between L^2(Σ) and L^2(F, dμ). The result is well-known in spectral theory (e.g., for the Laplace-Beltrami operator on complete Riemannian manifolds).",
+      "id": "C1",
+      "location": "Section: Generalized Fourier Transform on Riemannian Manifold",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Spectral degeneracy of the Laplace-Beltrami operator can be resolved by a fiberwise maximal Abelian commuting set (MASA) of geometric differential operators, particularly constructed from Killing data when available.",
+      "evidence": "The use of commuting operators (often from Killing vectors/tensors) to resolve degeneracies is standard practice (e.g., angular momentum operators on S^2, separation of variables in Stäckel systems). However, the claim that a MASA always exists for an arbitrary Riemannian manifold is not guaranteed — generic manifolds lack sufficient Killing symmetries. The claim holds in the symmetric/highly-symmetric case but is conditional.",
+      "id": "C2",
+      "location": "Section: Spectral Degeneracy and Operator Freedom; Geometric Operators and Symmetry-Adapted Bases",
+      "severity": "minor",
+      "suggested_fix": "Clarify that fiberwise MASA construction from Killing data presupposes sufficient isometry; discuss what happens on manifolds with trivial isometry group."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "A constructive algorithm is provided for generating commuting operators that resolve degeneracy, yielding momentum label spaces F (discrete, continuous, or mixed) that reflect geometric symmetry constraints.",
+      "evidence": "Without access to the explicit algorithm in the paper body, this is plausible and consistent with known constructions (Casimirs of isometry group, Killing tensors generating second-order symmetry operators). The discrete/continuous/mixed structure of F reflects compact vs. non-compact symmetry directions, which is standard harmonic analysis on homogeneous spaces.",
+      "id": "C3",
+      "location": "Section: Geometric Operators and Symmetry-Adapted Bases",
+      "severity": "minor",
+      "suggested_fix": "Ensure algorithm termination and completeness conditions are explicit; provide worked examples beyond R^3."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "A dual classification scheme is introduced: (i) by MASA completeness and Stäckel separability, and (ii) by the topology of the momentum label space F.",
+      "evidence": "Stäckel separability is a well-defined classical concept for Hamilton-Jacobi/Helmholtz separation, and linking it to MASA completeness is reasonable. The topological classification of F is meaningful (e.g., Pontryagin dual of isometry group on homogeneous spaces). Without seeing detailed propositions, the claim appears to be a reasonable organizing framework rather than a proven theorem.",
+      "id": "C4",
+      "location": "Section: GFT Classifications",
+      "severity": "minor",
+      "suggested_fix": "State precise theorems relating MASA completeness ↔ Stäckel separability with proof or citation."
+    },
+    {
+      "assessment": "supported",
+      "claim": "True isometries induce unitary changes preserving the GFT structure, whereas changes of coordinate-adapted degeneracy resolution schemes induce inequivalent k-space labelings that remain unitarily equivalent on L^2(Σ) (e.g., Cartesian vs spherical in R^3).",
+      "evidence": "This is a correct distinction. Isometries act on Σ and intertwine with the GFT via push-forward. Different choices of commuting operators (e.g., {p_x,p_y,p_z} vs {Δ, L^2, L_z} on R^3) yield distinct labelings (plane waves vs spherical waves) but both bases span L^2(R^3) and are related by a unitary change of basis. Standard result.",
+      "id": "C5",
+      "location": "Section: Gauge and Coordinate Freedom in GFT",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "supported",
+      "claim": "The framework provides a foundation for curved-space mode decompositions applicable to subsequent dynamical applications.",
+      "evidence": "Mode decomposition via spectral theory of the Laplace-Beltrami operator is a well-established foundation for PDEs (heat, wave, Schrödinger) on Riemannian manifolds. The claim is a programmatic statement consistent with standard usage.",
+      "id": "C6",
+      "location": "Abstract; Discussions and Summary",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "The requirement that the GFT kernel diagonalizes the Laplace-Beltrami operator uniquely (up to MASA-resolution) determines the transform.",
+      "evidence": "Uniqueness up to MASA choice is non-trivial: the spectral measure of Δ is unique by spectral theorem, but the realization as an L^2(F) requires choosing a measurable section of eigenspaces. Without a complete MASA the GFT is not uniquely determined; with a MASA it is determined up to phase/sign choices on each joint eigenspace. The paper should make these caveats explicit.",
+      "id": "C7",
+      "location": "Section: Generalized Fourier Transform on Riemannian Manifold",
+      "severity": "major",
+      "suggested_fix": "State explicitly that uniqueness holds modulo unitary gauge on each joint spectrum fiber, and address phase conventions."
+    },
+    {
+      "assessment": "supported",
+      "claim": "Momentum label spaces F can be discrete, continuous, or mixed and reflect geometric symmetry constraints (e.g., compactness of Σ or its isometry group).",
+      "evidence": "Standard: compact manifolds have discrete spectrum of Δ; non-compact homogeneous spaces (R^n, H^n) have continuous spectrum; mixed cases arise (e.g., cylinder R × S^1).",
+      "id": "C8",
+      "location": "Section: GFT Classifications",
+      "severity": "info",
+      "suggested_fix": null
+    }
+  ],
+  "confidence": 0.62,
+  "overall_correctness": "mostly_sound"
+}
+\end{verbatim}
+
+\section*{Corrections}
+% corrections rendered from corrections table; empty on first publish
+No corrections have been recorded.
+
+\section*{Bibliography}
+No bibliography extracted.
+
+% \bibliographystyle{plain}
+% \bibliography{references}
+\end{document}
