@@ -1,0 +1,308 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\title{A Heterogeneous Temporal Memory Governance Framework for Long-Term LLM Persona Consistency}
+\date{}
+\begin{document}
+\maketitle
+
+\noindent\textbf{arXiv:} \href{https://arxiv.org/abs/2605.14802}{2605.14802} \quad \textbf{Field:} cs.AI\\
+
+\section*{TL;DR}
+ARPM is a proposed external memory framework for maintaining long-term persona and factual consistency in LLM-based dialogue systems. It separates static knowledge from dynamic dialogue experience memory and combines vector retrieval, BM25, RRF fusion, dual-temporal reranking, and chronological evidence reading. The framework positions persona consistency as a traceable, auditable governance problem rather than a model-weight or context-window problem. While the conceptual framing is interesting and addresses a real practical challenge, the paper suffers from severe reproducibility deficits (no code, no public data, undisclosed hyperparameters), weak empirical methodology (small single-run experiments with no statistical testing, subjective manual evaluation without inter-annotator agreement), inadequately supported quantitative claims, missing baseline comparisons against alternative memory systems, and absent citation infrastructure. The novelty is moderate—the individual components (RAG, BM25, vector retrieval, hybrid fusion) are established, and the temporal governance framing, while useful, requires stronger differentiation from existing temporal reasoning and memory network literature. In its current form, the paper reads more as an engineering report or position paper than a rigorously validated scientific contribution.
+
+\textbf{Recommendation:} Major revision \quad \textbf{Confidence:} 82\%\\
+
+\section*{Strengths}
+\begin{itemize}[leftmargin=*]
+  \item Addresses a genuine and practically important problem: maintaining persona consistency and factual accuracy in LLMs across long, noisy, multi-model dialogue scenarios.
+  \item The architectural separation of static knowledge memory from dynamic dialogue experience memory is a clean conceptual contribution that offers a clear governance-oriented framing.
+  \item Demonstrates awareness that semantic retrieval alone is insufficient for correction and tracing, motivating hybrid BM25+vector retrieval with ablation evidence, directionally consistent with broader IR literature.
+  \item The multi-model handoff scenario (cross-model persona transfer) is a novel and practically relevant evaluation setting not commonly addressed in related work.
+  \item The white-box, externalized approach to consistency (auditable and transferable) is a meaningful design philosophy distinguishing ARPM from fine-tuning or long-context-only approaches.
+\end{itemize}
+
+\section*{Weaknesses}
+\begin{itemize}[leftmargin=*]
+  \item Critical reproducibility failure: no code, no public dataset, no corpus construction procedure, no embedding model or hyperparameter specifications (chunking, BM25 parameters, RRF constants, top-k, temporal scoring weights), and no compute environment disclosed.
+  \item All quantitative claims rest on single small-run experiments from private engineering logs with no confidence intervals, significance tests, repeated trials, or per-example outputs—making the reported numbers (54\%, 80\%, 100\%, 66.7\%) statistically uninterpretable.
+  \item Manual review serving as the gold standard is not rigorously defined: no annotation rubric, annotator count, or inter-annotator agreement is provided, leaving the large CSV-vs-manual gap (54\%→100\%) potentially explainable by evaluator leniency.
+  \item No baseline comparisons against alternative long-term memory or persona consistency systems (e.g., MemGPT-style, long-context window approaches, fine-tuned models), making relative performance claims unsupported.
+  \item The ablation sample sizes appear extremely small (denominators suggest \~{}15 items given 6.67\% granularity), rendering effect sizes noisy and generalization claims unwarranted.
+  \item Absent citation infrastructure: no bibliography was identifiable for audit, preventing assessment of related work coverage, including missing literature on temporal reasoning in dialogue/memory networks.
+  \item Claims about cross-model generalizability are unsupported: the specific models tested, the number of handoffs, and any controlled comparisons are not disclosed.
+  \item Dual-temporal reranking and chronological evidence reading are presented as key novel mechanisms but are not formally defined with sufficient precision for independent implementation.
+\end{itemize}
+
+\section*{Open Questions}
+\begin{itemize}[leftmargin=*]
+  \item Can the authors release the full implementation (code, configuration, prompts) and either a public dataset or a reproducible synthetic data generator to enable independent replication?
+  \item What are the exact hyperparameters used: embedding model, chunking strategy, BM25 parameters, RRF fusion constants, top-k retrieval, temporal scoring weights, and LLM versions/context window sizes?
+  \item Can the authors increase the evaluation set size substantially, run multiple trials, and report confidence intervals or statistical significance tests for all reported accuracy figures?
+  \item What is the precise manual review rubric? How many annotators were used, and what was the inter-annotator agreement (Cohen's kappa or similar)?
+  \item Which specific LLM models were involved in the multi-model handoff experiments, and what quantitative metrics define 'semantic continuity,' 'boundary continuity,' and 'persona consistency' in Experiment 3?
+  \item How does ARPM compare quantitatively against representative baselines such as MemGPT, retrieval-augmented long-context approaches, or persona-fine-tuned models on the same evaluation tasks?
+  \item How are dual-temporal reranking and chronological evidence reading formally defined, and what are the precise scoring functions and algorithmic procedures?
+  \item How does the framework relate to and differentiate from prior work on temporal reasoning and event sequencing in dialogue systems and memory networks?
+\end{itemize}
+
+\section*{Per-Agent Reviews}
+\subsection*{citation (\texttt{gemini-2.5-flash})}
+\begin{verbatim}
+{
+  "confidence": 0.1,
+  "entries": [],
+  "missing_references": [],
+  "summary": "No citations were found in the provided paper abstract and section headings. Therefore, a bibliography audit could not be performed."
+}
+\end{verbatim}
+
+\subsection*{meta_reviewer (\texttt{claude-sonnet-4-6})}
+\begin{verbatim}
+{
+  "confidence": 0.82,
+  "questions": [
+    "Can the authors release the full implementation (code, configuration, prompts) and either a public dataset or a reproducible synthetic data generator to enable independent replication?",
+    "What are the exact hyperparameters used: embedding model, chunking strategy, BM25 parameters, RRF fusion constants, top-k retrieval, temporal scoring weights, and LLM versions/context window sizes?",
+    "Can the authors increase the evaluation set size substantially, run multiple trials, and report confidence intervals or statistical significance tests for all reported accuracy figures?",
+    "What is the precise manual review rubric? How many annotators were used, and what was the inter-annotator agreement (Cohen's kappa or similar)?",
+    "Which specific LLM models were involved in the multi-model handoff experiments, and what quantitative metrics define 'semantic continuity,' 'boundary continuity,' and 'persona consistency' in Experiment 3?",
+    "How does ARPM compare quantitatively against representative baselines such as MemGPT, retrieval-augmented long-context approaches, or persona-fine-tuned models on the same evaluation tasks?",
+    "How are dual-temporal reranking and chronological evidence reading formally defined, and what are the precise scoring functions and algorithmic procedures?",
+    "How does the framework relate to and differentiate from prior work on temporal reasoning and event sequencing in dialogue systems and memory networks?"
+  ],
+  "recommendation": "major_revision",
+  "strengths": [
+    "Addresses a genuine and practically important problem: maintaining persona consistency and factual accuracy in LLMs across long, noisy, multi-model dialogue scenarios.",
+    "The architectural separation of static knowledge memory from dynamic dialogue experience memory is a clean conceptual contribution that offers a clear governance-oriented framing.",
+    "Demonstrates awareness that semantic retrieval alone is insufficient for correction and tracing, motivating hybrid BM25+vector retrieval with ablation evidence, directionally consistent with broader IR literature.",
+    "The multi-model handoff scenario (cross-model persona transfer) is a novel and practically relevant evaluation setting not commonly addressed in related work.",
+    "The white-box, externalized approach to consistency (auditable and transferable) is a meaningful design philosophy distinguishing ARPM from fine-tuning or long-context-only approaches."
+  ],
+  "summary": "ARPM is a proposed external memory framework for maintaining long-term persona and factual consistency in LLM-based dialogue systems. It separates static knowledge from dynamic dialogue experience memory and combines vector retrieval, BM25, RRF fusion, dual-temporal reranking, and chronological evidence reading. The framework positions persona consistency as a traceable, auditable governance problem rather than a model-weight or context-window problem. While the conceptual framing is interesting and addresses a real practical challenge, the paper suffers from severe reproducibility deficits (no code, no public data, undisclosed hyperparameters), weak empirical methodology (small single-run experiments with no statistical testing, subjective manual evaluation without inter-annotator agreement), inadequately supported quantitative claims, missing baseline comparisons against alternative memory systems, and absent citation infrastructure. The novelty is moderate—the individual components (RAG, BM25, vector retrieval, hybrid fusion) are established, and the temporal governance framing, while useful, requires stronger differentiation from existing temporal reasoning and memory network literature. In its current form, the paper reads more as an engineering report or position paper than a rigorously validated scientific contribution.",
+  "weaknesses": [
+    "Critical reproducibility failure: no code, no public dataset, no corpus construction procedure, no embedding model or hyperparameter specifications (chunking, BM25 parameters, RRF constants, top-k, temporal scoring weights), and no compute environment disclosed.",
+    "All quantitative claims rest on single small-run experiments from private engineering logs with no confidence intervals, significance tests, repeated trials, or per-example outputs—making the reported numbers (54%, 80%, 100%, 66.7%) statistically uninterpretable.",
+    "Manual review serving as the gold standard is not rigorously defined: no annotation rubric, annotator count, or inter-annotator agreement is provided, leaving the large CSV-vs-manual gap (54%→100%) potentially explainable by evaluator leniency.",
+    "No baseline comparisons against alternative long-term memory or persona consistency systems (e.g., MemGPT-style, long-context window approaches, fine-tuned models), making relative performance claims unsupported.",
+    "The ablation sample sizes appear extremely small (denominators suggest ~15 items given 6.67% granularity), rendering effect sizes noisy and generalization claims unwarranted.",
+    "Absent citation infrastructure: no bibliography was identifiable for audit, preventing assessment of related work coverage, including missing literature on temporal reasoning in dialogue/memory networks.",
+    "Claims about cross-model generalizability are unsupported: the specific models tested, the number of handoffs, and any controlled comparisons are not disclosed.",
+    "Dual-temporal reranking and chronological evidence reading are presented as key novel mechanisms but are not formally defined with sufficient precision for independent implementation."
+  ]
+}
+\end{verbatim}
+
+\subsection*{novelty (\texttt{gemini-2.5-flash})}
+\begin{verbatim}
+{
+  "confidence": 0.8,
+  "missing_prior_art": [
+    {
+      "reason": "The paper introduces 'dual-temporal reranking' and 'chronological evidence reading' as key components. A discussion of existing research on how dialogue systems or memory networks handle temporal aspects of information, event ordering, and timeline management would provide a richer context for the novelty of these specific mechanisms.",
+      "title": "Temporal Reasoning and Event Sequencing in Dialogue Systems or Memory Networks"
+    }
+  ],
+  "novelty_score": 0.7,
+  "related_work": [
+    {
+      "citation_key": null,
+      "delta": "ARPM extends standard RAG by introducing a specific temporal memory governance framework, separating static and dynamic memory, and incorporating dual-temporal reranking and chronological evidence reading specifically to address long-term persona consistency, fact loss, and timeline confusion under high-noise and context-clearing scenarios, going beyond typical RAG applications.",
+      "relation": "builds_on",
+      "title": "Retrieval Augmented Generation (RAG) for LLMs"
+    },
+    {
+      "citation_key": null,
+      "delta": "Unlike these methods that embed persona in model weights or rely solely on large context windows, ARPM treats persona consistency as an external, traceable, auditable, and transferable governance problem, offering a white-box solution that is robust to context clearing and multi-model handoff.",
+      "relation": "competing",
+      "title": "Approaches for LLM Persona Consistency via Fine-tuning or Long Context"
+    },
+    {
+      "citation_key": null,
+      "delta": "ARPM integrates these established retrieval techniques (BM25, vector retrieval, RRF fusion) within its novel temporal memory governance framework, demonstrating their critical role, especially BM25 for correction and tracing, in maintaining long-term dialogue and persona consistency through specific ablation studies.",
+      "relation": "prior_art",
+      "title": "Hybrid Information Retrieval (BM25 and Vector Search)"
+    }
+  ],
+  "verdict": "significant"
+}
+\end{verbatim}
+
+\subsection*{reproducibility (\texttt{gpt-5.5})}
+\begin{verbatim}
+{
+  "code_availability": "unspecified",
+  "code_url": null,
+  "concerns": [
+    {
+      "area": "code",
+      "description": "No code repository or implementation details are provided for ARPM components such as vector retrieval, BM25, RRF fusion, dual-temporal reranking, chronological evidence reading, or the controlled analysis protocol.",
+      "severity": "major"
+    },
+    {
+      "area": "data",
+      "description": "The experiments are described as using engineering logs and a 5.1-million-character noise substrate, but no public dataset, log dump, synthetic data generator, or exact corpus construction procedure is specified.",
+      "severity": "critical"
+    },
+    {
+      "area": "hyperparameters",
+      "description": "Key retrieval and reranking settings are not specified, including embedding model, chunking strategy, vector index configuration, BM25 parameters, RRF constants, top-k values, temporal scoring weights, and prompt construction limits.",
+      "severity": "major"
+    },
+    {
+      "area": "evaluation",
+      "description": "The evaluation depends partly on CSV auto-judgment and manual review, but the judging rules, annotation rubric, annotator count, inter-annotator agreement, and examples of accepted evidence are not provided.",
+      "severity": "major"
+    },
+    {
+      "area": "compute",
+      "description": "The hardware, software environment, LLM versions, context-window sizes, and API/model settings used for long-range interaction and multi-model handoff are unspecified.",
+      "severity": "major"
+    },
+    {
+      "area": "other",
+      "description": "The abstract reports aggregate accuracies from small experiments, but does not provide the exact 50-round QA set, ablation prompts, context-clearing schedule, or per-example outputs needed to verify the claims.",
+      "severity": "major"
+    }
+  ],
+  "confidence": 0.78,
+  "data_availability": "private",
+  "data_url": null,
+  "environment": null,
+  "reproducibility_score": 2.0
+}
+\end{verbatim}
+
+\subsection*{summary (\texttt{claude-haiku-4-5-20251001})}
+\begin{verbatim}
+{
+  "audience": "Researchers and practitioners working on long-context language models, dialogue systems, and AI reliability; teams building production LLM applications requiring consistent persona and fact retention over extended interactions.",
+  "key_contributions": [
+    "ARPM framework that separates static knowledge memory from dynamic dialogue experience memory for managing long-term LLM consistency",
+    "Demonstration that hybrid retrieval combining semantic search, BM25 keyword matching, and temporal reranking outperforms semantic-only approaches",
+    "Evidence that manual verification of retrieved evidence achieves 100% recall in clean conditions versus 54% for automatic CSV-based judgment",
+    "Proof that ARPM maintains persona consistency across extreme conditions: 5.1-million-character conversations, periodic context clearing, and multi-model handoffs",
+    "Framework for treating persona consistency as an auditable, traceable governance problem rather than a model weight encoding problem"
+  ],
+  "plain_language_summary": "Large language models (LLMs) like ChatGPT often struggle to maintain consistent personalities and remember facts accurately over long conversations. They may forget important details, get confused about timelines, or change their behavior inconsistently. This paper introduces ARPM, a system that solves this problem by maintaining an external memory separate from the model itself. Instead of trying to encode consistency into the model's weights or relying on the model to remember everything in context, ARPM treats consistency as a governance problem that can be tracked and audited.\n\nThe system works by keeping two types of memory: static knowledge (facts that don't change) and dynamic dialogue experience (what happened in the conversation). When answering questions, ARPM retrieves relevant information using multiple methods—semantic search, keyword matching, and temporal ranking—then verifies the evidence before using it. The researchers tested this on engineering logs with varying amounts of noise and found that manual review caught 100% of correct answers in clean conditions, while automatic checking only caught 54%. They also showed that combining semantic search with keyword-based retrieval was necessary; semantic search alone missed important corrections. Finally, they demonstrated that ARPM could maintain consistency even when the conversation was extremely long (5.1 million characters), periodically cleared, or handed off between different AI models.\n\nThe key insight is that long-term consistency doesn't require changing the model itself—it can be achieved through careful external memory management and verification protocols that are transparent and transferable across different systems.",
+  "tldr": "ARPM is an external memory framework that maintains consistent AI persona and facts during long conversations by separating static knowledge from dynamic dialogue history and using multiple retrieval and verification techniques."
+}
+\end{verbatim}
+
+\subsection*{technical_correctness (\texttt{claude-opus-4-7})}
+\begin{verbatim}
+{
+  "claims": [
+    {
+      "assessment": "supported",
+      "claim": "ARPM separates static knowledge memory from dynamic dialogue experience memory and combines vector retrieval, BM25, RRF fusion, dual-temporal reranking, chronological evidence reading, and a controlled analysis protocol.",
+      "evidence": "This is a design/architecture description rather than an empirical claim; consistent with what the abstract describes the system as doing.",
+      "id": "C1",
+      "location": "Abstract; Method",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Under 1:5 signal-to-noise ratio, CSV auto-judgment recall accuracy is 54.0% while manual review raises it to 100.0%.",
+      "evidence": "The numerical claim is internally reported but rests on a single 50-round run from engineering logs without confidence intervals, multiple seeds, or independent replication. The gap between automatic and manual scoring (54%→100%) is large and may reflect lenient manual judgment rather than true recall.",
+      "id": "C2",
+      "location": "Abstract; Experimental Results",
+      "severity": "major",
+      "suggested_fix": "Report multiple runs with variance, define manual-review rubric precisely, and include inter-rater agreement to justify the manual scores."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Under 1:200+ signal-to-noise ratio, CSV auto-judgment is 44.0% and manual review 80.0%.",
+      "evidence": "Same concerns as C2: single-run engineering log data, no statistical analysis, manual review subjectivity.",
+      "id": "C3",
+      "location": "Abstract; Experimental Results",
+      "severity": "major",
+      "suggested_fix": "Provide repeated trials, statistical significance testing, and a blinded review protocol."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Automatic CSV rules underestimate recall after supporting evidence enters the prompt.",
+      "evidence": "The gap between CSV and manual scores is consistent with this interpretation, but it could also indicate manual reviewers being overly lenient or counting paraphrase as recall. Without a precise definition of the CSV matching rule and manual criteria, the conclusion is plausible but not rigorously established.",
+      "id": "C4",
+      "location": "Experimental Results and Analysis",
+      "severity": "minor",
+      "suggested_fix": "Show example cases the CSV rule misses but manual marks as correct, and quantify the type of mismatch (paraphrase, partial match, etc.)."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Disabling dialogue history retrieval reduces strict accuracy from 100% to 66.7%; disabling BM25 reduces it to 80.0%.",
+      "evidence": "The 100%/66.7%/80.0% values appear to be drawn from a small evaluation set (denominators look like ~15 items given 6.67% granularity), making the effect sizes noisy. No CIs or significance tests are reported.",
+      "id": "C5",
+      "location": "Abstract; Experimental Results (ablation)",
+      "severity": "major",
+      "suggested_fix": "Increase sample size, report exact n, repeat trials, and provide confidence intervals or significance tests."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Pure semantic retrieval is insufficient for correction and tracing; BM25 lexical retrieval is needed.",
+      "evidence": "The single ablation supports the directional claim, but the strength of the generalization exceeds what one small ablation can justify; many prior works also support hybrid retrieval, lending external plausibility.",
+      "id": "C6",
+      "location": "Experimental Results (ablation)",
+      "severity": "minor",
+      "suggested_fix": "Soften the claim or back it with additional retrieval datasets/baselines."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Under a 5.1M-character noise substrate with periodic context clearing and multi-model handoff, ARPM maintains semantic continuity, boundary continuity, and persona consistency.",
+      "evidence": "The claim is qualitative and relies on engineering-log observation without standardized metrics or baseline comparisons against alternative memory systems (e.g., long-context, MemGPT-style approaches).",
+      "id": "C7",
+      "location": "Abstract; Experiment 3",
+      "severity": "major",
+      "suggested_fix": "Define quantitative metrics for each continuity dimension and compare against baselines."
+    },
+    {
+      "assessment": "supported",
+      "claim": "ARPM treats continuity as a traceable, auditable, and transferable governance problem, unlike weight-encoded or long-context approaches.",
+      "evidence": "This is a framing/positioning claim rather than an empirical one and is consistent with the described architecture.",
+      "id": "C8",
+      "location": "Abstract; Introduction",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Long-term persona consistency can be decomposed into governable components and evaluated in a white-box manner.",
+      "evidence": "The framework demonstrates a decomposition, but 'can be' is a broad claim; the paper provides a proof-of-concept rather than a general proof.",
+      "id": "C9",
+      "location": "Abstract; Conclusion",
+      "severity": "minor",
+      "suggested_fix": "Reframe as 'we demonstrate one such decomposition' rather than a general possibility claim."
+    },
+    {
+      "assessment": "unsupported",
+      "claim": "Findings generalize across models due to multi-model handoff testing.",
+      "evidence": "Multi-model handoff is described but the abstract does not specify which models, how many, or with what controlled comparisons; engineering-log evidence is insufficient for cross-model generalization claims.",
+      "id": "C10",
+      "location": "Experiment 3",
+      "severity": "major",
+      "suggested_fix": "List models tested, define handoff metrics, and run controlled comparisons."
+    }
+  ],
+  "confidence": 0.55,
+  "overall_correctness": "questionable"
+}
+\end{verbatim}
+
+\section*{Corrections}
+% corrections rendered from corrections table; empty on first publish
+No corrections have been recorded.
+
+\section*{Bibliography}
+No bibliography extracted.
+
+% \bibliographystyle{plain}
+% \bibliography{references}
+\end{document}
