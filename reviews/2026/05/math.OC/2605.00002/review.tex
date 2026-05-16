@@ -1,0 +1,427 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\title{Fixed-Time Convergence of Time-Varying Neurodynamic Systems for Mixed Variational Inequalities}
+\date{}
+\begin{document}
+\maketitle
+
+\noindent\textbf{arXiv:} \href{https://arxiv.org/abs/2605.00002}{2605.00002} \quad \textbf{Field:} math.OC\\
+
+\section*{TL;DR}
+This paper proposes a family of proximal neurodynamic models (PNMs), including time-varying variants (TVPNMs), that guarantee fixed-time (FXT) convergence to solutions of mixed variational inequalities (MVIs) under strong pseudomonotonicity and Lipschitz continuity. The framework is extended to composite and minimax optimization, and a robustness analysis under bounded noise is included. The contribution is incremental relative to existing fixed-time proximal neurodynamic models — the primary novelty is the introduction of time-varying coefficients and their extension to the MVI setting — but the theoretical problem is well-posed and relevant. Three major technical gaps in the correctness proofs, combined with poor reproducibility (no code, missing ODE solver details, single numerical example without baseline comparison), prevent acceptance in the current form. Major revisions are required.
+
+\textbf{Recommendation:} Major revision \quad \textbf{Confidence:} 72\%\\
+
+\section*{Strengths}
+\begin{itemize}[leftmargin=*]
+  \item Well-motivated problem: fixed-time convergence with uniform settling-time bounds is a practically important property for real-time optimization, and the MVI setting is sufficiently general to cover composite and minimax problems.
+  \item Solid bibliographic foundation covering foundational work on FXT stability (Polyakov 2012), variational inequalities (Facchinei \& Pang 2003), and the proximal point algorithm (Rockafellar 1976), as well as closely related recent neurodynamic work.
+  \item The reduction of composite and minimax optimization to the MVI framework is standard and sound (C4 assessed as supported), broadening the practical applicability of the proposed models.
+  \item Robustness analysis against bounded disturbances is a useful and practically relevant addition, even if the result should be clarified as practical FXT rather than exact FXT.
+\end{itemize}
+
+\section*{Weaknesses}
+\begin{itemize}[leftmargin=*]
+  \item Non-autonomous Lyapunov analysis insufficiently justified (C1, C6 — major): The paper claims FXT convergence for the TVPNM under strong pseudomonotonicity, but the non-autonomous Lyapunov inequality required for uniform settling-time bounds and the adequacy of strong pseudomonotonicity (vs. strong monotonicity) for the FXT decay rate are not demonstrated in the visible sections. Several papers in this literature silently invoke stronger assumptions than stated.
+  \item Settling-time bound finiteness unverified (C2 — major): Explicit settling-time bounds for time-varying coefficient designs require the lower envelope of the gain to be bounded away from zero. This non-trivial condition is not addressed.
+  \item Exact vs. practical FXT under noise conflated (C3 — minor/major): Persistent bounded noise generically precludes exact FXT convergence; the robustness result should be stated explicitly as practical FXT with a residual-set radius proportional to the disturbance bound.
+  \item Novelty is incremental (novelty score 0.60, verdict: incremental): The core idea — adding time-varying coefficients to an existing FXT proximal neurodynamic framework for MVIs — is a modest extension, and the verdict from the novelty reviewer is that it builds directly on a recent paper addressing essentially the same setting.
+  \item Poor reproducibility (score 0.55): No source code or simulation scripts are provided despite a software contribution being listed; ODE solver, step size, tolerances, and stopping criteria are unspecified; results appear only as trajectory plots with no tabulated convergence times or residuals; and a single numerical example is insufficient to validate the FXT property across initial conditions.
+  \item Claim of 'significantly enhanced' convergence speed is qualitative (C7 — minor): No side-by-side settling-time bound comparison between TVPNM and constant-coefficient PNM, and no controlled numerical comparison, is provided.
+  \item Missing references: No canonical Lyapunov stability text (e.g., Khalil), no citation for time-varying gains in control theory, and no reference for neurodynamic minimax optimization, leaving some theoretical claims without adequate grounding.
+\end{itemize}
+
+\section*{Open Questions}
+\begin{itemize}[leftmargin=*]
+  \item Please display the explicit Lyapunov inequality used in the TVPNM convergence proof, identifying exactly where the time-varying coefficient enters, and confirm that the resulting settling-time bound is uniform over all initial conditions and over all time-shifts of t0.
+  \item Is 'strong pseudomonotonicity' (in the Karamardian sense) genuinely sufficient for the FXT Lyapunov decay, or does the proof at any point invoke strong monotonicity or cocoercivity? If the latter, the stated assumptions should be strengthened to match.
+  \item For the robustness result, does the system converge to the exact solution or to a residual ball? If the latter, what is the explicit radius as a function of the disturbance bound and model coefficients?
+  \item Will simulation code (MATLAB/Python scripts) be made publicly available? If not, can the authors at minimum specify the ODE solver, step size, and tolerances used to generate the figures?
+  \item Can the authors provide a quantitative settling-time comparison — both theoretical bounds and a controlled numerical experiment on the same problem instance — between the TVPNM and its constant-coefficient PNM counterpart to substantiate the claim of significantly enhanced convergence speed?
+\end{itemize}
+
+\section*{Per-Agent Reviews}
+\subsection*{citation (\texttt{gemini-2.5-pro})}
+\begin{verbatim}
+{
+  "confidence": 4.5,
+  "entries": [
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Andrey Polyakov"
+        ],
+        "doi": "10.1109/TAC.2011.2161799",
+        "key": "[1]",
+        "raw": "A. Polyakov, \"Nonlinear feedback design for fixed-time stabilization of linear control systems,\" IEEE Transactions on Automatic Control, vol. 57, no. 8, pp. 2106-2110, 2012.",
+        "title": "Nonlinear feedback design for fixed-time stabilization of linear control systems",
+        "url": null,
+        "venue": "IEEE Transactions on Automatic Control",
+        "year": 2012
+      },
+      "exists": true,
+      "notes": "This is a foundational paper on fixed-time (FXT) stability, which is the core convergence property claimed by the authors. The paper's theoretical analysis of FXT convergence relies heavily on the concepts introduced in this work.",
+      "relevance": "high",
+      "resolved_doi": "10.1109/tac.2011.2161799",
+      "resolved_url": "https://ieeexplore.ieee.org/document/6032168"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Francisco Facchinei",
+          "Jong-Shi Pang"
+        ],
+        "doi": "10.1007/b97543",
+        "key": "[2]",
+        "raw": "F. Facchinei and J.-S. Pang, Finite-Dimensional Variational Inequalities and Complementarity Problems. Springer, 2003.",
+        "title": "Finite-dimensional variational inequalities and complementarity problems",
+        "url": null,
+        "venue": "Springer Series in Operations Research",
+        "year": 2003
+      },
+      "exists": true,
+      "notes": "This is the standard, comprehensive textbook on variational inequalities (VIs). It provides the necessary background, definitions (including mixed VIs), and theoretical framework, such as the concepts of strong pseudomonotonicity and Lipschitz continuity, which are key assumptions in the paper.",
+      "relevance": "high",
+      "resolved_doi": "10.1007/b97543",
+      "resolved_url": "https://link.springer.com/book/10.1007/b97543"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "J. J. Hopfield",
+          "D. W. Tank"
+        ],
+        "doi": "10.1007/BF00339943",
+        "key": "[3]",
+        "raw": "J. J. Hopfield and D. W. Tank, \"'Neural' computation of decisions in optimization problems,\" Biological Cybernetics, vol. 52, no. 3, pp. 141-152, 1985.",
+        "title": "'Neural' computation of decisions in optimization problems",
+        "url": null,
+        "venue": "Biological Cybernetics",
+        "year": 1985
+      },
+      "exists": true,
+      "notes": "This is a seminal paper that established the use of neurodynamic systems (recurrent neural networks) for solving optimization problems. While the current paper presents a much more advanced model, this work provides the historical and conceptual foundation for the entire field of neurodynamic optimization.",
+      "relevance": "medium",
+      "resolved_doi": "10.1007/bf00339943",
+      "resolved_url": "https://link.springer.com/article/10.1007/BF00339943"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "R. T. Rockafellar"
+        ],
+        "doi": "10.1137/0314056",
+        "key": "[4]",
+        "raw": "R. T. Rockafellar, \"Monotone operators and the proximal point algorithm,\" SIAM Journal on Control and Optimization, vol. 14, no. 5, pp. 877-898, 1976.",
+        "title": "Monotone operators and the proximal point algorithm",
+        "url": null,
+        "venue": "SIAM Journal on Control and Optimization",
+        "year": 1976
+      },
+      "exists": true,
+      "notes": "The paper proposes 'proximal neurodynamic models (PNMs)'. This reference is the foundational work on the proximal point algorithm, which is the basis for the 'proximal' aspect of their proposed models. It is essential for understanding the structure of their system.",
+      "relevance": "high",
+      "resolved_doi": "10.1137/0314056",
+      "resolved_url": "https://epubs.siam.org/doi/abs/10.1137/0314056"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Yuanqing Lou",
+          "Yiguang Hong",
+          "Guanrong Chen"
+        ],
+        "doi": "10.1109/TNN.2011.2163319",
+        "key": "[5]",
+        "raw": "Y. Lou, Y. Hong, and G. Chen, \"A class of neurodynamic approaches to constrained optimization with projection operators,\" IEEE Transactions on Neural Networks, vol. 22, no. 10, pp. 1653-1664, 2011.",
+        "title": "A class of neurodynamic approaches to constrained optimization with projection operators",
+        "url": null,
+        "venue": "IEEE Transactions on Neural Networks",
+        "year": 2011
+      },
+      "exists": true,
+      "notes": "This paper represents prior work on neurodynamic systems for solving variational inequalities and optimization problems. It serves as a relevant baseline or point of comparison for the novel fixed-time, time-varying models proposed in the current work.",
+      "relevance": "high",
+      "resolved_doi": "10.1109/tnn.2011.2163319",
+      "resolved_url": "https://ieeexplore.ieee.org/document/5982079/"
+    },
+    {
+      "citation": {
+        "arxiv_id": "1306.0573",
+        "authors": [
+          "Neal Parikh",
+          "Stephen Boyd"
+        ],
+        "doi": "10.1561/2400000003",
+        "key": "[6]",
+        "raw": "N. Parikh and S. Boyd, \"Proximal algorithms,\" Foundations and Trends in Optimization, vol. 1, no. 3, pp. 127-239, 2014.",
+        "title": "Proximal algorithms",
+        "url": "https://web.stanford.edu/~boyd/papers/prox_algs.html",
+        "venue": "Foundations and Trends® in Optimization",
+        "year": 2014
+      },
+      "exists": true,
+      "notes": "This is a modern and comprehensive survey on proximal algorithms. It is highly relevant for the application section on composite optimization, which heavily relies on proximal operators.",
+      "relevance": "medium",
+      "resolved_doi": "10.1561/2400000003",
+      "resolved_url": "https://dx.doi.org/10.1561/2400000003"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Qun Liu",
+          "Tingwen Huang",
+          "Jun Wang"
+        ],
+        "doi": "10.1109/TNNLS.2019.2956321",
+        "key": "[7]",
+        "raw": "Q. Liu, T. Huang, and J. Wang, \"Fixed-time convergent recurrent neural network for solving linear matrix inequalities,\" IEEE Transactions on Neural Networks and Learning Systems, vol. 31, no. 12, pp. 5663-5673, 2020.",
+        "title": "Fixed-time convergent recurrent neural network for solving linear matrix inequalities",
+        "url": null,
+        "venue": "IEEE Transactions on Neural Networks and Learning Systems",
+        "year": 2020
+      },
+      "exists": true,
+      "notes": "This paper directly combines the two main themes of the current work: fixed-time convergence and neurodynamic systems (recurrent neural networks). Citing this demonstrates awareness of recent, closely related work in the field, even though it addresses a different problem (linear matrix inequalities).",
+      "relevance": "high",
+      "resolved_doi": "10.1109/tnnls.2019.2956321",
+      "resolved_url": "https://ieeexplore.ieee.org/document/8932394/"
+    }
+  ],
+  "missing_references": [
+    {
+      "reason": "The paper states that 'Rigorous convergence and stability analyses are established... using Lyapunov stability theory.' While this is a standard tool, citing a canonical reference like H. K. Khalil's 'Nonlinear Systems' would strengthen the theoretical rigor and provide readers with a standard source for the underlying principles.",
+      "title": "A foundational text on Lyapunov stability theory for nonlinear systems."
+    },
+    {
+      "reason": "The paper emphasizes the 'strategic design of time-varying coefficients' to enhance convergence speed. Citing seminal work on this concept from the control theory literature would provide important context and acknowledge the origins of this technique, even if it was not originally applied to neurodynamic models.",
+      "title": "Early work on using time-varying gains for accelerated convergence in dynamical systems."
+    },
+    {
+      "reason": "The paper claims to demonstrate applicability to minimax problems. Including a reference to recent or foundational work in this specific application area would better situate their contribution and show how their proposed method compares to or extends existing neurodynamic solutions for minimax games.",
+      "title": "A survey or key paper on neurodynamic approaches for minimax optimization."
+    }
+  ],
+  "summary": "The bibliography provides a solid foundation for the paper's contributions. It correctly identifies and cites seminal works in the core areas of fixed-time stability (Polyakov), variational inequalities (Facchinei & Pang), and the proximal point algorithm (Rockafellar). It also includes references to both the historical origins of neurodynamic optimization (Hopfield & Tank) and more recent, highly relevant work combining fixed-time convergence with neural networks. The selection of references is appropriate and supports the paper's claims regarding its novelty and theoretical underpinnings. However, the bibliography could be strengthened by explicitly citing a standard text on Lyapunov stability theory, providing context on the use of time-varying gains from control theory, and including a specific reference for the application of neurodynamics to minimax problems."
+}
+\end{verbatim}
+
+\subsection*{meta_reviewer (\texttt{claude-sonnet-4-6})}
+\begin{verbatim}
+{
+  "confidence": 0.72,
+  "questions": [
+    "Please display the explicit Lyapunov inequality used in the TVPNM convergence proof, identifying exactly where the time-varying coefficient enters, and confirm that the resulting settling-time bound is uniform over all initial conditions and over all time-shifts of t0.",
+    "Is 'strong pseudomonotonicity' (in the Karamardian sense) genuinely sufficient for the FXT Lyapunov decay, or does the proof at any point invoke strong monotonicity or cocoercivity? If the latter, the stated assumptions should be strengthened to match.",
+    "For the robustness result, does the system converge to the exact solution or to a residual ball? If the latter, what is the explicit radius as a function of the disturbance bound and model coefficients?",
+    "Will simulation code (MATLAB/Python scripts) be made publicly available? If not, can the authors at minimum specify the ODE solver, step size, and tolerances used to generate the figures?",
+    "Can the authors provide a quantitative settling-time comparison — both theoretical bounds and a controlled numerical experiment on the same problem instance — between the TVPNM and its constant-coefficient PNM counterpart to substantiate the claim of significantly enhanced convergence speed?"
+  ],
+  "recommendation": "major_revision",
+  "strengths": [
+    "Well-motivated problem: fixed-time convergence with uniform settling-time bounds is a practically important property for real-time optimization, and the MVI setting is sufficiently general to cover composite and minimax problems.",
+    "Solid bibliographic foundation covering foundational work on FXT stability (Polyakov 2012), variational inequalities (Facchinei & Pang 2003), and the proximal point algorithm (Rockafellar 1976), as well as closely related recent neurodynamic work.",
+    "The reduction of composite and minimax optimization to the MVI framework is standard and sound (C4 assessed as supported), broadening the practical applicability of the proposed models.",
+    "Robustness analysis against bounded disturbances is a useful and practically relevant addition, even if the result should be clarified as practical FXT rather than exact FXT."
+  ],
+  "summary": "This paper proposes a family of proximal neurodynamic models (PNMs), including time-varying variants (TVPNMs), that guarantee fixed-time (FXT) convergence to solutions of mixed variational inequalities (MVIs) under strong pseudomonotonicity and Lipschitz continuity. The framework is extended to composite and minimax optimization, and a robustness analysis under bounded noise is included. The contribution is incremental relative to existing fixed-time proximal neurodynamic models — the primary novelty is the introduction of time-varying coefficients and their extension to the MVI setting — but the theoretical problem is well-posed and relevant. Three major technical gaps in the correctness proofs, combined with poor reproducibility (no code, missing ODE solver details, single numerical example without baseline comparison), prevent acceptance in the current form. Major revisions are required.",
+  "weaknesses": [
+    "Non-autonomous Lyapunov analysis insufficiently justified (C1, C6 — major): The paper claims FXT convergence for the TVPNM under strong pseudomonotonicity, but the non-autonomous Lyapunov inequality required for uniform settling-time bounds and the adequacy of strong pseudomonotonicity (vs. strong monotonicity) for the FXT decay rate are not demonstrated in the visible sections. Several papers in this literature silently invoke stronger assumptions than stated.",
+    "Settling-time bound finiteness unverified (C2 — major): Explicit settling-time bounds for time-varying coefficient designs require the lower envelope of the gain to be bounded away from zero. This non-trivial condition is not addressed.",
+    "Exact vs. practical FXT under noise conflated (C3 — minor/major): Persistent bounded noise generically precludes exact FXT convergence; the robustness result should be stated explicitly as practical FXT with a residual-set radius proportional to the disturbance bound.",
+    "Novelty is incremental (novelty score 0.60, verdict: incremental): The core idea — adding time-varying coefficients to an existing FXT proximal neurodynamic framework for MVIs — is a modest extension, and the verdict from the novelty reviewer is that it builds directly on a recent paper addressing essentially the same setting.",
+    "Poor reproducibility (score 0.55): No source code or simulation scripts are provided despite a software contribution being listed; ODE solver, step size, tolerances, and stopping criteria are unspecified; results appear only as trajectory plots with no tabulated convergence times or residuals; and a single numerical example is insufficient to validate the FXT property across initial conditions.",
+    "Claim of 'significantly enhanced' convergence speed is qualitative (C7 — minor): No side-by-side settling-time bound comparison between TVPNM and constant-coefficient PNM, and no controlled numerical comparison, is provided.",
+    "Missing references: No canonical Lyapunov stability text (e.g., Khalil), no citation for time-varying gains in control theory, and no reference for neurodynamic minimax optimization, leaving some theoretical claims without adequate grounding."
+  ]
+}
+\end{verbatim}
+
+\subsection*{novelty (\texttt{gemini-2.5-pro})}
+\begin{verbatim}
+{
+  "confidence": 0.8,
+  "missing_prior_art": [],
+  "novelty_score": 0.6,
+  "related_work": [
+    {
+      "citation_key": null,
+      "delta": "The current work introduces time-varying coefficients into the fixed-time proximal neurodynamic model framework for MVIs. This addition is shown to accelerate convergence, and the paper provides the corresponding stability analysis, settling time bounds, and robustness guarantees for this new model class.",
+      "relation": "builds_on",
+      "title": "A fixed-time convergent proximal neurodynamic model for mixed variational inequalities"
+    },
+    {
+      "citation_key": null,
+      "delta": "This paper achieves fixed-time convergence, a stronger property than the finite-time convergence established in earlier works, as the convergence time bound is independent of the initial conditions. It also addresses the more general class of mixed variational inequalities (MVIs).",
+      "relation": "prior_art",
+      "title": "Finite-time neurodynamic approach to solving variational inequalities and related optimization problems"
+    },
+    {
+      "citation_key": null,
+      "delta": "While prior work established fixed-time convergence for standard variational inequalities, this paper extends the concept to mixed variational inequalities, which include a non-smooth term, necessitating a proximal neurodynamic approach. The key addition is the use of time-varying parameters to improve performance.",
+      "relation": "prior_art",
+      "title": "Fixed-time convergent neurodynamic system for solving variational inequalities"
+    }
+  ],
+  "verdict": "incremental"
+}
+\end{verbatim}
+
+\subsection*{reproducibility (\texttt{gpt-5.5})}
+\begin{verbatim}
+{
+  "code_availability": "unspecified",
+  "code_url": null,
+  "concerns": [
+    {
+      "area": "code",
+      "description": "No source code, repository, or scripts are provided for generating the numerical figures, despite a software contribution being listed.",
+      "severity": "major"
+    },
+    {
+      "area": "data",
+      "description": "The experiments appear to use a synthetic nonlinear complementarity problem with parameters stated in the paper; no external dataset is required.",
+      "severity": "info"
+    },
+    {
+      "area": "hyperparameters",
+      "description": "Problem parameters and initial conditions are mostly specified, but numerical integration details such as ODE solver, step size, tolerances, stopping criterion, and plotting procedure are not given.",
+      "severity": "major"
+    },
+    {
+      "area": "evaluation",
+      "description": "Results are reported primarily as trajectory/error plots, without tabulated convergence times, residual thresholds, or machine-readable outputs for exact comparison.",
+      "severity": "major"
+    },
+    {
+      "area": "other",
+      "description": "There is a notation inconsistency in the example definition of the operator using both w and x, which may cause ambiguity during reimplementation.",
+      "severity": "minor"
+    },
+    {
+      "area": "compute",
+      "description": "No software environment or hardware requirements are specified, though the examples appear computationally lightweight.",
+      "severity": "minor"
+    }
+  ],
+  "confidence": 0.78,
+  "data_availability": "synthetic",
+  "data_url": null,
+  "environment": null,
+  "reproducibility_score": 0.55
+}
+\end{verbatim}
+
+\subsection*{summary (\texttt{claude-haiku-4-5-20251001})}
+\begin{verbatim}
+{
+  "audience": "Applied mathematicians, optimization specialists, control systems engineers, and researchers developing neural network-based algorithms for real-time optimization",
+  "key_contributions": [
+    "Novel class of proximal and time-varying proximal neurodynamic models with fixed-time convergence guarantees",
+    "Explicit closed-form upper bounds on settling time for the proposed time-varying systems",
+    "Rigorous robustness analysis proving stability against bounded noise disturbances",
+    "Extension of fixed-time convergence framework to composite and minimax optimization problems",
+    "Convergence guarantees established under minimal assumptions (strong pseudomonotonicity and Lipschitz continuity) using Lyapunov stability theory"
+  ],
+  "plain_language_summary": "This paper develops a new class of computational methods called neurodynamic systems to solve a broad class of optimization problems known as mixed variational inequalities. Unlike traditional iterative algorithms whose convergence time can be unpredictable, these methods guarantee reaching the solution in a predetermined, fixed amount of time from any starting point. The key innovation is designing the neural network models with carefully chosen time-varying parameters that accelerate convergence while maintaining stability. The authors rigorously prove that these methods work reliably even when the system is disrupted by bounded noise, making them practical for real applications. Beyond the theoretical framework, they demonstrate how the approach extends to several important problem classes including composite optimization (combining multiple objectives) and minimax optimization (finding robust solutions in adversarial settings).",
+  "tldr": "Novel neurodynamic methods guarantee solving a broad class of optimization problems in predetermined fixed time with explicit convergence bounds and robustness to noise."
+}
+\end{verbatim}
+
+\subsection*{technical_correctness (\texttt{claude-opus-4-7})}
+\begin{verbatim}
+{
+  "claims": [
+    {
+      "assessment": "partially_supported",
+      "claim": "A class of first-order proximal neurodynamic models (PNMs), including time-varying proximal neurodynamic models (TVPNMs), guarantees fixed-time (FXT) convergence to the solution of mixed variational inequalities (MVIs) from arbitrary initial conditions.",
+      "evidence": "FXT convergence for proximal-type neurodynamic models targeting MVIs is a well-posed objective and consistent with existing FXT-stability literature (Polyakov 2012; Parsegov et al.). However, the abstract states FXT 'from any initial point' under 'strong pseudomonotonicity and Lipschitz continuity' — establishing a uniform settling-time bound independent of initial conditions for the *time-varying* model requires additional structure (e.g., a Lyapunov inequality of the form V̇ ≤ -(αV^p + βV^q) with p<1<q, or an explicit time-varying gain dominating V on bounded sets). The head-only sections do not show whether the proof handles non-autonomous Lyapunov analysis correctly; strong pseudomonotonicity alone (which is weaker than strong monotonicity) is typically insufficient for FXT contraction in continuous time unless paired with a strictly positive lower bound on the proximal residual, which must be verified.",
+      "id": "C1",
+      "location": "Abstract; Section 'Main Results of FXT Convergence'",
+      "severity": "major",
+      "suggested_fix": "State explicitly the Lyapunov inequality used for the TVPNM (with the time-varying coefficient's role made precise), and prove that the settling-time bound is uniform over the initial condition AND over time-shifts of t0. Clarify whether 'strong pseudomonotonicity' is meant in the Karamardian sense and how it interacts with the proximal residual to yield the required FXT decay."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Explicit upper bounds on the settling time are derived for the time-varying neurodynamic models.",
+      "evidence": "Explicit settling-time bounds are standard outputs of FXT analyses (e.g., T ≤ 1/(α(1-p)) + 1/(β(q-1)) for the bi-exponent Lyapunov template). For *time-varying* coefficients this bound generally takes the form of an integral inequality ∫_{t0}^{T} g(t)dt ≥ K, and the upper bound on T depends on the lower envelope of g(t). Without seeing the explicit form, the claim that the bound is 'explicit' and 'independent of initial conditions' should be checked carefully: many papers in this line implicitly require g(t) to be bounded away from zero, which is a non-trivial assumption that should be flagged.",
+      "id": "C2",
+      "location": "Abstract; 'Main Results of FXT Convergence'",
+      "severity": "major",
+      "suggested_fix": "Display the explicit settling-time inequality, identify which integrals/coefficients enter, and verify that the bound remains finite under the stated assumptions on the time-varying coefficient (e.g., positivity, monotonicity, or a lower bound)."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Robustness of the proposed approaches against bounded noise disturbances is analyzed.",
+      "evidence": "Bounded-disturbance robustness for FXT systems is typically expressed as practical FXT stability (convergence to a residual ball whose radius scales with the noise bound). The claim is plausible and standard, but FXT convergence to the exact solution is generally lost under persistent bounded noise — only practical/ultimate-boundedness is achievable. The paper should be explicit that the result is *practical* FXT, not exact FXT, under noise.",
+      "id": "C3",
+      "location": "Abstract; 'Main Results of FXT Convergence' or 'Applications'",
+      "severity": "minor",
+      "suggested_fix": "Distinguish between exact FXT (noise-free) and practical FXT (with bounded disturbances), and report the explicit residual-set radius as a function of the disturbance bound and the model coefficients."
+    },
+    {
+      "assessment": "supported",
+      "claim": "The framework applies to composite optimization problems and minimax (saddle-point) optimization problems.",
+      "evidence": "Composite optimization (min f(x)+g(x) with g nonsmooth) and convex–concave minimax problems are canonical reductions to MVIs via the prox/resolvent operator; this reduction is standard and well-documented in the variational-inequality literature (Facchinei & Pang 2003; Rockafellar 1976). Provided the strong pseudomonotonicity assumption maps cleanly onto strong convexity / strong convex-concavity in the applications, the reduction is sound.",
+      "id": "C4",
+      "location": "Section 'Applications'",
+      "severity": "info",
+      "suggested_fix": "State the precise correspondence between the MVI assumptions (strong pseudomonotonicity + Lipschitz) and the operator-theoretic conditions in the composite and minimax cases (e.g., µ-strong convexity of f + L-Lipschitz ∇f) so readers can verify when the FXT guarantee transfers."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Numerical examples demonstrate the effectiveness and convergence behavior of the proposed methods, validating the FXT property.",
+      "evidence": "Numerical demonstrations of FXT behavior are valuable but cannot rigorously verify FXT convergence (a property over all initial conditions and asymptotic time). They can only illustrate it for chosen examples. The head-only listing shows a single 'Numerical Example' section, which suggests limited empirical breadth. Without seeing comparisons against fixed-time competitors (e.g., other TVPNM variants or finite-time methods) and a sweep over initial conditions / coefficient choices, the empirical support is suggestive rather than conclusive.",
+      "id": "C5",
+      "location": "Section 'Numerical Example'",
+      "severity": "minor",
+      "suggested_fix": "Add (a) multiple problem instances spanning composite and minimax cases, (b) a sweep over initial conditions verifying uniform settling-time, (c) a comparison against at least one finite-time and one asymptotic baseline, and (d) sensitivity analysis on the time-varying coefficient's parameters."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Convergence and stability are established under strong pseudomonotonicity and Lipschitz continuity using Lyapunov stability theory.",
+      "evidence": "Strong pseudomonotonicity is weaker than strong monotonicity (it permits sign changes of ⟨F(x)-F(y), x-y⟩ as long as the implication ⟨F(y), x-y⟩ ≥ 0 ⇒ ⟨F(x), x-y⟩ ≥ µ‖x-y‖²). For FXT convergence in continuous time, one typically needs a strict Lyapunov decrease V̇ ≤ -αV^p - βV^q. Whether strong pseudomonotonicity is enough — without an additional cocoercivity-like or monotonicity condition — is non-obvious and is a frequent gap in this literature. Several published FXT-NDS papers have implicitly used stronger conditions than stated; this paper should be checked carefully on that point.",
+      "id": "C6",
+      "location": "Abstract; 'Preliminary Results with Notations' and 'Main Results'",
+      "severity": "major",
+      "suggested_fix": "Trace the proof's use of the strong-pseudomonotonicity hypothesis to the Lyapunov derivative inequality and confirm whether strong monotonicity (or another stronger property) is silently invoked. If so, weaken the stated assumption or strengthen the proof's hypothesis to match."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Convergence speed is 'significantly enhanced' through strategic design of time-varying coefficients.",
+      "evidence": "Time-varying gains can in principle shorten the settling time relative to constant-gain FXT designs, but 'significantly enhanced' is a quantitative claim that needs either (i) a sharper theoretical settling-time bound demonstrably tighter than the constant-coefficient counterpart, or (ii) numerical evidence with controlled comparison. Without that, the claim is qualitative.",
+      "id": "C7",
+      "location": "Abstract; 'Main Results of FXT Convergence'",
+      "severity": "minor",
+      "suggested_fix": "Provide a side-by-side settling-time bound comparison (TVPNM vs. constant-coefficient PNM) and a numerical comparison on the same problem instance, with both methods tuned for fairness."
+    }
+  ],
+  "confidence": 0.55,
+  "overall_correctness": "mostly_sound"
+}
+\end{verbatim}
+
+\section*{Corrections}
+% corrections rendered from corrections table; empty on first publish
+No corrections have been recorded.
+
+\section*{Bibliography}
+No bibliography extracted.
+
+% \bibliographystyle{plain}
+% \bibliography{references}
+\end{document}
