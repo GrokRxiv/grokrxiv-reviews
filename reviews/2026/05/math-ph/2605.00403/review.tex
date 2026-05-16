@@ -1,0 +1,1420 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\title{Generalized Fourier Transforms for Momentum-Space Construction on Riemannian Manifolds}
+\date{}
+\begin{document}
+\maketitle
+
+\noindent\textbf{arXiv:} \href{https://arxiv.org/abs/2605.00403}{2605.00403} \quad \textbf{Field:} math-ph\\
+
+\section*{TL;DR}
+This paper develops a systematic mathematical framework for generalizing Fourier analysis to curved Riemannian manifolds, introducing the concept of a Generalized Fourier Transform (GFT) based on spectral decomposition of the Laplace-Beltrami operator. The central contributions are: the Local-MASA principle for resolving spectral degeneracy using maximal Abelian sets of local commuting geometric operators; an algorithmic construction procedure using Killing tensor machinery and separation-of-variables techniques; a generalized Parseval-Plancherel theorem establishing unitarity; and a dual classification of GFTs by MASA completeness/Stäckel separability and by k-space topology. The bibliography is comprehensive, well-chosen, and properly verified. Novelty is assessed as significant relative to prior work (Helgason, spectral geometry, separation of variables literature). However, technical reviewers identified one major error in the irrational-slope torus example, one major understatement of the curvature obstruction to operator commutativity in the Killing-tensor algorithm, and several minor imprecisions. Reproducibility is limited by proof-sketch level derivations and an only high-level description of the constructive algorithm, with no worked-out numerical examples sufficient for independent verification.
+
+\textbf{Recommendation:} Major revision \quad \textbf{Confidence:} 78\%\\
+
+\section*{Strengths}
+\begin{itemize}[leftmargin=*]
+  \item Addresses a genuinely significant and long-standing problem: providing a unified, systematic framework for generalized Fourier analysis on arbitrary Riemannian manifolds beyond the symmetric-space setting.
+  \item The Local-MASA principle is a conceptually clean and physically well-motivated organizing idea that clarifies the source of momentum-space ambiguity in degenerate spectra.
+  \item Proves a generalized Parseval-Plancherel theorem, establishing the GFT as a unitary isomorphism and placing it on solid functional-analytic footing.
+  \item The dual classification scheme (MASA completeness/Stäckel type and k-space topology) provides a useful taxonomy linking geometric structure to analytic properties of the transform.
+  \item Comprehensive, accurate, and well-chosen bibliography covering all relevant foundational literature in functional analysis, spectral geometry, harmonic analysis, and separation of variables.
+  \item Honest acknowledgment of limitations: the Killing-tensor MASA construction is described as a semi-algorithm that may not terminate in general.
+  \item The distinction between true isometry-induced symmetries (which preserve GFT structure) and mere coordinate adaptations (which yield unitarily equivalent but topologically distinct k-spaces) is a valuable conceptual clarification.
+  \item Novelty assessment is significant: the approach generalizes beyond symmetric spaces and provides a systematic degeneracy-resolution strategy not present in existing literature.
+\end{itemize}
+
+\section*{Weaknesses}
+\begin{itemize}[leftmargin=*]
+  \item Major error in the irrational-slope torus example (Section VII.C): for irrational rotation angle ε, the rotated partial-derivative operators do not yield well-defined self-adjoint operators with integer spectra on T², and their joint eigenfunctions fail periodicity. The classification as Type I-D in this case is therefore not adequately justified and may be incorrect.
+  \item Major understatement of the curvature obstruction in the Killing-tensor operator construction (Section IV.B, Step 3): Poisson commutativity of symbols does not automatically lift to operator commutativity; Carter's integrability conditions or analogous criteria are needed. The algorithm as stated does not guarantee construction of genuinely commuting operators, and this limitation is not sufficiently prominent.
+  \item Central results are presented as proof sketches rather than complete proofs, requiring readers to fill in domain specifications, self-adjointness arguments, direct-integral measurability conditions, and Schwartz-space preservation from external references, significantly reducing mathematical rigor and reproducibility.
+  \item The constructive MASA algorithm is described only at a high level; insufficient explicit detail is provided for independent implementation or verification.
+  \item Minor imprecision in the application of Peetre's theorem: the order of the differential operator is only locally finite in general, not globally finite; additional continuity assumptions are required for global finite order.
+  \item The Casimir-Laplacian relation stated for maximally symmetric spaces (Section IV.A.1) lacks precise normalization and representation-theoretic context.
+  \item The 'Type III rank-2 incomplete' classification for the non-degenerate case is potentially misleading terminology, conflating genuinely underdetermined degenerate cases with the trivially complete non-degenerate case.
+  \item The rigged Hilbert space isomorphism claim (Section VII.A) requires conditions ensuring the GFT maps test functions continuously in the nuclear/Schwartz topology, which are not stated.
+  \item Two duplicate citations appear in the bibliography (Spectral1/Plancherel2 and Spectral2/Plancherel1), suggesting incomplete editorial review.
+  \item No fully worked numerical or symbolic examples with explicit calculations are provided to allow independent verification of the classification claims.
+\end{itemize}
+
+\section*{Open Questions}
+\begin{itemize}[leftmargin=*]
+  \item For the irrational-slope torus example in Section VII.C: can the authors explicitly construct self-adjoint operators with the claimed spectral properties on L²(T²) for irrational ε? What happens to the periodicity conditions on the eigenfunctions, and does the Type I-D classification survive scrutiny?
+  \item Regarding the Killing-tensor operator construction (Algorithm Step 3): under what precise conditions do the symmetric divergence-form operators D\_κ commute with Δ at the operator level? Can the authors state Carter's conditions or equivalent criteria explicitly within the algorithm, and provide examples of when the algorithm fails?
+  \item The paper describes the MASA construction as a 'semi-algorithm.' Can the authors characterize more precisely the class of manifolds for which it is guaranteed to terminate, beyond the examples of symmetric spaces?
+  \item How does the GFT framework handle manifolds with non-compact symmetry groups where the spectrum of Δ is purely continuous or mixed? Are there additional subtleties in the MASA construction or in the Plancherel measure in these cases?
+  \item For the rigged Hilbert space isomorphism (Section VII.A): what conditions on the manifold and the choice of test function space Φ[Σ] ensure that the GFT extends continuously to the nuclear topology, so that the Gelfand triple isomorphism is valid?
+  \item Can the authors clarify the precise normalization relating the Laplace-Beltrami operator to the quadratic Casimir element in Section IV.A.1, including any curvature-dependent correction terms?
+  \item The paper defers physical applications (curved momentum space, Unruh effect, Aharonov-Bohm effect) to subsequent work. Can the authors provide at least one non-trivial worked example beyond ℝ³ and T² that demonstrates the full construction pipeline, including MASA construction, k-space determination, and explicit transform formulas?
+\end{itemize}
+
+\section*{Per-Agent Reviews}
+\subsection*{citation (\texttt{gemini-2.5-flash})}
+\begin{verbatim}
+{
+  "confidence": 5,
+  "entries": [
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "M. Reed",
+          "B. Simon"
+        ],
+        "doi": null,
+        "key": "Spectral1",
+        "raw": "10 M. Reed, B. Simon. Functional Analysis (Methods of Modern Mathematical Physics Volume I). Academic Press. 1980.",
+        "title": "Functional Analysis (Methods of Modern Mathematical Physics Volume I)",
+        "url": null,
+        "venue": "Academic Press",
+        "year": 1980
+      },
+      "exists": true,
+      "explanation": "This book is a foundational text in functional analysis and mathematical physics, directly relevant to the spectral theory and Hilbert space concepts used in the paper.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "G. B. Folland"
+        ],
+        "doi": null,
+        "key": "Folland",
+        "raw": "G. B. Folland. Fourier Analysis and its Applications. Wadsworth and Brooks. California. 1992.",
+        "title": "Fourier Analysis and its Applications",
+        "url": null,
+        "venue": "Wadsworth and Brooks",
+        "year": 1992
+      },
+      "exists": true,
+      "explanation": "This book is a standard reference for Fourier analysis, which the paper aims to generalize. It provides essential background for the introduction and core concepts.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "A. Grigor'yan"
+        ],
+        "doi": null,
+        "key": "Grigoryan",
+        "raw": "A. Grigor'yan. Heat Kernel and Analysis on Manifolds. American Mathematical Soc. 2009.",
+        "title": "Heat Kernel and Analysis on Manifolds",
+        "url": null,
+        "venue": "American Mathematical Soc.",
+        "year": 2009
+      },
+      "exists": true,
+      "explanation": "This book is highly relevant as it covers analysis on manifolds, including the Laplace-Beltrami operator and its spectral properties, which are central to the paper's GFT construction.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "P. Berard"
+        ],
+        "doi": null,
+        "key": "Spectral2",
+        "raw": "P. Berard. Spectral Geometry: Direct and Inverse Problems. Lecture Notes in Mathematics 1207. 1986.",
+        "title": "Spectral Geometry: Direct and Inverse Problems",
+        "url": null,
+        "venue": "Lecture Notes in Mathematics 1207",
+        "year": 1986
+      },
+      "exists": true,
+      "explanation": "This reference on spectral geometry is directly relevant to the spectral decomposition of the Laplace-Beltrami operator and the theoretical foundations of the GFT.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": "10.1007/BFb0076939",
+      "resolved_url": "https://doi.org/10.1007/BFb0076939"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "S. A. Morris"
+        ],
+        "doi": null,
+        "key": "Pontryagin1",
+        "raw": "S. A. Morris. Pontryagin Duality and the Structure of Locally Compact Abelian Groups. London Math. Soc. Lecture Notes 29. Cambridge U. Press. 1977.",
+        "title": "Pontryagin Duality and the Structure of Locally Compact Abelian Groups",
+        "url": null,
+        "venue": "London Math. Soc. Lecture Notes 29. Cambridge U. Press.",
+        "year": 1977
+      },
+      "exists": true,
+      "explanation": "This book on Pontryagin duality is directly cited as a foundational approach to generalizing Fourier analysis on groups, which is discussed in the introduction.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "H. Reiter",
+          "J. D. Stegeman"
+        ],
+        "doi": null,
+        "key": "Pontryagin2",
+        "raw": "H. Reiter, J. D. Stegeman. Classical Harmonic Analysis and Locally Compact Groups. 2nd ed. Clarendon Press. Oxford. 2000.",
+        "title": "Classical Harmonic Analysis and Locally Compact Groups",
+        "url": null,
+        "venue": "Clarendon Press. Oxford.",
+        "year": 2000
+      },
+      "exists": true,
+      "explanation": "This book on harmonic analysis on locally compact groups is relevant to the discussion of Pontryagin duality and generalizations of Fourier analysis.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "W. Rudin"
+        ],
+        "doi": null,
+        "key": "Pontryagin3",
+        "raw": "W. Rudin. Fourier Analysis on Groups. D. van Nostrand Co. 1962.",
+        "title": "Fourier Analysis on Groups",
+        "url": null,
+        "venue": "D. van Nostrand Co.",
+        "year": 1962
+      },
+      "exists": true,
+      "explanation": "This classic text on Fourier analysis on groups is directly relevant to the discussion of Pontryagin duality and extensions of Fourier analysis to non-Euclidean settings.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "P. Berard"
+        ],
+        "doi": "10.1007/BFb0076939",
+        "key": "Plancherel1",
+        "raw": "P. Berard. Spectral Geometry: Direct and Inverse Problems. Lecture Notes in Mathematics 1207. 1986.",
+        "title": "Spectral Geometry: Direct and Inverse Problems",
+        "url": "https://doi.org/10.1007/BFb0076939",
+        "venue": "Lecture Notes in Mathematics 1207",
+        "year": 1986
+      },
+      "exists": true,
+      "explanation": "This reference is relevant to the spectral theory approach for Fourier-type transforms, as mentioned in the introduction.",
+      "notes": "This is a duplicate of Spectral2.",
+      "relevance": "high",
+      "resolved_doi": "10.1007/BFb0076939",
+      "resolved_url": "https://doi.org/10.1007/BFb0076939"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "M. Reed",
+          "B. Simon"
+        ],
+        "doi": null,
+        "key": "Plancherel2",
+        "raw": "M. Reed, B. Simon. Functional Analysis (Methods of Modern Mathematical Physics Volume I). Academic Press. 1980.",
+        "title": "Functional Analysis (Methods of Modern Mathematical Physics Volume I)",
+        "url": null,
+        "venue": "Academic Press",
+        "year": 1980
+      },
+      "exists": true,
+      "explanation": "This foundational text on functional analysis is relevant to the spectral theory approach for Fourier-type transforms.",
+      "notes": "This is a duplicate of Spectral1.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "S. Helgason"
+        ],
+        "doi": null,
+        "key": "Helgason1",
+        "raw": "S. Helgason. Geometric Analysis on Symmetric Spaces. Am. Math. Soc. Providence .1994.",
+        "title": "Geometric Analysis on Symmetric Spaces",
+        "url": null,
+        "venue": "Am. Math. Soc. Providence",
+        "year": 1994
+      },
+      "exists": true,
+      "explanation": "This book by Helgason is a primary reference for the Helgason-Fourier transform on symmetric spaces, directly cited as a generalization of the Fourier transform.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "S. Helgason"
+        ],
+        "doi": null,
+        "key": "Helgason2",
+        "raw": "S. Helgason. Groups and Geometric Analysis: 425-444. Academic Press. New York. 1984.",
+        "title": "Groups and Geometric Analysis",
+        "url": null,
+        "venue": "Academic Press. New York.",
+        "year": 1984
+      },
+      "exists": true,
+      "explanation": "This work by Helgason is relevant to the Helgason-Fourier transform and geometric analysis on symmetric spaces.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "S. Helgason"
+        ],
+        "doi": null,
+        "key": "Helgason3",
+        "raw": "S. Helgason. The Fourier transform on symmetric spaces. Élie Cartan et les mathématiques d'aujourd'hui no. 131: 151-164. 1984.",
+        "title": "The Fourier transform on symmetric spaces",
+        "url": null,
+        "venue": "Élie Cartan et les mathématiques d'aujourd'hui no. 131",
+        "year": 1984
+      },
+      "exists": true,
+      "explanation": "This paper by Helgason directly discusses the Fourier transform on symmetric spaces, which is a key generalization mentioned in the introduction.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "P. Mohanty",
+          "S. K. Ray",
+          "R. P. Sarkar",
+          "A. Sitaram"
+        ],
+        "doi": null,
+        "key": "Helgason4",
+        "raw": "P. Mohanty, S. K. Ray, R. P. Sarkar, A. Sitaram. The Helgason–Fourier Transform for Symmetric Spaces II. Journal of Lie Theory Volume 14: 227–242. Heldermann-Verlag. 2004.",
+        "title": "The Helgason–Fourier Transform for Symmetric Spaces II",
+        "url": null,
+        "venue": "Journal of Lie Theory Volume 14",
+        "year": 2004
+      },
+      "exists": true,
+      "explanation": "This paper specifically addresses the Helgason-Fourier transform for symmetric spaces, reinforcing the discussion in the introduction.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "M. Boujeddaine",
+          "M. E. Kassimi",
+          "S. Fahlaoui"
+        ],
+        "doi": "10.1142/S021969132050056X",
+        "key": "Helgason5",
+        "raw": "M. Boujeddaine, M. E. Kassimi, S. Fahlaoui. Helgason–Gabor–Fourier transform and uncertainty principles. International Journal of Wavelets, Multiresolution, and Information Processing 19 (01): 2050056. 2021.",
+        "title": "Helgason–Gabor–Fourier transform and uncertainty principles",
+        "url": "https://doi.org/10.1142/S021969132050056X",
+        "venue": "International Journal of Wavelets, Multiresolution, and Information Processing",
+        "year": 2021
+      },
+      "exists": true,
+      "explanation": "This paper discusses a variant of the Helgason-Fourier transform, providing a more recent perspective on its applications, although it's less foundational than Helgason's own works.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": "10.1142/S021969132050056X",
+      "resolved_url": "https://doi.org/10.1142/S021969132050056X"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "I. M. Gelfand",
+          "M. A. Naimark"
+        ],
+        "doi": null,
+        "key": "Gelfand1",
+        "raw": "I. M. Gelfand, M. A. Naimark. On the imbedding of normed rings into the ring of operators on a Hilbert space. Mat. Sbornik. 12 (2): 197–217. 1943.",
+        "title": "On the imbedding of normed rings into the ring of operators on a Hilbert space",
+        "url": null,
+        "venue": "Mat. Sbornik.",
+        "year": 1943
+      },
+      "exists": true,
+      "explanation": "This is a seminal paper by Gelfand and Naimark, foundational to the Gelfand transform, which is listed as another approach to generalizing the Fourier transform.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "E. Hewitt",
+          "K. A. Ross"
+        ],
+        "doi": null,
+        "key": "Gelfand2",
+        "raw": "E. Hewitt, K. A. Ross. Abstract Harmonic Analysis. Volume I: Structure of Topological Groups Integration Theory Group Representations. Springer-Verlag. 1979.",
+        "title": "Abstract Harmonic Analysis. Volume I: Structure of Topological Groups Integration Theory Group Representations",
+        "url": null,
+        "venue": "Springer-Verlag.",
+        "year": 1979
+      },
+      "exists": true,
+      "explanation": "This book covers abstract harmonic analysis, including the Gelfand transform, and is relevant to the broader context of generalizing Fourier analysis.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "M. E. Taylor"
+        ],
+        "doi": null,
+        "key": "NoncommuteHarmonic1",
+        "raw": "M. E. Taylor. Noncommutative Harmonic Analysis. American Mathematical Society. 1986.",
+        "title": "Noncommutative Harmonic Analysis",
+        "url": null,
+        "venue": "American Mathematical Society.",
+        "year": 1986
+      },
+      "exists": true,
+      "explanation": "This book is a direct reference for noncommutative harmonic analysis, which is listed as an approach to generalizing the Fourier transform.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "J. Carmona",
+          "P. Delorme",
+          "M. Vergne"
+        ],
+        "doi": null,
+        "key": "NoncommuteHarmonic2",
+        "raw": "J. Carmona, P. Delorme, M. Vergne. Noncommutative harmonic analysis: in honor of Jacques Carmona. Springer. 2004.",
+        "title": "Noncommutative harmonic analysis: in honor of Jacques Carmona",
+        "url": null,
+        "venue": "Springer.",
+        "year": 2004
+      },
+      "exists": true,
+      "explanation": "This edited volume is relevant to noncommutative harmonic analysis, further supporting the discussion of different generalization approaches.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "K. I. Gross"
+        ],
+        "doi": "10.2307/2320491",
+        "key": "NoncommuteHarmonic3",
+        "raw": "K. I. Gross. On the evolution of noncommutative harmonic analysis. Amer. Math. Monthly. 85 (7): 525–548. 1978.",
+        "title": "On the evolution of noncommutative harmonic analysis",
+        "url": "https://doi.org/10.2307/2320491",
+        "venue": "Amer. Math. Monthly.",
+        "year": 1978
+      },
+      "exists": true,
+      "explanation": "This article provides an overview of noncommutative harmonic analysis, relevant to the introduction's discussion of generalization methods.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": "10.2307/2320491",
+      "resolved_url": "https://doi.org/10.2307/2320491"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "L. Hörmander"
+        ],
+        "doi": "10.1007/BF02390919",
+        "key": "FIO1",
+        "raw": "L. Hörmander. Fourier integral operators I. Acta Mathematica 127: 79–183. Springer Netherlands. 1970.",
+        "title": "Fourier integral operators I",
+        "url": "https://doi.org/10.1007/BF02390919",
+        "venue": "Acta Mathematica",
+        "year": 1970
+      },
+      "exists": true,
+      "explanation": "This is a seminal work on Fourier Integral Operators, which is listed as another approach to generalizing the Fourier transform.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": "10.1007/BF02390919",
+      "resolved_url": "https://doi.org/10.1007/BF02390919"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "J. J. Duistermaat"
+        ],
+        "doi": null,
+        "key": "FIO2",
+        "raw": "J. J. Duistermaat. Fourier Integral Operators. Progress in Mathematics. Birkhäuser. 1995.",
+        "title": "Fourier Integral Operators",
+        "url": null,
+        "venue": "Birkhäuser.",
+        "year": 1995
+      },
+      "exists": true,
+      "explanation": "This book is a direct reference for Fourier Integral Operators, further supporting the discussion of different generalization methods.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "1303.0195",
+        "authors": [
+          "J. Kowalski-Glikman"
+        ],
+        "doi": "10.1142/S0217751X1330014X",
+        "key": "curvedmomemtum1",
+        "raw": "J. Kowalski-Glikman. Living in Curved Momentum Space. Int. J. Mod. Phys. A 28 (12): 1330014. 2013. https://arxiv.org/abs/1303.0195.",
+        "title": "Living in Curved Momentum Space",
+        "url": "https://arxiv.org/abs/1303.0195",
+        "venue": "Int. J. Mod. Phys. A",
+        "year": 2013
+      },
+      "exists": true,
+      "explanation": "This paper is directly cited for the concept of 'curved k-space', which is a physical application to be addressed in subsequent work, indicating its relevance to the broader research program.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": "10.1142/S0217751X1330014X",
+      "resolved_url": "https://arxiv.org/abs/1303.0195"
+    },
+    {
+      "citation": {
+        "arxiv_id": "2303.08220v1",
+        "authors": [
+          "S. A. Franchino-Viñas",
+          "S. Mignemi",
+          "J. J. Relancio"
+        ],
+        "doi": null,
+        "key": "curvedmomentum2",
+        "raw": "S. A. Franchino-Viñas, S. Mignemi, J. J. Relancio. The beauty of curved momentum space. Proceedings of the Corfu Summer Institute School and Workshops on Elementary Particle Physics and Gravity. 2022. https://arxiv.org/abs/2303.08220v1.",
+        "title": "The beauty of curved momentum space",
+        "url": "https://arxiv.org/abs/2303.08220v1",
+        "venue": "Proceedings of the Corfu Summer Institute School and Workshops on Elementary Particle Physics and Gravity.",
+        "year": 2022
+      },
+      "exists": true,
+      "explanation": "This paper is directly cited for the concept of 'curved k-space', indicating its relevance to the physical applications mentioned.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": "https://arxiv.org/abs/2303.08220"
+    },
+    {
+      "citation": {
+        "arxiv_id": "2404.08553",
+        "authors": [
+          "N. Jafari"
+        ],
+        "doi": null,
+        "key": "curvedmomentum3",
+        "raw": "N. Jafari. Evolution of the concept of the curvature in the momentum space. https://arxiv.org/abs/2404.08553.",
+        "title": "Evolution of the concept of the curvature in the momentum space",
+        "url": "https://arxiv.org/abs/2404.08553",
+        "venue": null,
+        "year": null
+      },
+      "exists": true,
+      "explanation": "This arXiv preprint is directly cited for the concept of 'curved k-space', indicating its relevance to the physical applications mentioned.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": "https://arxiv.org/abs/2404.08553"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "H. Hopf"
+        ],
+        "doi": "10.1007/BF01457927",
+        "key": "Hopf",
+        "raw": "H. Hopf. Über die Abbildungen der dreidimensionalen Sphäre auf die Kugelfläche. Mathematische Annalen 104: 637 - 665. 1931.",
+        "title": "Über die Abbildungen der dreidimensionalen Sphäre auf die Kugelfläche",
+        "url": "https://doi.org/10.1007/BF01457927",
+        "venue": "Mathematische Annalen",
+        "year": 1931
+      },
+      "exists": true,
+      "explanation": "This paper on Hopf fibration is mentioned as an example for physical applications in subsequent work, suggesting a medium relevance to the broader research context.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": "10.1007/BF01457927",
+      "resolved_url": "https://doi.org/10.1007/BF01457927"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "C. N. Yang"
+        ],
+        "doi": "10.1063/1.523660",
+        "key": "CNYang",
+        "raw": "C. N. Yang. Generalization of Dirac's monopole to SU2 gauge fields. J. Math. Phys. 19: 320–328. 1978.",
+        "title": "Generalization of Dirac's monopole to SU2 gauge fields",
+        "url": "https://doi.org/10.1063/1.523660",
+        "venue": "J. Math. Phys.",
+        "year": 1978
+      },
+      "exists": true,
+      "explanation": "This paper by C.N. Yang is mentioned in the context of Hopf fibration as an example for physical applications in subsequent work, suggesting a medium relevance.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": "10.1063/1.523660",
+      "resolved_url": "https://doi.org/10.1063/1.523660"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "W. G. Unruh"
+        ],
+        "doi": "10.1103/PhysRevD.14.870",
+        "key": "Unruh",
+        "raw": "W. G. Unruh. Notes on black-hole evaporation. Phys. Rev. D 14 (4): 870–892. 1976.",
+        "title": "Notes on black-hole evaporation",
+        "url": "https://doi.org/10.1103/PhysRevD.14.870",
+        "venue": "Phys. Rev. D",
+        "year": 1976
+      },
+      "exists": true,
+      "explanation": "This seminal paper on the Unruh effect is mentioned as an example for physical applications in subsequent work, indicating a medium relevance.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": "10.1103/PhysRevD.14.870",
+      "resolved_url": "https://doi.org/10.1103/PhysRevD.14.870"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "S. A. Fulling"
+        ],
+        "doi": "10.1103/PhysRevD.7.2850",
+        "key": "Fulling",
+        "raw": "S. A. Fulling. Nonuniqueness of Canonical Field Quantization in Riemannian Space-Time. Phys. Rev. D 7 (10): 2850–2862. 1973.",
+        "title": "Nonuniqueness of Canonical Field Quantization in Riemannian Space-Time",
+        "url": "https://doi.org/10.1103/PhysRevD.7.2850",
+        "venue": "Phys. Rev. D",
+        "year": 1973
+      },
+      "exists": true,
+      "explanation": "This paper is relevant to the Unruh effect and quantization in curved spacetime, mentioned as an example for physical applications in subsequent work.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": "10.1103/PhysRevD.7.2850",
+      "resolved_url": "https://doi.1103/PhysRevD.7.2850"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "P. C. W. Davies"
+        ],
+        "doi": "10.1088/0305-4470/8/4/010",
+        "key": "Davies",
+        "raw": "P. C. W. Davies. Scalar production in Schwarzschild and Rindler metrics. J. Phys. A 8 (4): 609–616. 1975.",
+        "title": "Scalar production in Schwarzschild and Rindler metrics",
+        "url": "https://doi.org/10.1088/0305-4470/8/4/010",
+        "venue": "J. Phys. A",
+        "year": 1975
+      },
+      "exists": true,
+      "explanation": "This paper is relevant to the Unruh effect and quantum field theory in curved spacetime, mentioned as an example for physical applications in subsequent work.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": "10.1088/0305-4470/8/4/010",
+      "resolved_url": "https://doi.org/10.1088/0305-4470/8/4/010"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Y. Aharonov",
+          "D. Bohm"
+        ],
+        "doi": "10.1103/PhysRev.115.485",
+        "key": "ABeffect",
+        "raw": "Y. Aharonov, D. Bohm. Significance of Electromagnetic Potentials in the Quantum Theory. Phys. Rev. 115: 485. 1959.",
+        "title": "Significance of Electromagnetic Potentials in the Quantum Theory",
+        "url": "https://doi.org/10.1103/PhysRev.115.485",
+        "venue": "Phys. Rev.",
+        "year": 1959
+      },
+      "exists": true,
+      "explanation": "This seminal paper on the Aharonov-Bohm effect is mentioned as an example for physical applications in subsequent work, indicating a medium relevance.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": "10.1103/PhysRev.115.485",
+      "resolved_url": "https://doi.org/10.1103/PhysRev.115.485"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "L. P. Eisenhart"
+        ],
+        "doi": "10.2307/1968433",
+        "key": "Sep1",
+        "raw": "L. P. Eisenhart. Separable systems of Stäckel. Ann. of Math. 35: 284–305. 1934.",
+        "title": "Separable systems of Stäckel",
+        "url": "https://doi.org/10.2307/1968433",
+        "venue": "Ann. of Math.",
+        "year": 1934
+      },
+      "exists": true,
+      "explanation": "This paper by Eisenhart is foundational to the theory of separable systems and Stäckel separability, directly relevant to the algorithmic construction of local MASAs.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": "10.2307/1968433",
+      "resolved_url": "https://doi.org/10.2307/1968433"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "E. G. Kalnins"
+        ],
+        "doi": "10.1137/0506030",
+        "key": "Sep2",
+        "raw": "E. G. Kalnins. On the separation of variables for the Laplace equation ΔΨ+K2Ψ=0 in two and three-dimensional Minkowski space. SIAM J. Math. Anal. 6: 340–374. 1975.",
+        "title": "On the separation of variables for the Laplace equation ΔΨ+K2Ψ=0 in two and three-dimensional Minkowski space",
+        "url": "https://doi.org/10.1137/0506030",
+        "venue": "SIAM J. Math. Anal.",
+        "year": 1975
+      },
+      "exists": true,
+      "explanation": "This paper by Kalnins is relevant to the separation of variables for the Laplace equation, which is a key aspect of the MASA construction.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": "10.1137/0506030",
+      "resolved_url": "https://doi.org/10.1137/0506030"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "S. Benenti"
+        ],
+        "doi": "10.1063/1.532207",
+        "key": "Sep3",
+        "raw": "S. Benenti. Intrinsic characterization of the variable separation in the Hamilton-Jacobi equation. J. Math. Phys. 38: 6578–6602. 1997.",
+        "title": "Intrinsic characterization of the variable separation in the Hamilton-Jacobi equation",
+        "url": "https://doi.org/10.1063/1.532207",
+        "venue": "J. Math. Phys.",
+        "year": 1997
+      },
+      "exists": true,
+      "explanation": "This paper by Benenti is relevant to the intrinsic characterization of variable separation, which is part of the MASA construction methodology.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": "10.1063/1.532207",
+      "resolved_url": "https://doi.org/10.1063/1.532207"
+    },
+    {
+      "citation": {
+        "arxiv_id": "1512.07833",
+        "authors": [
+          "S. Benenti"
+        ],
+        "doi": "10.3842/SIGMA.2016.013",
+        "key": "Sep4",
+        "raw": "S. Benenti. Separability in Riemannian manifolds. SIGMA 12: 013. 2016. https://arxiv.org/abs/1512.07833.",
+        "title": "Separability in Riemannian manifolds",
+        "url": "https://arxiv.org/abs/1512.07833",
+        "venue": "SIGMA",
+        "year": 2016
+      },
+      "exists": true,
+      "explanation": "This paper by Benenti is directly relevant to separability in Riemannian manifolds, a core concept for the MASA construction.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": "10.3842/SIGMA.2016.013",
+      "resolved_url": "https://arxiv.org/abs/1512.07833"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "E. G. Kalnins",
+          "J. M. Kress",
+          "W. Miller",
+          "Jr."
+        ],
+        "doi": "10.1088/978-0-7503-1382-2",
+        "key": "Sep5",
+        "raw": "E. G. Kalnins, J. M. Kress, W. Miller, Jr. Separation of Variables and Superintegrability: The symmetry of solvable systems. IOP Publishing Ltd. 2018.",
+        "title": "Separation of Variables and Superintegrability: The symmetry of solvable systems",
+        "url": "https://doi.org/10.1088/978-0-7503-1382-2",
+        "venue": "IOP Publishing Ltd.",
+        "year": 2018
+      },
+      "exists": true,
+      "explanation": "This book is a comprehensive reference on separation of variables and superintegrability, directly relevant to the MASA construction algorithm.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": "10.1088/978-0-7503-1382-2",
+      "resolved_url": "https://doi.org/10.1088/978-0-7503-1382-2"
+    },
+    {
+      "citation": {
+        "arxiv_id": "1607.00712",
+        "authors": [
+          "K. Rajaratnam",
+          "R. G. McLenaghan",
+          "C. Valero"
+        ],
+        "doi": "10.3842/SIGMA.2016.117",
+        "key": "Sep6",
+        "raw": "K. Rajaratnam, R. G. McLenaghan, C. Valero. Orthogonal Separation of the Hamilton–Jacobi Equation on Spaces of Constant Curvature. SIGMA 12: 117. 2016. https://arxiv.org/pdf/1607.00712.",
+        "title": "Orthogonal Separation of the Hamilton–Jacobi Equation on Spaces of Constant Curvature",
+        "url": "https://arxiv.org/pdf/1607.00712",
+        "venue": "SIGMA",
+        "year": 2016
+      },
+      "exists": true,
+      "explanation": "This paper discusses orthogonal separation of the Hamilton-Jacobi equation, which is relevant to the separation-of-variables style MASA construction.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": "10.3842/SIGMA.2016.117",
+      "resolved_url": "https://arxiv.org/pdf/1607.00712"
+    },
+    {
+      "citation": {
+        "arxiv_id": "1808.01889",
+        "authors": [
+          "C. M. Chanu",
+          "G. Rastelli"
+        ],
+        "doi": "10.3842/SIGMA.2019.013",
+        "key": "Sep7",
+        "raw": "C. M. Chanu, G. Rastelli. Block-Separation of Variables: a Form of Partial Separation for Natural Hamiltonians. SIGMA 15: 013. 2019. https://arxiv.org/abs/1808.01889.",
+        "title": "Block-Separation of Variables: a Form of Partial Separation for Natural Hamiltonians",
+        "url": "https://arxiv.org/abs/1808.01889",
+        "venue": "SIGMA",
+        "year": 2019
+      },
+      "exists": true,
+      "explanation": "This paper discusses block-separation of variables, a form of partial separation relevant to the MASA construction and understanding different separability regimes.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": "10.3842/SIGMA.2019.013",
+      "resolved_url": "https://arxiv.org/abs/1808.01889"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "J. Peetre"
+        ],
+        "doi": "10.7146/math.scand.a-10574",
+        "key": "Peetre",
+        "raw": "J. Peetre. Une caractérisation abstraite des opérateurs différentiels. Mathematica Scandinavica 7: 211–218. (1959).",
+        "title": "Une caractérisation abstraite des opérateurs différentiels",
+        "url": "https://doi.org/10.7146/math.scand.a-10574",
+        "venue": "Mathematica Scandinavica",
+        "year": 1959
+      },
+      "exists": true,
+      "explanation": "Peetre's Theorem is directly cited to characterize local linear operators as differential operators of finite order, which is crucial for defining 'local' operators in the paper.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": "10.7146/math.scand.a-10574",
+      "resolved_url": "https://doi.org/10.7146/math.scand.a-10574"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "A. R. Gover",
+          "T. Leistner"
+        ],
+        "doi": "10.1007/s10231-018-0775-7",
+        "key": "prolongation",
+        "raw": "A. R. Gover, T. Leistner. Invariant prolongation of the Killing tensor equation. Annali di Matematica Pura ed Applicata (1923 -) 198: 307–334. 2019.",
+        "title": "Invariant prolongation of the Killing tensor equation",
+        "url": "https://doi.org/10.1007/s10231-018-0775-7",
+        "venue": "Annali di Matematica Pura ed Applicata (1923 -)",
+        "year": 2019
+      },
+      "exists": true,
+      "explanation": "This paper is relevant to the construction of commuting operators from Killing tensors, addressing the complexities of curvature obstruction and ordering ambiguities.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": "10.1007/s10231-018-0775-7",
+      "resolved_url": "https://doi.org/10.1007/s10231-018-0775-7"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "M. Eastwood"
+        ],
+        "doi": "10.4007/annals.2005.161.1645",
+        "key": "prolongation1a",
+        "raw": "M. Eastwood. Higher symmetries of the Laplacian. Annals of Mathematics, 161: 1645–1665. 2005.",
+        "title": "Higher symmetries of the Laplacian",
+        "url": "https://doi.org/10.4007/annals.2005.161.1645",
+        "venue": "Annals of Mathematics",
+        "year": 2005
+      },
+      "exists": true,
+      "explanation": "This paper discusses higher symmetries of the Laplacian, which is directly relevant to constructing commuting operators from Killing tensors and addressing curvature obstructions.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": "10.4007/annals.2005.161.1645",
+      "resolved_url": "https://doi.org/10.4007/annals.2005.161.1645"
+    },
+    {
+      "citation": {
+        "arxiv_id": "math/0610610",
+        "authors": [
+          "M. Eastwood",
+          "T. Leistner"
+        ],
+        "doi": "10.1007/978-0-387-77599-2_15",
+        "key": "prolongation2",
+        "raw": "M. Eastwood, T. Leistner. Higher Symmetries of the Square of the Laplacian. IMA Vol. Math. Appl. 144: 319-338. Springer, New York. 2008. https://arxiv.org/abs/math/0610610.",
+        "title": "Higher Symmetries of the Square of the Laplacian",
+        "url": "https://arxiv.org/abs/math/0610610",
+        "venue": "IMA Vol. Math. Appl. 144. Springer, New York.",
+        "year": 2008
+      },
+      "exists": true,
+      "explanation": "This paper discusses higher symmetries of the Laplacian, directly relevant to the construction of commuting operators from Killing tensors and addressing ordering/curvature conditions.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": "10.1007/978-0-387-77599-2_15",
+      "resolved_url": "https://arxiv.org/abs/math/0610610"
+    },
+    {
+      "citation": {
+        "arxiv_id": "1108.0149",
+        "authors": [
+          "O. P. Santillan"
+        ],
+        "doi": "10.1063/1.3701570",
+        "key": "obstruct1",
+        "raw": "O. P. Santillan. Killing-Yano tensors and some applications. J. Math. Phys. 53: 043509. 2012. https://arxiv.org/pdf/1108.0149.",
+        "title": "Killing-Yano tensors and some applications",
+        "url": "https://arxiv.org/pdf/1108.0149",
+        "venue": "J. Math. Phys.",
+        "year": 2012
+      },
+      "exists": true,
+      "explanation": "This paper discusses Killing-Yano tensors, which are related to Killing tensors and their applications, relevant to the construction of commuting operators and curvature obstruction.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": "10.1063/1.3701570",
+      "resolved_url": "https://arxiv.org/pdf/1108.0149"
+    },
+    {
+      "citation": {
+        "arxiv_id": "2108.03376",
+        "authors": [
+          "G. Clemente"
+        ],
+        "doi": "10.55992/mc.28.1.3",
+        "key": "obstruct2",
+        "raw": "G. Clemente. A curvature obstruction to integrability. Math. Commun. 28: 29–48. 2023. https://arxiv.org/abs/2108.03376",
+        "title": "A curvature obstruction to integrability",
+        "url": "https://arxiv.org/abs/2108.03376",
+        "venue": "Math. Commun.",
+        "year": 2023
+      },
+      "exists": true,
+      "explanation": "This paper directly addresses curvature obstruction to integrability, which is a key challenge in constructing commuting operators from Killing tensors.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": "10.55992/mc.28.1.3",
+      "resolved_url": "https://arxiv.org/abs/2108.03376"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "P. Hartman"
+        ],
+        "doi": "10.1137/1.9781611973012",
+        "key": "ODE",
+        "raw": "P. Hartman. Ordinary Differential Equations: Second Edition. Vol. 38 of Classics in Applied Mathematics. SIAM e-books. 1982.",
+        "title": "Ordinary Differential Equations: Second Edition",
+        "url": "https://doi.org/10.1137/1.9781611973012",
+        "venue": "SIAM e-books.",
+        "year": 1982
+      },
+      "exists": true,
+      "explanation": "This book on ordinary differential equations is cited for the Picard-Lindelöf theorem, which is used to explain the existence of one-parameter groups of isometries generated by Killing vector fields.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": "10.1137/1.9781611973012",
+      "resolved_url": "https://doi.org/10.1137/1.9781611973012"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "A. Nijenhuis"
+        ],
+        "doi": "10.1016/S1385-7258(55)50050-X",
+        "key": "Nijenhuis",
+        "raw": "A. Nijenhuis. Jacobi-type identities for bilinear differential concomitants of certain tensor fields. II. Indagationes Mathematicae (Proceedings) 58: 398-403. 1955.",
+        "title": "Jacobi-type identities for bilinear differential concomitants of certain tensor fields. II",
+        "url": "https://doi.org/10.1016/S1385-7258(55)50050-X",
+        "venue": "Indagationes Mathematicae (Proceedings)",
+        "year": 1955
+      },
+      "exists": true,
+      "explanation": "This paper by Nijenhuis is relevant to the Schouten-Nijenhuis bracket, which is used to define commutators for Killing tensors.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": "10.1016/S1385-7258(55)50050-X",
+      "resolved_url": "https://doi.org/10.1016/S1385-7258(55)50050-X"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "J. A. Schouten"
+        ],
+        "doi": null,
+        "key": "Schouten",
+        "raw": "J. A. Schouten. Ricci-Calculus: An Introduction to Tensor Analysis and Its Geometrical Applications. Grundlehren der mathematischen Wissenschaften, 2nd ed. Springer. 1954.",
+        "title": "Ricci-Calculus: An Introduction to Tensor Analysis and Its Geometrical Applications",
+        "url": null,
+        "venue": "Springer.",
+        "year": 1954
+      },
+      "exists": true,
+      "explanation": "This book by Schouten is a classic text on tensor calculus, relevant to the definition of the Schouten-Nijenhuis bracket for Killing tensors.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "I. Kolář",
+          "P. W. Michor",
+          "J. Slovak"
+        ],
+        "doi": null,
+        "key": "Operatorbook",
+        "raw": "I. Kolář, P. W. Michor, J. Slovak. Natural operations in differential geometry. Springer. 1993.",
+        "title": "Natural operations in differential geometry",
+        "url": null,
+        "venue": "Springer.",
+        "year": 1993
+      },
+      "exists": true,
+      "explanation": "This book on natural operations in differential geometry is relevant to the definition of the Schouten-Nijenhuis bracket and the general framework of geometric operators.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "K. Uhlenbeck"
+        ],
+        "doi": "10.2307/2373976",
+        "key": "uhlenbeck",
+        "raw": "K. Uhlenbeck. Generic properties of eigenfunctions. Amer. J. Math. 98 (4): 1059-1078. 1976.",
+        "title": "Generic properties of eigenfunctions",
+        "url": "https://doi.org/10.2307/2373976",
+        "venue": "Amer. J. Math.",
+        "year": 1976
+      },
+      "exists": true,
+      "explanation": "This paper by Uhlenbeck is directly cited for the theorem on generic metrics, which states that for a generic Riemannian metric, eigenvalues of the Laplacian are simple, supporting the non-degenerate case discussion.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": "10.2307/2373976",
+      "resolved_url": "https://doi.org/10.2307/2373976"
+    }
+  ],
+  "missing_references": [],
+  "summary": "The bibliography is comprehensive and highly relevant to the paper's content, covering foundational texts in functional analysis, Fourier analysis, spectral geometry, and specialized topics like Helgason-Fourier transforms, Killing tensors, and separation of variables. All cited references were successfully located. There are two instances of duplicate citations (Spectral1/Plancherel2 and Spectral2/Plancherel1). The relevance of each citation is generally high, with a few medium relevance citations for broader context or specific examples. The paper effectively uses these references to build its theoretical framework and justify its methodological choices."
+}
+\end{verbatim}
+
+\subsection*{meta_reviewer (\texttt{claude-sonnet-4-6})}
+\begin{verbatim}
+{
+  "confidence": 0.78,
+  "questions": [
+    "For the irrational-slope torus example in Section VII.C: can the authors explicitly construct self-adjoint operators with the claimed spectral properties on L²(T²) for irrational ε? What happens to the periodicity conditions on the eigenfunctions, and does the Type I-D classification survive scrutiny?",
+    "Regarding the Killing-tensor operator construction (Algorithm Step 3): under what precise conditions do the symmetric divergence-form operators D_κ commute with Δ at the operator level? Can the authors state Carter's conditions or equivalent criteria explicitly within the algorithm, and provide examples of when the algorithm fails?",
+    "The paper describes the MASA construction as a 'semi-algorithm.' Can the authors characterize more precisely the class of manifolds for which it is guaranteed to terminate, beyond the examples of symmetric spaces?",
+    "How does the GFT framework handle manifolds with non-compact symmetry groups where the spectrum of Δ is purely continuous or mixed? Are there additional subtleties in the MASA construction or in the Plancherel measure in these cases?",
+    "For the rigged Hilbert space isomorphism (Section VII.A): what conditions on the manifold and the choice of test function space Φ[Σ] ensure that the GFT extends continuously to the nuclear topology, so that the Gelfand triple isomorphism is valid?",
+    "Can the authors clarify the precise normalization relating the Laplace-Beltrami operator to the quadratic Casimir element in Section IV.A.1, including any curvature-dependent correction terms?",
+    "The paper defers physical applications (curved momentum space, Unruh effect, Aharonov-Bohm effect) to subsequent work. Can the authors provide at least one non-trivial worked example beyond ℝ³ and T² that demonstrates the full construction pipeline, including MASA construction, k-space determination, and explicit transform formulas?"
+  ],
+  "recommendation": "major_revision",
+  "strengths": [
+    "Addresses a genuinely significant and long-standing problem: providing a unified, systematic framework for generalized Fourier analysis on arbitrary Riemannian manifolds beyond the symmetric-space setting.",
+    "The Local-MASA principle is a conceptually clean and physically well-motivated organizing idea that clarifies the source of momentum-space ambiguity in degenerate spectra.",
+    "Proves a generalized Parseval-Plancherel theorem, establishing the GFT as a unitary isomorphism and placing it on solid functional-analytic footing.",
+    "The dual classification scheme (MASA completeness/Stäckel type and k-space topology) provides a useful taxonomy linking geometric structure to analytic properties of the transform.",
+    "Comprehensive, accurate, and well-chosen bibliography covering all relevant foundational literature in functional analysis, spectral geometry, harmonic analysis, and separation of variables.",
+    "Honest acknowledgment of limitations: the Killing-tensor MASA construction is described as a semi-algorithm that may not terminate in general.",
+    "The distinction between true isometry-induced symmetries (which preserve GFT structure) and mere coordinate adaptations (which yield unitarily equivalent but topologically distinct k-spaces) is a valuable conceptual clarification.",
+    "Novelty assessment is significant: the approach generalizes beyond symmetric spaces and provides a systematic degeneracy-resolution strategy not present in existing literature."
+  ],
+  "summary": "This paper develops a systematic mathematical framework for generalizing Fourier analysis to curved Riemannian manifolds, introducing the concept of a Generalized Fourier Transform (GFT) based on spectral decomposition of the Laplace-Beltrami operator. The central contributions are: the Local-MASA principle for resolving spectral degeneracy using maximal Abelian sets of local commuting geometric operators; an algorithmic construction procedure using Killing tensor machinery and separation-of-variables techniques; a generalized Parseval-Plancherel theorem establishing unitarity; and a dual classification of GFTs by MASA completeness/Stäckel separability and by k-space topology. The bibliography is comprehensive, well-chosen, and properly verified. Novelty is assessed as significant relative to prior work (Helgason, spectral geometry, separation of variables literature). However, technical reviewers identified one major error in the irrational-slope torus example, one major understatement of the curvature obstruction to operator commutativity in the Killing-tensor algorithm, and several minor imprecisions. Reproducibility is limited by proof-sketch level derivations and an only high-level description of the constructive algorithm, with no worked-out numerical examples sufficient for independent verification.",
+  "weaknesses": [
+    "Major error in the irrational-slope torus example (Section VII.C): for irrational rotation angle ε, the rotated partial-derivative operators do not yield well-defined self-adjoint operators with integer spectra on T², and their joint eigenfunctions fail periodicity. The classification as Type I-D in this case is therefore not adequately justified and may be incorrect.",
+    "Major understatement of the curvature obstruction in the Killing-tensor operator construction (Section IV.B, Step 3): Poisson commutativity of symbols does not automatically lift to operator commutativity; Carter's integrability conditions or analogous criteria are needed. The algorithm as stated does not guarantee construction of genuinely commuting operators, and this limitation is not sufficiently prominent.",
+    "Central results are presented as proof sketches rather than complete proofs, requiring readers to fill in domain specifications, self-adjointness arguments, direct-integral measurability conditions, and Schwartz-space preservation from external references, significantly reducing mathematical rigor and reproducibility.",
+    "The constructive MASA algorithm is described only at a high level; insufficient explicit detail is provided for independent implementation or verification.",
+    "Minor imprecision in the application of Peetre's theorem: the order of the differential operator is only locally finite in general, not globally finite; additional continuity assumptions are required for global finite order.",
+    "The Casimir-Laplacian relation stated for maximally symmetric spaces (Section IV.A.1) lacks precise normalization and representation-theoretic context.",
+    "The 'Type III rank-2 incomplete' classification for the non-degenerate case is potentially misleading terminology, conflating genuinely underdetermined degenerate cases with the trivially complete non-degenerate case.",
+    "The rigged Hilbert space isomorphism claim (Section VII.A) requires conditions ensuring the GFT maps test functions continuously in the nuclear/Schwartz topology, which are not stated.",
+    "Two duplicate citations appear in the bibliography (Spectral1/Plancherel2 and Spectral2/Plancherel1), suggesting incomplete editorial review.",
+    "No fully worked numerical or symbolic examples with explicit calculations are provided to allow independent verification of the classification claims."
+  ]
+}
+\end{verbatim}
+
+\subsection*{novelty (\texttt{gemini-2.5-flash})}
+\begin{verbatim}
+{
+  "confidence": 4,
+  "missing_prior_art": [],
+  "novelty_score": 0.7,
+  "related_work": [
+    {
+      "citation_key": "Spectral1",
+      "delta": "This paper builds on the foundational spectral theory for self-adjoint operators in Hilbert spaces, which is a core component of the GFT definition and its properties (Parseval-Plancherel theorem). The novelty lies in extending this to a generalized Fourier transform on Riemannian manifolds with explicit degeneracy resolution.",
+      "relation": "prior_art",
+      "title": "Functional Analysis (Methods of Modern Mathematical Physics Volume I)"
+    },
+    {
+      "citation_key": "Grigoryan",
+      "delta": "The paper leverages concepts from analysis on manifolds, particularly concerning the Laplace-Beltrami operator and its spectral properties, as discussed in works like Grigor'yan. The current work extends this by providing a systematic framework for GFT construction and degeneracy resolution using geometric operators.",
+      "relation": "prior_art",
+      "title": "Heat Kernel and Analysis on Manifolds"
+    },
+    {
+      "citation_key": "Helgason1",
+      "delta": "Helgason's work on Fourier transforms on symmetric spaces is a specific generalization of the Fourier transform. This paper offers a more general framework for GFT on *any* Riemannian manifold, not restricted to symmetric spaces, and provides a systematic approach to resolving spectral degeneracy using local, symmetry-adapted operators, which is a key distinction from Helgason's approach.",
+      "relation": "prior_art",
+      "title": "Geometric Analysis on Symmetric Spaces"
+    },
+    {
+      "citation_key": "Sep1",
+      "delta": "The paper explicitly builds on the theory of separation of variables and Stäckel systems, particularly in the algorithmic construction of local MASAs from Killing tensors. The novelty is in adapting these techniques specifically for the purpose of constructing a 'physical' GFT basis and classifying GFTs based on MASA completeness and Stäckel separability.",
+      "relation": "builds_on",
+      "title": "Separable systems of Stäckel"
+    },
+    {
+      "citation_key": "Peetre",
+      "delta": "Peetre's Theorem is cited to establish the mathematical characterization of local operators as differential operators. This paper uses this foundational result to justify the focus on differential operators for physically meaningful degeneracy resolution.",
+      "relation": "prior_art",
+      "title": "Une caractérisation abstraite des opérateurs différentiels."
+    },
+    {
+      "citation_key": "uhlenbeck",
+      "delta": "The paper references Uhlenbeck's work on generic metrics having simple eigenvalues for the Laplacian. This provides context for when degeneracy resolution is necessary, highlighting that the problem is relevant for manifolds with symmetries, which is the focus of the paper's degeneracy resolution strategy.",
+      "relation": "prior_art",
+      "title": "Generic properties of eigenfunctions"
+    },
+    {
+      "citation_key": "curvedmomemtum1",
+      "delta": "This paper focuses on the mathematical framework for defining a generalized Fourier transform and resolving momentum-space ambiguities. While related to the concept of 'curved momentum space', this paper provides the foundational mathematical tools and classification, with physical applications (including a generalized momentum definition) deferred to subsequent work. The cited work explores the implications of curved momentum space, which this paper aims to provide a rigorous basis for.",
+      "relation": "orthogonal",
+      "title": "Living in Curved Momentum Space."
+    }
+  ],
+  "verdict": "significant"
+}
+\end{verbatim}
+
+\subsection*{reproducibility (\texttt{gpt-5.5})}
+\begin{verbatim}
+{
+  "code_availability": "unspecified",
+  "code_url": null,
+  "concerns": [
+    {
+      "area": "other",
+      "description": "The work is primarily theoretical and does not appear to rely on experiments, datasets, or executable code; conventional computational reproducibility is therefore mostly not applicable.",
+      "severity": "info"
+    },
+    {
+      "area": "other",
+      "description": "Several central claims are presented as proof sketches or high-level classifications rather than fully formal derivations. Reproducing the mathematical results would require filling in domain, self-adjointness, direct-integral, and measurable-field details from external spectral theory references.",
+      "severity": "major"
+    },
+    {
+      "area": "other",
+      "description": "The claimed constructive MASA/Killing-tensor algorithm is only described at a high level in the supplied text, with important referenced conditions and equations not fully available here, making independent implementation or verification difficult.",
+      "severity": "major"
+    },
+    {
+      "area": "evaluation",
+      "description": "Worked examples and classification flowcharts are mentioned, but the supplied text does not provide enough explicit calculations to independently verify all example classifications and topology claims.",
+      "severity": "minor"
+    },
+    {
+      "area": "data",
+      "description": "No empirical or benchmark data are used or needed; data availability is not specified because the paper is not data-driven.",
+      "severity": "info"
+    }
+  ],
+  "confidence": 0.72,
+  "data_availability": "unspecified",
+  "data_url": null,
+  "environment": null,
+  "reproducibility_score": 0.46
+}
+\end{verbatim}
+
+\subsection*{summary (\texttt{claude-haiku-4-5-20251001})}
+\begin{verbatim}
+{
+  "audience": "Mathematicians and mathematical physicists working in differential geometry, harmonic analysis, and spectral theory; researchers developing quantum mechanics and field theory on curved spacetimes; specialists in geometric analysis and representation theory",
+  "key_contributions": [
+    "Establishes the Local-MASA principle: physical GFT bases must arise from maximal Abelian sets of local commuting operators that commute with the Laplace-Beltrami operator, excluding non-local alternatives",
+    "Provides an algorithmic construction procedure for building local commuting operator algebras using Killing tensor machinery and separation-of-variables techniques to resolve spectral degeneracy",
+    "Proves a generalized Parseval-Plancherel theorem confirming that the GFT is a unitary isomorphism preserving inner products and norms",
+    "Introduces a dual classification system for GFTs: one based on MASA completeness and Stäckel separability, another based on the topology of momentum space (discrete, continuous, or mixed)",
+    "Distinguishes between unitary transformations from true isometries (which preserve GFT structure) and coordinate-adapted degeneracy resolutions (which can produce inequivalent momentum labelings while remaining unitarily equivalent)",
+    "Demonstrates through explicit examples (Cartesian vs. spherical coordinates in ℝ³, rational vs. irrational flows on tori) how different local operator choices alter momentum-space structure while preserving underlying Hilbert space equivalence",
+    "Clarifies that in degenerate sectors, the position-momentum duality is unique only after fixing a specific local MASA, resolving an ambiguity in prior treatments"
+  ],
+  "plain_language_summary": "The Fourier transform is a fundamental tool in mathematics and physics that decomposes functions into simpler oscillatory components. It works beautifully in flat, Euclidean space, but extending it to curved spaces (Riemannian manifolds) is mathematically subtle. This paper provides a systematic framework for doing so.\n\nThe authors define a Generalized Fourier Transform (GFT) on any curved space by using the spectrum of the Laplace-Beltrami operator—a natural geometric differential operator that generalizes the familiar Laplacian to curved geometry. The key challenge is that on symmetric spaces, many different eigenmodes can have the same energy level (spectral degeneracy), making it ambiguous which modes to use as basis functions. The paper's main contribution is showing how to resolve this ambiguity by constructing a maximal set of commuting geometric operators (called a local MASA) built from symmetries of the space (Killing vectors and tensors). This choice of commuting operators uniquely determines a \"momentum space\" labeling that reflects the geometric symmetries.\n\nThe authors prove their transform satisfies a generalized Parseval-Plancherel theorem (norm-preservation), classify different types of momentum spaces that can arise, and carefully distinguish between true geometric symmetries (which preserve the transform structure) and mere coordinate choices (which can create different-looking but equivalent momentum labelings). The framework is intended as a foundation for analyzing wave phenomena and dynamics on curved spaces.",
+  "tldr": "This paper develops a mathematical framework for generalizing Fourier analysis to curved spaces by constructing transforms that decompose functions using the geometry of the space itself, with applications to physics on non-Euclidean manifolds."
+}
+\end{verbatim}
+
+\subsection*{technical_correctness (\texttt{claude-opus-4-7})}
+\begin{verbatim}
+{
+  "claims": [
+    {
+      "assessment": "supported",
+      "claim": "The Generalized Fourier Transform (GFT) on a Riemannian manifold, constructed via spectral decomposition of the Laplace-Beltrami operator, satisfies a generalized Parseval-Plancherel theorem and is a unitary isomorphism.",
+      "evidence": "This is a standard consequence of the spectral theorem for self-adjoint operators in direct-integral form (von Neumann's theorem). The proof sketch correctly invokes the resolution of identity. The result is essentially a restatement of well-known spectral theory (e.g., Reed-Simon).",
+      "id": "C1",
+      "location": "Section II.C, Theorem (Generalized Plancherel-Parseval)",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "supported",
+      "claim": "The Laplace-Beltrami operator is essentially self-adjoint on C∞_c(Σ) and admits a unique self-adjoint extension on L²(Σ) when Σ is geodesically complete.",
+      "evidence": "This is the classical Gaffney/Strichartz theorem for complete Riemannian manifolds.",
+      "id": "C2",
+      "location": "Section II.B",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "By Peetre's theorem, any local linear operator on smooth functions is necessarily a differential operator of finite order.",
+      "evidence": "Peetre's theorem states that local linear operators are differential operators, but the order is only locally finite (finite on each compact set), not globally finite in general. The paper's statement glosses over this subtlety.",
+      "id": "C3",
+      "location": "Section III.B.2",
+      "severity": "minor",
+      "suggested_fix": "Clarify that the order is locally finite; globally finite order requires additional assumptions (continuity in appropriate topology)."
+    },
+    {
+      "assessment": "supported",
+      "claim": "On a generic Riemannian metric on any compact manifold of dimension ≥ 2, all eigenvalues of the Laplacian are simple (citing Uhlenbeck).",
+      "evidence": "This is Uhlenbeck's classical genericity result (1976).",
+      "id": "C4",
+      "location": "Section II.D.1",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "For maximally symmetric spaces where R = n(n+1)/2, the Laplace-Beltrami operator coincides with the quadratic Casimir element.",
+      "evidence": "True up to normalization/constants on symmetric spaces (this is the Casimir-Laplacian relation), but the statement is imprecise: it holds for the action on functions in a specific representation, and there can be additional constants (scalar curvature terms) depending on conventions.",
+      "id": "C5",
+      "location": "Section IV.A.1",
+      "severity": "minor",
+      "suggested_fix": "Specify the precise relation including normalization and the representation acted upon."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "The construction of commuting differential operators from Killing tensors via the symmetric divergence form D_κ = -∇_i(κ^{ij}∇_j) yields operators that commute with the Laplace-Beltrami operator.",
+      "evidence": "The paper itself acknowledges this is not automatic—curvature obstructions and ordering ambiguities can prevent strict commutativity. The classical Poisson commutativity of symbols does not always lift to operator commutativity (Carter's condition is needed). The paper correctly notes this caveat but the algorithm as stated does not guarantee success.",
+      "id": "C6",
+      "location": "Section IV.B, Step 3",
+      "severity": "major",
+      "suggested_fix": "Make the obstruction more prominent in the algorithm description; explicitly state when commutation fails and provide criteria (e.g., Carter integrability conditions)."
+    },
+    {
+      "assessment": "supported",
+      "claim": "St$\\ddot{a}$ckel separability implies the existence of a complete family of mutually commuting second-order symmetry operators; the converse need not hold.",
+      "evidence": "This is consistent with the Eisenhart-Kalnins-Miller theory of separation of variables.",
+      "id": "C7",
+      "location": "Section V.D.1",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "supported",
+      "claim": "Isometries induce unitary pullback operators on L²(Σ) that commute with the Laplace-Beltrami operator and preserve the joint spectrum (and k-space topology).",
+      "evidence": "Standard result: isometries preserve the volume form and the Laplacian is built from the metric, so it commutes with the pullback. Spectrum is preserved under unitary conjugation.",
+      "id": "C8",
+      "location": "Section V.C, Theorem on isometry invariance",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "supported",
+      "claim": "Different MASA choices (coordinate-adapted separation schemes) can lead to topologically inequivalent k-space label spaces while remaining unitarily equivalent on L²(Σ); e.g., Cartesian MASA gives F = R³ while spherical MASA gives R⁺ × Z².",
+      "evidence": "This is a correct observation: the joint spectrum of {p_x, p_y, p_z} is R³ as a topological space, while the joint spectrum of {Δ, |L|², L_z} is R⁺ × Z × Z (with constraints |m|≤ℓ). The Hilbert spaces L²(R³) and L²(R⁺×Z²) are isomorphic as separable Hilbert spaces.",
+      "id": "C9",
+      "location": "Section V.C and Section VII.B",
+      "severity": "info",
+      "suggested_fix": "Note that the spherical k-space is actually constrained: |m|≤ℓ, so it is not exactly R⁺ × Z² but a subset thereof."
+    },
+    {
+      "assessment": "incorrect",
+      "claim": "For the flat torus T² with irrational slope MASA, the spectrum of Δ remains discrete with λ_{m'n'} = m'² + n'² ∈ Z, and the k-space remains Type I-D.",
+      "evidence": "The argument has an error. When the MASA is rotated by an irrational angle ε on T², the operators -i∂_{θ'} and -i∂_{φ'} are linear combinations of -i∂_θ and -i∂_φ. Their joint eigenfunctions on T² require simultaneous periodicity, but for irrational tan(ε), the operators ∂_{θ'}, ∂_{φ'} do not have well-defined spectra with eigenfunctions in L²(T²) labeled by integers in the same way. The eigenvalues of the rotated operators on the original integer lattice are m'=m cos ε + n sin ε and n'=-m sin ε + n cos ε which are generally irrational, not integers. Moreover, the eigenfunctions e^{im'θ'}e^{in'φ'} are NOT well-defined functions on T² for irrational ε because they fail periodicity. The original joint eigenbasis {e^{imθ}e^{inφ}} of Δ remains the eigenbasis (after relabeling), and the k-space label set is still Z² (just with relabeled coordinates), but the claim that the new MASA generators have integer spectrum is misleading and the eigenfunctions written are not on T².",
+      "id": "C10",
+      "location": "Section VII.C",
+      "severity": "major",
+      "suggested_fix": "Clarify that for irrational ε, the rotated 'MASA' generators do not have a discrete spectrum on T² in the same way; either they fail to be self-adjoint with the same domain, or one must lift to the universal cover. Reconsider whether this is truly the same Type I-D classification."
+    },
+    {
+      "assessment": "supported",
+      "claim": "The momentum domain F can be defined as the joint spectrum of a commuting family D of self-adjoint operators on H, where Δ is polynomial/functional in D.",
+      "evidence": "This generalization is consistent with the spectral theorem for commuting families of self-adjoint operators (joint spectral measure).",
+      "id": "C11",
+      "location": "Section V.C, Definition of k-space as joint spectrum",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "The rigged Hilbert space (Gelfand triple) construction Φ[Σ] ⊂ L²[Σ] ⊂ Φ*[Σ] is isomorphic to the spectral side Φ[F] ⊂ L²[F] ⊂ Φ*[F] via the GFT.",
+      "evidence": "The construction is standard but the isomorphism between rigged Hilbert spaces requires that the GFT maps test functions to test functions continuously in the appropriate topology. This is not always automatic and depends on the specific spaces chosen.",
+      "id": "C12",
+      "location": "Section VII.A",
+      "severity": "minor",
+      "suggested_fix": "Add conditions ensuring the GFT preserves the nuclear/Schwartz structure of the test function spaces."
+    },
+    {
+      "assessment": "supported",
+      "claim": "The construction of a complete fiberwise MASA from Killing data via the rank-by-rank algorithm is a semi-algorithm that may not terminate in general, but terminates for symmetric spaces like spheres and tori.",
+      "evidence": "The acknowledgment is honest and consistent with the literature on Killing tensors and separability.",
+      "id": "C13",
+      "location": "Section IV.B, 'The Semi-Algorithm' remark",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "In the non-degenerate higher-dimensional case (n ≥ 2), the GFT is classified as Type III (rank-2 incomplete) because there are no auxiliary symmetry operators beyond functional calculus of Δ.",
+      "evidence": "This is a somewhat awkward classification: in the non-degenerate case, the eigenbasis is uniquely determined by Δ alone (up to phase), so no additional operators are needed for labeling. Calling this 'incomplete' is a matter of convention; the paper acknowledges this oddity but the terminology may confuse readers.",
+      "id": "C14",
+      "location": "Section VI.A.3, Remark on non-degenerate spectra",
+      "severity": "minor",
+      "suggested_fix": "Introduce a separate category (e.g., 'Type 0' or 'trivially complete') for the non-degenerate case to avoid conflating it with chaotic/genuinely incomplete cases."
+    },
+    {
+      "assessment": "supported",
+      "claim": "In R³ with Cartesian MASA {p_x, p_y, p_z}, requiring Δ to belong to the MASA breaks maximality because Δ = p_x² + p_y² + p_z² is functionally dependent on the generators.",
+      "evidence": "Correct observation: in a commuting set, functional dependence reduces the effective dimension of the joint spectrum.",
+      "id": "C15",
+      "location": "Section V.C",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "supported",
+      "claim": "The Plancherel weight ρ_{[λ,α]} is fixed (up to fiber rotations) once a specific orthonormal family of generalized eigenfunctions is chosen.",
+      "evidence": "Standard fact from direct integral decompositions of self-adjoint operators.",
+      "id": "C16",
+      "location": "Section II.B",
+      "severity": "info",
+      "suggested_fix": null
+    }
+  ],
+  "confidence": 0.72,
+  "overall_correctness": "mostly_sound"
+}
+\end{verbatim}
+
+\section*{Corrections}
+% corrections rendered from corrections table; empty on first publish
+No corrections have been recorded.
+
+\section*{Bibliography}
+No bibliography extracted.
+
+% \bibliographystyle{plain}
+% \bibliography{references}
+\end{document}
