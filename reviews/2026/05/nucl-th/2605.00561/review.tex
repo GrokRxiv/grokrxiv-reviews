@@ -1,0 +1,2023 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\title{\$\textbackslash{}rho\$ mesons in finite magnetic field and finite temperature}
+\date{}
+\begin{document}
+\maketitle
+
+\noindent\textbf{arXiv:} \href{https://arxiv.org/abs/2605.00561}{2605.00561} \quad \textbf{Field:} nucl-th\\
+
+\section*{TL;DR}
+This paper derives ρ meson mass spectra in external magnetic fields and at finite temperature using the two-flavor NJL model, employing both the Ritus and Schwinger propagator schemes and proving their algebraic equivalence. The work systematically covers all six charge–spin combinations (ρ\_\{Q=±1\}\^{}\{s\_z=0,±1\} and ρ\_\{Q=0\}\^{}\{s\_z=0,±1\}), identifies multiple mass branches arising from the Landau-level structure of constituent quarks, and compares predictions against lattice QCD (LQCD) results. The technical execution is largely sound: the dual-scheme equivalence proof is internally consistent, the Dyson–Schwinger/RPA propagator structure follows standard NJL practice, and the high-temperature asymptotic behavior is physically well-motivated. One factual labeling error (neutral/charged swapped in a single sentence) and a regulatization-scheme caveat that is under-stated constitute the main technical concerns. Novelty is assessed as incremental: the Ritus–Schwinger equivalence is well-known for fermions, and the extension to charged vector mesons, while non-trivial in execution, is a methodological step rather than a conceptual advance. Reproducibility is poor—no code, data, or software environment is provided, and the algorithm for selecting among multiple mass solutions is not specified. Citation coverage is broad but many references could not be independently verified; two entries carry future-year or provisional identifiers (Mei:2026xlj, Li:2025wqb) whose availability should be clarified.
+
+\textbf{Recommendation:} Minor revision \quad \textbf{Confidence:} 72\%\\
+
+\section*{Strengths}
+\begin{itemize}[leftmargin=*]
+  \item Rigorous parallel derivation in both Ritus and Schwinger schemes with explicit algebraic proof of equivalence, resolving a methodological question for charged vector mesons in magnetic fields.
+  \item Comprehensive coverage of all charge–spin branches of the ρ meson multiplet, including identification and physical interpretation of multiple Landau-level mass solutions.
+  \item Quantitative results are consistent with available LQCD benchmarks (Bali et al. 2018, Luschevskaya et al. 2017), providing external validation of the NJL predictions.
+  \item High-temperature analysis reveals systematic degeneracies among mass branches and a transparent asymptotic approach to constituent-quark Landau-level sums, offering physical insight.
+  \item Builds coherently on the authors' prior work on pions and kaons, extending the programme to the vector-meson sector in a self-consistent framework.
+\end{itemize}
+
+\section*{Weaknesses}
+\begin{itemize}[leftmargin=*]
+  \item Novelty is incremental: the Ritus–Schwinger propagator equivalence is established in the literature for fermions, and its confirmation for charged ρ mesons in NJL is an extension rather than a new conceptual result.
+  \item Critical reproducibility gap: no source code, numerical tables for figures, or software/library specification is provided, requiring a complete reimplementation to verify results.
+  \item The algorithm for selecting the physical branch among multiple mass solutions (stated as 'lowest value') is not specified with sufficient precision to guarantee unambiguous reproduction.
+  \item Regularization-scheme dependence of the M(ρ⁺₊) behavior (saturation in Pauli–Villars vs. non-monotonic rise in MFIR) is noted only parenthetically; the text should explicitly qualify that reported trends are scheme-dependent.
+  \item One factual labeling error in the propagator section swaps 'neutral' and 'charged' (C7), contradicting all surrounding text and figure captions.
+  \item Citation verification confidence is low (0.55); two references carry provisional or future-year identifiers (Mei:2026xlj, Li:2025wqb) whose public availability is unclear, and no DOIs or arXiv IDs are resolved for the majority of entries.
+  \item Model parameters are stated but not tabulated against fitted observables; readers cannot verify the vacuum fit without rerunning the gap and Bethe–Salpeter equations.
+\end{itemize}
+
+\section*{Open Questions}
+\begin{itemize}[leftmargin=*]
+  \item Can the authors provide numerical data tables (or supplementary code) for at least the key figures, so that the mass-branch results can be verified without full reimplementation?
+  \item What convergence criterion and root-finding algorithm are used to identify and select the 'lowest-value solution' among the multiple poles of the mass equation? Please specify this in the manuscript.
+  \item How sensitive are the qualitative conclusions—particularly the saturation behavior of M(ρ⁺₊) and the degeneracy patterns—to the choice of regularization scheme (Pauli–Villars vs. MFIR)? A brief comparison or explicit statement of scheme dependence should be added.
+  \item Please correct the labeling error just before Eq. (prorho), where 'neutral ρ\_\{Q=±1\}' and 'charged ρ\_\{Q=0\}' are transposed.
+  \item Are the references Mei:2026xlj and Li:2025wqb currently available as preprints? If so, please supply arXiv identifiers so they can be accessed by referees and readers.
+\end{itemize}
+
+\section*{Per-Agent Reviews}
+\subsection*{citation (\texttt{gemini-2.5-flash})}
+\begin{verbatim}
+{
+  "confidence": 0.55,
+  "entries": [
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "Cha",
+        "raw": "Cha",
+        "title": "Exposing the effect of the p-wave component in the pion triplet under a strong magnetic field",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated] | Introduction: For charged meson study at quark level, (such as $\\pi_\\pm,\\ K_\\pm,\\ \\rho_\\pm$), the complexity lies in the lack of translational invariance in external electromagnetic fields, and the Fourier-like transformation between coordinate and momentum spaces should be carried out by the eigenfunctions of the magnetized field equation for mesons [@and... [truncated]",
+      "notes": "2 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "Li:2025wqb",
+        "raw": "Li:2025wqb",
+        "title": null,
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated] | NUMERICAL RESULTS: Similar phenomena are observed in the studies of other mesons under external magnetic field, such as $\\pi_{0}$, $\\pi_{\\pm}$, $K_{0}$, $K_{\\pm}$, $\\eta$, $\\eta'$ and $\\phi$ mesons [@sheng2021pole; @sheng2022impacts; @Li:2025wqb; @Mei:2022dkd; @mao2017effect; @shengxinli; @mao2019pions; @Mei:2026xlj].",
+      "notes": "2 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "Mei:2022dkd",
+        "raw": "Mei:2022dkd",
+        "title": null,
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated] | NUMERICAL RESULTS: Similar phenomena are observed in the studies of other mesons under external magnetic field, such as $\\pi_{0}$, $\\pi_{\\pm}$, $K_{0}$, $K_{\\pm}$, $\\eta$, $\\eta'$ and $\\phi$ mesons [@sheng2021pole; @sheng2022impacts; @Li:2025wqb; @Mei:2022dkd; @mao2017effect; @shengxinli; @mao2019pions; @Mei:2026xlj].",
+      "notes": "2 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "Mei:2026xlj",
+        "raw": "Mei:2026xlj",
+        "title": null,
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: For charged meson study at quark level, (such as $\\pi_\\pm,\\ K_\\pm,\\ \\rho_\\pm$), the complexity lies in the lack of translational invariance in external electromagnetic fields, and the Fourier-like transformation between coordinate and momentum spaces should be carried out by the eigenfunctions of the magnetized field equation for mesons [@and... [truncated] | NUMERICAL RESULTS: Similar phenomena are observed in the studies of other mesons under external magnetic field, such as $\\pi_{0}$, $\\pi_{\\pm}$, $K_{0}$, $K_{\\pm}$, $\\eta$, $\\eta'$ and $\\phi$ mesons [@sheng2021pole; @sheng2022impacts; @Li:2025wqb; @Mei:2022dkd; @mao2017effect; @shengxinli; @mao2019pions; @Mei:2026xlj].",
+      "notes": "2 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "Sccoccola",
+        "raw": "Sccoccola",
+        "title": "Masses of magnetized pseudoscalar and vector mesons in an extended NJL model: The role of axial vector mesons",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: For charged meson study at quark level, (such as $\\pi_\\pm,\\ K_\\pm,\\ \\rho_\\pm$), the complexity lies in the lack of translational invariance in external electromagnetic fields, and the Fourier-like transformation between coordinate and momentum spaces should be carried out by the eigenfunctions of the magnetized field equation for mesons [@and... [truncated] | Introduction: Different from the previous work [@ghosh2020thermo; @avancini2022magnetized; @carlomagno2022charged; @Sccoccola; @gomez2023charged], we conduct the analytical derivations for $\\rho$ meson propagators by using Ritus scheme and Schwinger scheme of particle propagators in the magnetic field, and prove that different schemes lead to the same algebraic formula. | NUMERICAL RESULTS: For instance, with the MFIR regularization scheme, $M_{\\rho^{+}_+}$ firstly decreases and then increases with magnetic field [@carlomagno2022charged; @Sccoccola; @gomez2023charged].",
+      "notes": "4 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "Tian",
+        "raw": "Tian",
+        "title": "{Mass spectra of charged Kaons and Pions at finite magnetic field, temperature and density",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: For charged meson study at quark level, (such as $\\pi_\\pm,\\ K_\\pm,\\ \\rho_\\pm$), the complexity lies in the lack of translational invariance in external electromagnetic fields, and the Fourier-like transformation between coordinate and momentum spaces should be carried out by the eigenfunctions of the magnetized field equation for mesons [@and... [truncated] | summary: In fact, in our previous paper [@mao2019pions; @Tian], the algebraic equations for charged $\\pi$ and $K$ meson propagators have been derived in the Ritus scheme. | summary: The same algebraic formula has been obtained in the Schwinger scheme, when we prepare this paper, which is a supplementary result for our previous work [@mao2019pions; @Tian] and thus not listed here.",
+      "notes": "3 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "Wei",
+        "raw": "Wei",
+        "title": "{Spin alignment of vector mesons from quark dynamics in a rotating medium*",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "aguirre2017modification",
+        "raw": "aguirre2017modification",
+        "title": "Modification of the masses of the lightest neutral mesons in a hadronic medium under an external magnetic field",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "andersen2012thermal",
+        "raw": "andersen2012thermal",
+        "title": "Thermal pions in a magnetic background",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated] | Introduction: For charged meson study at quark level, (such as $\\pi_\\pm,\\ K_\\pm,\\ \\rho_\\pm$), the complexity lies in the lack of translational invariance in external electromagnetic fields, and the Fourier-like transformation between coordinate and momentum spaces should be carried out by the eigenfunctions of the magnetized field equation for mesons [@and... [truncated]",
+      "notes": "2 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "andersen2016phase",
+        "raw": "andersen2016phase",
+        "title": "Phase diagram of QCD in a magnetic field",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Framework: There are two equivalent ways to treat the particle propagators in magnetic field, the Schwinger scheme [@andersen2016phase; @miransky2015quantum] and the Ritus scheme [@ritus1972radiative; @leung2006gauge; @elizalde2002neutrino]. | Framework: ### Schwinger Scheme In Schwinger scheme [@andersen2016phase; @miransky2015quantum], the particle propagator in magnetic field is composed of two parts, one is related to the Schwinger phase which breaks the translational invariance, and the other is a Fourier transformation of the translational invariant propagator.",
+      "notes": "2 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "avancini2016properties",
+        "raw": "avancini2016properties",
+        "title": "Properties of magnetized neutral mesons within a full RPA evaluation",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "avancini2017pi0",
+        "raw": "avancini2017pi0",
+        "title": "$\\pi$0 pole mass calculation in a strong magnetic field and lattice constraints",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "avancini2019neutral",
+        "raw": "avancini2019neutral",
+        "title": "Neutral meson properties in hot and magnetized quark matter: A new magnetic field independent regularization scheme applied to an NJL-type model",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "avancini2021light",
+        "raw": "avancini2021light",
+        "title": "Light pseudoscalar meson masses under strong magnetic fields within the SU (3) Nambu--Jona-Lasinio model",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated] | Introduction: For charged meson study at quark level, (such as $\\pi_\\pm,\\ K_\\pm,\\ \\rho_\\pm$), the complexity lies in the lack of translational invariance in external electromagnetic fields, and the Fourier-like transformation between coordinate and momentum spaces should be carried out by the eigenfunctions of the magnetized field equation for mesons [@and... [truncated]",
+      "notes": "2 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "avancini2022magnetized",
+        "raw": "avancini2022magnetized",
+        "title": "Magnetized pole-mass of neutral $\\rho$ meson within full RPA evaluation",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated] | Introduction: Different from the previous work [@ghosh2020thermo; @avancini2022magnetized; @carlomagno2022charged; @Sccoccola; @gomez2023charged], we conduct the analytical derivations for $\\rho$ meson propagators by using Ritus scheme and Schwinger scheme of particle propagators in the magnetic field, and prove that different schemes lead to the same algebraic formula. | NUMERICAL RESULTS: The $\\rho_0^\\pm$ mesons are degenerate in the magnetic field and their mass increases with the magnetic field (see blue solid line), which is consistent with LQCD results and theoretical calculations [@bali2018meson; @avancini2022magnetized; @larina2014rho; @Sccoccola].",
+      "notes": "4 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "ayala2018magnetic",
+        "raw": "ayala2018magnetic",
+        "title": "Magnetic field dependence of the neutral pion mass in the linear sigma model coupled to quarks: The weak field case",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "ayala2021magnetic",
+        "raw": "ayala2021magnetic",
+        "title": "Magnetic field dependence of the neutral pion mass in the linear sigma model with quarks: The strong field case",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "bacsar2012conformal",
+        "raw": "bacsar2012conformal",
+        "title": "Conformal anomaly as a source of soft photons in heavy ion collisions",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: Strong electromagnetic fields exist in Quantum Chromodynamics (QCD) systems like high energy nuclear collisions [@kharzeev2008effects; @kharzeev2008chiral; @kharzeev2009chern; @kharzeev2009chiral; @skokov2009estimate; @voronyuk2011electromagnetic; @deng2012event; @bacsar2012conformal], compact stars [@kouveliotou1998x; @ferrer2010equation; @p... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "bali2018meson",
+        "raw": "bali2018meson",
+        "title": "Meson masses in electromagnetic fields with Wilson fermions",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: For charged meson study at quark level, (such as $\\pi_\\pm,\\ K_\\pm,\\ \\rho_\\pm$), the complexity lies in the lack of translational invariance in external electromagnetic fields, and the Fourier-like transformation between coordinate and momentum spaces should be carried out by the eigenfunctions of the magnetized field equation for mesons [@and... [truncated] | NUMERICAL RESULTS: The results are consistent with LQCD simulations [@luschevskaya2017determination; @bali2018meson]. | NUMERICAL RESULTS: The $\\rho_0^\\pm$ mesons are degenerate in the magnetic field and their mass increases with the magnetic field (see blue solid line), which is consistent with LQCD results and theoretical calculations [@bali2018meson; @avancini2022magnetized; @larina2014rho; @Sccoccola].",
+      "notes": "4 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "baym1996magnetic",
+        "raw": "baym1996magnetic",
+        "title": "Magnetic fields produced by phase transition bubbles in the electroweak phase transition",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: Strong electromagnetic fields exist in Quantum Chromodynamics (QCD) systems like high energy nuclear collisions [@kharzeev2008effects; @kharzeev2008chiral; @kharzeev2009chern; @kharzeev2009chiral; @skokov2009estimate; @voronyuk2011electromagnetic; @deng2012event; @bacsar2012conformal], compact stars [@kouveliotou1998x; @ferrer2010equation; @p... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "1610.00426",
+        "authors": [],
+        "doi": null,
+        "key": "brauner2016vector",
+        "raw": "brauner2016vector",
+        "title": "Vector meson condensation in a pion superfluid",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): NUMERICAL RESULTS: The parameters of the NJL model are fixed by fitting the chiral condensate $\\langle \\bar{\\psi}\\psi \\rangle = -(230 \\text{ MeV})^3$, the $\\pi$ and $\\rho$ meson masses $m_\\pi = 134 \\text{ MeV}$ and $m_\\rho = 775 \\text{ MeV}$, and the pion decay constant $f_\\pi = 93 \\text{ MeV}$ in vacuum [@he1998pipi; @brauner2016vector].",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "buballa2005njl",
+        "raw": "buballa2005njl",
+        "title": "NJL-model analysis of dense quark matter",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: We make use of the two flavor Nambu-Jona-Lasinio (NJL) model [@klevansky1992nambu; @nambu1961dynamical; @volkov1992effective; @hatsuda1994qcd; @buballa2005njl] to study the mass spectra of $\\rho$ mesons ($\\rho_{Q=\\pm 1}^{s_z=0,\\pm 1}$ and $\\rho_{Q=0}^{s_z=0,\\pm 1}$) under magnetic field. | Framework: We perform our study in the framework of two-flavor Nambu-Jona-Lasinio(NJL) model, which is presented by the Lagrangian density in terms of quark fields $\\psi$ [@klevansky1992nambu; @nambu1961dynamical; @volkov1992effective; @hatsuda1994qcd; @buballa2005njl] $$\\begin{align} \\label{njl} {\\cal L} =& \\bar{\\psi}\\left(i \\gamma^{\\mu} {D_{\\mu}}-m_{0... [truncated] | Framework: With the random phase approximation (RPA) method [@klevansky1992nambu; @nambu1961dynamical; @volkov1992effective; @hatsuda1994qcd; @buballa2005njl; @zhuang1994j], the meson propagator can be expressed as a sum of infinite-order quark loop diagrams.",
+      "notes": "3 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "cao2015effects",
+        "raw": "cao2015effects",
+        "title": "Effects of chiral imbalance and magnetic field on pion superfluidity and color superconductivity",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: Strong electromagnetic fields exist in Quantum Chromodynamics (QCD) systems like high energy nuclear collisions [@kharzeev2008effects; @kharzeev2008chiral; @kharzeev2009chern; @kharzeev2009chiral; @skokov2009estimate; @voronyuk2011electromagnetic; @deng2012event; @bacsar2012conformal], compact stars [@kouveliotou1998x; @ferrer2010equation; @p... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "carlomagno2022charged",
+        "raw": "carlomagno2022charged",
+        "title": "Charged pseudoscalar and vector meson masses in strong magnetic fields in an extended NJL model",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: For charged meson study at quark level, (such as $\\pi_\\pm,\\ K_\\pm,\\ \\rho_\\pm$), the complexity lies in the lack of translational invariance in external electromagnetic fields, and the Fourier-like transformation between coordinate and momentum spaces should be carried out by the eigenfunctions of the magnetized field equation for mesons [@and... [truncated] | Introduction: Different from the previous work [@ghosh2020thermo; @avancini2022magnetized; @carlomagno2022charged; @Sccoccola; @gomez2023charged], we conduct the analytical derivations for $\\rho$ meson propagators by using Ritus scheme and Schwinger scheme of particle propagators in the magnetic field, and prove that different schemes lead to the same algebraic formula. | NUMERICAL RESULTS: For instance, with the MFIR regularization scheme, $M_{\\rho^{+}_+}$ firstly decreases and then increases with magnetic field [@carlomagno2022charged; @Sccoccola; @gomez2023charged].",
+      "notes": "3 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2604.24595",
+        "authors": [],
+        "doi": null,
+        "key": "chao",
+        "raw": "chao",
+        "title": "Mass spectra of charged mesons and the quenching of vector meson condensation via exact phase-space diagonalization",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: For charged meson study at quark level, (such as $\\pi_\\pm,\\ K_\\pm,\\ \\rho_\\pm$), the complexity lies in the lack of translational invariance in external electromagnetic fields, and the Fourier-like transformation between coordinate and momentum spaces should be carried out by the eigenfunctions of the magnetized field equation for mesons [@and... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "cheng1994primordial",
+        "raw": "cheng1994primordial",
+        "title": "Primordial magnetic fields generated in the quark-hadron transition",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: Strong electromagnetic fields exist in Quantum Chromodynamics (QCD) systems like high energy nuclear collisions [@kharzeev2008effects; @kharzeev2008chiral; @kharzeev2009chern; @kharzeev2009chiral; @skokov2009estimate; @voronyuk2011electromagnetic; @deng2012event; @bacsar2012conformal], compact stars [@kouveliotou1998x; @ferrer2010equation; @p... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "chu2015quark",
+        "raw": "chu2015quark",
+        "title": "Quark magnetar in the three-flavor Nambu--Jona-Lasinio model with vector interactions and a magnetized gluon potential",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: Strong electromagnetic fields exist in Quantum Chromodynamics (QCD) systems like high energy nuclear collisions [@kharzeev2008effects; @kharzeev2008chiral; @kharzeev2009chern; @kharzeev2009chiral; @skokov2009estimate; @voronyuk2011electromagnetic; @deng2012event; @bacsar2012conformal], compact stars [@kouveliotou1998x; @ferrer2010equation; @p... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "colucci2014chiral",
+        "raw": "colucci2014chiral",
+        "title": "Chiral pions in a magnetic background",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: For charged meson study at quark level, (such as $\\pi_\\pm,\\ K_\\pm,\\ \\rho_\\pm$), the complexity lies in the lack of translational invariance in external electromagnetic fields, and the Fourier-like transformation between coordinate and momentum spaces should be carried out by the eigenfunctions of the magnetized field equation for mesons [@and... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "coppola2018charged",
+        "raw": "coppola2018charged",
+        "title": "Charged pion masses under strong magnetic fields in the NJL model",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: For charged meson study at quark level, (such as $\\pi_\\pm,\\ K_\\pm,\\ \\rho_\\pm$), the complexity lies in the lack of translational invariance in external electromagnetic fields, and the Fourier-like transformation between coordinate and momentum spaces should be carried out by the eigenfunctions of the magnetized field equation for mesons [@and... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "coppola2019neutral",
+        "raw": "coppola2019neutral",
+        "title": "Neutral and charged pion properties under strong magnetic fields in the NJL model",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated] | Introduction: For charged meson study at quark level, (such as $\\pi_\\pm,\\ K_\\pm,\\ \\rho_\\pm$), the complexity lies in the lack of translational invariance in external electromagnetic fields, and the Fourier-like transformation between coordinate and momentum spaces should be carried out by the eigenfunctions of the magnetized field equation for mesons [@and... [truncated]",
+      "notes": "2 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "das2020neutral",
+        "raw": "das2020neutral",
+        "title": "Neutral pion mass in the linear sigma model coupled to quarks at arbitrary magnetic field",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "deng2012event",
+        "raw": "deng2012event",
+        "title": "Event-by-event generation of electromagnetic fields in heavy-ion collisions",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: Strong electromagnetic fields exist in Quantum Chromodynamics (QCD) systems like high energy nuclear collisions [@kharzeev2008effects; @kharzeev2008chiral; @kharzeev2009chern; @kharzeev2009chiral; @skokov2009estimate; @voronyuk2011electromagnetic; @deng2012event; @bacsar2012conformal], compact stars [@kouveliotou1998x; @ferrer2010equation; @p... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "ding2021chiral",
+        "raw": "ding2021chiral",
+        "title": "Chiral properties of (2+ 1)-flavor QCD in strong magnetic fields at zero temperature",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "elizalde2002neutrino",
+        "raw": "elizalde2002neutrino",
+        "title": "Neutrino self-energy and index of refraction in strong magnetic field: A new approach",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Framework: There are two equivalent ways to treat the particle propagators in magnetic field, the Schwinger scheme [@andersen2016phase; @miransky2015quantum] and the Ritus scheme [@ritus1972radiative; @leung2006gauge; @elizalde2002neutrino]. | Framework: ### Ritus Scheme In Ritus scheme, one can well-define the Fourier-like transformation for the particle propagator from the conserved Ritus momentum space to coordinate space [@elizalde2002neutrino; @ritus1972radiative; @leung2006gauge].",
+      "notes": "2 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "enqvist1993primordial",
+        "raw": "enqvist1993primordial",
+        "title": "On primordial magnetic fields of electroweak origin",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: Strong electromagnetic fields exist in Quantum Chromodynamics (QCD) systems like high energy nuclear collisions [@kharzeev2008effects; @kharzeev2008chiral; @kharzeev2009chern; @kharzeev2009chiral; @skokov2009estimate; @voronyuk2011electromagnetic; @deng2012event; @bacsar2012conformal], compact stars [@kouveliotou1998x; @ferrer2010equation; @p... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "fayazbakhsh2012properties",
+        "raw": "fayazbakhsh2012properties",
+        "title": "Properties of neutral mesons in a hot and magnetized quark matter",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "fayazbakhsh2013weak",
+        "raw": "fayazbakhsh2013weak",
+        "title": "Weak decay constant of neutral pions in a hot and magnetized quark matter",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "ferrer2010equation",
+        "raw": "ferrer2010equation",
+        "title": "Equation of state of a dense and magnetized fermion system",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: Strong electromagnetic fields exist in Quantum Chromodynamics (QCD) systems like high energy nuclear collisions [@kharzeev2008effects; @kharzeev2008chiral; @kharzeev2009chern; @kharzeev2009chiral; @skokov2009estimate; @voronyuk2011electromagnetic; @deng2012event; @bacsar2012conformal], compact stars [@kouveliotou1998x; @ferrer2010equation; @p... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "ferrer2013magnetism",
+        "raw": "ferrer2013magnetism",
+        "title": "Magnetism in dense quark matter",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: Strong electromagnetic fields exist in Quantum Chromodynamics (QCD) systems like high energy nuclear collisions [@kharzeev2008effects; @kharzeev2008chiral; @kharzeev2009chern; @kharzeev2009chiral; @skokov2009estimate; @voronyuk2011electromagnetic; @deng2012event; @bacsar2012conformal], compact stars [@kouveliotou1998x; @ferrer2010equation; @p... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "ghosh2020thermo",
+        "raw": "ghosh2020thermo",
+        "title": "Thermo-magnetic spectral properties of neutral mesons in vector and axial-vector channels using NJL model",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated] | Introduction: Different from the previous work [@ghosh2020thermo; @avancini2022magnetized; @carlomagno2022charged; @Sccoccola; @gomez2023charged], we conduct the analytical derivations for $\\rho$ meson propagators by using Ritus scheme and Schwinger scheme of particle propagators in the magnetic field, and prove that different schemes lead to the same algebraic formula.",
+      "notes": "2 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "gomez2018neutral",
+        "raw": "gomez2018neutral",
+        "title": "Neutral meson properties under an external magnetic field in nonlocal chiral quark models",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "gomez2023charged",
+        "raw": "gomez2023charged",
+        "title": "Charged meson masses under strong magnetic fields: Gauge invariance and Schwinger phases",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: For charged meson study at quark level, (such as $\\pi_\\pm,\\ K_\\pm,\\ \\rho_\\pm$), the complexity lies in the lack of translational invariance in external electromagnetic fields, and the Fourier-like transformation between coordinate and momentum spaces should be carried out by the eigenfunctions of the magnetized field equation for mesons [@and... [truncated] | Introduction: Different from the previous work [@ghosh2020thermo; @avancini2022magnetized; @carlomagno2022charged; @Sccoccola; @gomez2023charged], we conduct the analytical derivations for $\\rho$ meson propagators by using Ritus scheme and Schwinger scheme of particle propagators in the magnetic field, and prove that different schemes lead to the same algebraic formula. | NUMERICAL RESULTS: For instance, with the MFIR regularization scheme, $M_{\\rho^{+}_+}$ firstly decreases and then increases with magnetic field [@carlomagno2022charged; @Sccoccola; @gomez2023charged].",
+      "notes": "3 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "hatsuda1994qcd",
+        "raw": "hatsuda1994qcd",
+        "title": "QCD phenomenology based on a chiral effective Lagrangian",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: We make use of the two flavor Nambu-Jona-Lasinio (NJL) model [@klevansky1992nambu; @nambu1961dynamical; @volkov1992effective; @hatsuda1994qcd; @buballa2005njl] to study the mass spectra of $\\rho$ mesons ($\\rho_{Q=\\pm 1}^{s_z=0,\\pm 1}$ and $\\rho_{Q=0}^{s_z=0,\\pm 1}$) under magnetic field. | Framework: We perform our study in the framework of two-flavor Nambu-Jona-Lasinio(NJL) model, which is presented by the Lagrangian density in terms of quark fields $\\psi$ [@klevansky1992nambu; @nambu1961dynamical; @volkov1992effective; @hatsuda1994qcd; @buballa2005njl] $$\\begin{align} \\label{njl} {\\cal L} =& \\bar{\\psi}\\left(i \\gamma^{\\mu} {D_{\\mu}}-m_{0... [truncated] | Framework: With the random phase approximation (RPA) method [@klevansky1992nambu; @nambu1961dynamical; @volkov1992effective; @hatsuda1994qcd; @buballa2005njl; @zhuang1994j], the meson propagator can be expressed as a sum of infinite-order quark loop diagrams.",
+      "notes": "3 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "hattori2016mesons",
+        "raw": "hattori2016mesons",
+        "title": "Mesons in strong magnetic fields:(I) General analyses",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated] | Introduction: For charged meson study at quark level, (such as $\\pi_\\pm,\\ K_\\pm,\\ \\rho_\\pm$), the complexity lies in the lack of translational invariance in external electromagnetic fields, and the Fourier-like transformation between coordinate and momentum spaces should be carried out by the eigenfunctions of the magnetized field equation for mesons [@and... [truncated]",
+      "notes": "2 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "he1998pipi",
+        "raw": "he1998pipi",
+        "title": "$\\pi$$\\pi$ scattering in the ϱ-meson channel at finite temperature",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): NUMERICAL RESULTS: The parameters of the NJL model are fixed by fitting the chiral condensate $\\langle \\bar{\\psi}\\psi \\rangle = -(230 \\text{ MeV})^3$, the $\\pi$ and $\\rho$ meson masses $m_\\pi = 134 \\text{ MeV}$ and $m_\\rho = 775 \\text{ MeV}$, and the pion decay constant $f_\\pi = 93 \\text{ MeV}$ in vacuum [@he1998pipi; @brauner2016vector].",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "hidaka2013charged",
+        "raw": "hidaka2013charged",
+        "title": "Charged vector mesons in a strong magnetic field",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: For charged meson study at quark level, (such as $\\pi_\\pm,\\ K_\\pm,\\ \\rho_\\pm$), the complexity lies in the lack of translational invariance in external electromagnetic fields, and the Fourier-like transformation between coordinate and momentum spaces should be carried out by the eigenfunctions of the magnetized field equation for mesons [@and... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "isayev2011finite",
+        "raw": "isayev2011finite",
+        "title": "Finite temperature effects on anisotropic pressure and equation of state of dense neutron matter in an ultrastrong magnetic field",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: Strong electromagnetic fields exist in Quantum Chromodynamics (QCD) systems like high energy nuclear collisions [@kharzeev2008effects; @kharzeev2008chiral; @kharzeev2009chern; @kharzeev2009chiral; @skokov2009estimate; @voronyuk2011electromagnetic; @deng2012event; @bacsar2012conformal], compact stars [@kouveliotou1998x; @ferrer2010equation; @p... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "kharzeev2008chiral",
+        "raw": "kharzeev2008chiral",
+        "title": "The Chiral magnetic effect",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: Strong electromagnetic fields exist in Quantum Chromodynamics (QCD) systems like high energy nuclear collisions [@kharzeev2008effects; @kharzeev2008chiral; @kharzeev2009chern; @kharzeev2009chiral; @skokov2009estimate; @voronyuk2011electromagnetic; @deng2012event; @bacsar2012conformal], compact stars [@kouveliotou1998x; @ferrer2010equation; @p... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "kharzeev2008effects",
+        "raw": "kharzeev2008effects",
+        "title": "The effects of topological charge change in heavy ion collisions:“Event by event P and CP violation”",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: Strong electromagnetic fields exist in Quantum Chromodynamics (QCD) systems like high energy nuclear collisions [@kharzeev2008effects; @kharzeev2008chiral; @kharzeev2009chern; @kharzeev2009chiral; @skokov2009estimate; @voronyuk2011electromagnetic; @deng2012event; @bacsar2012conformal], compact stars [@kouveliotou1998x; @ferrer2010equation; @p... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "kharzeev2009chern",
+        "raw": "kharzeev2009chern",
+        "title": "Chern-Simons current and local parity violation in hot QCD matter",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: Strong electromagnetic fields exist in Quantum Chromodynamics (QCD) systems like high energy nuclear collisions [@kharzeev2008effects; @kharzeev2008chiral; @kharzeev2009chern; @kharzeev2009chiral; @skokov2009estimate; @voronyuk2011electromagnetic; @deng2012event; @bacsar2012conformal], compact stars [@kouveliotou1998x; @ferrer2010equation; @p... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "kharzeev2009chiral",
+        "raw": "kharzeev2009chiral",
+        "title": "Chiral magnetic conductivity",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: Strong electromagnetic fields exist in Quantum Chromodynamics (QCD) systems like high energy nuclear collisions [@kharzeev2008effects; @kharzeev2008chiral; @kharzeev2009chern; @kharzeev2009chiral; @skokov2009estimate; @voronyuk2011electromagnetic; @deng2012event; @bacsar2012conformal], compact stars [@kouveliotou1998x; @ferrer2010equation; @p... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "klevansky1992nambu",
+        "raw": "klevansky1992nambu",
+        "title": "The Nambu—Jona-Lasinio model of quantum chromodynamics",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: We make use of the two flavor Nambu-Jona-Lasinio (NJL) model [@klevansky1992nambu; @nambu1961dynamical; @volkov1992effective; @hatsuda1994qcd; @buballa2005njl] to study the mass spectra of $\\rho$ mesons ($\\rho_{Q=\\pm 1}^{s_z=0,\\pm 1}$ and $\\rho_{Q=0}^{s_z=0,\\pm 1}$) under magnetic field. | Framework: We perform our study in the framework of two-flavor Nambu-Jona-Lasinio(NJL) model, which is presented by the Lagrangian density in terms of quark fields $\\psi$ [@klevansky1992nambu; @nambu1961dynamical; @volkov1992effective; @hatsuda1994qcd; @buballa2005njl] $$\\begin{align} \\label{njl} {\\cal L} =& \\bar{\\psi}\\left(i \\gamma^{\\mu} {D_{\\mu}}-m_{0... [truncated] | Framework: With the random phase approximation (RPA) method [@klevansky1992nambu; @nambu1961dynamical; @volkov1992effective; @hatsuda1994qcd; @buballa2005njl; @zhuang1994j], the meson propagator can be expressed as a sum of infinite-order quark loop diagrams.",
+      "notes": "3 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "kojo2021neutral",
+        "raw": "kojo2021neutral",
+        "title": "Neutral and charged mesons in magnetic fields: A resonance gas in a non-relativistic quark model",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated] | Introduction: For charged meson study at quark level, (such as $\\pi_\\pm,\\ K_\\pm,\\ \\rho_\\pm$), the complexity lies in the lack of translational invariance in external electromagnetic fields, and the Fourier-like transformation between coordinate and momentum spaces should be carried out by the eigenfunctions of the magnetized field equation for mesons [@and... [truncated]",
+      "notes": "2 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "kouveliotou1998x",
+        "raw": "kouveliotou1998x",
+        "title": "An X-ray pulsar with a superstrong magnetic field in the soft $\\gamma$-ray repeater SGR1806- 20",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: Strong electromagnetic fields exist in Quantum Chromodynamics (QCD) systems like high energy nuclear collisions [@kharzeev2008effects; @kharzeev2008chiral; @kharzeev2009chern; @kharzeev2009chiral; @skokov2009estimate; @voronyuk2011electromagnetic; @deng2012event; @bacsar2012conformal], compact stars [@kouveliotou1998x; @ferrer2010equation; @p... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "larina2014rho",
+        "raw": "larina2014rho",
+        "title": "$\\rho$ mesons in strong abelian magnetic field in SU (3) lattice gauge theory",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated] | Introduction: For charged meson study at quark level, (such as $\\pi_\\pm,\\ K_\\pm,\\ \\rho_\\pm$), the complexity lies in the lack of translational invariance in external electromagnetic fields, and the Fourier-like transformation between coordinate and momentum spaces should be carried out by the eigenfunctions of the magnetized field equation for mesons [@and... [truncated] | NUMERICAL RESULTS: The $\\rho_0^\\pm$ mesons are degenerate in the magnetic field and their mass increases with the magnetic field (see blue solid line), which is consistent with LQCD results and theoretical calculations [@bali2018meson; @avancini2022magnetized; @larina2014rho; @Sccoccola].",
+      "notes": "3 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "leung2006gauge",
+        "raw": "leung2006gauge",
+        "title": "Gauge independent approach to chiral symmetry breaking in a strong magnetic field",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Framework: There are two equivalent ways to treat the particle propagators in magnetic field, the Schwinger scheme [@andersen2016phase; @miransky2015quantum] and the Ritus scheme [@ritus1972radiative; @leung2006gauge; @elizalde2002neutrino]. | Framework: ### Ritus Scheme In Ritus scheme, one can well-define the Fourier-like transformation for the particle propagator from the conserved Ritus momentum space to coordinate space [@elizalde2002neutrino; @ritus1972radiative; @leung2006gauge].",
+      "notes": "2 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "li2021gauge",
+        "raw": "li2021gauge",
+        "title": "Gauge independence of pion masses in a magnetic field within the Nambu--Jona-Lasinio model",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated] | Introduction: For charged meson study at quark level, (such as $\\pi_\\pm,\\ K_\\pm,\\ \\rho_\\pm$), the complexity lies in the lack of translational invariance in external electromagnetic fields, and the Fourier-like transformation between coordinate and momentum spaces should be carried out by the eigenfunctions of the magnetized field equation for mesons [@and... [truncated]",
+      "notes": "2 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "li2022light",
+        "raw": "li2022light",
+        "title": "Light mesons and phase structures in $\\mu$ B-T-eB and $\\mu$ I-T-eB spaces",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated] | Introduction: For charged meson study at quark level, (such as $\\pi_\\pm,\\ K_\\pm,\\ \\rho_\\pm$), the complexity lies in the lack of translational invariance in external electromagnetic fields, and the Fourier-like transformation between coordinate and momentum spaces should be carried out by the eigenfunctions of the magnetized field equation for mesons [@and... [truncated]",
+      "notes": "2 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "li2023inverse",
+        "raw": "li2023inverse",
+        "title": "Inverse magnetic catalysis effect and current quark mass effect on mass spectra and Mott transitions of pions under external magnetic field",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated] | Introduction: For charged meson study at quark level, (such as $\\pi_\\pm,\\ K_\\pm,\\ \\rho_\\pm$), the complexity lies in the lack of translational invariance in external electromagnetic fields, and the Fourier-like transformation between coordinate and momentum spaces should be carried out by the eigenfunctions of the magnetized field equation for mesons [@and... [truncated]",
+      "notes": "2 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "liu2018neutral",
+        "raw": "liu2018neutral",
+        "title": "Neutral and charged scalar mesons, pseudoscalar mesons, and diquarks in magnetic fields",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated] | Introduction: For charged meson study at quark level, (such as $\\pi_\\pm,\\ K_\\pm,\\ \\rho_\\pm$), the complexity lies in the lack of translational invariance in external electromagnetic fields, and the Fourier-like transformation between coordinate and momentum spaces should be carried out by the eigenfunctions of the magnetized field equation for mesons [@and... [truncated]",
+      "notes": "2 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "luschevskaya2015magnetic",
+        "raw": "luschevskaya2015magnetic",
+        "title": "Magnetic polarizabilities of light mesons in SU (3) lattice gauge theory",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "luschevskaya2016magnetic",
+        "raw": "luschevskaya2016magnetic",
+        "title": "Magnetic polarizability of pion",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated] | Introduction: For charged meson study at quark level, (such as $\\pi_\\pm,\\ K_\\pm,\\ \\rho_\\pm$), the complexity lies in the lack of translational invariance in external electromagnetic fields, and the Fourier-like transformation between coordinate and momentum spaces should be carried out by the eigenfunctions of the magnetized field equation for mesons [@and... [truncated]",
+      "notes": "2 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "luschevskaya2017determination",
+        "raw": "luschevskaya2017determination",
+        "title": "Determination of the properties of vector mesons in external magnetic field by quenched SU (3) lattice QCD",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: For charged meson study at quark level, (such as $\\pi_\\pm,\\ K_\\pm,\\ \\rho_\\pm$), the complexity lies in the lack of translational invariance in external electromagnetic fields, and the Fourier-like transformation between coordinate and momentum spaces should be carried out by the eigenfunctions of the magnetized field equation for mesons [@and... [truncated] | NUMERICAL RESULTS: The results are consistent with LQCD simulations [@luschevskaya2017determination; @bali2018meson].",
+      "notes": "2 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "mallick2014deformation",
+        "raw": "mallick2014deformation",
+        "title": "Deformation of a magnetized neutron star",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: Strong electromagnetic fields exist in Quantum Chromodynamics (QCD) systems like high energy nuclear collisions [@kharzeev2008effects; @kharzeev2008chiral; @kharzeev2009chern; @kharzeev2009chiral; @skokov2009estimate; @voronyuk2011electromagnetic; @deng2012event; @bacsar2012conformal], compact stars [@kouveliotou1998x; @ferrer2010equation; @p... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "mao2016inverse",
+        "raw": "mao2016inverse",
+        "title": "Inverse magnetic catalysis in Nambu--Jona-Lasinio model beyond mean field",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): NUMERICAL RESULTS: To ensure causality in this anisotropic system, we use the Pauli-Villars regularization scheme [@mao2016inverse; @mao2017effect].",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "mao2017effect",
+        "raw": "mao2017effect",
+        "title": "Effect of discrete quark momenta on the Goldstone mode in a magnetic field",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated] | NUMERICAL RESULTS: To ensure causality in this anisotropic system, we use the Pauli-Villars regularization scheme [@mao2016inverse; @mao2017effect]. | NUMERICAL RESULTS: Similar phenomena are observed in the studies of other mesons under external magnetic field, such as $\\pi_{0}$, $\\pi_{\\pm}$, $K_{0}$, $K_{\\pm}$, $\\eta$, $\\eta'$ and $\\phi$ mesons [@sheng2021pole; @sheng2022impacts; @Li:2025wqb; @Mei:2022dkd; @mao2017effect; @shengxinli; @mao2019pions; @Mei:2026xlj].",
+      "notes": "3 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "mao2019pions",
+        "raw": "mao2019pions",
+        "title": "Pions in magnetic field at finite temperature",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: For charged meson study at quark level, (such as $\\pi_\\pm,\\ K_\\pm,\\ \\rho_\\pm$), the complexity lies in the lack of translational invariance in external electromagnetic fields, and the Fourier-like transformation between coordinate and momentum spaces should be carried out by the eigenfunctions of the magnetized field equation for mesons [@and... [truncated] | NUMERICAL RESULTS: Similar phenomena are observed in the studies of other mesons under external magnetic field, such as $\\pi_{0}$, $\\pi_{\\pm}$, $K_{0}$, $K_{\\pm}$, $\\eta$, $\\eta'$ and $\\phi$ mesons [@sheng2021pole; @sheng2022impacts; @Li:2025wqb; @Mei:2022dkd; @mao2017effect; @shengxinli; @mao2019pions; @Mei:2026xlj]. | summary: In fact, in our previous paper [@mao2019pions; @Tian], the algebraic equations for charged $\\pi$ and $K$ meson propagators have been derived in the Ritus scheme.",
+      "notes": "4 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "menezes2014repulsive",
+        "raw": "menezes2014repulsive",
+        "title": "Repulsive vector interaction in three-flavor magnetized quark and stellar matter",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: Strong electromagnetic fields exist in Quantum Chromodynamics (QCD) systems like high energy nuclear collisions [@kharzeev2008effects; @kharzeev2008chiral; @kharzeev2009chern; @kharzeev2009chiral; @skokov2009estimate; @voronyuk2011electromagnetic; @deng2012event; @bacsar2012conformal], compact stars [@kouveliotou1998x; @ferrer2010equation; @p... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "miransky2015quantum",
+        "raw": "miransky2015quantum",
+        "title": "Quantum field theory in a magnetic field: From quantum chromodynamics to graphene and Dirac semimetals",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Framework: There are two equivalent ways to treat the particle propagators in magnetic field, the Schwinger scheme [@andersen2016phase; @miransky2015quantum] and the Ritus scheme [@ritus1972radiative; @leung2006gauge; @elizalde2002neutrino]. | Framework: ### Schwinger Scheme In Schwinger scheme [@andersen2016phase; @miransky2015quantum], the particle propagator in magnetic field is composed of two parts, one is related to the Schwinger phase which breaks the translational invariance, and the other is a Fourier transformation of the translational invariant propagator. | Framework: Note that, in Schwinger scheme, the particle propagator in magnetic field can also be written in the proper-time form [@miransky2015quantum], $$\\begin{eqnarray} &\\textstyle\\tilde{S}_f(p_\\perp,p_\\parallel)=\\int_{0}^{\\infty}ds {\\text {Exp}}\\left[-s\\left(m_q^2+p_\\parallel^2+p_\\perp^2\\frac{tanh(|Q_fB|s)}{|Q_fBs|}\\right)\\right]\\nonumber\\\\ &\\textst... [truncated]",
+      "notes": "3 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "mishra2021strange",
+        "raw": "mishra2021strange",
+        "title": "Strange mesons in strong magnetic fields",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated] | Introduction: For charged meson study at quark level, (such as $\\pi_\\pm,\\ K_\\pm,\\ \\rho_\\pm$), the complexity lies in the lack of translational invariance in external electromagnetic fields, and the Fourier-like transformation between coordinate and momentum spaces should be carried out by the eigenfunctions of the magnetized field equation for mesons [@and... [truncated]",
+      "notes": "2 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "nambu1961dynamical",
+        "raw": "nambu1961dynamical",
+        "title": "Dynamical model of elementary particles based on an analogy with superconductivity. II",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: We make use of the two flavor Nambu-Jona-Lasinio (NJL) model [@klevansky1992nambu; @nambu1961dynamical; @volkov1992effective; @hatsuda1994qcd; @buballa2005njl] to study the mass spectra of $\\rho$ mesons ($\\rho_{Q=\\pm 1}^{s_z=0,\\pm 1}$ and $\\rho_{Q=0}^{s_z=0,\\pm 1}$) under magnetic field. | Framework: We perform our study in the framework of two-flavor Nambu-Jona-Lasinio(NJL) model, which is presented by the Lagrangian density in terms of quark fields $\\psi$ [@klevansky1992nambu; @nambu1961dynamical; @volkov1992effective; @hatsuda1994qcd; @buballa2005njl] $$\\begin{align} \\label{njl} {\\cal L} =& \\bar{\\psi}\\left(i \\gamma^{\\mu} {D_{\\mu}}-m_{0... [truncated] | Framework: With the random phase approximation (RPA) method [@klevansky1992nambu; @nambu1961dynamical; @volkov1992effective; @hatsuda1994qcd; @buballa2005njl; @zhuang1994j], the meson propagator can be expressed as a sum of infinite-order quark loop diagrams.",
+      "notes": "3 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "nasser2019chiral",
+        "raw": "nasser2019chiral",
+        "title": "Chiral phase structure of the sixteen meson states in the SU (3) Polyakov linear-sigma model for finite temperature and chemical potential in a strong magnetic field",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "orlovsky2013nambu",
+        "raw": "orlovsky2013nambu",
+        "title": "Nambu-Goldstone mesons in strong magnetic field",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated] | Introduction: For charged meson study at quark level, (such as $\\pi_\\pm,\\ K_\\pm,\\ \\rho_\\pm$), the complexity lies in the lack of translational invariance in external electromagnetic fields, and the Fourier-like transformation between coordinate and momentum spaces should be carried out by the eigenfunctions of the magnetized field equation for mesons [@and... [truncated]",
+      "notes": "2 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "paulucci2011equation",
+        "raw": "paulucci2011equation",
+        "title": "Equation of state for the magnetic-color-flavor-locked phase<? format?> and its implications for compact star models",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: Strong electromagnetic fields exist in Quantum Chromodynamics (QCD) systems like high energy nuclear collisions [@kharzeev2008effects; @kharzeev2008chiral; @kharzeev2009chern; @kharzeev2009chiral; @skokov2009estimate; @voronyuk2011electromagnetic; @deng2012event; @bacsar2012conformal], compact stars [@kouveliotou1998x; @ferrer2010equation; @p... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "ritus1972radiative",
+        "raw": "ritus1972radiative",
+        "title": "Radiative corrections in quantum electrodynamics with intense field and their analytical properties",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Framework: There are two equivalent ways to treat the particle propagators in magnetic field, the Schwinger scheme [@andersen2016phase; @miransky2015quantum] and the Ritus scheme [@ritus1972radiative; @leung2006gauge; @elizalde2002neutrino]. | Framework: ### Ritus Scheme In Ritus scheme, one can well-define the Fourier-like transformation for the particle propagator from the conserved Ritus momentum space to coordinate space [@elizalde2002neutrino; @ritus1972radiative; @leung2006gauge].",
+      "notes": "2 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "sheng2021pole",
+        "raw": "sheng2021pole",
+        "title": "Pole and screening masses of neutral pions in a hot and magnetized medium: A comprehensive study in the Nambu--Jona-Lasinio model",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated] | NUMERICAL RESULTS: Similar phenomena are observed in the studies of other mesons under external magnetic field, such as $\\pi_{0}$, $\\pi_{\\pm}$, $K_{0}$, $K_{\\pm}$, $\\eta$, $\\eta'$ and $\\phi$ mesons [@sheng2021pole; @sheng2022impacts; @Li:2025wqb; @Mei:2022dkd; @mao2017effect; @shengxinli; @mao2019pions; @Mei:2026xlj].",
+      "notes": "2 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "sheng2022impacts",
+        "raw": "sheng2022impacts",
+        "title": "Impacts of inverse magnetic catalysis on screening masses of neutral pions and sigma mesons in hot and magnetized quark matter",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated] | NUMERICAL RESULTS: Similar phenomena are observed in the studies of other mesons under external magnetic field, such as $\\pi_{0}$, $\\pi_{\\pm}$, $K_{0}$, $K_{\\pm}$, $\\eta$, $\\eta'$ and $\\phi$ mesons [@sheng2021pole; @sheng2022impacts; @Li:2025wqb; @Mei:2022dkd; @mao2017effect; @shengxinli; @mao2019pions; @Mei:2026xlj].",
+      "notes": "2 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "shengxinli",
+        "raw": "shengxinli",
+        "title": "Mass splitting and spin alignment for $\\phi$ mesons in a magnetic field",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated] | NUMERICAL RESULTS: Similar phenomena are observed in the studies of other mesons under external magnetic field, such as $\\pi_{0}$, $\\pi_{\\pm}$, $K_{0}$, $K_{\\pm}$, $\\eta$, $\\eta'$ and $\\phi$ mesons [@sheng2021pole; @sheng2022impacts; @Li:2025wqb; @Mei:2022dkd; @mao2017effect; @shengxinli; @mao2019pions; @Mei:2026xlj].",
+      "notes": "2 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "simonov2016pion",
+        "raw": "simonov2016pion",
+        "title": "Pion decay constants in a strong magnetic field",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated] | Introduction: For charged meson study at quark level, (such as $\\pi_\\pm,\\ K_\\pm,\\ \\rho_\\pm$), the complexity lies in the lack of translational invariance in external electromagnetic fields, and the Fourier-like transformation between coordinate and momentum spaces should be carried out by the eigenfunctions of the magnetized field equation for mesons [@and... [truncated]",
+      "notes": "2 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "skokov2009estimate",
+        "raw": "skokov2009estimate",
+        "title": "Estimate of the magnetic field strength in heavy-ion collisions",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: Strong electromagnetic fields exist in Quantum Chromodynamics (QCD) systems like high energy nuclear collisions [@kharzeev2008effects; @kharzeev2008chiral; @kharzeev2009chern; @kharzeev2009chiral; @skokov2009estimate; @voronyuk2011electromagnetic; @deng2012event; @bacsar2012conformal], compact stars [@kouveliotou1998x; @ferrer2010equation; @p... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "vachaspati1991magnetic",
+        "raw": "vachaspati1991magnetic",
+        "title": "Magnetic fields from cosmological phase transitions",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: Strong electromagnetic fields exist in Quantum Chromodynamics (QCD) systems like high energy nuclear collisions [@kharzeev2008effects; @kharzeev2008chiral; @kharzeev2009chern; @kharzeev2009chiral; @skokov2009estimate; @voronyuk2011electromagnetic; @deng2012event; @bacsar2012conformal], compact stars [@kouveliotou1998x; @ferrer2010equation; @p... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "volkov1992effective",
+        "raw": "volkov1992effective",
+        "title": "Effective chiral Lagrangians and the Nambu-Jona-Lasinio model",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: We make use of the two flavor Nambu-Jona-Lasinio (NJL) model [@klevansky1992nambu; @nambu1961dynamical; @volkov1992effective; @hatsuda1994qcd; @buballa2005njl] to study the mass spectra of $\\rho$ mesons ($\\rho_{Q=\\pm 1}^{s_z=0,\\pm 1}$ and $\\rho_{Q=0}^{s_z=0,\\pm 1}$) under magnetic field. | Framework: We perform our study in the framework of two-flavor Nambu-Jona-Lasinio(NJL) model, which is presented by the Lagrangian density in terms of quark fields $\\psi$ [@klevansky1992nambu; @nambu1961dynamical; @volkov1992effective; @hatsuda1994qcd; @buballa2005njl] $$\\begin{align} \\label{njl} {\\cal L} =& \\bar{\\psi}\\left(i \\gamma^{\\mu} {D_{\\mu}}-m_{0... [truncated] | Framework: With the random phase approximation (RPA) method [@klevansky1992nambu; @nambu1961dynamical; @volkov1992effective; @hatsuda1994qcd; @buballa2005njl; @zhuang1994j], the meson propagator can be expressed as a sum of infinite-order quark loop diagrams.",
+      "notes": "3 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "voronyuk2011electromagnetic",
+        "raw": "voronyuk2011electromagnetic",
+        "title": "Electromagnetic field evolution in relativistic heavy-ion collisions",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: Strong electromagnetic fields exist in Quantum Chromodynamics (QCD) systems like high energy nuclear collisions [@kharzeev2008effects; @kharzeev2008chiral; @kharzeev2009chern; @kharzeev2009chiral; @skokov2009estimate; @voronyuk2011electromagnetic; @deng2012event; @bacsar2012conformal], compact stars [@kouveliotou1998x; @ferrer2010equation; @p... [truncated]",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "wang2018meson",
+        "raw": "wang2018meson",
+        "title": "Meson properties in magnetized quark matter",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated] | Introduction: For charged meson study at quark level, (such as $\\pi_\\pm,\\ K_\\pm,\\ \\rho_\\pm$), the complexity lies in the lack of translational invariance in external electromagnetic fields, and the Fourier-like transformation between coordinate and momentum spaces should be carried out by the eigenfunctions of the magnetized field equation for mesons [@and... [truncated]",
+      "notes": "2 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "xu2021effect",
+        "raw": "xu2021effect",
+        "title": "Effect of the anomalous magnetic moment of quarks on magnetized QCD matter and meson spectra",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated] | Introduction: For charged meson study at quark level, (such as $\\pi_\\pm,\\ K_\\pm,\\ \\rho_\\pm$), the complexity lies in the lack of translational invariance in external electromagnetic fields, and the Fourier-like transformation between coordinate and momentum spaces should be carried out by the eigenfunctions of the magnetized field equation for mesons [@and... [truncated]",
+      "notes": "2 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "zhang2016properties",
+        "raw": "zhang2016properties",
+        "title": "Properties of mesons in a strong magnetic field",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Introduction: At quark level, however, the electromagnetic interaction of the charged constituent quarks leads to a sensitive dependence of the neutral mesons (such as $\\pi_0,\\ K_0, \\ \\eta, \\ \\rho_0,\\ \\phi$) on the external electromagnetic fields [@ayala2021magnetic; @aguirre2017modification; @ayala2018magnetic; @das2020neutral; @nasser2019chiral; @luschev... [truncated] | Introduction: For charged meson study at quark level, (such as $\\pi_\\pm,\\ K_\\pm,\\ \\rho_\\pm$), the complexity lies in the lack of translational invariance in external electromagnetic fields, and the Fourier-like transformation between coordinate and momentum spaces should be carried out by the eigenfunctions of the magnetized field equation for mesons [@and... [truncated]",
+      "notes": "2 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "zhuang1994j",
+        "raw": "zhuang1994j",
+        "title": "Thermodynamics of a quark-meson plasma in the Nambu-Jona-Lasinio model",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Cited in extracted paper context(s): Framework: With the random phase approximation (RPA) method [@klevansky1992nambu; @nambu1961dynamical; @volkov1992effective; @hatsuda1994qcd; @buballa2005njl; @zhuang1994j], the meson propagator can be expressed as a sum of infinite-order quark loop diagrams.",
+      "notes": "1 extracted citation context(s) matched.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    }
+  ],
+  "missing_references": [],
+  "summary": "Deterministic citation review generated from extracted bibliography and in-text citation contexts. Entries are preserved for moderation; external existence lookups were not performed in this stage."
+}
+\end{verbatim}
+
+\subsection*{meta_reviewer (\texttt{claude-sonnet-4-6})}
+\begin{verbatim}
+{
+  "confidence": 0.72,
+  "questions": [
+    "Can the authors provide numerical data tables (or supplementary code) for at least the key figures, so that the mass-branch results can be verified without full reimplementation?",
+    "What convergence criterion and root-finding algorithm are used to identify and select the 'lowest-value solution' among the multiple poles of the mass equation? Please specify this in the manuscript.",
+    "How sensitive are the qualitative conclusions—particularly the saturation behavior of M(ρ⁺₊) and the degeneracy patterns—to the choice of regularization scheme (Pauli–Villars vs. MFIR)? A brief comparison or explicit statement of scheme dependence should be added.",
+    "Please correct the labeling error just before Eq. (prorho), where 'neutral ρ_{Q=±1}' and 'charged ρ_{Q=0}' are transposed.",
+    "Are the references Mei:2026xlj and Li:2025wqb currently available as preprints? If so, please supply arXiv identifiers so they can be accessed by referees and readers."
+  ],
+  "recommendation": "minor_revision",
+  "strengths": [
+    "Rigorous parallel derivation in both Ritus and Schwinger schemes with explicit algebraic proof of equivalence, resolving a methodological question for charged vector mesons in magnetic fields.",
+    "Comprehensive coverage of all charge–spin branches of the ρ meson multiplet, including identification and physical interpretation of multiple Landau-level mass solutions.",
+    "Quantitative results are consistent with available LQCD benchmarks (Bali et al. 2018, Luschevskaya et al. 2017), providing external validation of the NJL predictions.",
+    "High-temperature analysis reveals systematic degeneracies among mass branches and a transparent asymptotic approach to constituent-quark Landau-level sums, offering physical insight.",
+    "Builds coherently on the authors' prior work on pions and kaons, extending the programme to the vector-meson sector in a self-consistent framework."
+  ],
+  "summary": "This paper derives ρ meson mass spectra in external magnetic fields and at finite temperature using the two-flavor NJL model, employing both the Ritus and Schwinger propagator schemes and proving their algebraic equivalence. The work systematically covers all six charge–spin combinations (ρ_{Q=±1}^{s_z=0,±1} and ρ_{Q=0}^{s_z=0,±1}), identifies multiple mass branches arising from the Landau-level structure of constituent quarks, and compares predictions against lattice QCD (LQCD) results. The technical execution is largely sound: the dual-scheme equivalence proof is internally consistent, the Dyson–Schwinger/RPA propagator structure follows standard NJL practice, and the high-temperature asymptotic behavior is physically well-motivated. One factual labeling error (neutral/charged swapped in a single sentence) and a regulatization-scheme caveat that is under-stated constitute the main technical concerns. Novelty is assessed as incremental: the Ritus–Schwinger equivalence is well-known for fermions, and the extension to charged vector mesons, while non-trivial in execution, is a methodological step rather than a conceptual advance. Reproducibility is poor—no code, data, or software environment is provided, and the algorithm for selecting among multiple mass solutions is not specified. Citation coverage is broad but many references could not be independently verified; two entries carry future-year or provisional identifiers (Mei:2026xlj, Li:2025wqb) whose availability should be clarified.",
+  "weaknesses": [
+    "Novelty is incremental: the Ritus–Schwinger propagator equivalence is established in the literature for fermions, and its confirmation for charged ρ mesons in NJL is an extension rather than a new conceptual result.",
+    "Critical reproducibility gap: no source code, numerical tables for figures, or software/library specification is provided, requiring a complete reimplementation to verify results.",
+    "The algorithm for selecting the physical branch among multiple mass solutions (stated as 'lowest value') is not specified with sufficient precision to guarantee unambiguous reproduction.",
+    "Regularization-scheme dependence of the M(ρ⁺₊) behavior (saturation in Pauli–Villars vs. non-monotonic rise in MFIR) is noted only parenthetically; the text should explicitly qualify that reported trends are scheme-dependent.",
+    "One factual labeling error in the propagator section swaps 'neutral' and 'charged' (C7), contradicting all surrounding text and figure captions.",
+    "Citation verification confidence is low (0.55); two references carry provisional or future-year identifiers (Mei:2026xlj, Li:2025wqb) whose public availability is unclear, and no DOIs or arXiv IDs are resolved for the majority of entries.",
+    "Model parameters are stated but not tabulated against fitted observables; readers cannot verify the vacuum fit without rerunning the gap and Bethe–Salpeter equations."
+  ]
+}
+\end{verbatim}
+
+\subsection*{novelty (\texttt{gemini-2.5-flash})}
+\begin{verbatim}
+{
+  "confidence": 0.9,
+  "missing_prior_art": [],
+  "novelty_score": 0.7,
+  "related_work": [
+    {
+      "citation_key": "ghosh2020thermo",
+      "delta": "This paper differs by providing explicit analytical derivations for ρ meson propagators in both Ritus and Schwinger schemes and proving their algebraic equivalence, which was not the focus of previous work like this one focusing on neutral mesons.",
+      "relation": "prior_art",
+      "title": "Thermo-magnetic spectral properties of neutral mesons in vector and axial-vector channels using NJL model"
+    },
+    {
+      "citation_key": "avancini2022magnetized",
+      "delta": "This paper offers a comprehensive comparison of Ritus and Schwinger schemes for ρ meson propagators, a detail not explicitly performed or proven equivalent in prior work focusing on neutral ρ meson pole mass.",
+      "relation": "prior_art",
+      "title": "Magnetized pole-mass of neutral ρ meson within full RPA evaluation"
+    },
+    {
+      "citation_key": "carlomagno2022charged",
+      "delta": "While studying charged meson masses, this prior work did not present the detailed analytical derivation and proof of equivalence between Ritus and Schwinger schemes for ρ meson propagators, a key contribution of the current paper.",
+      "relation": "prior_art",
+      "title": "Charged pseudoscalar and vector meson masses in strong magnetic fields in an extended NJL model"
+    },
+    {
+      "citation_key": "Sccoccola",
+      "delta": "This work provides the explicit analytical derivation and proof of equivalence for ρ meson propagators using both Ritus and Schwinger schemes, which was not the focus of this earlier work on magnetized meson masses.",
+      "relation": "prior_art",
+      "title": "Masses of magnetized pseudoscalar and vector mesons in an extended NJL model: The role of axial vector mesons"
+    },
+    {
+      "citation_key": "gomez2023charged",
+      "delta": "This paper explicitly details the analytical derivation of ρ meson propagators in both Ritus and Schwinger schemes and proves their algebraic equivalence, a methodological contribution distinct from this prior work on gauge invariance and Schwinger phases in charged meson masses.",
+      "relation": "prior_art",
+      "title": "Charged meson masses under strong magnetic fields: Gauge invariance and Schwinger phases"
+    },
+    {
+      "citation_key": "mao2019pions",
+      "delta": "This paper extends the methodology of deriving algebraic equations for charged meson propagators, previously applied to pions in the Ritus scheme, by providing a similar derivation for ρ mesons and explicitly proving the equivalence between Ritus and Schwinger schemes for them.",
+      "relation": "builds_on",
+      "title": "Pions in magnetic field at finite temperature"
+    },
+    {
+      "citation_key": "Tian",
+      "delta": "Building on the methods used for charged Kaons and Pions, this paper applies similar analytical derivations to ρ mesons and provides a formal proof of equivalence between Ritus and Schwinger schemes for their propagators.",
+      "relation": "builds_on",
+      "title": "Mass spectra of charged Kaons and Pions at finite magnetic field, temperature and density"
+    },
+    {
+      "citation_key": "sheng2021pole",
+      "delta": "This paper observes similar phenomena of multiple mass solutions for ρ mesons under magnetic fields, consistent with findings for neutral pions in this prior work, extending the understanding to different meson types.",
+      "relation": "prior_art",
+      "title": "Pole and screening masses of neutral pions in a hot and magnetized medium: A comprehensive study in the Nambu--Jona-Lasinio model"
+    },
+    {
+      "citation_key": "mao2017effect",
+      "delta": "This paper confirms and illustrates the effect of discrete quark momenta (leading to multiple mass solutions) for ρ mesons, a phenomenon previously investigated for other particles in this prior work.",
+      "relation": "prior_art",
+      "title": "Effect of discrete quark momenta on the Goldstone mode in a magnetic field"
+    },
+    {
+      "citation_key": "bali2018meson",
+      "delta": "This paper's numerical results for ρ meson masses are found to be consistent with LQCD simulations presented in this work, providing a validation of the model's predictions.",
+      "relation": "prior_art",
+      "title": "Meson masses in electromagnetic fields with Wilson fermions"
+    },
+    {
+      "citation_key": "luschevskaya2017determination",
+      "delta": "The numerical results concerning ρ meson masses align with LQCD calculations, similar to the findings in this study focusing on vector mesons in external magnetic fields.",
+      "relation": "prior_art",
+      "title": "Determination of the properties of vector mesons in external magnetic field by quenched SU (3) lattice QCD"
+    }
+  ],
+  "verdict": "incremental"
+}
+\end{verbatim}
+
+\subsection*{reproducibility (\texttt{gemini-2.5-flash})}
+\begin{verbatim}
+{
+  "code_availability": "unspecified",
+  "code_url": null,
+  "concerns": [
+    {
+      "area": "code",
+      "description": "No source code or scripts were provided or linked, making it impossible to directly run the calculations performed by the authors. This requires a full reimplementation of the numerical model.",
+      "severity": "critical"
+    },
+    {
+      "area": "code",
+      "description": "The paper describes numerical computations but does not specify the software, programming languages, or scientific libraries used for implementation (e.g., Fortran, C++, Python with specific libraries, or commercial software like Mathematica).",
+      "severity": "major"
+    },
+    {
+      "area": "data",
+      "description": "No input data files, configuration files, or raw output data (e.g., numerical tables for figures) were provided. While the model is theoretical, direct numerical data for the plots would aid in verification.",
+      "severity": "major"
+    },
+    {
+      "area": "other",
+      "description": "The specific computational environment details (e.g., operating system, compiler versions, exact numerical methods used for solving pole equations) are not provided, which could affect the exact reproduction of numerical results.",
+      "severity": "minor"
+    },
+    {
+      "area": "hyperparameters",
+      "description": "The paper mentions 'multiple solutions' for meson masses when solving the pole equation. While the equations and model parameters are given, the specific numerical algorithm, convergence criteria, and how the 'lowest value solution' is consistently identified and selected for figures are not detailed. This could lead to ambiguity in reproducing specific results.",
+      "severity": "minor"
+    }
+  ],
+  "confidence": 1.0,
+  "data_availability": "unspecified",
+  "data_url": null,
+  "environment": {
+    "dependencies": [],
+    "hardware": null,
+    "software": null
+  },
+  "reproducibility_score": 1.0
+}
+\end{verbatim}
+
+\subsection*{summary (\texttt{claude-haiku-4-5-20251001})}
+\begin{verbatim}
+{
+  "audience": "Nuclear and particle physicists specializing in quantum chromodynamics, hadron physics in extreme environments (high-energy collisions, neutron stars, early universe conditions), and researchers interested in effective models of quark dynamics.",
+  "key_contributions": [
+    "Rigorous analytical derivation of ρ meson propagators using both Ritus and Schwinger formulations of quantum field theory in magnetic fields, demonstrating their mathematical equivalence",
+    "Complete characterization of ρ meson mass spectra as functions of both magnetic field strength and temperature for all charge and spin combinations",
+    "Discovery and analysis of multiple mass solutions arising from the dimension reduction of constituent quarks in strong magnetic fields, showing which solutions dominate at different conditions",
+    "Systematic exploration of mass degeneracies between different ρ meson types at finite magnetic field and temperature, revealing patterns in how the particle spectrum simplifies at high temperature",
+    "Comprehensive comparison with lattice QCD simulations confirming theoretical predictions for zero-temperature magnetic field effects"
+  ],
+  "plain_language_summary": "This paper investigates how ρ mesons—particles composed of quarks and antiquarks—change their properties when exposed to strong magnetic fields and elevated temperatures. Using theoretical quantum chromodynamics models, the researchers calculate the masses of different types of ρ mesons under these extreme conditions. They find that some ρ mesons become heavier in strong magnetic fields while others become lighter or remain relatively unchanged, with the exact behavior depending on the meson's electric charge and spin orientation. At high temperatures, the masses of all ρ meson types converge toward values determined simply by the sum of their constituent quark masses. The study employs two different but mathematically equivalent theoretical approaches to derive detailed predictions, which are validated against numerical simulations from lattice gauge theory.",
+  "tldr": "ρ meson masses depend sensitively on external magnetic fields and temperature through their constituent quark properties, with detailed predictions calculated using two equivalent theoretical schemes."
+}
+\end{verbatim}
+
+\subsection*{technical_correctness (\texttt{claude-opus-4-7})}
+\begin{verbatim}
+{
+  "claims": [
+    {
+      "assessment": "supported",
+      "claim": "The Ritus-scheme and Schwinger-scheme derivations of the rho meson polarization functions yield the same algebraic formula.",
+      "evidence": "The reduction proceeds via standard Hermite-Laguerre identities (Eqs. HHL, LJL, LLD, LLF), with the Schwinger phase factored out and the same Landau-level integer constraints recovered in both schemes. The equivalence of Ritus and Schwinger representations for fermion propagators in constant B is a well-established result (Miransky-Shovkovy, Leung-Wang, Elizalde et al.), so independent confirmation in this two-scheme derivation for charged vector mesons is plausible and the algebraic steps shown are consistent.",
+      "id": "C1",
+      "location": "Section II (Framework), subsections 'Ritus Scheme' and 'Schwinger Scheme'; Eqs. (rho11jihua*-new) vs (rho11jihua*); Appendix Eqs. (flnn), (flnn1), (LLD), (LLF), (Schw).",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "supported",
+      "claim": "The Dyson-Schwinger / RPA propagator for rho mesons takes the form D_M(k) = -2G_V / [1 - 2G_V Pi_M(k)], with pole equation 1 - 2G_V Pi_M(k) = 0 determining the masses.",
+      "evidence": "The sign flip from +2G_V g^{mu nu} in (DS) to -2G_V in (DS1) is consistent with diagonalizing on the spatial (s_z=0,+/-1) polarization subspace where g^{ii}=-1 for a vector meson, and the geometric-series resummation of the RPA bubble chain reproduces the stated propagator form. This matches the standard NJL vector-channel treatment in Klevansky and Buballa.",
+      "id": "C2",
+      "location": "Eqs. (DS), (DS1), (prorho), (poleeq) in Section II.",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "supported",
+      "claim": "The negative-binomial weight Z(n,n') = (1/3)(2/3)|eB| C^n_{n+n'}(2/3)^n(1/3)^{n'} satisfies sum_n Z(n,n')=|Q_u B| and sum_{n'} Z(n,n')=|Q_d B|.",
+      "evidence": "Using the negative-binomial identity sum_{k>=0} C^k_{k+r-1} (1-p)^k = 1/p^r with p=1/3, r=n'+1 gives sum_n C^n_{n+n'}(2/3)^n = 3^{n'+1}, so sum_n Z(n,n') = (1/3)(2/3)|eB|(1/3)^{n'} * 3^{n'+1} = (2/3)|eB| = |Q_u B|. Symmetric argument with p=2/3, r=n+1 gives sum_{n'} Z(n,n') = (1/3)|eB| = |Q_d B|. Both normalizations check out, and the form is consistent with the appendix result Z = |eB| C^n_{n+n'}(2/3)^{n+1}(1/3)^{n'+1}.",
+      "id": "C3",
+      "location": "After Eq. (rho13) in Section II.",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "supported",
+      "claim": "Multiple solutions of the rho meson mass appear at finite B due to dimension reduction of the constituent quarks.",
+      "evidence": "The 1+1-dimensional structure of charged fermions in a strong B field produces threshold-type singular denominators 1/(k_0 +/- E_n +/- E_{n'}) in J_2(k_0), each generating a branch of pole solutions labeled by Landau-level pairs (n,n'). This mechanism is known in the literature for neutral pion / phi / kaon studies (Sheng et al., Mao et al.), cited consistently here.",
+      "id": "C4",
+      "location": "Section II (just before Eq. poleeq) and Section III, Figs. 3, 4, 5.",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "At T=0, M(rho^-_+), M(rho^0_+), and M(rho^+/-_0) increase with B, M(rho^+_+) first decreases then saturates, and M(rho^0_0) is essentially insensitive to B, consistent with available LQCD data.",
+      "evidence": "The qualitative behaviors agree with the LQCD trends in Luschevskaya et al. and Bali et al. cited. The saturation of M(rho^+_+) (rather than the free-point-particle imaginary mass sqrt(m_rho^2 - |eB|)) is a known NJL-with-Pauli-Villars feature. However, the paper itself notes that other regularization schemes (MFIR) produce a non-monotonic M(rho^+_+) that turns up at strong B (Carlomagno, Sccoccola, Gomez-Dumm), so the saturation result is regularization-dependent and the claim should be qualified as 'consistent with LQCD within the Pauli-Villars scheme'.",
+      "id": "C5",
+      "location": "Section III.A, Figs. 1-2.",
+      "severity": "minor",
+      "suggested_fix": "Add a sentence in Sec. III.A explicitly noting that the saturation/non-saturation of M(rho^+_+) is regularization-scheme dependent and that the present Pauli-Villars result is one of several allowed NJL behaviors; current text only flags the MFIR comparison parenthetically."
+    },
+    {
+      "assessment": "supported",
+      "claim": "At high temperature, the rho meson mass solutions approach the sums m_u^{(n)} + m_d^{(n')} of their constituent quarks, and certain mass branches for different rho mesons become degenerate.",
+      "evidence": "At high T the constituent quark mass m_q -> m_0 (partial chiral restoration in NJL), and the pole equation thresholds in J_2 are dominated by k_0 -> E_n + E_{n'}, so mass branches asymptote to constituent-quark Landau-level sums. Degeneracies in Fig. 5 follow from coincidences among the (n,n') pairs (e.g. (0,0) appearing in both Pi(rho^+_+) and Pi(rho^0_0) families), which is a structural consequence of the polarization-function trace and Kronecker / Z(n,n') weighting and is internally consistent.",
+      "id": "C6",
+      "location": "Section III.B, Figs. 3-5.",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "incorrect",
+      "claim": "In Section II the propagators are described as 'propagators of neutral rho^{s_z}_{Q=+/-1} mesons (charged rho^{s_z}_{Q=0} mesons)'.",
+      "evidence": "By the conventions used everywhere else in the paper, Q=+/-1 are the charged rho mesons and Q=0 are the neutral rho mesons; here the labels 'neutral' and 'charged' are swapped. This is a labeling typo that contradicts the immediately preceding paragraphs and the figure captions.",
+      "id": "C7",
+      "location": "Sentence just before Eq. (prorho) in Section II.",
+      "severity": "minor",
+      "suggested_fix": "Swap the words: 'propagators of charged rho_{Q=+/-1}^{s_z=0,+/-1} mesons (neutral rho_{Q=0}^{s_z=0,+/-1} mesons)'."
+    },
+    {
+      "assessment": "supported",
+      "claim": "rho_+ and rho_- mesons are degenerate at finite B and T, and rho_0^+ and rho_0^- mesons are degenerate at finite B.",
+      "evidence": "This follows from CP / charge-conjugation symmetry of the magnetized two-flavor NJL Lagrangian: the polarization functions for rho_+ and rho_- are related by tau_+ <-> tau_- which gives identical algebraic structures after the sign of B is absorbed in the s_M factor. Same argument applies for the s_z = +/- 1 components of the neutral rho.",
+      "id": "C8",
+      "location": "Section II (paragraph after the diagonalization of Pi for rho_+), and degenerate label in the rho_0(s_z=+/-1) propagator definitions.",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "The vacuum parameter set m_0=6.28 MeV, G_S=8.27 GeV^-2, G_V=3.87 GeV^-2, Lambda=891 MeV reproduces <psi-bar psi>=-(230 MeV)^3, m_pi=134 MeV, m_rho=775 MeV, f_pi=93 MeV.",
+      "evidence": "The parameter ranges (m_0 ~ 5-10 MeV, G_S Lambda^2 ~ 4-6, Lambda ~ 600-900 MeV) and the physical-target values are standard for two-flavor NJL fits with Pauli-Villars regularization and are consistent with Mao 2016 and related work. The specific fit values cannot be reverified without rerunning the gap+Bethe-Salpeter solver, but they fall in the expected window and use m_pi=134 MeV (neutral pion), which is appropriate when comparing to lattice neutral-meson channels.",
+      "id": "C9",
+      "location": "Section III, opening of NUMERICAL RESULTS.",
+      "severity": "minor",
+      "suggested_fix": "Optionally tabulate the fitted-versus-target observables (chiral condensate, m_pi, m_rho, f_pi) so a reader can verify the parameter set without rerunning the fit."
+    },
+    {
+      "assessment": "supported",
+      "claim": "The free-point-particle dispersion E^2_{k_3,n,s_z} = k_3^2 + [2n - 2 sign(Q_rho) s_z + 1] |Q_rho B| + m_rho^2 reproduces the standard effective masses sqrt(m_rho^2 + 3|eB|), sqrt(m_rho^2 + |eB|), and sqrt(m_rho^2 - |eB|) for rho^-_+, rho^0_+, rho^+_+ at n=0,k_3=0.",
+      "evidence": "Substituting n=0, k_3=0 and s_z=-1,0,+1 with sign(Q_rho)=+1 directly yields the three quoted expressions. This is the standard Tassie / Hidaka-Yamamoto / Chernodub free-vector-meson Landau-level spectrum.",
+      "id": "C10",
+      "location": "Section III.A, paragraph below Fig. 1.",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "supported",
+      "claim": "The four-pole form of J_2(k_0) at finite temperature is correct, with Fermi-Dirac distribution functions weighting particle/antiparticle threshold contributions.",
+      "evidence": "This is the textbook Matsubara-frequency sum result for a particle/antiparticle bubble with two distinct energy denominators E_n, E_{n'}. The combination of (f(E_n)-f(E_{n'}))/(k_0-E_{n'}+E_n) channels and the antiparticle counterparts is the standard structure, and reduces correctly to the T=0 limit (only the two pair-creation/annihilation channels survive).",
+      "id": "C11",
+      "location": "Definition of J_2(k_0) in Section II.",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "supported",
+      "claim": "At the lowest Landau level n=0, the Schwinger-phase integral identity (Schw) gives the factor 4 pi l_M^2 (-1)^m e^{-(p_perp - q_perp)^2 l_M^2}, since L_0(...) = 1, leading to the negative-binomial Z(n,n') after the radial integration via (LLF).",
+      "evidence": "The argument is internally consistent: at n=0 the Laguerre polynomial reduces to unity, and applying (LLF) with the specified parameters produces a 2F_1 hypergeometric that collapses (because b(b-lambda-mu)/((b-lambda)(b-mu)) = 0 for the chosen kinematics) to a finite polynomial whose binomial-coefficient form is Z(n,n').",
+      "id": "C12",
+      "location": "Appendix, Eq. (Schw) and discussion of Eq. (LLF).",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "The result M(rho_0^0) ~ m_rho (insensitive to B, with slight non-monotonic structure) holds in the present NJL setup.",
+      "evidence": "In free-particle approximation neutral mesons decouple from B, but at the quark level there are residual effects through the magnetic-field dependence of m_q via the gap equation. The qualitatively flat curve with slight non-monotonic structure is consistent with prior Avancini et al. NJL results in the same regularization family. No LQCD benchmark for rho_0^0 is currently available, as the paper notes.",
+      "id": "C13",
+      "location": "Section III.A, Fig. 2 and discussion.",
+      "severity": "info",
+      "suggested_fix": null
+    }
+  ],
+  "confidence": 0.7,
+  "overall_correctness": "mostly_sound"
+}
+\end{verbatim}
+
+\section*{Corrections}
+% corrections rendered from corrections table; empty on first publish
+No corrections have been recorded.
+
+\section*{Bibliography}
+No bibliography extracted.
+
+% \bibliographystyle{plain}
+% \bibliography{references}
+\end{document}
