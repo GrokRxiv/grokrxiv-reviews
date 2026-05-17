@@ -1,0 +1,2068 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\title{Graph-theory measures capture weak ergodicity breaking on large quantum systems}
+\date{}
+\begin{document}
+\maketitle
+
+\noindent\textbf{arXiv:} \href{https://arxiv.org/abs/2605.00094}{2605.00094} \quad \textbf{Field:} quant-ph\\
+
+\section*{TL;DR}
+This paper introduces graph-energy centrality (GEC), a Fock-space graph-theoretic diagnostic for weak ergodicity-breaking (WEB) transitions in isolated quantum systems. The central claim is that characteristic changes in the GEC distribution fingerprint WEB transitions and can be computed analytically for systems of hundreds to infinitely many sites—well beyond the reach of exact diagonalization. The framework is validated on three model classes: the Rosenzweig-Porter random matrix model, the Quantum Sun model, and a kinetically constrained Triangular Lattice Gas. The novelty assessment (score 0.85, confidence 0.9) rates the contribution as significant: extending GEC to the thermodynamic limit and providing analytical formulas is a genuine advance over the prior Menzler2025 work. However, the review was conducted on abstract and bibliography only—the body text, figures, and supplemental derivations were absent from the supplied artifact. This severely limits confidence in the technical correctness assessment (overall: mostly\_sound, confidence 0.35) and renders reproducibility nearly unassessable (score 0.2). Citations appear well-chosen and relevant to the covered topics, though in-text mapping could not be confirmed. The scientific framing is sound and the problem is timely, but several major gaps must be addressed before acceptance: an explicit operational definition of the GEC distribution features that signal the transition, quantitative benchmarks against standard diagnostics, a complete statement of computational scaling, and deposition of code and data.
+
+\textbf{Recommendation:} Major revision \quad \textbf{Confidence:} 55\%\\
+
+\section*{Strengths}
+\begin{itemize}[leftmargin=*]
+  \item High novelty: the analytical extension of GEC to hundreds or infinitely many sites is a genuine methodological advance that addresses the well-documented finite-size bottleneck in WEB/ETH diagnostics (novelty score 0.85, confidence 0.9, verdict: significant).
+  \item Cross-model generality: applying a single diagnostic to three qualitatively distinct model classes (Rosenzweig-Porter, Quantum Sun, Triangular Lattice Gas) provides compelling evidence of framework breadth.
+  \item Distribution-level diagnostic: using the full GEC distribution rather than a single scalar captures richer information about the transition, consistent with multifractal-spectrum and large-deviation approaches in the literature.
+  \item Timely and well-framed: the paper targets an active, contested area (WEB, Hilbert-space fragmentation, glassy dynamics) with a well-chosen bibliography spanning foundational ETH works through recent Fock-space-cage and fading-ergodicity literature.
+  \item Builds on solid prior foundations: the Menzler2025 precursor established the Fock-space graph approach on quantum East models; the analytical extension to random-matrix and constrained models is a natural and significant step.
+\end{itemize}
+
+\section*{Weaknesses}
+\begin{itemize}[leftmargin=*]
+  \item Critical reproducibility gap (score 0.2): no code repository, raw data, or computational environment details are provided. The semianalytical and numerical procedures are visible only through a Supplemental Material reference whose content was not supplied.
+  \item Low verifiability of main claims: the review artifact contained only abstract and bibliography; body text, figures, tables, and derivations were absent, reducing technical-correctness confidence to 0.35 and making it impossible to check the operational definition of GEC, the distributional signatures at the transition, or the convergence proofs for the thermodynamic limit.
+  \item No benchmark against standard diagnostics: the paper does not (from what is reviewable) compare GEC against gap-ratio r, fractal dimension D\_2, half-chain entanglement entropy, or spectral form factor on the same models and system sizes, making it impossible to assess relative sensitivity or computational cost.
+  \item Finite-size vs. genuine transition ambiguity: identifying a sharp WEB transition (as opposed to a crossover) in finite kinetically constrained systems is notoriously difficult; no complementary dynamical observables (autocorrelation decay, entanglement growth) or finite-size-flow analysis are described.
+  \item Unvalidated thermodynamic-limit claim: the assertion that the moment expansion converges in the thermodynamic limit requires explicit convergence criteria and regime-of-validity statements that are deferred to supplementary material.
+  \item Missing comparison with classical Laplacian centrality: given that GEC is closely related to classical Laplacian centrality in network science, the paper does not establish what is gained by the adaptation beyond existing graph-spectral measures.
+\end{itemize}
+
+\section*{Open Questions}
+\begin{itemize}[leftmargin=*]
+  \item Which specific features of the GEC distribution—mean, variance, higher moments, fractal dimension of the distribution, large-deviation tails—change at the WEB transition, and how sharply do they change relative to finite-size effects?
+  \item How does GEC compare quantitatively to established diagnostics (gap-ratio r, fractal dimension D\_q, spectral form factor, half-chain entanglement entropy) for identical models and system sizes? Is there a regime where GEC outperforms or underperforms these benchmarks?
+  \item What is the precise computational scaling of the analytical method with system size L—polynomial, exponential with a small base, or otherwise—and what is the crossover system size below which exact diagonalization is cheaper?
+  \item For the Triangular Lattice Gas, what complementary dynamical observables (autocorrelation functions, entanglement growth, return probability) corroborate the conjectured WEB transition, and does finite-size flow support a genuine phase transition rather than a crossover?
+  \item How does GEC on the Fock-space graph compare to classical Laplacian centrality computed on the same graph, and what physical property of the quantum system does the difference encode?
+\end{itemize}
+
+\section*{Per-Agent Reviews}
+\subsection*{citation (\texttt{gemini-3-flash-preview})}
+\begin{verbatim}
+{
+  "confidence": 0.55,
+  "entries": [
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevA.43.2046",
+        "key": "[1]",
+        "raw": "Deutsch1991: author = {M. Deutsch, J.}, doi = {10.1103/PhysRevA.43.2046}, issue = {4}, journal = {Phys. Rev. A}, language = {en}, month = {2}, pages = {2046--2049}, publisher = {American Physical Society}, title = {Quantum statistical mechanics in a closed system}, url = {https://journals.aps.org/pra/abstract/10.1103/PhysRevA.43.2046}, volume = {43}, year = {1991},",
+        "title": "Quantum statistical mechanics in a closed system",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevE.50.888",
+        "key": "[2]",
+        "raw": "Srednicki1994: author = {Srednicki, Mark}, doi = {10.1103/PhysRevE.50.888}, issue = {2}, journal = {Phys. Rev. E}, language = {en}, month = {8}, pages = {888--901}, publisher = {American Physical Society}, title = {Chaos and quantum thermalization}, url = {https://journals.aps.org/pre/abstract/10.1103/PhysRevE.50.888}, volume = {50}, year = {1994},",
+        "title": "Chaos and quantum thermalization",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1088/1361-6633/aac9f1",
+        "key": "[3]",
+        "raw": "Deutsch2018: author = {Deutsch, Joshua M.}, doi = {10.1088/1361-6633/aac9f1}, issue = {8}, journal = {Rep. Prog. Phys.}, month = {May}, pages = {082001}, publisher = {IOP Publishing}, title = {Eigenstate Thermalization Hypothesis}, volume = {81}, year = {2018},",
+        "title": "Eigenstate Thermalization Hypothesis",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2016.11981",
+        "authors": [],
+        "doi": "10.1080/00018732.2016.1198134",
+        "key": "[4]",
+        "raw": "DAlessio2016: author = {D'Alessio, Luca and Kafri, Yariv and Polkovnikov, Anatoli and Rigol, Marcos}, doi = {10.1080/00018732.2016.1198134}, issue = {3}, journal = {Adv. Phys.}, language = {en}, month = {Sep}, pages = {239--362}, title = {From Quantum Chaos and Eigenstate Thermalization to Statistical Mechanics and Thermodynamics}, volume = {65}, year = {2015},",
+        "title": "From Quantum Chaos and Eigenstate Thermalization to Statistical Mechanics and Thermodynamics",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1038/nature06838",
+        "key": "[5]",
+        "raw": "Rigol2008: author = {Rigol, Marcos and Dunjko, Vanja and Olshanii, Maxim}, doi = {10.1038/nature06838}, issue = {7189}, journal = {Nature}, language = {en}, month = {4}, pages = {854--858}, publisher = {Springer Science and Business Media LLC}, title = {Thermalization and its mechanism for generic isolated quantum systems}, url = {http://dx.doi.org/10.1038/nature06838}, volume = {452}, year = {2008},",
+        "title": "Thermalization and its mechanism for generic isolated quantum systems",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevB.99.155130",
+        "key": "[6]",
+        "raw": "Jansen2019: title = {Eigenstate thermalization and quantum chaos in the {H}olstein polaron model}, author = {Jansen, David and Stolpp, Jan and Vidmar, Lev and Heidrich-Meisner, Fabian}, journal = {Phys. Rev. B}, volume = {99}, issue = {15}, pages = {155130}, numpages = {12}, year = {2019}, month = {Apr}, publisher = {American Physical Society}, doi = {10.1103/PhysRevB.99.155130}, url = {https://link.aps.org/doi/10.1103/PhysRevB.99.155130}",
+        "title": "Eigenstate thermalization and quantum chaos in the {H",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevB.103.235137",
+        "key": "[7]",
+        "raw": "Schoenle2021: title = {Eigenstate thermalization hypothesis through the lens of autocorrelation functions}, author = {Sch\\\"onle, Christoph and Jansen, David and Heidrich-Meisner, Fabian and Vidmar, Lev}, journal = {Phys. Rev. B}, volume = {103}, issue = {23}, pages = {235137}, numpages = {19}, year = {2021}, month = {Jun}, publisher = {American Physical Society}, doi = {10.1103/PhysRevB.103.235137}, url = {https://link.aps.org/doi/10.1103/PhysRevB.103.235137}",
+        "title": "Eigenstate thermalization hypothesis through the lens of autocorrelation functions",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1038/s41567-018-0137-5",
+        "key": "[8]",
+        "raw": "Turner2018a: author = {Turner, C. J. and Michailidis, A. A. and Abanin, D. A. and Serbyn, M. and Papi\\ifmmode \\acute{c}\\else \\'{c}\\fi{}, Z.}, doi = {10.1038/s41567-018-0137-5}, journal = {Nat. Phys.}, owner = {lev}, pages = {745}, timestamp = {2019.03.21}, title = {Weak ergodicity breaking from quantum many-body scars}, volume = {14}, year = {2018}, bdsk-url-1 = {https://doi.org/10.1038/s41567-018-0137-5}} @article{Serbyn2021, author = {Serbyn, Maksym and Abanin, Dmitry A. and Papi{\\'c}, Zlatko}, doi = {10.1038/s41567-021-01230-2}, issn = {1745-2481}, journal = {Nature Physics}, month = may, number = {6}, pages = {675--685}, publisher = {Springer Science and Business Media LLC}, title = {Quantum many-body scars and weak breaking of ergodicity}, volume = {17}, year = {2021}, bdsk-url-1 = {https://doi.org/10.1038/s41567-021-01230-2}",
+        "title": "Weak ergodicity breaking from quantum many-body scars",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevX.14.041069",
+        "key": "[9]",
+        "raw": "Moudgalya2022a: author = {Moudgalya, Sanjay and Motrunich, Olexei I.}, doi = {10.1103/PhysRevX.14.041069}, issue = {4}, journal = {Phys. Rev. X}, month = {Dec}, numpages = {49}, pages = {041069}, publisher = {American Physical Society}, title = {Exhaustive Characterization of Quantum Many-Body Scars Using Commutant Algebras}, url = {https://link.aps.org/doi/10.1103/PhysRevX.14.041069}, volume = {14}, year = {2024}, bdsk-url-1 = {https://link.aps.org/doi/10.1103/PhysRevX.14.041069}, bdsk-url-2 = {https://doi.org/10.1103/PhysRevX.14.041069}} @article{Moudgalya2022b, author = {Sanjay Moudgalya and B Andrei Bernevig and Nicolas Regnault}, date-added = {2023-09-23 12:53:18 +0200}, date-modified = {2023-09-23 12:54:08 +0200}, doi = {10.1088/1361-6633/ac73a0}, journal = {Rep. Prog. Phys.}, month = {jul}, number = {8}, pages = {086501}, publisher = {IOP Publishing}, title = {Quantum many-body scars and {H}ilbert space fragmentation: A review of exact results}, url = {https://dx.doi.org/10.1088/1361-6633/ac73a0}, volume = {85}, year = {2022}, bdsk-url-1 = {https://dx.doi.org/10.1088/1361-6633/ac73a0}",
+        "title": "Exhaustive Characterization of Quantum Many-Body Scars Using Commutant Algebras",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevX.12.011050",
+        "key": "[10]",
+        "raw": "Moudgalya2022c: author = {Moudgalya, Sanjay and Motrunich, Olexei I.}, doi = {10.1103/PhysRevX.12.011050}, issue = {1}, journal = {Phys. Rev. X}, month = {Mar}, numpages = {44}, pages = {011050}, publisher = {American Physical Society}, title = {{H}ilbert Space Fragmentation and Commutant Algebras}, url = {https://link.aps.org/doi/10.1103/PhysRevX.12.011050}, volume = {12}, year = {2022}, bdsk-url-1 = {https://link.aps.org/doi/10.1103/PhysRevX.12.011050}, bdsk-url-2 = {https://doi.org/10.1103/PhysRevX.12.011050}",
+        "title": "{H",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1146/annurev-conmatphys-031620-101617",
+        "key": "[11]",
+        "raw": "Channdran2023: author = {Chandran, Anushya and Iadecola, Thomas and Khemani, Vedika and Moessner, Roderich}, date-added = {2024-01-20 17:48:12 +0530}, date-modified = {2024-01-20 18:12:01 +0530}, doi = {10.1146/annurev-conmatphys-031620-101617}, journal = {Ann. Rev. Cond. Mat. Phys.}, number = {1}, pages = {443-469}, title = {Quantum Many-Body Scars: A Quasiparticle Perspective}, url = {https://doi.org/10.1146/annurev-conmatphys-031620-101617}, volume = {14}, year = {2023}, bdsk-url-1 = {https://doi.org/10.1146/annurev-conmatphys-031620-101617}",
+        "title": "Quantum Many-Body Scars: A Quasiparticle Perspective",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevLett.132.020401",
+        "key": "[12]",
+        "raw": "Evrard2024: title = {Quantum Scars and Regular Eigenstates in a Chaotic Spinor Condensate}, author = {Evrard, Bertrand and Pizzi, Andrea and Mistakidis, Simeon I. and Dag, Ceren B.}, journal = {Phys. Rev. Lett.}, volume = {132}, issue = {2}, pages = {020401}, numpages = {6}, year = {2024}, month = {Jan}, publisher = {American Physical Society}, doi = {10.1103/PhysRevLett.132.020401}, url = {https://link.aps.org/doi/10.1103/PhysRevLett.132.020401}",
+        "title": "Quantum Scars and Regular Eigenstates in a Chaotic Spinor Condensate",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/physrevx.10.011047",
+        "key": "[13]",
+        "raw": "Sala2020: author = {Sala, Pablo and Rakovszky, Tibor and Verresen, Ruben and Knap, Michael and Pollmann, Frank}, doi = {10.1103/physrevx.10.011047}, issn = {2160-3308}, journal = {Phys. Rev. X}, month = feb, number = {1}, pages = {011047}, publisher = {American Physical Society (APS)}, title = {Ergodicity Breaking Arising from {H}ilbert Space Fragmentation in Dipole-Conserving {H}amiltonians}, volume = {10}, year = {2020}, bdsk-url-1 = {https://doi.org/10.1103/physrevx.10.011047}} @article{Rakovszky2020, title = {Statistical localization: From strong fragmentation to strong edge modes}, author = {Rakovszky, Tibor and Sala, Pablo and Verresen, Ruben and Knap, Michael and Pollmann, Frank}, journal = {Phys. Rev. B}, volume = {101}, issue = {12}, pages = {125126}, numpages = {23}, year = {2020}, month = {Mar}, publisher = {American Physical Society}, doi = {10.1103/PhysRevB.101.125126}, url = {https://link.aps.org/doi/10.1103/PhysRevB.101.125126}",
+        "title": "Ergodicity Breaking Arising from {H",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevB.109.024311",
+        "key": "[14]",
+        "raw": "Jonay2024: title = {Slow thermalization and subdiffusion in {$U(1)$} conserving Floquet random circuits}, author = {Jonay, Cheryne and Rodriguez-Nieva, Joaquin F. and Khemani, Vedika}, journal = {Phys. Rev. B}, volume = {109}, issue = {2}, pages = {024311}, numpages = {11}, year = {2024}, month = {Jan}, publisher = {American Physical Society}, doi = {10.1103/PhysRevB.109.024311}, url = {https://link.aps.org/doi/10.1103/PhysRevB.109.024311}",
+        "title": "Slow thermalization and subdiffusion in {$U(1)$",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevB.111.144313",
+        "key": "[15]",
+        "raw": "Yang2025: title = {Probing {H}ilbert space fragmentation with strongly interacting {R}ydberg atoms}, author = {Yang, Fan and Yarloo, Hadi and Zhang, Hua-Chen and M\\o{}lmer, Klaus and Nielsen, Anne E. B.}, journal = {Phys. Rev. B}, volume = {111}, issue = {14}, pages = {144313}, numpages = {13}, year = {2025}, month = {Apr}, publisher = {American Physical Society}, doi = {10.1103/PhysRevB.111.144313}, url = {https://link.aps.org/doi/10.1103/PhysRevB.111.144313}",
+        "title": "Probing {H",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/wz33-vczt",
+        "key": "[16]",
+        "raw": "Jonay2025: title = {Localized Fock space cages in kinetically constrained models}, author = {Jonay, Cheryne and Pollmann, Frank}, journal = {Phys. Rev. B}, volume = {113}, issue = {13}, pages = {134313}, numpages = {10}, year = {2026}, month = {Apr}, publisher = {American Physical Society}, doi = {10.1103/wz33-vczt}, url = {https://link.aps.org/doi/10.1103/wz33-vczt}",
+        "title": "Localized Fock space cages in kinetically constrained models",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/7j6x-74f1",
+        "key": "[17]",
+        "raw": "Aditya2025: title = {Diagnostics of {H}ilbert space fragmentation, freezing transition, and its effects in the family of quantum {E}ast models involving varying range of constraints}, author = {Aditya, Sreemayee}, journal = {Phys. Rev. B}, volume = {112}, issue = {19}, pages = {195413}, numpages = {31}, year = {2025}, month = {Nov}, publisher = {American Physical Society}, doi = {10.1103/7j6x-74f1}, url = {https://link.aps.org/doi/10.1103/7j6x-74f1}",
+        "title": "Diagnostics of {H",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevB.109.184313",
+        "key": "[18]",
+        "raw": "Zhang2024: title = {Floquet engineering of {H}ilbert space fragmentation in Stark lattices}, author = {Zhang, Li and Ke, Yongguan and Lin, Ling and Lee, Chaohong}, journal = {Phys. Rev. B}, volume = {109}, issue = {18}, pages = {184313}, numpages = {15}, year = {2024}, month = {May}, publisher = {American Physical Society}, doi = {10.1103/PhysRevB.109.184313}, url = {https://link.aps.org/doi/10.1103/PhysRevB.109.184313}",
+        "title": "Floquet engineering of {H",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/fysk-w1vs",
+        "key": "[19]",
+        "raw": "Lisiecki2025: title = {Tunable {H}ilbert space fragmentation and extended critical regime}, author = {Lisiecki, Mateusz and Bon\\ifmmode \\check{c}\\else \\v{c}\\fi{}a, Janez and Mierzejewski, Marcin and Herbrych, Jacek and \\L{}yd\\ifmmode \\dot{z}\\else \\.{z}\\fi{}ba, Patrycja}, journal = {Phys. Rev. B}, volume = {112}, issue = {19}, pages = {195116}, numpages = {11}, year = {2025}, month = {Nov}, publisher = {American Physical Society}, doi = {10.1103/fysk-w1vs}, url = {https://link.aps.org/doi/10.1103/fysk-w1vs}",
+        "title": "Tunable {H",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevLett.121.040603",
+        "key": "[20]",
+        "raw": "Lan2018: title = {Quantum Slow Relaxation and Metastability due to Dynamical Constraints}, author = {Lan, Zhihao and van Horssen, Merlijn and Powell, Stephen and Garrahan, Juan P.}, journal = {Phys. Rev. Lett.}, volume = {121}, issue = {4}, pages = {040603}, numpages = {6}, year = {2018}, month = {Jul}, publisher = {American Physical Society}, doi = {10.1103/PhysRevLett.121.040603}, url = {https://link.aps.org/doi/10.1103/PhysRevLett.121.040603}",
+        "title": "Quantum Slow Relaxation and Metastability due to Dynamical Constraints",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevE.109.024136",
+        "key": "[21]",
+        "raw": "Royen2024: title = {Enhanced many-body localization in a kinetically constrained model}, author = {Royen, Karl and Mondal, Suman and Pollmann, Frank and Heidrich-Meisner, Fabian}, journal = {Phys. Rev. E}, volume = {109}, issue = {2}, pages = {024136}, numpages = {9}, year = {2024}, month = {Feb}, publisher = {American Physical Society}, doi = {10.1103/PhysRevE.109.024136}, url = {https://link.aps.org/doi/10.1103/PhysRevE.109.024136}",
+        "title": "Enhanced many-body localization in a kinetically constrained model",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": null,
+        "key": "[22]",
+        "raw": "SM: note = {See Supplemental Material for further details the $\\GEC$, its full analytical derivation for the Rosenzweig-Porter and Quantum sun model and a semianalytical approach for calculating the moments of the $\\GEC$ for the Triangular Lattice Gas model.}",
+        "title": "SM",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2504.07780",
+        "authors": [],
+        "doi": null,
+        "key": "[23]",
+        "raw": "Tan2025: archiveprefix = {arXiv}, author = {Tao-Lin Tan and Yi-Ping Huang}, eprint = {2504.07780}, title = {Interference-caged quantum many-body scars: {T}he {F}ock space topological localization and interference zeros}, year = {2025},",
+        "title": "Interference-caged quantum many-body scars: {T",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2504.13086",
+        "authors": [],
+        "doi": null,
+        "key": "[24]",
+        "raw": "Benami2025: archiveprefix = {arXiv}, author = {Tom Ben-Ami and Markus Heyl and Roderich Moessner}, eprint = {2504.13086}, title = {Many-body cages: {D}isorder-free glassiness from flat bands in {F}ock space, and many-body {R}abi oscillations}, year = {2025},",
+        "title": "Many-body cages: {D",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2604.13027",
+        "authors": [],
+        "doi": null,
+        "key": "[25]",
+        "raw": "Benami2026: title={Floquet Many-Body Cages}, author={Tom Ben-Ami and Roderich Moessner and Markus Heyl}, year={2026}, eprint={2604.13027}, archivePrefix={arXiv}, primaryClass={quant-ph}, url={https://arxiv.org/abs/2604.13027},",
+        "title": "Floquet Many-Body Cages",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevB.101.174204",
+        "key": "[26]",
+        "raw": "Khemani2020: title = {Localization from {H}ilbert space shattering: {F}rom theory to physical realizations}, author = {Khemani, Vedika and Hermele, Michael and Nandkishore, Rahul}, journal = {Phys. Rev. B}, volume = {101}, issue = {17}, pages = {174204}, numpages = {17}, year = {2020}, month = {May}, publisher = {American Physical Society}, doi = {10.1103/PhysRevB.101.174204}, url = {https://link.aps.org/doi/10.1103/PhysRevB.101.174204}",
+        "title": "Localization from {H",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevB.91.081103",
+        "key": "[27]",
+        "raw": "Luitz2015: author = {Luitz, David J. and Laflorencie, Nicolas and Alet, Fabien}, doi = {10.1103/PhysRevB.91.081103}, issue = {8}, journal = {Phys. Rev. B}, month = {Feb}, numpages = {5}, pages = {081103}, publisher = {American Physical Society}, title = {Many-body localization edge in the random-field {H}eisenberg chain}, url = {https://link.aps.org/doi/10.1103/PhysRevB.91.081103}, volume = {91}, year = {2015}, bdsk-url-1 = {https://link.aps.org/doi/10.1103/PhysRevB.91.081103}, bdsk-url-2 = {https://doi.org/10.1103/PhysRevB.91.081103}",
+        "title": "Many-body localization edge in the random-field {H",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevA.95.021601",
+        "key": "[28]",
+        "raw": "Sierant17: author = {Sierant, Piotr and Delande, Dominique and Zakrzewski, Jakub}, doi = {10.1103/PhysRevA.95.021601}, issue = {2}, journal = {Phys. Rev. A}, month = {Feb}, numpages = {5}, pages = {021601}, publisher = {American Physical Society}, title = {Many-body localization due to random interactions}, url = {https://link.aps.org/doi/10.1103/PhysRevA.95.021601}, volume = {95}, year = {2017}, bdsk-url-1 = {https://link.aps.org/doi/10.1103/PhysRevA.95.021601}, bdsk-url-2 = {https://doi.org/10.1103/PhysRevA.95.021601}} @article{Khemani17, author = {Khemani, Vedika and Sheng, D. N. and Huse, David A.}, doi = {10.1103/PhysRevLett.119.075702}, issue = {7}, journal = {Phys. Rev. Lett.}, month = {Aug}, numpages = {6}, pages = {075702}, publisher = {American Physical Society}, title = {Two Universality Classes for the Many-Body Localization Transition}, url = {https://link.aps.org/doi/10.1103/PhysRevLett.119.075702}, volume = {119}, year = {2017}, bdsk-url-1 = {https://link.aps.org/doi/10.1103/PhysRevLett.119.075702}, bdsk-url-2 = {https://doi.org/10.1103/PhysRevLett.119.075702}} @article{Panda2019, author = {Panda, R. K. and Scardicchio, A. and Schulz, M. and Taylor, S. R. and {\\v Z}nidari{\\v c}, M.}, doi = {10.1209/0295-5075/128/67003}, journal = {EPL}, number = 6, pages = {67003}, title = {Can we study the many-body localisation transition?}, url = {https://doi.org/10.1209/0295-5075/128/67003}, volume = 128, year = 2019, bdsk-url-1 = {https://doi.org/10.1209/0295-5075/128/67003}} @article{Logan19, author = {Logan, David E. and Welsh, Staszek}, doi = {10.1103/PhysRevB.99.045131}, issue = {4}, journal = {Phys. Rev. B}, month = {Jan}, numpages = {17}, pages = {045131}, publisher = {American Physical Society}, title = {Many-body localization in {F}ock space: {A} local perspective}, url = {https://link.aps.org/doi/10.1103/PhysRevB.99.045131}, volume = {99}, year = {2019}, bdsk-url-1 = {https://link.aps.org/doi/10.1103/PhysRevB.99.045131}, bdsk-url-2 = {https://doi.org/10.1103/PhysRevB.99.045131}} @Article{Colmenarez2019, author = {Colmenarez, Luis A. and McClarty, Paul A. and Haque, Masud and Luitz, David J.}, journal = {SciPost Physics}, title = {Statistics of correlation functions in the random {H}eisenberg chain}, year = {2019}, issn = {2542-4653}, month = nov, number = {5}, pages = {064}, volume = {7}, doi = {10.21468/scipostphys.7.5.064}, publisher = {Stichting SciPost},",
+        "title": "Many-body localization due to random interactions",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2021.16841",
+        "authors": [],
+        "doi": "10.1103/PhysRevResearch.3.L012019",
+        "key": "[29]",
+        "raw": "Prakash2021: author = {Prakash, Abhishodh and Pixley, J. H. and Kulkarni, Manas}, date-added = {2022-12-23 17:12:11 +0100}, date-modified = {2022-12-23 17:12:11 +0100}, doi = {10.1103/PhysRevResearch.3.L012019}, issue = {1}, journal = {Phys. Rev. Research}, month = {Feb}, numpages = {6}, pages = {L012019}, publisher = {American Physical Society}, title = {Universal spectral form factor for many-body localization}, url = {https://link.aps.org/doi/10.1103/PhysRevResearch.3.L012019}, volume = {3}, year = {2021}, bdsk-url-1 = {https://link.aps.org/doi/10.1103/PhysRevResearch.3.L012019}, bdsk-url-2 = {https://doi.org/10.1103/PhysRevResearch.3.L012019}} @article{Corps2021, author = {{\\'A}ngel L. Corps and Rafael A. Molina and Armando Rela{\\ n}o}, date-added = {2022-12-23 17:11:55 +0100}, date-modified = {2022-12-23 17:11:55 +0100}, doi = {10.21468/SciPostPhys.10.5.107}, issue = {5}, journal = {SciPost Phys.}, pages = {107}, publisher = {SciPost}, title = {Signatures of a critical point in the many-body localization transition}, url = {https://scipost.org/10.21468/SciPostPhys.10.5.107}, volume = {10}, year = {2021}, bdsk-url-1 = {https://scipost.org/10.21468/SciPostPhys.10.5.107}, bdsk-url-2 = {https://doi.org/10.21468/SciPostPhys.10.5.107}} @article{Abanin2021, author = {D.A. Abanin and J.H. Bardarson and G. {De Tomasi} and S. Gopalakrishnan and V. Khemani and S.A. Parameswaran and F. Pollmann and A.C. Potter and M. Serbyn and R. Vasseur}, date-added = {2022-12-23 17:11:28 +0100}, date-modified = {2022-12-23 17:11:28 +0100}, doi = {https://doi.org/10.1016/j.aop.2021.168415}, issn = {0003-4916}, journal = {Ann. Phys.}, keywords = {Localization, Many-body physics, {T}houless energy, Quantum chaos, Disordered systems, Strongly correlated electrons}, pages = {168415}, title = {Distinguishing localization from chaos: {C}hallenges in finite-size systems}, url = {https://www.sciencedirect.com/science/article/pii/S000349162100021X}, volume = {427}, year = {2021}, bdsk-url-1 = {https://www.sciencedirect.com/science/article/pii/S000349162100021X}, bdsk-url-2 = {https://doi.org/10.1016/j.aop.2021.168415}} @article{Sierant2025, author = {Sierant, Piotr and Lewenstein, Maciej and Scardicchio, Antonello and Vidmar, Lev and Zakrzewski, Jakub}, doi = {10.1088/1361-6633/ad9756}, journal = {Rep. Prog. Phys.}, month = {jan}, number = {2}, pages = {026502}, publisher = {IOP Publishing}, title = {Many-body localization in the age of classical computing}, url = {https://dx.doi.org/10.1088/1361-6633/ad9756}, volume = {88}, year = {2025}, bdsk-url-1 = {https://dx.doi.org/10.1088/1361-6633/ad9756}",
+        "title": "Universal spectral form factor for many-body localization",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevB.106.054208",
+        "key": "[30]",
+        "raw": "Skvortsov2022: author = {Skvortsov, M. A. and Amini, M. and Kravtsov, V. E.}, doi = {10.1103/PhysRevB.106.054208}, issue = {5}, journal = {Phys. Rev. B}, month = {Aug}, numpages = {15}, pages = {054208}, publisher = {American Physical Society}, title = {Sensitivity of (multi)fractal eigenstates to a perturbation of the {H}amiltonian}, url = {https://link.aps.org/doi/10.1103/PhysRevB.106.054208}, volume = {106}, year = {2022}, bdsk-url-1 = {https://link.aps.org/doi/10.1103/PhysRevB.106.054208}, bdsk-url-2 = {https://doi.org/10.1103/PhysRevB.106.054208}} @article{Rosenzweig1960, author = {Rosenzweig, Norbert and Porter, Charles E.}, copyright = {http://link.aps.org/licenses/aps-default-license}, doi = {10.1103/PhysRev.120.1698}, issn = {0031-899X}, journal = {Physical Review}, langid = {english}, month = dec, number = {5}, pages = {1698--1714}, title = {\\enquote{{R}epulsion of energy levels} in Complex Atomic Spectra}, urldate = {2025-04-24}, volume = {120}, year = {1960}, bdsk-url-1 = {https://doi.org/10.1103/PhysRev.120.1698}} @article{Kravtsov2015, author = {Kravtsov, V E and Khaymovich, I M and Cuevas, E and Amini, M}, doi = {10.1088/1367-2630/17/12/122002}, issn = {1367-2630}, journal = {New Journal of Physics}, month = dec, number = {12}, pages = {122002}, title = {A Random Matrix Model with Localization and Ergodic Transitions}, urldate = {2025-04-24}, volume = {17}, year = {2015}, bdsk-url-1 = {https://doi.org/10.1088/1367-2630/17/12/122002}} @article{Suntajs2022, author = {\\ifmmode \\check{S}\\else \\v{S}\\fi{}untajs, Jan and Vidmar, Lev}, date-added = {2022-12-23 16:41:25 +0100}, date-modified = {2022-12-23 16:41:25 +0100}, doi = {10.1103/PhysRevLett.129.060602}, issue = {6}, journal = {Phys. Rev. Lett.}, month = {Aug}, numpages = {6}, pages = {060602}, publisher = {American Physical Society}, title = {Ergodicity Breaking Transition in Zero Dimensions}, url = {https://link.aps.org/doi/10.1103/PhysRevLett.129.060602}, volume = {129}, year = {2022}, bdsk-url-1 = {https://link.aps.org/doi/10.1103/PhysRevLett.129.060602}, bdsk-url-2 = {https://doi.org/10.1103/PhysRevLett.129.060602}",
+        "title": "Sensitivity of (multi)fractal eigenstates to a perturbation of the {H",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/j7jf-746f",
+        "key": "[31]",
+        "raw": "Menzler2025: title = {Graph theory and tunable slow dynamics in quantum {E}ast {H}amiltonians}, author = {Menzler, Heiko Georg and Ba\\ nuls, Mari Carmen and Heidrich-Meisner, Fabian}, journal = {Phys. Rev. B}, volume = {112}, issue = {11}, pages = {115141}, numpages = {18}, year = {2025}, month = {Sep}, publisher = {American Physical Society}, doi = {10.1103/j7jf-746f}, url = {https://link.aps.org/doi/10.1103/j7jf-746f}",
+        "title": "Graph theory and tunable slow dynamics in quantum {E",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevB.111.184203",
+        "key": "[32]",
+        "raw": "Swietek2025a: title = {Fading ergodicity meets maximal chaos}, author = {\\ifmmode \\acute{S}\\else \\'{S}\\fi{}wi\\ifmmode \\mbox{\\c{e}}\\else \\c{e}\\fi{}tek, Rafa\\l{} and \\L{}yd\\ifmmode \\dot{z}\\else \\.{z}\\fi{}ba, Patrycja and Vidmar, Lev}, journal = {Phys. Rev. B}, volume = {111}, issue = {18}, pages = {184203}, numpages = {14}, year = {2025}, month = {May}, publisher = {American Physical Society}, doi = {10.1103/PhysRevB.111.184203}, url = {https://link.aps.org/doi/10.1103/PhysRevB.111.184203}",
+        "title": "Fading ergodicity meets maximal chaos",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/4l42-l7pk",
+        "key": "[33]",
+        "raw": "Swietek2024: title = {Scaling Theory of Fading Ergodicity}, author = {\\ifmmode \\acute{S}\\else \\'{S}\\fi{}wi\\ifmmode \\mbox{\\k{e}}\\else \\k{e}\\fi{}tek, Rafa\\l{} and Hopjan, Miroslav and Vanoni, Carlo and Scardicchio, Antonello and Vidmar, Lev}, journal = {Phys. Rev. Lett.}, volume = {135}, issue = {17}, pages = {170401}, numpages = {9}, year = {2025}, month = {Oct}, publisher = {American Physical Society}, doi = {10.1103/4l42-l7pk}, url = {https://link.aps.org/doi/10.1103/4l42-l7pk}",
+        "title": "Scaling Theory of Fading Ergodicity",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2603.23616",
+        "authors": [],
+        "doi": null,
+        "key": "[34]",
+        "raw": "Swietek2025b: title={Fading ergodicity and quantum dynamics in random matrix ensembles}, author={Rafał Świętek and Maksymilian Kliczkowski and Miroslav Hopjan and Lev Vidmar}, year={2026}, eprint={2603.23616}, archivePrefix={arXiv},",
+        "title": "Fading ergodicity and quantum dynamics in random matrix ensembles",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2506.13511",
+        "authors": [],
+        "doi": "10.1103/PhysRevB.110.134206",
+        "key": "[35]",
+        "raw": "Kliczkowski2024: author = {Kliczkowski, Maksymilian and \\ifmmode \\acute{S}\\else \\'{S}\\fi{}wi\\ifmmode \\mbox{\\k{e}}\\else \\k{e}\\fi{}tek, Rafa\\l{} and Hopjan, Miroslav and Vidmar, Lev}, doi = {10.1103/PhysRevB.110.134206}, issue = {13}, journal = {Phys. Rev. B}, month = {Oct}, numpages = {12}, pages = {134206}, publisher = {American Physical Society}, title = {Fading ergodicity}, url = {https://link.aps.org/doi/10.1103/PhysRevB.110.134206}, volume = {110}, year = {2024}, bdsk-url-1 = {https://link.aps.org/doi/10.1103/PhysRevB.110.134206}, bdsk-url-2 = {https://doi.org/10.1103/PhysRevB.110.134206}} @misc{DeRoeck2025, title={Many-body Localization and {P}oisson statistics in the quantum sun model}, author={Wojciech De Roeck and Amirali Hannani}, year={2025}, eprint={2506.13511}, archivePrefix={arXiv},",
+        "title": "Fading ergodicity",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevB.95.155129",
+        "key": "[36]",
+        "raw": "DeRoeck2017: author = {De Roeck, W. and Huveneers, F.}, date-added = {2022-12-23 16:39:40 +0100}, date-modified = {2022-12-23 16:39:40 +0100}, doi = {10.1103/PhysRevB.95.155129}, issue = {15}, journal = {Phys. Rev. B}, month = {Apr}, numpages = {14}, owner = {lev}, pages = {155129}, publisher = {American Physical Society}, timestamp = {2019.04.25}, title = {Stability and instability towards delocalization in many-body localization systems}, url = {https://link.aps.org/doi/10.1103/PhysRevB.95.155129}, volume = {95}, year = {2017}, bdsk-url-1 = {https://link.aps.org/doi/10.1103/PhysRevB.95.155129}, bdsk-url-2 = {https://doi.org/10.1103/PhysRevB.95.155129}} @book{Mehta1991, address = {New York}, author = {Mehta, M. L.}, owner = {lev}, publisher = {Academic}, series = {2nd ed.}, timestamp = {2019.04.25}, title = {Random Matrices and the Statistical Theory of Spectra}, year = {1991}",
+        "title": "Stability and instability towards delocalization in many-body localization systems",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevE.90.052105",
+        "key": "[37]",
+        "raw": "Kim2014: author = {Kim, Hyungwon and Ikeda, Tatsuhiko N. and Huse, David A.}, doi = {10.1103/PhysRevE.90.052105}, issue = {5}, journal = {Phys. Rev. E}, month = {Nov}, numpages = {8}, owner = {lev}, pages = {052105}, publisher = {American Physical Society}, timestamp = {2018.12.17}, title = {Testing whether all eigenstates obey the eigenstate thermalization hypothesis}, url = {https://link.aps.org/doi/10.1103/PhysRevE.90.052105}, volume = {90}, year = {2014}, bdsk-url-1 = {https://link.aps.org/doi/10.1103/PhysRevE.90.052105}, bdsk-url-2 = {https://doi.org/10.1103/PhysRevE.90.052105}",
+        "title": "Testing whether all eigenstates obey the eigenstate thermalization hypothesis",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevLett.103.100403",
+        "key": "[38]",
+        "raw": "Rigol2009: title = {Breakdown of Thermalization in Finite One-Dimensional Systems}, author = {Rigol, Marcos}, journal = {Phys. Rev. Lett.}, volume = {103}, issue = {10}, pages = {100403}, numpages = {4}, year = {2009}, month = {Sep}, publisher = {American Physical Society}, doi = {10.1103/PhysRevLett.103.100403}, url = {https://link.aps.org/doi/10.1103/PhysRevLett.103.100403}",
+        "title": "Breakdown of Thermalization in Finite One-Dimensional Systems",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevA.80.053607",
+        "key": "[39]",
+        "raw": "Rigol2009b: title = {Quantum quenches and thermalization in one-dimensional fermionic systems}, author = {Rigol, Marcos}, journal = {Phys. Rev. A}, volume = {80}, issue = {5}, pages = {053607}, numpages = {12}, year = {2009}, month = {Nov}, publisher = {American Physical Society}, doi = {10.1103/PhysRevA.80.053607}, url = {https://link.aps.org/doi/10.1103/PhysRevA.80.053607}",
+        "title": "Quantum quenches and thermalization in one-dimensional fermionic systems",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevE.82.031130",
+        "key": "[40]",
+        "raw": "Santos2010: title = {Localization and the effects of symmetries in the thermalization properties of one-dimensional quantum systems}, author = {Santos, Lea F. and Rigol, Marcos}, journal = {Phys. Rev. E}, volume = {82}, issue = {3}, pages = {031130}, numpages = {12}, year = {2010}, month = {Sep}, publisher = {American Physical Society}, doi = {10.1103/PhysRevE.82.031130}, url = {https://link.aps.org/doi/10.1103/PhysRevE.82.031130}",
+        "title": "Localization and the effects of symmetries in the thermalization properties of one-dimensional quantum systems",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevE.87.012118",
+        "key": "[41]",
+        "raw": "Stenigeweg2013: title = {Eigenstate thermalization within isolated spin-chain systems}, author = {Steinigeweg, R. and Herbrych, J. and Prelov\\ifmmode \\check{s}\\else \\v{s}\\fi{}ek, P.}, journal = {Phys. Rev. E}, volume = {87}, issue = {1}, pages = {012118}, numpages = {5}, year = {2013}, month = {Jan}, publisher = {American Physical Society}, doi = {10.1103/PhysRevE.87.012118}, url = {https://link.aps.org/doi/10.1103/PhysRevE.87.012118}",
+        "title": "Eigenstate thermalization within isolated spin-chain systems",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevLett.111.050403",
+        "key": "[42]",
+        "raw": "Khatami2013: title = {Fluctuation-Dissipation Theorem in an Isolated System of Quantum Dipolar Bosons after a Quench}, author = {Khatami, Ehsan and Pupillo, Guido and Srednicki, Mark and Rigol, Marcos}, journal = {Phys. Rev. Lett.}, volume = {111}, issue = {5}, pages = {050403}, numpages = {5}, year = {2013}, month = {Jul}, publisher = {American Physical Society}, doi = {10.1103/PhysRevLett.111.050403}, url = {https://link.aps.org/doi/10.1103/PhysRevLett.111.050403}",
+        "title": "Fluctuation-Dissipation Theorem in an Isolated System of Quantum Dipolar Bosons after a Quench",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevE.89.042112",
+        "key": "[43]",
+        "raw": "Beugeling2014: title = {Finite-size scaling of eigenstate thermalization}, author = {Beugeling, W. and Moessner, R. and Haque, Masudul}, journal = {Phys. Rev. E}, volume = {89}, issue = {4}, pages = {042112}, numpages = {9}, year = {2014}, month = {Apr}, publisher = {American Physical Society}, doi = {10.1103/PhysRevE.89.042112}, url = {https://link.aps.org/doi/10.1103/PhysRevE.89.042112}",
+        "title": "Finite-size scaling of eigenstate thermalization",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevA.90.033606",
+        "key": "[44]",
+        "raw": "Sorg2014: title = {Relaxation and thermalization in the one-dimensional {B}ose-{H}ubbard model: {A} case study for the interaction quantum quench from the atomic limit}, author = {Sorg, S. and Vidmar, L. and Pollet, L. and Heidrich-Meisner, F.}, journal = {Phys. Rev. A}, volume = {90}, issue = {3}, pages = {033606}, numpages = {17}, year = {2014}, month = {Sep}, publisher = {American Physical Society}, doi = {10.1103/PhysRevA.90.033606}, url = {https://link.aps.org/doi/10.1103/PhysRevA.90.033606}",
+        "title": "Relaxation and thermalization in the one-dimensional {B",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevE.91.012144",
+        "key": "[45]",
+        "raw": "Beugeling2015: title = {Off-diagonal matrix elements of local operators in many-body quantum systems}, author = {Beugeling, Wouter and Moessner, Roderich and Haque, Masudul}, journal = {Phys. Rev. E}, volume = {91}, issue = {1}, pages = {012144}, numpages = {10}, year = {2015}, month = {Jan}, publisher = {American Physical Society}, doi = {10.1103/PhysRevE.91.012144}, url = {https://link.aps.org/doi/10.1103/PhysRevE.91.012144}",
+        "title": "Off-diagonal matrix elements of local operators in many-body quantum systems",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevE.93.032104",
+        "key": "[46]",
+        "raw": "Mondaini2016: title = {Eigenstate thermalization in the two-dimensional transverse field {I}sing model}, author = {Mondaini, Rubem and Fratus, Keith R. and Srednicki, Mark and Rigol, Marcos}, journal = {Phys. Rev. E}, volume = {93}, issue = {3}, pages = {032104}, numpages = {9}, year = {2016}, month = {Mar}, publisher = {American Physical Society}, doi = {10.1103/PhysRevE.93.032104}, url = {https://link.aps.org/doi/10.1103/PhysRevE.93.032104}",
+        "title": "Eigenstate thermalization in the two-dimensional transverse field {I",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevE.96.012157",
+        "key": "[47]",
+        "raw": "Mondaini2017: title = {Eigenstate thermalization in the two-dimensional transverse field {I}sing model. {II}. {O}ff-diagonal matrix elements of observables}, author = {Mondaini, Rubem and Rigol, Marcos}, journal = {Phys. Rev. E}, volume = {96}, issue = {1}, pages = {012157}, numpages = {10}, year = {2017}, month = {Jul}, publisher = {American Physical Society}, doi = {10.1103/PhysRevE.96.012157}, url = {https://link.aps.org/doi/10.1103/PhysRevE.96.012157}",
+        "title": "Eigenstate thermalization in the two-dimensional transverse field {I",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevLett.120.200604",
+        "key": "[48]",
+        "raw": "Yoshizawa2018: title = {Numerical Large Deviation Analysis of the Eigenstate Thermalization Hypothesis}, author = {Yoshizawa, Toru and Iyoda, Eiki and Sagawa, Takahiro}, journal = {Phys. Rev. Lett.}, volume = {120}, issue = {20}, pages = {200604}, numpages = {6}, year = {2018}, month = {May}, publisher = {American Physical Society}, doi = {10.1103/PhysRevLett.120.200604}, url = {https://link.aps.org/doi/10.1103/PhysRevLett.120.200604}",
+        "title": "Numerical Large Deviation Analysis of the Eigenstate Thermalization Hypothesis",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevLett.125.070605",
+        "key": "[49]",
+        "raw": "Brenes2020: title = {Eigenstate Thermalization in a Locally Perturbed Integrable System}, author = {Brenes, Marlon and LeBlond, Tyler and Goold, John and Rigol, Marcos}, journal = {Phys. Rev. Lett.}, volume = {125}, issue = {7}, pages = {070605}, numpages = {6}, year = {2020}, month = {Aug}, publisher = {American Physical Society}, doi = {10.1103/PhysRevLett.125.070605}, url = {https://link.aps.org/doi/10.1103/PhysRevLett.125.070605}",
+        "title": "Eigenstate Thermalization in a Locally Perturbed Integrable System",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevB.102.075127",
+        "key": "[50]",
+        "raw": "Brenes2020b: title = {Low-frequency behavior of off-diagonal matrix elements in the integrable {XXZ} chain and in a locally perturbed quantum-chaotic {XXZ} chain}, author = {Brenes, Marlon and Goold, John and Rigol, Marcos}, journal = {Phys. Rev. B}, volume = {102}, issue = {7}, pages = {075127}, numpages = {7}, year = {2020}, month = {Aug}, publisher = {American Physical Society}, doi = {10.1103/PhysRevB.102.075127}, url = {https://link.aps.org/doi/10.1103/PhysRevB.102.075127}",
+        "title": "Low-frequency behavior of off-diagonal matrix elements in the integrable {XXZ",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevResearch.2.043034",
+        "key": "[51]",
+        "raw": "Santos2020: title = {Speck of chaos}, author = {Santos, Lea F. and P\\'erez-Bernal, Francisco and Torres-Herrera, E. Jonathan}, journal = {Phys. Rev. Res.}, volume = {2}, issue = {4}, pages = {043034}, numpages = {8}, year = {2020}, month = {Oct}, publisher = {American Physical Society}, doi = {10.1103/PhysRevResearch.2.043034}, url = {https://link.aps.org/doi/10.1103/PhysRevResearch.2.043034}",
+        "title": "Speck of chaos",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevLett.126.120602",
+        "key": "[52]",
+        "raw": "Sugimoto2021: title = {Test of the Eigenstate Thermalization Hypothesis Based on Local Random Matrix Theory}, author = {Sugimoto, Shoki and Hamazaki, Ryusuke and Ueda, Masahito}, journal = {Phys. Rev. Lett.}, volume = {126}, issue = {12}, pages = {120602}, numpages = {7}, year = {2021}, month = {Mar}, publisher = {American Physical Society}, doi = {10.1103/PhysRevLett.126.120602}, url = {https://link.aps.org/doi/10.1103/PhysRevLett.126.120602}",
+        "title": "Test of the Eigenstate Thermalization Hypothesis Based on Local Random Matrix Theory",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevLett.112.130403",
+        "key": "[53]",
+        "raw": "Steinigeweg2014: title = {Pushing the Limits of the Eigenstate Thermalization Hypothesis towards Mesoscopic Quantum Systems}, author = {Steinigeweg, R. and Khodja, A. and Niemeyer, H. and Gogolin, C. and Gemmer, J.}, journal = {Phys. Rev. Lett.}, volume = {112}, issue = {13}, pages = {130403}, numpages = {5}, year = {2014}, month = {Apr}, publisher = {American Physical Society}, doi = {10.1103/PhysRevLett.112.130403}, url = {https://link.aps.org/doi/10.1103/PhysRevLett.112.130403}",
+        "title": "Pushing the Limits of the Eigenstate Thermalization Hypothesis towards Mesoscopic Quantum Systems",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevE.102.042127",
+        "key": "[54]",
+        "raw": "Richter2020: title = {Eigenstate thermalization hypothesis beyond standard indicators: {E}mergence of random-matrix behavior at small frequencies}, author = {Richter, Jonas and Dymarsky, Anatoly and Steinigeweg, Robin and Gemmer, Jochen}, journal = {Phys. Rev. E}, volume = {102}, issue = {4}, pages = {042127}, numpages = {12}, year = {2020}, month = {Oct}, publisher = {American Physical Society}, doi = {10.1103/PhysRevE.102.042127}, url = {https://link.aps.org/doi/10.1103/PhysRevE.102.042127}",
+        "title": "Eigenstate thermalization hypothesis beyond standard indicators: {E",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.21468/SciPostPhys.6.1.014",
+        "key": "[55]",
+        "raw": "DeTomasi2019: author = {Giuseppe De Tomasi and Mohsen Amini and Soumya Bera and Ivan M. Khaymovich and Vladimir E. Kravtsov}, doi = {10.21468/SciPostPhys.6.1.014}, journal = {SciPost Phys.}, pages = {014}, publisher = {SciPost}, title = {Survival probability in Generalized {R}osenzweig-{P}orter random matrix ensemble}, url = {https://scipost.org/10.21468/SciPostPhys.6.1.014}, volume = {6}, year = {2019}, bdsk-url-1 = {https://scipost.org/10.21468/SciPostPhys.6.1.014}, bdsk-url-2 = {https://doi.org/10.21468/SciPostPhys.6.1.014}} @Article{Venturelli2023, title={Replica approach to the generalized {R}osenzweig-{P}orter model}, author={Davide Venturelli and Leticia F. Cugliandolo and Grégory Schehr and Marco Tarzia}, journal={SciPost Phys.}, volume={14}, pages={110}, year={2023}, publisher={SciPost}, doi={10.21468/SciPostPhys.14.5.110}, url={https://scipost.org/10.21468/SciPostPhys.14.5.110},",
+        "title": "Survival probability in Generalized {R",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevE.98.032139",
+        "key": "[56]",
+        "raw": "Bogomolny2018: author = {Bogomolny, E. and Sieber, M.}, doi = {10.1103/PhysRevE.98.032139}, issue = {3}, journal = {Phys. Rev. E}, month = {Sep}, numpages = {5}, pages = {032139}, publisher = {American Physical Society}, title = {Eigenfunction distribution for the {R}osenzweig-{P}orter model}, url = {https://link.aps.org/doi/10.1103/PhysRevE.98.032139}, volume = {98}, year = {2018}, bdsk-url-1 = {https://link.aps.org/doi/10.1103/PhysRevE.98.032139}, bdsk-url-2 = {https://doi.org/10.1103/PhysRevE.98.032139}} @article{Anderson1958, author = {Anderson, P. W.}, doi = {10.1103/PhysRev.109.1492}, issue = {5}, journal = {Phys. Rev.}, month = {Mar}, numpages = {0}, pages = {1492--1505}, publisher = {American Physical Society}, title = {Absence of Diffusion in Certain Random Lattices}, url = {https://link.aps.org/doi/10.1103/PhysRev.109.1492}, volume = {109}, year = {1958}, bdsk-url-1 = {https://link.aps.org/doi/10.1103/PhysRev.109.1492}, bdsk-url-2 = {https://doi.org/10.1103/PhysRev.109.1492}} @article{Mirlin1996, title = {Transition from localized to extended eigenstates in the ensemble of power-law random banded matrices}, author = {Mirlin, Alexander D. and Fyodorov, Yan V. and Dittes, Frank-Michael and Quezada, Javier and Seligman, Thomas H.}, journal = {Phys. Rev. E}, volume = {54}, issue = {4}, pages = {3221--3230}, numpages = {0}, year = {1996}, month = {Oct}, publisher = {American Physical Society}, doi = {10.1103/PhysRevE.54.3221}, url = {https://link.aps.org/doi/10.1103/PhysRevE.54.3221}",
+        "title": "Eigenfunction distribution for the {R",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1088/1742-5468/2009/12/L12001",
+        "key": "[57]",
+        "raw": "Fyodorov2009: author = {Fyodorov, Yan V and Ossipov, Alexander and Rodriguez, Alberto}, doi = {10.1088/1742-5468/2009/12/L12001}, issn = {1742-5468}, journal = {Journal of Statistical Mechanics: Theory and Experiment}, month = dec, number = {12}, pages = {L12001}, title = {The {A}nderson Localization Transition and Eigenfunction Multifractality in an Ensemble of Ultrametric Random Matrices}, urldate = {2025-04-24}, volume = {2009}, year = {2009}, bdsk-url-1 = {https://doi.org/10.1088/1742-5468/2009/12/L12001}} @article{Pasek2017, author = {Pasek, Michael and Orso, Giuliano and Delande, Dominique}, doi = {10.1103/PhysRevLett.118.170403}, issue = {17}, journal = {Phys. Rev. Lett.}, month = {Apr}, numpages = {6}, pages = {170403}, publisher = {American Physical Society}, title = {{A}nderson Localization of Ultracold Atoms: {W}here is the Mobility Edge?}, url = {https://link.aps.org/doi/10.1103/PhysRevLett.118.170403}, volume = {118}, year = {2017}, bdsk-url-1 = {https://link.aps.org/doi/10.1103/PhysRevLett.118.170403}, bdsk-url-2 = {https://doi.org/10.1103/PhysRevLett.118.170403}} @article{Bogomolny2018b, title = {Power-law random banded matrices and ultrametric matrices: {E}igenvector distribution in the intermediate regime}, author = {Bogomolny, E. and Sieber, M.}, journal = {Phys. Rev. E}, volume = {98}, issue = {4}, pages = {042116}, numpages = {8}, year = {2018}, month = {Oct}, publisher = {American Physical Society}, doi = {10.1103/PhysRevE.98.042116}, url = {https://link.aps.org/doi/10.1103/PhysRevE.98.042116}",
+        "title": "The {A",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2021.16846",
+        "authors": [],
+        "doi": "10.1103/PhysRevLett.124.186601",
+        "key": "[58]",
+        "raw": "Sierant2020: author = {Sierant, Piotr and Delande, Dominique and Zakrzewski, Jakub}, date-added = {2022-12-23 17:11:12 +0100}, date-modified = {2022-12-23 17:11:12 +0100}, doi = {10.1103/PhysRevLett.124.186601}, issue = {18}, journal = {Phys. Rev. Lett.}, month = {May}, numpages = {6}, pages = {186601}, publisher = {American Physical Society}, title = {{T}houless Time Analysis of {A}nderson and Many-Body Localization Transitions}, url = {https://link.aps.org/doi/10.1103/PhysRevLett.124.186601}, volume = {124}, year = {2020}, bdsk-url-1 = {https://link.aps.org/doi/10.1103/PhysRevLett.124.186601}, bdsk-url-2 = {http://dx.doi.org/10.1103/PhysRevLett.124.186601}} @article{Suntajs2021, author = {J. \\v{S}untajs and T. Prosen and L. Vidmar}, date-added = {2021-07-05 21:29:50 +0200}, date-modified = {2022-03-31 15:42:41 +0200}, doi = {https://doi.org/10.1016/j.aop.2021.168469}, issn = {0003-4916}, journal = {Ann. Phys.}, keywords = {{A}nderson model, Localization transition, Level sensitivity statistics, Level curvatures, Level statistics, Spectral form factor}, pages = {168469}, title = {Spectral properties of three-dimensional {A}nderson model}, volume = {435}, year = {2021}, bdsk-url-1 = {https://www.sciencedirect.com/science/article/pii/S0003491621000750}, bdsk-url-2 = {https://doi.org/10.1016/j.aop.2021.168469}} @article{Facoetti2016, author = {Facoetti, Davide and Vivo, Pierpaolo and Biroli, Giulio}, copyright = {http://iopscience.iop.org/info/page/text-and-data-mining}, doi = {10.1209/0295-5075/115/47003}, issn = {0295-5075, 1286-4854}, journal = {EPL (Europhysics Letters)}, month = aug, number = {4}, pages = {47003}, shorttitle = {From Non-Ergodic Eigenvectors to Local Resolvent Statistics and Back}, title = {From Non-Ergodic Eigenvectors to Local Resolvent Statistics and Back: {A} Random Matrix Perspective}, urldate = {2025-04-24}, volume = {115}, year = {2016}, bdsk-url-1 = {https://doi.org/10.1209/0295-5075/115/47003}} @article{Soosten2019, author = {Von Soosten, Per and Warzel, Simone}, doi = {10.1007/s11005-018-1131-7}, issn = {0377-9017, 1573-0530}, journal = {Letters in Mathematical Physics}, langid = {english}, month = apr, number = {4}, pages = {905--922}, title = {Non-Ergodic Delocalization in the {R}osenzweig--{P}orter Model}, urldate = {2025-04-24}, volume = {109}, year = {2019}, bdsk-url-1 = {https://doi.org/10.1007/s11005-018-1131-7}",
+        "title": "{T",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevLett.130.010201",
+        "key": "[59]",
+        "raw": "Kohlert2023: title = {Exploring the Regime of Fragmentation in Strongly Tilted {F}ermi-{H}ubbard Chains}, author = {Kohlert, Thomas and Scherg, Sebastian and Sala, Pablo and Pollmann, Frank and Hebbe Madhusudhana, Bharath and Bloch, Immanuel and Aidelsburger, Monika}, journal = {Phys. Rev. Lett.}, volume = {130}, issue = {1}, pages = {010201}, numpages = {7}, year = {2023}, month = {Jan}, publisher = {American Physical Society}, doi = {10.1103/PhysRevLett.130.010201}, url = {https://link.aps.org/doi/10.1103/PhysRevLett.130.010201}",
+        "title": "Exploring the Regime of Fragmentation in Strongly Tilted {F",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2501.16995",
+        "authors": [],
+        "doi": null,
+        "key": "[60]",
+        "raw": "Karch2025: title={Probing quantum many-body dynamics using subsystem {L}oschmidt echos}, author={Simon Karch and Souvik Bandyopadhyay and Zheng-Hang Sun and Alexander Impertro and SeungJung Huh and Irene Prieto Rodríguez and Julian F. Wienand and Wolfgang Ketterle and Markus Heyl and Anatoli Polkovnikov and Immanuel Bloch and Monika Aidelsburger}, year={2025}, eprint={2501.16995}, archivePrefix={arXiv},",
+        "title": "Probing quantum many-body dynamics using subsystem {L",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1038/s41586-024-08188-0",
+        "key": "[61]",
+        "raw": "Adler2024: title = {Observation of {H}ilbert space fragmentation and fractonic excitations in 2{D}}, volume = {636}, ISSN = {1476-4687}, url = {http://dx.doi.org/10.1038/s41586-024-08188-0}, DOI = {10.1038/s41586-024-08188-0}, number = {8041}, journal = {Nature}, publisher = {Springer Science and Business Media LLC}, author = {Adler, Daniel and Wei, David and Will, Melissa and Srakaew, Kritsana and Agrawal, Suchita and Weckesser, Pascal and Moessner, Roderich and Pollmann, Frank and Bloch, Immanuel and Zeiher, Johannes}, year = {2024}, month = nov, pages = {80–85}",
+        "title": "Observation of {H",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1126/sciadv.adv3255",
+        "key": "[62]",
+        "raw": "Honda2025: title = {Observation of slow relaxation due to {H}ilbert space fragmentation in strongly interacting {B}ose-{H}ubbard chains}, author = {Honda, Kantaro and Takasu, Yosuke and Goto, Shimpei and Kazuta, Hironori and Kunimi, Masaya and Danshita, Ippei and Takahashi, Yoshiro}, journal = {Science Advances}, volume = {11}, number = {23}, pages = {eadv3255}, year = {2025}, doi = {10.1126/sciadv.adv3255}, URL = {https://www.science.org/doi/abs/10.1126/sciadv.adv3255},",
+        "title": "Observation of slow relaxation due to {H",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevLett.123.100602",
+        "key": "[63]",
+        "raw": "Katira2019: title = {Theory for Glassy Behavior of Supercooled Liquid Mixtures}, author = {Katira, Shachi and Garrahan, Juan P. and Mandadapu, Kranthi K.}, journal = {Phys. Rev. Lett.}, volume = {123}, issue = {10}, pages = {100602}, numpages = {6}, year = {2019}, month = {Sep}, publisher = {American Physical Society}, doi = {10.1103/PhysRevLett.123.100602}, url = {https://link.aps.org/doi/10.1103/PhysRevLett.123.100602}",
+        "title": "Theory for Glassy Behavior of Supercooled Liquid Mixtures",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevB.110.134322",
+        "key": "[64]",
+        "raw": "Causer2024: title = {Nonthermal eigenstates and slow relaxation in quantum {F}redkin spin chains}, author = {Causer, Luke and Ba\\ nuls, Mari Carmen and Garrahan, Juan P.}, journal = {Phys. Rev. B}, volume = {110}, issue = {13}, pages = {134322}, numpages = {15}, year = {2024}, month = {Oct}, publisher = {American Physical Society}, doi = {10.1103/PhysRevB.110.134322}, url = {https://link.aps.org/doi/10.1103/PhysRevB.110.134322}",
+        "title": "Nonthermal eigenstates and slow relaxation in quantum {F",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevB.108.L100304",
+        "key": "[65]",
+        "raw": "Zadnik2023: title = {Slow heterogeneous relaxation due to constraints in dual {XXZ} models}, author = {Zadnik, Lenart and Garrahan, Juan P.}, journal = {Phys. Rev. B}, volume = {108}, issue = {10}, pages = {L100304}, numpages = {7}, year = {2023}, month = {Sep}, publisher = {American Physical Society}, doi = {10.1103/PhysRevB.108.L100304}, url = {https://link.aps.org/doi/10.1103/PhysRevB.108.L100304}",
+        "title": "Slow heterogeneous relaxation due to constraints in dual {XXZ",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevE.108.034207",
+        "key": "[66]",
+        "raw": "Geissler2023: title = {Slow dynamics and nonergodicity of the bosonic quantum {E}ast model in the semiclassical limit}, author = {Gei\\ss{}ler, Andreas and Garrahan, Juan P.}, journal = {Phys. Rev. E}, volume = {108}, issue = {3}, pages = {034207}, numpages = {7}, year = {2023}, month = {Sep}, publisher = {American Physical Society}, doi = {10.1103/PhysRevE.108.034207}, url = {https://link.aps.org/doi/10.1103/PhysRevE.108.034207}",
+        "title": "Slow dynamics and nonergodicity of the bosonic quantum {E",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevE.106.014128",
+        "key": "[67]",
+        "raw": "Causer2022: title = {Slow dynamics and large deviations in classical stochastic {F}redkin chains}, author = {Causer, Luke and Garrahan, Juan P. and Lamacraft, Austen}, journal = {Phys. Rev. E}, volume = {106}, issue = {1}, pages = {014128}, numpages = {13}, year = {2022}, month = {Jul}, publisher = {American Physical Society}, doi = {10.1103/PhysRevE.106.014128}, url = {https://link.aps.org/doi/10.1103/PhysRevE.106.014128}",
+        "title": "Slow dynamics and large deviations in classical stochastic {F",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevE.105.044121",
+        "key": "[68]",
+        "raw": "Rose2022: title = {Hierarchical classical metastability in an open quantum {E}ast model}, author = {Rose, Dominic C. and Macieszczak, Katarzyna and Lesanovsky, Igor and Garrahan, Juan P.}, journal = {Phys. Rev. E}, volume = {105}, issue = {4}, pages = {044121}, numpages = {28}, year = {2022}, month = {Apr}, publisher = {American Physical Society}, doi = {10.1103/PhysRevE.105.044121}, url = {https://link.aps.org/doi/10.1103/PhysRevE.105.044121}",
+        "title": "Hierarchical classical metastability in an open quantum {E",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1038/nature24622",
+        "key": "[69]",
+        "raw": "Bernien2017: author = {Bernien, Hannes and Schwartz, Sylvain and Keesling, Alexander and Levine, Harry and Omran, Ahmed and Pichler, Hannes and Choi, Soonwon and Zibrov, Alexander S. and Endres, Manuel and Greiner, Markus and Vuleti{\\'c}, Vladan and Lukin, Mikhail D.}, date = {2017/11/01}, date-added = {2026-03-12 11:52:15 +0100}, date-modified = {2026-03-12 11:52:15 +0100}, doi = {10.1038/nature24622}, id = {Bernien2017}, isbn = {1476-4687}, journal = {Nature}, number = {7682}, pages = {579--584}, title = {Probing many-body dynamics on a 51-atom quantum simulator}, url = {https://doi.org/10.1038/nature24622}, volume = {551}, year = {2017}, bdsk-url-1 = {https://doi.org/10.1038/nature24622}} @article{Page1993, author = {Page, Don N.}, doi = {10.1103/PhysRevLett.71.1291}, issue = {9}, journal = {Phys. Rev. Lett.}, month = {Aug}, numpages = {0}, pages = {1291--1294}, publisher = {American Physical Society}, title = {Average Entropy of a Subsystem}, url = {https://link.aps.org/doi/10.1103/PhysRevLett.71.1291}, volume = {71}, year = {1993}, bdsk-url-1 = {https://link.aps.org/doi/10.1103/PhysRevLett.71.1291}, bdsk-url-2 = {https://doi.org/10.1103/PhysRevLett.71.1291}} @article{Bianchi2022, author = {Bianchi, Eugenio and Hackl, Lucas and Kieburg, Mario and Rigol, Marcos and Vidmar, Lev}, date-added = {2022-08-23 23:20:17 +0200}, date-modified = {2022-08-23 23:20:31 +0200}, doi = {10.1103/PRXQuantum.3.030201}, issue = {3}, journal = {PRX Quantum}, month = {Jul}, numpages = {77}, pages = {030201}, publisher = {American Physical Society}, title = {Volume-Law Entanglement Entropy of Typical Pure Quantum States}, url = {https://link.aps.org/doi/10.1103/PRXQuantum.3.030201}, volume = {3}, year = {2022}, bdsk-url-1 = {https://link.aps.org/doi/10.1103/PRXQuantum.3.030201}, bdsk-url-2 = {https://doi.org/10.1103/PRXQuantum.3.030201}} @article{Beugeling2015b, author = {Beugeling, W and Andreanov, A and Haque, Masudul}, doi = {10.1088/1742-5468/2015/02/P02002}, journal = {Journal of Statistical Mechanics: Theory and Experiment}, month = {feb}, number = {2}, pages = {P02002}, publisher = {IOP Publishing and SISSA}, title = {Global characteristics of all eigenstates of local many-body {H}amiltonians: {P}articipation ratio and entanglement entropy}, url = {https://dx.doi.org/10.1088/1742-5468/2015/02/P02002}, volume = {2015}, year = {2015}, bdsk-url-1 = {https://dx.doi.org/10.1088/1742-5468/2015/02/P02002}} @article{Garrison2018, author = {Garrison, James R. and Grover, Tarun}, doi = {10.1103/PhysRevX.8.021026}, issue = {2}, journal = {Phys. Rev. X}, month = {Apr}, numpages = {24}, owner = {lev}, pages = {021026}, publisher = {American Physical Society}, timestamp = {2019.01.03}, title = {Does a Single Eigenstate Encode the Full {H}amiltonian?}, url = {https://link.aps.org/doi/10.1103/PhysRevX.8.021026}, volume = {8}, year = {2018}, bdsk-url-1 = {https://link.aps.org/doi/10.1103/PhysRevX.8.021026}, bdsk-url-2 = {https://doi.org/10.1103/PhysRevX.8.021026}} @article{Kliczkowski2023, author = {Kliczkowski, M. and Swietek, R. and Vidmar, L. and Rigol, M.}, doi = {10.1103/physreve.107.064119}, issn = {2470-0053}, journal = {Phys. Rev. E}, month = jun, number = {6}, pages = {064119}, publisher = {American Physical Society (APS)}, title = {Average entanglement entropy of midspectrum eigenstates of quantum-chaotic interacting {H}amiltonians}, volume = {107}, year = {2023}, bdsk-url-1 = {https://doi.org/10.1103/physreve.107.064119}} @article{Foini2019, author = {Foini, Laura and Kurchan, Jorge}, doi = {10.1103/PhysRevE.99.042139}, issue = {4}, journal = {Phys. Rev. E}, month = {Apr}, numpages = {12}, owner = {lev}, pages = {042139}, publisher = {American Physical Society}, timestamp = {2020.09.27}, title = {Eigenstate thermalization hypothesis and out of time order correlators}, url = {https://link.aps.org/doi/10.1103/PhysRevE.99.042139}, volume = {99}, year = {2019}, bdsk-url-1 = {https://link.aps.org/doi/10.1103/PhysRevE.99.042139}, bdsk-url-2 = {https://doi.org/10.1103/PhysRevE.99.042139}} @article{Pappalardi2022, author = {Pappalardi, Silvia and Foini, Laura and Kurchan, Jorge}, date-added = {2024-01-20 15:28:14 +0530}, date-modified = {2024-01-20 15:28:28 +0530}, doi = {10.1103/PhysRevLett.129.170603}, issue = {17}, journal = {Phys. Rev. Lett.}, month = {Oct}, numpages = {6}, pages = {170603}, publisher = {American Physical Society}, title = {Eigenstate Thermalization Hypothesis and Free Probability}, url = {https://link.aps.org/doi/10.1103/PhysRevLett.129.170603}, volume = {129}, year = {2022}, bdsk-url-1 = {https://link.aps.org/doi/10.1103/PhysRevLett.129.170603}, bdsk-url-2 = {https://doi.org/10.1103/PhysRevLett.129.170603}} @article{Pappalardi2025, author = {Pappalardi, Silvia and Fritzsch, Felix and Prosen, Tomas}, doi = {10.1103/PhysRevLett.134.140404}, issue = {14}, journal = {Phys. Rev. Lett.}, month = {Apr}, numpages = {7}, pages = {140404}, publisher = {American Physical Society}, title = {Full Eigenstate Thermalization via Free Cumulants in Quantum Lattice Systems}, url = {https://link.aps.org/doi/10.1103/PhysRevLett.134.140404}, volume = {134}, year = {2025}, bdsk-url-1 = {https://link.aps.org/doi/10.1103/PhysRevLett.134.140404}, bdsk-url-2 = {https://doi.org/10.1103/PhysRevLett.134.140404}",
+        "title": "Probing many-body dynamics on a 51-atom quantum simulator",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2511.23217",
+        "authors": [],
+        "doi": null,
+        "key": "[70]",
+        "raw": "Vallini2025: title={Refinements of the Eigenstate Thermalization Hypothesis under Local Rotational Invariance via Free Probability}, author={Elisa Vallini and Laura Foini and Silvia Pappalardi}, year={2025}, eprint={2511.23217}, archivePrefix={arXiv},",
+        "title": "Refinements of the Eigenstate Thermalization Hypothesis under Local Rotational Invariance via Free Probability",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevLett.110.084101",
+        "key": "[71]",
+        "raw": "Atas2013: author = {Atas, Y. Y. and Bogomolny, E. and Giraud, O. and Roux, G.}, doi = {10.1103/PhysRevLett.110.084101}, issue = {8}, journal = {Phys. Rev. Lett.}, month = {Feb}, numpages = {5}, pages = {084101}, publisher = {American Physical Society}, title = {Distribution of the Ratio of Consecutive Level Spacings in Random Matrix Ensembles}, url = {https://link.aps.org/doi/10.1103/PhysRevLett.110.084101}, volume = {110}, year = {2013}, bdsk-url-1 = {https://link.aps.org/doi/10.1103/PhysRevLett.110.084101}, bdsk-url-2 = {https://doi.org/10.1103/PhysRevLett.110.084101}} @article{Kunz1998, title = {Transition from {P}oisson to {G}aussian unitary statistics: {T}he two-point correlation function}, author = {Kunz, Herv\\'e and Shapiro, Boris}, journal = {Phys. Rev. E}, volume = {58}, issue = {1}, pages = {400--406}, numpages = {0}, year = {1998}, month = {Jul}, publisher = {American Physical Society}, doi = {10.1103/PhysRevE.58.400}, url = {https://link.aps.org/doi/10.1103/PhysRevE.58.400}",
+        "title": "Distribution of the Ratio of Consecutive Level Spacings in Random Matrix Ensembles",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.21468/SciPostPhys.18.3.090",
+        "key": "[72]",
+        "raw": "Kutlin2025: title={Investigating finite-size effects in random matrices by counting resonances}, author={Anton Kutlin and Carlo Vanoni}, journal={SciPost Phys.}, volume={18}, pages={090}, year={2025}, publisher={SciPost}, doi={10.21468/SciPostPhys.18.3.090}, url={https://scipost.org/10.21468/SciPostPhys.18.3.090},",
+        "title": "Investigating finite-size effects in random matrices by counting resonances",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.21468/SciPostPhys.15.3.084",
+        "key": "[73]",
+        "raw": "Barney2023: title={Spectral statistics of a minimal quantum glass model}, author={Richard Barney and Michael Winer and Christopher L. Baldwin and Brian Swingle and Victor Galitski}, journal={SciPost Phys.}, volume={15}, pages={084}, year={2023}, publisher={SciPost}, doi={10.21468/SciPostPhys.15.3.084}, url={https://scipost.org/10.21468/SciPostPhys.15.3.084},",
+        "title": "Spectral statistics of a minimal quantum glass model",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1088/1367-2630/ad5d86",
+        "key": "[74]",
+        "raw": "Cadez2024: doi = {10.1088/1367-2630/ad5d86}, url = {https://dx.doi.org/10.1088/1367-2630/ad5d86}, year = {2024}, month = {aug}, publisher = {IOP Publishing}, volume = {26}, number = {8}, pages = {083018}, author = {Čadež, Tilen and Kumar Nandy, Dillip and Rosa, Dario and Andreanov, Alexei and Dietz, Barbara}, title = {The {R}osenzweig–{P}orter model revisited for the three {W}igner–{D}yson symmetry classes}, journal = {New Journal of Physics},",
+        "title": "The {R",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1016/j.aop.2010.09.012",
+        "key": "[75]",
+        "raw": "Schollwoeck2011: title = {The density-matrix renormalization group in the age of matrix product states}, journal = {Annals of Physics}, volume = {326}, number = {1}, pages = {96-192}, year = {2011}, issn = {0003-4916}, doi = {https://doi.org/10.1016/j.aop.2010.09.012}, url = {https://www.sciencedirect.com/science/article/pii/S0003491610001752}, author = {Schollwöck, Ulrich },",
+        "title": "The density-matrix renormalization group in the age of matrix product states",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1007/s13278-018-0493-2",
+        "key": "[76]",
+        "raw": "Das2018: title = {Study on centrality measures in social networks: a survey}, volume = {8}, ISSN = {1869-5469}, url = {http://dx.doi.org/10.1007/s13278-018-0493-2}, DOI = {10.1007/s13278-018-0493-2}, number = {1}, journal = {Social Network Analysis and Mining}, publisher = {Springer Science and Business Media LLC}, author = {Das, Kousik and Samanta, Sovan and Pal, Madhumangal}, year = {2018}, month = feb , pages = {13}",
+        "title": "Study on centrality measures in social networks: a survey",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.21468/SciPostPhys.11.2.045",
+        "key": "[77]",
+        "raw": "Khaymovich2021: title={{Dynamical phases in a ``multifractal'' Rosenzweig-Porter model}}, author={Ivan M. Khaymovich and Vladimir E. Kravtsov}, journal={SciPost Phys.}, volume={11}, pages={045}, year={2021}, publisher={SciPost}, doi={10.21468/SciPostPhys.11.2.045}, url={https://scipost.org/10.21468/SciPostPhys.11.2.045},",
+        "title": "{Dynamical phases in a ``multifractal'' Rosenzweig-Porter model",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevLett.124.200602",
+        "key": "[78]",
+        "raw": "DeTomasi2020: title = {Multifractality Meets Entanglement: Relation for Nonergodic Extended States}, author = {De Tomasi, Giuseppe and Khaymovich, Ivan M.}, journal = {Phys. Rev. Lett.}, volume = {124}, issue = {20}, pages = {200602}, numpages = {7}, year = {2020}, month = {May}, publisher = {American Physical Society}, doi = {10.1103/PhysRevLett.124.200602}, url = {https://link.aps.org/doi/10.1103/PhysRevLett.124.200602}",
+        "title": "Multifractality Meets Entanglement: Relation for Nonergodic Extended States",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevLett.113.046806",
+        "key": "[79]",
+        "raw": "DeLuca2014: title = {Anderson Localization on the Bethe Lattice: Nonergodicity of Extended States}, author = {De Luca, A. and Altshuler, B. L. and Kravtsov, V. E. and Scardicchio, A.}, journal = {Phys. Rev. Lett.}, volume = {113}, issue = {4}, pages = {046806}, numpages = {5}, year = {2014}, month = {Jul}, publisher = {American Physical Society}, doi = {10.1103/PhysRevLett.113.046806}, url = {https://link.aps.org/doi/10.1103/PhysRevLett.113.046806}",
+        "title": "Anderson Localization on the Bethe Lattice: Nonergodicity of Extended States",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1088/1751-8121/ab4b76",
+        "key": "[80]",
+        "raw": "Pino2019: doi = {10.1088/1751-8121/ab4b76}, url = {https://doi.org/10.1088/1751-8121/ab4b76}, year = {2019}, month = {oct}, publisher = {IOP Publishing}, volume = {52}, number = {47}, pages = {475101}, author = {Pino, M and Tabanera, J and Serna, P}, title = {From ergodic to non-ergodic chaos in Rosenzweig–Porter model}, journal = {Journal of Physics A: Mathematical and Theoretical},",
+        "title": "From ergodic to non-ergodic chaos in Rosenzweig–Porter model",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevB.109.024205",
+        "key": "[81]",
+        "raw": "Buijsman2024: title = {Long-range spectral statistics of the {R}osenzweig-{P}orter model}, author = {Buijsman, Wouter}, journal = {Phys. Rev. B}, volume = {109}, issue = {2}, pages = {024205}, numpages = {7}, year = {2024}, month = {Jan}, publisher = {American Physical Society}, doi = {10.1103/PhysRevB.109.024205}, url = {https://link.aps.org/doi/10.1103/PhysRevB.109.024205}",
+        "title": "Long-range spectral statistics of the {R",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevE.56.1471",
+        "key": "[82]",
+        "raw": "Altland1997: title = {Perturbation theory for the {R}osenzweig-{P}orter matrix model}, author = {Altland, Alexander and Janssen, Martin and Shapiro, Boris}, journal = {Phys. Rev. E}, volume = {56}, issue = {2}, pages = {1471--1475}, numpages = {0}, year = {1997}, month = {Aug}, publisher = {American Physical Society}, doi = {10.1103/PhysRevE.56.1471}, url = {https://link.aps.org/doi/10.1103/PhysRevE.56.1471}",
+        "title": "Perturbation theory for the {R",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1209/0295-5075/116/37002",
+        "key": "[83]",
+        "raw": "Truong2016: doi = {10.1209/0295-5075/116/37002}, url = {https://doi.org/10.1209/0295-5075/116/37002}, year = {2016}, month = {dec}, publisher = {EDP Sciences, IOP Publishing and Società Italiana di Fisica}, volume = {116}, number = {3}, pages = {37002}, author = {Truong, K. and Ossipov, A.}, title = {Eigenvectors under a generic perturbation: Non-perturbative results from the random matrix approach}, journal = {Europhysics Letters},",
+        "title": "Eigenvectors under a generic perturbation: Non-perturbative results from the random matrix approach",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2604.11872",
+        "authors": [],
+        "doi": null,
+        "key": "[84]",
+        "raw": "Patil2026: title = {Eigenstate thermalization}, author = {Patil, Rohit and Rigol, Marcos}, year = {2026}, eprint = {2604.11872}, archivePrefix = {arXiv},",
+        "title": "Eigenstate thermalization",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2603.22077",
+        "authors": [],
+        "doi": null,
+        "key": "[85]",
+        "raw": "BracciTestasecca2026: title = {Semiclassical picture of the {H}eisenberg spin glass in two dimensions: from weak localization to hydrodynamics}, author = {Bracci-Testasecca, Giacomo and Niedda, Jacopo and Coraggio, Aldo and Moessner, Roderich and Scardicchio, Antonello}, year = {2026}, archivePrefix = {arXiv}, eprint = {2603.22077}",
+        "title": "Semiclassical picture of the {H",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevLett.124.040603",
+        "key": "[86]",
+        "raw": "Mierzejewski2020: title = {Quantitative Impact of Integrals of Motion on the Eigenstate Thermalization Hypothesis}, author = {Mierzejewski, Marcin and Vidmar, Lev}, journal = {Phys. Rev. Lett.}, volume = {124}, issue = {4}, pages = {040603}, numpages = {8}, year = {2020}, month = {Jan}, publisher = {American Physical Society}, doi = {10.1103/PhysRevLett.124.040603}, url = {https://link.aps.org/doi/10.1103/PhysRevLett.124.040603}",
+        "title": "Quantitative Impact of Integrals of Motion on the Eigenstate Thermalization Hypothesis",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevResearch.6.023030",
+        "key": "[87]",
+        "raw": "Suntajs2024: title = {Similarity between a many-body quantum avalanche model and the ultrametric random matrix model}, author = {\\ifmmode \\check{S}\\else \\v{S}\\fi{}untajs, Jan and Hopjan, Miroslav and De Roeck, Wojciech and Vidmar, Lev}, journal = {Phys. Rev. Res.}, volume = {6}, issue = {2}, pages = {023030}, numpages = {23}, year = {2024}, month = {Apr}, publisher = {American Physical Society}, doi = {10.1103/PhysRevResearch.6.023030}, url = {https://link.aps.org/doi/10.1103/PhysRevResearch.6.023030}",
+        "title": "Similarity between a many-body quantum avalanche model and the ultrametric random matrix model",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevB.62.7920",
+        "key": "[88]",
+        "raw": "Mirlin2000: title = {Multifractality and critical fluctuations at the Anderson transition}, author = {Mirlin, A. D. and Evers, F.}, journal = {Phys. Rev. B}, volume = {62}, issue = {12}, pages = {7920--7933}, numpages = {0}, year = {2000}, month = {Sep}, publisher = {American Physical Society}, doi = {10.1103/PhysRevB.62.7920}, url = {https://link.aps.org/doi/10.1103/PhysRevB.62.7920}",
+        "title": "Multifractality and critical fluctuations at the Anderson transition",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevLett.84.3690",
+        "key": "[89]",
+        "raw": "Evers2000: title = {Fluctuations of the Inverse Participation Ratio at the Anderson Transition}, author = {Evers, F. and Mirlin, A. D.}, journal = {Phys. Rev. Lett.}, volume = {84}, issue = {16}, pages = {3690--3693}, numpages = {0}, year = {2000}, month = {Apr}, publisher = {American Physical Society}, doi = {10.1103/PhysRevLett.84.3690}, url = {https://link.aps.org/doi/10.1103/PhysRevLett.84.3690}",
+        "title": "Fluctuations of the Inverse Participation Ratio at the Anderson Transition",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevB.109.L220301",
+        "key": "[90]",
+        "raw": "Deger2024: title = {Weak ergodicity breaking transition in a randomly constrained model}, author = {Deger, Aydin and Lazarides, Achilleas}, journal = {Phys. Rev. B}, volume = {109}, issue = {22}, pages = {L220301}, numpages = {5}, year = {2024}, month = {Jun}, publisher = {American Physical Society}, doi = {10.1103/PhysRevB.109.L220301}, url = {https://link.aps.org/doi/10.1103/PhysRevB.109.L220301}",
+        "title": "Weak ergodicity breaking transition in a randomly constrained model",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevResearch.2.023159",
+        "key": "[91]",
+        "raw": "Roy2020: title = {Strong ergodicity breaking due to local constraints in a quantum system}, author = {Roy, Sthitadhi and Lazarides, Achilleas}, journal = {Phys. Rev. Res.}, volume = {2}, issue = {2}, pages = {023159}, numpages = {14}, year = {2020}, month = {May}, publisher = {American Physical Society}, doi = {10.1103/PhysRevResearch.2.023159}, url = {https://link.aps.org/doi/10.1103/PhysRevResearch.2.023159}",
+        "title": "Strong ergodicity breaking due to local constraints in a quantum system",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevB.109.L180201",
+        "key": "[92]",
+        "raw": "Pawlik2024: title = {Many-body mobility edge in quantum sun models}, author = {Pawlik, Konrad and Sierant, Piotr and Vidmar, Lev and Zakrzewski, Jakub}, journal = {Phys. Rev. B}, volume = {109}, issue = {18}, pages = {L180201}, numpages = {8}, year = {2024}, month = {May}, publisher = {American Physical Society}, doi = {10.1103/PhysRevB.109.L180201}, url = {https://link.aps.org/doi/10.1103/PhysRevB.109.L180201}",
+        "title": "Many-body mobility edge in quantum sun models",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2507.18286",
+        "authors": [],
+        "doi": null,
+        "key": "[93]",
+        "raw": "Pawlik2026: title={Unconventional Thermalization of a Localized Chain Interacting with an Ergodic Bath}, author={Konrad Pawlik and Nicolas Laflorencie and Jakub Zakrzewski}, year={2026}, eprint={2507.18286}, archivePrefix={arXiv}, primaryClass={cond-mat.dis-nn}, url={https://arxiv.org/abs/2507.18286},",
+        "title": "Unconventional Thermalization of a Localized Chain Interacting with an Ergodic Bath",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/4tv9-q7g7",
+        "key": "[94]",
+        "raw": "Mohapatra2026: title = {Additional quantum many-body scars of the spin-1 $XY$ model with Fock-space cages and commutant algebras}, author = {Mohapatra, Sashikanta and Moudgalya, Sanjay and Balram, Ajit C.}, journal = {Phys. Rev. B}, volume = {113}, issue = {5}, pages = {054310}, numpages = {29}, year = {2026}, month = {Feb}, publisher = {American Physical Society}, doi = {10.1103/4tv9-q7g7}, url = {https://link.aps.org/doi/10.1103/4tv9-q7g7}",
+        "title": "Additional quantum many-body scars of the spin-1 $XY$ model with Fock-space cages and commutant algebras",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [],
+        "doi": "10.1103/PhysRevB.105.245137",
+        "key": "[95]",
+        "raw": "Desaules2022: title = {Hypergrid subgraphs and the origin of scarred quantum walks in many-body {H}ilbert space}, author = {Desaules, Jean-Yves and Bull, Kieran and Daniel, Aiden and Papi\\ifmmode \\acute{c}\\else \\'{c}\\fi{}, Zlatko}, journal = {Phys. Rev. B}, volume = {105}, issue = {24}, pages = {245137}, numpages = {18}, year = {2022}, month = {Jun}, publisher = {American Physical Society}, doi = {10.1103/PhysRevB.105.245137}, url = {https://link.aps.org/doi/10.1103/PhysRevB.105.245137}",
+        "title": "Hypergrid subgraphs and the origin of scarred quantum walks in many-body {H",
+        "url": null,
+        "venue": null,
+        "year": null
+      },
+      "exists": false,
+      "explanation": "Bibliography entry preserved for human moderation; no matching extracted citation context was found and no external citation lookup was completed.",
+      "notes": "No matching in-text citation context was found in the extracted body.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    }
+  ],
+  "missing_references": [],
+  "summary": "Deterministic citation review generated from extracted bibliography and in-text citation contexts. Entries are preserved for moderation; external existence lookups were not performed in this stage."
+}
+\end{verbatim}
+
+\subsection*{meta_reviewer (\texttt{claude-sonnet-4-6})}
+\begin{verbatim}
+{
+  "confidence": 0.55,
+  "questions": [
+    "Which specific features of the GEC distribution—mean, variance, higher moments, fractal dimension of the distribution, large-deviation tails—change at the WEB transition, and how sharply do they change relative to finite-size effects?",
+    "How does GEC compare quantitatively to established diagnostics (gap-ratio r, fractal dimension D_q, spectral form factor, half-chain entanglement entropy) for identical models and system sizes? Is there a regime where GEC outperforms or underperforms these benchmarks?",
+    "What is the precise computational scaling of the analytical method with system size L—polynomial, exponential with a small base, or otherwise—and what is the crossover system size below which exact diagonalization is cheaper?",
+    "For the Triangular Lattice Gas, what complementary dynamical observables (autocorrelation functions, entanglement growth, return probability) corroborate the conjectured WEB transition, and does finite-size flow support a genuine phase transition rather than a crossover?",
+    "How does GEC on the Fock-space graph compare to classical Laplacian centrality computed on the same graph, and what physical property of the quantum system does the difference encode?"
+  ],
+  "recommendation": "major_revision",
+  "strengths": [
+    "High novelty: the analytical extension of GEC to hundreds or infinitely many sites is a genuine methodological advance that addresses the well-documented finite-size bottleneck in WEB/ETH diagnostics (novelty score 0.85, confidence 0.9, verdict: significant).",
+    "Cross-model generality: applying a single diagnostic to three qualitatively distinct model classes (Rosenzweig-Porter, Quantum Sun, Triangular Lattice Gas) provides compelling evidence of framework breadth.",
+    "Distribution-level diagnostic: using the full GEC distribution rather than a single scalar captures richer information about the transition, consistent with multifractal-spectrum and large-deviation approaches in the literature.",
+    "Timely and well-framed: the paper targets an active, contested area (WEB, Hilbert-space fragmentation, glassy dynamics) with a well-chosen bibliography spanning foundational ETH works through recent Fock-space-cage and fading-ergodicity literature.",
+    "Builds on solid prior foundations: the Menzler2025 precursor established the Fock-space graph approach on quantum East models; the analytical extension to random-matrix and constrained models is a natural and significant step."
+  ],
+  "summary": "This paper introduces graph-energy centrality (GEC), a Fock-space graph-theoretic diagnostic for weak ergodicity-breaking (WEB) transitions in isolated quantum systems. The central claim is that characteristic changes in the GEC distribution fingerprint WEB transitions and can be computed analytically for systems of hundreds to infinitely many sites—well beyond the reach of exact diagonalization. The framework is validated on three model classes: the Rosenzweig-Porter random matrix model, the Quantum Sun model, and a kinetically constrained Triangular Lattice Gas. The novelty assessment (score 0.85, confidence 0.9) rates the contribution as significant: extending GEC to the thermodynamic limit and providing analytical formulas is a genuine advance over the prior Menzler2025 work. However, the review was conducted on abstract and bibliography only—the body text, figures, and supplemental derivations were absent from the supplied artifact. This severely limits confidence in the technical correctness assessment (overall: mostly_sound, confidence 0.35) and renders reproducibility nearly unassessable (score 0.2). Citations appear well-chosen and relevant to the covered topics, though in-text mapping could not be confirmed. The scientific framing is sound and the problem is timely, but several major gaps must be addressed before acceptance: an explicit operational definition of the GEC distribution features that signal the transition, quantitative benchmarks against standard diagnostics, a complete statement of computational scaling, and deposition of code and data.",
+  "weaknesses": [
+    "Critical reproducibility gap (score 0.2): no code repository, raw data, or computational environment details are provided. The semianalytical and numerical procedures are visible only through a Supplemental Material reference whose content was not supplied.",
+    "Low verifiability of main claims: the review artifact contained only abstract and bibliography; body text, figures, tables, and derivations were absent, reducing technical-correctness confidence to 0.35 and making it impossible to check the operational definition of GEC, the distributional signatures at the transition, or the convergence proofs for the thermodynamic limit.",
+    "No benchmark against standard diagnostics: the paper does not (from what is reviewable) compare GEC against gap-ratio r, fractal dimension D_2, half-chain entanglement entropy, or spectral form factor on the same models and system sizes, making it impossible to assess relative sensitivity or computational cost.",
+    "Finite-size vs. genuine transition ambiguity: identifying a sharp WEB transition (as opposed to a crossover) in finite kinetically constrained systems is notoriously difficult; no complementary dynamical observables (autocorrelation decay, entanglement growth) or finite-size-flow analysis are described.",
+    "Unvalidated thermodynamic-limit claim: the assertion that the moment expansion converges in the thermodynamic limit requires explicit convergence criteria and regime-of-validity statements that are deferred to supplementary material.",
+    "Missing comparison with classical Laplacian centrality: given that GEC is closely related to classical Laplacian centrality in network science, the paper does not establish what is gained by the adaptation beyond existing graph-spectral measures."
+  ]
+}
+\end{verbatim}
+
+\subsection*{novelty (\texttt{gemini-3-flash-preview})}
+\begin{verbatim}
+{
+  "confidence": 0.9,
+  "missing_prior_art": [
+    {
+      "reason": "The GEC measure is closely related to Laplacian centrality, and explicit comparison with classical spectral graph theory measures could further clarify the uniqueness of the GEC adaptation for quantum systems.",
+      "title": "Laplacian Centrality for Node Importance in Network Analysis"
+    }
+  ],
+  "novelty_score": 0.85,
+  "related_work": [
+    {
+      "citation_key": "Menzler2025",
+      "delta": "While the previous work introduced graph-energy centrality (GEC) for hierarchical structures in kinetically constrained models, this paper extends GEC to capture weak ergodicity-breaking transitions and provides analytical derivations for large systems and the thermodynamic limit.",
+      "relation": "builds_on",
+      "title": "Graph theory and tunable slow dynamics in quantum East Hamiltonians"
+    },
+    {
+      "citation_key": "Turner2018a",
+      "delta": "This paper provides a new diagnostic for weak ergodicity breaking using graph-theoretical measures in Fock space, offering an alternative to traditional diagnostics like level statistics or entanglement entropy, with superior scaling for large systems.",
+      "relation": "prior_art",
+      "title": "Weak ergodicity breaking from quantum many-body scars"
+    },
+    {
+      "citation_key": "Das2018",
+      "delta": "Adapts classical centrality measures from social network analysis to the physical context of Fock-space graphs to identify states that drive non-ergodic behavior.",
+      "relation": "orthogonal",
+      "title": "Study on centrality measures in social networks: a survey"
+    },
+    {
+      "citation_key": "Swietek2024",
+      "delta": "Complements the scaling theory of fading ergodicity by providing a microscopic, graph-theoretical basis for the transitions observed in random matrix ensembles.",
+      "relation": "builds_on",
+      "title": "Scaling Theory of Fading Ergodicity"
+    }
+  ],
+  "verdict": "significant"
+}
+\end{verbatim}
+
+\subsection*{reproducibility (\texttt{gpt-5.5})}
+\begin{verbatim}
+{
+  "code_availability": "unspecified",
+  "code_url": null,
+  "concerns": [
+    {
+      "area": "code",
+      "description": "No code repository, scripts, or implementation details are identified in the provided review artifact.",
+      "severity": "major"
+    },
+    {
+      "area": "data",
+      "description": "No generated datasets, raw numerical outputs, figure data, or data availability statement are provided.",
+      "severity": "major"
+    },
+    {
+      "area": "evaluation",
+      "description": "The supplied artifact contains only title, abstract, and bibliography, with no section text, figures, parameter tables, or step-by-step procedures needed to reproduce the reported graph-energy centrality distributions and transition evidence.",
+      "severity": "critical"
+    },
+    {
+      "area": "compute",
+      "description": "No computational environment, software stack, random seeds, sampling counts, or hardware requirements are specified for the numerical or semianalytical components.",
+      "severity": "major"
+    },
+    {
+      "area": "other",
+      "description": "A supplemental material entry is referenced, but the supplemental derivations and semianalytical procedure are not included in the supplied inputs.",
+      "severity": "major"
+    }
+  ],
+  "confidence": 0.78,
+  "data_availability": "unspecified",
+  "data_url": null,
+  "environment": null,
+  "reproducibility_score": 0.2
+}
+\end{verbatim}
+
+\subsection*{summary (\texttt{claude-haiku-4-5-20251001})}
+\begin{verbatim}
+{
+  "audience": "Quantum many-body physicists, condensed matter theorists, and researchers investigating ergodicity breaking, quantum scars, Hilbert space fragmentation, and glassy dynamics in isolated quantum systems.",
+  "key_contributions": [
+    "Demonstrates that graph-energy centrality quantifies weak ergodicity-breaking transitions through distinctive changes in the probability distribution of this measure across system states",
+    "Provides analytical formulas for computing this Fock-space diagnostic in systems of hundreds to infinitely many sites, substantially overcoming the computational bottlenecks of existing numerical approaches",
+    "Applies the framework to kinetically constrained quantum models and identifies weak ergodicity breaking accompanied by glassy slow-relaxation dynamics",
+    "Establishes a general graph-theoretic approach to Fock space as a practical diagnostic for ergodicity-breaking transitions driven by tunable model parameters"
+  ],
+  "plain_language_summary": "Most isolated quantum systems eventually reach equilibrium, forgetting their initial state—a property called ergodicity that is central to understanding quantum thermalization. However, some quantum systems violate this expectation in subtle ways through weak ergodicity breaking, where certain information persists despite the system's chaotic behavior. This paper introduces a powerful diagnostic tool based on graph theory applied to Fock space (the abstract mathematical space describing all possible quantum states) to detect and characterize these violations. The key innovation is that the graph-energy centrality measure can often be calculated analytically for enormous systems with hundreds of quantum particles, or even in the theoretical limit of infinitely large systems, whereas conventional numerical methods are limited to tens of particles. The authors demonstrate their approach on several quantum models and show it successfully identifies transitions between ergodic and non-ergodic behavior, while also revealing connections to glassy dynamics where quantum systems become sluggish.",
+  "tldr": "Graph-energy centrality provides an analytically computable measure that detects weak ergodicity-breaking transitions in quantum systems from hundreds of particles to the thermodynamic limit."
+}
+\end{verbatim}
+
+\subsection*{technical_correctness (\texttt{claude-opus-4-7})}
+\begin{verbatim}
+{
+  "claims": [
+    {
+      "assessment": "partially_supported",
+      "claim": "Graph-energy centrality (GEC), introduced in prior work of the authors, captures known weak ergodicity-breaking transitions via characteristic changes in its distribution.",
+      "evidence": "The claim is consistent with the authors' precursor work (Menzler2025, [31]) where graph-theoretic measures on Fock-space graphs were already linked to slow dynamics in quantum East Hamiltonians, and with related Fock-space-graph literature (Desaules2022 [95], Tan2025 [23], Benami2025 [24]). However, the review_input.json contains an empty 'sections' array and no figures, so the specific operational definition of GEC, the demonstrated distributional signatures (mean/variance/multifractal indicators), and the mapping to known WEB transitions cannot be checked against derivations or numerics. The abstract conflates 'captures' (a heuristic indicator) with 'detects/predicts the transition', which differ in strength.",
+      "id": "C1",
+      "location": "Abstract; main result (paper body not provided in review_input)",
+      "severity": "major",
+      "suggested_fix": "In the body, state explicitly which features of the GEC distribution (e.g., mean, variance, fractal dimension, large-deviation tails) change at the transition, and quantify the precision of locating the transition point versus established diagnostics (gap-ratio r, spectral form factor, fractal dimension D_q). Provide a falsifier — a system that breaks weak ergodicity yet has a featureless GEC distribution — to demarcate the indicator's scope."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "The GEC measure can be computed analytically for systems of many hundreds of sites, and in some cases in the thermodynamic limit, going beyond the reach of exact diagonalization.",
+      "evidence": "The bibliography cites a Supplemental Material entry [22] promising full analytical derivations for the Rosenzweig-Porter and Quantum Sun models, and a semianalytical moment calculation for the Triangular Lattice Gas. Analytical tractability for Rosenzweig-Porter is plausible because the model has explicit Gaussian off-diagonal statistics and known eigenvector overlap distributions (Bogomolny2018 [56], Venturelli2023 [55], Pino2019 [80]). The Quantum Sun model has a hierarchical bath structure (Suntajs2022 [30], Pawlik2024 [92]) that admits perturbative analysis. The 'hundreds of sites' assertion is plausible for these random-matrix-like models because their Fock-space graph has structure that does not require full Hilbert-space diagonalization. The thermodynamic-limit claim is strong and depends crucially on the convergence properties of the moment expansion, which cannot be verified from the abstract alone.",
+      "id": "C2",
+      "location": "Abstract; Supplemental Material [22]",
+      "severity": "major",
+      "suggested_fix": "State precisely the system-size scaling of the analytical method (polynomial in L? exponential but with a small base?), specify which moments / which observables actually converge in the thermodynamic limit, and show the regime of validity (e.g., parameter range, finite-size corrections) explicitly in the main text rather than only in supplementary material."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "In a kinetically constrained quantum model (Triangular Lattice Gas, per SM reference), there is evidence for a weak ergodicity-breaking transition accompanied by glassy dynamics.",
+      "evidence": "Glassiness in kinetically constrained models is well established (Lan2018 [20], Geissler2023 [66], Royen2024 [21], Rose2022 [68]), and the authors' previous work on the quantum East model (Menzler2025 [31]) already used graph-theoretic measures to diagnose slow dynamics. The claim of a 'transition accompanied by glassy dynamics' is plausible in principle; however, identifying a sharp WEB transition (as opposed to a crossover) in a finite kinetically constrained system is notoriously difficult and contested in the MBL literature (Sierant2025, Suntajs2021, Abanin2021 in [29]/[58]). The qualifier 'evidence for' in the abstract is appropriately hedged. Without access to the numerical methodology (system sizes, disorder averaging, comparison to dynamical observables), the strength of this evidence cannot be assessed.",
+      "id": "C3",
+      "location": "Abstract (concluding sentence); Triangular Lattice Gas analysis (paper body not in input)",
+      "severity": "major",
+      "suggested_fix": "Provide complementary diagnostics (e.g., autocorrelation decay, entanglement entropy growth, level statistics, spectral form factor) on the same TLG samples, and discuss finite-size flow to rule out a crossover masquerading as a transition. Clarify whether the transition is conjectured to survive the thermodynamic limit, and at what parameter value."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "The Fock-space graph representation plus graph-theoretical measures is a generally applicable framework for diagnosing weak ergodicity breaking across qualitatively different models (Rosenzweig-Porter, Quantum Sun, Triangular Lattice Gas).",
+      "evidence": "Demonstrating the same diagnostic on three different model classes — a random-matrix model (RP), a hierarchical avalanche/bath model (Quantum Sun), and a constrained lattice model (TLG) — would support generality, and is consistent with the bibliography selection covering all three classes (Skvortsov2022, Suntajs2024, Pawlik2024 for QS; Buijsman2024, Cadez2024, Khaymovich2021 for RP; Royen2024, Geissler2023 for constrained). However, RP and QS are designed as toy/random-matrix models in which WEB-like transitions are partially understood analytically, so success there is not as informative as success on a microscopic many-body model. The genuine test is the TLG demonstration; whether the GEC distribution actually distinguishes ergodic from non-ergodic phases on the TLG with comparable resolution to gap-ratio statistics is the key claim and cannot be verified from the provided files.",
+      "id": "C4",
+      "location": "Abstract; throughout",
+      "severity": "minor",
+      "suggested_fix": "Include a side-by-side benchmark of GEC against standard diagnostics (gap ratio r, fractal dimension D_2, half-chain entanglement) in each of the three models, and quantify how well each captures the transition for matched system sizes. Discuss model regimes where the GEC fails or is ambiguous."
+    },
+    {
+      "assessment": "supported",
+      "claim": "Most numerical tools for WEB transitions are limited to small system sizes, motivating the new measure.",
+      "evidence": "This background framing is well documented in the cited review and method papers: ED-based studies of MBL and WEB are commonly limited to L ~ 20-26 spins (Luitz2015 [27], Sierant2025, Abanin2021 in [29]; Suntajs2021 in [58]; Pawlik2024 [92]). DMRG/MPS approaches (Schollwoeck2011 [75]) extend reach but are typically restricted to weakly entangled or specific eigenstates. The framing is therefore accurate, although the abstract overstates the contrast in saying 'most numerical tools are limited' without acknowledging that some specialized large-system techniques exist (e.g., shift-invert ED, MPS-based eigenstate targeting, KPM-based spectral methods).",
+      "id": "C5",
+      "location": "Abstract (motivational claim)",
+      "severity": "info",
+      "suggested_fix": "Briefly acknowledge in the introduction that shift-invert and tensor-network methods extend ED reach in special cases, and clarify that the GEC's advantage is in producing distributional information at sizes inaccessible to those approaches."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Characteristic changes in the GEC distribution serve as a fingerprint of the underlying WEB transition (i.e., a distribution-level diagnostic rather than a single scalar order parameter).",
+      "evidence": "Distribution-level diagnostics are standard in non-ergodic-physics literature (e.g., the multifractal spectrum f(alpha), large-deviation analyses by Yoshizawa2018 [48], Evers2000 [89], Mirlin2000 [88], DeTomasi2019 [55]). Using a distribution as a diagnostic is therefore methodologically reasonable. The novelty rests on whether the GEC distribution changes are non-trivially correlated with the transition rather than being driven by trivial spectral or graph-structural artifacts (e.g., degree distribution of the Fock-space graph, sector size). This subtlety cannot be assessed from the abstract alone.",
+      "id": "C6",
+      "location": "Abstract; main result",
+      "severity": "minor",
+      "suggested_fix": "Explicitly disentangle the GEC signal from graph-structural baselines: compute the same distribution for a structureless reference Hamiltonian on the same Fock-space graph, and verify that the distribution change tracks the physical transition and not the bare graph topology."
+    }
+  ],
+  "confidence": 0.35,
+  "overall_correctness": "mostly_sound"
+}
+\end{verbatim}
+
+\section*{Corrections}
+% corrections rendered from corrections table; empty on first publish
+No corrections have been recorded.
+
+\section*{Bibliography}
+No bibliography extracted.
+
+% \bibliographystyle{plain}
+% \bibliography{references}
+\end{document}
