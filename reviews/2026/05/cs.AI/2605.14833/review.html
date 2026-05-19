@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Emotion-Attended Stateful Memory (EASM):The Architecture for Hyper-Personalization at Scale — GrokRxiv Review</title>
+  <meta name="generator" content="grokrxiv-render">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- KaTeX is rendered client-side; math is kept as \( ... \) and \[ ... \] delimiters. -->
+  <style>
+    :root { color-scheme: light dark; --fg: #111; --muted: #555; --bg: #fff;
+            --accent: #1f6feb; --border: #d0d7de; --banner: #fff3cd; --banner-fg: #664d03; }
+    @media (prefers-color-scheme: dark) {
+      :root { --fg: #e6edf3; --muted: #8b949e; --bg: #0d1117; --accent: #58a6ff;
+              --border: #30363d; --banner: #3a2f0b; --banner-fg: #f1c453; }
+    }
+    body { font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+           color: var(--fg); background: var(--bg); max-width: 820px;
+           margin: 0 auto; padding: 24px; }
+    h1 { font-size: 1.7rem; line-height: 1.25; margin: 0 0 0.5rem; }
+    h2 { font-size: 1.2rem; margin-top: 2rem; border-bottom: 1px solid var(--border); padding-bottom: .25rem; }
+    .muted { color: var(--muted); }
+    .disclaimer { background: var(--banner); color: var(--banner-fg); border: 1px solid var(--border);
+                  padding: .75rem 1rem; border-radius: 6px; margin: 0 0 1.5rem; font-weight: 600; }
+    .footer-disclaimer { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--border);
+                         color: var(--muted); font-size: .9rem; }
+    .brand { font-weight: 700; color: var(--accent); }
+    details { border: 1px solid var(--border); border-radius: 6px; padding: .75rem 1rem; margin: .5rem 0; }
+    details > summary { cursor: pointer; font-weight: 600; }
+    .meta-link { font-size: .9rem; }
+    ul { padding-left: 1.25rem; }
+    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .agent-grid { display: grid; gap: .5rem; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 999px;
+             background: var(--border); color: var(--fg); font-size: .8rem; }
+    .badge.pass { background: #1f883d; color: #fff; }
+    .badge.warn { background: #bf8700; color: #fff; }
+    .badge.fail { background: #cf222e; color: #fff; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Emotion-Attended Stateful Memory (EASM):The Architecture for Hyper-Personalization at Scale</h1>
+    <p class="muted">
+      <span class="brand">GrokRxiv</span> review of
+      <a class="meta-link" href="https://arxiv.org/abs/2605.14833">arXiv:2605.14833</a>
+       · <span>cs.AI</span>
+    </p>
+    <p class="muted">
+      
+    </p>
+  </header>
+
+  <section>
+    <h2>TL;DR</h2>
+    <p>This paper proposes Emotion-Attended Stateful Memory (EASM), an architecture that integrates emotional signals, long-term conversational history, and inferred user intent into a persistent, personalized context layer for LLM-based dialogue systems. The core motivation—that current LLMs are stateless and lack emotionally-aware personalization—is well-framed and addresses a genuine gap. A controlled A&#x2f;B study across 30 non-scripted conversations in six emotional categories is presented, reporting substantial improvements in memory grounding (95%), plan clarity (57%), and emotional validation (34%) versus a stateless baseline. However, the paper has pervasive and serious weaknesses: the evaluation methodology is underpowered and statistically underspecified, key architectural and implementation details are absent, no code or data is released or described, the bibliography is entirely missing from the submitted material, and several central claims are either unsupported or overstated relative to the evidence. The paper presents an interesting idea with preliminary empirical signals, but in its current form it does not meet the standards required for acceptance.</p>
+    <p class="muted">Recommendation: <strong>Major revision</strong> · Confidence: 82%</p>
+  </section>
+
+  <section>
+    <h2>Strengths</h2>
+    <ul>
+      <li>Addresses a genuine and important problem: the fundamental statelessness of production LLMs and the consequent inability to build emotionally-aware, persistent personalization across sessions.</li><li>The EASM conceptual architecture—combining long-term history, emotional signals, and inferred intent for dynamic context construction at inference time—is a coherent and practically motivated design.</li><li>Experimental design uses non-scripted, emotionally diverse conversations (six categories including adversarial scenarios such as grief and distress), which is more ecologically valid than scripted benchmarks.</li><li>Authors explicitly acknowledge limitations and call for broader validation, demonstrating appropriate scientific humility.</li><li>The framing of stateful emotional memory as infrastructure rather than a feature is a useful conceptual contribution to the discourse on AI system design.</li><li>Novelty assessment by specialists rates the contribution as &#x27;significant&#x27; relative to RAG, fine-tuning, and generative agent baselines, particularly in the combination of emotion-attended and stateful personalization at inference time.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Weaknesses</h2>
+    <ul>
+      <li>Evaluation is critically underpowered: N=30 conversations (~5 per emotional category) is insufficient for robust statistical inference, and no significance tests, confidence intervals, or effect-size estimates are reported.</li><li>The &#x27;memory grounding&#x27; metric is potentially tautological—any memory-enabled system will trivially score higher than a stateless baseline on a metric measuring whether responses reference past history—raising serious concerns about construct validity.</li><li>No bibliography or citation list is included in the submitted material; claims drawing on psychological foundations, prior architectural work, and benchmark literature are entirely uncited.</li><li>Core architectural details are absent: the underlying language model, emotion classifier, memory schema, retrieval policy, embedding approach, intent inference method, and prompting strategy are not specified, making independent replication impossible.</li><li>No code, dataset, annotation rubrics, or evaluation transcripts are shared or indicated as available; reproducibility score is rated 1.5&#x2f;10 by specialists.</li><li>Rater protocol is underspecified: blinding, inter-rater reliability (e.g., Cohen&#x27;s kappa), rubric definitions for each metric, and randomization procedures are not described.</li><li>Key quantitative claims (95%, 57%, 34% improvements) are reported without absolute baseline scores, per-category breakdowns, or variance estimates, making them difficult to contextualize.</li><li>The strong infrastructural claim—that EASM is &#x27;foundational infrastructure for hyper-personalized AI&#x27;—is not empirically established by an N=30 A&#x2f;B study and should be framed as a position or hypothesis.</li><li>Insufficient engagement with related work: existing longitudinal memory benchmarks (LongMemEval, LoCoMo, MemoryBank), recurrent memory architectures, and personalized dialogue systems are not cited or contrasted.</li><li>The claim that RAG and fine-tuning cannot enable persistent personalization is overstated; RAG over user-specific histories is a common personalization strategy that deserves more nuanced treatment.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Open Questions</h2>
+    <ul>
+      <li>Can you provide full algorithmic and implementation details for EASM, including the underlying LLM, emotion classification method, memory schema, retrieval policy, context construction rules, and prompting strategy?</li><li>Will code, anonymized conversation transcripts, and annotation rubrics be made publicly available? If not, can synthetic equivalents be provided to support reproducibility?</li><li>How is &#x27;memory grounding&#x27; defined operationally, and how do you address the concern that this metric tautologically favors memory-enabled systems? What steps were taken to ensure construct validity?</li><li>What statistical tests were performed, and can you report absolute scores, per-category breakdowns, confidence intervals, and effect sizes for all three metrics?</li><li>What was the inter-rater reliability (e.g., Cohen&#x27;s kappa or Krippendorff&#x27;s alpha) for the human evaluators, and were evaluators blind to condition assignment?</li><li>How does EASM compare to or differentiate from existing longitudinal memory benchmarks and architectures (e.g., LongMemEval, LoCoMo, MemoryBank, Recurrent Memory Transformers)?</li><li>Can you provide citations for the psychological claims (e.g., the claim that emotional state and memory are &#x27;inseparable&#x27;), and engage with the affective computing and empathetic dialogue literature?</li><li>With only ~5 conversations per emotional category, how do you support robustness claims in adversarial emotional scenarios? Is expansion of the adversarial subset planned?</li><li>How does EASM handle privacy, consent, and data security concerns given that it stores persistent emotional and behavioral user histories across sessions?</li><li>Can you provide ablation experiments isolating the contribution of the emotional signal component from the long-term memory component alone?</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Per-Agent Reviews</h2>
+    <div class="agent-grid">
+      
+      <details>
+        <summary>
+          citation — <span class="muted">gemini-2.5-flash</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;confidence&quot;: 0,
+  &quot;entries&quot;: [],
+  &quot;missing_references&quot;: [
+    {
+      &quot;reason&quot;: &quot;The task requires auditing a bibliography, but no bibliography section or inline citations were included in the provided text.&quot;,
+      &quot;title&quot;: &quot;No references provided in the input.&quot;
+    }
+  ],
+  &quot;summary&quot;: &quot;No bibliography was provided in the input text, therefore, no references could be audited for existence, relevance, or accuracy. The &#x27;entries&#x27; array is empty as a result.&quot;
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          meta_reviewer — <span class="muted">claude-sonnet-4-6</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;confidence&quot;: 0.82,
+  &quot;questions&quot;: [
+    &quot;Can you provide full algorithmic and implementation details for EASM, including the underlying LLM, emotion classification method, memory schema, retrieval policy, context construction rules, and prompting strategy?&quot;,
+    &quot;Will code, anonymized conversation transcripts, and annotation rubrics be made publicly available? If not, can synthetic equivalents be provided to support reproducibility?&quot;,
+    &quot;How is &#x27;memory grounding&#x27; defined operationally, and how do you address the concern that this metric tautologically favors memory-enabled systems? What steps were taken to ensure construct validity?&quot;,
+    &quot;What statistical tests were performed, and can you report absolute scores, per-category breakdowns, confidence intervals, and effect sizes for all three metrics?&quot;,
+    &quot;What was the inter-rater reliability (e.g., Cohen&#x27;s kappa or Krippendorff&#x27;s alpha) for the human evaluators, and were evaluators blind to condition assignment?&quot;,
+    &quot;How does EASM compare to or differentiate from existing longitudinal memory benchmarks and architectures (e.g., LongMemEval, LoCoMo, MemoryBank, Recurrent Memory Transformers)?&quot;,
+    &quot;Can you provide citations for the psychological claims (e.g., the claim that emotional state and memory are &#x27;inseparable&#x27;), and engage with the affective computing and empathetic dialogue literature?&quot;,
+    &quot;With only ~5 conversations per emotional category, how do you support robustness claims in adversarial emotional scenarios? Is expansion of the adversarial subset planned?&quot;,
+    &quot;How does EASM handle privacy, consent, and data security concerns given that it stores persistent emotional and behavioral user histories across sessions?&quot;,
+    &quot;Can you provide ablation experiments isolating the contribution of the emotional signal component from the long-term memory component alone?&quot;
+  ],
+  &quot;recommendation&quot;: &quot;major_revision&quot;,
+  &quot;strengths&quot;: [
+    &quot;Addresses a genuine and important problem: the fundamental statelessness of production LLMs and the consequent inability to build emotionally-aware, persistent personalization across sessions.&quot;,
+    &quot;The EASM conceptual architecture—combining long-term history, emotional signals, and inferred intent for dynamic context construction at inference time—is a coherent and practically motivated design.&quot;,
+    &quot;Experimental design uses non-scripted, emotionally diverse conversations (six categories including adversarial scenarios such as grief and distress), which is more ecologically valid than scripted benchmarks.&quot;,
+    &quot;Authors explicitly acknowledge limitations and call for broader validation, demonstrating appropriate scientific humility.&quot;,
+    &quot;The framing of stateful emotional memory as infrastructure rather than a feature is a useful conceptual contribution to the discourse on AI system design.&quot;,
+    &quot;Novelty assessment by specialists rates the contribution as &#x27;significant&#x27; relative to RAG, fine-tuning, and generative agent baselines, particularly in the combination of emotion-attended and stateful personalization at inference time.&quot;
+  ],
+  &quot;summary&quot;: &quot;This paper proposes Emotion-Attended Stateful Memory (EASM), an architecture that integrates emotional signals, long-term conversational history, and inferred user intent into a persistent, personalized context layer for LLM-based dialogue systems. The core motivation—that current LLMs are stateless and lack emotionally-aware personalization—is well-framed and addresses a genuine gap. A controlled A&#x2f;B study across 30 non-scripted conversations in six emotional categories is presented, reporting substantial improvements in memory grounding (95%), plan clarity (57%), and emotional validation (34%) versus a stateless baseline. However, the paper has pervasive and serious weaknesses: the evaluation methodology is underpowered and statistically underspecified, key architectural and implementation details are absent, no code or data is released or described, the bibliography is entirely missing from the submitted material, and several central claims are either unsupported or overstated relative to the evidence. The paper presents an interesting idea with preliminary empirical signals, but in its current form it does not meet the standards required for acceptance.&quot;,
+  &quot;weaknesses&quot;: [
+    &quot;Evaluation is critically underpowered: N=30 conversations (~5 per emotional category) is insufficient for robust statistical inference, and no significance tests, confidence intervals, or effect-size estimates are reported.&quot;,
+    &quot;The &#x27;memory grounding&#x27; metric is potentially tautological—any memory-enabled system will trivially score higher than a stateless baseline on a metric measuring whether responses reference past history—raising serious concerns about construct validity.&quot;,
+    &quot;No bibliography or citation list is included in the submitted material; claims drawing on psychological foundations, prior architectural work, and benchmark literature are entirely uncited.&quot;,
+    &quot;Core architectural details are absent: the underlying language model, emotion classifier, memory schema, retrieval policy, embedding approach, intent inference method, and prompting strategy are not specified, making independent replication impossible.&quot;,
+    &quot;No code, dataset, annotation rubrics, or evaluation transcripts are shared or indicated as available; reproducibility score is rated 1.5&#x2f;10 by specialists.&quot;,
+    &quot;Rater protocol is underspecified: blinding, inter-rater reliability (e.g., Cohen&#x27;s kappa), rubric definitions for each metric, and randomization procedures are not described.&quot;,
+    &quot;Key quantitative claims (95%, 57%, 34% improvements) are reported without absolute baseline scores, per-category breakdowns, or variance estimates, making them difficult to contextualize.&quot;,
+    &quot;The strong infrastructural claim—that EASM is &#x27;foundational infrastructure for hyper-personalized AI&#x27;—is not empirically established by an N=30 A&#x2f;B study and should be framed as a position or hypothesis.&quot;,
+    &quot;Insufficient engagement with related work: existing longitudinal memory benchmarks (LongMemEval, LoCoMo, MemoryBank), recurrent memory architectures, and personalized dialogue systems are not cited or contrasted.&quot;,
+    &quot;The claim that RAG and fine-tuning cannot enable persistent personalization is overstated; RAG over user-specific histories is a common personalization strategy that deserves more nuanced treatment.&quot;
+  ]
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          novelty — <span class="muted">gemini-2.5-flash</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;confidence&quot;: 4,
+  &quot;missing_prior_art&quot;: [
+    {
+      &quot;reason&quot;: &quot;The paper highlights its use of &#x27;long-term history&#x27; but could benefit from explicitly differentiating EASM&#x27;s &#x27;dynamic context construction&#x27; and &#x27;emotion-attended&#x27; aspects from other established architectural approaches to managing long-term conversational memory that go beyond simple history concatenation.&quot;,
+      &quot;title&quot;: &quot;Architectures for Long-Term Conversational Memory (e.g., summarization, vector databases, Recurrent Memory Transformers)&quot;
+    },
+    {
+      &quot;reason&quot;: &quot;While the paper aims for &#x27;hyper-personalization&#x27; and uses &#x27;inferred intent,&#x27; a clearer comparison to existing user modeling techniques that build persistent user profiles or adapt to user preferences over time would strengthen the novelty claim in the personalization space.&quot;,
+      &quot;title&quot;: &quot;User Modeling and Adaptive Personalization in Dialogue Systems&quot;
+    }
+  ],
+  &quot;novelty_score&quot;: 0.75,
+  &quot;related_work&quot;: [
+    {
+      &quot;citation_key&quot;: null,
+      &quot;delta&quot;: &quot;EASM goes beyond RAG by enabling persistent understanding of individual users and incorporating emotional signals, operating statefully across sessions rather than just retrieving static knowledge. RAG is described as insufficient for persistent personalization.&quot;,
+      &quot;relation&quot;: &quot;prior_art&quot;,
+      &quot;title&quot;: &quot;Retrieval-Augmented Generation (RAG) for Language Models&quot;
+    },
+    {
+      &quot;citation_key&quot;: null,
+      &quot;delta&quot;: &quot;EASM addresses the fundamental statelessness of fine-tuned models by dynamically constructing user-specific context at inference time, allowing for adaptation and personalization without requiring retraining or explicit fine-tuning for each user&#x27;s evolving state.&quot;,
+      &quot;relation&quot;: &quot;prior_art&quot;,
+      &quot;title&quot;: &quot;Fine-tuning Large Language Models (LLMs)&quot;
+    },
+    {
+      &quot;citation_key&quot;: &quot;Park et al., 2023&quot;,
+      &quot;delta&quot;: &quot;While Generative Agents also utilize a comprehensive memory stream for long-term behavior and reflection, EASM specifically focuses on an &#x27;emotion-attended&#x27; stateful memory architecture for *hyper-personalization of conversational context* in *LLM systems* at *inference time*, demonstrating gains in emotional validation and plan clarity for human users, rather than simulating agent autonomy.&quot;,
+      &quot;relation&quot;: &quot;competing&quot;,
+      &quot;title&quot;: &quot;Generative Agents: Interactive Simulacra of Human Behavior&quot;
+    },
+    {
+      &quot;citation_key&quot;: null,
+      &quot;delta&quot;: &quot;EASM provides a general architectural layer for incorporating emotional signals into conversational context for hyper-personalization, aiming to *understand* and *validate* emotions as part of a broader memory system, rather than focusing solely on specific empathetic response generation techniques or isolated emotion recognition.&quot;,
+      &quot;relation&quot;: &quot;prior_art&quot;,
+      &quot;title&quot;: &quot;Empathetic Dialogue Systems and Affective Computing&quot;
+    }
+  ],
+  &quot;verdict&quot;: &quot;significant&quot;
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          reproducibility — <span class="muted">gpt-5.5</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;code_availability&quot;: &quot;unspecified&quot;,
+  &quot;code_url&quot;: null,
+  &quot;concerns&quot;: [
+    {
+      &quot;area&quot;: &quot;code&quot;,
+      &quot;description&quot;: &quot;No code, implementation details, repository, or reproducible pipeline are indicated for the EASM architecture or the stateless baseline.&quot;,
+      &quot;severity&quot;: &quot;critical&quot;
+    },
+    {
+      &quot;area&quot;: &quot;data&quot;,
+      &quot;description&quot;: &quot;The evaluation uses thirty non-scripted conversations, but there is no indication that transcripts, prompts, user histories, emotional categories, or annotation data are publicly available.&quot;,
+      &quot;severity&quot;: &quot;critical&quot;
+    },
+    {
+      &quot;area&quot;: &quot;evaluation&quot;,
+      &quot;description&quot;: &quot;The A&#x2f;B study design is only described at a high level; evaluator protocol, scoring rubrics, randomization, statistical tests, and inter-rater reliability are not specified in the provided material.&quot;,
+      &quot;severity&quot;: &quot;major&quot;
+    },
+    {
+      &quot;area&quot;: &quot;hyperparameters&quot;,
+      &quot;description&quot;: &quot;Key configuration details are missing, including the underlying language model, memory retrieval parameters, emotion&#x2f;intent inference method, context construction rules, and prompting strategy.&quot;,
+      &quot;severity&quot;: &quot;major&quot;
+    },
+    {
+      &quot;area&quot;: &quot;compute&quot;,
+      &quot;description&quot;: &quot;No runtime environment, hardware, API model version, inference settings, or dependency information is provided, which limits exact replication.&quot;,
+      &quot;severity&quot;: &quot;minor&quot;
+    },
+    {
+      &quot;area&quot;: &quot;other&quot;,
+      &quot;description&quot;: &quot;Because the study involves emotionally sensitive, non-scripted conversations, privacy constraints may prevent release of the original evaluation data unless anonymized or replaced with synthetic equivalents.&quot;,
+      &quot;severity&quot;: &quot;major&quot;
+    }
+  ],
+  &quot;confidence&quot;: 0.74,
+  &quot;data_availability&quot;: &quot;unspecified&quot;,
+  &quot;data_url&quot;: null,
+  &quot;environment&quot;: null,
+  &quot;reproducibility_score&quot;: 1.5
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          summary — <span class="muted">claude-haiku-4-5-20251001</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;audience&quot;: &quot;AI researchers and practitioners working on conversational AI, personalization, and user experience; product teams building customer-facing AI systems; researchers interested in emotion recognition and memory in AI systems.&quot;,
+  &quot;key_contributions&quot;: [
+    &quot;Proposes EASM architecture that integrates emotional signals, long-term conversation history, and inferred user intent to create persistent, personalized user context&quot;,
+    &quot;Demonstrates through controlled A&#x2f;B testing that stateful emotional memory significantly improves key personalization metrics (memory grounding, plan clarity, emotional validation) compared to stateless baselines&quot;,
+    &quot;Shows that emotional memory benefits persist even in adversarial or emotionally difficult conversation scenarios&quot;,
+    &quot;Frames stateful emotional memory as foundational infrastructure rather than a feature, suggesting it should be a core component of future AI systems&quot;,
+    &quot;Identifies limitations of current benchmarks for measuring personalization and proposes evaluation methodology using non-scripted conversations across emotional categories&quot;
+  ],
+  &quot;plain_language_summary&quot;: &quot;Current AI language models like ChatGPT start fresh with each conversation—they have no memory of previous interactions with a user and cannot track emotional context over time. This paper proposes a new system called Emotion-Attended Stateful Memory (EASM) that gives AI the ability to remember users&#x27; past conversations, emotional states, and inferred intentions. The system works by dynamically building personalized context at the moment of response, drawing on long-term user history and emotional signals detected in the conversation.\n\nThe researchers tested this approach through a controlled study with 30 real conversations across six emotionally distinct scenarios (ranging from casual to difficult topics like grief and distress). They compared the new memory-enriched system against a standard stateless baseline, both powered by the same underlying language model. The results showed consistent improvements: the memory system was 95% better at grounding responses in user history, 57% better at clarifying plans, and 34% better at emotional validation. Importantly, these gains held up even in emotionally challenging conversations.\n\nThe authors argue this isn&#x27;t just a feature improvement but rather foundational infrastructure for truly personalized AI systems. They acknowledge that while results are promising, broader validation with larger and more diverse user populations is needed before drawing final conclusions.&quot;,
+  &quot;tldr&quot;: &quot;A new AI architecture that remembers users&#x27; emotional states and conversation history across sessions significantly outperforms stateless chatbots in personalization tasks.&quot;
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          technical_correctness — <span class="muted">claude-opus-4-7</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;claims&quot;: [
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;Current LLM systems are fundamentally stateless across sessions, limiting personalization over time.&quot;,
+      &quot;evidence&quot;: &quot;Most production LLM APIs do not retain state across sessions by default; this is a widely acknowledged limitation.&quot;,
+      &quot;id&quot;: &quot;C1&quot;,
+      &quot;location&quot;: &quot;Abstract; The Problem: AI That Forgets&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;RAG and fine-tuning do not enable persistent understanding of individual users.&quot;,
+      &quot;evidence&quot;: &quot;RAG can incorporate user-specific documents and fine-tuning can encode persona-level data; the claim is directionally correct but overstated since RAG over user histories is in fact a common personalization approach.&quot;,
+      &quot;id&quot;: &quot;C2&quot;,
+      &quot;location&quot;: &quot;Abstract&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Soften to: &#x27;standard RAG and generic fine-tuning are not designed for evolving, emotionally-aware persistent user state.&#x27;&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;An emotion-attended stateful memory architecture can dynamically construct user-specific context at inference time using history, emotional signals, and inferred intent.&quot;,
+      &quot;evidence&quot;: &quot;The architecture is described conceptually; without implementation details (e.g., embedding models, emotion classifier, retrieval policy, memory schema) in the provided text, feasibility is plausible but not independently verifiable.&quot;,
+      &quot;id&quot;: &quot;C3&quot;,
+      &quot;location&quot;: &quot;Architecture&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Provide algorithmic detail, pseudocode, and component-level specs for emotion tagging, memory write&#x2f;read, and intent inference.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;A controlled A&#x2f;B study across 30 non-scripted conversations spanning six emotional categories was conducted with the same underlying LLM in both conditions.&quot;,
+      &quot;evidence&quot;: &quot;N=30 conversations (~5 per category) is small for statistical inference; &#x27;non-scripted&#x27; raises reproducibility concerns; no mention of inter-rater reliability or blinding in the head sections.&quot;,
+      &quot;id&quot;: &quot;C4&quot;,
+      &quot;location&quot;: &quot;Evaluation Design&quot;,
+      &quot;severity&quot;: &quot;major&quot;,
+      &quot;suggested_fix&quot;: &quot;Report sample sizes per category, rater agreement (e.g., Cohen&#x27;s kappa), blinding protocol, and statistical tests with confidence intervals.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;The memory-enriched condition consistently outperformed the stateless baseline across all scenarios.&quot;,
+      &quot;evidence&quot;: &quot;With only 30 conversations and unspecified evaluation rubric, &#x27;consistent outperformance&#x27; may reflect rater bias or confounds (e.g., longer context). No significance testing reported in the abstract.&quot;,
+      &quot;id&quot;: &quot;C5&quot;,
+      &quot;location&quot;: &quot;Results; Abstract&quot;,
+      &quot;severity&quot;: &quot;major&quot;,
+      &quot;suggested_fix&quot;: &quot;Include per-scenario scores, variance, statistical significance, and ablations isolating memory vs. emotion components.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;unsupported&quot;,
+      &quot;claim&quot;: &quot;Quantitative gains: 95% memory grounding, 57% plan clarity, 34% emotional validation.&quot;,
+      &quot;evidence&quot;: &quot;Percent improvements are reported without baseline absolute scores, rubric definitions, raters, or CI. The &#x27;memory grounding&#x27; metric likely favors any system with memory by construction, inflating improvement.&quot;,
+      &quot;id&quot;: &quot;C6&quot;,
+      &quot;location&quot;: &quot;Abstract; Results&quot;,
+      &quot;severity&quot;: &quot;major&quot;,
+      &quot;suggested_fix&quot;: &quot;Define each metric operationally, report absolute scores with CIs, and address construct validity (e.g., memory grounding is tautologically improved by memory access).&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;Results remained consistent in emotionally adversarial conversations (grief, distress, uncertainty).&quot;,
+      &quot;evidence&quot;: &quot;With ~5 conversations per category, robustness claims in adversarial emotional contexts are underpowered.&quot;,
+      &quot;id&quot;: &quot;C7&quot;,
+      &quot;location&quot;: &quot;Results&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Expand the adversarial subset and report category-level statistics with uncertainty estimates.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;Current benchmarks cannot measure stateful personalization.&quot;,
+      &quot;evidence&quot;: &quot;Many static benchmarks indeed do not test longitudinal personalization, but works like LongMemEval, LoCoMo, and MemoryBank do attempt this; the claim should engage with them.&quot;,
+      &quot;id&quot;: &quot;C8&quot;,
+      &quot;location&quot;: &quot;Why Current Benchmarks Cannot Measure This&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Acknowledge and contrast with existing longitudinal&#x2f;memory benchmarks.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;Emotional state and memory are psychologically inseparable, motivating emotion-attended memory.&quot;,
+      &quot;evidence&quot;: &quot;There is psychological literature on mood-congruent memory and affect-modulated encoding, but the strong &#x27;inseparable&#x27; framing requires careful citation.&quot;,
+      &quot;id&quot;: &quot;C9&quot;,
+      &quot;location&quot;: &quot;Psychological Foundations&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Cite specific findings (e.g., Bower 1981; LeDoux) and qualify the claim.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;unsupported&quot;,
+      &quot;claim&quot;: &quot;Stateful emotional memory is a foundational infrastructure layer for hyper-personalized AI.&quot;,
+      &quot;evidence&quot;: &quot;This is a strong infrastructural claim not established by an N=30 A&#x2f;B study; it is positional rather than empirically supported.&quot;,
+      &quot;id&quot;: &quot;C10&quot;,
+      &quot;location&quot;: &quot;The Broader Argument; Conclusion&quot;,
+      &quot;severity&quot;: &quot;major&quot;,
+      &quot;suggested_fix&quot;: &quot;Frame as a hypothesis or position statement, separating empirical findings from architectural advocacy.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;Broader validation across larger and more diverse evaluations remains necessary.&quot;,
+      &quot;evidence&quot;: &quot;Explicitly acknowledged by authors and consistent with the study&#x27;s scale.&quot;,
+      &quot;id&quot;: &quot;C11&quot;,
+      &quot;location&quot;: &quot;Abstract; Limitations&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    }
+  ],
+  &quot;confidence&quot;: 0.72,
+  &quot;overall_correctness&quot;: &quot;questionable&quot;
+}</pre>
+      </details>
+      
+    </div>
+  </section>
+
+  <!-- corrections rendered from corrections table; empty on first publish -->
+  <section>
+    <h2>Corrections</h2>
+    <p class="muted">No corrections have been recorded.</p>
+  </section>
+
+  <section>
+    <h2>Bibliography</h2>
+    
+    <p class="muted">No bibliography extracted.</p>
+    
+  </section>
+
+  <footer class="footer-disclaimer">
+    <p class="muted">Rendered by <span class="brand">GrokRxiv</span>. Source: <a href="https://arxiv.org/abs/2605.14833">arXiv:2605.14833</a>.</p>
+  </footer>
+</body>
+</html>
