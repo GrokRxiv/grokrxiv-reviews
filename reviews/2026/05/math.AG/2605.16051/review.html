@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Exponential Concentration for Quantum Periods via Mirror Symmetry — GrokRxiv Review</title>
+  <meta name="generator" content="grokrxiv-render">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- KaTeX is rendered client-side; math is kept as \( ... \) and \[ ... \] delimiters. -->
+  <style>
+    :root { color-scheme: light dark; --fg: #111; --muted: #555; --bg: #fff;
+            --accent: #1f6feb; --border: #d0d7de; --banner: #fff3cd; --banner-fg: #664d03; }
+    @media (prefers-color-scheme: dark) {
+      :root { --fg: #e6edf3; --muted: #8b949e; --bg: #0d1117; --accent: #58a6ff;
+              --border: #30363d; --banner: #3a2f0b; --banner-fg: #f1c453; }
+    }
+    body { font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+           color: var(--fg); background: var(--bg); max-width: 820px;
+           margin: 0 auto; padding: 24px; }
+    h1 { font-size: 1.7rem; line-height: 1.25; margin: 0 0 0.5rem; }
+    h2 { font-size: 1.2rem; margin-top: 2rem; border-bottom: 1px solid var(--border); padding-bottom: .25rem; }
+    .muted { color: var(--muted); }
+    .disclaimer { background: var(--banner); color: var(--banner-fg); border: 1px solid var(--border);
+                  padding: .75rem 1rem; border-radius: 6px; margin: 0 0 1.5rem; font-weight: 600; }
+    .footer-disclaimer { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--border);
+                         color: var(--muted); font-size: .9rem; }
+    .brand { font-weight: 700; color: var(--accent); }
+    details { border: 1px solid var(--border); border-radius: 6px; padding: .75rem 1rem; margin: .5rem 0; }
+    details > summary { cursor: pointer; font-weight: 600; }
+    .meta-link { font-size: .9rem; }
+    ul { padding-left: 1.25rem; }
+    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .agent-grid { display: grid; gap: .5rem; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 999px;
+             background: var(--border); color: var(--fg); font-size: .8rem; }
+    .badge.pass { background: #1f883d; color: #fff; }
+    .badge.warn { background: #bf8700; color: #fff; }
+    .badge.fail { background: #cf222e; color: #fff; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Exponential Concentration for Quantum Periods via Mirror Symmetry</h1>
+    <p class="muted">
+      <span class="brand">GrokRxiv</span> review of
+      <a class="meta-link" href="https://arxiv.org/abs/2605.16051">arXiv:2605.16051</a>
+       · <span>math.AG</span>
+    </p>
+  </header>
+
+  <section>
+    <h2>TL;DR</h2>
+    <p>This paper proves that quantum periods of Fano manifolds admitting convenient weak Landau–Ginzburg models with non-negative coefficients concentrate exponentially near the A-model conifold value. The technical core is a hierarchy of concentration notions for power series, culminating in an exponential concentration theorem for modified hypergeometric series (Theorem 20), then applied geometrically via Galkin&#x27;s random-walk interpretation of Laurent-polynomial constant terms and the Local Central Limit Theorem. All 19 assessed claims are verified by the technical reviewer (17 fully supported, 2 with minor gaps); overall correctness is mostly sound. Novelty is significant: the paper cleanly replaces Hugtenburg&#x27;s &#x27;superpolynomially peaked &#x2f; exponentially bounded&#x27; framework with sharper notions and establishes them unconditionally under mirror-model hypotheses. Reproducibility flags are structurally critical under the applied rubric, but this is a pure mathematics paper in algebraic geometry and mirror symmetry where Lean&#x2f;Coq&#x2f;Isabelle tooling does not yet cover the requisite theory (Gromov–Witten invariants, quantum cohomology, LCLT for lattice random walks on Newton polytopes); absence of formal proof artifacts is field-standard and the exception to the recommendation gate applies. The reproducibility specialist also noted the absence of numerical illustrations and no code repository (reproducibility_score 0.28). The remaining actionable issues are: one missing bibliography entry (SandaShamoto2021 is cited in-text but absent from the reference list), missing per-class citations for the claimed examples of Fano manifolds admitting convenient weak LG models, and no computational supplement verifying concentration rates on concrete instances.</p>
+    <p class="muted">Recommendation: <strong>Minor revision</strong> · Confidence: 72%</p>
+  </section>
+
+  <section>
+    <h2>Strengths</h2>
+    <ul>
+      <li>Technically sound main result: all key claims (Lemmas 5, 7, 12, 16; Propositions 11, 14; Theorems 6, 17, 18, 19, 20, 21) are verified in detail by the technical reviewer with no critical or major mathematical errors identified.</li><li>Conceptual clarity: the paper introduces a clean hierarchy of concentration notions and proves that exponential concentration implies the weaker &#x27;superpolynomially peaked&#x27; and &#x27;exponentially bounded&#x27; conditions of Hugtenburg 2024, unifying and strengthening the prior framework.</li><li>Methodological novelty: the synthesis of Galkin&#x27;s random-walk interpretation of Laurent-polynomial constant terms with the Local Central Limit Theorem and discrete-Laplace asymptotics constitutes a creative and non-obvious bridge between probability, analysis, and algebraic geometry.</li><li>Strong motivation and context: the paper is positioned clearly within the Gamma conjecture program, with well-chosen antecedents explicitly cited and precise statements of how the results advance that program.</li><li>Broad applicability: exponential concentration is established for all Fano manifolds admitting convenient weak LG models with non-negative coefficients, a class stated to cover dim ≤ 3 Fano manifolds, toric Fano manifolds, and partial flag manifolds.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Weaknesses</h2>
+    <ul>
+      <li>Missing bibliography entry: the citation key SandaShamoto2021 appears in the Introduction but has no corresponding entry in the reference list; this defect was confirmed by the citation specialist and must be corrected before publication.</li><li>Undercited application examples: Sections 1 and 4 assert that dim ≤ 3 Fano manifolds, toric Fano manifolds, and partial flag manifolds admit convenient weak LG models with non-negative coefficients without per-class citations; non-negativity of coefficients is non-trivial and each class requires a specific reference (technical_correctness C14, severity minor).</li><li>No numerical illustrations: the paper provides no computed examples verifying the concentration rate, the identification <span class="math">T<sub>A,con</sub> = limsup(n! G<sub>n</sub>)<sup>1/n</sup></span>, or the comparison with the spectral radius for any concrete Fano manifold; the absence was noted by both the technical reviewer (C17, severity minor) and reproducibility reviewer (severity minor).</li><li>Novelty confidence is reduced (0.58) because the Semantic Scholar API was rate-limited during review; recent analytic-combinatorics or probability literature on concentration estimates for Laurent-polynomial constant-term asymptotics may partially overlap with Theorems 17–18 and could not be systematically checked.</li><li>Reproducibility score is very low (0.28); while formal proof artifacts are not field-standard in algebraic geometry, the absence of any computational supplement (e.g., Sage or Python scripts querying the CK22 quantum-period database) leaves the applied claims unverified beyond manual proof reading.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Open Questions</h2>
+    <ul>
+      <li>The missing bibliography entry for SandaShamoto2021 must be supplied — can the authors provide the full reference and confirm which statement(s) in the Introduction it supports?</li><li>For each claimed class of Fano manifolds (dim ≤ 3, toric, partial flag), can the authors add explicit citations establishing the existence of a convenient weak LG model with non-negative coefficients, and specifically address the non-negativity condition?</li><li>Could the authors include a short computational appendix or supplementary notebook computing <span class="math">G<sub>n</sub></span> for representative Fano manifolds (e.g., <span class="math">P<sup>2</sup></span>, a del Pezzo surface, a Grassmannian) and numerically illustrating exponential concentration toward <span class="math">T<sub>A,con</sub></span>?</li><li>Remark 3 notes that <span class="math">T<sub>A,con</sub></span> may differ from the spectral radius <span class="math">T</span> used in the original Gamma Conjecture I formulation; can the authors elaborate on what this implies for the modified Gamma I of Galkin–Hu–Iritani–Ke–Li–Su 2024 and whether <span class="math">T<sub>A,con</sub></span> is the correct concentration center in that revised framework?</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Per-Agent Reviews</h2>
+    <div class="agent-grid">
+      
+      <details>
+        <summary>
+          citation — <span class="muted">gpt-5.5</span>
+          <span class="badge warn">warn</span>
+        </summary>
+        <pre>{
+  &quot;confidence&quot;: 0.82,
+  &quot;entries&quot;: [
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Tom Coates&quot;,
+          &quot;Sergey Galkin&quot;,
+          &quot;Alexander Kasprzyk&quot;,
+          &quot;Andrew Strangeway&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;CGKS20&quot;,
+        &quot;raw&quot;: &quot;CGKS20: author = {Tom Coates and Sergey Galkin and Alexander Kasprzyk and Andrew Strangeway}, title = {Quantum periods for certain four-dimensional Fano manifolds}, journal = {Experimental Mathematics}, volume = {29}, number = {2}, pages = {183--221}, year = {2020}, shorthand = {CGKS20},&quot;,
+        &quot;title&quot;: &quot;Quantum periods for certain four-dimensional Fano manifolds&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Experimental Mathematics&quot;,
+        &quot;year&quot;: 2020
+      },
+      &quot;exists&quot;: false,
+      &quot;explanation&quot;: &quot;No extracted in-text citation context uses this key. The work is topically related to quantum periods of Fano manifolds, but its role in this paper is not evident from the provided contexts.&quot;,
+      &quot;notes&quot;: &quot;Listed in bibliography but not found in extracted citation contexts.&quot;,
+      &quot;relevance&quot;: &quot;low&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    }
+  ],
+  &quot;missing_references&quot;: [
+    {
+      &quot;reason&quot;: &quot;The Introduction explicitly cites @SandaShamoto2021 in a list of progress on Gamma Conjecture I, but no corresponding bibliography entry is present in the supplied bibliography.&quot;,
+      &quot;title&quot;: &quot;Bibliography entry for Sanda--Shamoto 2021 work cited as @SandaShamoto2021&quot;
+    }
+  ],
+  &quot;summary&quot;: &quot;The bibliography is mostly relevant: high-relevance items support quantum periods, Gamma conjectures, weak Landau-Ginzburg models, conifold values, random-walk asymptotics, local CLT, and discrete Laplace methods. CGKS20 is topically relevant but lacks an extracted in-text citation context. The clearest citation defect is the in-text key SandaShamoto2021, which is cited but absent from the bibliography. Existence, DOI, and URL fields are intentionally left at verifier defaults as requested.&quot;
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          meta_reviewer — <span class="muted">claude-sonnet-4-6</span>
+          <span class="badge warn">warn</span>
+        </summary>
+        <pre>{
+  &quot;confidence&quot;: 0.72,
+  &quot;questions&quot;: [
+    &quot;The missing bibliography entry for SandaShamoto2021 must be supplied — can the authors provide the full reference and confirm which statement(s) in the Introduction it supports?&quot;,
+    &quot;For each claimed class of Fano manifolds (dim ≤ 3, toric, partial flag), can the authors add explicit citations establishing the existence of a convenient weak LG model with non-negative coefficients, and specifically address the non-negativity condition?&quot;,
+    &quot;Could the authors include a short computational appendix or supplementary notebook computing G_n for representative Fano manifolds (e.g., P^2, a del Pezzo surface, a Grassmannian) and numerically illustrating exponential concentration toward T_{A,con}?&quot;,
+    &quot;Remark 3 notes that T_{A,con} may differ from the spectral radius T used in the original Gamma Conjecture I formulation; can the authors elaborate on what this implies for the modified Gamma I of Galkin–Hu–Iritani–Ke–Li–Su 2024 and whether T_{A,con} is the correct concentration center in that revised framework?&quot;
+  ],
+  &quot;recommendation&quot;: &quot;minor_revision&quot;,
+  &quot;strengths&quot;: [
+    &quot;Technically sound main result: all key claims (Lemmas 5, 7, 12, 16; Propositions 11, 14; Theorems 6, 17, 18, 19, 20, 21) are verified in detail by the technical reviewer with no critical or major mathematical errors identified.&quot;,
+    &quot;Conceptual clarity: the paper introduces a clean hierarchy of concentration notions and proves that exponential concentration implies the weaker &#x27;superpolynomially peaked&#x27; and &#x27;exponentially bounded&#x27; conditions of Hugtenburg 2024, unifying and strengthening the prior framework.&quot;,
+    &quot;Methodological novelty: the synthesis of Galkin&#x27;s random-walk interpretation of Laurent-polynomial constant terms with the Local Central Limit Theorem and discrete-Laplace asymptotics constitutes a creative and non-obvious bridge between probability, analysis, and algebraic geometry.&quot;,
+    &quot;Strong motivation and context: the paper is positioned clearly within the Gamma conjecture program, with well-chosen antecedents explicitly cited and precise statements of how the results advance that program.&quot;,
+    &quot;Broad applicability: exponential concentration is established for all Fano manifolds admitting convenient weak LG models with non-negative coefficients, a class stated to cover dim ≤ 3 Fano manifolds, toric Fano manifolds, and partial flag manifolds.&quot;
+  ],
+  &quot;summary&quot;: &quot;This paper proves that quantum periods of Fano manifolds admitting convenient weak Landau–Ginzburg models with non-negative coefficients concentrate exponentially near the A-model conifold value. The technical core is a hierarchy of concentration notions for power series, culminating in an exponential concentration theorem for modified hypergeometric series (Theorem 20), then applied geometrically via Galkin&#x27;s random-walk interpretation of Laurent-polynomial constant terms and the Local Central Limit Theorem. All 19 assessed claims are verified by the technical reviewer (17 fully supported, 2 with minor gaps); overall correctness is mostly sound. Novelty is significant: the paper cleanly replaces Hugtenburg&#x27;s &#x27;superpolynomially peaked &#x2f; exponentially bounded&#x27; framework with sharper notions and establishes them unconditionally under mirror-model hypotheses. Reproducibility flags are structurally critical under the applied rubric, but this is a pure mathematics paper in algebraic geometry and mirror symmetry where Lean&#x2f;Coq&#x2f;Isabelle tooling does not yet cover the requisite theory (Gromov–Witten invariants, quantum cohomology, LCLT for lattice random walks on Newton polytopes); absence of formal proof artifacts is field-standard and the exception to the recommendation gate applies. The reproducibility specialist also noted the absence of numerical illustrations and no code repository (reproducibility_score 0.28). The remaining actionable issues are: one missing bibliography entry (SandaShamoto2021 is cited in-text but absent from the reference list), missing per-class citations for the claimed examples of Fano manifolds admitting convenient weak LG models, and no computational supplement verifying concentration rates on concrete instances.&quot;,
+  &quot;weaknesses&quot;: [
+    &quot;Missing bibliography entry: the citation key SandaShamoto2021 appears in the Introduction but has no corresponding entry in the reference list; this defect was confirmed by the citation specialist and must be corrected before publication.&quot;,
+    &quot;Undercited application examples: Sections 1 and 4 assert that dim ≤ 3 Fano manifolds, toric Fano manifolds, and partial flag manifolds admit convenient weak LG models with non-negative coefficients without per-class citations; non-negativity of coefficients is non-trivial and each class requires a specific reference (technical_correctness C14, severity minor).&quot;,
+    &quot;No numerical illustrations: the paper provides no computed examples verifying the concentration rate, the identification T_{A,con} = limsup(n! G_n)^{1&#x2f;n}, or the comparison with the spectral radius for any concrete Fano manifold; the absence was noted by both the technical reviewer (C17, severity minor) and reproducibility reviewer (severity minor).&quot;,
+    &quot;Novelty confidence is reduced (0.58) because the Semantic Scholar API was rate-limited during review; recent analytic-combinatorics or probability literature on concentration estimates for Laurent-polynomial constant-term asymptotics may partially overlap with Theorems 17–18 and could not be systematically checked.&quot;,
+    &quot;Reproducibility score is very low (0.28); while formal proof artifacts are not field-standard in algebraic geometry, the absence of any computational supplement (e.g., Sage or Python scripts querying the CK22 quantum-period database) leaves the applied claims unverified beyond manual proof reading.&quot;
+  ]
+}</pre>
+      </details>
+      
+    </div>
+  </section>
+
+  <!-- corrections rendered from corrections table; empty on first publish -->
+  <section>
+    <h2>Corrections</h2>
+    <p class="muted">No corrections have been recorded.</p>
+  </section>
+
+  <section>
+    <h2>Bibliography</h2>
+    
+    <p class="muted">No bibliography extracted.</p>
+    
+  </section>
+
+  <footer class="footer-disclaimer">
+    <p class="muted">Rendered by <span class="brand">GrokRxiv</span>. Source: <a href="https://arxiv.org/abs/2605.16051">arXiv:2605.16051</a>.</p>
+  </footer>
+</body>
+</html>
