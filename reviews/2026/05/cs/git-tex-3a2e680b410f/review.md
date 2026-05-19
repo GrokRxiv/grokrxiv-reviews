@@ -1,0 +1,979 @@
+# % The Hallucination--Homotopy Correspondence A Complete Classification of Language Model Failure Modes via Algebraic Topology and Homotopy Type Theory%
+
+GrokRxiv review of [arXiv:git-tex-3a2e680b410f](https://arxiv.org/abs/git-tex-3a2e680b410f)
+
+## TL;DR
+
+Automated review gate failed before meta-review synthesis because too few specialist outputs passed verifier checks.
+
+_Recommendation_: **Major revision** · _Confidence_: 100%
+
+## Strengths
+
+
+## Weaknesses
+
+- verifier quorum not met: only 0 of 5 specialists produced usable output (need >= 3)
+- Roles without usable verifier output: summary, technical_correctness, novelty, reproducibility, citation
+
+## Open Questions
+
+- Please address the verifier failures and resubmit corrections for automated re-review.
+
+## Per-Agent Reviews
+
+### citation (`gpt-5.5`) — status: `fail`
+
+```json
+{
+  "confidence": 0.86,
+  "entries": [
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "The Univalent Foundations Program"
+        ],
+        "doi": null,
+        "key": "hottbook",
+        "raw": "hottbook: The Univalent Foundations Program. Homotopy Type Theory: Univalent Foundations of Mathematics. Institute for Advanced Study, 2013.",
+        "title": "Homotopy Type Theory: Univalent Foundations of Mathematics",
+        "url": null,
+        "venue": "Institute for Advanced Study",
+        "year": 2013
+      },
+      "exists": false,
+      "explanation": "Cited in the Introduction as the core source for the HoTT program and in the Univalence Constraint section as the source for the univalence axiom. This is central to the paper's types-as-spaces and semantic identity framework.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "B. Coecke",
+          "M. Sadrzadeh",
+          "S. Clark"
+        ],
+        "doi": null,
+        "key": "coecke2010mathematical",
+        "raw": "coecke2010mathematical: B. Coecke, M. Sadrzadeh, and S. Clark. Mathematical Foundations for a Compositional Distributional Model of Meaning. Linguistic Analysis, 36(1--4):345--384, 2010.",
+        "title": "Mathematical Foundations for a Compositional Distributional Model of Meaning",
+        "url": null,
+        "venue": "Linguistic Analysis",
+        "year": 2010
+      },
+      "exists": false,
+      "explanation": "Cited in the Introduction related-work discussion as the DisCoCat foundation for functorial compositional semantics into finite-dimensional vector spaces. The paper positions its homotopical semantics as a direct generalization of this line.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "J. Bolt",
+          "B. Coecke",
+          "F. Genovese",
+          "M. Lewis",
+          "D. Marsden",
+          "R. Piedeleu"
+        ],
+        "doi": null,
+        "key": "bolt2019interacting",
+        "raw": "bolt2019interacting: J. Bolt, B. Coecke, F. Genovese, M. Lewis, D. Marsden, and R. Piedeleu. Interacting Conceptual Spaces I: Grammatical Composition of Concepts. In Concepts and their Applications, Springer, 2019.",
+        "title": "Interacting Conceptual Spaces I: Grammatical Composition of Concepts",
+        "url": null,
+        "venue": "Concepts and their Applications, Springer",
+        "year": 2019
+      },
+      "exists": false,
+      "explanation": "Cited in the Introduction as an extension of DisCoCat to interactive processes. It supports the related-work lineage for categorical compositional semantics but is not used in the technical development.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "G. Carlsson"
+        ],
+        "doi": null,
+        "key": "carlsson2009topology",
+        "raw": "carlsson2009topology: G. Carlsson. Topology and Data. Bulletin of the American Mathematical Society, 46(2):255--308, 2009.",
+        "title": "Topology and Data",
+        "url": null,
+        "venue": "Bulletin of the American Mathematical Society",
+        "year": 2009
+      },
+      "exists": false,
+      "explanation": "Cited in the Introduction as establishing the persistent homology framework. This is relevant to the paper's practical detection proposal using Vietoris-Rips filtrations and persistent homology.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "G. Naitzat",
+          "A. Zhitnikov",
+          "L. H. Lim"
+        ],
+        "doi": null,
+        "key": "naitzat2020topology",
+        "raw": "naitzat2020topology: G. Naitzat, A. Zhitnikov, and L. H. Lim. Topology of Deep Neural Networks. Journal of Machine Learning Research, 21(184):1--40, 2020.",
+        "title": "Topology of Deep Neural Networks",
+        "url": null,
+        "venue": "Journal of Machine Learning Research",
+        "year": 2020
+      },
+      "exists": false,
+      "explanation": "Cited in the Introduction for the claim that deep neural networks progressively simplify data topology. This is highly relevant because the paper frames hallucination as topological structure lost under neural representations.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2508.11646",
+        "authors": [
+          "X. Li"
+        ],
+        "doi": null,
+        "key": "li2025memory",
+        "raw": "li2025memory: X. Li. Memory as Structured Trajectories: Persistent Homology and Contextual Sheaves. arXiv preprint arXiv:2508.11646, 2025.",
+        "title": "Memory as Structured Trajectories: Persistent Homology and Contextual Sheaves",
+        "url": null,
+        "venue": "arXiv preprint",
+        "year": 2025
+      },
+      "exists": false,
+      "explanation": "Cited in the Introduction and Sheaf-Theoretic Formulation section as a model of memory traces using persistent homology and contextual sheaves. It is directly relevant to the paper's memory, sheaf, and dynamical topological framing.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2502.15476",
+        "authors": [
+          "A. Ayzenberg",
+          "et al."
+        ],
+        "doi": null,
+        "key": "ayzenberg2025sheaf",
+        "raw": "ayzenberg2025sheaf: A. Ayzenberg et al. Sheaf Theory: from Deep Geometry to Deep Learning. arXiv preprint arXiv:2502.15476, 2025.",
+        "title": "Sheaf Theory: from Deep Geometry to Deep Learning",
+        "url": null,
+        "venue": "arXiv preprint",
+        "year": 2025
+      },
+      "exists": false,
+      "explanation": "Cited in the Introduction as a survey of sheaf-theoretic methods in deep learning. It is relevant background for the paper's sheaf-cohomological hallucination formulation, though not tied to a specific proof.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Z. Ji",
+          "N. Lee",
+          "R. Frieske",
+          "et al."
+        ],
+        "doi": null,
+        "key": "ji2023survey",
+        "raw": "ji2023survey: Z. Ji, N. Lee, R. Frieske, et al. Survey of Hallucination in Natural Language Generation. ACM Computing Surveys, 55(12):1--38, 2023.",
+        "title": "Survey of Hallucination in Natural Language Generation",
+        "url": null,
+        "venue": "ACM Computing Surveys",
+        "year": 2023
+      },
+      "exists": false,
+      "explanation": "Cited in the Introduction as a comprehensive hallucination survey. It is relevant background for the problem framing, taxonomy, and motivation, but the paper's technical claims are not derived from it.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2311.05232",
+        "authors": [
+          "L. Huang",
+          "W. Yu",
+          "W. Ma",
+          "et al."
+        ],
+        "doi": null,
+        "key": "huang2023survey",
+        "raw": "huang2023survey: L. Huang, W. Yu, W. Ma, et al. A Survey on Hallucination in Large Language Models. arXiv preprint arXiv:2311.05232, 2023.",
+        "title": "A Survey on Hallucination in Large Language Models",
+        "url": null,
+        "venue": "arXiv preprint",
+        "year": 2023
+      },
+      "exists": false,
+      "explanation": "Cited in the Introduction for classifying hallucination by source. It is relevant to the paper's hallucination-failure-mode framing, but the paper quickly departs into its own topological classification.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2303.08774",
+        "authors": [
+          "OpenAI"
+        ],
+        "doi": null,
+        "key": "openai2023gpt4",
+        "raw": "openai2023gpt4: OpenAI. GPT-4 Technical Report. arXiv preprint arXiv:2303.08774, 2023.",
+        "title": "GPT-4 Technical Report",
+        "url": null,
+        "venue": "arXiv preprint",
+        "year": 2023
+      },
+      "exists": false,
+      "explanation": "Cited in the Introduction as an example of scaling laws or scaled LLM development that has not eliminated hallucination. It is relevant as motivating context, not as a mathematical foundation.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "L. Ouyang",
+          "J. Wu",
+          "X. Jiang",
+          "et al."
+        ],
+        "doi": null,
+        "key": "ouyang2022training",
+        "raw": "ouyang2022training: L. Ouyang, J. Wu, X. Jiang, et al. Training Language Models to Follow Instructions with Human Feedback. NeurIPS, 2022.",
+        "title": "Training Language Models to Follow Instructions with Human Feedback",
+        "url": null,
+        "venue": "NeurIPS",
+        "year": 2022
+      },
+      "exists": false,
+      "explanation": "Cited in the Introduction as an example of reinforcement learning from human feedback, one of the mitigation approaches the paper says has not solved hallucination. It is relevant as LLM-method background.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "P. Lewis",
+          "E. Perez",
+          "A. Piktus",
+          "et al."
+        ],
+        "doi": null,
+        "key": "lewis2020retrieval",
+        "raw": "lewis2020retrieval: P. Lewis, E. Perez, A. Piktus, et al. Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks. NeurIPS, 2020.",
+        "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+        "url": null,
+        "venue": "NeurIPS",
+        "year": 2020
+      },
+      "exists": false,
+      "explanation": "Cited in the Introduction as an example of retrieval-augmented generation, another practical hallucination-mitigation approach. It is relevant to the motivation but not central to the paper's topology or HoTT claims.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "C. Cohen",
+          "T. Coquand",
+          "S. Huber",
+          "A. Mortberg"
+        ],
+        "doi": null,
+        "key": "cohen2018cubical",
+        "raw": "cohen2018cubical: C. Cohen, T. Coquand, S. Huber, and A. M\\\"ortberg. Cubical Type Theory: A Constructive Interpretation of the Univalence Axiom. FLAP, 4(10):3127--3170, 2017.",
+        "title": "Cubical Type Theory: A Constructive Interpretation of the Univalence Axiom",
+        "url": null,
+        "venue": "FLAP",
+        "year": 2017
+      },
+      "exists": false,
+      "explanation": "Cited in the Introduction and Discussion as providing computational content for HoTT and univalence via cubical type theory. This is highly relevant to the paper's proposed computational realization of path-based justifications.",
+      "notes": "The key says 2018 while the bibliography raw year is 2017; existence and metadata should be overlaid by the verifier.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "V. Voevodsky"
+        ],
+        "doi": null,
+        "key": "voevodsky2010univalent",
+        "raw": "voevodsky2010univalent: V. Voevodsky. Univalent Foundations Project. NSF Grant Proposal, 2010.",
+        "title": "Univalent Foundations Project",
+        "url": null,
+        "venue": "NSF Grant Proposal",
+        "year": 2010
+      },
+      "exists": false,
+      "explanation": "Cited in the Introduction as initiating the HoTT and univalent foundations program. It is foundationally relevant to the paper's univalence and homotopy-type-theoretic framing, though used historically rather than technically.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "J. Lurie"
+        ],
+        "doi": null,
+        "key": "lurie2009higher",
+        "raw": "lurie2009higher: J. Lurie. Higher Topos Theory. Princeton University Press, 2009.",
+        "title": "Higher Topos Theory",
+        "url": null,
+        "venue": "Princeton University Press",
+        "year": 2009
+      },
+      "exists": false,
+      "explanation": "No extracted in-text citation context cites this entry. The topic is conceptually relevant to infinity-categories, infinity-groupoids, and higher topos language, but the paper does not connect it to a specific definition or theorem.",
+      "notes": "Bibliography-only entry in the extracted contexts.",
+      "relevance": "low",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "J. P. May"
+        ],
+        "doi": null,
+        "key": "may1999concise",
+        "raw": "may1999concise: J. P. May. A Concise Course in Algebraic Topology. University of Chicago Press, 1999.",
+        "title": "A Concise Course in Algebraic Topology",
+        "url": null,
+        "venue": "University of Chicago Press",
+        "year": 1999
+      },
+      "exists": false,
+      "explanation": "No extracted in-text citation context cites this entry. It is general background for homotopy and homology terminology, but no particular result or construction in the paper is explicitly attributed to it.",
+      "notes": "Bibliography-only entry in the extracted contexts.",
+      "relevance": "low",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "H. Edelsbrunner",
+          "J. L. Harer"
+        ],
+        "doi": null,
+        "key": "edelsbrunner2010computational",
+        "raw": "edelsbrunner2010computational: H. Edelsbrunner and J. L. Harer. Computational Topology: An Introduction. American Mathematical Society, 2010.",
+        "title": "Computational Topology: An Introduction",
+        "url": null,
+        "venue": "American Mathematical Society",
+        "year": 2010
+      },
+      "exists": false,
+      "explanation": "Cited in the Persistent Homology for Practical Detection section for the stability theorem and for distinguishing low-persistence noise from genuine topological structure. It directly supports the proposed persistent-homology detection criterion.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "U. Bauer"
+        ],
+        "doi": null,
+        "key": "bauer2021ripser",
+        "raw": "bauer2021ripser: U. Bauer. Ripser: Efficient Computation of Vietoris--Rips Persistence Barcodes. Journal of Applied and Computational Topology, 5:391--423, 2021.",
+        "title": "Ripser: Efficient Computation of Vietoris--Rips Persistence Barcodes",
+        "url": null,
+        "venue": "Journal of Applied and Computational Topology",
+        "year": 2021
+      },
+      "exists": false,
+      "explanation": "Cited in the Persistent Homology for Practical Detection section as evidence that optimized Vietoris-Rips persistence implementations can be efficient on sparse inputs. It is relevant to computational feasibility rather than to the main theory.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "E. Riehl"
+        ],
+        "doi": null,
+        "key": "riehl2014categorical",
+        "raw": "riehl2014categorical: E. Riehl. Categorical Homotopy Theory. Cambridge University Press, 2014.",
+        "title": "Categorical Homotopy Theory",
+        "url": null,
+        "venue": "Cambridge University Press",
+        "year": 2014
+      },
+      "exists": false,
+      "explanation": "No extracted in-text citation context cites this entry. It is broadly relevant to categorical homotopy theory and could support the functor-to-homotopy-types claims, but the current text does not use it explicitly.",
+      "notes": "Bibliography-only entry in the extracted contexts.",
+      "relevance": "low",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "M. Shulman"
+        ],
+        "doi": null,
+        "key": "shulman2015univalence",
+        "raw": "shulman2015univalence: M. Shulman. Univalence for Inverse Diagrams and Homotopy Canonicity. Mathematical Structures in Computer Science, 25(5):1203--1277, 2015.",
+        "title": "Univalence for Inverse Diagrams and Homotopy Canonicity",
+        "url": null,
+        "venue": "Mathematical Structures in Computer Science",
+        "year": 2015
+      },
+      "exists": false,
+      "explanation": "No extracted in-text citation context cites this entry. It is relevant to univalence and homotopy canonicity, but the paper's univalence discussion cites only the HoTT book, so this entry is not textually integrated.",
+      "notes": "Bibliography-only entry in the extracted contexts.",
+      "relevance": "low",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "F. W. Lawvere"
+        ],
+        "doi": null,
+        "key": "lawvere1969adjointness",
+        "raw": "lawvere1969adjointness: F. W. Lawvere. Adjointness in Foundations. Dialectica, 23(3/4):281--296, 1969.",
+        "title": "Adjointness in Foundations",
+        "url": null,
+        "venue": "Dialectica",
+        "year": 1969
+      },
+      "exists": false,
+      "explanation": "No extracted in-text citation context cites this entry. The paper discusses category-theoretic semantics and weighted limits, but it does not discuss adjunctions or Lawvere's specific foundational argument.",
+      "notes": "Bibliography-only entry in the extracted contexts.",
+      "relevance": "low",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "1303.3255",
+        "authors": [
+          "J. Curry"
+        ],
+        "doi": null,
+        "key": "curry2014sheaves",
+        "raw": "curry2014sheaves: J. Curry. Sheaves, Cosheaves and Applications. arXiv preprint arXiv:1303.3255, 2014.",
+        "title": "Sheaves, Cosheaves and Applications",
+        "url": null,
+        "venue": "arXiv preprint",
+        "year": 2014
+      },
+      "exists": false,
+      "explanation": "Cited in the Introduction as part of the sheaf-theoretic signal-processing background. It is relevant to the paper's sheaf-cohomology formulation, although the paper does not cite it inside the technical theorem statement.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "M. Robinson"
+        ],
+        "doi": null,
+        "key": "robinson2014topological",
+        "raw": "robinson2014topological: M. Robinson. Topological Signal Processing. Springer, 2014.",
+        "title": "Topological Signal Processing",
+        "url": null,
+        "venue": "Springer",
+        "year": 2014
+      },
+      "exists": false,
+      "explanation": "Cited in the Introduction with Curry as prior work on sheaf-theoretic signal processing. It is relevant background for using sheaves to model local-to-global consistency failures.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    }
+  ],
+  "missing_references": [
+    {
+      "reason": "The paper has a full section reinterpreting attention as a weighted limit and repeatedly discusses current LLM architecture, but it does not cite the canonical transformer architecture paper.",
+      "title": "Attention Is All You Need"
+    },
+    {
+      "reason": "The Introduction names chain-of-thought prompting as a failed remedy but does not cite the main chain-of-thought prompting paper.",
+      "title": "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models"
+    },
+    {
+      "reason": "The Introduction names self-consistency decoding as a failed remedy but does not cite the standard self-consistency paper.",
+      "title": "Self-Consistency Improves Chain of Thought Reasoning in Language Models"
+    },
+    {
+      "reason": "The Introduction names constitutional AI as a failed remedy but does not cite the constitutional AI work it is invoking.",
+      "title": "Constitutional AI: Harmlessness from AI Feedback"
+    },
+    {
+      "reason": "The paper makes claims about hallucination and factuality in LLMs but omits a common benchmark paper for truthfulness and model falsehoods.",
+      "title": "TruthfulQA: Measuring How Models Mimic Human Falsehoods"
+    },
+    {
+      "reason": "The paper proposes practical hallucination detection, but it does not compare against a widely used black-box hallucination detection baseline.",
+      "title": "SelfCheckGPT: Zero-Resource Black-Box Hallucination Detection for Generative Large Language Models"
+    },
+    {
+      "reason": "The paper discusses factual hallucination and detection without citing fine-grained factual precision evaluation for long-form generations.",
+      "title": "FActScore: Fine-grained Atomic Evaluation of Factual Precision in Long Form Text Generation"
+    },
+    {
+      "reason": "The persistent-homology detection theorem invokes stability; citing only a textbook leaves out the original stability result usually expected for this claim.",
+      "title": "Stability of Persistence Diagrams"
+    },
+    {
+      "reason": "The persistent-homology computation discussion would be stronger with the original algorithmic reference for computing persistence, in addition to Ripser and a textbook.",
+      "title": "Computing Persistent Homology"
+    },
+    {
+      "reason": "The paper relies on interpreting identity types as groupoidal or homotopical structure; this foundational semantic bridge should cite the classic groupoid model of type theory.",
+      "title": "The Groupoid Interpretation of Type Theory"
+    },
+    {
+      "reason": "The paper's HoTT foundations would be better grounded by citing model-theoretic work on identity types as homotopy-theoretic objects, not only the HoTT book.",
+      "title": "Homotopy Theoretic Models of Identity Types"
+    },
+    {
+      "reason": "The paper frames DisCoCat as a grammar-to-vector functor but omits the pregrouplogical grammar foundation on which that framework is built.",
+      "title": "Type Grammar Revisited"
+    }
+  ],
+  "summary": "The cited bibliography is mostly relevant to the paper's stated themes: HoTT and univalence, DisCoCat/categorical semantics, hallucination surveys, TDA/persistent homology, and sheaf-theoretic signal processing. The main weakness is integration: several foundational entries in higher topos theory, algebraic topology, categorical homotopy theory, univalence, and Lawvere-style categorical foundations appear only in the bibliography with no extracted in-text citation context. The most important missing work concerns transformers and attention, the uncited mitigation methods named in the Introduction, empirical hallucination detection/evaluation baselines, and original persistent-homology stability/model references."
+}
+```
+
+### novelty (`gpt-5.5`) — status: `fail`
+
+```json
+{
+  "confidence": 0.53,
+  "missing_prior_art": [
+    {
+      "reason": "The paper does not appear to engage prior work specifically applying topology or persistent homology to word embeddings, sentence embeddings, language trajectories, or NLP error detection, which would be the closest empirical prior art for the detection claims.",
+      "title": "Topological data analysis of language embeddings and NLP representations"
+    },
+    {
+      "reason": "The proposed knowledge complex and sheaf obstruction framing overlaps with existing work on sheaves, database consistency, knowledge graphs, and local-to-global inconsistency detection, but that literature is not directly compared.",
+      "title": "Sheaf-theoretic and categorical approaches to database or knowledge-graph consistency"
+    },
+    {
+      "reason": "The HoTT-LM proposal should be compared with proof-carrying generation, neuro-symbolic theorem-proving systems, type-directed synthesis, and retrieval/provenance-grounded generation rather than only with generic LLM hallucination surveys.",
+      "title": "Type-directed and proof-carrying generation for neuro-symbolic language systems"
+    }
+  ],
+  "novelty_score": 0.32,
+  "related_work": [
+    {
+      "citation_key": "coecke2010mathematical",
+      "delta": "This paper replaces the vector-space DisCoCat codomain with an infinity-groupoid and interprets lost higher morphism structure as hallucination-relevant. The shift in target category is conceptually different, but it is presented largely as a high-level reframing rather than a demonstrated new semantic construction.",
+      "relation": "builds_on",
+      "title": "Mathematical Foundations for a Compositional Distributional Model of Meaning"
+    },
+    {
+      "citation_key": "hottbook",
+      "delta": "The paper imports the types-as-spaces and identity-types-as-paths interpretation into natural-language semantics. The use is mostly an application metaphor or program sketch; the core HoTT machinery is not extended with new formal results.",
+      "relation": "builds_on",
+      "title": "Homotopy Type Theory: Univalent Foundations of Mathematics"
+    },
+    {
+      "citation_key": "naitzat2020topology",
+      "delta": "Naitzat et al. already argue that neural networks simplify topology in learned representations. This paper extrapolates that observation to hallucination and claims a structural obstruction for contractible embedding spaces, but does not supply empirical or rigorous architectural evidence beyond the analogy.",
+      "relation": "builds_on",
+      "title": "Topology of Deep Neural Networks"
+    },
+    {
+      "citation_key": "carlsson2009topology",
+      "delta": "The paper uses persistent homology and Vietoris-Rips filtrations as a proposed hallucination detector. The novelty is in the proposed application to generation trajectories, not in the TDA machinery itself.",
+      "relation": "prior_art",
+      "title": "Topology and Data"
+    },
+    {
+      "citation_key": "ayzenberg2025sheaf",
+      "delta": "The sheaf-theoretic obstruction story is an application of local-to-global consistency ideas to hallucination. The paper does not clearly separate what is new from the existing sheaf-learning and sheaf-signal-processing literature.",
+      "relation": "builds_on",
+      "title": "Sheaf Theory: from Deep Geometry to Deep Learning"
+    },
+    {
+      "citation_key": "ji2023survey",
+      "delta": "The paper attempts to replace survey taxonomies of hallucination causes with a topological classification. Its claimed completeness is not substantiated against the empirical taxonomy literature.",
+      "relation": "competing",
+      "title": "Survey of Hallucination in Natural Language Generation"
+    },
+    {
+      "citation_key": "huang2023survey",
+      "delta": "The proposed five-way homotopy classification is positioned as deeper than existing source- or manifestation-based hallucination taxonomies, but the mapping from empirical categories to invariants is asserted rather than validated.",
+      "relation": "competing",
+      "title": "A Survey on Hallucination in Large Language Models"
+    },
+    {
+      "citation_key": "li2025memory",
+      "delta": "The paper cites persistent homology and contextual sheaves for memory trajectories and adapts that style of construction to hallucination and generation. If this citation is accurate, the incremental step is applying similar topology-and-sheaf language to LLM failure modes.",
+      "relation": "builds_on",
+      "title": "Memory as Structured Trajectories: Persistent Homology and Contextual Sheaves"
+    }
+  ],
+  "verdict": "marginal"
+}
+```
+
+### reproducibility (`gpt-5.5`) — status: `fail`
+
+```json
+{
+  "code_availability": "unspecified",
+  "code_url": null,
+  "concerns": [
+    {
+      "area": "code",
+      "description": "The paper includes illustrative Haskell snippets but provides no repository, complete source tree, build instructions, package versions, or executable formalization artifacts for reproducing the claimed implementation.",
+      "severity": "major"
+    },
+    {
+      "area": "data",
+      "description": "The proposed knowledge complex and embedding trajectories require grounded facts, justification relations, and embeddings, but no dataset, construction protocol, annotation scheme, or example corpus is provided.",
+      "severity": "major"
+    },
+    {
+      "area": "evaluation",
+      "description": "The paper outlines persistent-homology-based hallucination detection but provides no experiments, benchmark tasks, thresholds, metrics, baselines, or reported numerical results to reproduce.",
+      "severity": "major"
+    },
+    {
+      "area": "hyperparameters",
+      "description": "Operational parameters such as filtration scales, persistence threshold theta, embedding model choice, and candidate rejection criteria are not specified.",
+      "severity": "major"
+    },
+    {
+      "area": "compute",
+      "description": "Computational complexity is discussed qualitatively, but no hardware, runtime environment, or scalability measurements are specified.",
+      "severity": "minor"
+    },
+    {
+      "area": "other",
+      "description": "Most central claims are mathematical/theoretical and would require formal proofs or machine-checkable proof artifacts; the paper provides proof sketches but no independently checkable formalization.",
+      "severity": "major"
+    }
+  ],
+  "confidence": 0.88,
+  "data_availability": "unspecified",
+  "data_url": null,
+  "environment": null,
+  "reproducibility_score": 0.12
+}
+```
+
+### summary (`claude-haiku-4-5-20251001`) — status: `fail`
+
+```json
+{
+  "audience": "Researchers in machine learning and AI safety concerned with understanding fundamental limits of vector-space-based language models; category theorists and mathematicians interested in applications to semantic modeling; researchers designing alternative LLM architectures; AI alignment researchers investigating structural sources of model failure",
+  "key_contributions": [
+    "Establishes the Hallucination-Homotopy Correspondence: complete bijection between five hallucination types and homotopy-theoretic invariants (π₀, π₁, π₂, H_n, holonomy)",
+    "Proves the Fundamental Obstruction Theorem: any faithful embedding of semantic space into a contractible (vector space) codomain is impossible, establishing hallucination as structural inevitability",
+    "Hallucinaton-Homology Theorem: a model-generated claim is hallucinated if and only if it corresponds to non-trivial homology in the knowledge complex",
+    "Univalence Constraint: proves statistical similarity (cosine distance) is categorically insufficient for semantic identity, explaining entity confusion hallucinations",
+    "Functorial framework: the HHC correspondence is not merely a classification but a faithful, isomorphism-reflecting functor preserving structure across hallucination types",
+    "Sheaf-theoretic formulation: characterizes hallucinations as cohomological obstructions preventing local-to-global gluing of claims",
+    "Practical detection via persistent homology: provides computational method to detect hallucinations by identifying stable topological holes in embedding space",
+    "Architectural blueprint: outlines HoTT-LM replacing next-token prediction with type inhabitation search and demonstrates Haskell formalization using GADTs"
+  ],
+  "plain_language_summary": "This paper argues that LLM hallucinations are not primarily failures of training or data quality, but rather a fundamental mathematical consequence of how current language models represent meaning. The core insight is that human language and concepts naturally exist in a mathematically complex space with rich internal structure—multiple ways to justify relationships between ideas, loops of reasoning, coherences between different justifications. When language models compress this into embeddings (vectors in high-dimensional spaces), they discard this structure entirely, flattening it into a topologically trivial space where all \"holes\" and \"obstructions\" disappear. This means models cannot mathematically \"see\" certain types of invalid reasoning. The paper rigorously classifies five hallucination types by their topological nature: unjustified jumps between unrelated concepts (disconnection), circular self-reinforcing claims (non-contractible loops), contradictory justifications (incoherent higher structure), individually coherent but collectively unfounded chains (unfilled holes), and meanings that shift subtly with context (transport anomalies). Each maps precisely to mathematical objects studied in algebraic topology. The authors prove this constraint is not an artifact of current architectures but fundamental: no faithful representation of full semantic structure can map into a flat vector space. They provide practical detection via persistent homology and sketch an alternative architecture (HoTT-LM) based on richer mathematical structures, formalized in Haskell.",
+  "tldr": "The paper proves that LLM hallucinations are a mathematical inevitability arising from embedding semantically rich, topologically complex meaning into contractible vector spaces, and establishes a bijection between five hallucination types and specific homotopy-theoretic obstructions."
+}
+```
+
+### technical_correctness (`claude-opus-4-7`) — status: `fail`
+
+```json
+{
+  "claims": [
+    {
+      "assessment": "incorrect",
+      "claim": "The category Vect_R^fin is contractible: π_n(|N(Vect_R^fin)|) = 0 for all n ≥ 0.",
+      "evidence": "The classifying space of the groupoid of finite-dimensional real vector spaces (isomorphisms only) is ∐_n BGL_n(R), which is far from contractible: π_0 enumerates dimensions, and π_k(BGL_n(R)) recovers homotopy of the orthogonal/general linear groups (e.g., π_1(BGL_n(R)) ≅ Z/2 for n ≥ 2). The category with all linear maps is a pointed/additive category whose K-theory space (Quillen's construction) yields the connective real K-theory spectrum ko, which is not contractible (π_*(ko) includes Z, Z/2, Z/2, 0, Z, ...). The only way Vect is 'contractible' is in the trivial Ab-enriched sense where every morphism factors through 0, which collapses the entire homotopy-theoretic apparatus the paper is trying to invoke.",
+      "id": "C1",
+      "location": "Introduction, after Eq. (eq:statfunctor)",
+      "severity": "critical",
+      "suggested_fix": "Replace the contractibility claim with a precise statement of what is being lost: either (a) the embedding lands in a single fiber (a fixed R^d) which is contractible as a space, but this conflates the object with its underlying set; or (b) argue that the *functor* F factors through the truncation/discrete category, killing higher cells. The current sweeping claim about Vect is the load-bearing premise for Cor. 22 and Thm 21 and is mathematically incorrect."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Theorem 12 (Hallucination–Homology): a chain σ is hallucinated iff [σ] ≠ 0 ∈ H_n(K_•; Z).",
+      "evidence": "The proof is effectively definitional: 'hallucinated' is operationally taken to mean 'no (n+1)-chain τ with ∂τ = σ', which is verbatim the condition σ ∉ B_n. Given that K_• is defined so that n-simplices encode 'mutually justified' tuples, the theorem reduces to unpacking the definitions of Z_n and B_n; there is no independent notion of hallucination being equated with a homological obstruction. The forward direction's case 1 ('open boundary' = 'raw hallucination') is also definitional. The result is a true statement under the chosen definitions, but it is a tautology rather than a non-trivial bridge between LLM behavior and algebraic topology.",
+      "id": "C2",
+      "location": "§3.2, Theorem 12 (eq:main)",
+      "severity": "major",
+      "suggested_fix": "State the result honestly as a definitional equivalence, or provide an independent operational characterization of 'hallucinated' (e.g., empirical mismatch with a ground-truth knowledge base) and then prove non-trivially that this empirical notion is captured by H_n ≠ 0."
+    },
+    {
+      "assessment": "unsupported",
+      "claim": "Theorem 17 provides a complete classification of all hallucination types by homotopy-theoretic invariants (five types).",
+      "evidence": "The table is asserted as 'complete' but no exhaustiveness argument is given. The five 'types' are picked from the informal LLM literature and matched ad hoc to π_0, π_1, π_2, H_n, and holonomy. Many empirical hallucination phenomena (numerical errors, calibration overconfidence, prompt-injection-induced outputs, sycophantic agreement, copy-paste from memorized training data) do not obviously fit any of these five buckets. 'Compositional drift ↔ holonomy' uses a non-flat connection on the semantic fibration that is never constructed.",
+      "id": "C3",
+      "location": "§4.1, Theorem 17 (HHC)",
+      "severity": "major",
+      "suggested_fix": "Either prove completeness with respect to a precise definition of 'hallucination type', or downgrade the claim to 'five canonical examples' rather than 'complete classification'."
+    },
+    {
+      "assessment": "unsupported",
+      "claim": "Theorem 19: there exists a faithful, isomorphism-reflecting functor Φ: Hall → hTop_*.",
+      "evidence": "The category Hall (Def. 18) is not well-defined: 'structure-preserving maps … that preserve the hallucination structure' is circular — the structure to be preserved is what is being defined. Composition and identities are not specified. The 'proof sketch' invokes Hurewicz π_n ≅ H_n only for (n−1)-connected spaces, which is not assumed for K_•; in general the Hurewicz map is neither injective (n=1) nor surjective (higher). Faithfulness is asserted from 'distinct chains produce distinct chains', which is trivial; reflection of isomorphisms is not actually argued. No construction of Φ on morphisms is given.",
+      "id": "C4",
+      "location": "§4.2, Theorem 19 (eq:hhcfunctor)",
+      "severity": "major",
+      "suggested_fix": "Provide an explicit definition of Hall's morphisms with composition and identities, construct Φ on objects and morphisms separately, and replace the appeal to Hurewicz with a stable-range or low-dimensional argument that is actually valid."
+    },
+    {
+      "assessment": "incorrect",
+      "claim": "Theorem 21 (Fundamental Obstruction): no faithful functor F: Sem → C exists when C is contractible and Sem has non-trivial π_k.",
+      "evidence": "The proof conflates faithfulness of a functor (injectivity on Hom-sets) with faithfulness of the induced map on homotopy groups. A faithful functor between 1-categories can absolutely kill higher π_k of the geometric realization: e.g., the inclusion of a discrete category into a contractible category can be faithful while killing all loops. The argument that 'F(γ) ≃_H F(e) implies F(γ) = F(e)' confuses homotopy of morphisms with equality of morphisms; in an ordinary category there is no notion of homotopy between morphisms in the first place, and in an (∞,1)-category faithfulness is weakened to fully-faithfulness on mapping spaces, which is not what is assumed. The intended statement — that a homotopically faithful (∞,1)-functor cannot collapse non-trivial π_k — is true, but the proof given does not establish it.",
+      "id": "C5",
+      "location": "§5, Theorem 21",
+      "severity": "major",
+      "suggested_fix": "Restate as: there is no (∞,1)-functor that is fully faithful on mapping spaces from Sem (as an (∞,1)-category) to any contractible (∞,1)-category. Provide a real proof using the induced equivalences on mapping spaces."
+    },
+    {
+      "assessment": "unsupported",
+      "claim": "Corollary 22: any architecture with contractible representation space necessarily hallucinates on domains with non-trivial homotopy.",
+      "evidence": "This depends on (a) the incorrect claim C1 that Vect is contractible, and (b) the flawed Thm 21 (C5). Even granting both, the inference from 'no faithful functor exists' to 'the model hallucinates' requires identifying hallucination with non-faithfulness, which has not been done. Real LLMs use non-linear depth-many transformer maps; identifying their output with a single functor F: Sem → Vect is a major simplification that elides the entire computational pipeline.",
+      "id": "C6",
+      "location": "§5, Corollary 22",
+      "severity": "major",
+      "suggested_fix": "Either weaken the corollary to a conditional ('if a system were a single functor to a contractible target, then…') or model the actual transformer pipeline (composition of attention, MLP, residual streams) and argue at that level."
+    },
+    {
+      "assessment": "supported",
+      "claim": "Theorem 26: cosine similarity ≥ 1 − ε does not entail the existence of (f, g, η, ε, τ) witnessing semantic equivalence.",
+      "evidence": "The conclusion is correct and essentially trivial: a real-valued metric cannot witness existence of algebraic data without an explicit construction. The Frege morning/evening star example is a fine illustration. The auxiliary remark that 'the space of embeddings within ε is contractible while the space of semantic equivalences is non-contractible' is not strictly necessary for the conclusion and overstates what is being shown.",
+      "id": "C7",
+      "location": "§6, Theorem 26",
+      "severity": "info",
+      "suggested_fix": "Tighten by stating the trivial direction explicitly: cosine similarity is a function on R^d × R^d, while semantic equivalence is a Σ-type whose constructors include η, ε, τ; no real-valued statistic can produce these constructors."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Theorem 29 (Sheaf Obstruction): a claim is hallucinated iff its obstruction class o(ŝ) ∈ H^1(K_•, F) is non-trivial.",
+      "evidence": "The standard Čech exact sequence is invoked correctly: H^1 classifies gluing obstructions for sheaves. However, the link from 'a hallucinated claim ŝ' to 'a cocycle in Čech 1-cohomology' is asserted, not constructed. No procedure is given to extract a Čech cocycle from a model output, and the cover {U_i} is never specified for an actual conversation. The duality with Thm 12 via UCT also requires a specific coefficient setup (Z vs. R-vector spaces vs. the F-valued sheaf) that is not pinned down.",
+      "id": "C8",
+      "location": "§7, Theorem 29",
+      "severity": "major",
+      "suggested_fix": "Pin down the sheaf F (sets? abelian groups? types?), specify the cover associated to a generated claim, and exhibit the cocycle map ŝ ↦ δ({s_i}) explicitly."
+    },
+    {
+      "assessment": "unsupported",
+      "claim": "Theorem 37 (Persistent Hallucination Detection): a persistent H_1 class with persistence δ − β > θ traversed by the generation trajectory indicates hallucination with confidence proportional to δ − β.",
+      "evidence": "The argument that an embedding-space H_1 class is the 'shadow' of a hole in K_• is asserted but not proven. The stability theorem (Cohen-Steiner–Edelsbrunner–Harer) controls perturbations of barcodes under Hausdorff perturbations of point clouds, not the relationship between embedding-space topology and any external knowledge complex K_•. Without a metric between the embedding and K_• and a continuity claim for the embedding functor, no transfer of homological information is justified. No empirical evidence is presented.",
+      "id": "C9",
+      "location": "§9, Theorem 37",
+      "severity": "major",
+      "suggested_fix": "Either downgrade to a proposed heuristic and motivate empirically, or formalize an embedding-to-K_• map and prove a stability statement (and then validate experimentally)."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Proposition 33: softmax attention computes a weighted colimit in Vect that exists even when the Sem-limit does not.",
+      "evidence": "Softmax attention is a convex combination of value vectors, which is not literally a categorical colimit (a colimit is a universal cocone; convex combination is one particular cocone with no universality). The intuition that Vect is cocomplete and absorbs incoherence is correct, but the precise categorical identification is loose. The general point — that statistical aggregation cannot detect logical contradiction in the inputs — is correct.",
+      "id": "C10",
+      "location": "§8, Proposition 33 (eq:softmax)",
+      "severity": "minor",
+      "suggested_fix": "Replace 'weighted colimit' with 'weighted average' or 'enriched mean', or define the precise (co)limit notion (e.g., colimit in V-Cat for V = Vect with the appropriate weight)."
+    },
+    {
+      "assessment": "unsupported",
+      "claim": "Ripser achieves near-linear time on sparse inputs.",
+      "evidence": "Ripser is highly optimized in practice (apparent pairs, emergent pairs, clearing, cohomology), but its worst-case complexity for Vietoris–Rips persistence remains super-cubic in the number of simplices; 'near-linear on sparse inputs' is not an established complexity bound and is not claimed in Bauer (2021). Empirical timings on specific datasets are not a complexity statement.",
+      "id": "C11",
+      "location": "§9, Remark 38",
+      "severity": "minor",
+      "suggested_fix": "Replace with 'highly efficient in practice on sparse inputs' or cite specific empirical benchmarks; do not state a complexity bound that is not in the literature."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Hurewicz: a non-trivial π_1 element maps to a non-trivial element of H_1.",
+      "evidence": "Strictly, the Hurewicz map π_1 → H_1 is the abelianization map for path-connected spaces, so its kernel is the commutator subgroup [π_1, π_1]. A non-trivial loop that is a commutator maps to 0 in H_1. The argument is correct only for π_1 elements outside the commutator subgroup or for π_1 abelian.",
+      "id": "C12",
+      "location": "§4.1, proof of Theorem 17 Case 2",
+      "severity": "minor",
+      "suggested_fix": "Either restrict to homology classes (H_1) for case 2, or add the caveat that commutator loops in π_1 are detected at higher homology / higher Postnikov pieces but not by H_1 alone."
+    },
+    {
+      "assessment": "supported",
+      "claim": "Standard persistent-homology matrix reduction is O(m^3) in the number of simplices m.",
+      "evidence": "The cubic worst-case complexity of standard matrix reduction for persistent homology is well-established (Edelsbrunner–Harer 2010; Milosavljević–Morozov–Skraba). This part of the remark is correct.",
+      "id": "C13",
+      "location": "§9, Remark 38",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Categorical attention is the weighted limit lim^W D for diagram D: I → Sem and weight W: I^op → Set.",
+      "evidence": "Weighted limits are well-defined for V-enriched categories where W is a V-functor to V (not Set in general for non-Cartesian V). For Sem viewed as an (∞,1)-category, weighted (co)limits are defined via Lurie's framework, but the weight should land in the same enrichment as the hom-spaces, not Set. The definition as written is closer to a Cat-enriched conical limit weighted by Set-valued cardinalities, which is not what one wants for attention.",
+      "id": "C14",
+      "location": "§8, Definition 32 (eq:cattention)",
+      "severity": "minor",
+      "suggested_fix": "Specify the enrichment V of Sem and require W: I^op → V; alternatively, define attention as an end / coend with the correct enrichment."
+    },
+    {
+      "assessment": "supported",
+      "claim": "Univalence Axiom statement: (A =_U B) ≃ (A ≃ B).",
+      "evidence": "Standard statement of Voevodsky's univalence axiom as in the HoTT Book. Correctly cited.",
+      "id": "C15",
+      "location": "§6, Axiom 24 (eq:univalence)",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "unsupported",
+      "claim": "Proposition 20: every non-trivial homotopy class can be elicited as a hallucination from an LLM operating in Vect.",
+      "evidence": "The 'proof' rests on (a) the disputed claim that π_n(Vect) = 0 (C1), and (b) an unproven assumption that an LLM is guaranteed to traverse any 'hole' if a context is supplied 'near the support of the cycle'. No realizer is given: what counts as a prompt 'near the support of α'? No empirical demonstration is provided. The statement is an existential claim about all sufficiently capable LLMs without a constructive procedure.",
+      "id": "C16",
+      "location": "§4.3, Proposition 20",
+      "severity": "major",
+      "suggested_fix": "Either restrict to a formal toy model (a specific embedding map) and prove existence within it, or downgrade to a conjecture with proposed empirical tests."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Definition 5 / Eq. (eq:halluc-measure): hallucination is precisely the leak of the conditional measure μ_γ outside the fiber p^{-1}(γ).",
+      "evidence": "The measure-theoretic picture requires p: E → B to be a fibration in a category where measures and conditional measures are defined. A token-level next-token distribution is not literally a measure on a fiber of a fibration p: E → B; one needs a kernel / disintegration of a joint distribution. The definition is suggestive but not technically pinned down (no σ-algebras, no compatibility of disintegration with p).",
+      "id": "C17",
+      "location": "§2.2, Definition 5",
+      "severity": "minor",
+      "suggested_fix": "Either formalize using a probability monad and an explicit disintegration theorem, or weaken to a heuristic analogy."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Corollary 13: acyclicity of K_• implies hallucination-freedom.",
+      "evidence": "Given the tautological character of Thm 12 (C2), this corollary is also essentially definitional: under the chosen definition of K_•, every cycle is a boundary iff every internally consistent chain has a justification. True under the definitions, but does not provide a new operational test.",
+      "id": "C18",
+      "location": "§3.2, Corollary 13",
+      "severity": "minor",
+      "suggested_fix": "Note the tautological character or provide an independent operational criterion (e.g., existence of a justification within a fixed corpus) and prove the equivalence."
+    },
+    {
+      "assessment": "unsupported",
+      "claim": "The functor F: Sem → Vect maps an arbitrary non-trivial π_k element to 0.",
+      "evidence": "Even if Vect were contractible (which it is not — see C1), the conclusion that F_*([α]) = 0 requires that F be a functor in a homotopy-coherent sense and that π_k(Vect) = 0. Neither is established. Modern LLMs are not described by a single functor; they are compositions of trainable maps that, taken together, induce some map on derived structures. The reduction of the whole pipeline to a single π_*-killing functor is unjustified.",
+      "id": "C19",
+      "location": "§4.3, proof of Proposition 20",
+      "severity": "major",
+      "suggested_fix": "Replace with a careful model of the actual computational pipeline, or argue at the level of representable functors / nerves with proper care."
+    },
+    {
+      "assessment": "unsupported",
+      "claim": "Definition 18 (category Hall of hallucination events) is a well-defined category.",
+      "evidence": "Morphisms are defined as 'structure-preserving maps that preserve the hallucination structure', which is circular. Identities, composition, and associativity are not exhibited. Without a well-defined source category, Theorem 19's functor Φ has no domain.",
+      "id": "C20",
+      "location": "§4.2, Definition 18",
+      "severity": "major",
+      "suggested_fix": "Give a concrete definition: e.g., objects are tuples (M, Γ, â, A) and morphisms are pairs (f: Γ → Γ', g: â ↦ â') with explicit conditions, and verify the category axioms."
+    },
+    {
+      "assessment": "unsupported",
+      "claim": "Reinterpretation of attention as 'approximate section' of the semantic fibration (Prop. 6).",
+      "evidence": "No precise notion of 'approximate section' is defined; no metric/topology on sections is specified; no proof is given that softmax attention realizes such a section even approximately. The statement is a suggestive analogy, not a proposition with content.",
+      "id": "C21",
+      "location": "§2.2, Proposition 6",
+      "severity": "minor",
+      "suggested_fix": "Promote to a remark, or define 'approximate section' precisely (e.g., section up to ε in some norm) and prove the approximation."
+    },
+    {
+      "assessment": "supported",
+      "claim": "Type inhabitation for full homotopy types is undecidable.",
+      "evidence": "Type inhabitation for MLTT with full universes / univalence subsumes higher-order proof search and is well-known to be undecidable. The paper's acknowledgement is correct.",
+      "id": "C22",
+      "location": "§11.3, Computational considerations",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Definition of grounded vs. hallucinated term via propositional truncation ‖g =_A â‖.",
+      "evidence": "The definition is internally consistent within HoTT but conflates two distinct phenomena: (i) absence of any sourced g with a path, (ii) inability to compute such a path. Real systems may have the path exist but not find it. The definition therefore captures 'no possible justification', not 'this model failed to produce a justification'.",
+      "id": "C23",
+      "location": "§2.3, Definition 8",
+      "severity": "minor",
+      "suggested_fix": "Split into 'objectively hallucinated' (no g, no path exists) and 'epistemically hallucinated' (model failed to produce one); only the first is what Def. 8 captures."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Statistical Float justification is a 'measure on the fiber, not a term in the path type' — and this is the 'fundamental category error'.",
+      "evidence": "The distinction is philosophically reasonable, but the claim that a probability 'carries no derivational structure' is too strong: a likelihood can be decomposed into a chain of conditional independences that *do* carry derivational structure (e.g., a Bayesian network). The right statement is that current LLMs do not expose this structure, not that probability itself is structure-free.",
+      "id": "C24",
+      "location": "§10.2, Listing on Justifications",
+      "severity": "minor",
+      "suggested_fix": "Rephrase: 'current LLMs expose only the scalar p, not the derivational structure that could produce it'."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Connection to delta-homology of Li (2025): 'memory formation is cycle closure, and valid retrieval requires the cycle to persist across filtration scales.'",
+      "evidence": "This is a citation-driven analogy, not an independent contribution. The paraphrase of Li (2025) is plausible but the reviewer cannot verify it against the cited preprint within this assessment; the connection is suggestive but not proved.",
+      "id": "C25",
+      "location": "§7, Remark 31",
+      "severity": "info",
+      "suggested_fix": "Make the analogy explicit as 'we conjecture' or 'as suggested by [li2025memory]'."
+    }
+  ],
+  "confidence": 0.78,
+  "overall_correctness": "questionable"
+}
+```
+
+## Corrections
+
+<!-- corrections-section: rendered from corrections table; empty on first publish -->
+_No corrections have been recorded._
+
+## Bibliography
+
+_No bibliography extracted._
+
