@@ -1,0 +1,257 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\title{Graphical Algebraic Geometry: From Ideals and Varieties to Quantum Calculi}
+\date{}
+\begin{document}
+\maketitle
+
+\noindent\textbf{arXiv:} \href{https://arxiv.org/abs/2605.13993}{2605.13993} \quad \textbf{Field:} quant-ph\\
+
+\section*{TL;DR}
+This paper introduces Graphical Algebraic Geometry (GAG), a family of diagrammatic languages for commutative algebras and affine varieties, extending the Graphical Linear Algebra (GLA) programme. The central claims are: (1) GAG is universal and complete for (co)span semantics of commutative algebras and affine varieties; (2) \#CSP instances reduce to GAG diagram rewriting, making rewritability \#P-hard; (3) the qudit ZH calculus is an extension of GAG, analogous to how GLA underlies ZX; and (4) quantum amplitude computation in qudit ZH requires only a constant number of GAG oracle queries. The work is theoretically ambitious and bridges algebraic geometry, computational complexity, and quantum information. However, the primary correctness concerns stem from the fact that key proofs reside in appendices that were not fully assessable, leaving the central completeness theorems, the ZH-GAG embedding, and the constant-query oracle claim only partially verified. Novelty is rated highly (0.9), and reproducibility is reasonable for a theoretical paper (0.78), though no code or mechanized proof artifacts are provided. No bibliography was supplied, precluding citation audit. Overall the contribution is significant and the approach is sound in outline, but several major claims require more explicit, self-contained justification before acceptance.
+
+\textbf{Recommendation:} Major revision \quad \textbf{Confidence:} 62\%\\
+
+\section*{Strengths}
+\begin{itemize}[leftmargin=*]
+  \item Highly novel contribution: GAG fills a genuine gap by lifting the GLA/ZX programme to the richer setting of commutative algebras and affine varieties, establishing the GAG:ZH :: GLA:ZX analogy on solid categorical footing.
+  \item Breadth of applications: the paper connects three distinct areas—algebraic geometry, counting complexity (\#CSP, \#P-hardness), and quantum computation (qudit ZH calculus)—within a single compositional framework.
+  \item Use of well-established categorical infrastructure (PROPs, (co)span semantics) lends structural plausibility to the completeness claims and follows a proven methodological template from GLA.
+  \item Appendices containing formal proofs are present, which is a positive indicator of reproducibility for a purely theoretical work.
+  \item The plain-language framing and the explicit analogy to GLA/ZX make the contribution accessible to a broader audience spanning mathematics, computer science, and quantum information.
+\end{itemize}
+
+\section*{Weaknesses}
+\begin{itemize}[leftmargin=*]
+  \item Central completeness and universality theorems (C1) are not self-contained in the main text; they depend entirely on appendix proofs that could not be fully validated, and no explicit normal-form construction or exhaustive axiom soundness check is summarised in the body.
+  \item The characterisation of qudit ZH as an extension of GAG (C4) lacks an explicit generator-to-generator and axiom-to-axiom mapping table in the main text; it is unclear which qudit dimensions are covered and whether all ZH axioms are derivable.
+  \item The 'constant number of oracle queries' claim (C5) for amplitude computation is stated without a precise oracle interface definition, a formal reduction proof, or a clear bound (e.g., O(1) queries independent of diagram size).
+  \item The \#P-hardness reduction (C2) needs explicit complexity bookkeeping—specifically, the size of the resulting GAG diagram as a function of the \#CSP instance, and clarification of whether hardness concerns exact rewritability or amplitude computation.
+  \item The meaning of 'complete rewrite system' (C3) is ambiguous: it is unclear whether confluence, termination, or only equational completeness is claimed.
+  \item No bibliography was provided for review, preventing any audit of citation coverage or identification of missing related work.
+  \item No code or mechanized proof artifacts are available, which, while acceptable for a theoretical paper, limits independent verification of the rewrite systems and reductions.
+\end{itemize}
+
+\section*{Open Questions}
+\begin{itemize}[leftmargin=*]
+  \item Can the authors provide a self-contained summary theorem in the main body stating all hypotheses (field characteristics, finiteness assumptions) for the completeness and universality results, along with a sketch of the normal-form construction?
+  \item For the ZH-GAG embedding (C4), can an explicit table be provided mapping each ZH generator and axiom to GAG counterparts, specifying which qudit dimensions d are covered?
+  \item What is the precise oracle interface for the constant-query amplitude computation result (C5)? Is it truly O(1) queries independent of diagram size, and can a formal reduction proof or pseudocode be supplied?
+  \item For the \#CSP reduction (C2), what is the asymptotic size of the GAG diagram produced from a \#CSP instance of size n? Does the hardness result apply to exact rewritability, approximate rewritability, or amplitude extraction?
+  \item What does 'complete rewrite system' mean operationally in this context—equational completeness only, confluence, or also termination? If confluence and termination are not claimed, how should one algorithmically apply the rewrite rules?
+  \item How does GAG relate to other existing diagrammatic or categorical formalisms for commutative algebra and algebraic geometry beyond GLA and ZX/ZH? Is there overlap with, e.g., Cartesian differential categories or other string-diagrammatic approaches to polynomial systems?
+\end{itemize}
+
+\section*{Per-Agent Reviews}
+\subsection*{citation (\texttt{gemini-2.5-flash})}
+\begin{verbatim}
+{
+  "confidence": 0,
+  "entries": [],
+  "missing_references": [],
+  "summary": "No bibliography was provided in the prompt, therefore no citations could be audited. The 'entries' and 'missing_references' arrays are empty as a result."
+}
+\end{verbatim}
+
+\subsection*{meta_reviewer (\texttt{claude-sonnet-4-6})}
+\begin{verbatim}
+{
+  "confidence": 0.62,
+  "questions": [
+    "Can the authors provide a self-contained summary theorem in the main body stating all hypotheses (field characteristics, finiteness assumptions) for the completeness and universality results, along with a sketch of the normal-form construction?",
+    "For the ZH-GAG embedding (C4), can an explicit table be provided mapping each ZH generator and axiom to GAG counterparts, specifying which qudit dimensions d are covered?",
+    "What is the precise oracle interface for the constant-query amplitude computation result (C5)? Is it truly O(1) queries independent of diagram size, and can a formal reduction proof or pseudocode be supplied?",
+    "For the #CSP reduction (C2), what is the asymptotic size of the GAG diagram produced from a #CSP instance of size n? Does the hardness result apply to exact rewritability, approximate rewritability, or amplitude extraction?",
+    "What does 'complete rewrite system' mean operationally in this context—equational completeness only, confluence, or also termination? If confluence and termination are not claimed, how should one algorithmically apply the rewrite rules?",
+    "How does GAG relate to other existing diagrammatic or categorical formalisms for commutative algebra and algebraic geometry beyond GLA and ZX/ZH? Is there overlap with, e.g., Cartesian differential categories or other string-diagrammatic approaches to polynomial systems?"
+  ],
+  "recommendation": "major_revision",
+  "strengths": [
+    "Highly novel contribution: GAG fills a genuine gap by lifting the GLA/ZX programme to the richer setting of commutative algebras and affine varieties, establishing the GAG:ZH :: GLA:ZX analogy on solid categorical footing.",
+    "Breadth of applications: the paper connects three distinct areas—algebraic geometry, counting complexity (#CSP, #P-hardness), and quantum computation (qudit ZH calculus)—within a single compositional framework.",
+    "Use of well-established categorical infrastructure (PROPs, (co)span semantics) lends structural plausibility to the completeness claims and follows a proven methodological template from GLA.",
+    "Appendices containing formal proofs are present, which is a positive indicator of reproducibility for a purely theoretical work.",
+    "The plain-language framing and the explicit analogy to GLA/ZX make the contribution accessible to a broader audience spanning mathematics, computer science, and quantum information."
+  ],
+  "summary": "This paper introduces Graphical Algebraic Geometry (GAG), a family of diagrammatic languages for commutative algebras and affine varieties, extending the Graphical Linear Algebra (GLA) programme. The central claims are: (1) GAG is universal and complete for (co)span semantics of commutative algebras and affine varieties; (2) #CSP instances reduce to GAG diagram rewriting, making rewritability #P-hard; (3) the qudit ZH calculus is an extension of GAG, analogous to how GLA underlies ZX; and (4) quantum amplitude computation in qudit ZH requires only a constant number of GAG oracle queries. The work is theoretically ambitious and bridges algebraic geometry, computational complexity, and quantum information. However, the primary correctness concerns stem from the fact that key proofs reside in appendices that were not fully assessable, leaving the central completeness theorems, the ZH-GAG embedding, and the constant-query oracle claim only partially verified. Novelty is rated highly (0.9), and reproducibility is reasonable for a theoretical paper (0.78), though no code or mechanized proof artifacts are provided. No bibliography was supplied, precluding citation audit. Overall the contribution is significant and the approach is sound in outline, but several major claims require more explicit, self-contained justification before acceptance.",
+  "weaknesses": [
+    "Central completeness and universality theorems (C1) are not self-contained in the main text; they depend entirely on appendix proofs that could not be fully validated, and no explicit normal-form construction or exhaustive axiom soundness check is summarised in the body.",
+    "The characterisation of qudit ZH as an extension of GAG (C4) lacks an explicit generator-to-generator and axiom-to-axiom mapping table in the main text; it is unclear which qudit dimensions are covered and whether all ZH axioms are derivable.",
+    "The 'constant number of oracle queries' claim (C5) for amplitude computation is stated without a precise oracle interface definition, a formal reduction proof, or a clear bound (e.g., O(1) queries independent of diagram size).",
+    "The #P-hardness reduction (C2) needs explicit complexity bookkeeping—specifically, the size of the resulting GAG diagram as a function of the #CSP instance, and clarification of whether hardness concerns exact rewritability or amplitude computation.",
+    "The meaning of 'complete rewrite system' (C3) is ambiguous: it is unclear whether confluence, termination, or only equational completeness is claimed.",
+    "No bibliography was provided for review, preventing any audit of citation coverage or identification of missing related work.",
+    "No code or mechanized proof artifacts are available, which, while acceptable for a theoretical paper, limits independent verification of the rewrite systems and reductions."
+  ]
+}
+\end{verbatim}
+
+\subsection*{novelty (\texttt{gemini-2.5-flash})}
+\begin{verbatim}
+{
+  "confidence": 5,
+  "missing_prior_art": [
+    {
+      "reason": "The paper claims GAG is 'universal and complete for the corresponding (co)span semantics of commutative algebras and affine varieties.' While specific to (co)span semantics, a broader discussion or comparison with other existing categorical or diagrammatic approaches to algebraic structures, especially those touching on polynomial systems or varieties, could further contextualize its novelty and contributions.",
+      "title": "Other diagrammatic or categorical formalisms for commutative algebra or algebraic geometry"
+    }
+  ],
+  "novelty_score": 0.9,
+  "related_work": [
+    {
+      "citation_key": null,
+      "delta": "This paper introduces Graphical Algebraic Geometry (GAG) as an extension of the Graphical Linear Algebra programme, moving from linear algebra to the more general domain of commutative algebras and affine varieties. GAG provides diagrammatic languages for polynomials, ideals, and varieties, which GLA does not cover.",
+      "relation": "builds_on",
+      "title": "Graphical Linear Algebra (GLA) programme"
+    },
+    {
+      "citation_key": null,
+      "delta": "The paper uses the well-established relationship between Graphical Linear Algebra and the ZX calculus as an analogy to position GAG. It establishes that GAG is to the ZH calculus what GLA is to the ZX calculus, providing a foundational algebraic layer for the ZH calculus similar to how GLA underpins ZX.",
+      "relation": "prior_art",
+      "title": "ZX Calculus"
+    },
+    {
+      "citation_key": null,
+      "delta": "This paper characterizes the qudit ZH calculus, a diagrammatic language for quantum computation, as an extension of Graphical Algebraic Geometry. GAG provides the underlying algebraic geometry framework for ZH, offering a deeper understanding of its structure and enabling amplitude computation via GAG oracles.",
+      "relation": "builds_on",
+      "title": "Qudit ZH Calculus"
+    },
+    {
+      "citation_key": null,
+      "delta": "The paper recasts instances of #CSP as rewrite problems of closed diagrams in GAG. This provides a novel, complete, and compositional rewrite system for networks of polynomial constraints, demonstrating GAG's expressive power and its relevance to a #P-hard problem.",
+      "relation": "orthogonal",
+      "title": "Counting Constraint Satisfaction Problem (#CSP)"
+    }
+  ],
+  "verdict": "significant"
+}
+\end{verbatim}
+
+\subsection*{reproducibility (\texttt{gpt-5.5})}
+\begin{verbatim}
+{
+  "code_availability": "unspecified",
+  "code_url": null,
+  "concerns": [
+    {
+      "area": "code",
+      "description": "No code or mechanized proof artifact is indicated. This is likely acceptable for a primarily theoretical paper, but it limits automated checking of rewrite systems, translations, and complexity reductions.",
+      "severity": "minor"
+    },
+    {
+      "area": "data",
+      "description": "No datasets or experimental artifacts are indicated; the paper appears to be theoretical, so external data may not be required.",
+      "severity": "info"
+    },
+    {
+      "area": "evaluation",
+      "description": "Reproducibility depends on the completeness and clarity of formal definitions, rewrite rules, semantics, and proofs. The listed appendix/proof sections are a positive sign, but reproducibility cannot be fully assessed from the abstract and section headings alone.",
+      "severity": "minor"
+    }
+  ],
+  "confidence": 0.65,
+  "data_availability": "unspecified",
+  "data_url": null,
+  "environment": null,
+  "reproducibility_score": 0.78
+}
+\end{verbatim}
+
+\subsection*{summary (\texttt{claude-haiku-4-5-20251001})}
+\begin{verbatim}
+{
+  "audience": "Researchers in algebraic geometry, categorical logic, quantum computing, computational complexity theory, and diagrammatic reasoning; mathematicians and computer scientists interested in visual approaches to abstract algebra and constraint satisfaction problems.",
+  "key_contributions": [
+    "Introduction of Graphical Algebraic Geometry (GAG), a family of diagrammatic languages for representing commutative algebras and affine varieties with proven universality and completeness",
+    "Proof that counting constraint satisfaction problems (#CSP) can be recast as diagram rewriting problems in GAG, establishing that GAG rewritability is #P-hard",
+    "Characterization of the qudit ZH calculus as an extension of GAG, establishing the correspondence between GAG and ZH calculus analogous to Graphical Linear Algebra and ZX calculus",
+    "Demonstration that computing quantum amplitudes in qudit ZH requires only constant-depth queries to a GAG oracle",
+    "A compositional and complete rewrite system for networks of polynomial constraints with clear graphical semantics"
+  ],
+  "plain_language_summary": "This paper introduces Graphical Algebraic Geometry (GAG), a visual language for representing and reasoning about algebraic structures like polynomials, equations, and geometric varieties. Just as pictures can sometimes communicate mathematical ideas more intuitively than symbols, GAG uses diagrams (nodes and wires) to represent algebraic operations, making complex polynomial relationships easier to understand and manipulate. The authors prove these diagrams are complete and universal—meaning any algebraic relationship can be expressed and reasoned about graphically.\n\nThe paper demonstrates two major applications. First, it shows that counting constraint satisfaction problems (a class of computationally hard problems) can be translated into questions about rewriting diagrams in GAG. This connection reveals that GAG is fundamentally tied to computational complexity. Second, the authors establish that the ZH calculus—a diagrammatic system used in quantum computing—is actually a special case of GAG. This creates a beautiful parallel: just as Graphical Linear Algebra relates to the ZX calculus in quantum computing, GAG relates to the ZH calculus, suggesting a deep structural connection between algebraic geometry and quantum computation.\n\nThe work bridges pure mathematics (algebraic geometry), computer science (constraint satisfaction and computational complexity), and quantum information theory, providing a unified graphical framework that makes reasoning about these diverse areas more intuitive and compositional.",
+  "tldr": "A new diagrammatic language for algebraic geometry that unifies polynomial constraints, quantum computing, and counting problems through graphical reasoning."
+}
+\end{verbatim}
+
+\subsection*{technical_correctness (\texttt{claude-opus-4-7})}
+\begin{verbatim}
+{
+  "claims": [
+    {
+      "assessment": "partially_supported",
+      "claim": "The introduced graphical languages within GAG are universal and complete for the corresponding (co)span semantics of commutative algebras and affine varieties.",
+      "evidence": "The paper claims completeness/universality theorems and references appendices ('Proofs about LangSpk and LangSpq') containing the proofs. Without verifying the detailed proofs in the appendices, the claim follows the established pattern of Graphical Linear Algebra completeness results (e.g., Bonchi-Sobocinski-Zanasi), which is plausible but cannot be fully validated from the head-only sections provided.",
+      "id": "C1",
+      "location": "Abstract; Sections 'Graphical Commutative Algebra' and 'Graphical Algebraic Geometry'",
+      "severity": "major",
+      "suggested_fix": "Ensure that the completeness proofs explicitly state the normal form construction and the soundness of each axiom with respect to the (co)span semantics; include a summary theorem statement with all hypotheses (e.g., field characteristics, finiteness assumptions)."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Instances of #CSP can be recast as rewrite problems of closed diagrams in GAG, implying that deciding rewritability in GAG is #P-hard.",
+      "evidence": "The reduction from #CSP to diagrammatic rewriting is a natural extension of known correspondences between tensor networks/string diagrams and counting problems. The hardness conclusion follows immediately from a polynomial-time reduction. Plausible but contingent on appendix details.",
+      "id": "C2",
+      "location": "Section 'From GAG to Counting CSP'; Appendix 'Proof of GAG as CSP'",
+      "severity": "minor",
+      "suggested_fix": "State the reduction explicitly with complexity bookkeeping (size of resulting diagram in terms of #CSP instance) and clarify whether the hardness holds for exact rewritability or for amplitude computation."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "GAG provides a complete and compositional rewrite system for networks of polynomial constraints.",
+      "evidence": "Completeness of the rewrite system depends on the completeness theorem (C1). If C1 holds, compositional rewriting for polynomial constraint networks follows. The claim is consistent with PROP-based compositional semantics.",
+      "id": "C3",
+      "location": "Abstract; Section 'From GAG to Counting CSP'",
+      "severity": "minor",
+      "suggested_fix": "Clarify what 'complete rewrite system' means operationally (confluence? termination? equational completeness only?)."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "The qudit ZH calculus is characterized as an extension of Graphical Algebraic Geometry.",
+      "evidence": "The analogy 'GAG : ZH :: GLA : ZX' is plausible because ZH generators encode multiplicative/polynomial structure (H-boxes encode multilinear forms), while ZX corresponds more to linear/Fourier structure. The detailed embedding into qudit ZH would need to verify all ZH axioms are derivable from GAG plus the claimed extensions.",
+      "id": "C4",
+      "location": "Section 'From GAG to Qudit ZH Calculus'; Appendix 'Proofs about ZH calculus as an extension of GAG'",
+      "severity": "major",
+      "suggested_fix": "Provide an explicit table mapping ZH generators and axioms to GAG counterparts; specify which dimension/qudit-d cases are covered."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Computing amplitudes in qudit ZH requires only a constant number of queries to a GAG oracle.",
+      "evidence": "A constant-query reduction is a strong claim. It is plausible if amplitude extraction reduces to closing a diagram and asking a single rewritability/value query of the oracle. However, 'constant number of queries' should be carefully qualified (e.g., one query per amplitude, independent of diagram size).",
+      "id": "C5",
+      "location": "Abstract; Section 'From GAG to Qudit ZH Calculus'",
+      "severity": "major",
+      "suggested_fix": "State the oracle interface precisely and prove the reduction with a bound (e.g., O(1) queries per amplitude with diagrams of size polynomial in the ZH diagram)."
+    },
+    {
+      "assessment": "supported",
+      "claim": "GAG provides clear graphical representations of polynomials, ideals, and varieties enabling diagrammatic reasoning.",
+      "evidence": "This is largely a descriptive/expository claim. The framework of PROPs/props with span and cospan semantics is well-established for representing algebraic structures.",
+      "id": "C6",
+      "location": "Introduction; Sections 'The Polynomial Fragment', 'Graphical Algebraic Geometry'",
+      "severity": "info",
+      "suggested_fix": null
+    }
+  ],
+  "confidence": 0.45,
+  "overall_correctness": "mostly_sound"
+}
+\end{verbatim}
+
+\section*{Corrections}
+% corrections rendered from corrections table; empty on first publish
+No corrections have been recorded.
+
+\section*{Bibliography}
+No bibliography extracted.
+
+% \bibliographystyle{plain}
+% \bibliography{references}
+\end{document}
