@@ -1,0 +1,391 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\title{Strong-disorder expansion of the root-averaged density of states for the Anderson model on the Bethe lattice}
+\date{}
+\begin{document}
+\maketitle
+
+\noindent\textbf{arXiv:} \href{https://arxiv.org/abs/2605.00478}{2605.00478} \quad \textbf{Field:} math-ph\\
+
+\section*{TL;DR}
+This paper studies the density of states (DOS) for the Anderson model on the Bethe lattice in the strong-disorder regime. The main contributions are: (1) a proof that the root-averaged DOS is absolutely continuous and real analytic in the strong-disorder regime; (2) a finite-order strong-disorder expansion with explicit structure (leading term equals the single-site density, odd coefficients vanish, higher coefficients governed by closed-walk occupation profiles on the tree); and (3) an explicit computation of the first nonzero correction for the uniform disorder distribution. The methods combine random-walk expansions on trees with complex-analytic Stieltjes transform arguments. The work is a solid, technically demanding contribution to mathematical physics, well-grounded in foundational literature. However, several aspects of the proofs—particularly the quantitative convergence of the complex-analytic continuation, the parity argument for vanishing of odd coefficients, and the distinction between asymptotic and convergent expansions—require clarification or more explicit justification. The novelty is incremental relative to prior results (e.g., C∞ smoothness of DOS in other settings, localization results by Aizenman–Molchanov), but the combination of real analyticity, a Bethe-lattice geometry, and explicit expansion coefficients represents a genuine contribution. Citation coverage is generally strong, though a few methodologically relevant references appear to be missing.
+
+\textbf{Recommendation:} Minor revision \quad \textbf{Confidence:} 72\%\\
+
+\section*{Strengths}
+\begin{itemize}[leftmargin=*]
+  \item Proves real analyticity (stronger than mere smoothness) of the root-averaged DOS for the Anderson model on the Bethe lattice in the strong-disorder regime, a result not previously established in this geometric setting.
+  \item Develops a rigorous and self-contained complex-analytic framework combining random-walk tree expansions with Stieltjes transform methods, providing a clean and transferable methodology.
+  \item Structural clarity of the expansion: explicit identification of leading term, vanishing of odd coefficients, and combinatorial interpretation of higher coefficients in terms of closed-walk occupation profiles.
+  \item Provides an explicit computation of the first nonzero correction term for the uniform distribution, grounding the abstract results in a concrete example.
+  \item Well-situated in the literature, citing seminal works (Anderson 1958, Abou-Chacra–Anderson–Thouless 1973, Fröhlich–Spencer 1983, Klein 1994, Aizenman–Warzel 2015) and correctly distinguishing the root-averaged spectral measure from finite-volume eigenvalue counting.
+  \item The work is purely theoretical; reproducibility concerns are minimal and appropriate for this type of mathematical paper.
+\end{itemize}
+
+\section*{Weaknesses}
+\begin{itemize}[leftmargin=*]
+  \item The holomorphic continuation of the scaled diagonal resolvent to a complex neighborhood of the relevant interval (Claim C1) is stated but the quantitative control—radius of holomorphy, explicit threshold λ\_0, and uniformity over walk depth—is not made explicit in the reviewed material, making independent verification difficult.
+  \item The parity argument for vanishing of odd coefficients (Claim C4) is plausible from the tree structure but is not explicitly stated; a clear combinatorial or algebraic justification should be provided.
+  \item It is unclear whether 'finite-order expansion' means a convergent series or an asymptotic expansion with a controlled remainder of arbitrary order; this distinction has significant mathematical implications and should be clarified.
+  \item The explicit computation of the first nonzero correction for the uniform distribution (Claim C6) is not cross-validated against numerical evaluation of the DOS at large disorder, leaving a potential gap in verification.
+  \item Novelty is incremental: the result strengthens smoothness to analyticity and moves from Z\^{}d to the Bethe lattice, but the conceptual advance over prior art (Bovier et al., Aizenman–Molchanov) is relatively modest.
+  \item A few methodologically relevant references appear to be missing, specifically: Constantinescu–Fröhlich–Spencer on analyticity of the DOS in the strong-disorder regime, and Aizenman–Graf on graphical/locator expansion techniques.
+\end{itemize}
+
+\section*{Open Questions}
+\begin{itemize}[leftmargin=*]
+  \item Can the authors provide explicit quantitative bounds on the radius of holomorphy of the diagonal resolvent and the threshold disorder strength λ\_0, and clarify uniformity of these bounds over walk length/depth?
+  \item What is the precise parity argument that forces all odd-order coefficients in the strong-disorder expansion to vanish? Is it simply that all closed walks on a tree have even length, or is there an additional symmetry assumption on the single-site distribution?
+  \item Is the strong-disorder expansion convergent (in some norm) or merely asymptotic with a controlled remainder? If asymptotic, what is the explicit form of the remainder estimate?
+  \item Have the authors compared the explicit first correction term for the uniform distribution against numerical computation of the DOS at large but finite disorder, as a sanity check?
+  \item Why are Constantinescu–Fröhlich–Spencer (1983) on analyticity of the DOS and Aizenman–Graf (1993) on localization bounds not cited, given their methodological relevance to the techniques employed?
+\end{itemize}
+
+\section*{Per-Agent Reviews}
+\subsection*{citation (\texttt{gemini-2.5-pro})}
+\begin{verbatim}
+{
+  "confidence": 4.5,
+  "entries": [
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "R. Abou-Chacra",
+          "P. W. Anderson",
+          "D. J. Thouless"
+        ],
+        "doi": "10.1088/0022-3719/6/10/009",
+        "key": "AAT73",
+        "raw": "R. Abou-Chacra, P. W. Anderson, and D. J. Thouless. A self-consistent theory of localization. Journal of Physics C: Solid State Physics, 6(10):1734, 1973.",
+        "title": "A self-consistent theory of localization",
+        "url": null,
+        "venue": "Journal of Physics C: Solid State Physics",
+        "year": 1973
+      },
+      "exists": true,
+      "notes": "This is a seminal paper on localization for the Anderson model on the Bethe lattice, which is the setting of the current work. It is highly relevant.",
+      "relevance": "high",
+      "resolved_doi": "10.1088/0022-3719/6/10/009",
+      "resolved_url": "https://doi.org/10.1088/0022-3719/6/10/009"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Michael Aizenman"
+        ],
+        "doi": "10.1142/s0129055x94000429",
+        "key": "Aiz94",
+        "raw": "M. Aizenman. Localization at weak disorder: some elementary bounds. Rev. Math. Phys., 6(5a):1163–1182, 1994.",
+        "title": "Localization at weak disorder: some elementary bounds",
+        "url": null,
+        "venue": "Reviews in Mathematical Physics",
+        "year": 1994
+      },
+      "exists": true,
+      "notes": "While this paper focuses on weak disorder, the techniques developed by Aizenman are foundational for the entire field, including the strong-disorder regime. It provides important context and methods.",
+      "relevance": "medium",
+      "resolved_doi": "10.1142/s0129055x94000429",
+      "resolved_url": "https://doi.org/10.1142/s0129055x94000429"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Michael Aizenman",
+          "Simone Warzel"
+        ],
+        "doi": "10.1090/gsm/168",
+        "key": "AW15",
+        "raw": "M. Aizenman and S. Warzel. Random Operators: Disorder Effects on Quantum Spectra and Dynamics. Graduate Studies in Mathematics, vol. 168. American Mathematical Society, Providence, RI, 2015.",
+        "title": "Random Operators: Disorder Effects on Quantum Spectra and Dynamics",
+        "url": null,
+        "venue": "American Mathematical Society",
+        "year": 2015
+      },
+      "exists": true,
+      "notes": "A comprehensive and modern monograph on the subject. It is an essential reference for definitions, background, and established results concerning the Anderson model, including on the Bethe lattice.",
+      "relevance": "high",
+      "resolved_doi": "10.1090/gsm/168",
+      "resolved_url": "https://doi.org/10.1090/gsm/168"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "P. W. Anderson"
+        ],
+        "doi": "10.1103/physrev.109.1492",
+        "key": "And58",
+        "raw": "P. W. Anderson. Absence of diffusion in certain random lattices. Phys. Rev., 109:1492–1505, 1958.",
+        "title": "Absence of Diffusion in Certain Random Lattices",
+        "url": null,
+        "venue": "Physical Review",
+        "year": 1958
+      },
+      "exists": true,
+      "notes": "The foundational paper that introduced the Anderson model and the concept of localization. It is indispensable for any work on this topic.",
+      "relevance": "high",
+      "resolved_doi": "10.1103/physrev.109.1492",
+      "resolved_url": "https://doi.org/10.1103/physrev.109.1492"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Jürg Fröhlich",
+          "Thomas Spencer"
+        ],
+        "doi": "10.1007/bf01209482",
+        "key": "FS83",
+        "raw": "J. Fröhlich and T. Spencer. Absence of diffusion in the Anderson tight binding model for large disorder or low energy. Comm. Math. Phys., 88(2):151–184, 1983.",
+        "title": "Absence of diffusion in the Anderson tight binding model for large disorder or low energy",
+        "url": null,
+        "venue": "Communications in Mathematical Physics",
+        "year": 1983
+      },
+      "exists": true,
+      "notes": "A landmark paper proving localization in the strong-disorder regime, which is the focus of the current paper. The methods and results are highly relevant.",
+      "relevance": "high",
+      "resolved_doi": "10.1007/bf01209482",
+      "resolved_url": "https://doi.org/10.1007/bf01209482"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Abel Klein"
+        ],
+        "doi": "10.4310/mrl.1994.v1.n4.a1",
+        "key": "K94",
+        "raw": "A. Klein. The Anderson model on the Bethe lattice: absolutely continuous spectrum. Mathematical Research Letters, 1(4):399–407, 1994.",
+        "title": "The Anderson model on the Bethe lattice: absolutely continuous spectrum",
+        "url": null,
+        "venue": "Mathematical Research Letters",
+        "year": 1994
+      },
+      "exists": true,
+      "notes": "This paper is directly concerned with the spectral properties of the Anderson model on the Bethe lattice, the same model studied in the current work. It is a key reference for the state of the art.",
+      "relevance": "high",
+      "resolved_doi": "10.4310/mrl.1994.v1.n4.a1",
+      "resolved_url": "https://doi.org/10.4310/mrl.1994.v1.n4.a1"
+    }
+  ],
+  "missing_references": [
+    {
+      "reason": "The paper proves that the density of states is real analytic and derives an expansion. The work by F. Constantinescu, J. Fröhlich, and T. Spencer (J. Stat. Phys. 32, 597–609, 1983) is a key early result on the analyticity of the density of states in the strong disorder regime and should be cited.",
+      "title": "Analyticity of the density of states and replica method for random Schrödinger operators on a lattice"
+    },
+    {
+      "reason": "The paper's method relies on a 'random-walk expansion on the tree'. The graphical expansion techniques developed by M. Aizenman and G. M. Graf (J. Phys. A: Math. Gen. 26, 67-81, 1993) are fundamental for such expansions and their application to localization problems, and represent a likely methodological antecedent.",
+      "title": "Localization bounds for discrete Schrödinger operators"
+    }
+  ],
+  "summary": "The bibliography appears to correctly cite the most important foundational and contemporary works related to the Anderson model, particularly in the strong-disorder regime and on the Bethe lattice. It includes the seminal papers by Anderson (1958), Abou-Chacra et al. (1973), and Fröhlich & Spencer (1983), as well as key results by Klein and the modern monograph by Aizenman & Warzel. However, it seems to be missing citations to foundational works on the specific techniques employed, namely the analyticity of the density of states and the random-walk expansion method. Adding references to the work of Constantinescu, Fröhlich, & Spencer on analyticity and Aizenman & Graf on graphical expansions would strengthen the paper's scholarly context."
+}
+\end{verbatim}
+
+\subsection*{meta_reviewer (\texttt{claude-sonnet-4-6})}
+\begin{verbatim}
+{
+  "confidence": 0.72,
+  "questions": [
+    "Can the authors provide explicit quantitative bounds on the radius of holomorphy of the diagonal resolvent and the threshold disorder strength λ_0, and clarify uniformity of these bounds over walk length/depth?",
+    "What is the precise parity argument that forces all odd-order coefficients in the strong-disorder expansion to vanish? Is it simply that all closed walks on a tree have even length, or is there an additional symmetry assumption on the single-site distribution?",
+    "Is the strong-disorder expansion convergent (in some norm) or merely asymptotic with a controlled remainder? If asymptotic, what is the explicit form of the remainder estimate?",
+    "Have the authors compared the explicit first correction term for the uniform distribution against numerical computation of the DOS at large but finite disorder, as a sanity check?",
+    "Why are Constantinescu–Fröhlich–Spencer (1983) on analyticity of the DOS and Aizenman–Graf (1993) on localization bounds not cited, given their methodological relevance to the techniques employed?"
+  ],
+  "recommendation": "minor_revision",
+  "strengths": [
+    "Proves real analyticity (stronger than mere smoothness) of the root-averaged DOS for the Anderson model on the Bethe lattice in the strong-disorder regime, a result not previously established in this geometric setting.",
+    "Develops a rigorous and self-contained complex-analytic framework combining random-walk tree expansions with Stieltjes transform methods, providing a clean and transferable methodology.",
+    "Structural clarity of the expansion: explicit identification of leading term, vanishing of odd coefficients, and combinatorial interpretation of higher coefficients in terms of closed-walk occupation profiles.",
+    "Provides an explicit computation of the first nonzero correction term for the uniform distribution, grounding the abstract results in a concrete example.",
+    "Well-situated in the literature, citing seminal works (Anderson 1958, Abou-Chacra–Anderson–Thouless 1973, Fröhlich–Spencer 1983, Klein 1994, Aizenman–Warzel 2015) and correctly distinguishing the root-averaged spectral measure from finite-volume eigenvalue counting.",
+    "The work is purely theoretical; reproducibility concerns are minimal and appropriate for this type of mathematical paper."
+  ],
+  "summary": "This paper studies the density of states (DOS) for the Anderson model on the Bethe lattice in the strong-disorder regime. The main contributions are: (1) a proof that the root-averaged DOS is absolutely continuous and real analytic in the strong-disorder regime; (2) a finite-order strong-disorder expansion with explicit structure (leading term equals the single-site density, odd coefficients vanish, higher coefficients governed by closed-walk occupation profiles on the tree); and (3) an explicit computation of the first nonzero correction for the uniform disorder distribution. The methods combine random-walk expansions on trees with complex-analytic Stieltjes transform arguments. The work is a solid, technically demanding contribution to mathematical physics, well-grounded in foundational literature. However, several aspects of the proofs—particularly the quantitative convergence of the complex-analytic continuation, the parity argument for vanishing of odd coefficients, and the distinction between asymptotic and convergent expansions—require clarification or more explicit justification. The novelty is incremental relative to prior results (e.g., C∞ smoothness of DOS in other settings, localization results by Aizenman–Molchanov), but the combination of real analyticity, a Bethe-lattice geometry, and explicit expansion coefficients represents a genuine contribution. Citation coverage is generally strong, though a few methodologically relevant references appear to be missing.",
+  "weaknesses": [
+    "The holomorphic continuation of the scaled diagonal resolvent to a complex neighborhood of the relevant interval (Claim C1) is stated but the quantitative control—radius of holomorphy, explicit threshold λ_0, and uniformity over walk depth—is not made explicit in the reviewed material, making independent verification difficult.",
+    "The parity argument for vanishing of odd coefficients (Claim C4) is plausible from the tree structure but is not explicitly stated; a clear combinatorial or algebraic justification should be provided.",
+    "It is unclear whether 'finite-order expansion' means a convergent series or an asymptotic expansion with a controlled remainder of arbitrary order; this distinction has significant mathematical implications and should be clarified.",
+    "The explicit computation of the first nonzero correction for the uniform distribution (Claim C6) is not cross-validated against numerical evaluation of the DOS at large disorder, leaving a potential gap in verification.",
+    "Novelty is incremental: the result strengthens smoothness to analyticity and moves from Z^d to the Bethe lattice, but the conceptual advance over prior art (Bovier et al., Aizenman–Molchanov) is relatively modest.",
+    "A few methodologically relevant references appear to be missing, specifically: Constantinescu–Fröhlich–Spencer on analyticity of the DOS in the strong-disorder regime, and Aizenman–Graf on graphical/locator expansion techniques."
+  ]
+}
+\end{verbatim}
+
+\subsection*{novelty (\texttt{gemini-2.5-pro})}
+\begin{verbatim}
+{
+  "confidence": 0.8,
+  "missing_prior_art": [],
+  "novelty_score": 0.65,
+  "related_work": [
+    {
+      "citation_key": "Bovier et al. (1991)",
+      "delta": "This paper proves real analyticity of the density of states (DOS) in the energy variable for the Anderson model on the Bethe lattice. The prior work by Bovier et al. established C-infinity smoothness for the DOS on the Z^d lattice. The current work obtains a stronger result (analyticity vs. smoothness) on a different, tree-like geometry where the random walk expansion method employed is particularly effective.",
+      "relation": "builds_on",
+      "title": "Smoothness of the density of states in the Anderson model at high disorder"
+    },
+    {
+      "citation_key": "Aizenman & Molchanov (1993)",
+      "delta": "Aizenman & Molchanov established localization for the Anderson model at high disorder, including on the Bethe lattice. The current paper does not study localization properties of eigenfunctions but rather the complementary topic of the analytic properties of the averaged density of states, providing a detailed strong-disorder expansion.",
+      "relation": "prior_art",
+      "title": "Localization at high disorder and at extreme energies"
+    },
+    {
+      "citation_key": "Miller & Derrida (1994)",
+      "delta": "Miller and Derrida provided strong-disorder expansions for the Lyapunov exponent in one dimension using non-rigorous methods from physics. The current work provides a mathematically rigorous strong-disorder expansion for the density of states on the infinite-dimensional Bethe lattice, with a focus on proving analyticity in the energy variable.",
+      "relation": "orthogonal",
+      "title": "Weak-disorder and strong-disorder expansions for the Anderson model"
+    }
+  ],
+  "verdict": "incremental"
+}
+\end{verbatim}
+
+\subsection*{reproducibility (\texttt{gpt-5.5})}
+\begin{verbatim}
+{
+  "code_availability": "unspecified",
+  "code_url": null,
+  "concerns": [
+    {
+      "area": "code",
+      "description": "No code is described or needed for the main analytical results; any symbolic computations for the uniform-distribution correction term are not accompanied by scripts.",
+      "severity": "info"
+    },
+    {
+      "area": "data",
+      "description": "The work appears purely theoretical and does not rely on external datasets; the paper does not state a data availability artifact.",
+      "severity": "info"
+    },
+    {
+      "area": "other",
+      "description": "Reproducibility depends on the completeness and correctness of the mathematical proofs and definitions in the full paper; from the abstract and section headings alone, the detailed derivations cannot be independently checked.",
+      "severity": "minor"
+    }
+  ],
+  "confidence": 0.55,
+  "data_availability": "unspecified",
+  "data_url": null,
+  "environment": null,
+  "reproducibility_score": 0.78
+}
+\end{verbatim}
+
+\subsection*{summary (\texttt{claude-haiku-4-5-20251001})}
+\begin{verbatim}
+{
+  "audience": "Mathematical physicists and specialists in random operators, disordered systems, and spectral theory; researchers studying the Anderson localization transition and density of states in random media.",
+  "key_contributions": [
+    "Proves that the root-averaged density of states for the Anderson model on the Bethe lattice is absolutely continuous and real analytic in the strong-disorder regime",
+    "Establishes a finite-order strong-disorder expansion of the density of states with explicit structure: leading term is the single-site distribution density, odd coefficients vanish, and higher coefficients are determined by closed-walk occupation profiles",
+    "Develops a rigorous complex-analytic method combining random-walk expansions on trees with Stieltjes transform analysis to control the averaged resolvent",
+    "Provides explicit computation of the first nonzero correction term for the uniform disorder distribution"
+  ],
+  "plain_language_summary": "The Anderson model describes how electrons move through a disordered material, and understanding its density of states—roughly, how many electron energy levels exist at each energy—is crucial for predicting material properties. This paper studies this problem on a Bethe lattice (an idealized tree-like network) when disorder is very strong, meaning the random potential variations are large. Rather than counting eigenvalues in finite systems, the authors analyze the root-averaged spectral measure, which captures the density of states more directly. Using a combination of random-walk techniques on the tree structure and complex analysis, they prove that in the strong-disorder regime, the density of states is smooth (real analytic) and can be expressed as a finite-order expansion in powers of the disorder strength. The leading term is simply the density of the random potential distribution itself, all odd-order corrections vanish, and higher corrections are determined by the statistics of closed random walks on the tree. For a specific case (uniform disorder), they compute the first correction term explicitly.",
+  "tldr": "The paper derives a finite-order strong-disorder expansion for the density of states of the Anderson model on the Bethe lattice, showing it is real analytic with coefficients determined by random walks on the tree."
+}
+\end{verbatim}
+
+\subsection*{technical_correctness (\texttt{claude-opus-4-7})}
+\begin{verbatim}
+{
+  "claims": [
+    {
+      "assessment": "partially_supported",
+      "claim": "For single-site distributions with compact support and locally analytic density on an interval I^♯ ⊃ I, the scaled averaged diagonal resolvent has a holomorphic continuation to a complex neighborhood of I for all sufficiently large disorder λ.",
+      "evidence": "The combination of random-walk expansion on the Bethe lattice with a complex-analytic continuation of single-site Stieltjes transforms is a standard and plausible approach in the strong-disorder regime. Without access to the full proof in Sections 4–5, the technical control of the random-walk series (convergence uniform in a complex neighborhood) and the holomorphic extension of E[1/(λv−z)] off the real axis through the support of v are nontrivial; the latter is essentially a Plemelj-type continuation that requires analyticity of the density across the relevant interval, which is assumed.",
+      "id": "C1",
+      "location": "Abstract; Section 5",
+      "severity": "major",
+      "suggested_fix": "Provide explicit quantitative bounds on the radius of holomorphy and on the threshold λ_0, and clarify uniformity in the depth/length of walks."
+    },
+    {
+      "assessment": "supported",
+      "claim": "By Stieltjes inversion, the root-averaged density of states is absolutely continuous on the scaled window λI and its density is real analytic there.",
+      "evidence": "Holomorphic continuation of the diagonal resolvent across the real axis yields, via Stieltjes inversion, a real-analytic density on the relevant interval. This is a standard consequence once C1 is established.",
+      "id": "C2",
+      "location": "Abstract; Section 6",
+      "severity": "minor"
+    },
+    {
+      "assessment": "supported",
+      "claim": "The density admits a finite-order strong-disorder expansion in 1/λ with leading coefficient equal to the local density ρ(ξ) of the single-site distribution in the scaled variable E=λξ.",
+      "evidence": "At leading order, the diagonal resolvent is (λv−E)^{-1} averaged over v, which gives ρ(ξ)/λ after the scaling E=λξ. Higher-order corrections arise from loops on the tree. The 'finite-order' qualifier suggests the expansion is asymptotic (not necessarily convergent), which is consistent with what such expansions typically yield.",
+      "id": "C3",
+      "location": "Abstract; Section 6",
+      "severity": "minor",
+      "suggested_fix": "Clarify whether 'finite-order' means truncated with controlled remainder of any order, or convergent."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "All odd coefficients in the strong-disorder expansion vanish.",
+      "evidence": "On the Bethe lattice, closed walks from the root must return; on a tree every closed walk traverses each edge an even number of times, so the walk lengths contributing to closed walks at the root are even. This typically forces only even powers of 1/λ to appear. The claim is plausible but its rigor depends on the precise definition of the expansion variable and whether self-energy/loop contributions only contribute at even orders.",
+      "id": "C4",
+      "location": "Abstract; Section 6",
+      "severity": "major",
+      "suggested_fix": "State explicitly the parity argument (e.g., even length of closed walks on a tree) used to conclude vanishing of odd coefficients."
+    },
+    {
+      "assessment": "supported",
+      "claim": "Higher coefficients are finite sums determined by occupation profiles of short closed walks on the tree.",
+      "evidence": "This is the natural structure produced by a random-walk (locator) expansion on a tree, where each order in 1/λ involves closed walks of bounded length whose contributions factor over vertex occupation profiles.",
+      "id": "C5",
+      "location": "Section 3; Section 6",
+      "severity": "info"
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "For the uniform single-site distribution, the first nonzero correction term is computed explicitly.",
+      "evidence": "Without access to the explicit formula, the claim is plausible: for uniform v on [−1/2,1/2] (say), moments are explicit and short-walk contributions can be computed in closed form. Verification requires checking the specific computation in Section 7.",
+      "id": "C6",
+      "location": "Section 7",
+      "severity": "minor",
+      "suggested_fix": "Cross-check the explicit coefficient against a direct numerical evaluation of the DOS at large λ."
+    },
+    {
+      "assessment": "supported",
+      "claim": "The 'density of states' here is the root-averaged spectral measure, not a finite-volume eigenvalue counting limit.",
+      "evidence": "This is a precise and standard definition for infinite tree models, where the empirical eigenvalue counting measure on growing balls need not coincide with E[⟨δ_o, E_H(dE) δ_o⟩] in general on non-amenable graphs like the Bethe lattice. The authors correctly flag this distinction.",
+      "id": "C7",
+      "location": "Abstract; Introduction",
+      "severity": "info"
+    },
+    {
+      "assessment": "supported",
+      "claim": "The methods combine a random-walk expansion on the tree with a complex-analytic argument for the single-site Stieltjes transforms.",
+      "evidence": "Both ingredients are standard and compatible. The single-site Stieltjes transform of an analytic density extends across its support by a contour-deformation/Plemelj argument.",
+      "id": "C8",
+      "location": "Sections 3–4",
+      "severity": "info"
+    }
+  ],
+  "confidence": 0.5,
+  "overall_correctness": "mostly_sound"
+}
+\end{verbatim}
+
+\section*{Corrections}
+% corrections rendered from corrections table; empty on first publish
+No corrections have been recorded.
+
+\section*{Bibliography}
+No bibliography extracted.
+
+% \bibliographystyle{plain}
+% \bibliography{references}
+\end{document}
