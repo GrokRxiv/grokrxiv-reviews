@@ -1,0 +1,1270 @@
+# Law IV --- Information-bearing Structures: Emergent Geometry from Compositional Information
+
+GrokRxiv review of [arXiv:local-tex-c5cddbce17a4](https://arxiv.org/abs/local-tex-c5cddbce17a4)
+
+## TL;DR
+
+This paper presents a capstone framework claiming that emergent spacetime geometry arises from the modular composition of categorical mathematics (Law I), topological order (Law II), and periodic temporal dynamics (Law III). The technical content spans holographic quantum error correction (HaPPY codes, discrete Ryu-Takayanagi, entanglement-wedge reconstruction), Fisher/Bures information geometry exhibiting hyperbolic structure, and conjectural continuum extensions toward AdS/CFT. A companion Haskell software package is claimed. The manuscript is clearly written and pedagogically organized, but it suffers from two significant mathematical errors (an incorrect entropy formula in Proposition 32 and a wrong Lipschitz coefficient in Proposition 31), low novelty (the technical components are largely restated prior art with the organizational synthesis schema as the primary claimed contribution), inadequate reproducibility (no repository URL or environment specification for the software), and a substantial number of missing key references. The meta-reviewer assesses this as requiring major revision before publication.
+
+_Recommendation_: **Major revision** · _Confidence_: 74%
+
+## Strengths
+
+- Coherent and accessible synthesis of holographic quantum error correction, information geometry, and categorical quantum mechanics into a unified modular narrative, providing pedagogical value for the cross-disciplinary audience.
+- Concrete worked examples (the five-qubit [[5,1,3]] code on a HaPPY tile, the Gaussian Fisher metric exhibiting AdS₂ hyperbolic geometry) effectively ground the abstract framework in checkable computations.
+- Appropriate epistemic hedging throughout: conjectural continuum claims (Remark 19, Remark 28, holographic functor construction) are clearly labeled as such, and the non-derivability proposition honestly discloses that it is a structural statement rather than a no-go theorem.
+- Broad and relevant bibliography covering the principal prior works in holographic codes (HaPPY, ADH, Harlow), Ryu-Takayanagi/AdS-CFT, entanglement-as-geometry, modular Hamiltonians, and Fisher/Bures information geometry.
+- The categorical reformulation of Knill-Laflamme conditions and the holographic-functor vocabulary provide a useful organizing language for cross-domain synthesis, even where the individual results are inherited from the literature.
+
+## Weaknesses
+
+- Proposition 32 contains a major mathematical error: the entanglement entropy for a contiguous boundary region of size k reads min(k, 5-k) log 2, but the correct value is min(k, 6-k) log 2 because the bulk logical qubit contributes an additional log 2 to wedge sizes k ≥ 3. The proof silently invokes S(A)=S(A^c), which holds only for pure states, on the mixed code state ρ=VV†/2.
+- Proposition 31 (Lipschitz continuity of HaPPY entropy) states the Lipschitz constant as |\gamma_A| log d, but the correct constant is proportional to the entanglement-wedge bulk dimension |W(A)| log d via the Fannes-Audenaert inequality; the proposed coefficient conflates the minimal-cut size with the bulk wedge Hilbert space dimension, and the trace-norm-to-vector-norm conversion is not justified.
+- Novelty is marginal (specialist score 0.28, verdict marginal): the HaPPY construction, Harlow's RT-from-QEC theorem, ADH bulk locality and OAQEC, Miyaji-Takayanagi Fisher geometry, and the categorical QEC vocabulary are all prior art; the manuscript's delta is an organizational synthesis narrative and companion toy implementation, which is modest for a standalone publication claiming a new framework.
+- Reproducibility is seriously undermined: the companion Haskell package is asserted throughout but no repository URL, commit hash, archive identifier, or file manifest is provided anywhere in the artifact; the computational environment (GHC version, Cabal version, package dependency pins, property-testing framework and settings) is entirely unspecified; and the thirteen claimed test results are unverifiable from the manuscript alone.
+- Multiple important references are absent: Knill-Laflamme QEC conditions (1997), the JLMS relative-entropy bulk equality, Faulkner-Lewkowycz-Maldacena quantum corrections to RT (FLM), the covariant HRT formula, quantum extremal surfaces, the island formula papers (Penington; Almheiri-Engelhardt-Marolf-Maxfield), holographic complexity, Braunstein-Caves quantum Fisher distance, the Amari-Nagaoka monograph (cited by name in the text but absent from the bibliography), and Swingle's entanglement-renormalization holography.
+- Proposition 30 (non-derivability) is presented as a formal proved proposition, but the proof consists solely of one illustrative counterexample per law; this demonstrates existence of instances lacking the structure but does not preclude other formulations of the same law that achieve it, and the result should be demoted to a remark or observation.
+- Several minor technical issues compound the major ones: the Petz recovery formula conflates ρ_enc with N(ρ_enc) in the inner inverse square roots; the claim that Klein's inequality alone implies the Bousso covariant entropy bound is incorrect (the modern derivation requires QNEC/monotonicity); and Remark 8 labels a scalar-deviation condition as a naturality square, which does not correspond to a standard natural transformation.
+
+## Open Questions
+
+- Proposition 32: the entropy formula min(k, 5-k) log 2 appears to omit the bulk logical qubit contribution for k ≥ 3. Do the authors agree the correct formula is min(k, 6-k) log 2, and can they supply a corrected proof that does not rely on the pure-state identity S(A)=S(A^c) for the mixed state VV†/2?
+- Proposition 31: why is the Lipschitz constant expressed in terms of |\gamma_A| (minimal-cut size) rather than |W(A)| (entanglement-wedge bulk dimension), and can the authors provide the missing justification for passing from trace-norm distance between states to vector-norm distance between purifications?
+- Software reproducibility: can the authors provide a public repository URL, exact GHC and Cabal version requirements, a full dependency manifest, and the complete test logs (expected outputs, actual outputs, and pass/fail status) for the thirteen reported tests?
+- Novelty positioning: given that HaPPY, Harlow's RT-from-QEC, ADH, Miyaji-Takayanagi, and the categorical QEC vocabulary are cited prior art, what is the authors' precise claim of new mathematical or physical content beyond the organizational synthesis, and how does the framework differ technically from existing categorical or OAQEC formulations of holographic reconstruction?
+- Can the authors correct the Petz recovery formula in Theorem 7 (replacing ρ_enc^{-1/2} in the inner factors with (N(ρ_enc))^{-1/2}), soften the Bousso-bound implication in Theorem 5 to correctly invoke QNEC/monotonicity rather than bare Klein positivity, and reformulate Remark 8 to avoid the non-standard use of 'naturality square' for a scalar-deviation condition?
+
+## Per-Agent Reviews
+
+### citation (`gpt-5.5`) — status: `warn`
+
+```json
+{
+  "confidence": 0.88,
+  "entries": [
+    {
+      "citation": {
+        "arxiv_id": "1503.06237",
+        "authors": [
+          "F. Pastawski",
+          "B. Yoshida",
+          "D. Harlow",
+          "J. Preskill"
+        ],
+        "doi": null,
+        "key": "pyhp2015",
+        "raw": "pyhp2015: F. Pastawski, B. Yoshida, D. Harlow, and J. Preskill, Holographic quantum error-correcting codes: toy models for the bulk/boundary correspondence, JHEP 2015, 149 (2015), arXiv:1503.06237.",
+        "title": "Holographic quantum error-correcting codes: toy models for the bulk/boundary correspondence",
+        "url": null,
+        "venue": "JHEP",
+        "year": 2015
+      },
+      "exists": false,
+      "explanation": "Cited repeatedly for the HaPPY tensor network, perfect-tensor bulk reconstruction, the exact discrete Ryu-Takayanagi formula, and the modular-composition example; it is one of the paper's central technical precedents.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "hep-th/0603001",
+        "authors": [
+          "S. Ryu",
+          "T. Takayanagi"
+        ],
+        "doi": null,
+        "key": "ryutakayanagi2006",
+        "raw": "ryutakayanagi2006: S. Ryu and T. Takayanagi, Holographic derivation of entanglement entropy from AdS/CFT, Phys. Rev. Lett. 96, 181602 (2006), arXiv:hep-th/0603001.",
+        "title": "Holographic derivation of entanglement entropy from AdS/CFT",
+        "url": null,
+        "venue": "Physical Review Letters",
+        "year": 2006
+      },
+      "exists": false,
+      "explanation": "Cited for the continuum RT entropy-area formula and again in discussion of the semiclassical status of the formula; directly supports a core holographic-geometry claim.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "hep-th/9711200",
+        "authors": [
+          "J. M. Maldacena"
+        ],
+        "doi": null,
+        "key": "maldacena1997",
+        "raw": "maldacena1997: J. M. Maldacena, The large N limit of superconformal field theories and supergravity, Int. J. Theor. Phys. 38, 1113 (1999), arXiv:hep-th/9711200.",
+        "title": "The large N limit of superconformal field theories and supergravity",
+        "url": null,
+        "venue": "International Journal of Theoretical Physics",
+        "year": 1999
+      },
+      "exists": false,
+      "explanation": "Cited as the AdS/CFT foundation for the paper's conjectural categorical holographic-functor framework; essential background for the bulk-boundary geometry claims.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "hep-th/0106112",
+        "authors": [
+          "J. M. Maldacena"
+        ],
+        "doi": null,
+        "key": "maldacena2003",
+        "raw": "maldacena2003: J. M. Maldacena, Eternal black holes in anti-de Sitter, JHEP 2003, 021 (2003), arXiv:hep-th/0106112.",
+        "title": "Eternal black holes in anti-de Sitter",
+        "url": null,
+        "venue": "JHEP",
+        "year": 2003
+      },
+      "exists": false,
+      "explanation": "Cited in the thermofield-double subsection for the duality between the TFD state and the eternal AdS black hole; important to the entanglement-as-geometry discussion.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "1306.0533",
+        "authors": [
+          "J. M. Maldacena",
+          "L. Susskind"
+        ],
+        "doi": null,
+        "key": "maldacena2013",
+        "raw": "maldacena2013: J. M. Maldacena and L. Susskind, Cool horizons for entangled black holes, Fortschr. Phys. 61, 781 (2013), arXiv:1306.0533.",
+        "title": "Cool horizons for entangled black holes",
+        "url": null,
+        "venue": "Fortschritte der Physik",
+        "year": 2013
+      },
+      "exists": false,
+      "explanation": "Cited for ER=EPR, which the manuscript reformulates as agreement between an entanglement-induced metric and a gravitational metric on bipartite states; directly tied to a stated abstract-level claim.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "1005.3035",
+        "authors": [
+          "M. Van Raamsdonk"
+        ],
+        "doi": null,
+        "key": "vanraamsdonk2010",
+        "raw": "vanraamsdonk2010: M. Van Raamsdonk, Building up spacetime with quantum entanglement, Gen. Rel. Grav. 42, 2323 (2010), arXiv:1005.3035.",
+        "title": "Building up spacetime with quantum entanglement",
+        "url": null,
+        "venue": "General Relativity and Gravitation",
+        "year": 2010
+      },
+      "exists": false,
+      "explanation": "Cited for the entanglement-as-glue argument that the paper categorifies as continuity of an emergent metric functor; central to the geometry-from-entanglement theme.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "1207.3123",
+        "authors": [
+          "A. Almheiri",
+          "D. Marolf",
+          "J. Polchinski",
+          "J. Sully"
+        ],
+        "doi": null,
+        "key": "amps2012",
+        "raw": "amps2012: A. Almheiri, D. Marolf, J. Polchinski, and J. Sully, Black holes: complementarity or firewalls?, JHEP 2013, 062 (2013), arXiv:1207.3123.",
+        "title": "Black holes: complementarity or firewalls?",
+        "url": null,
+        "venue": "JHEP",
+        "year": 2013
+      },
+      "exists": false,
+      "explanation": "Cited in the discussion as an application of holographic error correction to the firewall paradox; relevant but not part of the main derivation.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "1411.7041",
+        "authors": [
+          "A. Almheiri",
+          "X. Dong",
+          "D. Harlow"
+        ],
+        "doi": null,
+        "key": "almheiridongharlow2015",
+        "raw": "almheiridongharlow2015: A. Almheiri, X. Dong, and D. Harlow, Bulk locality and quantum error correction in AdS/CFT, JHEP 2015, 163 (2015), arXiv:1411.7041.",
+        "title": "Bulk locality and quantum error correction in AdS/CFT",
+        "url": null,
+        "venue": "JHEP",
+        "year": 2015
+      },
+      "exists": false,
+      "explanation": "Cited for operator-algebra quantum error correction and the holographic interpretation of bulk locality and reconstruction; directly supports the paper's QEC-as-functor and continuum holography claims.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "1607.03901",
+        "authors": [
+          "D. Harlow"
+        ],
+        "doi": null,
+        "key": "harlow2017",
+        "raw": "harlow2017: D. Harlow, The Ryu-Takayanagi formula from quantum error correction, Commun. Math. Phys. 354, 865 (2017), arXiv:1607.03901.",
+        "title": "The Ryu-Takayanagi formula from quantum error correction",
+        "url": null,
+        "venue": "Communications in Mathematical Physics",
+        "year": 2017
+      },
+      "exists": false,
+      "explanation": "Cited in the OAQEC and continuum holographic-functor contexts; highly relevant because it directly connects RT entropy to quantum error correction.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "1312.7856",
+        "authors": [
+          "T. Faulkner",
+          "M. Guica",
+          "T. Hartman",
+          "R. C. Myers",
+          "M. Van Raamsdonk"
+        ],
+        "doi": null,
+        "key": "fghmv2014",
+        "raw": "fghmv2014: T. Faulkner, M. Guica, T. Hartman, R. C. Myers, and M. Van Raamsdonk, Gravitation from entanglement in holographic CFTs, JHEP 2014, 051 (2014), arXiv:1312.7856.",
+        "title": "Gravitation from entanglement in holographic CFTs",
+        "url": null,
+        "venue": "JHEP",
+        "year": 2014
+      },
+      "exists": false,
+      "explanation": "Cited for deriving linearized Einstein equations from the entanglement first law and for the semiclassical status of RT; central to the claimed link between information and emergent gravity.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "S.-I. Amari"
+        ],
+        "doi": null,
+        "key": "amari",
+        "raw": "amari: S.-I. Amari, Information Geometry and Its Applications, Applied Mathematical Sciences 194, Springer (2016).",
+        "title": "Information Geometry and Its Applications",
+        "url": null,
+        "venue": "Springer",
+        "year": 2016
+      },
+      "exists": false,
+      "explanation": "Cited for the Fisher information metric and statistical manifolds, which are central to the manuscript's information-geometry component.",
+      "notes": "The local context says Amari-Nagaoka, but the bibliography entry is Amari's 2016 solo text.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "1503.03542",
+        "authors": [
+          "M. Miyaji",
+          "T. Takayanagi"
+        ],
+        "doi": null,
+        "key": "miyaji2015",
+        "raw": "miyaji2015: M. Miyaji and T. Takayanagi, Surface/state correspondence as a generalized holography, Prog. Theor. Exp. Phys. 2015, 073B03 (2015), arXiv:1503.03542.",
+        "title": "Surface/state correspondence as a generalized holography",
+        "url": null,
+        "venue": "Progress of Theoretical and Experimental Physics",
+        "year": 2015
+      },
+      "exists": false,
+      "explanation": "Cited for the conjecture that a Fisher-Bures metric on CFT state space can reproduce bulk AdS geometry; directly supports the manuscript's information-geometry-to-bulk-metric claim.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "M. Atiyah"
+        ],
+        "doi": null,
+        "key": "atiyah1988",
+        "raw": "atiyah1988: M. Atiyah, Topological quantum field theories, Publ. Math. IHES 68, 175 (1988).",
+        "title": "Topological quantum field theories",
+        "url": null,
+        "venue": "Publications Mathematiques de l'IHES",
+        "year": 1988
+      },
+      "exists": false,
+      "explanation": "Cited in the introduction as part of Law I's categorical and TQFT background; relevant to the modular hierarchy but not specific to the Law IV holographic or Fisher-metric arguments.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "J. Baez",
+          "J. Dolan"
+        ],
+        "doi": null,
+        "key": "baezdolan1995",
+        "raw": "baezdolan1995: J. Baez and J. Dolan, Higher-dimensional algebra and topological quantum field theory, J. Math. Phys. 36, 6073 (1995).",
+        "title": "Higher-dimensional algebra and topological quantum field theory",
+        "url": null,
+        "venue": "Journal of Mathematical Physics",
+        "year": 1995
+      },
+      "exists": false,
+      "explanation": "Cited for higher-categorical TQFT background used to motivate Law I's compositional language; relevant as framework support but peripheral to the concrete Law IV examples.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "0903.0340",
+        "authors": [
+          "J. C. Baez",
+          "M. Stay"
+        ],
+        "doi": null,
+        "key": "baezstay2009",
+        "raw": "baezstay2009: J. C. Baez and M. Stay, Physics, topology, logic and computation: a Rosetta Stone, arXiv:0903.0340 (2009).",
+        "title": "Physics, topology, logic and computation: a Rosetta Stone",
+        "url": null,
+        "venue": "arXiv",
+        "year": 2009
+      },
+      "exists": false,
+      "explanation": "Cited for the shared categorical language of physics, topology, logic, and computation underlying Law I; useful background for the paper's compositional framing.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "S. Abramsky",
+          "B. Coecke"
+        ],
+        "doi": null,
+        "key": "abramskycoecke2004",
+        "raw": "abramskycoecke2004: S. Abramsky and B. Coecke, A categorical semantics of quantum protocols, in Proc. 19th IEEE Symp. on Logic in Computer Science (2004).",
+        "title": "A categorical semantics of quantum protocols",
+        "url": null,
+        "venue": "Proceedings of the 19th IEEE Symposium on Logic in Computer Science",
+        "year": 2004
+      },
+      "exists": false,
+      "explanation": "Cited for dagger-symmetric monoidal categorical semantics of quantum protocols, supporting the categorical treatment of quantum information and QEC functors.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "J. Lurie"
+        ],
+        "doi": null,
+        "key": "lurie2009",
+        "raw": "lurie2009: J. Lurie, Higher Topos Theory, Annals of Math. Studies 170, Princeton (2009).",
+        "title": "Higher Topos Theory",
+        "url": null,
+        "venue": "Princeton University Press",
+        "year": 2009
+      },
+      "exists": false,
+      "explanation": "Cited as foundational higher-topos background for Law I; relevant to the manuscript's categorical setting but not used in the concrete holographic-code or Fisher-metric claims.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "1408.0054",
+        "authors": [
+          "U. Schreiber",
+          "M. Shulman"
+        ],
+        "doi": null,
+        "key": "schreibershulman2014",
+        "raw": "schreibershulman2014: U. Schreiber and M. Shulman, Quantum gauge field theory in cohesive homotopy type theory, arXiv:1408.0054 (2014).",
+        "title": "Quantum gauge field theory in cohesive homotopy type theory",
+        "url": null,
+        "venue": "arXiv",
+        "year": 2014
+      },
+      "exists": false,
+      "explanation": "Cited for cohesive homotopy type theory and higher-geometric categorical physics in the Law I background; relevant to the broad formalism rather than the paper's main technical examples.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "F. W. Lawvere"
+        ],
+        "doi": null,
+        "key": "lawvere1963",
+        "raw": "lawvere1963: F. W. Lawvere, Functorial semantics of algebraic theories, Proc. Nat. Acad. Sci. USA 50, 869 (1963).",
+        "title": "Functorial semantics of algebraic theories",
+        "url": null,
+        "venue": "Proceedings of the National Academy of Sciences USA",
+        "year": 1963
+      },
+      "exists": false,
+      "explanation": "Cited for functorial semantics in the Law I setup; relevant to the paper's functorial vocabulary but only as historical and conceptual background.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "A. Yu. Kitaev"
+        ],
+        "doi": null,
+        "key": "kitaev2003",
+        "raw": "kitaev2003: A. Yu. Kitaev, Fault-tolerant quantum computation by anyons, Ann. Phys. 303, 2 (2003).",
+        "title": "Fault-tolerant quantum computation by anyons",
+        "url": null,
+        "venue": "Annals of Physics",
+        "year": 2003
+      },
+      "exists": false,
+      "explanation": "Cited for topological order and anyonic fault tolerance in the Law II substrate that the paper treats as feeding into holographic QEC; relevant but upstream of the Law IV construction.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "X.-G. Wen"
+        ],
+        "doi": null,
+        "key": "wen1990",
+        "raw": "wen1990: X.-G. Wen, Topological orders in rigid states, Int. J. Mod. Phys. B 4, 239 (1990).",
+        "title": "Topological orders in rigid states",
+        "url": null,
+        "venue": "International Journal of Modern Physics B",
+        "year": 1990
+      },
+      "exists": false,
+      "explanation": "Cited for the notion of topological order in the Law II recap; relevant because the paper treats topological order as the long-range entangled substrate for QEC.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "M. Levin",
+          "X.-G. Wen"
+        ],
+        "doi": null,
+        "key": "levinwen2005",
+        "raw": "levinwen2005: M. Levin and X.-G. Wen, String-net condensation: a physical mechanism for topological phases, Phys. Rev. B 71, 045110 (2005).",
+        "title": "String-net condensation: a physical mechanism for topological phases",
+        "url": null,
+        "venue": "Physical Review B",
+        "year": 2005
+      },
+      "exists": false,
+      "explanation": "Cited for string-net/topological phases in the Law II background; relevant to the claimed substrate of long-range entanglement, though not central to the Law IV examples.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "X. Chen",
+          "Z.-C. Gu",
+          "Z.-X. Liu",
+          "X.-G. Wen"
+        ],
+        "doi": null,
+        "key": "chen2013",
+        "raw": "chen2013: X. Chen, Z.-C. Gu, Z.-X. Liu, and X.-G. Wen, Symmetry protected topological orders and the group cohomology of their symmetry group, Phys. Rev. B 87, 155114 (2013).",
+        "title": "Symmetry protected topological orders and the group cohomology of their symmetry group",
+        "url": null,
+        "venue": "Physical Review B",
+        "year": 2013
+      },
+      "exists": false,
+      "explanation": "Cited for SPT phase classification in the Law II recap; relevant to the modular hierarchy but not directly used in holographic QEC or Fisher metric sections.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "A. Kitaev",
+          "J. Preskill"
+        ],
+        "doi": null,
+        "key": "kitaevpreskill2006",
+        "raw": "kitaevpreskill2006: A. Kitaev and J. Preskill, Topological entanglement entropy, Phys. Rev. Lett. 96, 110404 (2006).",
+        "title": "Topological entanglement entropy",
+        "url": null,
+        "venue": "Physical Review Letters",
+        "year": 2006
+      },
+      "exists": false,
+      "explanation": "Cited for entanglement diagnostics of topological order in the Law II background; relevant to the long-range-entanglement substrate but not the main RT-area derivation.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "D. V. Else",
+          "B. Bauer",
+          "C. Nayak"
+        ],
+        "doi": null,
+        "key": "else2016",
+        "raw": "else2016: D. V. Else, B. Bauer, and C. Nayak, Floquet time crystals, Phys. Rev. Lett. 117, 090402 (2016).",
+        "title": "Floquet time crystals",
+        "url": null,
+        "venue": "Physical Review Letters",
+        "year": 2016
+      },
+      "exists": false,
+      "explanation": "Cited in the Law III recap for periodically driven phases and time crystals; relevant as background for the temporal-dynamics layer but peripheral to the Law IV examples.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "V. Khemani",
+          "A. Lazarides",
+          "R. Moessner",
+          "S. L. Sondhi"
+        ],
+        "doi": null,
+        "key": "khemani2016",
+        "raw": "khemani2016: V. Khemani, A. Lazarides, R. Moessner, and S. L. Sondhi, Phase structure of driven quantum systems, Phys. Rev. Lett. 116, 250401 (2016).",
+        "title": "Phase structure of driven quantum systems",
+        "url": null,
+        "venue": "Physical Review Letters",
+        "year": 2016
+      },
+      "exists": false,
+      "explanation": "Cited for Floquet phase structure in the Law III recap; relevant to the modular temporal layer but not directly to holographic geometry.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "M. Bukov",
+          "L. D'Alessio",
+          "A. Polkovnikov"
+        ],
+        "doi": null,
+        "key": "bukov2015",
+        "raw": "bukov2015: M. Bukov, L. D'Alessio, and A. Polkovnikov, Universal high-frequency behavior of periodically driven systems, Adv. Phys. 64, 139 (2015).",
+        "title": "Universal high-frequency behavior of periodically driven systems",
+        "url": null,
+        "venue": "Advances in Physics",
+        "year": 2015
+      },
+      "exists": false,
+      "explanation": "Cited for periodic driving and Floquet systems in the Law III background; relevant to the paper's claimed temporal-dynamics input but not one of the central geometry references.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "M. S. Rudner",
+          "N. H. Lindner"
+        ],
+        "doi": null,
+        "key": "rudner2020",
+        "raw": "rudner2020: M. S. Rudner and N. H. Lindner, Band structure engineering and non-equilibrium dynamics in Floquet topological insulators, Nat. Rev. Phys. 2, 229 (2020).",
+        "title": "Band structure engineering and non-equilibrium dynamics in Floquet topological insulators",
+        "url": null,
+        "venue": "Nature Reviews Physics",
+        "year": 2020
+      },
+      "exists": false,
+      "explanation": "Cited for Floquet topological insulators in the Law III recap; relevant as background for driven topological phases rather than the main Law IV derivation.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "R. Roy",
+          "F. Harper"
+        ],
+        "doi": null,
+        "key": "roy2017",
+        "raw": "roy2017: R. Roy and F. Harper, Periodic table for Floquet topological insulators, Phys. Rev. B 96, 155118 (2017).",
+        "title": "Periodic table for Floquet topological insulators",
+        "url": null,
+        "venue": "Physical Review B",
+        "year": 2017
+      },
+      "exists": false,
+      "explanation": "Cited for classification of Floquet topological insulators in the Law III recap; relevant to the modular hierarchy but peripheral to the holographic-code and information-metric sections.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "J. J. Bisognano",
+          "E. H. Wichmann"
+        ],
+        "doi": null,
+        "key": "bisognano1976",
+        "raw": "bisognano1976: J. J. Bisognano and E. H. Wichmann, On the duality condition for quantum fields, J. Math. Phys. 17, 303 (1976).",
+        "title": "On the duality condition for quantum fields",
+        "url": null,
+        "venue": "Journal of Mathematical Physics",
+        "year": 1976
+      },
+      "exists": false,
+      "explanation": "Cited in the mathematical framework and in the RT/entanglement-first-law discussion for the modular Hamiltonian of wedge or ball regions; technically important to the modular-flow bridge.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "0907.5391",
+        "authors": [
+          "C. Beny",
+          "O. Oreshkov"
+        ],
+        "doi": null,
+        "key": "beny2007",
+        "raw": "beny2007: C. Beny and O. Oreshkov, General conditions for approximate quantum error correction and near-optimal recovery channels, Phys. Rev. Lett. 104, 120501 (2010), arXiv:0907.5391.",
+        "title": "General conditions for approximate quantum error correction and near-optimal recovery channels",
+        "url": null,
+        "venue": "Physical Review Letters",
+        "year": 2010
+      },
+      "exists": false,
+      "explanation": "Cited in the OAQEC subsection as part of the refined recovery-channel picture; relevant to QEC foundations, though the citation is less directly holographic than ADH or Harlow.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "M. A. Nielsen",
+          "I. L. Chuang"
+        ],
+        "doi": null,
+        "key": "nielsenchuang",
+        "raw": "nielsenchuang: M. A. Nielsen and I. L. Chuang, Quantum Computation and Quantum Information, 10th anniversary ed., Cambridge University Press (2010).",
+        "title": "Quantum Computation and Quantum Information",
+        "url": null,
+        "venue": "Cambridge University Press",
+        "year": 2010
+      },
+      "exists": false,
+      "explanation": "Cited for the explicit QEC recovery construction and for standard quantum-information background in the Fisher/Renyi discussion; directly supports the manuscript's QEC formalism.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "quant-ph/9602019",
+        "authors": [
+          "R. Laflamme",
+          "C. Miquel",
+          "J. P. Paz",
+          "W. H. Zurek"
+        ],
+        "doi": null,
+        "key": "laflamme1996",
+        "raw": "laflamme1996: R. Laflamme, C. Miquel, J. P. Paz, and W. H. Zurek, Perfect quantum error correcting code, Phys. Rev. Lett. 77, 198 (1996), arXiv:quant-ph/9602019.",
+        "title": "Perfect quantum error correcting code",
+        "url": null,
+        "venue": "Physical Review Letters",
+        "year": 1996
+      },
+      "exists": false,
+      "explanation": "Cited for the [[5,1,3]] perfect code used as the single-tile HaPPY worked example and for explicit codeword expansions; directly relevant to the paper's concrete example.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "1102.0440",
+        "authors": [
+          "H. Casini",
+          "M. Huerta",
+          "R. C. Myers"
+        ],
+        "doi": null,
+        "key": "casini2011",
+        "raw": "casini2011: H. Casini, M. Huerta, and R. C. Myers, Towards a derivation of holographic entanglement entropy, JHEP 2011, 036 (2011), arXiv:1102.0440.",
+        "title": "Towards a derivation of holographic entanglement entropy",
+        "url": null,
+        "venue": "JHEP",
+        "year": 2011
+      },
+      "exists": false,
+      "explanation": "Cited for the Casini-Huerta-Myers relation used with Bisognano-Wichmann to express the modular Hamiltonian and connect the entanglement first law to boundary stress-tensor data.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "D. Petz"
+        ],
+        "doi": null,
+        "key": "petz1986",
+        "raw": "petz1986: D. Petz, Quasi-entropies for finite quantum systems, Reports on Mathematical Physics 23, 57 (1986).",
+        "title": "Quasi-entropies for finite quantum systems",
+        "url": null,
+        "venue": "Reports on Mathematical Physics",
+        "year": 1986
+      },
+      "exists": false,
+      "explanation": "Cited for monotonicity of quantum Renyi divergences in the Fisher information metric section; relevant to quantum information geometry but not the main holographic-code construction.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    }
+  ],
+  "missing_references": [
+    {
+      "reason": "The manuscript formalizes exact QEC and recovery maps, but it does not cite the standard Knill-Laflamme error-correction conditions that underlie exact code-subspace correctability.",
+      "title": "Theory of quantum error-correcting codes"
+    },
+    {
+      "reason": "The JLMS relation is a central bridge between modular Hamiltonians, entanglement wedge reconstruction, RT, and holographic QEC, all of which are major ingredients in the paper.",
+      "title": "Relative entropy equals bulk relative entropy"
+    },
+    {
+      "reason": "Entanglement wedge reconstruction is directly relevant to the operator-algebra QEC and bulk-reconstruction claims, especially beyond the original ADH discussion.",
+      "title": "Reconstruction of bulk operators within the entanglement wedge in gauge-gravity duality"
+    },
+    {
+      "reason": "The paper discusses the continuum RT formula and its derivation but omits the standard Lewkowycz-Maldacena gravitational-entropy derivation.",
+      "title": "Generalized gravitational entropy"
+    },
+    {
+      "reason": "The manuscript discusses semiclassical RT and open nonperturbative issues; the FLM quantum correction is a key reference for the bulk-entanglement correction to area.",
+      "title": "Quantum corrections to holographic entanglement entropy"
+    },
+    {
+      "reason": "Covariant holography is named as an open problem, and HRT is the standard covariant extension of the Ryu-Takayanagi formula.",
+      "title": "A covariant holographic entanglement entropy proposal"
+    },
+    {
+      "reason": "The island formula and quantum extremal surfaces are closely related to the paper's open-problems discussion of islands and nonperturbative holographic entropy.",
+      "title": "Quantum extremal surfaces: holographic entanglement entropy beyond the classical regime"
+    },
+    {
+      "reason": "The paper mentions the island formula and black-hole information issues, but does not cite Penington's island/entanglement-wedge work that is central to that development.",
+      "title": "Entanglement wedge reconstruction and the information paradox"
+    },
+    {
+      "reason": "The island formula is listed as an open problem, but the companion Almheiri-Engelhardt-Marolf-Maxfield island calculation is absent.",
+      "title": "The entropy of Hawking radiation"
+    },
+    {
+      "reason": "Holographic complexity is listed among open problems, but the paper gives no foundational complexity reference.",
+      "title": "Computational complexity and black hole horizons"
+    },
+    {
+      "reason": "The Fisher-Bures metric is central to the paper's information-geometry section; Braunstein-Caves is a standard quantum Fisher/statistical-distance reference that should be cited.",
+      "title": "Statistical distance and the geometry of quantum states"
+    },
+    {
+      "reason": "The text explicitly says Amari-Nagaoka, but the bibliography only includes Amari's 2016 solo text; the Amari-Nagaoka monograph is the expected citation for that phrase.",
+      "title": "Methods of Information Geometry"
+    },
+    {
+      "reason": "The paper develops emergent geometry from tensor-network/holographic-code structure; Swingle's tensor-network route to holography is a natural missing predecessor.",
+      "title": "Entanglement renormalization and holography"
+    }
+  ],
+  "summary": "The bibliography is broadly relevant: the highest-value references cover HaPPY holographic codes, RT/AdS-CFT, holographic QEC, entanglement-as-geometry, Fisher information geometry, modular Hamiltonians, and the worked five-qubit-code example. The prior-law category/topological/Floquet references are mostly medium-relevance contextual scaffolding. No cited entry appears unrelated from the supplied contexts. The main gaps are standard references for Knill-Laflamme QEC, JLMS and entanglement-wedge reconstruction, RT derivations and quantum/covariant extensions, island formula papers, holographic complexity, and quantum Fisher/Bures geometry."
+}
+```
+
+### meta_reviewer (`claude-sonnet-4-6`) — status: `warn`
+
+```json
+{
+  "confidence": 0.74,
+  "questions": [
+    "Proposition 32: the entropy formula min(k, 5-k) log 2 appears to omit the bulk logical qubit contribution for k ≥ 3. Do the authors agree the correct formula is min(k, 6-k) log 2, and can they supply a corrected proof that does not rely on the pure-state identity S(A)=S(A^c) for the mixed state VV†/2?",
+    "Proposition 31: why is the Lipschitz constant expressed in terms of |\\gamma_A| (minimal-cut size) rather than |W(A)| (entanglement-wedge bulk dimension), and can the authors provide the missing justification for passing from trace-norm distance between states to vector-norm distance between purifications?",
+    "Software reproducibility: can the authors provide a public repository URL, exact GHC and Cabal version requirements, a full dependency manifest, and the complete test logs (expected outputs, actual outputs, and pass/fail status) for the thirteen reported tests?",
+    "Novelty positioning: given that HaPPY, Harlow's RT-from-QEC, ADH, Miyaji-Takayanagi, and the categorical QEC vocabulary are cited prior art, what is the authors' precise claim of new mathematical or physical content beyond the organizational synthesis, and how does the framework differ technically from existing categorical or OAQEC formulations of holographic reconstruction?",
+    "Can the authors correct the Petz recovery formula in Theorem 7 (replacing ρ_enc^{-1/2} in the inner factors with (N(ρ_enc))^{-1/2}), soften the Bousso-bound implication in Theorem 5 to correctly invoke QNEC/monotonicity rather than bare Klein positivity, and reformulate Remark 8 to avoid the non-standard use of 'naturality square' for a scalar-deviation condition?"
+  ],
+  "recommendation": "major_revision",
+  "strengths": [
+    "Coherent and accessible synthesis of holographic quantum error correction, information geometry, and categorical quantum mechanics into a unified modular narrative, providing pedagogical value for the cross-disciplinary audience.",
+    "Concrete worked examples (the five-qubit [[5,1,3]] code on a HaPPY tile, the Gaussian Fisher metric exhibiting AdS₂ hyperbolic geometry) effectively ground the abstract framework in checkable computations.",
+    "Appropriate epistemic hedging throughout: conjectural continuum claims (Remark 19, Remark 28, holographic functor construction) are clearly labeled as such, and the non-derivability proposition honestly discloses that it is a structural statement rather than a no-go theorem.",
+    "Broad and relevant bibliography covering the principal prior works in holographic codes (HaPPY, ADH, Harlow), Ryu-Takayanagi/AdS-CFT, entanglement-as-geometry, modular Hamiltonians, and Fisher/Bures information geometry.",
+    "The categorical reformulation of Knill-Laflamme conditions and the holographic-functor vocabulary provide a useful organizing language for cross-domain synthesis, even where the individual results are inherited from the literature."
+  ],
+  "summary": "This paper presents a capstone framework claiming that emergent spacetime geometry arises from the modular composition of categorical mathematics (Law I), topological order (Law II), and periodic temporal dynamics (Law III). The technical content spans holographic quantum error correction (HaPPY codes, discrete Ryu-Takayanagi, entanglement-wedge reconstruction), Fisher/Bures information geometry exhibiting hyperbolic structure, and conjectural continuum extensions toward AdS/CFT. A companion Haskell software package is claimed. The manuscript is clearly written and pedagogically organized, but it suffers from two significant mathematical errors (an incorrect entropy formula in Proposition 32 and a wrong Lipschitz coefficient in Proposition 31), low novelty (the technical components are largely restated prior art with the organizational synthesis schema as the primary claimed contribution), inadequate reproducibility (no repository URL or environment specification for the software), and a substantial number of missing key references. The meta-reviewer assesses this as requiring major revision before publication.",
+  "weaknesses": [
+    "Proposition 32 contains a major mathematical error: the entanglement entropy for a contiguous boundary region of size k reads min(k, 5-k) log 2, but the correct value is min(k, 6-k) log 2 because the bulk logical qubit contributes an additional log 2 to wedge sizes k ≥ 3. The proof silently invokes S(A)=S(A^c), which holds only for pure states, on the mixed code state ρ=VV†/2.",
+    "Proposition 31 (Lipschitz continuity of HaPPY entropy) states the Lipschitz constant as |\\gamma_A| log d, but the correct constant is proportional to the entanglement-wedge bulk dimension |W(A)| log d via the Fannes-Audenaert inequality; the proposed coefficient conflates the minimal-cut size with the bulk wedge Hilbert space dimension, and the trace-norm-to-vector-norm conversion is not justified.",
+    "Novelty is marginal (specialist score 0.28, verdict marginal): the HaPPY construction, Harlow's RT-from-QEC theorem, ADH bulk locality and OAQEC, Miyaji-Takayanagi Fisher geometry, and the categorical QEC vocabulary are all prior art; the manuscript's delta is an organizational synthesis narrative and companion toy implementation, which is modest for a standalone publication claiming a new framework.",
+    "Reproducibility is seriously undermined: the companion Haskell package is asserted throughout but no repository URL, commit hash, archive identifier, or file manifest is provided anywhere in the artifact; the computational environment (GHC version, Cabal version, package dependency pins, property-testing framework and settings) is entirely unspecified; and the thirteen claimed test results are unverifiable from the manuscript alone.",
+    "Multiple important references are absent: Knill-Laflamme QEC conditions (1997), the JLMS relative-entropy bulk equality, Faulkner-Lewkowycz-Maldacena quantum corrections to RT (FLM), the covariant HRT formula, quantum extremal surfaces, the island formula papers (Penington; Almheiri-Engelhardt-Marolf-Maxfield), holographic complexity, Braunstein-Caves quantum Fisher distance, the Amari-Nagaoka monograph (cited by name in the text but absent from the bibliography), and Swingle's entanglement-renormalization holography.",
+    "Proposition 30 (non-derivability) is presented as a formal proved proposition, but the proof consists solely of one illustrative counterexample per law; this demonstrates existence of instances lacking the structure but does not preclude other formulations of the same law that achieve it, and the result should be demoted to a remark or observation.",
+    "Several minor technical issues compound the major ones: the Petz recovery formula conflates ρ_enc with N(ρ_enc) in the inner inverse square roots; the claim that Klein's inequality alone implies the Bousso covariant entropy bound is incorrect (the modern derivation requires QNEC/monotonicity); and Remark 8 labels a scalar-deviation condition as a naturality square, which does not correspond to a standard natural transformation."
+  ]
+}
+```
+
+### novelty (`gpt-5.5`) — status: `warn`
+
+```json
+{
+  "confidence": 0.55,
+  "missing_prior_art": [
+    {
+      "reason": "Prior-art retrieval was unavailable, so the reviewer could not verify whether the proposed Laws I--III modular-composition schema has close antecedents in recent categorical holography, tensor-network, or information-geometry literature.",
+      "title": "Recent categorical formulations of holography and AdS/CFT"
+    },
+    {
+      "reason": "Tensor-network emergence of hyperbolic geometry predates this manuscript and should be checked beyond the HaPPY citation, especially MERA/entanglement-renormalization work and related holographic tensor-network geometry papers.",
+      "title": "Tensor networks, MERA, and emergent holographic geometry"
+    },
+    {
+      "reason": "The paper cites OAQEC-related holography but should more fully position its categorical/QEC framing against the operator-algebra QEC literature, including algebraic reconstruction, complementary recovery, and relative-entropy equivalence results.",
+      "title": "Operator-algebra quantum error correction and complementary recovery literature"
+    },
+    {
+      "reason": "The Fisher/Bures-to-AdS discussion relies on Miyaji--Takayanagi but should be checked against broader work on fidelity susceptibility, quantum information metric, kinematic space, and emergent bulk geometry.",
+      "title": "Fidelity susceptibility, Fisher information, and holographic information geometry"
+    }
+  ],
+  "novelty_score": 0.28,
+  "related_work": [
+    {
+      "citation_key": "pyhp2015",
+      "delta": "The manuscript largely restates the HaPPY construction, bulk-to-boundary isometry, greedy reconstruction, and discrete RT formula; its added element is to place these results inside a Laws I--III modular composition narrative and companion toy implementation.",
+      "relation": "prior_art",
+      "title": "Holographic quantum error-correcting codes: toy models for the bulk/boundary correspondence"
+    },
+    {
+      "citation_key": "harlow2017",
+      "delta": "Harlow already derives the RT formula from quantum error correction. The manuscript does not appear to strengthen that theorem; it recasts the result as an output of a broader categorical/information-bearing layer.",
+      "relation": "prior_art",
+      "title": "The Ryu--Takayanagi formula from quantum error correction"
+    },
+    {
+      "citation_key": "almheiridongharlow2015",
+      "delta": "The entanglement-wedge reconstruction and operator-algebra QEC content are inherited from this line of work. The manuscript's delta is an organizing categorical reading, not a new reconstruction theorem.",
+      "relation": "prior_art",
+      "title": "Bulk locality and quantum error correction in AdS/CFT"
+    },
+    {
+      "citation_key": "ryutakayanagi2006",
+      "delta": "The continuum entropy-area relation is used as established background. The manuscript contributes no new derivation of continuum RT, but connects its discrete code examples and Fisher-metric narrative to the RT paradigm.",
+      "relation": "builds_on",
+      "title": "Holographic derivation of entanglement entropy from AdS/CFT"
+    },
+    {
+      "citation_key": "fghmv2014",
+      "delta": "The entanglement-first-law route to linearized Einstein equations is cited as prior support for geometry-from-entanglement. The manuscript does not extend it beyond first order and acknowledges nonlinear Einstein equations as open.",
+      "relation": "builds_on",
+      "title": "Gravitation from entanglement in holographic CFTs"
+    },
+    {
+      "citation_key": "vanraamsdonk2010",
+      "delta": "The entanglement-as-glue argument is not new here; the manuscript reformulates it conjecturally as continuity of a state-to-geometry functor.",
+      "relation": "prior_art",
+      "title": "Building up spacetime with quantum entanglement"
+    },
+    {
+      "citation_key": "maldacena2013",
+      "delta": "ER=EPR is used as conceptual input. The manuscript's claimed novelty is the categorical faithfulness interpretation, which is suggestive but not developed into a new technical result.",
+      "relation": "builds_on",
+      "title": "Cool horizons for entangled black holes"
+    },
+    {
+      "citation_key": "miyaji2015",
+      "delta": "The Fisher/Bures metric connection to holographic geometry is substantially prior work. The manuscript uses it as a component in its modular thesis and adds only simple Gaussian examples and synthesis.",
+      "relation": "prior_art",
+      "title": "Surface/state correspondence as a generalized holography"
+    },
+    {
+      "citation_key": "amari",
+      "delta": "The Fisher metric, Chentsov uniqueness, and Gaussian-family hyperbolic metric are standard information-geometry material. The manuscript repurposes them for the emergent-geometry narrative rather than introducing new information geometry.",
+      "relation": "prior_art",
+      "title": "Information Geometry and Its Applications"
+    },
+    {
+      "citation_key": "abramskycoecke2004",
+      "delta": "The categorical semantics and dagger-monoidal language used for QEC are grounded in categorical quantum mechanics. The manuscript's encoding-as-dagger-monomorphism presentation is a natural repackaging rather than a clearly new categorical theorem.",
+      "relation": "prior_art",
+      "title": "A categorical semantics of quantum protocols"
+    }
+  ],
+  "verdict": "marginal"
+}
+```
+
+### reproducibility (`gpt-5.5`) — status: `warn`
+
+```json
+{
+  "code_availability": "unspecified",
+  "code_url": null,
+  "concerns": [
+    {
+      "area": "code",
+      "description": "The manuscript claims a companion Haskell package and names modules and commands, but provides no repository URL, archive identifier, license, file manifest, commit hash, or source listing in the review artifact.",
+      "severity": "major"
+    },
+    {
+      "area": "hyperparameters",
+      "description": "The computational environment is underspecified: Haskell compiler, Cabal version, package dependencies, solver constraints, and random/property-test settings are not stated.",
+      "severity": "major"
+    },
+    {
+      "area": "evaluation",
+      "description": "The paper reports a thirteen-test pass but does not include test logs, exact test names, expected outputs, or enough implementation detail to independently verify the claimed software results from the manuscript alone.",
+      "severity": "major"
+    },
+    {
+      "area": "data",
+      "description": "No external empirical data appear to be required; examples are analytic or toy/synthetic, so data availability is not a primary blocker.",
+      "severity": "info"
+    },
+    {
+      "area": "compute",
+      "description": "The described stabilizer-code and Fisher-metric examples should require only ordinary local compute if the Haskell package is available.",
+      "severity": "info"
+    }
+  ],
+  "confidence": 0.82,
+  "data_availability": "synthetic",
+  "data_url": null,
+  "environment": {
+    "dependencies": [
+      "GHC/Haskell version not specified",
+      "Cabal version not specified",
+      "Haskell package dependencies not specified",
+      "Property-testing framework not specified"
+    ],
+    "hardware": null,
+    "software": "Haskell companion package with Cabal build/test workflow; exact versions unspecified"
+  },
+  "reproducibility_score": 0.42
+}
+```
+
+### summary (`claude-haiku-4-5-20251001`) — status: `warn`
+
+```json
+{
+  "audience": "Theoretical physicists and quantum information researchers working on holography, AdS/CFT, quantum error correction, emergent spacetime, topological order, and information geometry. The paper is positioned as a manifesto for a research program bridging high-energy theory, condensed matter, and quantum information.",
+  "key_contributions": [
+    "Categorical formulation of quantum error correction as monomorphisms in Hilbert spaces, with Knill-Laflamme conditions recast as naturality squares",
+    "Analysis of HaPPY holographic codes proving bulk-to-boundary isometry and verifying the discrete Ryu-Takayanagi formula exactly",
+    "Definition and properties of Fisher and Bures metrics on quantum state manifolds, showing they exhibit hyperbolic geometry (emergent AdS₂)",
+    "Categorical reformulation of Van Raamsdonk's entanglement-as-glue argument as continuity of a metric functor under decoherence",
+    "Non-derivability proposition: Fisher-Bures metric and Ryu-Takayanagi formula emerge only from composition of all three prior laws, not from any individual layer",
+    "Companion software package implementing stabilizer codes, HaPPY-style codes, and Fisher metric calculations with property tests"
+  ],
+  "plain_language_summary": "This paper presents the capstone of a four-paper series arguing that spacetime geometry emerges from the precise layering of three mathematical and physical structures. The authors show that none of these layers alone—categorical mathematics, topologically ordered quantum matter, or periodic temporal dynamics—can produce geometric structure. Only when combined do they generate a Riemannian metric on quantum state space and holographic error-correcting codes, suggesting a deep connection between quantum information and spacetime itself.\n\nThe paper makes this concrete through discrete examples: the HaPPY holographic code, where entanglement between quantum systems directly maps to bulk geometry via the Ryu-Takayanagi area law, and the Fisher information metric on families of quantum states, which exhibits the hyperbolic geometry of anti-de Sitter spacetime. The authors reformulate familiar results from quantum information and high-energy physics—the Knill-Laflamme error correction conditions, the entanglement-as-glue mechanism—in categorical language to show how they fit together as building blocks of a unified framework.\n\nWhile the paper focuses on rigorous discrete models and conjectural continuum extensions, its central contribution is the organizational schema itself: a claim that geometry is fundamentally emergent from informational and topological properties through compositional layering. This bridges condensed matter physics, quantum information theory, and gravitational physics through a common mathematical language.",
+  "tldr": "A modular framework showing how quantum error correction, topological order, and temporal dynamics compose to generate emergent spacetime geometry and holographic codes."
+}
+```
+
+### technical_correctness (`claude-opus-4-7`) — status: `warn`
+
+```json
+{
+  "claims": [
+    {
+      "assessment": "supported",
+      "claim": "Knill-Laflamme conditions (Theorem 7): A code corrects error set E iff enc^† E_a^† E_b enc = C_{ab} id_{H_L} for some Hermitian matrix C.",
+      "evidence": "This is the standard Knill-Laflamme theorem (1997). The proof sketch correctly invokes diagonalization of C to construct orthogonal syndrome subspaces, and the Petz transpose recovery map is the standard explicit reversal channel.",
+      "id": "c1",
+      "location": "Section 3.1, Theorem 7",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Petz transpose recovery formula stated in the proof of Theorem 7.",
+      "evidence": "The standard Petz recovery for a reference state σ under channel N is R(τ)=σ^{1/2} N*((N(σ))^{-1/2} τ (N(σ))^{-1/2}) σ^{1/2}. The paper writes ρ_enc^{-1/2} on the noisy side, conflating the encoded reference with its noisy image (which should appear as N(ρ_enc) in the inverse square roots).",
+      "id": "c2",
+      "location": "Section 3.1, proof of Theorem 7",
+      "severity": "minor",
+      "suggested_fix": "Replace the inner ρ_enc^{-1/2} factors with (N(ρ_enc))^{-1/2} so the formula matches the standard Petz/transpose recovery construction."
+    },
+    {
+      "assessment": "supported",
+      "claim": "HaPPY tensor network on a {5,4} pentagon tiling defines an isometry V: H_bulk -> H_boundary, and S(A) = |γ_A| log d + S_bulk(W(A)) (Theorem 13).",
+      "evidence": "This matches Pastawski-Yoshida-Harlow-Preskill (2015), arXiv:1503.06237. The greedy-algorithm proof sketch is standard.",
+      "id": "c3",
+      "location": "Section 4.2, Theorem 13",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "supported",
+      "claim": "Entanglement-wedge reconstruction: bulk operators in W(A) admit boundary representations supported on A (Theorem 15).",
+      "evidence": "Correctly attributed to Almheiri-Dong-Harlow (2015), arXiv:1411.7041. The argument via perfect-tensor pushing is the standard one.",
+      "id": "c4",
+      "location": "Section 4.3, Theorem 15",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "supported",
+      "claim": "Continuum Ryu-Takayanagi formula S(A) = Area(γ_A)/(4 G_N) (Theorem 16).",
+      "evidence": "Standard Ryu-Takayanagi (2006), arXiv:hep-th/0603001, stated correctly in the static case.",
+      "id": "c5",
+      "location": "Section 5.1, Theorem 16",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "supported",
+      "claim": "Linearised Einstein equations follow from the entanglement first law δS(A)=δ⟨K_A⟩ on all ball-shaped regions (Theorem 18).",
+      "evidence": "Correctly attributed to Faulkner-Guica-Hartman-Myers-Van Raamsdonk (2014), arXiv:1312.7856. The sketch invokes RT, Casini-Huerta-Myers and Bisognano-Wichmann correctly.",
+      "id": "c6",
+      "location": "Section 5.2, Theorem 18",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Klein's inequality S(ρ||σ)≥0 (Theorem 5), and the assertion that its positivity implies the Bousso bound and the linearised positive energy theorem in the bulk.",
+      "evidence": "Klein's inequality itself is correct. However, positivity of relative entropy alone does not imply the Bousso (covariant entropy) bound — the modern derivations (Bousso et al.) use the QNEC/QFC, which is the stronger monotonicity statement, not bare positivity. Linearised positive energy in the bulk does follow (via FGHM) from positivity of vacuum-subtracted relative entropy.",
+      "id": "c7",
+      "location": "Section 2.3, Theorem 5",
+      "severity": "minor",
+      "suggested_fix": "Soften to 'monotonicity of relative entropy underlies the QNEC and, via FGHM, the linearised positive energy theorem'; drop the direct claim that Klein's inequality implies the Bousso bound."
+    },
+    {
+      "assessment": "supported",
+      "claim": "Fisher information metric on the univariate Gaussian family is g = diag(1/σ^2, 2/σ^2), giving ds^2 = (2/y^2)(dμ^2+dy^2) with y=√2 σ; constant Gauss curvature K=-1/2, Ricci scalar R=-1 (Example 23, Section 9.2, Remark 33).",
+      "evidence": "Direct verification: g_{μμ}=E[(x-μ)^2/σ^4]=1/σ^2; g_{σσ}=1/σ^2 - 2/σ^2 + 3/σ^2 = 2/σ^2; g_{μσ}=0 by odd-moment vanishing. The substitution y=√2 σ gives ds^2=(2/y^2)(dμ^2+dy^2). Conformal scaling of the unit-curvature Poincaré half-plane metric by 2 sends K=-1 → K=-1/2 (Ricci scalar R=2K=-1). All consistent.",
+      "id": "c8",
+      "location": "Sections 6.1 and 9.2, Example 23, Remark 33",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "supported",
+      "claim": "Five-qubit [[5,1,3]] code is a perfect tensor / AME state on 6 legs over d=2 (Example 12).",
+      "evidence": "Standard fact: the Laflamme-Miquel-Paz-Zurek/BDSW 5-qubit code is AME(6,2); all 3-leg reductions of the encoder viewed as a 6-leg tensor are maximally mixed. The stabilizers listed (cyclic shifts of XZZXI) pairwise commute as required, and X̄=X⊗5, Z̄=Z⊗5 commute with the stabilizers and anticommute with each other as needed.",
+      "id": "c9",
+      "location": "Section 4.1, Example 12",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "incorrect",
+      "claim": "For the maximally mixed code state ρ=VV^†/2 of the five-qubit code, the entanglement entropy on a contiguous boundary region of size k satisfies S(A) = min(k, 5-k) log 2 (Proposition 32).",
+      "evidence": "The state ρ=VV^†/2 is mixed (rank 2, S(ρ)=log 2), so S(A) ≠ S(A^c) in general. Using the standard 6-qubit AME purification |Ψ⟩=(1/√2)Σ_i |i⟩_R V|i⟩_phys, S_ρ(A) = S_|Ψ⟩(A) equals the entropy of a |A|-leg subset of an AME(6,2) state: log 2 for |A|=1, 2log 2 for |A|=2, 3log 2 for |A|=3, 2log 2 for |A|=4, log 2 for |A|=5. The formula min(k,5-k)log 2 gives 2log 2 at k=3 and log 2 at k=4, both of which are too small — the actual correct closed form is min(k, 6-k) log 2 (or equivalently the discrete RT formula |γ_A| log 2 + S_bulk with bulk entropy log 2 in the entanglement wedge for k≥3, which yields 3log 2 and 2log 2). The proof in the paper silently substitutes S(A^c) for S(A) — valid only for pure states.",
+      "id": "c10",
+      "location": "Section 9.1, Proposition 32",
+      "severity": "major",
+      "suggested_fix": "Replace 'S(A) = min(k, 5-k) log 2' with 'S(A) = min(k, 6-k) log 2' (equivalently, S(A) = k log 2 for k≤2 and S(A) = (6-k) log 2 for k≥3). Rewrite the proof: for k≤2, ρ_A is maximally mixed by the perfect-tensor property; for k≥3, A reconstructs the bulk leg and S(A) acquires an additional bulk entropy log 2 on top of |γ_A| log 2 = (5-k) log 2."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "HaPPY Lipschitz continuity: |S_ψ(A) - S_{ψ'}(A)| ≤ |γ_A| · ||ψ - ψ'|| · (log d) + O(||·||^2) (Proposition 31).",
+      "evidence": "Since S_ψ(A) = |γ_A| log d + S^ψ_bulk(W(A)) and the first term is ψ-independent, |S_ψ(A) - S_{ψ'}(A)| equals the difference of bulk-wedge entropies, which is governed by the Fannes-Audenaert bound with Lipschitz constant ~log(dim H_{W(A)}) (i.e. proportional to the number of bulk legs in W(A), not to |γ_A|). The coefficient |γ_A| log d in the proposition therefore appears to be the wrong quantity; it confuses the size of the cut with the dimension of the entanglement-wedge bulk Hilbert space. Furthermore the trace-norm-to-vector-norm passage is not justified.",
+      "id": "c11",
+      "location": "Section 8.3, Proposition 31",
+      "severity": "major",
+      "suggested_fix": "State the bound as |S_ψ(A) - S_{ψ'}(A)| ≤ |W(A)| log d · ||ρ_ψ - ρ_{ψ'}||_1 + h(||·||_1) (Fannes-Audenaert), or equivalently bound it by O(|W(A)| log d · ||ψ-ψ'||) after relating trace norm to state-vector norm, and drop the |γ_A| factor."
+    },
+    {
+      "assessment": "supported",
+      "claim": "Quantum Fisher metric is monotone non-increasing under CPTP maps (Theorem 26), and the Bures line element is one quarter of the quantum Fisher metric.",
+      "evidence": "Standard results: monotonicity of the SLD Fisher metric under CPTP maps is the Petz monotonicity (1986). The relation ds_B^2 = (1/4) g^Q_{ij} dθ^i dθ^j between the Bures metric (defined via fidelity) and the SLD quantum Fisher metric is the standard Uhlmann-Hübner identity.",
+      "id": "c12",
+      "location": "Section 6.2, Theorem 26 and following",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "supported",
+      "claim": "Toric code on an L×L torus encodes k=2 logical qubits into n=2L^2 physical qubits with distance d=L (Proposition 34).",
+      "evidence": "Standard Kitaev (2003) parameters for the toric code on a torus.",
+      "id": "c13",
+      "location": "Section 9.3, Proposition 34",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Non-derivability proposition: within the modular framework, the Fisher-Bures metric and RT area law are not derivable from any one of Laws I, II, or III alone (Proposition 30).",
+      "evidence": "The 'proof' exhibits one example per law that lacks the structure; this is an existence-of-counterexample argument, not a true no-go theorem (different categorical/operator presentations of each law could in principle realize a metric). The proposition statement itself acknowledges this ('structural statement … not a no-go theorem'), so the limitation is correctly disclosed, but the language of 'Proposition' with a 'Proof' is stronger than the content warrants.",
+      "id": "c14",
+      "location": "Section 8.2, Proposition 30",
+      "severity": "minor",
+      "suggested_fix": "Demote 'Proposition 30' and 'Proof' to 'Remark' or 'Observation' with an illustrative argument, or strengthen by formally specifying the precise theories considered for each law and the precise meaning of 'derivable' before claiming a proof."
+    },
+    {
+      "assessment": "supported",
+      "claim": "ER=EPR (Maldacena-Susskind, 2013) reformulated as faithfulness of the metric functor Γ on entanglement-creating boundary operations.",
+      "evidence": "The factual claim attached to Maldacena-Susskind (2013), arXiv:1306.0533, is correctly summarized; the 'faithfulness' rephrasing is presented as a conjectural categorical interpretation, consistent with the paper's manifesto framing.",
+      "id": "c15",
+      "location": "Section 7.3, Remark 28",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "supported",
+      "claim": "Van Raamsdonk's thermofield-double argument: bulk Einstein-Rosen bridge thins and pinches off as entanglement between the two CFT copies is removed.",
+      "evidence": "Correctly attributed to Van Raamsdonk (2010), arXiv:1005.3035; the qualitative description matches the published argument.",
+      "id": "c16",
+      "location": "Section 7.1",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Holographic functor Φ_hol: Bulk -> Bdy with (1) bulk-to-boundary Hilbert space assignment, (2) isometric morphism mapping, (3) wedge-supported restriction to subregion algebras, implying RT via entropy formula for isometric embeddings (Remark 19).",
+      "evidence": "The remark is explicitly labeled 'a conjectural framework, not an established definition,' which is appropriate. However, the claim that '(2) inner product preservation … combined with (3) implies the Ryu-Takayanagi formula' is loose — an isometric embedding alone does not imply RT; one also needs the QEC/OAQEC complementary-recovery structure (Harlow 2017). The HaPPY-rigorous claim for the discrete case is correct.",
+      "id": "c17",
+      "location": "Section 5.3, Remark 19",
+      "severity": "minor",
+      "suggested_fix": "Add to (2)+(3) the requirement of complementary recovery / OAQEC compatibility, and cite Harlow (2017) for the precise theorem that this set of axioms implies RT."
+    },
+    {
+      "assessment": "supported",
+      "claim": "On the simplex of probability distributions over a finite alphabet, the Fisher metric is the unique (up to positive scalar) Riemannian metric monotone non-increasing under stochastic maps (Chentsov, Theorem 22).",
+      "evidence": "Standard Chentsov theorem (Amari-Nagaoka).",
+      "id": "c18",
+      "location": "Section 6.1, Theorem 22",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Knill-Laflamme as a naturality square: Φ(ρ) = enc ρ enc^† intertwines with noise up to scalar C_{ab} (Remark 8).",
+      "evidence": "The categorical phrasing is suggestive but informal — the diagram is described as commuting 'up to multiplication by C_{ab} ∈ ℂ', which is not a standard 2-cell or natural transformation but a scalar deviation on each element pair (a,b). This is more accurately a family of 2-cells or a property of an enrichment, not a genuine naturality square.",
+      "id": "c19",
+      "location": "Section 3.1, Remark 8",
+      "severity": "minor",
+      "suggested_fix": "Reformulate as 'enc^† ∘ E_a^† E_b ∘ enc factors through the scalar inclusion ℂ → B(H_L)', or present the diagram inside a category enriched over Hermitian matrices, rather than calling it 'naturality'."
+    },
+    {
+      "assessment": "supported",
+      "claim": "The Miyaji-Takayanagi conjecture: in the holographic limit, the Fisher-Bures metric on CFT state space reproduces the bulk AdS metric.",
+      "evidence": "Correctly cited as a conjecture (Miyaji-Takayanagi 2015, arXiv:1503.03542); the conditional framing is appropriate.",
+      "id": "c20",
+      "location": "Section 6.3",
+      "severity": "info",
+      "suggested_fix": null
+    }
+  ],
+  "confidence": 0.78,
+  "overall_correctness": "mostly_sound"
+}
+```
+
+## Corrections
+
+<!-- corrections-section: rendered from corrections table; empty on first publish -->
+_No corrections have been recorded._
+
+## Bibliography
+
+_No bibliography extracted._
+
