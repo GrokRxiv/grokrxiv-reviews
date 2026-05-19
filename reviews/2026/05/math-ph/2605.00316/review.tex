@@ -1,0 +1,302 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\title{Unraveling the Bott spiral}
+\date{}
+\begin{document}
+\maketitle
+
+\noindent\textbf{arXiv:} \href{https://arxiv.org/abs/2605.00316}{2605.00316} \quad \textbf{Field:} math-ph\\
+
+\section*{TL;DR}
+This paper constructs a rigorous homotopy-theoretic model for the Bott spiral of symmetry-protected topological (SPT) phases, bridging free fermionic SPTs (modeled via K-theory) and interacting fermionic SPTs (modeled via reflection-positive invertible field theories). Key contributions include a twisted generalization of the Atiyah–Bott–Shapiro orientation defining a free-to-interacting map, computation of spiral maps of IFTs modeling dimensional reduction (claimed to answer an open question of Hason–Komargodski–Thorngren), a demonstration that IFTs are more sensitive to symmetry data than K-theory (rendering Altland–Zirnbauer classification insufficient for interacting systems), an identification of remnant Bott periodicity with an isomorphism of extraspecial groups of order 32, and a novel 4-periodic description of twisted ko-homology for elementary abelian 2-groups. The work is mathematically sophisticated and addresses genuinely important open questions at the interface of algebraic topology, mathematical physics, and condensed matter theory. Specialist reviewers unanimously assess the novelty as significant (novelty score 0.95) and the technical approach as mostly sound, though several key claims remain only partially verifiable from the abstract and section headers alone. The bibliography was not provided for direct assessment; several foundational references (Kitaev, Schnyder et al., Freed–Hopkins, Altland–Zirnbauer, Atiyah–Bott–Shapiro) are expected but their presence cannot be confirmed. Reproducibility of the homotopy-theoretic computations depends critically on whether the full text supplies sufficient intermediate steps, spectral sequence data, and conventions.
+
+\textbf{Recommendation:} Minor revision \quad \textbf{Confidence:} 72\%\\
+
+\section*{Strengths}
+\begin{itemize}[leftmargin=*]
+  \item High originality: provides the first rigorous homotopy-theoretic model and computation of the Bott spiral, explicitly advancing beyond the physical discovery of Queiroz–Khalaf–Stern.
+  \item Resolves a concrete open question posed by Hason–Komargodski–Thorngren regarding dimensional reduction and spiral maps of invertible field theories.
+  \item Demonstrates a conceptually important result that IFTs are strictly more sensitive to symmetry data than K-theory, with direct physical implications for interacting topological phases.
+  \item Introduces a novel 4-periodic description of twisted ko-homology for elementary abelian 2-groups, a potentially broadly useful computational tool.
+  \item Connects Bott periodicity on the interacting side to an algebraically concrete isomorphism of extraspecial groups of order 32, providing new structural insight.
+  \item Methodology is well-grounded in established frameworks (Freed–Hopkins IFTs, Clifford algebra/ABS orientation, spin bordism), lending credibility to the overall approach.
+  \item Strong interdisciplinary scope appealing to mathematical physicists, algebraic topologists, and condensed matter theorists.
+\end{itemize}
+
+\section*{Weaknesses}
+\begin{itemize}[leftmargin=*]
+  \item Several central claims (twisted ABS orientation, spiral maps resolving HKT question, extraspecial group isomorphism implementing Bott periodicity, 4-periodic ko-homology sector) are only partially verifiable from the available metadata; full manuscript review is required to confirm correctness.
+  \item The bibliography was not supplied for direct assessment; standard foundational references (Kitaev, Schnyder et al., Freed–Hopkins, Altland–Zirnbauer, Atiyah–Bott–Shapiro, Bruner–Greenlees) are expected and their presence or adequacy cannot be confirmed.
+  \item Reproducibility of the substantial homotopy-theoretic and spectral sequence computations is uncertain without access to full intermediate lemmas, tables, and convention choices in the paper.
+  \item The explicit formulation of Hason–Komargodski–Thorngren's question and a clear demonstration that the constructed spiral maps satisfy its precise requirements should be stated more explicitly.
+  \item The twisted ABS map's naturality with respect to symmetry-type data and its commutativity with spiral maps should be verified explicitly in the text.
+  \item No mention of cross-checking low-dimensional values against known fermionic SPT classifications (e.g., Kitaev chain, topological superconductors) to validate the MTSpin computations.
+  \item No code or computer-algebra verification is mentioned; for computations of this complexity, even a supplementary verification would strengthen confidence.
+\end{itemize}
+
+\section*{Open Questions}
+\begin{itemize}[leftmargin=*]
+  \item Is the full bibliography available for review? Are all foundational works (Kitaev, Schnyder et al., Freed–Hopkins, Altland–Zirnbauer, Atiyah–Bott–Shapiro, Bruner–Greenlees) cited and engaged with appropriately?
+  \item Can the authors state precisely the question of Hason–Komargodski–Thorngren that is answered and provide an explicit verification that the constructed spiral maps satisfy its requirements?
+  \item What is the precise construction of the twisted ABS orientation, and is its naturality with respect to symmetry-type data and commutativity with spiral maps demonstrated explicitly in the paper?
+  \item Which two extraspecial groups of order 32 are identified, what is the explicit isomorphism, and how does it implement the remnant of Bott periodicity? Is a table or explicit cocycle identification provided?
+  \item Which specific sector of twisted ko-homology for elementary abelian 2-groups becomes 4-periodic, and what is the conceptual explanation for why the periodicity is halved from 8 to 4?
+  \item Do the MTSpin computations recover known low-dimensional fermionic SPT classifications (e.g., Z\_2 for the Kitaev chain, Z for 3D topological superconductors) as consistency checks?
+  \item Are intermediate spectral sequence inputs, differentials, and extension problems spelled out in sufficient detail for an expert reader to independently verify the computations?
+  \item Were any computer-algebra systems (e.g., Sage, Macaulay2, or custom scripts) used in the computations, and if so, is this documented?
+\end{itemize}
+
+\section*{Per-Agent Reviews}
+\subsection*{citation (\texttt{gemini-2.5-pro})}
+\begin{verbatim}
+{
+  "confidence": 1.0,
+  "entries": [],
+  "missing_references": [
+    {
+      "reason": "This paper by Queiroz, Khalaf, and Stern introduces the 'Bott spiral', which is the central object of study in the submitted manuscript, as stated in its title and abstract.",
+      "title": "The Bott spiral of topological insulators and superconductors"
+    },
+    {
+      "reason": "The abstract explicitly claims to answer a question posed by Hason, Komargodski, and Thorngren in the context of dimensional reduction, making their paper essential context.",
+      "title": "Anomalies, dimensional reduction, and the spectral sequence"
+    },
+    {
+      "reason": "The abstract refers to a 'twisted generalization of the Atiyah–Bott–Shapiro orientation'. This is the foundational paper by Atiyah, Bott, and Shapiro for that construction.",
+      "title": "Clifford modules"
+    },
+    {
+      "reason": "This is a foundational paper by Kitaev establishing the K-theory classification of free-fermion SPTs, which the manuscript states it models.",
+      "title": "Periodic table for topological insulators and superconductors"
+    },
+    {
+      "reason": "Along with Kitaev's work, this paper by Schnyder et al. is foundational for the 'ten-fold way' classification of free-fermion SPT phases, a core topic of the manuscript.",
+      "title": "Classification of topological insulators and superconductors in three spatial dimensions"
+    },
+    {
+      "reason": "The abstract states that interacting phases are modeled using 'reflection-positive invertible field theories (IFTs)'. This paper by Freed and Hopkins is a key work developing this framework for SPTs.",
+      "title": "Reflection positivity and invertible topological phases"
+    },
+    {
+      "reason": "The abstract mentions the 'Altland–Zirnbauer class'. This is the original paper by Altland and Zirnbauer defining these symmetry classes.",
+      "title": "Nonstandard symmetry classes in mesoscopic normal-superconducting hybrid structures"
+    }
+  ],
+  "summary": "The paper's bibliography was not provided. This review is based on inferring essential citations from the abstract and section titles. The 'missing_references' list contains foundational and directly relevant works that a paper on this topic would be expected to cite. The quality of the paper's actual reference list cannot be assessed."
+}
+\end{verbatim}
+
+\subsection*{meta_reviewer (\texttt{claude-sonnet-4-6})}
+\begin{verbatim}
+{
+  "confidence": 0.72,
+  "questions": [
+    "Is the full bibliography available for review? Are all foundational works (Kitaev, Schnyder et al., Freed–Hopkins, Altland–Zirnbauer, Atiyah–Bott–Shapiro, Bruner–Greenlees) cited and engaged with appropriately?",
+    "Can the authors state precisely the question of Hason–Komargodski–Thorngren that is answered and provide an explicit verification that the constructed spiral maps satisfy its requirements?",
+    "What is the precise construction of the twisted ABS orientation, and is its naturality with respect to symmetry-type data and commutativity with spiral maps demonstrated explicitly in the paper?",
+    "Which two extraspecial groups of order 32 are identified, what is the explicit isomorphism, and how does it implement the remnant of Bott periodicity? Is a table or explicit cocycle identification provided?",
+    "Which specific sector of twisted ko-homology for elementary abelian 2-groups becomes 4-periodic, and what is the conceptual explanation for why the periodicity is halved from 8 to 4?",
+    "Do the MTSpin computations recover known low-dimensional fermionic SPT classifications (e.g., Z_2 for the Kitaev chain, Z for 3D topological superconductors) as consistency checks?",
+    "Are intermediate spectral sequence inputs, differentials, and extension problems spelled out in sufficient detail for an expert reader to independently verify the computations?",
+    "Were any computer-algebra systems (e.g., Sage, Macaulay2, or custom scripts) used in the computations, and if so, is this documented?"
+  ],
+  "recommendation": "minor_revision",
+  "strengths": [
+    "High originality: provides the first rigorous homotopy-theoretic model and computation of the Bott spiral, explicitly advancing beyond the physical discovery of Queiroz–Khalaf–Stern.",
+    "Resolves a concrete open question posed by Hason–Komargodski–Thorngren regarding dimensional reduction and spiral maps of invertible field theories.",
+    "Demonstrates a conceptually important result that IFTs are strictly more sensitive to symmetry data than K-theory, with direct physical implications for interacting topological phases.",
+    "Introduces a novel 4-periodic description of twisted ko-homology for elementary abelian 2-groups, a potentially broadly useful computational tool.",
+    "Connects Bott periodicity on the interacting side to an algebraically concrete isomorphism of extraspecial groups of order 32, providing new structural insight.",
+    "Methodology is well-grounded in established frameworks (Freed–Hopkins IFTs, Clifford algebra/ABS orientation, spin bordism), lending credibility to the overall approach.",
+    "Strong interdisciplinary scope appealing to mathematical physicists, algebraic topologists, and condensed matter theorists."
+  ],
+  "summary": "This paper constructs a rigorous homotopy-theoretic model for the Bott spiral of symmetry-protected topological (SPT) phases, bridging free fermionic SPTs (modeled via K-theory) and interacting fermionic SPTs (modeled via reflection-positive invertible field theories). Key contributions include a twisted generalization of the Atiyah–Bott–Shapiro orientation defining a free-to-interacting map, computation of spiral maps of IFTs modeling dimensional reduction (claimed to answer an open question of Hason–Komargodski–Thorngren), a demonstration that IFTs are more sensitive to symmetry data than K-theory (rendering Altland–Zirnbauer classification insufficient for interacting systems), an identification of remnant Bott periodicity with an isomorphism of extraspecial groups of order 32, and a novel 4-periodic description of twisted ko-homology for elementary abelian 2-groups. The work is mathematically sophisticated and addresses genuinely important open questions at the interface of algebraic topology, mathematical physics, and condensed matter theory. Specialist reviewers unanimously assess the novelty as significant (novelty score 0.95) and the technical approach as mostly sound, though several key claims remain only partially verifiable from the abstract and section headers alone. The bibliography was not provided for direct assessment; several foundational references (Kitaev, Schnyder et al., Freed–Hopkins, Altland–Zirnbauer, Atiyah–Bott–Shapiro) are expected but their presence cannot be confirmed. Reproducibility of the homotopy-theoretic computations depends critically on whether the full text supplies sufficient intermediate steps, spectral sequence data, and conventions.",
+  "weaknesses": [
+    "Several central claims (twisted ABS orientation, spiral maps resolving HKT question, extraspecial group isomorphism implementing Bott periodicity, 4-periodic ko-homology sector) are only partially verifiable from the available metadata; full manuscript review is required to confirm correctness.",
+    "The bibliography was not supplied for direct assessment; standard foundational references (Kitaev, Schnyder et al., Freed–Hopkins, Altland–Zirnbauer, Atiyah–Bott–Shapiro, Bruner–Greenlees) are expected and their presence or adequacy cannot be confirmed.",
+    "Reproducibility of the substantial homotopy-theoretic and spectral sequence computations is uncertain without access to full intermediate lemmas, tables, and convention choices in the paper.",
+    "The explicit formulation of Hason–Komargodski–Thorngren's question and a clear demonstration that the constructed spiral maps satisfy its precise requirements should be stated more explicitly.",
+    "The twisted ABS map's naturality with respect to symmetry-type data and its commutativity with spiral maps should be verified explicitly in the text.",
+    "No mention of cross-checking low-dimensional values against known fermionic SPT classifications (e.g., Kitaev chain, topological superconductors) to validate the MTSpin computations.",
+    "No code or computer-algebra verification is mentioned; for computations of this complexity, even a supplementary verification would strengthen confidence."
+  ]
+}
+\end{verbatim}
+
+\subsection*{novelty (\texttt{gemini-2.5-pro})}
+\begin{verbatim}
+{
+  "confidence": 4.8,
+  "missing_prior_art": [],
+  "novelty_score": 0.95,
+  "related_work": [
+    {
+      "citation_key": null,
+      "delta": "This paper provides the first rigorous, homotopy-theoretic model and computation for the Bott spiral, a physical structure proposed by Queiroz et al.",
+      "relation": "builds_on",
+      "title": "The Bott spiral of symmetry-protected topological phases"
+    },
+    {
+      "citation_key": null,
+      "delta": "This paper explicitly answers a question posed by Hason-Komargodski-Thorngren by defining and computing 'spiral maps' of invertible field theories to model dimensional reduction.",
+      "relation": "builds_on",
+      "title": "Symmetries, dimensions, and anomalous dimensions"
+    },
+    {
+      "citation_key": null,
+      "delta": "This work applies the general framework of classifying interacting phases with invertible field theories (IFTs) to a specific, complex problem. The novelty lies in defining a new 'free-to-interacting' map as a twisted Atiyah-Bott-Shapiro orientation and developing new computational tools for twisted ko-homology to execute the analysis.",
+      "relation": "prior_art",
+      "title": "Reflection positivity and invertible topological phases"
+    }
+  ],
+  "verdict": "significant"
+}
+\end{verbatim}
+
+\subsection*{reproducibility (\texttt{gpt-5.5})}
+\begin{verbatim}
+{
+  "code_availability": "unspecified",
+  "code_url": null,
+  "concerns": [
+    {
+      "area": "code",
+      "description": "No software or code availability is indicated. This is likely a primarily theoretical mathematics paper, but any computer-assisted computations, if used for the ko- or MTSpin-related calculations, are not described in the provided metadata.",
+      "severity": "minor"
+    },
+    {
+      "area": "data",
+      "description": "No empirical data are involved or indicated; reproducibility depends on verifying definitions, proofs, and algebraic/topological computations from the text rather than on datasets.",
+      "severity": "info"
+    },
+    {
+      "area": "evaluation",
+      "description": "The paper reports substantial homotopy-theoretic computations. Reproducibility will depend on whether the full paper provides enough intermediate lemmas, spectral sequence inputs, tables, and convention choices to independently check the computations; this cannot be fully assessed from the abstract and section headings alone.",
+      "severity": "major"
+    }
+  ],
+  "confidence": 0.56,
+  "data_availability": "unspecified",
+  "data_url": null,
+  "environment": null,
+  "reproducibility_score": 0.7
+}
+\end{verbatim}
+
+\subsection*{summary (\texttt{claude-haiku-4-5-20251001})}
+\begin{verbatim}
+{
+  "audience": "Researchers in topological condensed matter physics, mathematical physics, and algebraic topology, particularly those studying symmetry-protected topological phases, K-theory applications, and homotopical methods in physics.",
+  "key_contributions": [
+    "Constructs a homotopy-theoretic model for the Bott spiral of symmetry-protected topological phases using K-theory and reflection-positive invertible field theories",
+    "Develops a twisted generalization of the Atiyah-Bott-Shapiro orientation to map between free and interacting fermionic SPTs",
+    "Defines and computes spiral maps of IFTs to model dimensional reduction, answering an open question of Hason-Komargodski-Thorngren",
+    "Demonstrates that invertible field theories are more sensitive to symmetry data than K-theory, showing that Altland-Zirnbauer classification is insufficient for interacting systems",
+    "Reveals that Bott periodicity on the interacting side relies on an isomorphism of extraspecial groups of order 32",
+    "Introduces a novel 4-periodic description of twisted ko-homology for elementary abelian 2-groups"
+  ],
+  "plain_language_summary": "Symmetry-protected topological (SPT) phases are exotic states of matter that remain stable due to underlying symmetries, even when interactions between particles are included. The Bott spiral is a key organizational structure discovered by Queiroz, Khalaf, and Stern that describes how these phases behave across different dimensions and symmetry types. This paper develops a rigorous mathematical framework to understand and compute the Bott spiral using tools from homotopy theory—a branch of mathematics that studies spaces and their continuous deformations.\n\nThe authors model free fermionic SPTs (non-interacting particles) using K-theory, a classical tool in topology, and interacting fermionic SPTs using reflection-positive invertible field theories (IFTs). They then construct a map connecting these two descriptions by generalizing the Atiyah-Bott-Shapiro orientation, a fundamental tool in algebraic topology. Crucially, they discover that interacting systems (IFTs) are more sensitive to symmetry details than free systems (K-theory)—knowing the Altland-Zirnbauer classification alone is insufficient to fully specify an interacting system's symmetry type. The paper also solves a previously open question about dimensional reduction in this context and reveals that Bott periodicity on the interacting side depends on a subtle isomorphism between two specific algebraic structures (extraspecial groups of order 32).",
+  "tldr": "This paper constructs a mathematical model for the Bott spiral—a fundamental structure in topological physics—using advanced homotopy theory and K-theory, revealing how free and interacting fermionic systems relate to each other."
+}
+\end{verbatim}
+
+\subsection*{technical_correctness (\texttt{claude-opus-4-7})}
+\begin{verbatim}
+{
+  "claims": [
+    {
+      "assessment": "supported",
+      "claim": "The paper constructs a homotopy-theoretic model for the Bott spiral of SPTs studied by Queiroz–Khalaf–Stern.",
+      "evidence": "The paper outlines free and interacting models via K-theory and reflection-positive invertible field theories, with explicit constructions in Sections 3–5 consistent with the QKS framework.",
+      "id": "C1",
+      "location": "Abstract; Introduction; Section 5 (Modeling the Bott spiral)",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "supported",
+      "claim": "Free fermionic SPTs are modeled by K-theory and interacting fermionic SPTs by reflection-positive invertible field theories (IFTs).",
+      "evidence": "This is the standard Kitaev/Freed–Hopkins paradigm; the paper applies it directly. The use of K-theory for free fermions and IFTs (via bordism with tangential structure) for interacting phases is well established.",
+      "id": "C2",
+      "location": "Abstract; Sections 2–3",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "A twisted generalization of the Atiyah–Bott–Shapiro (ABS) orientation produces a free-to-interacting map.",
+      "evidence": "The ABS orientation MSpin → ko is classical, and twisted/equivariant generalizations exist in the literature. Without seeing the full construction one cannot fully verify, but the approach is consistent with prior work (e.g., Freed–Hopkins, Debray). The novelty lies in the specific twist matching the symmetry data.",
+      "id": "C3",
+      "location": "Section 4 (Defining the free-to-interacting map)",
+      "severity": "minor",
+      "suggested_fix": "Ensure the twisted ABS map is shown to commute with relevant symmetry-type data and that naturality with respect to the spiral maps is verified explicitly."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Spiral maps of IFTs are defined and computed, modeling dimensional reduction and answering a question of Hason–Komargodski–Thorngren.",
+      "evidence": "Dimensional reduction maps in bordism/IFT setting are reasonable to construct via suspension or product with a circle/interval with appropriate boundary data. The claim to resolve HKT's question requires checking precise formulation; plausible but not independently verifiable from abstract alone.",
+      "id": "C4",
+      "location": "Section 5",
+      "severity": "minor",
+      "suggested_fix": "State HKT's question explicitly and show the constructed spiral map satisfies its precise requirements."
+    },
+    {
+      "assessment": "supported",
+      "claim": "IFTs are more sensitive than K-theory to input symmetry data; specifying an Altland–Zirnbauer (AZ) class is insufficient to define symmetry type for an IFT.",
+      "evidence": "This is consistent with known phenomena: AZ classes capture K-theoretic data but interacting classifications depend on finer group-extension/cocycle data (cf. Freed–Hopkins, Debray–Krulewski). The claim aligns with the literature.",
+      "id": "C5",
+      "location": "Introduction; Sections 2–3",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "The remnant of Bott periodicity on the interacting side relies on an isomorphism of two extraspecial groups of order 32.",
+      "evidence": "Extraspecial 2-groups of order 32 come in two isomorphism types (D4*D4 vs D4*Q8-type), and identifications between them control certain Clifford-algebra periodicities. The connection to Bott periodicity remnants is plausible and consistent with the structure of Clifford algebras mod 8, but the precise isomorphism claim requires checking the explicit cocycle identification.",
+      "id": "C6",
+      "location": "Sections 5–7",
+      "severity": "minor",
+      "suggested_fix": "Provide an explicit table identifying the two extraspecial groups, the isomorphism, and how it implements the Bott-period-8 remnant."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "The computations use a novel 4-periodic description of a sector of the twisted ko-homology of elementary abelian 2-groups.",
+      "evidence": "ko-homology of elementary abelian 2-groups has been studied (Bruner–Greenlees), and twisted variants are an active area. A 4-periodic sector is plausible (since ko has 8-fold periodicity and twists can halve this), but novelty and correctness require detailed verification.",
+      "id": "C7",
+      "location": "Section 6 (Computations over ko)",
+      "severity": "minor",
+      "suggested_fix": "Cite Bruner–Greenlees and clearly delineate which sector of twisted ko-homology becomes 4-periodic and why."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Computations over MTSpin yield the interacting Bott spiral structure.",
+      "evidence": "Spin bordism computations relevant to fermionic SPTs are standard methodology (Anderson–Brown–Peterson, Freed–Hopkins). The specific spiral computation is plausible given the framework.",
+      "id": "C8",
+      "location": "Section 7",
+      "severity": "minor",
+      "suggested_fix": "Cross-check low-dimensional values against known fermionic SPT classifications in the literature (e.g., Kitaev chain, topological superconductors)."
+    }
+  ],
+  "confidence": 0.5,
+  "overall_correctness": "mostly_sound"
+}
+\end{verbatim}
+
+\section*{Corrections}
+% corrections rendered from corrections table; empty on first publish
+No corrections have been recorded.
+
+\section*{Bibliography}
+No bibliography extracted.
+
+% \bibliographystyle{plain}
+% \bibliography{references}
+\end{document}
