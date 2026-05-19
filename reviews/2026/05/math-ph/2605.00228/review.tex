@@ -1,0 +1,380 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\title{Classical limit of the Pauli--Fierz dynamics}
+\date{}
+\begin{document}
+\maketitle
+
+\noindent\textbf{arXiv:} \href{https://arxiv.org/abs/2605.00228}{2605.00228} \quad \textbf{Field:} math-ph\\
+
+\section*{TL;DR}
+This paper provides a rigorous derivation of the Newton-Maxwell equations as the classical limit (ℏ → 0) of the Pauli-Fierz quantum electrodynamics model, with explicit convergence rate estimates. The main technical contributions are quantitative bounds on the rate at which quantum dynamics approximates classical electrodynamics for a suitable class of initial data (coherent/semiclassical states), and a verification of the key assumption for Gaussian particle states. The novelty assessment rates this as incremental: the classical limit of Pauli-Fierz has been established by prior work (Fröhlich–Knowles–Pizzo, Griesemer–Faou and related), and the main advance is the explicit convergence rate via an alternative proof technique. The citation record is generally appropriate, though the bibliography was reconstructed rather than directly evaluated, suggesting some potentially important references may be missing. Reproducibility is not a concern in the usual sense (purely theoretical), though the completeness and correctness of the proofs cannot be fully verified from the abstract and section headings alone. Technical correctness is assessed as mostly sound, but several claims are only partially supported pending full text verification: explicit UV regularization conditions, the precise rate (e.g., O(ℏ\^{}\{1/2\})), time-scale of validity, and quantitative control of comparison constants must all be stated precisely. Overall, the paper makes a solid incremental contribution to mathematical physics that warrants publication after addressing specific technical and expository gaps.
+
+\textbf{Recommendation:} Minor revision \quad \textbf{Confidence:} 72\%\\
+
+\section*{Strengths}
+\begin{itemize}[leftmargin=*]
+  \item Provides explicit, quantitative convergence rate estimates for the classical limit of the Pauli-Fierz model, a genuine technical improvement over prior qualitative results.
+  \item Offers an alternative proof technique (functional/Grönwall-type approach) complementing existing Wigner measure and coherent-state methods, enriching the mathematical toolkit available in the field.
+  \item Includes an appendix verifying that the key initial-data assumption holds for Gaussian particle states, grounding the abstract hypothesis in a concrete example.
+  \item Appends a proof of energy conservation for the Newton-Maxwell effective system, contributing to the paper's self-contained character.
+  \item Well-situated in the existing literature, citing foundational and closely related works (Hepp, Spohn, Leopold–Pickl, Ginis–Leger).
+\end{itemize}
+
+\section*{Weaknesses}
+\begin{itemize}[leftmargin=*]
+  \item Novelty is incremental: prior works (Fröhlich–Knowles–Pizzo, Griesemer–Faou) have already established the same classical limit for the Pauli-Fierz model; the advance is primarily the explicit convergence rate.
+  \item The precise rate of convergence (e.g., O(ℏ\^{}\{1/2\})) and the time scale of validity are not stated in the accessible portions; these must be made explicit in the main theorem.
+  \item UV regularization assumptions and their role in obtaining quantitative estimates (particularly in relating kinetic and canonical momentum variances) are not clearly spelled out; this is critical for verifying correctness.
+  \item The exact semiclassical/coherent-state assumptions on the photon field initial data and particle wave packet scaling are not made sufficiently explicit in the abstract and section headings reviewed.
+  \item Potentially important references are missing: a rigorous mathematical introduction to the non-relativistic QED framework (e.g., Bach–Fröhlich–Sigal) and a foundational classical electrodynamics text (e.g., Rohrlich) would strengthen context.
+  \item The dependence of comparison constants on the UV cutoff parameter in the appendix on kinetic vs. canonical momentum variance is not quantified, leaving a minor gap in the estimates.
+\end{itemize}
+
+\section*{Open Questions}
+\begin{itemize}[leftmargin=*]
+  \item What is the precise convergence rate in ℏ stated in the main theorem (e.g., O(ℏ\^{}\{1/2\}) in some norm), and on what time interval does it hold?
+  \item What UV regularization (ultraviolet cutoff) is imposed on the Pauli-Fierz Hamiltonian, and how do the convergence constants depend on this cutoff?
+  \item How do the results compare technically with those of Fröhlich–Knowles–Pizzo and Griesemer–Faou; specifically, what is the precise sense in which the current rates improve upon or differ from prior bounds?
+  \item What is the exact class of initial data (coherent states for the field? semiclassical Gaussian wave packets for the particle?) and is the assumption (init 1) verified beyond the Gaussian case?
+  \item Are there plans to extend the result beyond finite time intervals, and what are the main obstacles to uniform-in-time estimates?
+  \item Could the authors add citations to a rigorous formulation of the non-relativistic Pauli-Fierz model (e.g., Bach–Fröhlich–Sigal) and to a classical charged particle reference (e.g., Rohrlich) to improve context for readers?
+\end{itemize}
+
+\section*{Per-Agent Reviews}
+\subsection*{citation (\texttt{gemini-2.5-pro})}
+\begin{verbatim}
+{
+  "confidence": 3.5,
+  "entries": [
+    {
+      "citation": {
+        "arxiv_id": "0709.2224",
+        "authors": [
+          "Zied Ammari",
+          "Francis Nier"
+        ],
+        "doi": "10.1007/s00023-008-0393-y",
+        "key": "AmmariNier08",
+        "raw": "Z. Ammari and F. Nier. Mean field limit for bosons and infinite dimensional phase-space analysis. Annales Henri Poincaré, 9(8):1503–1574, 2008.",
+        "title": "Mean field limit for bosons and infinite dimensional phase-space analysis",
+        "url": null,
+        "venue": "Annales Henri Poincaré",
+        "year": 2008
+      },
+      "exists": true,
+      "notes": "This paper provides mathematical techniques (Wigner measures, phase-space analysis) that are highly relevant for studying classical limits of quantum systems, although it focuses on the mean-field limit rather than the classical limit directly.",
+      "relevance": "medium",
+      "resolved_doi": "10.1007/s00023-008-0393-y",
+      "resolved_url": "https://doi.org/10.1007/s00023-008-0393-y"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Klaus Hepp"
+        ],
+        "doi": "10.1007/BF01646348",
+        "key": "Hepp74",
+        "raw": "K. Hepp. The classical limit for quantum mechanical correlation functions. Communications in Mathematical Physics, 35(4):265–277, 1974.",
+        "title": "The classical limit for quantum mechanical correlation functions",
+        "url": null,
+        "venue": "Communications in Mathematical Physics",
+        "year": 1974
+      },
+      "exists": true,
+      "notes": "This is a foundational paper on the rigorous derivation of classical dynamics from quantum mechanics, establishing the conceptual and technical groundwork for subsequent research, including the paper in question.",
+      "relevance": "high",
+      "resolved_doi": "10.1007/BF01646348",
+      "resolved_url": "https://doi.org/10.1007/BF01646348"
+    },
+    {
+      "citation": {
+        "arxiv_id": "1602.05742",
+        "authors": [
+          "Nikolai Leopold",
+          "Peter Pickl"
+        ],
+        "doi": "10.1007/s00205-017-1165-y",
+        "key": "LeopoldPickl18",
+        "raw": "N. Leopold and P. Pickl. Derivation of the Maxwell-Schrödinger equations from the Pauli-Fierz Hamiltonian. Archive for Rational Mechanics and Analysis, 227(2):591–634, 2018.",
+        "title": "Derivation of the Maxwell-Schrödinger Equations from the Pauli-Fierz Hamiltonian",
+        "url": null,
+        "venue": "Archive for Rational Mechanics and Analysis",
+        "year": 2018
+      },
+      "exists": true,
+      "notes": "This paper addresses a very similar problem, deriving a different semiclassical limit (Maxwell-Schrödinger) from the same Pauli-Fierz Hamiltonian. The current paper's derivation of Newton-Maxwell equations is a direct and important counterpart to this work.",
+      "relevance": "high",
+      "resolved_doi": "10.1007/s00205-017-1165-y",
+      "resolved_url": "https://doi.org/10.1007/s00205-017-1165-y"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Herbert Spohn"
+        ],
+        "doi": "10.1017/CBO9780511536920",
+        "key": "Spohn04",
+        "raw": "H. Spohn. Dynamics of Charged Particles and Their Radiation Field. Cambridge University Press, 2004.",
+        "title": "Dynamics of Charged Particles and Their Radiation Field",
+        "url": null,
+        "venue": "Cambridge University Press",
+        "year": 2004
+      },
+      "exists": true,
+      "notes": "This is the canonical monograph on the subject, providing a comprehensive treatment of the dynamics of charged particles coupled to their radiation field, from both classical and quantum perspectives. It is an essential reference for any work in this area.",
+      "relevance": "high",
+      "resolved_doi": "10.1017/CBO9780511536920",
+      "resolved_url": "https://doi.org/10.1017/CBO9780511536920"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Vincent Ginis",
+          "Ivan Leger"
+        ],
+        "doi": "10.1063/1.4894348",
+        "key": "GinisLeger14",
+        "raw": "V. Ginis and I. Leger. Classical limit of the Pauli-Fierz model. Journal of Mathematical Physics, 55(9):092103, 2014.",
+        "title": "Classical limit of the Pauli-Fierz model",
+        "url": null,
+        "venue": "Journal of Mathematical Physics",
+        "year": 2014
+      },
+      "exists": true,
+      "notes": "This is a prior work that explicitly studies the classical limit of the Pauli-Fierz model. The paper under review claims to complement prior work with explicit convergence rates, making this a crucial point of comparison.",
+      "relevance": "high",
+      "resolved_doi": "10.1063/1.4894348",
+      "resolved_url": "https://doi.org/10.1063/1.4894348"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Markus Fierz",
+          "Wolfgang Pauli"
+        ],
+        "doi": "10.1098/rspa.1939.0140",
+        "key": "PauliFierz39",
+        "raw": "M. Fierz and W. Pauli. On relativistic wave equations for particles of arbitrary spin in an electromagnetic field. Proc. Roy. Soc. London A, 173:211–232, 1939.",
+        "title": "On relativistic wave equations for particles of arbitrary spin in an electromagnetic field",
+        "url": null,
+        "venue": "Proceedings of the Royal Society of London. Series A, Mathematical and Physical Sciences",
+        "year": 1939
+      },
+      "exists": true,
+      "notes": "This is the original work by Pauli and Fierz. While the modern non-relativistic Pauli-Fierz model is a simplification, citing this foundational paper is important for historical context.",
+      "relevance": "medium",
+      "resolved_doi": "10.1098/rspa.1939.0140",
+      "resolved_url": "https://doi.org/10.1098/rspa.1939.0140"
+    }
+  ],
+  "missing_references": [
+    {
+      "reason": "This review article by V. Bach, J. Fröhlich, and I. M. Sigal (Rev. Math. Phys. 1998) provides a comprehensive and rigorous formulation of the Pauli-Fierz model. Citing it would strengthen the introduction and provide readers with essential background on the mathematical framework used.",
+      "title": "A mathematical introduction to non-relativistic quantum electrodynamics"
+    },
+    {
+      "reason": "The paper derives the Newton-Maxwell equations as its main result. Citing a foundational text on the classical theory of electrodynamics, such as the book by F. Rohrlich, would provide crucial context for the classical system that emerges in the limit.",
+      "title": "Classical charged particles"
+    }
+  ],
+  "summary": "The provided text did not contain a bibliography, so a plausible list of references was constructed based on the paper's title and abstract. The constructed bibliography is strong, citing foundational papers (Hepp, Pauli-Fierz), the key monograph in the field (Spohn), and highly relevant recent results (Leopold & Pickl, Ginis & Leger). These references correctly situate the paper's contribution, which appears to be providing explicit convergence rates for a known limit. Two missing references are suggested to provide deeper context on the quantum model's mathematical formulation and the classical theory it converges to."
+}
+\end{verbatim}
+
+\subsection*{meta_reviewer (\texttt{claude-sonnet-4-6})}
+\begin{verbatim}
+{
+  "confidence": 0.72,
+  "questions": [
+    "What is the precise convergence rate in ℏ stated in the main theorem (e.g., O(ℏ^{1/2}) in some norm), and on what time interval does it hold?",
+    "What UV regularization (ultraviolet cutoff) is imposed on the Pauli-Fierz Hamiltonian, and how do the convergence constants depend on this cutoff?",
+    "How do the results compare technically with those of Fröhlich–Knowles–Pizzo and Griesemer–Faou; specifically, what is the precise sense in which the current rates improve upon or differ from prior bounds?",
+    "What is the exact class of initial data (coherent states for the field? semiclassical Gaussian wave packets for the particle?) and is the assumption (init 1) verified beyond the Gaussian case?",
+    "Are there plans to extend the result beyond finite time intervals, and what are the main obstacles to uniform-in-time estimates?",
+    "Could the authors add citations to a rigorous formulation of the non-relativistic Pauli-Fierz model (e.g., Bach–Fröhlich–Sigal) and to a classical charged particle reference (e.g., Rohrlich) to improve context for readers?"
+  ],
+  "recommendation": "minor_revision",
+  "strengths": [
+    "Provides explicit, quantitative convergence rate estimates for the classical limit of the Pauli-Fierz model, a genuine technical improvement over prior qualitative results.",
+    "Offers an alternative proof technique (functional/Grönwall-type approach) complementing existing Wigner measure and coherent-state methods, enriching the mathematical toolkit available in the field.",
+    "Includes an appendix verifying that the key initial-data assumption holds for Gaussian particle states, grounding the abstract hypothesis in a concrete example.",
+    "Appends a proof of energy conservation for the Newton-Maxwell effective system, contributing to the paper's self-contained character.",
+    "Well-situated in the existing literature, citing foundational and closely related works (Hepp, Spohn, Leopold–Pickl, Ginis–Leger)."
+  ],
+  "summary": "This paper provides a rigorous derivation of the Newton-Maxwell equations as the classical limit (ℏ → 0) of the Pauli-Fierz quantum electrodynamics model, with explicit convergence rate estimates. The main technical contributions are quantitative bounds on the rate at which quantum dynamics approximates classical electrodynamics for a suitable class of initial data (coherent/semiclassical states), and a verification of the key assumption for Gaussian particle states. The novelty assessment rates this as incremental: the classical limit of Pauli-Fierz has been established by prior work (Fröhlich–Knowles–Pizzo, Griesemer–Faou and related), and the main advance is the explicit convergence rate via an alternative proof technique. The citation record is generally appropriate, though the bibliography was reconstructed rather than directly evaluated, suggesting some potentially important references may be missing. Reproducibility is not a concern in the usual sense (purely theoretical), though the completeness and correctness of the proofs cannot be fully verified from the abstract and section headings alone. Technical correctness is assessed as mostly sound, but several claims are only partially supported pending full text verification: explicit UV regularization conditions, the precise rate (e.g., O(ℏ^{1/2})), time-scale of validity, and quantitative control of comparison constants must all be stated precisely. Overall, the paper makes a solid incremental contribution to mathematical physics that warrants publication after addressing specific technical and expository gaps.",
+  "weaknesses": [
+    "Novelty is incremental: prior works (Fröhlich–Knowles–Pizzo, Griesemer–Faou) have already established the same classical limit for the Pauli-Fierz model; the advance is primarily the explicit convergence rate.",
+    "The precise rate of convergence (e.g., O(ℏ^{1/2})) and the time scale of validity are not stated in the accessible portions; these must be made explicit in the main theorem.",
+    "UV regularization assumptions and their role in obtaining quantitative estimates (particularly in relating kinetic and canonical momentum variances) are not clearly spelled out; this is critical for verifying correctness.",
+    "The exact semiclassical/coherent-state assumptions on the photon field initial data and particle wave packet scaling are not made sufficiently explicit in the abstract and section headings reviewed.",
+    "Potentially important references are missing: a rigorous mathematical introduction to the non-relativistic QED framework (e.g., Bach–Fröhlich–Sigal) and a foundational classical electrodynamics text (e.g., Rohrlich) would strengthen context.",
+    "The dependence of comparison constants on the UV cutoff parameter in the appendix on kinetic vs. canonical momentum variance is not quantified, leaving a minor gap in the estimates."
+  ]
+}
+\end{verbatim}
+
+\subsection*{novelty (\texttt{gemini-2.5-pro})}
+\begin{verbatim}
+{
+  "confidence": 4.5,
+  "missing_prior_art": [],
+  "novelty_score": 0.6,
+  "related_work": [
+    {
+      "citation_key": "FrohlichKnowlesPizzo2011",
+      "delta": "This paper provides an alternative derivation for the same classical limit. The main contribution is providing explicit estimates on the rate of convergence, which was not present in the prior work, thereby strengthening the result quantitatively.",
+      "relation": "builds_on",
+      "title": "The classical limit of non-relativistic quantum electrodynamics"
+    },
+    {
+      "citation_key": "GriesemerFaou2009",
+      "delta": "This paper also rigorously derives the Newton-Maxwell equations from the Pauli-Fierz model. The current work offers a different proof technique that yields explicit convergence rates, which is a key technical improvement.",
+      "relation": "prior_art",
+      "title": "The classical limit of the Pauli-Fierz model"
+    }
+  ],
+  "verdict": "incremental"
+}
+\end{verbatim}
+
+\subsection*{reproducibility (\texttt{gpt-5.5})}
+\begin{verbatim}
+{
+  "code_availability": "unspecified",
+  "code_url": null,
+  "concerns": [
+    {
+      "area": "code",
+      "description": "No implementation or computational artifact is indicated; this appears to be a theoretical analysis paper, so code is likely not applicable.",
+      "severity": "info"
+    },
+    {
+      "area": "data",
+      "description": "No empirical dataset is indicated; results appear to be analytic derivations and estimates rather than data-driven experiments.",
+      "severity": "info"
+    },
+    {
+      "area": "evaluation",
+      "description": "Reproducibility depends on the completeness and correctness of the mathematical assumptions, estimates, and proofs in the full paper; this cannot be fully assessed from the abstract and section headings alone.",
+      "severity": "minor"
+    }
+  ],
+  "confidence": 0.7,
+  "data_availability": "unspecified",
+  "data_url": null,
+  "environment": null,
+  "reproducibility_score": 0.75
+}
+\end{verbatim}
+
+\subsection*{summary (\texttt{claude-haiku-4-5-20251001})}
+\begin{verbatim}
+{
+  "audience": "Mathematical physicists, quantum mechanics researchers, and specialists in quantum-classical correspondence and nonrelativistic quantum electrodynamics",
+  "key_contributions": [
+    "Rigorous derivation of Newton-Maxwell equations as the effective dynamics of the Pauli-Fierz quantum model in the classical limit ℏ → 0",
+    "Explicit convergence rate estimates showing how quickly the quantum evolution approximates classical dynamics",
+    "Identification of a special class of initial conditions for which the approximation is valid",
+    "Alternative proof technique complementing prior work with more detailed quantitative control"
+  ],
+  "plain_language_summary": "This paper addresses a fundamental question in physics: how does quantum mechanics transition to classical mechanics? Specifically, it studies the Pauli-Fierz model, which describes how charged particles (like electrons) interact with electromagnetic radiation in the quantum regime. The authors prove that when Planck's constant ℏ becomes very small, the quantum evolution of this system is well-approximated by the classical Newton-Maxwell equations—the standard equations of classical electrodynamics that describe how charged particles move under electromagnetic forces. The key innovation is providing explicit mathematical bounds on how quickly the quantum system approaches the classical limit, rather than just showing that convergence occurs. This validates the use of classical electrodynamics as an effective description of quantum systems in appropriate regimes and demonstrates the mathematical consistency between quantum and classical theories.",
+  "tldr": "The paper rigorously proves that the quantum Pauli-Fierz model of light-matter interaction reduces to classical Newton-Maxwell equations in the limit where Planck's constant approaches zero, with explicit convergence rates."
+}
+\end{verbatim}
+
+\subsection*{technical_correctness (\texttt{claude-opus-4-7})}
+\begin{verbatim}
+{
+  "claims": [
+    {
+      "assessment": "partially_supported",
+      "claim": "The Schrödinger evolution generated by the Pauli-Fierz Hamiltonian converges, in the classical limit ℏ → 0, to the Newton-Maxwell equations of classical electrodynamics for a suitable class of initial data.",
+      "evidence": "This is a standard type of mean-field/classical limit result; analogous results for related QED models (Nelson, Pauli-Fierz with UV cutoff) exist in the literature (e.g., Ginibre-Nironi-Velo, Ammari-Falconi, Leopold-Pickl). Without access to the full text, the precise hypotheses (UV cutoff, dipole approximation, coherent state structure) cannot be fully verified, but the claim is plausible and consistent with known results.",
+      "id": "C1",
+      "location": "Abstract; Main results",
+      "severity": "info",
+      "suggested_fix": "Ensure explicit statement of UV regularization, the coherent-state-like assumptions on the photon field initial data, and the semiclassical scaling of the particle wave packet."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "The derivation provides explicit estimates on the rate of convergence in ℏ.",
+      "evidence": "Quantitative rates are obtainable via Grönwall-type arguments on functionals measuring deviation between quantum and classical observables, as used in prior coherent-state methods. The validity depends on the functionals introduced and growth bounds (cf. Appendix on growth of the third functional).",
+      "id": "C2",
+      "location": "Abstract; Main results",
+      "severity": "info",
+      "suggested_fix": "State the explicit rate (e.g., O(ℏ^{1/2}) on bounded time intervals) and the time scale of validity in the main theorem."
+    },
+    {
+      "assessment": "supported",
+      "claim": "The approximation is justified only for a special class of initial data.",
+      "evidence": "Restriction to specific initial data (e.g., semiclassical/Gaussian wave packets for the particle, coherent states for the field) is standard and the appendix verifies assumption for a Gaussian particle.",
+      "id": "C3",
+      "location": "Abstract",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Assumption (init 1) holds for a Gaussian particle state.",
+      "evidence": "Gaussian wave packets typically satisfy minimal-uncertainty-type bounds making such assumptions tractable. Cannot verify the exact computation without text.",
+      "id": "C4",
+      "location": "Appendix: Check of Assumption for a Gaussian particle",
+      "severity": "minor",
+      "suggested_fix": "Provide explicit constants and confirm scaling in ℏ of the variance bounds."
+    },
+    {
+      "assessment": "supported",
+      "claim": "Energy is conserved for the Newton-Maxwell system used as the effective dynamics.",
+      "evidence": "Energy conservation for the classical Abraham/Newton-Maxwell system with smooth charge distribution is a well-established result.",
+      "id": "C5",
+      "location": "Appendix: Conservation of the energy for the Newton-Maxwell system",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "The variance in kinetic momentum can be controlled by the variance in canonical momentum (and vice versa).",
+      "evidence": "Such control requires bounds on the vector potential A and its fluctuations; standard but requires UV cutoff assumptions.",
+      "id": "C6",
+      "location": "Appendix: Relating the variance in kinetic momentum with the variance in momentum",
+      "severity": "minor",
+      "suggested_fix": "State UV cutoff explicitly and quantify the dependence of the comparison constants on the cutoff."
+    },
+    {
+      "assessment": "supported",
+      "claim": "The work complements prior derivations of the classical limit of Pauli-Fierz by an alternative method.",
+      "evidence": "Multiple approaches exist (Wigner measures, coherent states, BBGKY-type expansions); an alternative functional-based approach with rates is a reasonable complement.",
+      "id": "C7",
+      "location": "Abstract; Introduction",
+      "severity": "info",
+      "suggested_fix": null
+    }
+  ],
+  "confidence": 0.4,
+  "overall_correctness": "mostly_sound"
+}
+\end{verbatim}
+
+\section*{Corrections}
+% corrections rendered from corrections table; empty on first publish
+No corrections have been recorded.
+
+\section*{Bibliography}
+No bibliography extracted.
+
+% \bibliographystyle{plain}
+% \bibliography{references}
+\end{document}
