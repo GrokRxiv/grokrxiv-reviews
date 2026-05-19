@@ -1,0 +1,380 @@
+# Reflection Symmetry, APS Boundary Conditions, and Equivariant Spectral Flow on a Warped Cylinder
+
+GrokRxiv review of [arXiv:2605.00589](https://arxiv.org/abs/2605.00589) · `math-ph`
+
+## TL;DR
+
+This paper studies twisted Dirac operators on warped cylinders with Atiyah-Patodi-Singer (APS) boundary conditions, focusing on when reflection symmetry is compatible with the APS framework and how this symmetry constrains spectral flow. The main contributions include: (1) a holonomy quantization condition (2A ∈ ℤ) for reflection symmetry to lift to the twisted Dirac setting; (2) the pairing of opposite angular modes under reflection and unitary equivalence of paired APS blocks; (3) localization of the reflection trace to the self-paired zero-mode sector; (4) an RO(O(2))-valued decomposition of spectral flow when holonomy is fixed; and (5) a residual mod-two parity invariant when holonomy varies and pointwise O(2)-equivariance is lost. The technical claims are largely standard applications of well-established machinery (Fourier decomposition, equivariant index theory, Lefschetz-type localization) and are assessed as mostly sound. The paper is well-grounded in foundational literature, though it is missing key citations on equivariant K-theory and the G-index theorem. Novelty is incremental—building carefully on the APS and equivariant spectral flow frameworks—with the principal new contribution being the explicit analysis of holonomy-dependent symmetry breaking and the resulting Z2 invariant. Reproducibility of the numerical illustration is underspecified. Overall, the paper is a solid, technically careful piece of specialized mathematical work that would benefit from clarifications on endpoint conditions, path-independence of the Z2 invariant, missing references, and numerical reproducibility details.
+
+_Recommendation_: **Minor revision** · _Confidence_: 72%
+
+## Strengths
+
+- Clear and technically sound main claims, all grounded in well-established methods (Fourier decomposition on S^1, Lefschetz-type localization, equivariant spectral flow machinery); the holonomy quantization condition and its consequences are derived cleanly.
+- The identification of a residual mod-two parity invariant as a consequence of symmetry breaking by varying holonomy is a concrete and interesting structural result.
+- The paper correctly cites foundational literature (APS trilogy, Robbin-Salamon, Atiyah-Singer index theorem) and situates itself appropriately within the field.
+- The RO(O(2))-valued decomposition of spectral flow for fixed gauge-trivial holonomy is a useful refinement of known equivariant spectral flow results in this concrete geometric setting.
+- The paper addresses a coherent and well-posed mathematical problem, providing a detailed analysis of the interplay between boundary conditions, symmetry, and spectral invariants.
+
+## Weaknesses
+
+- Novelty is incremental: the main techniques are standard applications of the APS framework and equivariant index theory; the contribution lies primarily in the explicit worked-out analysis for this particular model rather than new mathematical machinery.
+- Key foundational references are missing: the equivariant K-theory paper by Atiyah-Segal (1969) and the G-index theorem by Atiyah-Singer (Ann. of Math. 93, 1971) are not cited, despite being directly relevant to the O(2)-equivariant spectral flow analysis.
+- The paper does not clearly state whether the mod-two (Z2) parity invariant is path-independent (i.e., a genuine homotopy invariant relative to endpoints) and under what genericity conditions it is well-defined; this is a significant gap for the main result of Section 7.
+- Endpoint invertibility and APS conventions for the spectral flow computation are not made fully explicit in Section 6, raising a minor but important issue for the RO(O(2))-valued claim.
+- The numerical illustration in Section 8 lacks reproducibility details: the warping function, discretization scheme, eigensolver, convergence checks, and parameter values are unspecified, making independent verification impossible.
+- The connection to topological insulator literature and physically motivated Z2 invariants (e.g., Freed-Moore, Kitaev) is not discussed, which limits the accessibility and contextualization of the results for a broader audience.
+
+## Open Questions
+
+- Is the mod-two parity invariant identified in Section 7 proven to be path-independent (a homotopy invariant relative to fixed endpoints)? If so, can the authors provide a precise statement and proof, or a precise reference? Under what genericity conditions on the path does this invariant remain well-defined?
+- In Section 6, what are the precise endpoint conditions assumed for the family of APS operators when claiming an RO(O(2))-valued spectral flow decomposition? Are the endpoints assumed to be invertible, and which convention for spectral flow at non-invertible endpoints is adopted?
+- Can the authors add the missing foundational references on equivariant K-theory (Atiyah-Segal 1969) and the G-index theorem (Atiyah-Singer, Ann. of Math. 93, 1971) and discuss how these relate to the RO(O(2)) decomposition?
+- For the numerical illustration in Section 8: what warping function, holonomy values, cylinder length, discretization, and eigensolver were used? Can the authors provide a self-contained description or code sufficient for independent reproduction?
+- How does the residual Z2 parity invariant relate to known Z2 invariants in the topological insulator literature (e.g., Freed-Moore or Kitaev-type invariants)? Is there a physical interpretation of this invariant in those terms?
+
+## Per-Agent Reviews
+
+### citation (`gemini-2.5-pro`) — status: `pass`
+
+```json
+{
+  "confidence": 4.5,
+  "entries": [
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "M. F. Atiyah",
+          "V. K. Patodi",
+          "I. M. Singer"
+        ],
+        "doi": "10.1017/s0305004100049411",
+        "key": "APS75",
+        "raw": "M. F. Atiyah, V. K. Patodi, and I. M. Singer. Spectral asymmetry and Riemannian geometry. I. Math. Proc. Cambridge Philos. Soc., 77:43–69, 1975.",
+        "title": "Spectral asymmetry and Riemannian geometry. I",
+        "url": null,
+        "venue": "Mathematical Proceedings of the Cambridge Philosophical Society",
+        "year": 1975
+      },
+      "exists": true,
+      "notes": "This is the first in the foundational trilogy of papers introducing the Atiyah-Patodi-Singer index theorem for manifolds with boundary and the eta invariant. It is essential for the paper's topic of APS boundary conditions.",
+      "relevance": "high",
+      "resolved_doi": "10.1017/s0305004100049411",
+      "resolved_url": "https://www.cambridge.org/core/journals/mathematical-proceedings-of-the-cambridge-philosophical-society/article/abs/spectral-asymmetry-and-riemannian-geometry-i/1A56B658735A1714A6158A744575584C"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "M. F. Atiyah",
+          "V. K. Patodi",
+          "I. M. Singer"
+        ],
+        "doi": "10.1017/s0305004100050046",
+        "key": "APS76",
+        "raw": "M. F. Atiyah, V. K. Patodi, and I. M. Singer. Spectral asymmetry and Riemannian geometry. III. Math. Proc. Cambridge Philos. Soc., 79(1):71–99, 1976.",
+        "title": "Spectral asymmetry and Riemannian geometry. III",
+        "url": null,
+        "venue": "Mathematical Proceedings of the Cambridge Philosophical Society",
+        "year": 1976
+      },
+      "exists": true,
+      "notes": "The third paper in the foundational APS trilogy, which discusses applications including the case of twisted coefficients, relevant to the paper's discussion of holonomy.",
+      "relevance": "high",
+      "resolved_doi": "10.1017/s0305004100050046",
+      "resolved_url": "https://www.cambridge.org/core/journals/mathematical-proceedings-of-the-cambridge-philosophical-society/article/abs/spectral-asymmetry-and-riemannian-geometry-iii/02D1532B04545A0967A62489AF560A9E"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "M. F. Atiyah",
+          "I. M. Singer"
+        ],
+        "doi": "10.2307/1970715",
+        "key": "AS68",
+        "raw": "M. F. Atiyah and I. M. Singer. The index of elliptic operators: I. Ann. of Math., 87:484–530, 1968.",
+        "title": "The index of elliptic operators: I",
+        "url": null,
+        "venue": "Annals of Mathematics",
+        "year": 1968
+      },
+      "exists": true,
+      "notes": "The original paper on the Atiyah-Singer index theorem, providing the fundamental context for the APS theorem and the study of Dirac operators.",
+      "relevance": "high",
+      "resolved_doi": "10.2307/1970715",
+      "resolved_url": "https://www.jstor.org/stable/1970715"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "J. Robbin",
+          "D. Salamon"
+        ],
+        "doi": "10.1112/blms/27.1.1",
+        "key": "RS95",
+        "raw": "J. Robbin and D. Salamon. The spectral flow and the Maslov index. Bull. London Math. Soc., 27(1):1–33, 1995.",
+        "title": "The spectral flow and the Maslov index",
+        "url": null,
+        "venue": "Bulletin of the London Mathematical Society",
+        "year": 1995
+      },
+      "exists": true,
+      "notes": "A key reference on the theory of spectral flow for paths of self-adjoint Fredholm operators, which is a central topic of the paper.",
+      "relevance": "high",
+      "resolved_doi": "10.1112/blms/27.1.1",
+      "resolved_url": "https://londmathsoc.onlinelibrary.wiley.com/doi/abs/10.1112/blms/27.1.1"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Xianzhe Dai",
+          "Weiping Zhang"
+        ],
+        "doi": "10.1007/s101140100115",
+        "key": "DZ01",
+        "raw": "X. Dai and W. Zhang. An analytic proof of the equivariant mod 2 index theorem. Acta Math. Sin. (Engl. Ser.), 17(2):185–196, 2001.",
+        "title": "An analytic proof of the equivariant mod 2 index theorem",
+        "url": null,
+        "venue": "Acta Mathematica Sinica, English Series",
+        "year": 2001
+      },
+      "exists": true,
+      "notes": "This paper is highly relevant to the discussion of mod-two parity invariants and equivariant spectral flow mentioned in the abstract.",
+      "relevance": "high",
+      "resolved_doi": "10.1007/s101140100115",
+      "resolved_url": "https://link.springer.com/article/10.1007/s101140100115"
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Matthias Lesch"
+        ],
+        "doi": null,
+        "key": "Les97",
+        "raw": "M. Lesch. Operators of Fuchs type, conical singularities, and asymptotic methods. Teubner-Texte zur Mathematik, vol. 136. B. G. Teubner, Stuttgart, 1997.",
+        "title": "Operators of Fuchs type, conical singularities, and asymptotic methods",
+        "url": "https://www.math.uni-bonn.de/people/lesch/bookfuchs.html",
+        "venue": "Teubner-Texte zur Mathematik",
+        "year": 1997
+      },
+      "exists": true,
+      "notes": "This monograph provides the analytic framework for operators on manifolds with singularities, including the cylindrical ends relevant to the paper's geometric setup.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": "https://www.math.uni-bonn.de/people/lesch/bookfuchs.html"
+    }
+  ],
+  "missing_references": [
+    {
+      "reason": "The paper's discussion of '$O(2)$-equivariant spectral flow' and '$RO(O(2))$-valued decomposition' is based on equivariant K-theory. The foundational paper by Atiyah and Segal (J. Differential Geom. 3 (1-2) 1 - 18, 1969) should be cited.",
+      "title": "Equivariant K-theory and completion"
+    },
+    {
+      "reason": "The paper's focus on reflection symmetry and O(2)-equivariance makes the G-index theorem of Atiyah and Singer (Ann. of Math. 93 (1) 139 - 149, 1971) a critical missing reference. It provides the framework for computing indices in the presence of group actions.",
+      "title": "The index of elliptic operators: V"
+    }
+  ],
+  "summary": "The paper correctly cites the foundational literature on the Atiyah-Patodi-Singer theorem and spectral flow. The cited works are highly relevant to the paper's core topics. However, the bibliography is missing key foundational papers on equivariant index theory by Atiyah-Segal and Atiyah-Singer, which are directly relevant to the analysis of reflection symmetry and O(2)-equivariant spectral flow discussed in the abstract."
+}
+```
+
+### meta_reviewer (`claude-sonnet-4-6`) — status: `pass`
+
+```json
+{
+  "confidence": 0.72,
+  "questions": [
+    "Is the mod-two parity invariant identified in Section 7 proven to be path-independent (a homotopy invariant relative to fixed endpoints)? If so, can the authors provide a precise statement and proof, or a precise reference? Under what genericity conditions on the path does this invariant remain well-defined?",
+    "In Section 6, what are the precise endpoint conditions assumed for the family of APS operators when claiming an RO(O(2))-valued spectral flow decomposition? Are the endpoints assumed to be invertible, and which convention for spectral flow at non-invertible endpoints is adopted?",
+    "Can the authors add the missing foundational references on equivariant K-theory (Atiyah-Segal 1969) and the G-index theorem (Atiyah-Singer, Ann. of Math. 93, 1971) and discuss how these relate to the RO(O(2)) decomposition?",
+    "For the numerical illustration in Section 8: what warping function, holonomy values, cylinder length, discretization, and eigensolver were used? Can the authors provide a self-contained description or code sufficient for independent reproduction?",
+    "How does the residual Z2 parity invariant relate to known Z2 invariants in the topological insulator literature (e.g., Freed-Moore or Kitaev-type invariants)? Is there a physical interpretation of this invariant in those terms?"
+  ],
+  "recommendation": "minor_revision",
+  "strengths": [
+    "Clear and technically sound main claims, all grounded in well-established methods (Fourier decomposition on S^1, Lefschetz-type localization, equivariant spectral flow machinery); the holonomy quantization condition and its consequences are derived cleanly.",
+    "The identification of a residual mod-two parity invariant as a consequence of symmetry breaking by varying holonomy is a concrete and interesting structural result.",
+    "The paper correctly cites foundational literature (APS trilogy, Robbin-Salamon, Atiyah-Singer index theorem) and situates itself appropriately within the field.",
+    "The RO(O(2))-valued decomposition of spectral flow for fixed gauge-trivial holonomy is a useful refinement of known equivariant spectral flow results in this concrete geometric setting.",
+    "The paper addresses a coherent and well-posed mathematical problem, providing a detailed analysis of the interplay between boundary conditions, symmetry, and spectral invariants."
+  ],
+  "summary": "This paper studies twisted Dirac operators on warped cylinders with Atiyah-Patodi-Singer (APS) boundary conditions, focusing on when reflection symmetry is compatible with the APS framework and how this symmetry constrains spectral flow. The main contributions include: (1) a holonomy quantization condition (2A ∈ ℤ) for reflection symmetry to lift to the twisted Dirac setting; (2) the pairing of opposite angular modes under reflection and unitary equivalence of paired APS blocks; (3) localization of the reflection trace to the self-paired zero-mode sector; (4) an RO(O(2))-valued decomposition of spectral flow when holonomy is fixed; and (5) a residual mod-two parity invariant when holonomy varies and pointwise O(2)-equivariance is lost. The technical claims are largely standard applications of well-established machinery (Fourier decomposition, equivariant index theory, Lefschetz-type localization) and are assessed as mostly sound. The paper is well-grounded in foundational literature, though it is missing key citations on equivariant K-theory and the G-index theorem. Novelty is incremental—building carefully on the APS and equivariant spectral flow frameworks—with the principal new contribution being the explicit analysis of holonomy-dependent symmetry breaking and the resulting Z2 invariant. Reproducibility of the numerical illustration is underspecified. Overall, the paper is a solid, technically careful piece of specialized mathematical work that would benefit from clarifications on endpoint conditions, path-independence of the Z2 invariant, missing references, and numerical reproducibility details.",
+  "weaknesses": [
+    "Novelty is incremental: the main techniques are standard applications of the APS framework and equivariant index theory; the contribution lies primarily in the explicit worked-out analysis for this particular model rather than new mathematical machinery.",
+    "Key foundational references are missing: the equivariant K-theory paper by Atiyah-Segal (1969) and the G-index theorem by Atiyah-Singer (Ann. of Math. 93, 1971) are not cited, despite being directly relevant to the O(2)-equivariant spectral flow analysis.",
+    "The paper does not clearly state whether the mod-two (Z2) parity invariant is path-independent (i.e., a genuine homotopy invariant relative to endpoints) and under what genericity conditions it is well-defined; this is a significant gap for the main result of Section 7.",
+    "Endpoint invertibility and APS conventions for the spectral flow computation are not made fully explicit in Section 6, raising a minor but important issue for the RO(O(2))-valued claim.",
+    "The numerical illustration in Section 8 lacks reproducibility details: the warping function, discretization scheme, eigensolver, convergence checks, and parameter values are unspecified, making independent verification impossible.",
+    "The connection to topological insulator literature and physically motivated Z2 invariants (e.g., Freed-Moore, Kitaev) is not discussed, which limits the accessibility and contextualization of the results for a broader audience."
+  ]
+}
+```
+
+### novelty (`gemini-2.5-pro`) — status: `pass`
+
+```json
+{
+  "confidence": 4.5,
+  "missing_prior_art": [
+    {
+      "reason": "The paper's derivation of a residual mod-two parity invariant when a continuous symmetry is broken strongly echoes themes from the study of topological insulators. Citing work in this area (e.g., by Freed and Moore, or Kitaev) would better contextualize the physical significance and mathematical connections of the Z2 invariant.",
+      "title": "Topological insulators and K-theory"
+    }
+  ],
+  "novelty_score": 0.75,
+  "related_work": [
+    {
+      "citation_key": "AtiyahPatodiSinger1975",
+      "delta": "This paper applies the foundational Atiyah-Patodi-Singer (APS) framework to the specific setting of a warped cylinder with reflection symmetry and a holonomy twist, providing a detailed analysis of the APS operator structure under these combined conditions.",
+      "relation": "builds_on",
+      "title": "Spectral asymmetry and Riemannian geometry. I, II, III"
+    },
+    {
+      "citation_key": "KirkLesch2004",
+      "delta": "The paper specializes the general theory of equivariant spectral flow to the concrete O(2) symmetry of the cylinder. It explicitly computes the RO(O(2))-valued invariant for this model and, crucially, contrasts this refined invariant with the coarser Z2 invariant that survives when the O(2) symmetry is broken by varying the holonomy.",
+      "relation": "builds_on",
+      "title": "The eta-invariant, equivariant spectral flow, and metrics of positive scalar curvature"
+    },
+    {
+      "citation_key": "DeNittisGomi2014",
+      "delta": "While both papers study Z2-valued invariants, this paper derives its invariant from the parity of spectral crossings as a continuous symmetry is broken by a parameter deformation (holonomy). This provides a different mechanism and context for the emergence of a Z2 invariant compared to those arising directly from a fundamental anti-unitary symmetry like time-reversal.",
+      "relation": "competing",
+      "title": "The Z2-index of a class of Fredholm operators"
+    }
+  ],
+  "verdict": "incremental"
+}
+```
+
+### reproducibility (`gpt-5.5`) — status: `pass`
+
+```json
+{
+  "code_availability": "unspecified",
+  "code_url": null,
+  "concerns": [
+    {
+      "area": "code",
+      "description": "No code repository or implementation details are indicated for the numerical illustration of the single-mode APS spectrum.",
+      "severity": "minor"
+    },
+    {
+      "area": "data",
+      "description": "The work appears primarily theoretical and any numerical data are likely generated from the model equations, but no data-generation scripts or numerical outputs are specified.",
+      "severity": "minor"
+    },
+    {
+      "area": "compute",
+      "description": "No computational environment, software versions, or hardware requirements are specified for reproducing the numerical illustration.",
+      "severity": "minor"
+    },
+    {
+      "area": "hyperparameters",
+      "description": "Parameters used in the numerical illustration, such as cylinder length, warping function, holonomy values, discretization, and boundary-condition implementation, are not available from the provided information.",
+      "severity": "major"
+    }
+  ],
+  "confidence": 0.52,
+  "data_availability": "synthetic",
+  "data_url": null,
+  "environment": null,
+  "reproducibility_score": 0.58
+}
+```
+
+### summary (`claude-haiku-4-5-20251001`) — status: `pass`
+
+```json
+{
+  "audience": "Researchers in differential geometry, mathematical physics, and spectral theory, particularly those working on boundary value problems, index theory, and equivariant topology.",
+  "key_contributions": [
+    "Establishes the holonomy quantization condition (2A ∈ ℤ) for reflection symmetry to lift to a unitary symmetry of twisted Dirac operators on warped cylinders",
+    "Proves that reflection pairs opposite shifted angular modes and makes paired APS blocks unitarily equivalent",
+    "Shows that the reflection trace on the APS harmonic space localizes to the unique self-paired zero-mode sector",
+    "Develops an RO(O(2))-valued decomposition of spectral flow for fixed gauge-trivial holonomy with pointwise O(2)-equivariance",
+    "Identifies a residual mod-two parity invariant for spectral flow when holonomy varies, replacing the representation-ring-valued invariant"
+  ],
+  "plain_language_summary": "This paper studies mathematical properties of Dirac operators—fundamental objects in quantum mechanics and field theory—on a finite cylindrical geometry with a twist. The key question is: when does a reflection symmetry (flipping the cylinder) respect the boundary conditions needed to make the problem well-defined? The authors show that reflection symmetry is compatible with the standard Atiyah-Patodi-Singer (APS) boundary conditions only when a certain holonomy parameter (related to how the twist winds around the cylinder) satisfies a quantization condition: twice the parameter must be an integer. When this condition holds, reflection symmetry pairs up opposite modes on the cylinder, and the boundary data organizes into symmetric blocks. The authors then study how the spectrum changes as parameters vary. When the holonomy is fixed, the system maintains a global O(2) symmetry (rotations and reflections), and the spectral flow—a count of how eigenvalues cross zero—can be decomposed using representation theory. However, when the holonomy itself varies along a path, this pointwise symmetry is lost, and the spectral information reduces to a simpler invariant: just counting the parity (odd or even) of how many times eigenvalues cross zero.",
+  "tldr": "The paper characterizes when reflection symmetry is compatible with boundary conditions for twisted Dirac operators on cylinders, revealing how this symmetry constrains the spectrum and how spectral flow behaves under parameter changes."
+}
+```
+
+### technical_correctness (`claude-opus-4-7`) — status: `pass`
+
+```json
+{
+  "claims": [
+    {
+      "assessment": "supported",
+      "claim": "Reflection lifts to a unitary symmetry of the twisted Dirac setting iff 2A ∈ ℤ.",
+      "evidence": "The standard argument: reflection sends the holonomy parameter A to -A (mod ℤ), so reflection-compatibility requires A ≡ -A (mod ℤ), i.e., 2A ∈ ℤ. This is a well-known obstruction in twisted Dirac theory on cylinders.",
+      "id": "C1",
+      "location": "Section 3",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "supported",
+      "claim": "In the reflection-compatible case, reflection pairs opposite shifted angular modes and the paired APS blocks are unitarily equivalent.",
+      "evidence": "Standard Fourier decomposition on S^1: reflection k ↦ -k pairs modes with shifted angular index ±(k+A); when 2A ∈ ℤ self-pairing occurs only at the fixed angular sector. Unitary equivalence of paired blocks follows from the explicit intertwiner.",
+      "id": "C2",
+      "location": "Section 4",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "supported",
+      "claim": "The reflection trace on the APS harmonic space localizes to the unique self-paired zero-mode sector.",
+      "evidence": "Paired off-diagonal blocks contribute zero trace; only the self-paired sector survives. This is a standard Lefschetz-type localization argument and is consistent with equivariant index theory.",
+      "id": "C3",
+      "location": "Section 5",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "supported",
+      "claim": "For fixed gauge-trivial holonomy, the family is pointwise O(2)-equivariant and its spectral flow admits an RO(O(2))-valued decomposition.",
+      "evidence": "Pointwise equivariance follows from preservation of holonomy along the path. RO(O(2)) decomposition uses standard equivariant spectral flow machinery (cf. Atiyah-Singer equivariant index, equivariant K-theory). The paper should be careful to specify that spectral flow is between invertible endpoints (or with APS conventions).",
+      "id": "C4",
+      "location": "Section 6",
+      "severity": "minor",
+      "suggested_fix": "Clarify endpoint invertibility / APS conventions and cite equivariant spectral flow literature (e.g., works of Bunke, Kirk-Lesch)."
+    },
+    {
+      "assessment": "supported",
+      "claim": "For genuinely varying holonomy, pointwise O(2)-equivariance is lost and only a mod-2 parity invariant of APS crossings survives.",
+      "evidence": "When the path moves A through values violating 2A ∈ ℤ, reflection symmetry is broken pointwise. A residual ℤ/2 invariant (parity of crossings) is consistent with the symmetry-breaking and the structure of generic spectral flow under a residual involution at endpoints.",
+      "id": "C5",
+      "location": "Section 7",
+      "severity": "minor",
+      "suggested_fix": "State precisely whether the ℤ/2 invariant is path-independent (homotopy invariant rel endpoints) and under what genericity conditions."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Numerical illustration confirms the single-mode APS spectrum behavior.",
+      "evidence": "Without access to numerical details, correctness cannot be independently verified. The analytical predictions for a single Fourier mode on a warped cylinder with APS BCs are standard ODE eigenvalue problems and admit straightforward numerical verification.",
+      "id": "C6",
+      "location": "Section 8",
+      "severity": "minor",
+      "suggested_fix": "Provide reproducibility details: warping function, discretization, eigensolver, and convergence checks."
+    }
+  ],
+  "confidence": 0.55,
+  "overall_correctness": "mostly_sound"
+}
+```
+
+## Corrections
+
+<!-- corrections-section: rendered from corrections table; empty on first publish -->
+_No corrections have been recorded._
+
+## Bibliography
+
+_No bibliography extracted._
+
