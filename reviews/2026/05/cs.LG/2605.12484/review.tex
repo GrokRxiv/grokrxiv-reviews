@@ -1,0 +1,297 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\title{Learning, Fast and Slow: Towards LLMs That Adapt Continually}
+\date{}
+\begin{document}
+\maketitle
+
+\noindent\textbf{arXiv:} \href{https://arxiv.org/abs/2605.12484}{2605.12484} \quad \textbf{Field:} cs.LG\\
+
+\section*{TL;DR}
+Fast-Slow Training (FST) proposes a dual-timescale adaptation framework for large language models that couples in-context 'fast weight' optimization (via GEPA prompt optimization) with conventional 'slow weight' parameter updates. The paper claims up to 3× sample efficiency over RL-only baselines, 70\% less KL divergence from the base model, and substantially improved continual learning across sequential tasks. The core intuition—that offloading task-specific information to the context allows parameters to change less and remain plastic—is theoretically grounded and consistent with the fast/slow weights literature. Specialists found the contribution significant and the motivating framework sound, but raised consistent concerns around empirical rigor (statistical reporting, breadth of baselines), reproducibility (no code release, incomplete evaluation protocols), and missing prior-art engagement (prompt optimization, continual learning baselines). The overall quality is promising but requires non-trivial revisions before acceptance.
+
+\textbf{Recommendation:} Major revision \quad \textbf{Confidence:} 72\%\\
+
+\section*{Strengths}
+\begin{itemize}[leftmargin=*]
+  \item Novel and well-motivated framework combining in-context learning as fast weights with parameter updates as slow weights, with a clear mechanistic rationale for why the decomposition should reduce catastrophic forgetting and preserve plasticity.
+  \item Compelling empirical claims: 3× sample efficiency, 70\% KL reduction, and improved continual learning performance provide concrete and meaningful benchmarks if properly validated.
+  \item The FST approach addresses a practically important problem—catastrophic forgetting and plasticity loss in RL fine-tuning of LLMs—with a principled architectural solution rather than ad-hoc regularization.
+  \item Rollout reuse across GEPA and RL components is a practical efficiency contribution that addresses a real computational concern in joint optimization.
+  \item The continual learning evaluation scenario (sequential task learning) is a meaningful and challenging test bed that goes beyond standard fine-tuning benchmarks.
+  \item Appendix coverage of hyperparameters and compute requirements indicates some attention to reproducibility details.
+\end{itemize}
+
+\section*{Weaknesses}
+\begin{itemize}[leftmargin=*]
+  \item Empirical claims (3× sample efficiency, 70\% KL reduction, 'consistently' higher asymptote) are stated without confidence intervals, statistical tests, or clarification of whether they represent maxima or averages across seeds and tasks; evaluation appears limited to four tasks.
+  \item No code repository or data release is provided or promised, making independent reproduction of FST, GEPA optimization, RL baselines, and distillation extremely difficult.
+  \item Missing continual learning baselines: comparisons against EWC, GEM, replay-based methods, and KL-regularized RL are absent, making it unclear how much of the benefit is attributable to the fast-slow decomposition versus simply a KL penalty on slow weights.
+  \item Missing prompt optimization prior art (RLPrompt, AutoPrompt) that directly relates to the GEPA 'fast weight' learning mechanism; their omission leaves the technical novelty of the fast component insufficiently contextualized.
+  \item The System 1/System 2 cognitive framing is presented loosely as motivation but is not rigorously substantiated; this risks overstating the theoretical contribution.
+  \item KL divergence measurement methodology (which data distribution, token-level vs. sequence-level, prompt conditioning) is not specified in the main text, making the 70\% claim difficult to evaluate.
+  \item Evaluation is restricted to a narrow set of reasoning tasks (including a synthetic star-graph task); generalizability to broader NLP benchmarks and real-world instruction-following datasets is undemonstrated.
+  \item The overhead of GEPA prompt optimization at each step is not fully accounted for in wall-time comparisons, potentially understating the true computational cost of FST.
+\end{itemize}
+
+\section*{Open Questions}
+\begin{itemize}[leftmargin=*]
+  \item Are the reported sample-efficiency and KL divergence gains (3× and 70\%) averages or maxima across tasks and seeds? Please provide means, standard deviations, and statistical significance tests.
+  \item Will code, model checkpoints, and dataset splits (including random seeds for the star-graph synthetic tasks) be released? If so, on what timeline?
+  \item How does FST compare to continual learning baselines such as EWC, GEM, replay buffers, and KL-regularized RL (without the fast-weight component)? This is essential to isolate the contribution of the fast-slow decomposition.
+  \item How is KL divergence measured—on what data distribution, at the token level or sequence level, and with or without task-conditioning in the prompt? Please specify this in the main text.
+  \item What is the per-step and total wall-clock overhead of GEPA prompt optimization relative to the RL gradient step? Does rollout reuse fully offset this cost, and under what conditions?
+  \item How do results change across different task orderings in the continual learning experiments? Are the reported results robust to permutation of task sequence?
+  \item How does FST compare to PEFT methods (LoRA, prefix tuning) combined with a KL penalty, which represent a simpler alternative for reducing parameter drift?
+  \item Can the System 1/2 analogy be made more precise, or should it be explicitly reframed as motivational analogy rather than a mechanistic claim?
+\end{itemize}
+
+\section*{Per-Agent Reviews}
+\subsection*{citation (\texttt{gemini-2.5-flash})}
+\begin{verbatim}
+{
+  "confidence": 0,
+  "entries": [],
+  "missing_references": [],
+  "summary": "No references were provided in the input text (abstract and section headers). Therefore, a bibliography audit cannot be performed."
+}
+\end{verbatim}
+
+\subsection*{meta_reviewer (\texttt{claude-sonnet-4-6})}
+\begin{verbatim}
+{
+  "confidence": 0.72,
+  "questions": [
+    "Are the reported sample-efficiency and KL divergence gains (3× and 70%) averages or maxima across tasks and seeds? Please provide means, standard deviations, and statistical significance tests.",
+    "Will code, model checkpoints, and dataset splits (including random seeds for the star-graph synthetic tasks) be released? If so, on what timeline?",
+    "How does FST compare to continual learning baselines such as EWC, GEM, replay buffers, and KL-regularized RL (without the fast-weight component)? This is essential to isolate the contribution of the fast-slow decomposition.",
+    "How is KL divergence measured—on what data distribution, at the token level or sequence level, and with or without task-conditioning in the prompt? Please specify this in the main text.",
+    "What is the per-step and total wall-clock overhead of GEPA prompt optimization relative to the RL gradient step? Does rollout reuse fully offset this cost, and under what conditions?",
+    "How do results change across different task orderings in the continual learning experiments? Are the reported results robust to permutation of task sequence?",
+    "How does FST compare to PEFT methods (LoRA, prefix tuning) combined with a KL penalty, which represent a simpler alternative for reducing parameter drift?",
+    "Can the System 1/2 analogy be made more precise, or should it be explicitly reframed as motivational analogy rather than a mechanistic claim?"
+  ],
+  "recommendation": "major_revision",
+  "strengths": [
+    "Novel and well-motivated framework combining in-context learning as fast weights with parameter updates as slow weights, with a clear mechanistic rationale for why the decomposition should reduce catastrophic forgetting and preserve plasticity.",
+    "Compelling empirical claims: 3× sample efficiency, 70% KL reduction, and improved continual learning performance provide concrete and meaningful benchmarks if properly validated.",
+    "The FST approach addresses a practically important problem—catastrophic forgetting and plasticity loss in RL fine-tuning of LLMs—with a principled architectural solution rather than ad-hoc regularization.",
+    "Rollout reuse across GEPA and RL components is a practical efficiency contribution that addresses a real computational concern in joint optimization.",
+    "The continual learning evaluation scenario (sequential task learning) is a meaningful and challenging test bed that goes beyond standard fine-tuning benchmarks.",
+    "Appendix coverage of hyperparameters and compute requirements indicates some attention to reproducibility details."
+  ],
+  "summary": "Fast-Slow Training (FST) proposes a dual-timescale adaptation framework for large language models that couples in-context 'fast weight' optimization (via GEPA prompt optimization) with conventional 'slow weight' parameter updates. The paper claims up to 3× sample efficiency over RL-only baselines, 70% less KL divergence from the base model, and substantially improved continual learning across sequential tasks. The core intuition—that offloading task-specific information to the context allows parameters to change less and remain plastic—is theoretically grounded and consistent with the fast/slow weights literature. Specialists found the contribution significant and the motivating framework sound, but raised consistent concerns around empirical rigor (statistical reporting, breadth of baselines), reproducibility (no code release, incomplete evaluation protocols), and missing prior-art engagement (prompt optimization, continual learning baselines). The overall quality is promising but requires non-trivial revisions before acceptance.",
+  "weaknesses": [
+    "Empirical claims (3× sample efficiency, 70% KL reduction, 'consistently' higher asymptote) are stated without confidence intervals, statistical tests, or clarification of whether they represent maxima or averages across seeds and tasks; evaluation appears limited to four tasks.",
+    "No code repository or data release is provided or promised, making independent reproduction of FST, GEPA optimization, RL baselines, and distillation extremely difficult.",
+    "Missing continual learning baselines: comparisons against EWC, GEM, replay-based methods, and KL-regularized RL are absent, making it unclear how much of the benefit is attributable to the fast-slow decomposition versus simply a KL penalty on slow weights.",
+    "Missing prompt optimization prior art (RLPrompt, AutoPrompt) that directly relates to the GEPA 'fast weight' learning mechanism; their omission leaves the technical novelty of the fast component insufficiently contextualized.",
+    "The System 1/System 2 cognitive framing is presented loosely as motivation but is not rigorously substantiated; this risks overstating the theoretical contribution.",
+    "KL divergence measurement methodology (which data distribution, token-level vs. sequence-level, prompt conditioning) is not specified in the main text, making the 70% claim difficult to evaluate.",
+    "Evaluation is restricted to a narrow set of reasoning tasks (including a synthetic star-graph task); generalizability to broader NLP benchmarks and real-world instruction-following datasets is undemonstrated.",
+    "The overhead of GEPA prompt optimization at each step is not fully accounted for in wall-time comparisons, potentially understating the true computational cost of FST."
+  ]
+}
+\end{verbatim}
+
+\subsection*{novelty (\texttt{gemini-2.5-flash})}
+\begin{verbatim}
+{
+  "confidence": 4,
+  "missing_prior_art": [
+    {
+      "reason": "The paper describes 'fast weights' learning from 'textual feedback' via optimization, which is precisely what RL-based prompt optimization methods do. This work provides a direct technical foundation for the 'fast' learning component and should be acknowledged.",
+      "title": "RLPrompt: Optimizing Discrete Text Prompts with Reinforcement Learning"
+    },
+    {
+      "reason": "Similar to RLPrompt, this work explores gradient-based optimization of prompts, which is a core mechanism for the 'fast weights' in FST. Acknowledging such methods would strengthen the technical grounding of the fast learning component.",
+      "title": "Auto-Prompt: Eliciting Knowledge from Language Models with Automatically Generated Prompts"
+    }
+  ],
+  "novelty_score": 0.75,
+  "related_work": [
+    {
+      "citation_key": "Lester et al., 2021",
+      "delta": "FST integrates prompt tuning (as 'fast weights') with simultaneous parameter updates (as 'slow weights') in a unified framework, demonstrating benefits for continual learning and plasticity preservation beyond what prompt tuning alone offers.",
+      "relation": "prior_art",
+      "title": "The Power of Scale for Parameter-Efficient Prompt Tuning"
+    },
+    {
+      "citation_key": "Ouyang et al., 2022",
+      "delta": "FST shows that pure RL training (slow learning) suffers from catastrophic forgetting and plasticity loss, and proposes its fast-slow mechanism to overcome these limitations while achieving higher performance and efficiency.",
+      "relation": "prior_art",
+      "title": "Training language models to follow instructions with human feedback"
+    },
+    {
+      "citation_key": "Hu et al., 2021",
+      "delta": "While PEFT methods like LoRA aim for efficiency and reduced forgetting, FST argues they still suffer from plasticity loss and forgetting. FST's addition of a 'fast' context layer further mitigates these issues and improves adaptation, especially in continual learning scenarios.",
+      "relation": "prior_art",
+      "title": "LoRA: Low-Rank Adaptation of Large Language Models"
+    },
+    {
+      "citation_key": null,
+      "delta": "FST offers a novel architectural and algorithmic approach to continual learning in LLMs by explicitly decoupling fast, task-specific learning (context) from slow, general learning (parameters), leveraging LLM-specific capabilities like in-context learning, which is distinct from typical regularization or replay-based methods.",
+      "relation": "prior_art",
+      "title": "General Continual Learning Literature (e.g., EWC, GEM)"
+    }
+  ],
+  "verdict": "significant"
+}
+\end{verbatim}
+
+\subsection*{reproducibility (\texttt{gpt-5.5})}
+\begin{verbatim}
+{
+  "code_availability": "unspecified",
+  "code_url": null,
+  "concerns": [
+    {
+      "area": "code",
+      "description": "No code repository or release statement is provided in the supplied paper information; reproducing FST, GEPA prompt optimization, RL baselines, rollout reuse, and distillation would require reimplementation from the description and pseudocode.",
+      "severity": "major"
+    },
+    {
+      "area": "data",
+      "description": "The star-graph dataset appears to be synthetically constructible from the appendix, but availability of exact generated instances, seeds, task splits, and any other reasoning-task datasets is not specified.",
+      "severity": "major"
+    },
+    {
+      "area": "hyperparameters",
+      "description": "A hyperparameters and compute appendix is indicated, which helps reproducibility, but the supplied information does not confirm that all optimizer, RL, prompt-optimization, sampling, KL, and evaluation settings are fully specified.",
+      "severity": "minor"
+    },
+    {
+      "area": "compute",
+      "description": "Compute requirements are mentioned as an appendix topic, but exact hardware/software environment and expected wall-clock or rollout budgets are not available from the supplied information.",
+      "severity": "minor"
+    },
+    {
+      "area": "evaluation",
+      "description": "Claims involve sample efficiency, asymptotic performance, KL divergence to the base model, catastrophic forgetting, and continual-learning transfer; exact metrics, seeds, confidence intervals, and evaluation protocols are not visible in the supplied information.",
+      "severity": "major"
+    }
+  ],
+  "confidence": 0.55,
+  "data_availability": "synthetic",
+  "data_url": null,
+  "environment": null,
+  "reproducibility_score": 0.52
+}
+\end{verbatim}
+
+\subsection*{summary (\texttt{claude-haiku-4-5-20251001})}
+\begin{verbatim}
+{
+  "audience": "Machine learning researchers and practitioners working on large language models, continual learning, and parameter-efficient fine-tuning; those interested in improving sample efficiency and reducing catastrophic forgetting in neural networks.",
+  "key_contributions": [
+    "Introduces Fast-Slow Training (FST), a framework that combines in-context learning (fast weights via optimized context) with parameter updates (slow weights) to balance task adaptation and knowledge retention",
+    "Demonstrates that FST achieves up to 3x better sample efficiency compared to parameter-only reinforcement learning on reasoning tasks",
+    "Shows that FST-trained models maintain 70% less KL divergence from the base model, reducing catastrophic forgetting while preserving the model's general reasoning capabilities",
+    "Proves that FST improves continual learning: models trained with FST can successfully learn new tasks sequentially, while parameter-only trained models fail to adapt to subsequent tasks",
+    "Provides empirical evidence that separating task-specific learning (context) from general learning (parameters) is more effective than traditional single-timescale parameter updates"
+  ],
+  "plain_language_summary": "Large language models face a fundamental trade-off: updating their parameters through reinforcement learning can improve performance on specific tasks but causes the model to forget general knowledge and lose flexibility (catastrophic forgetting). In contrast, in-context learning—where you optimize the prompt without changing the model—is fast and flexible but typically doesn't achieve the same performance gains. This paper proposes Fast-Slow Training (FST), which treats these two approaches as complementary learning systems operating at different timescales. The \"fast\" system learns task-specific information through optimized context and textual feedback, while the \"slow\" system (the model's parameters) learns more gradually and stays closer to the original base model. This mirrors how humans learn through both quick intuitive responses (System 1) and deliberate reasoning (System 2). The key insight is that by separating where task-specific versus general knowledge is stored, the model can learn more efficiently, maintain better performance, and remain adaptable to new tasks. Experiments show FST is up to 3 times more sample-efficient than parameter-only training on reasoning tasks, keeps the model 70% closer to its original state (measured by KL divergence), and performs significantly better when learning multiple tasks sequentially—a scenario where parameter-only training typically fails.",
+  "tldr": "A new training method for large language models combines fast in-context learning with slow parameter updates to achieve better sample efficiency, less forgetting, and improved continual learning."
+}
+\end{verbatim}
+
+\subsection*{technical_correctness (\texttt{claude-opus-4-7})}
+\begin{verbatim}
+{
+  "claims": [
+    {
+      "assessment": "partially_supported",
+      "claim": "Fast-Slow Training (FST) is up to 3x more sample-efficient than only slow learning (RL) across reasoning tasks.",
+      "evidence": "The abstract claims up to 3x sample efficiency. Without seeing the full empirical curves and confidence intervals, the 'up to 3x' phrasing typically reflects a best-case point comparison rather than a robust average. The mechanism (combining context optimization with parameter updates) is plausible and consistent with prior work on prompt+weight hybrid optimization.",
+      "id": "C1",
+      "location": "Abstract; Advantages of Fast-Slow Training",
+      "severity": "minor",
+      "suggested_fix": "Report sample-efficiency gains across multiple tasks with confidence intervals and clarify whether '3x' is a maximum or mean across seeds/tasks."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "FST consistently reaches a higher performance asymptote than RL-only training.",
+      "evidence": "Plausible if fast weights (context) absorb task-specific noise allowing slow weights to learn more generalizable updates. However, 'consistently' is a strong claim that requires evaluation across diverse tasks and seeds; only four tasks appear evaluated based on appendix titles.",
+      "id": "C2",
+      "location": "Abstract; Advantages of Fast-Slow Training",
+      "severity": "minor",
+      "suggested_fix": "Soften 'consistently' or provide statistical tests across all tasks and seeds."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "FST-trained models remain closer to the base LLM (up to 70% less KL divergence) than RL-trained models.",
+      "evidence": "The mechanism is intuitive since FST offloads task-specific information to the prompt, requiring fewer weight changes. The '70% less KL' is a specific empirical claim that depends on KL measurement methodology (which distribution, on which prompts). The appendix appears to support this with four-task results.",
+      "id": "C3",
+      "location": "Abstract; KL-vs-reward, full four-task results",
+      "severity": "minor",
+      "suggested_fix": "Specify how KL is measured (data distribution, token-level vs sequence-level) in the main text."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Reduced drift preserves plasticity: after training on one task, FST-trained models adapt better to a subsequent task than parameter-only RL models.",
+      "evidence": "Consistent with the loss-of-plasticity literature showing that large parameter drift impairs subsequent learning. Empirical support depends on the specific task pairs evaluated.",
+      "id": "C4",
+      "location": "Abstract; Advantages of Fast-Slow Training",
+      "severity": "minor",
+      "suggested_fix": "Include multiple task orderings and baselines (e.g., LoRA, KL-regularized RL) to isolate the cause of preserved plasticity."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "In continual learning scenarios with changing task domains, FST continues acquiring new tasks while parameter-only RL stalls.",
+      "evidence": "Reasonable claim given C4, but 'stalls' is qualitative. Need quantitative comparisons against standard continual learning baselines (EWC, replay, KL-regularized RL).",
+      "id": "C5",
+      "location": "Abstract; Advantages of Fast-Slow Training",
+      "severity": "minor",
+      "suggested_fix": "Compare against established continual learning baselines beyond vanilla RL."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "In-context learning (fast weights) and parameter updates (slow weights) form a useful System-1/System-2-like decomposition for LLM adaptation.",
+      "evidence": "The analogy is motivational rather than rigorous. Fast/slow weights in neural networks have a long history (Hinton & Plaut 1987, Ba et al. 2016), and the System 1/2 framing is loose. The framework itself is reasonable but the cognitive analogy is suggestive, not proven.",
+      "id": "C6",
+      "location": "Introduction",
+      "severity": "info",
+      "suggested_fix": "Frame the System 1/2 connection as analogy/motivation rather than mechanistic claim."
+    },
+    {
+      "assessment": "supported",
+      "claim": "Fast weights (optimized context via GEPA) can absorb task-specific information that would otherwise force slow weights to drift.",
+      "evidence": "This is the core mechanism and is consistent with the observed lower KL divergence (C3). The conceptual argument is sound: if the prompt encodes task specifics, the gradient signal to the weights focuses on more general capabilities.",
+      "id": "C7",
+      "location": "Fast-Slow Training (FST); Why Does Fast-Slow Training Work?",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "FST achieves the same accuracy at lower wall-time and rollout cost via rollout reuse.",
+      "evidence": "Plausible if GEPA prompt evaluation rollouts can be reused for RL gradient estimation. Wall-time claims depend heavily on implementation and hardware.",
+      "id": "C8",
+      "location": "Appendix: Rollout reuse",
+      "severity": "minor",
+      "suggested_fix": "Provide detailed cost accounting including GEPA optimization overhead."
+    }
+  ],
+  "confidence": 0.5,
+  "overall_correctness": "mostly_sound"
+}
+\end{verbatim}
+
+\section*{Corrections}
+% corrections rendered from corrections table; empty on first publish
+No corrections have been recorded.
+
+\section*{Bibliography}
+No bibliography extracted.
+
+% \bibliographystyle{plain}
+% \bibliography{references}
+\end{document}
