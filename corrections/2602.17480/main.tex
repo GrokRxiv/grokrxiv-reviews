@@ -1,0 +1,1997 @@
+\documentclass[a4paper,UKenglish,cleveref, autoref]{lipics-v2021}
+\usepackage{amsmath}
+\usepackage{stmaryrd}
+\usepackage{esint}
+\usepackage{mdframed}
+\usepackage{quiver}
+\SetSymbolFont{stmry}{bold}{U}{stmry}{m}{n}
+
+\usepackage{makecell}
+\usepackage{preamble}
+\usepackage{graphicx}
+\usepackage{bm} % For bold symbols
+\usepackage{bbm} % For \mathbbm{2}
+% \usepackage[inline]{enumitem}
+\usepackage{newmacros}
+
+%This is a template for producing LIPIcs articles.
+%See lipics-v2021-authors-guidelines.pdf for further information.
+%for A4 paper format use option "a4paper", for US-letter use option "letterpaper"
+%for british hyphenation rules use option "UKenglish", for american hyphenation rules use option "USenglish"
+%for section-numbered lemmas etc., use "numberwithinsect"
+%for enabling cleveref support, use "cleveref"
+%for enabling autoref support, use "autoref"
+%for anonymousing the authors (e.g.\ for double-blind review), add "anonymous"
+%for enabling thm-restate support, use "thm-restate"
+%for enabling a two-column layout for the author/affilation part (only applicable for > 6 authors), use "authorcolumns"
+%for producing a PDF according the PDF/A standard, add "pdfa"
+
+\pdfoutput=1 %uncomment to ensure pdflatex processing (mandatatory e.g.\ to submit to arXiv)
+\hideLIPIcs  %uncomment to remove references to LIPIcs series (logo, DOI, ...), e.g.\ when preparing a pre-final version to be uploaded to arXiv or another public repository
+
+%\graphicspath{{./graphics/}}%helpful if your graphic files are in another directory
+
+\bibliographystyle{plainurl}% the mandatory bibstyle
+
+\title{Directed type theory, with a twist} %TODO Please add
+
+%\titlerunning{Dummy short title} %TODO optional, please use if title is longer than one line
+
+\author{Fernando Chu}{Utrecht University, Netherlands}{johnqpublic@dummyuni.org}{https://orcid.org/0009-0005-9125-769X}{}%TODO mandatory, please use full name; only 1 author per \author macro; first two parameters are mandatory, other parameters can be empty. Please provide at least the name of the affiliation and the country. The full address is optional. Use additional curly braces to indicate the correct name splitting when the last name consists of multiple name parts.
+
+\author{Paige Randall North}{Utrecht University, Netherlands}{p.r.north@uu.nl}{https://orcid.org/0000-0001-7876-0956}{}
+
+\authorrunning{F. Chu and P.\,R. North} %TODO mandatory. First: Use abbreviated first/middle names. Second (only in severe cases): Use first author plus 'et al.'
+
+\Copyright{Fernando Chu and Paige Randall North} %TODO mandatory, please use full first names. LIPIcs license is "CC-BY";  http://creativecommons.org/licenses/by/3.0/
+
+\begin{CCSXML}
+  <ccs2012>
+  <concept>
+  <concept_id>10003752.10003790.10011740</concept_id>
+  <concept_desc>Theory of computation~Type theory</concept_desc>
+  <concept_significance>500</concept_significance>
+  </concept>
+  </ccs2012>
+\end{CCSXML}
+
+\ccsdesc[500]{Theory of computation~Type theory}
+
+% \ccsdesc[100]{\textcolor{red}{Replace ccsdesc macro with valid one}} %TODO mandatory: Please choose ACM 2012 classifications from https://dl.acm.org/ccs/ccs_flat.cfm
+
+\keywords{Directed Type Theory, Category Theory, Homotopy Type Theory} %TODO mandatory; please add comma-separated list of keywords
+
+\category{} %optional, e.g.\ invited paper
+
+\relatedversion{} %optional, e.g.\ full version hosted on arXiv, HAL, or other respository/website
+%\relatedversiondetails[linktext={opt. text shown instead of the URL}, cite=DBLP:books/mk/GrayR93]{Classification (e.g.\ Full Version, Extended Version, Previous Version}{URL to related version} %linktext and cite are optional
+
+%\supplement{}%optional, e.g.\ related research data, source code, ... hosted on a repository like zenodo, figshare, GitHub, ...
+%\supplementdetails[linktext={opt. text shown instead of the URL}, cite=DBLP:books/mk/GrayR93, subcategory={Description, Subcategory}, swhid={Software Heritage Identifier}]{General Classification (e.g.\ Software, Dataset, Model, ...)}{URL to related version} %linktext, cite, and subcategory are optional
+
+%\funding{(Optional) general funding statement \dots}%optional, to capture a funding statement, which applies to all authors. Please enter author specific funding statements as fifth argument of the \author macro.
+
+\acknowledgements{The authors thank Kenji Maillard, Andrea Laretto, Christian Merten, Rob Schellingerhout, Ulrik Buchholtz, and \'El\'eonore Mangel for insightful discussions about this work.}%optional
+
+%\nolinenumbers %uncomment to disable line numbering
+
+%Editor-only macros:: begin (do not touch as author)%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\EventEditors{John Q. Open and Joan R. Access}
+\EventNoEds{2}
+\EventLongTitle{42nd Conference on Very Important Topics (CVIT 2016)}
+\EventShortTitle{CVIT 2016}
+\EventAcronym{CVIT}
+\EventYear{2016}
+\EventDate{December 24--27, 2016}
+\EventLocation{Little Whinging, United Kingdom}
+\EventLogo{}
+\SeriesVolume{42}
+\ArticleNo{23}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\nolinenumbers % Removes numbers from here on
+\maketitle
+
+\begin{abstract}
+  In recent years, Homotopy Type Theory (HoTT) has had great success both as a foundation of mathematics and as internal language to reason about $\infty$-groupoids (a.k.a. spaces).
+  However, in many areas of mathematics and computer science, it is often the case that it is categories, not groupoids, which are the more important structures to consider.
+  For this reason, multiple directed type theories have been proposed, i.e., theories whose semantics are based on categories.
+  In this paper, we present a new such type theory, Twisted Type Theory (TTT).
+  It features a novel ``twisting'' operation on types: given a type that depends both contravariantly and covariantly on some variables, its twist is a new type that depends only covariantly on the same variables.
+  To provide the semantics of this operation, we introduce the notion of dependent 2-sided fibrations (D2SFibs), which generalize Street's notion of 2-sided fibrations.
+  We develop the basic theory of D2SFibs, as well as characterize them through a straightening-unstraightening theorem.
+  With these results in hand, we introduce a new elimination rule for Hom-types.
+  We argue that our syntax and semantics satisfy key features that allow reasoning in a HoTT-like style, which allows us to mimic the proof techniques of that setting.
+  We end the paper by exemplifying this, and use TTT to reason about categories, giving a syntactic proof of Yoneda's lemma.
+\end{abstract}
+
+\section{Introduction}
+In a seminal paper \cite{hofmann_groupoid_1998}, Hofmann and Streicher constructed the \emph{groupoid model}: a semantic interpretation of Martin-Löf Type Theory (MLTT) \cite{martin-lof_intuitionistic_1975} where contexts are interpreted as groupoids and types are interpreted as indexed groupoids.
+Years later, Voevodsky et al.\ \cite{kapulkin_simplicial_2021} generalized this result by constructing the \emph{$\infty$-groupoid model}.
+Further, they observed that this model satisfies the so-called \emph{univalence axiom}, which roughly states that equivalent types are equal.
+These results marked the beginning of Homotopy Type Theory (HoTT) \cite{the_univalent_foundations_program_homotopy_2013}.
+
+After multiple years of development, HoTT has proven to be both (i) a successful foundation for developing mathematics and (ii) a useful synthetic language to reason about $\infty$-groupoids (a.k.a. spaces).
+As an example of (i), in HoTT one can use the Structure Identity Principle (SIP) to transport properties between equivalent algebraic structures \cite{coquand_isomorphism_2013,ahrens_higher_2020}; this gives a rigorous foundation to the often used practice in mathematics of equating equivalent structures.
+As an example of (ii), one can encode CW-complexes as Higher Inductive Types (HITs) and compute their homotopy groups synthetically \cite{brunerie_james_2019,hutchison_pi_n_2013}.
+
+However, in many areas of mathematics and computer science, it is often the case that it is categories, not groupoids, which are the more important structures to consider.
+Hence, multiple researchers have proposed \emph{directed type theories} \cite{ahrensBicategoricalTypeTheory2023,gratzer_directed_2024,larettoDiDirectedFirstOrder2026,licata_2-dimensional_2011,nasuInternalLogicVirtual2024,neumannSynthetic1CategoriesDirected2025,newFormalLogicFormal2023,north_towards_2019,andreas_towards_2015,riehl_type_2017}.
+That is, type theories with a notion of non-symmetric ``directed equality'', whose semantics are based on categories.
+The hope is then, in analogy to HoTT, that these theories would be (i) via a directed version of the SIP, an even more powerful foundation of mathematics and (ii) a useful synthetic language to reason about categories.
+
+In this paper, we present a new directed type theory, which we call \emph{Twisted Type Theory (TTT)}.
+One of our overarching design principles was to follow very closely Hofmann and Streicher's groupoid model of MLTT.
+Therefore, we build upon North's category model \cite{north_towards_2019}, which generalizes it.
+Indeed, in the category model, contexts are interpreted as categories, while types are interpreted as indexed categories.
+
+We focus on generalizing the groupoid model as it is simpler than its $\infty$-dimensional counterpart, yet still retains enough features to validate a restricted version of points (i) and (ii) above.
+Following closely the groupoid model will therefore allow us to replicate the syntactic techniques of HoTT, while maintaining some level of simplicity in our semantic considerations.
+We leave it to future work to explore the higher dimensional models of TTT.
+
+More specifically, TTT was designed to satisfy the following three desiderata, each of which is a categorical adaptation of a feature the groupoid model satisfies.
+
+\begin{enumerate}
+  \item \emph{Types as categories}.
+    Being a type in the empty context should semantically correspond to being a category.
+    This has the benefit of reducing the problem of whether a new construction is a category to a typechecking exercise.
+    This is in contrast to other work, such as Simplicial Type Theory (STT) \cite{riehl_type_2017}, that extends the universe of types to include additional structures that are not the object of interest, i.e.\ they have types that are not categories.
+    Categories are then recovered as types satisfying some additional conditions, and therefore one has to provide a proof that a newly constructed type is a category.
+    While there are some results that ensure that certain constructions in STT preserve categories, one is usually also interested in obtaining categories by applying constructions on the more general base types.
+    For example, discrete types in STT are defined as types satisfying a certain discreteness condition. Ad-hoc arguments are then used to show that these satisfy the so-called Segal condition, see Section 7 in op.\ cit.
+
+  \item \emph{Emergent categorical structure}.
+    There should be a type of directed equalities, i.e.\ a $\Hom$-type, given by formation, introduction, elimination and computation rules.
+    This condition eases a generalization of the type theory to higher dimensions.
+    Indeed, having $\Hom$-types allow encoding the $n$-cells of a type as the $n$-th iteration of the $\Hom$-type.
+    Further, from an appropriate $\Hom$-elimination rule, the coherences will follow; this is what happens with the $\Id$-elimination rule in HoTT, which gives types the structure of $\infty$-groupoids.
+    In contrast, other approaches would have to significantly change the type theory to accommodate the $n$-cells and their coherences.
+    For example, a higher dimensional analogue of the 2-dimensional type theory of Licata \& Harper \cite{licata_2-dimensional_2011}, which does not have $\Hom$-types, would have to manually specify an $n$-categorical structure to the contexts. Similarly, STT would have to add a calculus of new shapes \cite[p. 152]{riehl_type_2017}.
+
+  \item \emph{Trivial directed equalities through directed path objects}. We require that the $\Hom$-introduction rule corresponds to the factorization $A \to A^\to \to A\times A$ of the diagonal map $\delta:A \to A\times A$ through the arrow category $A^\to$ of a category $A$ (see Section \ref{sec:d2sfibs}).
+    This is a generalization of the fact that, in a model category, path objects, i.e.\ appropriate factorizations $A \to A^I \to A \times A$ of the diagonal map $\delta$, can be used to give an interpretation of the formation and introduction rules of $\Id$-types \cite{awodey_homotopy_2009}.
+    This technical condition ensures that the HoTT notion of homotopies between functions, i.e.\ functions $\Pi_{x:X}f(x) = g(x)$, can be readily generalized to the directed case.
+    That is, it allows for reasoning about natural transformations (see Subsection \ref{subsec:nats}).
+    This had previously been a difficulty in some directed type theories, see e.g.\ Neumann \& Altenkirch \cite[Section 6]{neumannSynthetic1CategoriesDirected2025}.
+\end{enumerate}
+
+% \begin{enumerate}
+%   \item \emph{Types as categories}. Being a type should semantically correspond to being a category.
+%     This implays that . Indeed, desideratum (1) would then reduce this problem to that of typechecking: if the new construction is a type, then it is a category.
+%     This is in contrast to other work, such as Simplicial Type Theory (STT) \cite{riehl_type_2017}, where only some types are categories, and therefore one has to provide a proof that a new type is a category.
+%   \item \emph{Emergent categorical structure}. The categorical structure of the types should not be hand-coded.
+%     Instead, there should be a type of directed equalities, i.e.\ a $\Hom$-type, given by formation, introduction, elimination and computation rules.
+%   \item \emph{Trivial directed equalities through directed path objects}. We require that the $\Hom$-introduction rule corresponds to the factorization $A \to A^\to \to A\times A$ of the diagonal map $\delta:A \to A\times A$ through the arrow category $A^\to$ of a category $A$ (see Section \ref{sec:d2sfibs}).
+%     This is a generalization of the fact that, in a model category, path objects, i.e.\ appropriate factorizations $A \to A^I \to A \times A$ of the diagonal map $\delta$, can be used to give an interpretation of the formation and introduction rules of $\Id$-types \cite{awodey_homotopy_2009}.
+%     % rivial directed equality in a type $A$ should correspond to the path object
+%     % a lift of the diagonal $\delta:A \to A\times A$ through the projection $\langle \mathsf{dom} , \mathsf{cod}\rangle : A^\to \to A \times A$. This allows for recovering the $\Hom$-elimination principle as a natural lifting property, as well use a direct generalization of HoTT's concept of homotopies (see Sections \ref{sec:TTT} and \ref{sec:applications}).
+% \end{enumerate}
+
+% We consider these desiderata as they imply the following benefits, respectively.
+% \begin{enumerate}
+%   \item \emph{Ease of checking when a new construction corresponds to a category}. Indeed, desideratum (1) would then reduce this problem to that of typechecking: if the new construction is a type, then it is a category.
+%     This is in contrast to other work, such as Simplicial Type Theory (STT) \cite{riehl_type_2017}, where only some types are categories, and therefore one has to provide a proof that a new type is a category.
+%   \item \emph{Ease of generalization to higher dimensions}. Having $\Hom$-types allow encoding the $n$-cells of a type as the $n$-th iteration of the $\Hom$-type.
+%     Further, if these are generated by rules, then the coherences between cells should follow from the $\Hom$-elimination rule.
+%     In contrast, other approaches would have to significantly change the type theory to accommodate the $n$-cells and their coherences.
+%     For example, a higher dimensional analogue of the 2-dimensional type theory of Licata \& Harper \cite{licata_2-dimensional_2011}, which does not have $\Hom$-types, would have to manually give an $n$-categorical structure to the contexts. On the other hand, STT would have to add a calculus of new shapes \cite[p. 152]{riehl_type_2017}.
+%   \item \emph{Ability to replicate HoTT's syntactic constructions}. The technical condition given in desideratum (3) ensures that the HoTT notion of homotopies between functions can be readily generalized to the directed case.
+%     That is, it allows for reasoning about natural transformations (see Subsection \ref{subsec:nats}).
+%     This had not yet been achieved by other type theories satisfying our desiderata (1) and (2), see e.g.\ \cite[Section 6]{neumannSynthetic1CategoriesDirected2025}.
+% \end{enumerate}
+
+The work of North \cite{north_towards_2019} already satisfied the first two desiderata.
+Our contribution is then satisfying also the third.
+We achieve this by introducing a novel ``twisting'' operation on types: given a type that depends both contravariantly and covariantly on some variables, its twist is a new type that depends only covariantly on the same variables.
+Crucially, the interpretation of the twist of the $\Hom$-type of a type $A$ gives the arrow category $A^\to$ of $A$.
+This enables us to state a $\Hom$-introduction rule, syntactically analogous to the $\Id$-introduction rule, whose interpretation satisfies desideratum (3).
+
+More generally, the interpretation of the twisting of a type makes use of our notion of \emph{dependent 2-sided fibrations (D2SFibs)}, a generalization of Street's notion of a 2-sided fibration \cite{streetFibrationsYonedasLemma1974}.
+Indeed, the twist of a type corresponds then to the unstraightening part of a straightening-unstraightening characterization we give of D2SFibs.
+
+The theory TTT can then be summarized as an extension of North's type theory \cite{north_towards_2019} featuring twisted types and modified $\Hom$-types.
+We will also make use of other features already well known in the literature, such as restricted $\Pi$-types, opposite contexts, discrete universes, among others \cite{licata_2-dimensional_2011,neumannSynthetic1CategoriesDirected2025}.
+
+% More generally, to interpret the twisting operation on types we introduce the notion of \emph{dependent 2-sided fibrations (D2SFibs)}, which generalizes Street's notion of a 2-sided fibration \cite{streetFibrationsYonedasLemma1974}
+
+% Semantically, the twist of a type $A$ is interpreted as the unstraightening of
+
+% It features a novel ``twisting'' operation on types: given a type that depends both contravariantly and covariantly on some variables, its twist is a new type that depends only covariantly on the same variables.
+% To provide the semantics of this operation, we introduce the notion of dependent 2-sided fibrations (D2SFibs), which generalize Street's notion of 2-sided fibrations.
+% We develop the basic theory of D2SFibs, as well as characterize them through a straightening-unstraightening theorem.
+
+\subparagraph*{Outline and main contributions.}
+\begin{itemize}
+  \item Section \ref{sec:review} reviews the categorical semantics of MLTT and North's category model \cite{north_towards_2019}, as well as introduces the displayed category model of MLTT.
+  \item Section \ref{sec:d2sfibs} introduces D2SFibs and develops the basic theory of these, which is used to give the semantics of the twist of a type.
+  \item Section \ref{sec:TTT} introduces TTT, which presents novel rules for $\Hom$-types and adapts some additional features previously considered in the literature to our context.
+  \item Section \ref{sec:applications} presents some applications of TTT, including a proof of Yoneda's lemma.
+  \item Section \ref{sec:future-work} concludes the paper and sketches future work directions.
+\end{itemize}
+
+\subparagraph*{Related work.}
+% We briefly describe some key work the history of the development of directed type theory.
+% We begin by exploring directed type theories that extend MLTT.
+% From our perspective, there are three main lines of work on directed type theory extending MLTT have emerged, each beginning with one pioneering work, which we now describe.
+
+The first published work on directed type theory was presented by Licata \& Harper \cite{licata_2-dimensional_2011}.
+Their theory's main feature is that the syntax had a primitive notion of transformations between parallel substitutions of contexts, thereby giving a 2-categorical structure to the category of contexts.
+Since they did not introduce $\Hom$-types, their work does not satisfy our desiderata (2) nor (3).
+Later work by North \cite{north_towards_2019} introduced $\Hom$-types for the first time, but did so by restricting the $\Hom$-introduction rule to the groupoid core of a type, hence their theory does not meet our desiderata (3).
+More recently, Riehl \& Shulman \cite{riehl_type_2017} extended MLTT with a directed interval and other shapes, resulting in a powerful calculus reminiscent of Cubical Type Theory \cite{cohenCubicalTypeTheory2018}.
+In order to do this, their semantic interpretation of a type is a bisimplicial set, and hence only some types correspond to categories; therefore our desiderata (1) and (2) are not satisfied.
+
+Further work has extended and refined each of these three works in different directions: Ahrens et al.\ \cite{ahrensBicategoricalTypeTheory2023} generalize Licata \& Harper's work by giving the category of contexts a bicategorical structure, Neumann \& Altenkirch \cite{neumannSynthetic1CategoriesDirected2025} extend North's type theory by also adding groupoid cores of contexts and hence obtaining new rules for $\Hom$-types, and Gratzer et al.\ \cite{gratzer_directed_2024} add modalities to Riehl \& Shulman's type theory, greatly increasing the expressivity of the theory.
+Nonetheless, these new works satisfy the same desiderata as the work their building upon, and so none satisfy all three of our criteria.
+Table \ref{table:work} summarizes this discussion.
+
+\begin{table}[h]
+  \begin{tabular}{lllll}
+    % \hline
+    \cline{2-5}
+
+    \multicolumn{1}{c|}{\multirow{2}{*}{}} & \multicolumn{1}{c|}{\multirow{2}{*}{Works}} & \multicolumn{3}{c|}{Desiderata}                                                   \\ \cline{3-5}
+    \multicolumn{1}{c|}{}                   & \multicolumn{1}{c|}{}                   & \multicolumn{1}{c|}{(1)} & \multicolumn{1}{c|}{(2)} & \multicolumn{1}{c|}{(3)} \\ \hline
+    \multicolumn{1}{|l|}{\makecell[l]{Directed type theories with two-dimensional\\ categories of contexts}}                  & \multicolumn{1}{l|}{\makecell[l]{Licata \& Harper \cite{licata_2-dimensional_2011}, \\ Ahrens et al.\ \cite{ahrensBicategoricalTypeTheory2023}}}                  & \multicolumn{1}{l|}{Yes} & \multicolumn{1}{l|}{No} & \multicolumn{1}{l|}{No} \\ \hline
+    \multicolumn{1}{|l|}{\makecell[l]{Directed type theories with operations\\ involving groupoids}}                  & \multicolumn{1}{l|}{\makecell[l]{North \cite{north_towards_2019}, Neumann \\ \& Altenkirch \cite{neumannSynthetic1CategoriesDirected2025}}}                  & \multicolumn{1}{l|}{Yes} & \multicolumn{1}{l|}{Yes} & \multicolumn{1}{l|}{No} \\ \hline
+    \multicolumn{1}{|l|}{Directed type theories with directed intervals}                  & \multicolumn{1}{l|}{\makecell[l]{Riehl \& Shulman \cite{riehl_type_2017}, \\Gratzer et al.\ \cite{gratzer_directed_2024}}}                  & \multicolumn{1}{l|}{No} & \multicolumn{1}{l|}{No} & \multicolumn{1}{l|}{Yes} \\ \hline
+    % &                                         &                        &                        &
+  \end{tabular}
+  \caption{Summary of related work and desiderata satisfied.}
+  \label{table:work}
+\end{table}
+
+% Multiple directed type theories have been proposed, each with many different features and characteristics. Nonetheless, for the purpose of this subsection we will categorize them in four groups, based on their most distinctive feature.
+
+% \begin{itemize}
+%   \item \emph{Type theories with a directed interval}. In \cite{riehl_type_2017} and it's modal extension \cite{gratzer_directed_2024}, MLTT is extended with a directed interval and other shapes, resulting in a powerful calculus reminiscent of Cubical Type Theory \cite{cohenCubicalTypeTheory2018}. This approach however does not satisfy our desiderata (1) nor (2).
+%   \item \emph{Two-dimensional Type theories}. In \cite{licata_2-dimensional_2011} and it's generalization \cite{ahrensBicategoricalTypeTheory2023}, the authors allow for transformations between parallel substitutions of contexts, thereby giving a bicategorical structure to the category of contexts. These do not satisfy our desiderata (2) nor (3).
+%     The work of \cite{andreas_towards_2015} also roughly fits this framework, though they do not give a precise semantics of their syntax.
+%   \item \emph{MLTT with primitive $\Hom$-types}. As we mentioned, our work builds on top of North's \cite{north_towards_2019}, and hence also fits in this group. The work of \cite{neumannSynthetic1CategoriesDirected2025} builds upon a similar framework, with additional expressiveness given by considering neutral contexts and deep polarization. Neither of these satisfy our desideratum (3).
+% \end{itemize}
+
+A different line of work on directed type theory comes from theories that do not extend MLTT.
+These include the simply typed theory of Laretto et al.\ \cite{larettoDiDirectedFirstOrder2026}, which gives a (co)end calculus for profunctors; as well as the work of New \& Licata \cite{newFormalLogicFormal2023} and Nasu \cite{nasuInternalLogicVirtual2024}, which introduce type theories whose semantics are based on virtual equipments and virtual double categories, respectively.
+While these theories informed the present work, their lack of dependent types prevents us from directly comparing them with TTT.
+
+The work of Nuyts \cite{andreas_towards_2015} is also relevant, as it introduces a modal directed type theory expanding on the work of Licata \& Harper \cite{licata_2-dimensional_2011}.
+However, it does not provide semantics for their calculus, and so does not satisfy any of our desiderata.
+
+\section{Categorical models of MLTT}\label{sec:review}
+For the rest of this paper, all our (op)fibrations are cloven.
+We begin by recalling the definition of comprehension category.
+
+\begin{definition}[Comprehension categories \cite{jacobsComprehensionCategoriesSemantics1993}]
+  Let $\mathcal{C}$ be a  category. A \emph{(split) comprehension category (CC) over} $\mathcal{C}$ is a (split) fibration $p:\mathcal{T}\to \mathcal{C}$ equipped with a functor $\chi: \mathcal{T} \to \mathcal{C}^\to$, the \emph{comprehension}, such that it preserves cartesian morphisms and such that the following diagram commutes.
+  % https://q.uiver.app/#q=WzAsMyxbMCwwLCJhIl0sWzIsMCwiYiJdLFsxLDEsImMiXSxbMCwxLCJmIl0sWzAsMiwiZCIsMl0sWzEsMiwiYWEiXV0=
+  \[
+    \begin{tikzcd}[sep=scriptsize]
+      \mathcal{T} && \mathcal{C}^\to \\
+      & \mathcal{C}
+      \arrow["\chi", from=1-1, to=1-3]
+      \arrow["p"', from=1-1, to=2-2]
+      \arrow["\cod", from=1-3, to=2-2]
+  \end{tikzcd}\]
+  We write $(\mathcal{C}, \mathcal{T}, \chi)$ for such a CC. We say the CC is \emph{full} if $\chi$ is full and faithful.
+\end{definition}
+
+Jacobs \cite{jacobsComprehensionCategoriesSemantics1993} showed that full split CC's provide semantics for MLTT.
+Briefly, the interpretation of the syntax is as follows:
+\begin{itemize} %[leftmargin=2em]
+  \item A context $\Gamma$ is interpreted as an object $\Interp{\Gamma} \in \mathcal{C}$.
+  \item A type $\Gamma \vdash A\,\Ty$ is interpreted as an object $\Interp{A}\in \mathcal{T}_\Interp{\Gamma}$, i.e.\ the fibre in $\mathcal{T}$ over $\Interp{\Gamma}$.
+  \item The context extension $\Gamma, a:A$ is interpreted as the domain of the comprehension of $A$, and so $\Interp{\Gamma, x:A} \defeq \mathsf{dom}(\chi(\Interp{A}))$.
+  \item A term $\Gamma \vdash a :A$ is interpreted as a section $\Interp{a}: \Interp{\Gamma} \to \Interp{\Gamma.A}$ of $\chi(\Interp{A})$.
+\end{itemize}
+
+We now will give two categorical models of MLTT, i.e.\ two CC's over $\Cat$. To simplify the following discussion, we introduce the following notations.
+\begin{notation}
+  Let $F : A \to \Cat$ (resp. $G : B^\op \to \Cat$) be a functor. We write $A \ctxe F$ (resp. $B \ctxe^- G$) for the covariant (resp. contravariant) Grothendieck construction of $F$ (resp. $G$). We write $\pi:A\ctxe F \to A$ (resp. $\pi:B \ctxe^- G \to B)$ for its canonical projection.
+\end{notation}
+
+\subsection{The category model of MLTT}
+
+The category model of MLTT in terms of a CC is given by North \cite[Construction 3.3]{north_towards_2019}, which we now recall.
+\begin{definition}[The category model]\label{def:catmodel}
+  Consider the functor $[-,\Cat]_\textnormal{lax}:\Cat^\op \to \Cat$
+  that maps a category $A$ to the category of strict functors from $A$ to $\Cat$ and lax natural transformations. Write $\ICat_\textnormal{lax}$ for the category $\Cat \ctxe^- [-,\Cat]_\textnormal{lax}$ of indexed categories and lax natural transformations.
+  %, whose objects are pairs $(\Gamma,A)$ with $\Gamma \in \Cat$ and $A$ a functor from $\Gamma$ to $\Cat$.
+
+  The \emph{category model} is the full split CC over $\Cat$ given by the canonical projection of the $\pi:\ICat_\textnormal{lax} \to \Cat$, together with the comprehension functor $\ctxe^*{} : \ICat_\textnormal{lax} \to \Cat^\to$ given by mapping an object $(A,B)$ of $\ICat_\textnormal{lax}$ to $A \ctxe B \xrightarrow{\pi} A$ in $\Cat^\to$.
+\end{definition}
+
+It follows from the above discussion that, in the category model, a context is interpreted as a category $\Interp{\Gamma}$, while a type $\Gamma \vdash A\,\Ty$ interpreted as an indexed category $\Interp{A}:\Interp{\Gamma} \to \Cat$.
+
+\begin{notation}
+  From now on we write $\cxe$ for the context extension operation in MLTT, i.e.\ we write $\Gamma \cxe a : A$ for $\Gamma, a : A$.
+  For the category model, we then have $\Interp{\Gamma \cxe a : A} \defeq \Interp{\Gamma} \ctxe \Interp{A}$.
+  This notation will be useful to disambiguate from additional context extension operations we will introduce later.
+\end{notation}
+
+\begin{proposition}[\cite{licata_2-dimensional_2011,north_towards_2019}]\label{prop:Sigma}
+  The category model has strong $\Sigma$-types and, if a countable hierarchy of inaccessible cardinals is assumed, universes $\UU_i$.
+  Further, it also validates the following rules about opposite types and $\Hom$-types.
+  {
+    \small
+    \begin{mathparpagebreakable}
+      \inferrule*[right=$\op$\textnormal{\textsc{-Form}}]{
+        \IsTy{A}
+      }{
+        \IsTy{A^\op}
+      } \and
+      \inferrule*[right=$\Hom$\textnormal{\textsc{-Form}}]{
+        \IsTy{A}
+      }{
+        \IsTy[\Gamma \cxe a:A^\op \cxe b:A]{\Hom_{A}(a,b)}
+      } \and
+      \inferrule*[right=$\op$\textnormal{\textsc{-Inv}}]{
+        \IsTy{A}
+      }{
+        \EqTy{(A^\op)^\op}{A}
+      } \and
+      \inferrule*[right=$\Hom$\textnormal{\textsc{-}}$\op$]{
+        \IsTy{A}
+      }{
+        \IsTy[\Gamma \cxe a:A^\op \cxe b:A]{\Hom_{A}(a,b)^\op \jeq \Hom_{A}(a,b)}
+      }
+    \end{mathparpagebreakable}
+  }
+\end{proposition}
+\begin{proof}[Proof sketch]
+  Let $\Gamma \vdash A\,\Ty$ and $\Gamma \cxe a : A \vdash B\,\Ty$ be types.
+  The interpretation of $\Gamma \vdash \sum_AB\,\Ty$ is given by setting $\Interp{\sum_AB}(\gamma)$ to be the category that has as objects $(a,b) \in \coprod_{a\in A(\gamma)}B(a,\gamma)$, while a morphism $(a,b) \to (a',b')$ is a pair $(\alpha,\beta)$ with $\alpha:a \to a'$ in $A(\gamma)$ and $\beta:B(\id_\gamma, \alpha)b \to b'$.
+  The interpretation of opposite types is given by postcomposition with the opposite functor $\op : \Cat \to \Cat$. Finally, the interpretation of $\Hom$-types is given by $\Interp{\Hom_A}(\gamma,x,y) \defeq \hom_{A(\gamma)}(x,y)$.
+  % We give the interpretation of opposite and $\Hom$-types. Let $\Gamma \vdash A \,\Ty$ be a type. Writing $\op : \Cat \to \Cat$ for the opposite involution on categories, we have $\Interp{A^\op}\defeq \op \circ A$.
+  % Fo interpretation of opposite types is given by postcomposing with the opposite functor $\op : \Cat \to \Cat$, while $\Interp{\Hom_A(a,b)}$ is given by $\Interp{\Hom_A(a,b)}(\gamma,y,x) \defeq \hom_{A(\gamma)}(x,y)$.
+\end{proof}
+
+\begin{remark}\label{remark:univs}
+  For the concerned reader, the specific universes the category model validates (under the assumption above) are Coquand universes \cite{coquandPresheafModelType2013,gratzer_multimodal_2021}.
+  However, for convenience, we will use Russell universes with implicit indices, understanding that these should be elaborated to the Coquand ones.
+\end{remark}
+
+\begin{notation}
+  For a functor $F: C \to \Cat$, we will write $F^\op$ for $\op \circ F$. With this notation, for a type $A$, we have $\Interp{A^\op} \defeq \Interp{A}^\op$.
+\end{notation}
+
+The following well-known result, due to Grothendieck \cite{grothendieckRevetementsEtalesGroupe2003}, gives us a different perspective on this comprehension category.
+\begin{proposition}[Straightening-unstraightening for opfibrations]\label{prop:straight-icat}
+  Write $\Opfib^\textup{split}_\textup{lax}$ for the full fibred subcategory of $\Cat^\to$ spanned by the split opfibrations.
+  The comprehension functor $\ctxe^*{} : \ICat_\textnormal{lax} \to \Cat^\to$ restricts to a fibred equivalence of categories $\ctxe^*\, : \ICat_\textnormal{lax} \xrightarrow{\simeq} \Opfib^\textup{split}_\textup{lax}$ over $\Cat$.
+\end{proposition}
+
+% By this proposition, we can think of a type in a context $\Gamma$ as an opfibration over $\Interp{\Gamma}$.
+Note that the fibration $\cod:\Opfib^{\text{split}}_\text{lax}\to \Cat$ is not split, and hence cannot be directly used to interpret MLTT.
+Hence, we will carefully apply Proposition \ref{prop:straight-icat}, ensuring that we are not breaking the splitness of our constructions.
+
+\subsection{The displayed category model of MLTT}
+As we mentioned in the introduction, for a category $A$, we are interested in a factorization $A \xrightarrow{\iota} A^\to \xrightarrow{\langle\mathsf{dom},\mathsf{cod}\rangle} A \times A$ of the diagonal map $\delta :A \to A \times A$.
+More specifically, we would like $\iota$ to be defined by $\iota(a) \defeq \mathsf{id}_a$.
+In Hofmann \& Streicher's groupoid model \cite{hofmann_groupoid_1998}, the interpretation of the term $a:A \vdash \Refl_a : \mathsf{Id}(a,a)$ carries precisely this data, as the canonical projection $\pi:\Interp{a:A,b:A,\Id(a,b)} \to \Interp{a:A,b:A}$ is isomorphic to the functor $\langle\mathsf{dom},\mathsf{cod}\rangle:\Interp{A}^\to \to \Interp{A} \times \Interp{A}$.
+
+Following this pattern, for the category model case, we are led to consider a type $a:A \cxe b:A \vdash H(a,b) \,\Ty$, such that $\pi:\Interp{a:A \cxe b : A \cxe H(a,b)} \to \Interp{a:A\cxe b : B}$ is isomorphic to $\langle\mathsf{dom},\mathsf{cod}\rangle:A^\to \to A \times A$.
+However, this approach cannot work: by Proposition \ref{prop:straight-icat}, the projection $\pi$ is always an opfibration, but $\langle\mathsf{dom},\mathsf{cod}\rangle:A^\to \to A \times A$ is not.
+
+We therefore introduce a whole new family of types, the \emph{displayed types}, which will allow us to consider our desired projection from the arrow category.
+Indeed, while types in the category model correspond to opfibrations via Proposition \ref{prop:straight-icat}, displayed types will correspond to arbitrary functors over a base category.
+First, we begin by recalling a well-known straightening-unstraightening result due to B\'enabou \cite{benabou2000distributors}.
+\begin{proposition}[Straightening-unstraightening for displayed categories]\label{prop:dcat-model}
+  Write $\Cat_\Prof$ for the bicategory that has as objects categories and as morphisms profunctors (not to be confused with the category $\Prof$ of Definition \ref{def:dprof}). Consider also the functor $[-,\Cat_\Prof]^{\textnormal{lax,normal}} : \Cat^\op \to \Cat$ that maps a category $A$ to the category of lax normal functors from $A$ to $\Cat_\Prof$.
+  Write $\DCat := \Cat \ctxe^- [-,\Cat_\Prof]^{\textnormal{lax,normal}}$ for the category of \emph{displayed categories}.
+
+  There exists a functor $(\ctxe^d)^*\, : \DCat \xrightarrow{\simeq} \Cat^\to$ which induces a fibred equivalence of categories over $\Cat$.
+\end{proposition}
+\begin{proof}[Proof sketch.]
+  We follow Loregian \cite[Theorem 5.4.5]{loregianCoendCalculus2021}.
+  Consider the forgetful functor $U: (\Cat_\Prof)_* \to \Cat_\Prof$, where $(\Cat_\Prof)_*$ is the bicategory that has as objects pointed categories and as morphisms pointed profunctors.
+  The functor $(\ctxe^d)^*$ is defined on objects by mapping a lax normal functor $F : A \to \Cat_\Prof$ to the strict pullback $F^*U : A \times_{\Cat_\Prof} (\Cat_\Prof)_* \to A$.
+  % That this definition induces the required equivalence can be found in \cite[Theorem 5.4.5]{loregianCoendCalculus2021}.
+\end{proof}
+
+\begin{remark}
+  The term ``displayed category'' is borrowed from Ahrens \& Lumsdaine work \cite{ahrensDisplayedCategories2019}, which studies functors to a base category in the context of type theory.
+\end{remark}
+
+\begin{definition}[Displayed category model]\label{def:dcat-model}
+  The full split CC over $\Cat$ that has as its comprehension the unstraightening functor $(\ctxe^d)^*\, : \DCat \to \Cat^\to$ is called the \emph{displayed category model}.
+\end{definition}
+
+\begin{remark}
+  The existence of the displayed category model is folklore. That is, it is known by researchers in the field, but, to our knowledge, there is no published work mentioning it.
+\end{remark}
+
+In order to use this second model, we now introduce a second copy of MLTT to our syntax.
+For this copy, the typing judgement, term-in-type judgement, and context extension operation are written $\Gamma \vdash A\,\Ty_d$, $\Gamma \vdash a \dvar A$ and $\Gamma \cxe^d a: A$ respectively.
+We call the types $\Gamma \vdash A\,\Ty_d$ the \emph{displayed types}.
+Whenever we interpret these judgements, it will be using the displayed category model.
+
+Now, we can relate the two copies of MLTT by the following proposition.
+
+\begin{proposition}
+  There is a strict family inclusion \cite{kovacs_generalized_2022} from the category model to the displayed category model.
+  That is, the following two rules are validated.
+  \begin{mathparpagebreakable}
+    \inferrule*[right=$\Ty$\textnormal{\textsc{-Disp}}]{
+      \Gamma \vdash A\,\Ty
+    }{
+      \Gamma \vdash A\,\Ty_d
+    } \and
+    \inferrule*[right=\textnormal{\textsc{Ctx-Ext-Disp}}]{
+      \Gamma \vdash A\,\Ty
+    }{
+      \Gamma \cxe^d a : A \jeq \Gamma \cxe a : A
+    }
+  \end{mathparpagebreakable}
+\end{proposition}
+\begin{proof}
+  The rule \textsc{$\Ty$-Disp} is validated by the embedding $\ICat_{\text{lax}} \to \DCat$ given by postcomposing a functor $A:\Gamma \to \Cat$ with the embedding $\Cat \hookrightarrow \Cat_\Prof$.
+  The other rule follows by definition of $\cxe^d$.
+\end{proof}
+
+\begin{remark}
+  An equivalent perspective, mentioned in op.\ cit., is to view strict family inclusions as degenerate modalities.
+  Indeed, the rule \textsc{$\Ty$-Disp} can be seen as a dependent right adjoint \cite{birkedalModalDependentType2020} to the identity functor on the category of contexts.
+\end{remark}
+
+% For a type $A$, we could now postulate the existence of a displayed type $a : A \cxe b : A \vdash H\,\Ty_d$, corresponding to the functor $\langle\mathsf{dom},\mathsf{cod}\rangle:\Interp{A}^\to \to \Interp{A} \times \Interp{A}$.
+% This has the disadvantages of being ad-hoc and that it is unclear of how this type would relate to other construction in the syntax.
+In the next section, we introduce the operation of ``twisting'' a type.
+Crucially, the twist of the $\Hom$ type will allow us to recover our desired functor $\langle\mathsf{dom},\mathsf{cod}\rangle:A^\to \to A \times A$.
+
+\section{Twisted types and dependent 2-sided fibrations}\label{sec:d2sfibs}
+It was first observed by Street \cite{street_fibrations_1980} that for a category $A$, the functor $\langle \mathsf{dom},\mathsf{cod}\rangle: A^\to \to A\times A$ can be obtained from applying a general procedure to the profunctor $\hom_A:A^\op \times A \to \Set$.
+Specifically, he introduced the Grothendieck construction on profunctors.
+This operation takes an arbitrary profunctor $C:A^\op \times B \to \Set$ and gives back a new category $G(C)$ together with a span $A \xleftarrow{l_C} G(C) \xrightarrow{r_C} B$.
+Further, he also introduced the notion of a 2-sided fibration \cite{streetFibrationsYonedasLemma1974}, and showed that his Grothendieck construction gives a fibred equivalence of categories from the category $\Prof$ of profunctors to the category $\mathsf{2SFib}$ of 2-sided fibrations.
+
+Restricting our attention to types $A$ and $B$ in the empty context, we could internalize Street's Grothendieck construction to our syntax by stating that given a type $a : A^\op \cxe b : B \vdash C\,\Ty$, we can obtain a new displayed type $a :A \cxe b : B \vdash G(C)\,\Ty_d$.
+We could then interpret $G(C)$ as the displayed category corresponding to the functor $G(C) \xrightarrow{\langle l_C,r_C \rangle} A \times B$.
+However, in many of our cases of interest, the type $B$ depends on $A$; e.g.\ see Example \ref{ex:dhom}.
+Hence, we need to consider a dependent version of Street's definitions and results.
+
+% In the following, it will be convenient to consider the contravariant variable of a profunctor as the second one, not the first one.
+% The reason for this is that
+
+% A further source of difficulties comes from contexts containing additional variables of interest. For example, consider the type $\Gamma \cxe a :A^\op \cxe b : B \vdash \Hom_A(a,b)$.
+% We would like our construction to give us a new type $\Gamma \cxe a :A \cxe b : B \vdash G(\Hom_A(a,b))$.
+% That is, the construction should leave $\Gamma$ unchanged.
+% This would require
+
+% Indeed, in op.\ cit.\ he shows
+
+% Recall that for a type $A$ in the empty context, the introduction rule for identity types states the existence of a term $a : A \vdash \Refl_a : \Id(a,a)$.
+% In the groupoid model, the interpretation of this rule corresponds precisely to a factorization $A \to A^{\to} \to A \times A$ of the diagonal functor $\delta : A \to A \times A$.
+% Our desideratum (3) from the introduction states that the $\Hom$-introduction rule follows this same pattern.
+% Notice that directly generalizing the $\Id$-introduction rule fails, as the judgement $a:A \vdash \Refl_a:\Hom_A(a,a)$ does not typecheck, i.e.\ $a:A \vdash \Hom_A(a,a) \,\Ty$ is not a derivable judgement.
+% Indeed, by the $\Hom$-formation rule, $\Hom$-types must be contravariant on the first argument.
+
+% Other directed type theories work around this problem by imposing conditions on $A$, e.g.\ North \cite{north_towards_2019} considers instead $a:A^\mathsf{core} \vdash \Refl_a:\Hom_A(a,a)$, where $A^\mathsf{core}$ is interpreted as the groupoid core of $\Interp{A}$.
+% Instead, our approach is to introduce ``twisted types'', and recover the arrow category of a type using the twist of its $\Hom$-type.
+% This section deals with the semantic counterpart of this operation, that is, with our notion of dependent 2-sided fibrations.
+
+We begin with a generalization of the notion of profunctors.
+
+\begin{definition}[Dependent profunctors]\label{def:dprof}
+  Write $\ICat_{\textnormal{str}} \defeq \Cat \ctxe^- [-,\Cat]$ for the category of indexed categories and strict natural transformations and let $K : (\ICat_{\textnormal{str}})^\op \to \Cat$ be the functor given by $K(A,B) \defeq [A \ctxe B^\op, \Cat]$.
+  % \begin{align*}
+  %   H &: (\Cat \times \Cat)^\op \to \Cat & K &: \ICat^\op \to \Cat \\
+  %   H(A,B) &\defeq [A \times B^\op, \Cat] & K(A,B) &\defeq [A \ctxe B^\op, \Cat]
+  % \end{align*}
+  % The \emph{category of profunctors} is the category $\Prof$ given by $(\Cat \times \Cat) \ctxe^- K$, whose objects are triples $(A,B,C)$, with $C : A \times B^\op \to \Cat$.
+  The \emph{category of dependent profunctors} $\DProf$ is the category $\ICat_{\textnormal{str}} \ctxe^- K$, whose objects are triples $(A,B,C)$, with $C : A \ctxe B^\op \to \Cat$.
+\end{definition}
+
+Indeed, dependent profunctors generalize profunctors in the following sense.
+
+\begin{lemma}\label{lemma:dprof-generalizes}
+  There is a fibred embedding $\Prof \hookrightarrow \DProf$.
+\end{lemma}
+\begin{proof}
+  The embedding maps a profunctor $C:A \times B^\op \to \Cat$ to the dependent profunctor $C':A \ctxe (\mathsf{const}_B)^\op \xrightarrow{\cong} A \times B^\op \xrightarrow{ C} \Cat$.
+  % Note that there is an embedding $\Cat \times \Cat \hookrightarrow \ICat$ given by mapping $(A,B)$ to $(A,\mathsf{const}_B)$, where $\mathsf{const}_B:A \to \Cat$ is the constant functor on $B$.
+  % The lemma follows by precomposing a functor $C:A\times B^\op \to \Cat$ with the isomorphism $A \ctxe (\mathsf{const}_B)^\op \cong A \times B^\op$.
+\end{proof}
+
+\begin{notation}
+  Because of the previous lemma, we will conflate profunctors with their dependent version.
+  Further, given two categories $A$ and $B$, we will write $A \ctxe B$ for $A \ctxe \mathsf{const}_B$.
+\end{notation}
+
+Note that dependent profunctors correspond to types $a : A \cxe b:B^\op \vdash C\,\Ty$ in the category model. More generally, they also correspond to types $\Gamma \cxe b : B^\op \vdash C\,\Ty$, by considering $\Gamma$ as one single category.
+Indeed, this is why we chose the contravariant variable in the dependent profunctor to be the second one: with the opposite convention, a dependent profunctor would correspond to a type  $\Gamma^\op \cxe a : A \vdash B\,\Ty$.
+While we will introduce the opposite of contexts later (Proposition \ref{prop:op-ctx}), they are not as well-behaved as opposite types.
+% This explains why we take the second component of the profunctor to be the contravariant one, instead of the usual first one.
+% Otherwise,
+% Indeed, with the current convention, the \textsc{Twist}-rule (Proposition \ref{prop:sctxe}) will modify only one variable, as opposed to the whole context.
+
+% \begin{example}\label{ex:hom}
+%   Let $A$ be a category, then the functor $\overline{\hom}_A:A\times A^\op \to \Cat$ given by $\overline{\hom}_A(b,a)=\hom_A(a,b)$ is a non-dependent profunctor. This functor is the interpretation of the type $b : A \cxe a:A^\op \vdash \Hom_A(a,b)\,\Ty$.
+% \end{example}
+\begin{example}\label{ex:dhom}
+  For a type $\Gamma \vdash A\,\Ty$, the type $\Gamma \cxe b:A \cxe a:A^\op\vdash \Hom_A(a,b)\,\Ty$ induces the dependent profunctor $\Interp{\Hom_A(a,b)} : (\Interp{\Gamma} \ctxe \Interp{b:A}) \ctxe \Interp{a : A}^\op \to \Cat$.
+\end{example}
+
+Next, we generalize Street's notion of Grothendieck construction for profunctors.
+
+\begin{definition}[Unstraightening of dependent profunctors]\label{def:unstraightening-dprof}
+  Let $C:A \ctxe B^\op \to \Cat$ be a dependent profunctor.
+  Define the functor $B \tye C : A \to \Cat$ by
+  \[
+    B \tye C \defeq \left\llbracket a:A \vdash \left(\sum_{b:B^\op}C^\op\right)^\op \,\Ty \right\rrbracket.
+  \]
+  The \emph{unstraightening} of $C$ is the category $A \ctxe (B \tye C)$.
+\end{definition}
+
+\begin{notation}
+  By convention, $\tye$ binds more tightly than $\ctxe$.
+\end{notation}
+
+Concretely, the objects of $A \ctxe B \tye C$ are triples $(a,b,c)$ with $a\in A$, $b\in B(a)$ and $c\in C(a,b)$. A morphism $(a,b,c) \to (a',b',c')$ is a triple $(\alpha,\beta,\theta)$ with $\alpha:a \to a'$, $\beta: B(\alpha)(b) \to b'$ and $\theta: C(\alpha,\id_{B(\alpha)b})c \to C(\id_{a},\beta)c'$.
+% Such a morphism is represented in Figure \ref{figure:d2sfib}.
+From this description, it's clear that there is a canonical projection $\pi_2:A \ctxe B \tye C \to A \ctxe B$ given by forgetting the last component.
+% \vspace{-2em}
+% \begin{figure}[h]
+%   \caption{A morphism $(\alpha,\beta,\theta):(a,b,c) \to (a',b',c')$ in $A \ctxe B \tye C$}
+%   \centering
+%   \scalebox{.8}
+%   {
+%     \begin{tikzpicture}
+%       % Nodes
+%       \node (A) at (0,0) {$A$};
+%       \node (a) at (1,0) {$a$};
+%       \node (a') at (4,0) {$a'$};
+%       \node (Ba) at (0,2.7) {$B(a)$};
+%       \node (Ba') at (5,2.7) {$B(a')$};
+%       \node (Cab) at (0,4.5) {$C(a,b)$};
+%       \node (Ca'b') at (5,4.5) {$C(a',b')$};
+%       \node (Ca'trb) at (4.2,6.5) {$C(a',B(\alpha)b)$};
+%       \node (b) at (1,1.75) {$b$};
+%       \node (b') at (4,1.25) {$b'$};
+%       \node (c) at (1,3.75) {$c$};
+%       \node (c') at (4,3.75) {$c'$};
+%       \node (c') at (4,3.75) {$c'$};
+%       \node (trb) at (4,2.25) {$B(\alpha)b$};
+%       \node (trc) at (2.5,6) {$C(\alpha,\id_{B(\alpha)b})c$};
+%       \node (trc') at (2.5,5) {$C(\id_a,\beta)c'$};
+
+%       % Ovals
+%       \draw (2.5,0) ellipse (2cm and 0.5cm);
+%       % Bs
+%       \draw (1,1.75) ellipse (.65cm and 1cm);
+%       \draw (4,1.75) ellipse (.65cm and 1cm);
+%       % Cs
+%       \draw (1,3.75) ellipse (.5cm and .5cm);
+%       \draw (4,3.75) ellipse (.5cm and .5cm);
+%       \draw (2.5,5.5) ellipse (1.1cm and 1cm);
+
+%       % Arrows
+%       \draw[->] (a) -- (a') node[midway, below] {$\alpha$};
+%       \draw[->] (trb) -- (b') node[midway, right] {$\beta$};
+%       \draw[->] (trc) -- (trc') node[midway, right] {$\theta$};
+%       \draw[|->, gray] (b) to[out=0, in=180] (trb);
+%       \draw[|->, gray] (c) to[out=90, in=180] (trc);
+%       \draw[|->, gray] (c') to[out=90, in=0] (trc');
+%     \end{tikzpicture}
+%   }
+%   \label{figure:d2sfib}
+% \end{figure}
+
+\begin{proposition}[Twisted types]\label{prop:twists}
+  The following rules are validated.
+  \begin{mathparpagebreakable}
+    \inferrule*[right=\textnormal{\textsc{Twist}}]{
+      \Gamma \cxe b:B^\op \vdash C\,\Ty
+    }{
+      \Gamma \cxe b:B \vdash \mathsf{Tw}_b(C)\,\Ty_d
+    } \and
+    \inferrule*[right=\textnormal{\textsc{Twist-Weak}}]{
+      \Gamma \vdash B\,\Ty \and \Gamma \vdash C\,\Ty
+    }{
+      \Gamma \cxe b:B \vdash \mathsf{Tw}_b(C) \jeq C\,\Ty_d
+    }
+  \end{mathparpagebreakable}
+\end{proposition}
+\begin{proof}
+  The interpretation of $\mathsf{Tw}_b(C)$ is given by the displayed category corresponding to the canonical projection $\pi_2:A \ctxe B \tye C \to A \ctxe B$.
+  The equality required by \textsc{Twist-Weak} readily follows.
+\end{proof}
+
+\begin{notation}
+  We write $C[\bar b/b]$ for the type $\mathsf{Tw}_b(C)$.
+  Notice how this notation makes \textsc{Twist-Weak} automatic: If $C$ does not depend on $b$ then $C[\bar b/b]$ is just $C$.
+  The $C[\bar b/b]$ notation was inspired by Laretto et al.\ \cite{larettoDiDirectedFirstOrder2026}.
+\end{notation}
+
+% \begin{remark}
+%   Our notation $C[\bar b/b]$ for the twist of a type deserves some comment.
+%   While the bar appears on the top of the variable $b$, it should be understood as the application of a type former on $C$, which also keeps track of the position of the original variable $b$.
+%   If the reader prefers, they can think of $C[\bar b/b]$ as a notation for a more conventional type former, such as $\mathsf{Tw}_b(C)$.
+% \end{remark}
+
+In the following, it will be important to keep track of which displayed types come from directly applying the \textsc{Twist} rule. Hence, we introduce the following notation.
+
+\begin{notation}\label{not:tscxe}
+  For a type $\Gamma \cxe b : B^\op \vdash C \,\Ty$, we write $\Gamma \cxe b : B \tscxe c : C[\bar b/b]$ for the context $\Gamma \cxe b : B \cxe^d c : C[\bar b/b]$.
+  In particular, uses of $\tscxe$ will imply that no variable in the context $\Gamma \cxe b : B$ has been (non-trivially) substituted. With this notation we have $\Interp{\Gamma \cxe b : B \tscxe c : C[\bar b/b]} \cong \Interp{\Gamma} \ctxe \Interp{B} \tye \Interp{C}$.
+\end{notation}
+
+We now return to our original motivation, and recover our desired projection $A^\to \to A\times A$.
+
+\begin{example}\label{ex:sctxe-hom}
+  Let $A$ be a category. By definition, the category $\Interp{b:A \cxe a:A \tscxe \hom_A(\bar{a},b)} \defeq A \ctxe A \tye \overline{\hom}_A$ has as objects triples $(b,a,f)$, with $f:a \to b$ in $A$, while a morphism $(b,a,f) \to (b',a',f')$ is a triple $(\beta, \alpha, e)$ with $\beta:b \to b'$, $\alpha: a \to a'$, and $e:\beta \circ f = f' \circ \alpha$. That is, this is the arrow category $A^\to$. The projection $\Interp{b:A \cxe a:A \tscxe \hom_A(\bar{a},b)} \to \Interp{b:A \cxe a:A}$ is then given by $\langle \mathsf{cod}, \mathsf{dom} \rangle:A^\to \to A \times A$.
+
+  By contrast, the category $\Interp{b:A \cxe a:A^\op \cxe \hom_A(a,b)}$ has the same objects, but a morphism $(b,a,f)\to (b',a',f')$ is a triple $(\beta,\alpha,e)$ with $\beta:b \to b'$, $\alpha: a'\to a$ and $e:\beta \circ f \circ \alpha = f'$. That is, it is the twisted arrow category $A^{\mathsf{tw}}$. Hence, applying the \textsc{Twist} rule to the type $\Hom_A(a,b)$ appears to have made a ``twist''.
+\end{example}
+
+% The following example is our first example, albeit trivial, of how our syntax allows for reasoning about categories.
+% It also exemplifies why the study of the dependent case of 2-sided fibrations is relevant for our purposes.
+
+% \begin{example}
+%   Covariance of the arrow category $A^\to$ on $A$ follows by considering the interpretation the unstraightening of the dependent profunctor in Example \ref{ex:dhom}. Indeed, we have the following chain of isomorphisms.
+%   {
+%     \small
+%     \begin{align*}
+%       \llbracket A:\UU &\cxe b:A \cxe a:A \tscxe f : \Hom_A(\bar a,b) \rrbracket \\
+%       &\defeq \Big\llbracket A:\UU \cxe b:A \cxe a : A \cxe^d f : \Hom_A(\bar a,b) \rrbracket  & \text{by Def. }\\
+%       &\cong \Big\llbracket A:\UU \cxe b:A \cxe z : \big(\sum_{a:A^\op} \Hom_A(a,b)^\op\big)^\op \Big\rrbracket \\
+%       &\jeq \Big\llbracket A:\UU \cxe b:A \cxe z : \big(\sum_{a:A^\op} \Hom_A(a,b)\big)^\op \Big\rrbracket \\
+%       &\cong \Big\llbracket A:\UU \cxe w : \sum_{b:A}\big(\sum_{a:A^\op} \Hom_A(a,b)\big)^\op \Big\rrbracket \\
+%       &\cong \Interp{A : \UU} \ctxe \Big\llbracket w : \sum_{b:A}\big(\sum_{a:A^\op} \Hom_A(a,b)\big)^\op \Big\rrbracket \\
+%       &\cong \Interp{A : \UU} \ctxe \Interp{b:A \cxe \bar{a}:A \tscxe \hom_A(a,b)} \\
+%       & \cong \Interp{A : \UU} \ctxe \Interp{A}^\to
+%     \end{align*}
+%   }
+%   This shows that forming the arrow category is a functor $\Cat \to \Cat$.
+% \end{example}
+
+The generalization of a 2-sided fibration is given as follows.
+
+\begin{definition}[D2SFib]\label{def:d2sfib}
+  Consider a category $A$ and a functor $B:A \to \Cat$.
+  A (split) \emph{dependent 2-sided fibration (D2SFib)} from $A$ to $B$ consists of the following data:
+  \begin{enumerate}
+    \item A category $C$;
+    \item A functor $q:C \to A \ctxe B$;
+    \item Data specifying that $q$ is a  ``local fibration''. That is, for each $a \in A$ the functor $q_{|a}:C_a \to B(a)$ given by postcomposing $q_a:C_a \to (A \ctxe B)_a$ with the isomorphisms $(A \ctxe B)_a \cong B(a)$ is a (split) fibration, so that each morphism $\beta: b \to qe$ in $B(a)$ has a specified cartesian lift $\beta^*e \to e$;
+    \item Data specifying that $p \defeq \pi_A \circ q : C \to A$ is a (split) opfibration, so that each morphism $\alpha: pe \to a$ has a specified opcartesian lift $e \to \alpha_!e$;
+  \end{enumerate}
+  such that:
+  \begin{enumerate}
+      \setcounter{enumi}{4}
+    \item $q$ is a cartesian functor of opfibrations from $p : C \to A$ to $\pi:A \ctxe B \to A$; and
+      %   {\color{blue} Would the main theorem still be true if we just required $q$ to map all $p$-opcartesian morphisms to $\pi_A$-opcartesian morphisms?}
+    \item For each $\alpha: pe \to a$ in $A$ and $\beta: b \to qe$ in $B(p(e))$, the canonical morphism $\alpha_! \beta^* e \to (B(\alpha)\beta)^*\alpha_!e$ given by any of the universal properties is an identity.
+  \end{enumerate}
+\end{definition}
+
+For simplicity, as they are our main objects of interest in this paper, we will focus only on split D2SFibs.
+Therefore, we will leave the qualifier ``split'' implicit.
+We will also identify a D2SFib as above with its first component, i.e.\ the functor $q:C \to A \ctxe B$.
+
+% The following gives a concise characterization of D2SFibs, and is readily verified by expanding definitions.
+% \begin{lemma}
+%   A functor $q:C \to A \ctxe B$ is a D2SFib if and only if it is a fibration internal to the category of opfibrations over $A$.
+% \end{lemma}
+
+% This characterization gives a notion of morphisms of D2SFibs, which we now unfold.
+
+\begin{definition}[Cartesian functors between D2SFibs]\label{def:d2sfib-1cells}
+  A \emph{cartesian functor} between two D2SFibs $q:C \to A \ctxe B$ and $q' : C' \to A \ctxe B$ is a functor $\varphi:C \to C'$ satisfying the following two conditions.
+  \begin{enumerate}
+    \item It is a cartesian functor of opfibrations from $\pi_A \circ q: C \to A$ to $\pi_A \circ q': C' \to A$.
+    \item For each $a \in A$, the restriction $\varphi_{a}:C_a \to C'_a$ is a cartesian functor of fibrations from $q_{|a}:C_a \to B(a)$ to $q'_{|a}:C'_a \to B(a)$
+  \end{enumerate}
+  % https://q.uiver.app/#q=WzAsNixbMCwwLCJDIl0sWzEsMSwiQSJdLFsyLDAsIkQiXSxbNCwwLCJDKGEpIl0sWzUsMSwiQihhKSJdLFs2LDAsIkQoYSkiXSxbMCwxLCJxIiwyXSxbMiwxLCJxJyJdLFswLDIsIlxcdmFycGhpIl0sWzMsNCwicV97fGF9IiwyXSxbMyw1LCJcXHZhcnBoaSJdLFs1LDQsInEnX3t8YX0iXV0=
+  % \[
+  %   \begin{tikzcd}[column sep=1.7em,cramped]
+  %     C && C' &\hspace{-5em}& {C_a} && {C'_a} \\
+  %     & A &&&& {B(a)}
+  %     \arrow["\varphi", from=1-1, to=1-3]
+  %     \arrow["\pi_A \circ q"', from=1-1, to=2-2]
+  %     \arrow["{\pi_A \circ q'}", from=1-3, to=2-2]
+  %     \arrow["\varphi_{|a}", from=1-5, to=1-7]
+  %     \arrow["{q_{|a}}"', from=1-5, to=2-6]
+  %     \arrow["{q'_{|a}}", from=1-7, to=2-6]
+  % \end{tikzcd}\]
+  Note that $q' \circ \varphi = q$ follows from these conditions.
+\end{definition}
+
+With this notion of cartesian functors, D2SFibs from $A$ to $B$ form a category $\DTSFib(A,B)$.
+In fact, these assemble to a fibred category, as the following routine lemma shows.
+
+\begin{lemma}
+  Given a D2SFib $q:C \to A \ctxe B$ and a morphism $(F,G):(A',B')\to(A,B)$ in $\ICat_\textnormal{str}$, the pullback of $q$ along the cartesian functor ${\ctxe}^*(F,G):A' \ctxe B' \to A \ctxe B$ induces a D2SFib from $A'$ to $B'$.
+  Further, this operation is pseudofunctorial on $\ICat_\textnormal{str}$, and hence it induces a non-split fibred category $\DTSFib$.
+\end{lemma}
+
+We are now ready to state our generalization of Street's equivalence between profunctors and 2-sided fibrations to the dependent case.
+
+\begin{proposition}[Straightening-unstraightening for D2SFibs]\label{prop:straight-d2sfibs}
+  Unstraightening of dependent profunctors (Definition \ref{def:unstraightening-dprof}) extends to a fibred equivalence of categories $\tye^* : \mathsf{DProf} \xrightarrow{\simeq} \DTSFib$ over $\ICat_{\textnormal{str}}$.
+  % Consider a category $A$ and a functor $B:A \to \Cat$. Unstraightening of dependent profunctors (Definition \ref{def:unstraightening-dprof}) induces an equivalence of categories
+  % $ [A \ctxe B^\op,\Cat] \simeq \mathsf{D2SFib}(A,B) $  natural in $A$ and $B$.
+\end{proposition}
+\begin{proof}[Proof sketch.]
+  The straightening functor $S:\mathsf{D2SFib}(A,B) \to [A \ctxe B^\op,\Cat]$ is defined on objects by mapping a D2SFib $q:C \to A \ctxe B$ to the functor that maps an object $(a,b) \in A \ctxe B^\op$ to the fibre in $C$ above it.
+  A complete proof is given in Section \ref{sec:staightd2sfibs} of the appendix.
+\end{proof}
+
+\begin{remark}
+  It can be verified that a span $A \xleftarrow{p} C \xrightarrow{q} B$ is a 2-sided fibration, in Street's sense \cite{streetFibrationsYonedasLemma1974}, if and only if the induced functor $C \xrightarrow{\langle p,q\rangle} A \times B \xrightarrow{\cong} A \ctxe B$ is a D2SFib.
+  Our work then generalizes Street's in the sense that we have the following commutative diagram.
+  % https://q.uiver.app/#q=WzAsNixbMCwwLCJcXFByb2YiXSxbMiwwLCJcXFRTRmliIl0sWzEsMiwiXFxDYXQgXFx0aW1lcyBcXENhdCJdLFszLDEsIlxcRFByb2YiXSxbNSwxLCJcXERUU0ZpYiJdLFs0LDMsIlxcSUNhdCJdLFswLDEsIlxcc2ltZXEiXSxbMCwyXSxbMSwyXSxbMyw0LCJcXHNpbWVxIl0sWzQsNV0sWzMsNV0sWzIsNV0sWzAsMywiIiwxLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoiaG9vayIsInNpZGUiOiJib3R0b20ifX19XSxbMSw0LCIiLDEseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJob29rIiwic2lkZSI6InRvcCJ9fX1dXQ==
+  \[
+    \begin{tikzcd}[cramped,sep=.7em]
+      \Prof && \mathsf{2SFib} \\
+      &&& \DProf && \DTSFib \\
+      & {\Cat \times \Cat} \\
+      &&&& \ICat_{\textnormal{str}}
+      \arrow["\simeq", from=1-1, to=1-3]
+      \arrow[hook', from=1-1, to=2-4]
+      \arrow[from=1-1, to=3-2]
+      \arrow[hook, from=1-3, to=2-6]
+      \arrow[from=1-3, to=3-2]
+      \arrow["\simeq", from=2-4, to=2-6]
+      \arrow[from=2-4, to=4-5]
+      \arrow[from=2-6, to=4-5]
+      \arrow[hook, from=3-2, to=4-5]
+    \end{tikzcd}
+  \]
+\end{remark}
+
+% Recall our original desideratum of capturing syntactically a factorization $A \to A^\to \to A \times A$ of the diagonal $\delta : A \to A \times A$ for a category $A$.
+% With the new context extension this can be restated as that of obtaining a lift of $\delta : A \to A \ctxe A$ through $\pi_2:A \ctxe A \tye \hom_A \to A \ctxe A$.
+% Type theoretically, this is usually done by using substitution: i.e.\ we are led to consider the term $a : A \vdash \Refl_A : \Hom_A(\bar a, a)$.
+% As before, this approach fails, since $a : A \vdash \Hom_A(\bar a, a)\,\Ty$ is not derivable.
+% Indeed, if it were, the projection $\pi : \Interp{a : A \cxe \Hom_A(\bar a, a)} \to \Interp{A}$ would be an opfibration, but this is not necessarily the case, as is readily checked.
+
+% The canonical projection from our new context extension does not induce a type, as it is not an opfibration, and is further not well-behaved under arbitrary substitution in our context.
+% This suggests that it is in fact better understood as the context extension operation of another comprehension category.
+% Indeed, the following result is easily verified.
+
+By Proposition \ref{prop:straight-d2sfibs}, the canonical projection $\pi_2:\Interp{\Gamma \cxe b:B \tscxe c : C[\bar b/b]} \to \Interp{\Gamma \cxe b : B}$ is a D2SFib.
+These D2SFibs will have an important role in TTT, as they are related the $\Hom$, $\Sigma$ and $\Pi$-types, as the next section will show.
+
+% \begin{proposition}[The D2SFibs model]
+%   Unstraightening for dependent profunctors induces a split CC over $\ICat_{\textnormal{str}}$, the \emph{D2SFibs model}.
+%   Precisely, the comprehension $\tye^*\,: \DProf \to (\ICat_{\textnormal{str}})^\to$ is defined by
+%   $\tye^*\!(A,B,C) \defeq (A,B \tye C) \xrightarrow{\pi} (A,B)$.
+%   % \[
+%   %   \begin{tikzcd}
+%   %     \DProf && \ICat^\to \\
+%   %     & \ICat
+%   %     \arrow["\tye^*", from=1-1, to=1-3]
+%   %     \arrow["\pi"', from=1-1, to=2-2]
+%   %     \arrow["\cod", from=1-3, to=2-2]
+%   % \end{tikzcd}\]
+
+% \end{proposition}
+
+% The canonical projection $\pi_2 : A \ctxe B \tye C \to A \ctxe B$ can now be seen as applying $\ctxe^*$ to the morphism $(A,B \tye C) \xrightarrow{\pi} (A,B)$ in $\ICat_{\textnormal{str}}$.
+
+% With these technical prerequisites, we are now ready to state the rules about $\Hom$-types.
+
+\section{Twisted Type Theory}\label{sec:TTT}
+In this section we introduce Twisted Type Theory.
+We first introduce our new rules for $\Hom$-types. Afterwards, we introduce constructions already considered in the directed type theory literature, and relate them to our $\textsc{Twist}$ rule.
+\subsection{\texorpdfstring{$\Hom$}{Hom}-types revisited}\label{sec:dispcat}
+
+We begin by observing that we can now substitute $\Hom$-types along diagonals. That is, we can make the following derivation.
+\begin{example}
+  Let $A$ be a type in context $\Gamma$. Then $\Gamma \cxe a :A \vdash \Hom_A(\bar a, a)\,\Ty_d$ is derivable. Indeed, we have the following derivation.
+  {
+    \small
+    \begin{mathparpagebreakable}
+      \inferrule*[Right=$\Hom$-Form]{
+        \Gamma \vdash A\,\Ty
+      }{
+        \inferrule*[Right=Twist]{
+          \Gamma \cxe b:A \cxe a :A^\op \vdash \Hom_A(a, b)\,\Ty
+        }{
+          \inferrule*[Right=Subst]{
+            \Gamma \cxe b:A \cxe a :A \vdash \Hom_A(\bar a, b)\,\Ty_d
+          }{
+            \Gamma \cxe a :A \vdash \Hom_A(\bar a, a)\,\Ty_d
+          }
+        }
+      }
+    \end{mathparpagebreakable}
+  }
+\end{example}
+
+Our desired $\Hom$-introduction rule from desideratum (3) in the introduction is now given by the following proposition.
+Note that it is analogous to the $\Id$-introduction rule of MLTT, which is given by a term $\Gamma, x:A \vdash \Refl_a:\Id(a,a)$.
+
+\begin{proposition}[$\Hom$\textsc{-Intro}]\label{prop:hom-intro}
+  The category model validates the following rule.
+  {
+    \small
+    \begin{mathparpagebreakable}
+      \inferrule*[Right=$\Hom$\textnormal{\textsc{-Intro}}]{
+        \Gamma \vdash A\,\Ty
+      }{
+        \Gamma \cxe a :A \vdash \Refl_a \dvar \Hom_A(\bar a, a)
+      }
+    \end{mathparpagebreakable}
+  }
+\end{proposition}
+\begin{proof}
+  By an analogous argument to Example \ref{ex:sctxe-hom}, we see that $\Interp{\Gamma \cxe b:A \cxe a :A \tscxe \Hom_A(\bar a, b)}$ is isomorphic to $\Interp{\Gamma} \ctxe \Interp{A}^\to$, where $\Interp{A}^\to:\Gamma \to \Cat$ maps $\gamma \in \Gamma$ to $(A(\gamma))^\to$. The rule is then validated by the functor $\Interp{\Refl}:\Interp{\Gamma} \ctxe \Interp{A} \to \Interp{\Gamma} \ctxe \Interp{A}^\to$ given by $\Interp{\Refl}(\gamma,a) \defeq (\gamma, \id_a)$.
+\end{proof}
+
+% \begin{mathparpagebreakable}
+%   \inferrule*[right=$\Hom$-Elim$^*$]
+%   {
+%     \Gamma \vdash A\,\Ty \\\\
+%     \Gamma \cxe b: A \cxe a:A \tscxe f : \Hom_A(\bar a,b)\vdash D\,\Ty \\\\
+%     \Gamma \cxe a:A \vdash d : D[a/b,\Refl_A/f]
+%   }
+%   {
+%     \Gamma \cxe b: A \cxe a:A \tscxe f:\Hom_A(\bar a,b) \vdash j_d : D
+%   }
+% \end{mathparpagebreakable}
+
+% \section{\texorpdfstring{$\Hom$}{Hom}-Types, revisited}
+Similarly, we could a give a $\Hom$-elimination rule that is analogous to the $\Id$-elimination rule.
+% This rule is validated by the semantics, as the next proposition shows, and is analogous the $\Id$ elimination rule for MLTT.
+% Recalling that we say that a functor $F: A \to B$ lifts
+% Briefly, it says that  $\Interp{a}$ lift against opfibrations (over a specific base).
+However, the category model does not have all $\Pi$-types, and therefore this rule is not strong enough for our purposes.
+Indeed, the lack of all $\Pi$-types had been previously observed \cite{licata_2-dimensional_2011,neumannSynthetic1CategoriesDirected2025}, and corresponds to the fact that the dependent product of an opfibration along an arbitrary functor may fail to be an opfibration.
+Our approach to the $\Hom$-elimination rule therefore explicitly specifies that the motive can also depend on an additional variable of the appropriate form ($X$, in the rule below).
+% Briefly, our $\Hom$-elimination rule states that path objects, when extended with a type of the appropriate form, lift against D2SFibs.
+\begin{proposition}[$\Hom$\textsc{-Elim}]
+  The category model validates the following rule.
+  {
+    \small
+    \begin{mathparpagebreakable}
+      \inferrule*[Right=$\Hom$\textnormal{\textsc{-Elim}}]
+      {
+        \Gamma \vdash A\,\Ty \\\\
+        \Gamma \cxe a:A \vdash X\,\Ty \\\\
+        \Gamma \cxe b: A \cxe a:A \tscxe f : \Hom_A(\bar a,b) \cxe x : X^\op\vdash D\,\Ty \\\\
+        \Gamma \cxe a:A \cxe x:X \vdash d \dvar D[\bar{a}/b,\Refl_A/f, \bar{x}/x]
+      }
+      {
+        \Gamma \cxe b: A \cxe a:A \tscxe f : \Hom_A(\bar a,b) \cxe x : X \vdash j(f,x,d) \dvar D
+        % \Gamma \cxe b: A \cxe a:A \tscxe f:\Hom_A(\bar a,b) \tscxe x:X \vdash j_d \dvar D
+      }
+    \end{mathparpagebreakable}
+  }%
+  It also validates the following rule, which has the same antecedents as \textnormal{\textsc{$\Hom$-Elim}}, and has the following conclusion.
+  \[ \Gamma \cxe a:A \cxe x:X \vdash j(\Refl_a,x,d) \jeq d \dvar D[\bar{a}/b,\Refl_A/f, \bar{x}/x] \hspace{3em} \textnormal{\textsc{$\Hom$-Comp}}\]
+\end{proposition}
+\begin{proof}[Proof sketch.]
+  For readability, we conflate here contexts, terms and types with their interpretation, e.g.\ $A=\Interp{A}$.
+  For this proof, we introduce two functors $X[\mathsf{dom}]:\Gamma \ctxe A^\to \to \Cat$ and $r: \Gamma \ctxe A \ctxe X \to \Gamma \ctxe A^\to \ctxe X[\mathsf{dom}]$, given by $X[\mathsf{dom}](\gamma, f:a \to b)\defeq(\gamma, X(a))$ and $r(\gamma, a, x) \defeq (\gamma, \id_a, x)$, respectively.
+  Recalling that $\Interp{\Gamma \cxe b:A \cxe a :A \tscxe \Hom_A(\bar a, b)}$ is isomorphic to $\Interp{\Gamma} \ctxe \Interp{A}^\to$ (proof of Proposition \ref{prop:hom-intro}), the proposition is equivalent to the existence of a functor $j$ making the rightmost diagram below commute.
+  {
+    \small
+    % https://q.uiver.app/#q=WzAsOCxbMywwLCJcXEdhbW1hIFxcY3R4ZSBBIFxcY3R4ZSBYIl0sWzMsMSwiXFxHYW1tYSBcXGN0eGUgQV5cXHRvIFxcY3R4ZSBYW1xcbWF0aHNme2RvbX1dIl0sWzQsMSwiXFxHYW1tYSBcXGN0eGUgQV5cXHRvIFxcY3R4ZSBYW1xcbWF0aHNme2RvbX1dIl0sWzQsMCwiXFxHYW1tYSBcXGN0eGUgQV5cXHRvIFxcY3R4ZSBYW1xcbWF0aHNme2RvbX1dIFxcdHllIEQgIl0sWzEsMCwiXFxHYW1tYSBcXGN0eGUgQV5cXHRvIFxcY3R4ZSBYW1xcbWF0aHNme2RvbX1dIFxcdHllIEQgIl0sWzEsMSwiXFxHYW1tYSBcXGN0eGUgQV5cXHRvIFxcY3R4ZSBYW1xcbWF0aHNme2RvbX1dIl0sWzAsMSwiXFxHYW1tYSBcXGN0eGUgQSBcXGN0eGUgWCJdLFswLDAsIlxcYnVsbGV0Il0sWzAsMSwiciIsMl0sWzEsMiwiPSIsMix7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMywyLCJcXHBpXzIiXSxbMCwzLCJkJyJdLFsxLDMsImoiLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XSxbNyw2XSxbNiw1LCJyIiwyXSxbNyw0XSxbNCw1LCJcXHBpXzIiLDJdLFs2LDQsImQnIiwxLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoiZGFzaGVkIn19fV0sWzYsNywiZCIsMSx7Im9mZnNldCI6LTMsImN1cnZlIjotMn1dLFs3LDUsIiIsMSx7InN0eWxlIjp7Im5hbWUiOiJjb3JuZXIifX1dXQ==
+    \[
+      \begin{tikzcd}[column sep=small]
+        \bullet & {\Gamma \ctxe A^\to \ctxe X[\mathsf{dom}] \tye D } && {\Gamma \ctxe A \ctxe X} & {\Gamma \ctxe A^\to \ctxe X[\mathsf{dom}] \tye D } \\
+        {\Gamma \ctxe A \ctxe X} & {\Gamma \ctxe A^\to \ctxe X[\mathsf{dom}]} && {\Gamma \ctxe A^\to \ctxe X[\mathsf{dom}]} & {\Gamma \ctxe A^\to \ctxe X[\mathsf{dom}]}
+        \arrow[from=1-1, to=1-2]
+        \arrow[from=1-1, to=2-1]
+        \arrow["\lrcorner"{anchor=center, pos=0.085, rotate=0}, shift right=1.5, draw=none, from=1-1, to=2-2]
+        \arrow["{\pi_2}"', from=1-2, to=2-2]
+        \arrow["{d'}", from=1-4, to=1-5]
+        \arrow["r"', from=1-4, to=2-4]
+        \arrow["{\pi_2}", from=1-5, to=2-5]
+        \arrow["d"{description}, shift left=3, curve={height=-6pt}, from=2-1, to=1-1]
+        \arrow["{d'}"{description}, dashed, from=2-1, to=1-2]
+        \arrow["r"', from=2-1, to=2-2]
+        \arrow["j"{description}, dashed, from=2-4, to=1-5]
+        \arrow["{=}"', no head, from=2-4, to=2-5]
+      \end{tikzcd}
+    \]
+  }%
+  Here, $d'$ is defined by the universal property of the pullback, as shown in the leftmost diagram.
+  Further, $D$ is being considered as a dependent profunctor $D:\Gamma \ctxe A^\to \ctxe X[\mathsf{dom}]^\op \to \Cat$.
+
+  We now define the action of $j$ on an object $(\gamma,f:a\to b,x) \in \Gamma \ctxe A^\to \ctxe X[\mathsf{dom}]$.
+  First, writing $d^*=\pi_4 \circ d'$, note that $d^*(\gamma,a,x)$ is in $D(\gamma,\id_a,x)$.
+  Further, observe that the there is a morphism from $\id_a$ to $f$ in $A^\to(\gamma)$, given by the tuple $(\id_a, f)$.
+  It follows that $\phi \defeq (\id_\gamma, (\id_a, f), \id_x)$ is a morphism from $(\gamma, \id_a,x)$ to $(\gamma, f,x)$ in $\Gamma \ctxe A^\to \ctxe X[\mathsf{dom}]^\op$.
+  Hence, we can define $j(\gamma,f:a\to b,x) \defeq (\gamma,f:a\to b,x, D(\phi)(d^*(\gamma,a,x)))$, which is readily seen to make the required diagram commute.
+  The action of $j$ on morphisms and is similarly defined and is included in Section \ref{subsec:Hom-elim} of the appendix for completeness.
+\end{proof}
+
+Briefly, the elimination rule states that $r$ lifts against D2SFibs, in the sense made precise by the rightmost commutative diagram above.
+This is analogous to how, for a path object $A \xrightarrow{r} A^I \xrightarrow{p} A \times A$ in a model category, the morphism $r$ lifts against fibrations \cite{awodeyHomotopyTheoreticModels2009}.
+
+\subsection{Other operations in TTT}
+% The previous sections focused on the twisted types, as well as the $\Hom$-types of TTT.
+In this section, we adapt rules from the directed type theory literature \cite{licata_2-dimensional_2011,neumannSynthetic1CategoriesDirected2025} to our current context, and then relate them to our new constructions.
+We begin with the so-called deep polarization \cite{neumannSynthetic1CategoriesDirected2025}.
+\begin{proposition}[\cite{licata_2-dimensional_2011,neumannSynthetic1CategoriesDirected2025}]\label{prop:op-ctx}
+  The category model validates opposite contexts. That is, it validates the following rules.
+  \begin{mathparpagebreakable}
+    \inferrule*[Right=\textnormal{\textsc{Ctx-Op}}]
+    {
+      \Gamma\,\Ctx
+    }
+    {
+      \Gamma^\op\,\Ctx
+    }
+    \and
+    \inferrule*[Right=\textnormal{\textsc{Ctx-Op-Op}}]
+    {
+      \Gamma\,\Ctx
+    }
+    {
+      (\Gamma^\op)^\op \jeq \Gamma \,\Ctx
+    }
+  \end{mathparpagebreakable}
+  Semantically, $\Interp{\Gamma^\op}$ is interpreted as $\Interp{\Gamma}^\op$.
+\end{proposition}
+
+We can now capture syntactically the contravariant Grothendieck construction as follows.
+
+\begin{notation}[\cite{neumannSynthetic1CategoriesDirected2025}]
+  For a type $\Gamma^\op \vdash A\,\Ty$, we write $\Gamma \cxe^- A$ for the context $(\Gamma^\op \cxe A^\op)^\op$. It follows that $\Interp{\Gamma \cxe^- A} = \Interp{\Gamma} \ctxe^- \Interp{A}$.
+\end{notation}
+
+We also recall the existence of a universe of discrete types.
+The same points of Remark \ref{remark:univs} apply to these universes.
+\begin{proposition}[\cite{licata_2-dimensional_2011,neumannSynthetic1CategoriesDirected2025}]
+  Under the assumption of a countable hierarchy of inaccessible cardinals, the category model validates countable universes $\Set_i$ classifying discrete categories.
+  For these \emph{discrete types} $\Gamma \vdash A:\Set_i$, the category model validates the judgemental equality $A^\op \jeq A\,\Ty$, as well as discreteness of $\Hom$-types, i.e.\ $\Hom_A(a,b) : \Set_i$.
+\end{proposition}
+
+Next, we introduce $\Pi$-types. For conciseness, here and in the next propositions we only state the bijection between terms in the category models.
+The rules that follow from these bijections can be found in Section \ref{sec:add-rules} of the appendix.
+\begin{notation}
+  Write $\Tm(\Gamma, A)$ (resp. $\Tm_d(\Gamma, A)$) for the set of terms of type $A$ in context $\Gamma$ in the category model (resp. displayed category model). Recall that this set is defined as the set of sections of the canonical projection $\pi:\Interp{\Gamma \cxe a : A} \to \Interp{\Gamma}$ (resp. $\pi:\Interp{\Gamma \cxe^d a : A} \to \Interp{\Gamma}$).
+\end{notation}
+
+\begin{proposition}[\cite{licata_2-dimensional_2011,neumannSynthetic1CategoriesDirected2025}]\label{prop:pi-types}
+  Given types $\Gamma^\op \vdash A\,\Ty$ and $\Gamma \cxe^- a : A \vdash B\,\Ty$, the category model has the $\Pi$-type $\Gamma \vdash \Pi_AB\,\Ty$, where its terms satisfy the following natural isomorphism.
+  \[ \mathsf{app} : \Tm(\Gamma, \Pi_AB) \cong \Tm(\Gamma \cxe^- a : A, B) : \mathsf{\lambda}\]
+\end{proposition}
+
+As usual, if the type $B$ does not depend on $A$, we write $A\to B$ instead of $\prod_AB$.
+
+% One can now ask how the introduced type formers interact with the twists and opposites.
+Now, consider the type $\Gamma \cxe B : \UU \cxe A^\op : \UU \vdash A \to B \,\Ty$ and apply the \textsc{Twist} rule to obtain the type $\Gamma \cxe B : \UU \cxe A : \UU \vdash \bar{A} \to B \,\Ty_d$.
+The following proposition characterizes the terms of this type in the category model, after substituting for some types $A$ and $B$.
+
+\begin{proposition}\label{prop:function-twist}
+  Let $\Gamma \vdash A\,\Ty$ and $\Gamma \vdash B\,\Ty$ be two types. Then we have the following natural isomorphism of terms.
+  \[ \mathsf{app} : \Tm_d(\Gamma, \bar{A} \to B) \cong \Tm(\Gamma \cxe a : A, B) : \mathsf{\lambda}\]
+\end{proposition}
+\begin{proof}
+  Analogous to Proposition \ref{prop:pi-types}.
+\end{proof}
+
+Twists also allow characterizing the opposite of a $\Sigma$-type, as the next proposition shows.
+
+\begin{proposition}\label{prop:op-sigma}
+  Let $\Gamma \vdash A\,\Ty$ and $\Gamma \cxe a:A \vdash B\,\Ty$ be two types. Then we have the following natural isomorphism.
+  \[ \langle \mathsf{fst},\mathsf{snd}\rangle : \Tm\left(\Gamma, z : \bigg(\sum_{a:A}B\bigg)^\op\right) \cong
+  \sum_{x :\Tm(\Gamma, A^\op)} \Tm_d(\Gamma, B^\op[\bar x/a]) : \mathsf{pair} \]
+  Here, the type $\Gamma \vdash B^\op[\bar x/a]$ has been obtained by substituting $x$ for $a$ in the twisted type $\Gamma \cxe a : A^\op \vdash B[\bar a/a]\,\Ty_d$.
+\end{proposition}
+\begin{proof}
+  The bijection follows from the isomorphism $\Interp{\Gamma \cxe A^\op \tscxe B^\op} \cong \Interp{\Gamma} \cxe \Interp{(\sum_{a:A}B)^\op}$.
+\end{proof}
+
+A complete description of TTT is given in Appendix \ref{sec:add-rules}.
+It includes additional rules omitted here for reasons of space, e.g.\ the empty context $\diamond$ satisfies $\diamond^\op \jeq \diamond$.
+Nonetheless, a concise definition is given as follows.
+
+\begin{definition}
+  \emph{Twisted Type Theory (TTT)} is MLTT extended with the $\Sigma$-types, $\Pi$-types, $\Hom$-types, twists, opposite types, displayed types, universes and opposite contexts, as described this paper. The interpretation of TTT given is called the \emph{category model} of TTT.
+\end{definition}
+
+\section{Applications}\label{sec:applications}
+In this section, we use TTT to develop some synthetic category theory.
+Any mentions to an interpretation of the syntax will therefore be about the category model of TTT.
+\subsection{Directed univalence}
+By definition, the semantics of the type of functions $A \to B$ is the category of functors $[\llbracket A \rrbracket, \llbracket B \rrbracket]$.
+When $A$ and $B$ are sets, this category has no non-identity morphisms; i.e.\ it is a set.
+This suggests the following definition.
+
+\begin{definition}\label{def:dunivalence}
+  For sets $\Gamma^\op \vdash A : \Set$ and $\Gamma \vdash B : \Set$, the conversion rule $\Gamma \vdash A \to B \equiv \Hom_\Set(A,B) : \Set$ is called \emph{directed univalence}.
+\end{definition}
+
+By the previous discussion, we obtain the following proposition.
+
+\begin{proposition}\label{prop:dunivalence}
+  The category model validates directed univalence.
+\end{proposition}
+
+An alternative to the judgemental equality $\Hom_\Set(A,B) : \Set$ would be requiring that the canonical function $\Hom_\Set(A,B) \to (A \to B)$ induces an equivalence of types.
+However, such a function can only be formed when $A$ and $B$ are types in the empty context.
+Our current definition applies in more general contexts, as well as being more useful in pen and paper proofs, at the cost of severely complicating typechecking.
+
+We will freely use directed univalence in the next sections.
+
+% {
+%   \textcolor{red}{
+%     Additionally, with the presence of universes we can twist non-dependent functions, that is we can do
+%     \begin{mathpar}
+%       \inferrule*[Right=Twist]
+%       {\Gamma, B : \UU, A : \UU^\op \vdash A \to B \Type}
+%       {\Gamma, B : \UU, A : \UU \vdash \bar A \to B \Type_{2\mathfrak f}}
+%     \end{mathpar}
+%     In the category model, the objects of the type $\bar A \to B$ are functors $A \to B$, while the morphisms are lax natural transformations.
+%     It is not hard to see that the semantics satisfies analogous introduction, elimination and computation rules as the usual functions, e.g.
+%     \begin{mathpar}
+%       \inferrule*[Right=$\Pi$-Intro]
+%       {\Gamma \vdash A : \UU \and \Gamma \vdash B : \UU \and \Gamma, x :  A \vdash b : B}
+%       {\Gamma \vdash \lambda x. b \var{2\mathfrak f} \bar A \to B}
+%     \end{mathpar}
+%     which we will freely use in the next sections.
+%   }
+% }
+
+\subsection{Natural transformations}\label{subsec:nats}
+
+As was stated in the introduction, twisted types allow us to capture syntactically the semantic notion of natural transformations between functors.
+
+\begin{proposition}\label{prop:internal-nat-hom}
+  For two terms $\IsTm[a:A]{Fa}{B}$ and $\IsTm[a:A]{Ga}{B}$, terms $\IsTmD[a:A]{t}{\Hom(\overline{Fa},Ga)}$ correspond to natural transformations $\Interp{F} \to \Interp{G}$ in the category model.
+\end{proposition}
+\begin{proof}
+  By the universal property of the pullback, terms $t$ as above correspond to functors $\tau:\Interp{A} \to \Interp{A}^\to$ satisfying that for all $a \in \Interp{A}$, the morphism $\tau(a)$ has as domain $\Interp{F}(a)$ and as codomain $\Interp{G}(a)$.
+  That is, they correspond to natural transformations $\Interp{F} \to \Interp{G}$.
+  % The type $a : A \vdash \Hom(\overline{Fa},Ga)\,\Ty_d$ comes from substituting the type $b:A \cxe a :A \vdash \Hom(\bar a,b)\,\Ty_d$ along the context morphism .
+  % Therefore, the projection $\pi:\Interp{a : A \cxe^d \Hom(\overline{Fa},Ga)} \to \Interp{a:A}$ corresponds to the pullback of $\langle \mathsf{cod}, \mathsf{dom}\rangle:A^\to \to A \times A$ along the functor $\langle G , F \rangle :A \to A \times A$.
+  % Hence, terms $t$ as above corresponds to functors $\tau:A \to A^\to$ satisfying $\tau(a):Fa \to Ga$.
+\end{proof}
+
+\begin{remark}\label{remark:lax-ends}
+  For the reader familiar with lax ends, the previous proposition follows from a more general fact, which is readily verified: for a profunctor $F:A \times A^\op \to \Cat$, the category of lifts from $A$ to $A \ctxe A \tye F$ through the diagonal $\delta : A \to A \times A$ is the lax end of $F$. The previous result then follows by setting $F$ to be $\Hom(F-,G-):A \times A^\op \to \Cat$.
+  % More generally, for a functor $F : A \ctxe (\op \circ (A/\cdot)) \to \Cat$, the category of lifts from $A$ to $A \ctxe (\op \circ (A/\cdot)) \tye F$ through the  $\iota_A : A \to A^\to \cong A \ctxe (\op \circ (A/\cdot))$ correspond to the lax version of the dependent ends of \cite{lirias3065223}.
+\end{remark}
+
+Generalizing to arbitrary contexts and dependent functions, an argument analogous to the previous one gives the following result.
+\begin{proposition}\label{prop:dfunext}
+  Let $\Gamma \vdash F,G:\prod_AB$ be two functions.
+  Then the canonical function $\Tm_d(\Gamma, \hom_{\Pi_AB}(\bar F,G)) \to \Tm_d(\Gamma \cxe^- a :A, \hom_{Ba}(\overline{F(a)}, G(a))$
+    given by $\Hom$-elimination induces a bijection between the interpretation of both sets.
+  \end{proposition}
+  % \begin{proof}
+  %   Analogous to the bijection of Proposition \ref{prop:internal-nat-hom}.
+  % \end{proof}
+
+  Internalizing this result, we present the following axiom.
+  \begin{definition}
+    Let $\Gamma \vdash F,G:\prod_AB$ be two functions.
+    The axiom \emph{directed function extensionality} states that given a term $\Gamma \cxe^- a :A \vdash t : \hom_{Ba}(\overline{F(a)}, G(a))$, we can form a new term $\Gamma \vdash \mathsf{dfunext}(t) : \hom_{\Pi_AB}(F,G)$.
+    % \[ \left\{ t \bigm| \Gamma \vdash t : \hom_{\Pi_AB}(F,G) \right\} \to
+    % \left\{ t \bigm| \Gamma \cxe^- a :A \vdash t : \hom_{Ba}(\overline{F(a)}, G(a))  \right\}\]
+  \end{definition}
+
+  Note that the natural transformations are syntactically analogous to the homotopies $\IsTm[a:A]{t}{\Id(Fa,Ga)}$ in HoTT.
+  However, unlike in that setting, we cannot form the type of all natural transformations by using a $\Pi$-type, since we only have $\Hom(\overline{Fa},Ga)\,\Ty_d$. The problem is resolved for functors into $\Set$, by uncurrying, as the next proposition shows.
+
+  \begin{proposition}\label{prop:internal-nat-pi}
+    Let $A$ be a type and let $F$ and $G$ be copresheaves from $A$, i.e.\ $a:A \vdash Fa : \Set$ and $a:A \vdash Ga : \Set$. The interpretation of the type
+    \[ \Nat(F,G) \defeq \prod_{(a,x):\sum_{a:A}Fa}Ga \]
+    is the set of natural transformations $F \to G$.
+  \end{proposition}
+  \begin{proof}
+    Indeed, we have the following chain of isomorphisms.
+    % \begin{align*}
+    %   &\Tm\bigg(\diamond, \prod_{(a,x):\sum_{a:A}Fa}Ga\bigg) \cong
+    %   \Tm\big(\sum_{a:A}Fa, Ga\big) \cong
+    %   \Tm(a:A \cxe x: Fa, Ga) \\[.3em]
+    %   &\hspace{2em} \cong
+    %   \Tm_d(a:A, \overline{Fa} \to Ga) \cong
+    %   \Tm_d(a:A, \Hom(\overline{Fa}, Ga)) \cong \Nat(\Interp{F},\Interp{G}),
+    % \end{align*}
+    \begin{align*}
+      \Tm\bigg(\diamond, \prod_{(a,x):\sum_{a:A}Fa}Ga\bigg) &\cong
+      \Tm\big(\sum_{a:A}Fa, Ga\big)  && \text{by Proposition \ref{prop:pi-types}}\\[-.5em]
+      & \cong
+      \Tm(a:A \cxe x: Fa, Ga) && \text{by Proposition \ref{prop:Sigma}}\\
+      & \cong
+      \Tm_d(a:A, \overline{Fa} \to Ga) && \text{by Proposition \ref{prop:function-twist}} \\
+      &\cong
+      \Tm_d(a:A, \Hom(\overline{Fa}, Ga))  && \text{by Proposition \ref{prop:dunivalence}} \\
+      &\cong \Nat(\Interp{F},\Interp{G}) && \text{by Proposition \ref{prop:internal-nat-hom}} \qedhere
+    \end{align*}
+  \end{proof}
+
+  When working with copresheaves, we can also consider equalities of natural transformations. In the following, for ease of reading, for a natural transformation $\varphi : \Nat(F,G)$ we write $\varphi_a(x)$ for $\varphi(a,x)$.
+
+  \begin{proposition}
+    Let $A$ be a type, $F$ and $G$ be two copresheaves from $A$, and $\varphi,\psi:\Nat(F,G)$ be two natural transformations. Then, the judgement
+    \[ a:A \cxe x:Fa \vdash t:\Hom_{Ga}(\varphi_a(x),\psi_a(x))\]
+    typechecks and its interpretation is an equality of natural transformations $\varphi$ and $\psi$.
+  \end{proposition}
+  \begin{proof}
+    Since $Ga$ is a set, we have $(Ga)^\op\jeq Ga$. Therefore, we have $a:A \cxe x : Fa \vdash \varphi_a(x) : (Ga)^\op$ and so the judgement in the proposition typechecks. Further, the $\Hom$-type of a set is trivial, hence we have that $\varphi_a(x)$ and $\psi_a(x)$ are equal for each $x:Fa$, i.e.\ $\varphi=\psi$.
+  \end{proof}
+
+  \begin{corollary}\label{cor:nat-isos}
+    Let $A$ be a type and $F$ and $G$ be two copresheaves from $A$. Then the interpretation of a tuple $(\varphi,\psi,t,r)$ satisfying
+    \begin{gather*}
+      \varphi:\Nat(F,G) \  \psi:\Nat(G,F) \\
+      a:A \cxe x : Fa \vdash t : \Hom_{Fa}(x, \psi_a(\varphi_a(x))) \\
+      a:A \cxe y : Ga \vdash t : \Hom_{Ga}(\varphi_a(\psi_a(y)), y)
+    \end{gather*}
+    is an isomorphism of $F$ and $G$.
+  \end{corollary}
+
+  \subsection{Yoneda lemma}
+  In this section, we sketch a proof of the Yoneda lemma. A complete proof with the omitted details can be found in Section \ref{subsec:yoneda-full} in the appendix.
+  % To do this, we will first need a technical lemma, which is proved in the Appendix (\ref{lemma:yoneda-perm-proof}).
+  % \begin{lemma}\label{lemma:yoneda-perm}
+  % Let $A : \UU$ be a type in the empty context.
+  % Then, for any context $\Gamma$, we have an isomorphism of contexts
+  % \[ \Gamma \cxe x:A \cxe a:A \tscxe B(\bar a, x) \cong \Gamma \cxe a:A \cxe^- (x,b):\sum_{x:A}\Hom(a,x).\]
+  % \end{lemma}
+  % \begin{proof}
+  % The lemma follows from the following chain of isomorphisms.
+  % \begin{align*}
+  % &\Gamma \cxe x:A \cxe a:A \tscxe \Hom(\bar a, x) \\
+  % & \hspace{2em} \cong
+  % \Gamma \cxe x:A \cxe z : \left(\sum_{a:A^\op}\Hom(a,x)^\op\right)^\op\\
+  % & \hspace{2em} \cong
+  % \Gamma \cxe z : \sum_{x:A}\left(\sum_{a:A^\op}\Hom(a,x)^\op\right)^\op \\
+  % & \hspace{2em} \cong
+  % \Gamma \cxe^- z : \sum_{x:A}\left(\sum_{a:A^\op}\Hom(a,x)^\op\right)^\op\\
+  % & \hspace{2em} \jeq
+  % \left(\Gamma^\op \cxe \left(z : \sum_{x:A}\left(\sum_{a:A^\op}\Hom(a,x)^\op\right)^\op\right)^\op \right)^\op\\
+  % & \hspace{2em} \cong
+  % \left(\Gamma^\op \cxe z : \sum_{a:A^\op}\left(\sum_{x:A^\op}\Hom(a,x)^\op\right)^\op \right)^\op\\
+  % & \hspace{2em} \cong
+  % \left(\Gamma^\op \cxe a:A^\op \cxe z : \left(\sum_{x:A}\Hom(a,x)\right)^\op \right)^\op\\
+  % & \hspace{2em} \cong
+  % \left(w : (\Gamma \times A)^\op \cxe z : \left(\sum_{x:A}\Hom(a,x)\right)^\op \right)^\op\\
+  % & \hspace{2em} \jeq
+  % w : \Gamma \times A \cxe^- z : \sum_{x:A}\Hom(a,x)\\
+  % & \hspace{2em} \cong
+  % \Gamma \cxe a : A \cxe^- z : \sum_{x:A}\Hom(a,x)\\
+  % \end{align*}
+  % \end{proof}
+
+  % ...
+
+  \begin{lemma}[Yoneda]\label{lemma:yoneda}
+    Let $A:\UU$ be a type in the empty context. Then the two following functors are naturally isomorphic.
+    \begin{align*}
+      Y, \bar Y   & :(A \to \Set) \times A \to \Set             \\
+      Y(F,a)      & \defeq \Nat(\Hom_A(a,-), F) \\
+      \bar Y(F,a) & \defeq Fa
+    \end{align*}
+  \end{lemma}
+  \begin{proof}[Proof sketch]
+    We use Corollary \ref{cor:nat-isos}. First, we define a natural transformation $\Phi:Y \to \bar Y$ by evaluation on $\Refl_a$, as follows.
+    {
+      \small
+      \begin{mathpar}
+        \inferrule*[Right=$\Pi$-Elim]
+        {
+          F:A \to \Set \cxe a :A \cxe \varphi: Y(F,a) \vdash (a,\Refl_a) \cvar \sum_{x:A}\hom(a,x)
+        }
+        {
+          F:A \to \Set \cxe a :A \cxe \varphi: Y(F,a)\vdash \varphi_a(\Refl_a) : Fa
+        }
+      \end{mathpar}
+    }
+    The first step in the derivation of $\Psi:\bar Y \to Y$ is given by $\Hom$-elimation, as follows.
+    {
+      \small
+      \begin{mathpar}
+        \inferrule*[Right=$\Hom$-Elim]
+        {
+          F:A \to \Set \cxe a:A \vdash Fa\,\Ty \\\\
+          F:A \to \Set \cxe x:A \cxe a:A \tscxe f : \hom(a,x), r:Fa \vdash Fx\,\Ty \\\\
+          F:A \to \Set \cxe a :A \cxe r:Fa \vdash r : Fa
+        }
+        {
+          F:A \to \Set \cxe x:A \cxe a:A \tscxe f : \hom(a,x) \cxe r:Fa \vdash j(f,r,r) : Fx
+        }
+      \end{mathpar}
+    }%
+    By rearranging the context, we obtain the following term.
+    {
+      \small
+      \[
+        F:A \to \Set \cxe a :A \cxe r:Fa \vdash \lambda (x,f) . j(f,r,r) : \prod_{(x,f):\sum_{x:A}\hom(a,x)}Fx
+      \]
+    }%
+    That $\Phi \circ \Psi$ is the identity follows from the computation rule for $\Hom$-types, while $\Psi \circ \Phi = \id$ follows from another application of $\Hom$-elimination.
+  \end{proof}
+
+  \section{Conclusion and future work}\label{sec:future-work}
+  We have introduced TTT as an extension of MLTT and showed that it allows for synthetic reasoning about categories.
+  While we argued for the three desiderata given in the introduction, we emphasize that any such criteria will lead to different advantages and disadvantages.
+  For example, a negative consequence of the desideratum (1), i.e.\ that closed types are interpreted as categories, is that not all $\Pi$-types will exist, and so the $\Pi$-formation rule has to be restricted, as we did in Proposition \ref{prop:pi-types}.
+  Hence, we see our work as exploring and developing one of many different possibilities in the space of directed type theories.
+
+  Nonetheless, we argue that the introduction of twisted types is an important development:
+  They are linked to $\Sigma$-types and $\Pi$-types via Propositions \ref{prop:op-sigma} and \ref{prop:function-twist}, as well as to lax ends via Remark \ref{remark:lax-ends}.
+  Further, the $\Hom$-elimination rule it allows is essentially a generalization of the Yoneda lemma.
+  Indeed, careful inspection of the proof given in Lemma \ref{lemma:yoneda} reveals that the first step in the derivation of the natural transformation $\Psi: \bar Y \to Y$ already carries all the information of the Yoneda lemma, albeit in a disorganized way: the next steps in the proof are all invertible, and hence are just reorganizing the data.
+
+  This being said, there are multiple avenues to explore which could improve TTT.
+  For one, we need to develop a richer theory of D2SFibs.
+  We expect to find a mathematical structure generalizing weak factorization systems, which would allow us to generalize North's \cite{north_type_2019} results about 2-sided fibrations to the dependent case.
+  We expect that such results would clarify and refine our $\Hom$-elimination principle.
+  An additional area to explore is the reintroduction of the $\mathsf{core}$-types from North \cite{north_towards_2019}.
+  These types are useful as not every categorical construction is either covariant or contravariant. Indeed, in our statement of Yoneda we required that $A$ be a closed type precisely for this reason.
+  Furthermore, the rules for permuting contexts involving twisted types could be improved.
+  Our proof of the Yoneda lemma uses such a permutation, but our current proof of its correctness is quite technical (see Lemma \ref{lemma:yoneda-perm-proof}).
+  Finally, future work should explore the higher dimensional models of TTT, and study the properties the twisted types have in this context.
+
+  %%
+  %% Bibliography
+  %%
+
+  %% Please use bibtex,
+
+  \bibliography{references}
+
+  \appendix
+
+  \section{Complete description of TTT}\label{sec:add-rules}
+  Twisted Type Theory has two copies of MLTT, see e.g.\ Hofmann \cite{hofmannSyntaxSemanticsDependent1997} for survey of MLTT.
+  Of note is that we assume the structural rules, i.e.\ weakening, substitution, and permutation; as they would not be admissible given our following rules.
+  We write $\Gamma \vdash A\,\Ty$, $\Gamma \vdash a : A$ and $\Gamma \cxe a: A$ (resp. $\Gamma \vdash A\,\Ty_d$, $\Gamma \vdash a \dvar A$ and $\Gamma \cxe^d a: A$) for the typing judgement, term-in-type judgement, and context extension operation respectively of the first MLTT copy (resp. second MLTT copy).
+  These two copies of MLTT are related via the following rules.
+
+  \begin{figure}[h]
+    \begin{rules}
+      \begin{mathparpagebreakable}
+        \inferrule*[right=$\Ty$\textnormal{\textsc{-Disp}}]{
+          \Gamma \vdash A\,\Ty
+        }{
+          \Gamma \vdash A\,\Ty_d
+        } \and
+        \inferrule*[right=\textnormal{\textsc{Ctx-Ext-Disp}}]{
+          \Gamma \vdash A\,\Ty
+        }{
+          \Gamma \cxe^d a : A \jeq \Gamma \cxe a : A
+        } \and
+        \inferrule*[right=\textnormal{\textsc{Twist}}]{
+          \Gamma \cxe b:B^\op \vdash C\,\Ty
+        }{
+          \Gamma \cxe b:B \vdash \mathsf{Tw}_b(C) \,\Ty_d
+        } \and
+        \inferrule*[right=\textnormal{\textsc{Twist-Weak}}]{
+          \Gamma \vdash B\,\Ty \and \Gamma \vdash C\,\Ty
+        }{
+          \Gamma \cxe b:B \vdash \mathsf{Tw}_b(C) \jeq C\,\Ty_d
+        }
+      \end{mathparpagebreakable}
+    \end{rules}
+    \caption{Rules about displayed types and twists.}
+  \end{figure}
+
+  We assume two countable hierarchies of Coquand universes \cite{coquandPresheafModelType2013,gratzer_multimodal_2021}.
+  We write $\UU_i$ for the universes of types and $\Set_i$ for the universes of discrete types.
+  \cite{kovacs_generalized_2022}.
+  These universes are related by a strict family inclusion from the discrete types in $\Set_i$ to the base types in $\UU_i$, which commutes with the strict family inclusion in each hierarchy.
+  As usual, we use these universes as if they were Russell universes, and leave the indices implicit.
+  The discrete types $\Gamma \vdash A:\Set$ are postulated to satisfy $\Gamma \vdash A^\op \jeq A : \Set$.
+
+  We additionally have rules concerning opposite types and opposite contexts. These had already appeared in other directed type theories in the literature \cite{licata_2-dimensional_2011,neumannSynthetic1CategoriesDirected2025}.
+  % For simplicity, we assume only one Tarski universe.
+
+  % \begin{figure}[h]
+  %   \begin{rules}
+  %     \begin{mathparpagebreakable}
+  %       \inferrule*{
+  %         \Gamma\,\Ctx
+  %       }{
+  %         \IsTy{\UU}
+  %       } \and
+  %       \inferrule*{
+  %         \Gamma\vdash A : \UU
+  %       }{
+  %         \Gamma \vdash \mathsf{El}(A) \,\Ty
+  %       } \and
+  %       \inferrule*{
+  %         \Gamma \vdash \mathsf{El}(A) \,\Ty
+  %       }{
+  %         \Gamma\vdash A : \UU
+  %       } \and
+  %       \inferrule*{
+  %         \Gamma\,\Ctx
+  %       }{
+  %         \IsTy{\Set}
+  %       } \and
+  %       \inferrule*{
+  %         \Gamma\vdash A : \Set
+  %       }{
+  %         \IsTy{A}
+  %       } \and
+  %       \inferrule*{
+  %         \Gamma\vdash A : \Set
+  %       }{
+  %         \Gamma \vdash A^\op \jeq A \,\Ty
+  %       }
+  %     \end{mathparpagebreakable}
+  %   \end{rules}
+  %   \caption{Rules about universes.}
+  % \end{figure}
+
+  \begin{figure}[h]
+    \begin{rules}
+      \begin{mathparpagebreakable}
+        \inferrule*[]{
+          \IsTy{A}
+        }{
+          \IsTy{A^\op}
+        } \and
+        \inferrule*[]{
+          \IsTy{A}
+        }{
+          \EqTy{(A^\op)^\op}{A}
+        } \\
+        \inferrule*[]
+        {
+          \Gamma\,\Ctx
+        }
+        {
+          \Gamma^\op\,\Ctx
+        }
+        \and
+        \inferrule*[]
+        {
+          \Gamma\,\Ctx
+        }
+        {
+          (\Gamma^\op)^\op \jeq \Gamma \,\Ctx
+        } \and
+        \inferrule*[]{
+        }{
+          \diamond^\op \jeq \diamond
+        } \and
+        \inferrule*[]{
+          \diamond \vdash A\ \Ty \and \Gamma\,\Ctx
+        }{
+          \Gamma \cxe A \jeq \Gamma \cxe^- A
+        }
+      \end{mathparpagebreakable}
+    \end{rules}
+    \caption{Rules about opposite types and contexts.}
+  \end{figure}
+
+  \begin{notation}
+    Let $\Gamma^\op \vdash B\,\Ty$ and $\Gamma \cxe b:B^\op \vdash C\,\Ty$ be types.
+    \begin{enumerate}
+      \item Other than in the $\textsc{Twist}$ and $\textsc{Twist-Weak}$ rules, we write $C[\bar b/b]$ for $\mathsf{Tw}_b(C)$.
+      \item We write $\Gamma \cxe^- B$ for the context $(\Gamma^\op \cxe B^\op)^\op$.
+      \item We write $\Gamma \cxe b:B \tscxe c : C[\bar b/b]$ for the context $\Gamma \cxe b:B \cxe^d c : C[\bar b/b]$.
+        This notation has as presupposition that $\Gamma \cxe b:B^\op \vdash C\,\Ty$ and so, e.g., won't be used after a (non-trivial) substitution.
+      \item We write $\sum_{b:B}^\tscxe c : C[\bar b/b]$ for the type $(\sum_{b:B^\op}C^\op)^\op$. We only use this in the appendix.
+      \item We write $X \to Y$ and $X \times Y$ instead of $\Pi_{x:X}Y$ and $\Sigma_{x:X}Y$, respectively, when $Y$ does not depend on $X$.
+    \end{enumerate}
+  \end{notation}
+
+  Finally, TTT includes rules for $\Sigma$, $\Pi$, and $\Hom$-types.
+  These are given in the Figures \ref{fig:sigma}, \ref{fig:pi}, and \ref{fig:hom} respectively.
+  This concludes the presentation of TTT.
+
+  \begin{remark}
+    The rules about $\Sigma$-types and $\Pi$-types not involving twists or opposites have been adapted from previous work in the literature \cite{licata_2-dimensional_2011,neumannSynthetic1CategoriesDirected2025}.
+  \end{remark}
+
+  \begin{remark}
+    The last two rules for $\Sigma$-types in Figure \ref{fig:sigma}, involving the $\mathsf{swap}$ and $\mathsf{swap}^{-1}$ operations, are only used in the proof Lemma \ref{lemma:yoneda-perm-proof}.
+    They are a technical tool to facilitate rearrangements of the data in contexts with twisted types.
+  \end{remark}
+
+  % \begin{proposition}
+  %   Let $\Gamma \vdash X,Y\,\Ty$ be types and $\Gamma \cxe x:X \cxe y:Y^\op \vdash Z(x,y)\,\Ty$ a dependent profunctor. Then there is a bijection of terms
+  %   \[ \left\{z \Bigm| \Gamma \vdash g : \bigg(\sum_{x:X}\sum_{y:Y}^\tscxe Z(x,\bar y)\bigg)^\op \right\} \cong
+  %   \left\{z \bigm| \Gamma \vdash t : \sum_{y:Y^\op}\sum_{x:X^\op}^\tscxe Z(\bar x,y)^\op \right\}. \]
+  % \end{proposition}
+  % \begin{proof}
+  %   The bijection follows from the fact that interpretation of the types in both sides are isomorphic, which is itself readily checked after expanding definitions.
+  % \end{proof}
+
+  \begin{figure}[h!]
+    \begin{rules}
+      \begin{mathparpagebreakable}
+        \inferrule*[]{
+          \Gamma \vdash A\,\Ty \and \Gamma \cxe a : A \vdash B\,\Ty
+        }{
+          \Gamma \vdash \Sigma_{a:A}B \,\Ty
+        }  \and
+        \inferrule*[]{
+          \Gamma \vdash A\,\Ty \and \Gamma \cxe a : A \vdash B\,\Ty \and \Gamma \vdash p : \Sigma_{a:A}B
+        }{
+          \Gamma \vdash \pi_1(p) : A \and \Gamma \vdash \pi_2(p) : B[\pi_1(p)/a] \and \Gamma \vdash (\pi_1(p),\pi_2(p)) \jeq p : \Sigma_{a:A}B
+        } \and
+        \inferrule*[]{
+          \Gamma \vdash A\,\Ty \and \Gamma \cxe a : A \vdash B\,\Ty \and \Gamma \vdash u : A \and \Gamma \vdash v : B
+        }{
+          \Gamma \vdash (u,v) : \Sigma_{a:A}B \and
+          \Gamma \vdash \pi_1(u,v) \jeq u : A \and \Gamma \vdash \pi_2(u,v) \jeq v : B[u/a]
+        } \and
+        \inferrule*[]{
+          \Gamma \vdash A\,\Ty \and \Gamma \cxe a : A \vdash B\,\Ty \and \Gamma \vdash p : (\Sigma_{a:A}B)^\op
+        }{
+          \Gamma \vdash \pi_1(p) : A^\op \and \Gamma \vdash \pi_2(p) : B^\op[\overline{\pi_1(p)}/a] \and \Gamma \vdash (\pi_1(p),\pi_2(p)) \jeq p : \Sigma_{a:A}B
+        } \and
+        \inferrule*[]{
+          \Gamma \vdash A\,\Ty \and \Gamma \cxe a : A \vdash B\,\Ty \and \Gamma \vdash u : A^\op \and \Gamma \vdash v : B^\op[\bar u/a]
+        }{
+          \Gamma \vdash (u,v) : (\Sigma_{a:A}B)^\op \and
+          \Gamma \vdash \pi_1(u,v) \jeq u : A^\op \and \Gamma \vdash \pi_2(u,v) \jeq v : B^\op[\bar u/a]
+        }\and
+        \inferrule*[]{
+          \Gamma \vdash X,Y\,\Ty \and \Gamma \cxe x : X \cxe y : Y^\op \vdash Z\,\Ty \and \Gamma \vdash p : (\Sigma_{x:X}\Sigma_{y:Y}^\tscxe Z(x,\bar y))^\op
+        }{
+          \Gamma \vdash \mathsf{swap}(p) : \Sigma_{y:Y^\op}\Sigma_{x:X^\op}^\tscxe Z(\bar x,y)^\op
+          \and
+          \Gamma \vdash \mathsf{swap}^{-1}(\mathsf{swap}(p) ): (\Sigma_{x:X}\Sigma_{y:Y}^\tscxe Z(x,\bar y))^\op
+        } \and
+        \inferrule*[]{
+          \Gamma \vdash X,Y\,\Ty \and \Gamma \cxe x : X \cxe y : Y^\op \vdash Z\,\Ty \and \Gamma \vdash q : \Sigma_{y:Y^\op}\Sigma_{x:X^\op}^\tscxe Z(\bar x,y)^\op
+        }{
+          \Gamma \vdash \mathsf{swap}^{-1}(q) : (\Sigma_{x:X}\Sigma_{y:Y}^\tscxe Z(x,\bar y))^\op
+          \and
+          \Gamma \vdash \mathsf{swap}(\mathsf{swap}^{-1}(q)): \Sigma_{y:Y^\op}\Sigma_{x:X^\op}^\tscxe Z(\bar x,y)^\op
+        }
+      \end{mathparpagebreakable}
+      %     \[ \left\{z \Bigm| \Gamma \vdash g : \bigg(\Sigma_{x:X}\Sigma_{y:Y}^\tscxe Z(x,\bar y)\bigg)^\op \right\} \cong
+      % \left\{z \bigm| \Gamma \vdash t : \Sigma_{y:Y^\op}\Sigma_{x:X^\op}^\tscxe Z(\bar x,y)^\op \right\}. \]
+    \end{rules}
+    \caption{Rules about $\Sigma$-types.}
+    \label{fig:sigma}
+  \end{figure}
+
+  \begin{figure}[h!]
+    \begin{rules}
+      \begin{mathparpagebreakable}
+        \inferrule*[]{
+          \Gamma^\op \vdash A\,\Ty \and \Gamma \cxe^- a : A \vdash B\,\Ty
+        }{
+          \Gamma \vdash \Pi_{a:A}B \,\Ty
+        }  \and
+        \inferrule*[]{
+          \Gamma^\op \vdash A\,\Ty \and \Gamma \cxe^- a : A \vdash B\,\Ty \and \Gamma \vdash f : \Pi_{a:A}B
+        }{
+          \Gamma \cxe^- a : A\vdash f(a) : B \and
+          \Gamma \vdash \lambda a.f(a) \jeq f : \Pi_{a:A}B
+        } \and
+        \inferrule*[]{
+          \Gamma^\op \vdash A\,\Ty \and \Gamma \cxe^- a : A \vdash B\,\Ty \and \Gamma \cxe^- a : A \vdash b : B
+        }{
+          \Gamma \vdash \lambda a. b : \Pi_{a:A}B \and
+          \Gamma \cxe^- a : A \vdash (\lambda a.b)(a) \jeq b : B
+        } \and
+        \inferrule*[]{
+          \Gamma \vdash A\,\Ty \and \Gamma \vdash B\,\Ty \and \Gamma \vdash f \dvar \bar A \to B
+        }{
+          \Gamma \cxe a : A  \vdash f(a) : B \and \Gamma \vdash \lambda a.f(a) \jeq f : \bar A \to B
+        } \and
+        \inferrule*[]{
+          \Gamma \vdash A\,\Ty \and \Gamma \vdash B\,\Ty \and \Gamma \cxe a :A \vdash b : B
+        }{
+          \Gamma \vdash \lambda a. b : \bar A \to B \and
+          \Gamma \cxe a : A \vdash (\lambda a.b)(a) \jeq b : B
+        }
+      \end{mathparpagebreakable}
+    \end{rules}
+    \caption{Rules about $\Pi$-types.}
+    \label{fig:pi}
+  \end{figure}
+
+  \begin{figure}[h!]
+    \begin{rules}
+      \begin{mathparpagebreakable}
+        \inferrule*[right=$\Hom$\textnormal{\textsc{-Form}}]{
+          \IsTy{A}
+        }{
+          \Gamma \cxe b:A \cxe a:A^\op \vdash \Hom_{A}(a,b) : \Set
+        }  \and
+        \inferrule*[right=$\Hom$\textnormal{\textsc{-Intro}}]{
+          \Gamma \vdash A\,\Ty
+        }{
+          \Gamma, a :A \vdash \Refl_a \dvar \Hom_A(\bar a, a)
+        } \and
+        \inferrule*[right=$\Hom$\textnormal{\textsc{-Elim}}]
+        {
+          \Gamma \vdash A\,\Ty \\\\
+          \Gamma \cxe a:A \vdash X\,\Ty \\\\
+          \Gamma \cxe b: A \cxe a:A \tscxe f : \Hom_A(\bar a,b) \cxe x : X^\op\vdash D\,\Ty \\\\
+          \Gamma \cxe a:A \cxe x:X \vdash d \dvar D[\bar{a}/b,\Refl_A/f, \bar{x}/x]
+        }
+        {
+          \Gamma \cxe b: A \cxe a:A \tscxe f : \Hom_A(\bar a,b) \cxe x : X \vdash j(f,x,d) \dvar D
+          % \Gamma \cxe b: A \cxe a:A \tscxe f:\Hom_A(\bar a,b) \tscxe x:X \vdash j_d \dvar D
+        } \and
+        \inferrule*[right=$\Hom$\textnormal{\textsc{-Comp}}]
+        {
+          \Gamma \vdash A\,\Ty \\\\
+          \Gamma \cxe a:A \vdash X\,\Ty \\\\
+          \Gamma \cxe b: A \cxe a:A \tscxe f : \Hom_A(\bar a,b) \cxe x : X^\op\vdash D\,\Ty \\\\
+          \Gamma \cxe a:A \cxe x:X \vdash d \dvar D[\bar{a}/b,\Refl_A/f, \bar{x}/x]
+        }
+        {
+          \Gamma \cxe a:A \cxe x:X \vdash j(\Refl_a,x,d) \jeq d \dvar D[\bar{a}/b,\Refl_A/f, \bar{x}/x]
+        }
+      \end{mathparpagebreakable}
+    \end{rules}
+    \caption{Rules about $\Hom$-types.}
+    \label{fig:hom}
+  \end{figure}
+
+  % \begin{proof}
+  % The lemma follows from the following chain of isomorphisms.
+  % \begin{align*}
+  % &\Gamma \cxe x:A \cxe a:A \tscxe \Hom(\bar a, x) \\
+  % & \hspace{2em} \cong
+  % \Gamma \cxe x:A \cxe z : \left(\sum_{a:A^\op}\Hom(a,x)^\op\right)^\op & by tests\\
+  % & \hspace{2em} \cong
+  % \Gamma \cxe x:A \cxe z : \left(\sum_{a:A^\op}\Hom(a,x)\right)^\op\\
+  % & \hspace{2em} \cong
+  % \Gamma \cxe z : \sum_{x:A}\left(\sum_{a:A^\op}\Hom(a,x)\right)^\op \\
+  % & \hspace{2em} \cong
+  % \Gamma \cxe^- z : \sum_{x:A}\left(\sum_{a:A^\op}\Hom(a,x)\right)^\op\\
+  % & \hspace{2em} \jeq
+  % \left(\Gamma^\op \cxe z : \left(\sum_{x:A}\left(\sum_{a:A^\op}\Hom(a,x)\right)^\op\right)^\op \right)^\op\\
+  % & \hspace{2em} \cong
+  % \left(\Gamma^\op \cxe z : \sum_{a:A^\op}\left(\sum_{x:A}\Hom(a,x)^\op\right)^\op \right)^\op\\
+  % & \hspace{2em} \cong
+  % \left(\Gamma^\op \cxe z : \sum_{a:A^\op}\left(\sum_{x:A}\Hom(a,x)\right)^\op \right)^\op\\
+  % & \hspace{2em} \cong
+  % \left(\Gamma^\op \cxe a:A^\op \cxe z : \left(\sum_{x:A}\Hom(a,x)\right)^\op \right)^\op\\
+  % & \hspace{2em} \cong
+  % \left(w : (\Gamma \times A)^\op \cxe z : \left(\sum_{x:A}\Hom(a,x)\right)^\op \right)^\op\\
+  % & \hspace{2em} \jeq
+  % w : \Gamma \times A \cxe^- z : \sum_{x:A}\Hom(a,x)\\
+  % & \hspace{2em} \cong
+  % \Gamma \cxe a : A \cxe^- z : \sum_{x:A}\Hom(a,x)\\
+  % \end{align*}
+  % \end{proof}
+
+  \section{Straightening and unstraightening for D2SFibs}\label{sec:staightd2sfibs}
+  In this section we give a complete proof of the equivalence between dependent profunctors and D2SFibs, stated in Proposition \ref{prop:straight-d2sfibs}.
+  For the rest of this section, let $B: A \to \Cat$ be an indexed category.
+
+  \subsection{The unstraightening functor}
+  We first show that unstraightening of a dependent profunctor is indeed a D2SFib.
+  \begin{proposition}
+    Let $C:A \ctxe B^\op \to \Cat$ be a dependent profunctor, then the canonical projection $\pi_2:A \ctxe B \tye C \to A \ctxe B$ is a D2SFib.
+  \end{proposition}
+  \begin{proof}
+    % \pushQED{\qed}
+    We show that conditions (3) to (6) of Definition \ref{def:d2sfib} are satisfied.
+    \begin{enumerate}
+        \setcounter{enumi}{2}
+      \item We show that for each $a \in A$, the functor $(\pi_2)_{|a}: (A \ctxe B \tye C)_a \to B(a)$ is a fibration.
+        Let $\beta: b \to (\pi_2)_{|a}(a,b',c)$ be a morphism in $B(a)$. We define the opcartesian lift of $\beta$ to be
+        \[ \beta^* \defeq (\id_a, \beta, \id_{C(\id_a,\beta)c}): (a,b,C(\id_a,\beta)c) \to (a,b',c). \]
+      \item We show that $\pi:A \ctxe B \tye C \to A$ is an opfibration. Let $\alpha:\pi(a,b,c) \to a'$ be a morphism in $A$. We define the opcartesian lift of $\alpha$ to be
+        \[ \alpha_! \defeq (\alpha, \id_{B(\alpha)b}, \id_{C(\alpha,\id_{B(\alpha)b})c}) : (a,b,c) \to (a',B(\alpha)b,C(\alpha,\id_{B(\alpha)b})c). \]
+      \item That $\pi_2$ is a cartesian functor follows from the following equation.
+        \[ \pi_2(\alpha, \id_B(\alpha)b, \id_{C(\alpha,\id_{B(\alpha)b})c})=(\alpha, \id_B(\alpha)b)\]
+      \item For $e\defeq(a,b,c)$ in $A \ctxe B \tye C$, $\alpha:\pi_{A}(e) \to a'$ and $\beta: b' \to (\pi_2)_{|a}(e)$, we have
+        \[ \alpha_! \beta^* e = (a',B(\alpha)b', C(\alpha,B(\alpha)\beta)c) = (B(\alpha)\beta)^*\alpha_!e \qedhere\]
+        % \popQED
+    \end{enumerate}
+  \end{proof}
+
+  Next, we show the functorial action of unstraightening.
+
+  \begin{proposition}
+    Unstraightening of dependent profunctors (Definition \ref{def:unstraightening-dprof}) extends to a functor $\Phi:[A \cxe B^\op, \Cat] \to \DTSFib(A,B)$.
+  \end{proposition}
+  \begin{proof}
+    Given dependent profunctors $C,D:A \ctxe B^\op \to \Cat$ and a natural transformation $\varphi:C \to D$, we now construct a functor $\Phi(\varphi):A \ctxe B \tye C \to A \ctxe B \tye D$.
+    On objects, it maps $(a,b,c) : A \ctxe B \tye C$ to $(a,b,\varphi_{(a,b)}(c)) : A \ctxe B \tye D$.
+    On morphisms, it maps $(\alpha,\beta,\theta):(a,b,c) \to (a',b',c')$ to $(\alpha,\beta,\varphi_{(a',B(\alpha)b)}\theta):(a,b,\varphi_{(a,b)}(c)) \to (a',b',\varphi_{(a,b)}(c'))$. Functoriality is immediate by naturality.
+    We now show that $\Phi(\varphi)$ is a cartesian functor of D2SFib, i.e.\ that it satisfies the two conditions of \ref{def:d2sfib-1cells}
+    \begin{enumerate}
+      \item We show that $\Phi(\varphi)$ is a cartesian functor of opfibrations.
+        Indeed, the opcartesian morphism
+        \[ (\alpha, \id_{B(\alpha)b}, \id_{C(\alpha,\id_{B(\alpha)b})c}) : (a,b,c) \to (a',B(\alpha)b,C(\alpha,\id_{B(\alpha)b})c)\]
+        in $A \ctxe B \tye C$ is mapped to
+        \[ (\alpha, \id_{B(\alpha)b}, \id_{D(\alpha,\id_{B(\alpha)b})\Phi(\varphi)c}) : (a,b,\Phi(\varphi)c) \to (a',B(\alpha)b,D(\alpha,\id_{B(\alpha)b})\Phi(\varphi)c),\]
+        which is also opcartesian.
+      \item We show that for each $a \in A$, $\Phi(\varphi)_{|a}$ is a cartesian functor.
+        Indeed, the cartesian morphism
+        \[ (\id_a, \beta, \id_{C(\id_a,\beta)c}): (a,b,C(\id_a,\beta)c) \to (a,b',c)$ is mapped by $\Phi(\varphi) \]
+        in $(A \ctxe B \tye C)_a$ is mapped to
+        \[ (\id_a, \beta, \id_{D(\id_a,\beta)\Phi(\varphi)c}): (a,b,D(\id_a,\beta)\Phi(\varphi)c) \to (a,b',\Phi(\varphi)c), \]
+        which is also cartesian.
+    \end{enumerate}
+    Functoriality of $\Phi$ is immediate from the definitions.
+  \end{proof}
+
+  \subsection{The straightening functor}
+  We begin with a simple lemma.
+
+  \begin{lemma}\label{d2sfib:lemma}
+    Let $q:C \to A \ctxe B$ be a D2SFib, and let $\alpha:a \to a'$ in $A$ and $\beta: b \to b'$ in $B(a)$. Then the following diagram commutes.
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJDKGEsYicpIl0sWzAsMSwiQyhhJyxCXFxhbHBoYSBiJykiXSxbMSwxLCJDKGEnLEJcXGFscGhhIGIpIl0sWzEsMCwiQyhhLGIpIl0sWzAsMSwiXFxhbHBoYV8hIiwyXSxbMSwyLCIoQihcXGFscGhhKVxcYmV0YSleKiJdLFszLDIsIlxcYWxwaGFfISJdLFswLDMsIlxcYmV0YV4qIl1d
+    \[
+      \begin{tikzcd}[column sep=4.5em]
+        {C_{(a,b')}} & {C_{(a,b)}} \\
+        {C_{(a',B\alpha b')}} & {C_{(a',B\alpha b)}}
+        \arrow["{\beta^*}", from=1-1, to=1-2]
+        \arrow["{\alpha_!}"', from=1-1, to=2-1]
+        \arrow["{\alpha_!}", from=1-2, to=2-2]
+        \arrow["{(B(\alpha)\beta)^*}"', from=2-1, to=2-2]
+    \end{tikzcd}\]
+  \end{lemma}
+  \begin{proof}
+    By definition of D2SFib, the diagram commutes on objects. To see that it commutes on morphisms, let $f:e \to d$ be a morphism in $C_{(a,b')}$. Then by either of the universal properties, there exists a unique diagonal arrow as below.
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXGFscGhhXyFcXGJldGFeKmUiXSxbMCwxLCJcXGFscGhhXyFcXGJldGFeKmQiXSxbMSwxLCIoQihcXGFscGhhKVxcYmV0YSleKlxcYWxwaGFfIWQiXSxbMSwwLCIoQihcXGFscGhhKVxcYmV0YSleKlxcYWxwaGFfIWUiXSxbMCwxLCJcXGFscGhhXyFcXGJldGFeKmYiLDJdLFsxLDIsIj0iLDIseyJzdHlsZSI6eyJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzAsMywiPSIsMCx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6Im5vbmUifX19XSxbMywyLCIoQihcXGFscGhhKVxcYmV0YSleKlxcYWxwaGFfIWYiXSxbMCwyLCIiLDEseyJzdHlsZSI6eyJib2R5Ijp7Im5hbWUiOiJkYXNoZWQifX19XV0=
+    \[
+      \begin{tikzcd}[sep=2.25em]
+        {\alpha_!\beta^*e} & {(B(\alpha)\beta)^*\alpha_!e} \\
+        {\alpha_!\beta^*d} & {(B(\alpha)\beta)^*\alpha_!d}
+        \arrow["{=}", no head, from=1-1, to=1-2]
+        \arrow["{\alpha_!\beta^*f}"', from=1-1, to=2-1]
+        \arrow[dashed, from=1-1, to=2-2]
+        \arrow["{(B(\alpha)\beta)^*\alpha_!f}", from=1-2, to=2-2]
+        \arrow["{=}"', no head, from=2-1, to=2-2]
+      \end{tikzcd}
+    \]
+    This shows that $\alpha_!\beta^*f = (B(\alpha)\beta)^*\alpha_!f$, as desired.
+  \end{proof}
+
+  \begin{proposition}
+    Let $q:C \to A \ctxe B$ be a D2SFib. Taking the fibre at each $(a,b) \in A \ctxe B$ produces a functor $\Psi(q):A \ctxe B^\op \to \Cat$, the \emph{straightening} of $q$.
+  \end{proposition}
+  \begin{proof}
+    For $(a,b) \in A \ctxe B^\op$, we've defined $\Psi(C)(a,b) \defeq C_{(a,b)}$. Given $(\alpha,\beta) : (a,b) \to (a',b')$ in $A \ctxe B^\op$, we define $\Psi(C)(\alpha,\beta)$ by $C(a,b) \xrightarrow{\alpha_!} C(a',B(\alpha)b) \xrightarrow{\beta^*} C(a',b')$.
+
+    We now check functoriality.
+    First, $\Psi(C)$ preserves identities by splitness of the (op)fibrational data.
+    It also preserves composition, since for $(a,b) \xrightarrow{(\alpha,\beta)} (a',b')  \xrightarrow{(\alpha',\beta')} (a'',b'')$, by Lemma \ref{d2sfib:lemma}, the following diagram commutes.
+    % https://q.uiver.app/#q=WzAsNixbMCwwLCJhIl0sWzEsMCwiciJdLFsxLDEsInQiXSxbMiwwLCJzIl0sWzIsMSwiZyJdLFszLDEsInoiXSxbMCwxLCJzIl0sWzEsMiwidCIsMl0sWzEsMywiciJdLFszLDQsImEiXSxbMiw0LCJ4IiwyXSxbNCw1LCJ6IiwyXV0=
+    \[
+      \begin{tikzcd}
+        C(a,b) & C(a',B(\alpha)b) & C(a'',B(\alpha'\alpha)b) \\
+        & C(a',b') & C(a'',B(\alpha')b') & C(a'',b'')
+        \arrow["\alpha_!", from=1-1, to=1-2]
+        \arrow["\alpha'_!", from=1-2, to=1-3]
+        \arrow["\beta^*"', from=1-2, to=2-2]
+        \arrow["(B(\alpha)\beta')^*", from=1-3, to=2-3]
+        \arrow["\alpha'_!"', from=2-2, to=2-3]
+        \arrow["(\beta')^*"', from=2-3, to=2-4]
+    \end{tikzcd}\]
+  \end{proof}
+
+  Next, we show the functorial action of straightening.
+
+  \begin{proposition}
+    Straightening of D2SFibs extends to a functor $\Psi:\DTSFib(A,B) \to [A \cxe B^\op, \Cat]$.
+  \end{proposition}
+  \begin{proof}
+    Let $q : C \to A \ctxe B$ and $q' : D \to A \ctxe B$ be D2SFibs.
+    Given a cartesian functor of D2SFibs $\varphi : C \to D$, we give a natural transformation $\Psi(\varphi):\Psi(C) \to \Psi(D)$. For $(a,b):A \ctxe B^\op$, the component $\Psi(\varphi)_{(a,b)}:C(a,b) \to D(a,b)$ is given by restricting $\varphi : C \to D$. It is natural since each square below commutes:
+    % https://q.uiver.app/#q=WzAsNixbMCwwLCJhIl0sWzEsMCwiYiJdLFsyLDAsImMiXSxbMCwxLCJkIl0sWzEsMSwiZSJdLFsyLDEsImYiXSxbMCwzLCJhIiwyXSxbMyw0LCJiIiwyXSxbMCwxLCJhIl0sWzEsNCwiYyIsMl0sWzEsMiwiYyJdLFs0LDUsImMiLDJdLFsyLDUsImEiXV0=
+    \[
+      \begin{tikzcd}
+        C(a,b) & C(a',B(\alpha)b) & C(a',b') \\
+        D(a,b) & D(a',B(\alpha)b) & D(a',b')
+        \arrow["\alpha_!", from=1-1, to=1-2]
+        \arrow["\varphi"', from=1-1, to=2-1]
+        \arrow["\beta^*", from=1-2, to=1-3]
+        \arrow["\varphi"{description}, from=1-2, to=2-2]
+        \arrow["\varphi", from=1-3, to=2-3]
+        \arrow["\alpha_!"', from=2-1, to=2-2]
+        \arrow["\beta^*"', from=2-2, to=2-3]
+    \end{tikzcd}\]
+    by the corresponding theorem for (op)fibrations.
+    Functoriality of $\Psi$ is immediate from the definitions.
+  \end{proof}
+
+  \subsection{The equivalence}
+
+  \begin{proposition}\label{prop:d2sfibequiv}
+    Straightening and unstraightening induce an equivalence of categories.
+    \[ \Phi : [A \ctxe B^\op,\Cat] \simeq \mathsf{D2SFib}(A,B) : \Psi \]
+  \end{proposition}
+  \begin{proof}
+    We begin by showing that $\Phi \circ \Psi \cong \id_{\mathsf{D2SFib}(A,B)}$. Let $q:C\to A \ctxe B$ be a D2SFib, we define a functor $\epsilon: C \to A \ctxe B \tye \Psi(q)$ as follows:
+    \begin{itemize}
+      \item \textbf{Objects:} For $c:C$, $\epsilon(c)\defeq(p(c), q_{|p(c)}(c), c)$.
+      \item \textbf{Morphisms:} For $f:c\to c':C$, and setting $(a,b,c) \defeq \epsilon(c)$, $(a',b',c')\defeq \epsilon(c')$, $\alpha \defeq p(f):a \to a'$ and $\beta\defeq q_{|a'}(f):B(\alpha)b \to b'$, we define $\epsilon(f):\alpha_!c \to \beta^*c'$, by first obtaining a map $\alpha_!c \to c'$ by the universal property of $\alpha_!c$, and then obtaining $\epsilon(f)$ by using the universal property of $\beta^*c'$.
+        % https://q.uiver.app/#q=WzAsNCxbMCwwLCJcXGFscGhhXyFjIl0sWzAsMSwiYyJdLFsxLDEsImMnIl0sWzEsMCwiXFxiZXRhXipjJyJdLFswLDFdLFsxLDIsImYiLDJdLFszLDJdLFswLDMsIiIsMSx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dLFswLDIsIiIsMSx7InN0eWxlIjp7ImJvZHkiOnsibmFtZSI6ImRhc2hlZCJ9fX1dXQ==
+        \[
+          \begin{tikzcd}
+            {\alpha_!c} & {\beta^*c'} \\
+            c & {c'}
+            \arrow["\epsilon(f)", dashed, from=1-1, to=1-2]
+            \arrow[dashed, from=1-1, to=1-2]
+            \arrow[from=2-1, to=1-1]
+            \arrow[dashed, from=1-1, to=2-2]
+            \arrow[from=1-2, to=2-2]
+            \arrow["f"', from=2-1, to=2-2]
+        \end{tikzcd}\]
+      \item \textbf{Functoriality:} Preservation of identities is immediate. For functoriality, let $c \xrightarrow{f} c' \xrightarrow{f'} c''$ be morphisms whose image under $q$ give the morphisms $(a,b) \xrightarrow{(\alpha,\beta)} (a',b') \xrightarrow{(\alpha',\beta')} (a'',b'')$. Then, preservation of composition follows from the diagram below.
+        % https://q.uiver.app/#q=WzAsMTAsWzIsMiwiXFxiZXRhXipjJyJdLFszLDAsIlxcYWxwaGEnXyFcXGJldGFeKmMnPShCXFxhbHBoYSdcXGJldGEpXipcXGFscGhhJ18hYyciXSxbNCwyLCJcXGFscGhhJ18hYyciXSxbMyw0LCJjJyJdLFswLDIsIlxcYWxwaGFfIWMiXSxbMSwwLCIoXFxhbHBoYSdcXGFscGhhKV8hYyJdLFsxLDQsImMiXSxbNSw0LCJjJyciXSxbNiwyLCJcXGJldGEnXipjJyciXSxbNSwwLCIoXFxiZXRhJyBcXGNpcmMgQlxcYWxwaGEnXFxiZXRhKV4qYycnIl0sWzAsMV0sWzEsMl0sWzAsM10sWzQsMCwiRmYiXSxbNCw1XSxbNiw0XSxbNiwzLCJmIiwyXSxbMyw3LCJmJyIsMl0sWzgsN10sWzIsOCwiRmYnIl0sWzUsMSwiXFxhbHBoYSdfIShGZikiXSxbMSw5LCIoQlxcYWxwaGEnXFxiZXRhKV4qRmYnIl0sWzksOF0sWzMsMl1d
+        \[
+          \begin{tikzcd}[column sep=1em,row sep=0.5em]
+            & {(\alpha'\alpha)_!c} && {\alpha'_!\beta^*c'=(B(\alpha')\beta)^*\alpha'_!c'} && {(\beta' \circ B(\alpha')\beta)^*c''} \\
+            \\
+            {\alpha_!c} && {\beta^*c'} && {\alpha'_!c'} && {\beta'^*c''} \\
+            \\
+            & c && {c'} && {c''}
+            \arrow["{\alpha'_!(Ff)}", from=1-2, to=1-4]
+            \arrow["{(B\alpha'\beta)^*Ff'}", from=1-4, to=1-6]
+            \arrow[from=1-4, to=3-5]
+            \arrow[from=1-6, to=3-7]
+            \arrow[from=3-1, to=1-2]
+            \arrow["Ff", from=3-1, to=3-3]
+            \arrow[from=3-3, to=1-4]
+            \arrow[from=3-3, to=5-4]
+            \arrow["{Ff'}", from=3-5, to=3-7]
+            \arrow[from=3-7, to=5-6]
+            \arrow[from=5-2, to=3-1]
+            \arrow["f"', from=5-2, to=5-4]
+            \arrow[from=5-4, to=3-5]
+            \arrow["{f'}"', from=5-4, to=5-6]
+        \end{tikzcd}\]
+    \end{itemize}
+
+    The inverse $\epsilon^{-1}:A \ctxe B \tye \Psi(q) \to C$ of $\epsilon$ is defined as follows.
+    \begin{itemize}
+      \item \textbf{Objects:} For $(a,b,c) : A \ctxe B \tye (\Psi q)$, we set $G(a,b,c) \defeq c$. \\
+      \item \textbf{Morphisms:} For $(\alpha,\beta,\theta):(a,b,c) \to (a',b',c')$ in $A \ctxe B \tye (\Psi q)$, its image under $G$ is given by $c \to \alpha_! c \xrightarrow{\theta} \beta^* c' \to c'$
+      \item \textbf{Functoriality:} Analogous to the proof of functoriality of $\epsilon$.
+    \end{itemize}
+    That these two functors are cartesian functors of D2SFibs is readily seen. Further, by construction, these are inverses.
+    % The fact that $F$ and $G$ are inverses follows from the fact that $\hom_C(\alpha_!c,\beta^*c') \cong \hom_C(c,c')$, for $(\alpha,\beta):\pi_{A \ctxe B}(a,b,c) \to \pi_{A \ctxe B}(a',b',c')$. \\[1em]
+
+    Finally, we show that $\Psi \circ \Phi \cong \id_{\mathsf{Functor}(A \ctxe B^\op,\Cat)}$.
+    Let $C:A \ctxe B^\op \to \Cat$, we define a natural transformation $\eta:C \to \Psi(A \ctxe B \tye C)$, which is readily seen to be an isomorphism.
+    \begin{itemize}
+      \item \textbf{Components:} For $(a,b) : A \ctxe B^\op$, we define $\eta{(a,b)}:C(a,b) \to C(a,b)$ to be the identity functor.
+      \item \textbf{Naturality:} For $(\alpha,\beta):(a,b) \to (a',b')$, naturality requires that $C(\alpha,\beta)=C(\id_{a'},\beta) \circ C(\alpha,\id_{B(\alpha)b})$, which holds by functoriality of $C$. \qedhere
+    \end{itemize}
+  \end{proof}
+
+  We are now ready to prove Proposition \ref{prop:straight-d2sfibs}.
+  \setcounter{proposition}{27}
+  \begin{proposition}[Straightening-unstraightening for D2SFibs]
+    Unstraightening of dependent profunctors (Definition \ref{def:unstraightening-dprof}) extends to a fibred equivalence of categories $\tye^* : \mathsf{DProf} \xrightarrow{\simeq} \DTSFib$ over $\ICat_{\textnormal{str}}$.
+    % Consider a category $A$ and a functor $B:A \to \Cat$. Unstraightening of dependent profunctors (Definition \ref{def:unstraightening-dprof}) induces an equivalence of categories
+    % $ [A \ctxe B^\op,\Cat] \simeq \mathsf{D2SFib}(A,B) $  natural in $A$ and $B$.
+  \end{proposition}
+  \begin{proof}
+    This follows from the previous proposition, by noting that each construction given is natural in $A$ and $B$.
+  \end{proof}
+
+  \section{Expanded proofs of results}\label{sec:proofs}
+  In this section, we present the proofs omitted in the main body of the paper.
+
+  \subsection{The \texorpdfstring{$\Hom$}{Hom}-elimination rule}\label{subsec:Hom-elim}
+  \setcounter{proposition}{31}
+  \begin{proposition}[$\Hom$\textsc{-Elim}]
+    The category model validates the following rule.
+    {
+      \small
+      \begin{mathparpagebreakable}
+        \inferrule*[Right=$\Hom$\textnormal{\textsc{-Elim}}]
+        {
+          \Gamma \vdash A\,\Ty \\\\
+          \Gamma \cxe a:A \vdash X\,\Ty \\\\
+          \Gamma \cxe b: A \cxe a:A \tscxe f : \Hom_A(\bar a,b) \cxe x : X^\op\vdash D\,\Ty \\\\
+          \Gamma \cxe a:A \cxe x:X \vdash d \dvar D[\bar{a}/b,\Refl_A/f, \bar{x}/x]
+        }
+        {
+          \Gamma \cxe b: A \cxe a:A \tscxe f : \Hom_A(\bar a,b) \cxe x : X \vdash j(f,x,d) \dvar D
+          % \Gamma \cxe b: A \cxe a:A \tscxe f:\Hom_A(\bar a,b) \tscxe x:X \vdash j_d \dvar D
+        }
+      \end{mathparpagebreakable}
+    }%
+    It also validates the following rule, which has the same antecedents as \textnormal{\textsc{$\Hom$-Elim}}, and has the following conclusion.
+    \[ \Gamma \cxe a:A \cxe x:X \vdash j(\Refl_a,x,d) \jeq d \dvar D[\bar{a}/b,\Refl_A/f, \bar{x}/x] \hspace{3em} \textnormal{\textsc{$\Hom$-Comp}}\]
+  \end{proposition}
+  \begin{proof}
+    We continue the sketched proof, using the introduced notation.
+    We now give the action of $j$ on morphisms.
+    Let $(\theta,(\alpha,\beta),\psi):(\gamma, f:a \to b,x) \to (\gamma',f':a'\to b', x')$ be a morphism in ${\Gamma \ctxe A^\to \ctxe X[\mathsf{dom}]}$.
+    Note that this gives us a morphism $(\theta,\alpha,\psi): (\gamma, a,x) \to (\gamma', a',x')$ in the category $\Gamma \ctxe A \ctxe X$.
+    By applying $d^*$ to it, we obtain the morphism
+    \[ d^*(\theta,\alpha,\psi) : D(\theta,(\alpha,\alpha),\id_{X(\theta,\alpha)x})(\gamma,a,x) \to D(\id_{\gamma'},\id_{\id_{a'}},\psi)(\gamma',a',x') \]
+    in $D(\gamma',\id_{a'},X(\theta,\alpha)x)$.
+
+    We now define $j(\theta,(\alpha,\beta),\psi) := D(\id_{\gamma}',(\id_{a'},f'),\id_{X(\theta,\alpha)x})(d^*(\theta,\alpha,\psi))$.
+    % Further, consider the morphism $\tau \defeq (\id_{\gamma}',(\id_{a'},f'),\id_{X(\theta,\alpha)x}) : (\gamma',\id_{a'},X(\theta,\alpha)x) \to (\gamma',f',X(\theta,\alpha)x)$ in $\Gamma \ctxe A^\to \ctxe X[\mathsf{dom}]^\op$
+    Commutativity of the diagram below ensures correctness of the endpoints.
+    % https://q.uiver.app/#q=WzAsNixbMCwwLCJEKFxcZ2FtbWEsXFxpZF9hLHgpIl0sWzAsMSwiRChcXGdhbW1hLGYseCkiXSxbMSwwLCJEKFxcZ2FtbWEnLFxcaWRfe2EnfSxYKFxcdGhldGEsXFxhbHBoYSl4KSJdLFsxLDEsIkQoXFxnYW1tYScsZicsWChcXHRoZXRhLFxcYWxwaGEpeCkiXSxbMiwwLCJEKFxcZ2FtbWEnLFxcaWRfe2EnfSx4JykiXSxbMiwxLCJEKFxcZ2FtbWEnLGYnLHgnKSJdLFsxLDMsIkQoXFx0aGV0YSwoXFxhbHBoYSxcXGJldGEpLFxcaWRfe1goXFx0aGV0YSxcXGFscGhhKXh9KSIsMl0sWzAsMiwiRChcXHRoZXRhLChcXGFscGhhLFxcYWxwaGEpLFxcaWRfe1goXFx0aGV0YSxcXGFscGhhKXh9KSJdLFswLDEsIkQoXFxpZF9cXGdhbW1hLChcXGlkX2EsZiksXFxpZF94KSIsMl0sWzIsMywiRChcXGlkX3tcXGdhbW1hfScsKFxcaWRfe2EnfSxmJyksXFxpZF97WChcXHRoZXRhLFxcYWxwaGEpeH0pIiwxXSxbNCw1LCJEKFxcaWRfe1xcZ2FtbWF9JywoXFxpZF97YSd9LGYnKSxcXGlkX3t4J30pIl0sWzUsMywiRChcXGlkX3tcXGdhbW1hJ30sXFxpZF97Zid9LFxccHNpKSJdLFs0LDIsIkQoXFxpZF97XFxnYW1tYSd9LFxcaWRfe1xcaWRfe2EnfX0sXFxwc2kpIiwyXV0=
+    {
+      \small
+      \[
+        \begin{tikzcd}[row sep=2em, column sep=8em]
+          {D(\gamma,\id_a,x)} & {D(\gamma',\id_{a'},X(\theta,\alpha)x)} & {D(\gamma',\id_{a'},x')} \\
+          {D(\gamma,f,x)} & {D(\gamma',f',X(\theta,\alpha)x)} & {D(\gamma',f',x')}
+          \arrow["{D(\theta,(\alpha,\alpha),\id_{X(\theta,\alpha)x})}", from=1-1, to=1-2]
+          \arrow["{D(\id_\gamma,(\id_a,f),\id_x)}"{description}, from=1-1, to=2-1]
+          \arrow["{D(\id_{\gamma}',(\id_{a'},f'),\id_{X(\theta,\alpha)x})}"{description}, from=1-2, to=2-2]
+          \arrow["{D(\id_{\gamma'},\id_{\id_{a'}},\psi)}"', from=1-3, to=1-2]
+          \arrow["{D(\id_{\gamma}',(\id_{a'},f'),\id_{x'})}"{description}, from=1-3, to=2-3]
+          \arrow["{D(\theta,(\alpha,\beta),\id_{X(\theta,\alpha)x})}"', from=2-1, to=2-2]
+          \arrow["{D(\id_{\gamma'},\id_{f'},\psi)}", from=2-3, to=2-2]
+      \end{tikzcd}\]
+    }
+    Functoriality readily follows and, by construction, the desired square commutes.
+  \end{proof}
+
+  \subsection{A proof of Yoneda lemma}\label{subsec:yoneda-full}
+  In this section we give a complete proof of Yoneda lemma.
+  We begin with a technical lemma.
+  \setcounter{proposition}{59}
+  \begin{lemma}\label{lemma:yoneda-perm-proof}
+    Let $A : \UU$ be a type in the empty context.
+    Then, for a context $\Gamma$ of the form $\Gamma \defeq \gamma_1 : \Gamma_1 \cxe \cdots \cxe \gamma_n : \Gamma_n$, we have an isomorphism of contexts
+    \[ \Gamma \cxe x:A \cxe a:A \tscxe \Hom(\bar a, x) \cong \Gamma \cxe a:A \cxe^- (x,b):\sum_{x:A}\Hom(a,x).\]
+  \end{lemma}
+  \begin{proof}
+    The lemma follows from the following chain of isomorphisms of contexts, all of which follow from the rules for $\Sigma$, opposite contexts, and opposite types.
+    {
+      \allowdisplaybreaks
+      \begin{align*}
+        &\Gamma \cxe x:A \cxe a:A \tscxe \Hom(\bar a, x) \\
+        & \hspace{2em} \cong
+        \Gamma \cxe x:A \cxe z : \sum^\tscxe_{a:A}\Hom(\bar a,x) \\
+        & \hspace{2em} \cong
+        \Gamma \cxe z : \sum_{x:A} \sum^\tscxe_{a:A}\Hom(\bar a,x)  \\
+        & \hspace{2em} \cong
+        \Gamma \cxe^- z : \sum_{x:A} \sum^\tscxe_{a:A}\Hom(\bar a,x)  \\
+        & \hspace{2em} \jeq
+        \left(\Gamma^\op \cxe z : \left(\sum_{x:A} \sum^\tscxe_{a:A}\Hom(\bar a,x) \right)^\op \right)^\op\\
+        & \hspace{2em} \cong
+        \left(\Gamma^\op \cxe z : \sum_{a:A^\op} \sum^\tscxe_{x:A^\op}\Hom(a,\bar x)^\op  \right)^\op\\
+        & \hspace{2em} \jeq
+        \left(\Gamma^\op \cxe z : \sum_{a:A^\op} \sum^\tscxe_{x:A^\op}\Hom(a,\bar x)  \right)^\op\\
+        & \hspace{2em} \cong
+        \left(\Gamma^\op \cxe a:A^\op \cxe z : \sum_{x:A^\op}^\tscxe \Hom(a,\bar x) \right)^\op\\
+        & \hspace{2em} \jeq
+        \left(\Gamma^\op \cxe a:A^\op \cxe z : \left(\sum_{x:A} \Hom(a,\bar x)^\op\right)^\op \right)^\op\\
+        & \hspace{2em} \jeq
+        \left(w : (\Sigma\Gamma \times A)^\op \cxe z : \left(\sum_{x:A}\Hom(a,x)\right)^\op \right)^\op\\
+        & \hspace{2em} \jeq
+        w : \Sigma\Gamma \times A \cxe^- z : \sum_{x:A}\Hom(a,x)\\
+        & \hspace{2em} \cong
+        \Gamma \cxe a : A \cxe^- z : \sum_{x:A}\Hom(a,x)
+      \end{align*}
+    }%
+    Here, $\Sigma\Gamma$ is defined by $\Sigma\Gamma \defeq \Sigma_{\gamma_1 : \Gamma_1}\cdots \Sigma_{\gamma_{n-1}:\Gamma_{n-1}}\Gamma_n$.
+  \end{proof}
+
+  \setcounter{proposition}{49}
+  \begin{lemma}[Yoneda]
+    Let $A:\UU$ be a type in the empty context. Then the two following functors are naturally isomorphic.
+    \begin{align*}
+      Y, \bar Y   & :(A \to \Set) \times A \to \Set             \\
+      Y(F,a)      & \defeq \Nat(\Hom_A(a,-), F) \\
+      \bar Y(F,a) & \defeq Fa
+    \end{align*}
+  \end{lemma}
+  \begin{proof}
+    We use Corollary \ref{cor:nat-isos}.
+    First, we obtain a natural transformation $\Phi:Y \to \bar Y$ as follows.
+    {
+      \small
+      \begin{mathparpagebreakable}
+        \inferrule*[Right=$\Pi$-Elim]
+        {
+          \inferrule*[Right=Weak]
+          {
+            \inferrule*[Right=Def]
+            {
+              \inferrule*[Right=$\Sigma^\op$-Intro]
+              {F:(A \to \Set)^\op \cxe a :A^\op  \vdash a:A^\op \\\\
+              F:(A \to \Set)^\op \cxe a :A^\op  \vdash \Refl_a \dvar \hom(a,a)}
+              {
+                (F:A \to \Set \cxe a :A)^\op  \vdash (a,\Refl_a) : \bigg(\sum_{x:A}\hom(a,x)\bigg)^\op
+              }
+            }
+            {
+              F:A \to \Set \cxe a :A  \vdash (a,\Refl_a) \cvar \sum_{x:A}\hom(a,x)
+            }
+          }
+          {
+            F:A \to \Set \cxe a :A \cxe \varphi: Y(F,a) \vdash (a,\Refl_a) \cvar \sum_{x:A}\hom(a,x)
+          }
+        }
+        {
+          F:A \to \Set \cxe a :A \cxe \varphi: Y(F,a)\vdash \varphi(a,\Refl_a) : Fa
+        }
+      \end{mathparpagebreakable}
+    } %
+    Its inverse $\Psi:\bar Y \to Y$ is given by $\Hom$-elimination.
+    {
+      \small
+      \begin{mathpar}
+        \inferrule*[Right=$\Pi$-Intro]
+        {
+          \inferrule*[Right=Perm]
+          {
+            \inferrule*[Right=Lemma-\ref{lemma:yoneda-perm-proof}]
+            {
+              \inferrule*[Right=$\Hom$-Elim]
+              {
+                F:A \to \Set \cxe a:A \vdash Fa\,\Ty \\\\
+                F:A \to \Set \cxe x:A \cxe a:A \tscxe f : \hom(a,x), r:Fa \vdash Fx\,\Ty \\\\
+                F:A \to \Set \cxe a :A \cxe r:Fa \vdash r : Fa
+              }
+              {
+                F:A \to \Set \cxe x:A \cxe a:A \tscxe f : \hom(a,x) \cxe r:Fa \vdash j(f,r,r) : Fx
+              }
+            }
+            {
+              F:A \to \Set \cxe a :A \cxe^- (x,f) : \sum_{x:A}\hom(a,x)\cxe r : Fa \vdash j(f,r,r) : Fx
+            }
+          }
+          {
+            F:A \to \Set \cxe a :A \cxe r : Fa \cxe^- (x,f) : \sum_{x:A}\hom(a,x)\vdash j(f,r,r) : Fx
+          }
+        }
+        {
+          F:A \to \Set \cxe a :A \cxe r:Fa \vdash \lambda (x,f) . j(f,r,r) : \prod_{(x,f):\sum_{x:A}\hom(a,x)} Fx
+        }
+      \end{mathpar}
+    }
+    % \begin{mathpar}
+    % \inferrule*[Right=$\Pi$-Intro]
+    % {
+    % \inferrule*[Right=Key-step]
+    % {
+    % \inferrule*[Right=$\Hom$-Intro]
+    % {
+    % F:A \to \Set \cxe a:A \vdash Fa\,\Ty \\\\
+    % F:A \to \Set \cxe x:A \cxe a:A \tscxe f : \hom(a,x), r:Fa \vdash Fx\,\Ty \\\\
+    % F:A \to \Set \cxe a :A \cxe r:Fa \vdash r : Fa
+    % }
+    % {
+    % F:A \to \Set \cxe x:A \cxe a:A \tscxe f : \hom(a,x) \cxe r:Fa \vdash j_r : Fx
+    % }
+    % }
+    % {
+    % F:A \to \Set \cxe a :A \cxe r : Fa \cxe^- (x,f) : \sum_{x:A}\hom(a,x)\vdash j_r : Fx
+    % }
+    % }
+    % {
+    % F:A \to \Set \cxe a :A \cxe r:Fa \vdash \lambda (x,f) . j_r : \bigg( \prod_{(x,f):\sum_{x:A}\hom(a,x)} Fx \bigg)
+    % }
+    % \end{mathpar}
+
+    Now we show that these are inverses. That $\Phi \circ \Psi$ is the identity follows from the computation rule for $\Hom$-types.
+    The other direction, that $\Psi \circ \Phi = \id$, is derived below, using the abbreviations $j_{\varphi} \defeq j(f,\varphi(a,\Refl_a),\varphi(a,\Refl_a))$ and $j_{\Refl} \defeq j(f, \varphi, \Refl_{\varphi(a,\Refl_a)})$.
+    {
+      \small
+      \begin{mathpar}
+        \inferrule*[right=dfunext]
+        {
+          \inferrule*[Right=Perm]
+          {
+            \inferrule*[Right=Lemma-\ref{lemma:yoneda-perm-proof}]
+            {
+              \inferrule*[Right=$\Hom$-Elim]
+              {
+                F:A \to \Set\cxe a:A \vdash Y(F,a)\,\Ty \\\\
+                F:A \to \Set\cxe x :A\cxe a:A \tscxe f : \Hom(\bar a,x)\cxe  \varphi: Y(F,a) \vdash \Hom_{Fx}(\varphi(x,f), j_{\varphi})\,\Ty \\\\
+                F:A \to \Set\cxe a :A\cxe \varphi: Y(F,a) \vdash \Refl_{\varphi(a,\Refl_a)} : \Hom_{Fx}(\varphi(a,\Refl_a), \varphi(a,\Refl_a))
+              }
+              {
+                F:A \to \Set\cxe x :A\cxe a:A \tscxe f : \Hom(\bar a,x) \cxe \varphi: Y(F,a) \vdash j_{\Refl} : \Hom_{Fx}(\varphi(x,f), j_{\varphi})
+              }
+            }
+            {
+              F:A \to \Set\cxe a :A\cxe^- (x,f): \sum_{x:A}\Hom(a,x) \cxe \varphi: Y(F,a) \vdash j_{\Refl} : \Hom_{Fx}(\varphi(x,f), j_{\varphi})
+            }
+          }
+          {
+            F:A \to \Set\cxe a :A\cxe \varphi: Y(F,a) \cxe^- (x,f): \sum_{x:A}\Hom(a,x) \vdash j_{\Refl} : \Hom_{Fx}(\varphi(x,f), j_{\varphi})
+          }
+        }
+        {
+          F:A \to \Set \cxe a :A \cxe \varphi: Y(F,a) \vdash \mathsf{dfunext}(j_{\Refl_{\varphi}}) : \Hom_{Y(F,a)}(\varphi, \lambda(x,f).j_{\varphi})
+        }
+      \end{mathpar}
+    }
+  \end{proof}
+
+  \end{document}
