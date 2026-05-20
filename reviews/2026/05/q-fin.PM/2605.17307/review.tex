@@ -1,0 +1,481 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\title{Deep Reinforcement Learning Framework for Diversified Portfolio Management Across Global Equity Markets}
+\date{}
+\begin{document}
+\maketitle
+
+\noindent\textbf{Source:} \href{https://arxiv.org/abs/2605.17307}{arXiv:2605.17307} \quad \textbf{Field:} q-fin.PM\\
+
+\section*{TL;DR}
+This paper presents an incremental but methodologically substantive extension of deep RL portfolio management, providing the first unified multi-market comparison across three economically distinct equity benchmarks (NASDAQ-100, Nikkei 225, Euro Stoxx 50) over a 17-year out-of-sample horizon. The core innovations—a hierarchical Dirichlet policy separating equity-cash allocation from asset selection, and a performance-based adaptive retraining criterion—are clearly described, and the walk-forward evaluation design is rigorous. However, four major methodological concerns must be addressed before publication: (1) the SAC adaptation to the portfolio simplex is underspecified, leaving the validity of the actor-critic update unclear; (2) approximately 75 hypothesis tests are conducted at the 10\% level without multiple-testing correction, which is comparable to the number of 'significant' Euro Stoxx 50 alpha findings and renders the main positive result statistically fragile; (3) transaction costs are modelled at an optimistic 2 bps with no sensitivity analysis at realistic frictions; and (4) the yfinance data pipeline lacks documentation of corporate-action handling and delisted-ticker treatment, potentially reintroducing survivorship bias despite the Bloomberg membership data. Reproducibility is critically deficient: no code is released, Bloomberg constituent data are restricted, and hyperparameters and fold boundaries are not fully operationalised. The citation specialist review failed to complete (timeout), leaving citation quality partially unverified; two bibliography errors were identified by the technical reviewer. The paper requires major revision before it can be published with confidence.
+
+\textbf{Recommendation:} Major revision \quad \textbf{Confidence:} 74\%\\
+
+\section*{Strengths}
+\begin{itemize}[leftmargin=*]
+  \item First unified multi-market RL portfolio evaluation across US (NASDAQ-100), Asian (Nikkei 225), and European (Euro Stoxx 50) equity markets using an identical rigorous walk-forward methodology with 16 out-of-sample folds spanning 17 years.
+  \item Novel hierarchical Dirichlet policy architecture that separates the equity-cash allocation decision from individual asset selection, addressing a structural limitation of flat portfolio policies.
+  \item Performance-based adaptive retraining criterion with explicit, well-defined triggering conditions that reduces computational cost while preserving deployment realism.
+  \item Comprehensive regime decomposition linking RL outperformance to elevated-uncertainty periods, providing actionable insight into when active allocation adds value over passive strategies.
+  \item Systematic comparison of five model configurations varying reward formulation, policy structure, constraints, and temporal encoder (LSTM vs. Transformer), providing useful design guidance for practitioners.
+\end{itemize}
+
+\section*{Weaknesses}
+\begin{itemize}[leftmargin=*]
+  \item The SAC adaptation to the portfolio simplex is underspecified: the paper does not state the Dirichlet log-probability or entropy formulae used in actor and critic targets, does not confirm whether a Jacobian correction is applied, and does not justify the fixed entropy coefficient alpha=0.2 relative to the variable action-simplex dimension (10–30 assets plus cash).
+  \item Approximately 75 hypothesis tests are conducted at the 10\% significance level without any family-wise error rate or false-discovery-rate correction; the expected number of spurious rejections (\~{}7–8) is comparable to the count of 'significant' Euro Stoxx 50 alpha findings, making the main positive result statistically fragile.
+  \item Transaction costs are modelled at an optimistic 2 bps with no sensitivity analysis; realistic institutional frictions including bid-ask spread and market impact are typically 5–10 bps, and the paper does not demonstrate that the Euro Stoxx 50 alpha survives under more realistic cost assumptions.
+  \item The yfinance data pipeline lacks documentation of corporate-action adjustment, total-return versus price-return treatment, and handling of delisted tickers, which may reintroduce survivorship or look-ahead bias despite the use of Bloomberg constituent membership data.
+  \item Reproducibility is critically deficient: no code, scripts, or model artifacts are released; Bloomberg constituent membership data are restricted; hyperparameters (candidate configurations, fold-specific selections, random seeds) and evaluation details (exact fold boundaries, HAC lag choices, stationary bootstrap parameters) are not fully operationalised (reproducibility score 0.28).
+  \item The Maximum Drawdown formula as typeset (Section 5.8, Eq. eq:md) is mathematically degenerate—the inner maximisation over t does not affect the expression R\_\{i,T\}-R\_\{i,s\}—and does not correspond to the standard peak-to-trough definition.
+  \item The foundational SAC reference (Haarnoja et al. 2018) is cited in-text but absent from the bibliography; bibliography entry [12] labelled 'Giles2001' maps to a 2021 IEEE paper rather than the intended Giles, Lawrence \& Tsoi (2001) work.
+\end{itemize}
+
+\section*{Revision Targets}
+\begin{itemize}[leftmargin=*]
+  \item [open] paper\_tex `corrections/2605.17307/paper.tex` at `Section 5.5 (Model Architecture); Table 4`: State explicitly the Dirichlet log-prob/entropy formulae used in the actor and critic targets, justify alpha=0.2 versus the action-simplex dimension, and report sensitivity of results to alpha. Check: Re-review should confirm `Section 5.5 (Model Architecture); Table 4` is corrected or justified.
+  \item [open] paper\_tex `corrections/2605.17307/paper.tex` at `Section 6.4, Tables 7-8; Section 8, Table 9`: Apply a family-wise or false-discovery-rate correction across all tested strategy-market-metric combinations, or report deflated Sharpe ratios (Bailey \& Lopez de Prado 2014) and re-state which findings survive. Check: Re-review should confirm `Section 6.4, Tables 7-8; Section 8, Table 9` is corrected or justified.
+  \item [open] paper\_tex `corrections/2605.17307/paper.tex` at `Section 5.5, Table 6 and note`: Re-run a sensitivity analysis at 5, 10, and 20 bps to show whether the EURO STOXX 50 alpha and ensemble alpha survive realistic frictions; clarify the basis on which 2 bps maps to IBKR per-share fees. Check: Re-review should confirm `Section 5.5, Table 6 and note` is corrected or justified.
+  \item [open] paper\_tex `corrections/2605.17307/paper.tex` at `Section 3.2`: Document the corporate-action adjustment policy, the source of price data for delisted tickers (since yfinance often loses them), and clarify whether returns are total returns or price returns; ideally cross-validate a subset against Bloomberg pricing. Check: Re-review should confirm `Section 3.2` is corrected or justified.
+  \item [open] code `boundaries/calendars` at `experiment configuration`: Publish the exact experiment configuration: random seeds, candidate grids, fold boundaries/calendars, initialization policy, package versions, top-k choices, and penalty settings. Check: Re-review should confirm exact seeds, grids, folds, package versions, and configuration choices are specified.
+  \item [open] paper\_tex `corrections/2605.17307/paper.tex` at `Section 5.8, Eq. eq:md`: Replace Eq. eq:md with the standard peak-to-trough formulation, e.g., MD = max\_\{0<=s<=t<=T\} ( max\_\{u<=t\} V\_u - V\_t ) / max\_\{u<=t\} V\_u, where V\_t is the equity curve. Check: Re-review should confirm `Section 5.8, Eq. eq:md` is corrected or justified.
+  \item [open] paper\_tex `corrections/2605.17307/paper.tex` at `Bibliography entry [12]`: Replace entry [12] with Giles, Lawrence \& Tsoi (2001), or update the in-text citation key to match the Lin et al. (2021) paper actually in the bibliography. Check: Re-review should confirm `Bibliography entry [12]` is corrected or justified.
+\end{itemize}
+
+\section*{Open Questions}
+\begin{itemize}[leftmargin=*]
+  \item How exactly are the Dirichlet log-probability and entropy computed within the SAC actor and critic update steps, and is a Jacobian correction applied to account for the simplex constraint? How was alpha=0.2 calibrated relative to the varying action-simplex dimension?
+  \item Do the reported Euro Stoxx 50 alpha results (and ensemble alpha) survive a standard multiple-testing correction—e.g., Benjamini-Hochberg FDR across all \~{}75 strategy-market-metric tests—and if not, how should the paper's conclusions be reframed?
+  \item Does the outperformance observed on Euro Stoxx 50 persist when transaction costs are raised to 5 bps, 10 bps, and 20 bps to reflect realistic institutional frictions including bid-ask spread and market impact?
+  \item How were split-adjusted prices and total returns handled for delisted index constituents in yfinance (which typically drops delisted tickers), and were the resulting return series cross-validated against Bloomberg or another authoritative source?
+  \item Will code and processed data be made publicly available upon acceptance? If Bloomberg constituent membership data cannot be shared, will the authors at minimum release exported ticker-date membership matrices so independent replication is feasible?
+\end{itemize}
+
+\section*{Per-Agent Reviews}
+\subsection*{citation (\texttt{gemini-3-flash-preview})}
+\begin{verbatim}
+{
+  "error": "CliRunner timed out after 360s for role Citation",
+  "role": "citation",
+  "status": "agent_failed"
+}
+\end{verbatim}
+
+\subsection*{meta_reviewer (\texttt{claude-sonnet-4-6})}
+\begin{verbatim}
+{
+  "confidence": 0.74,
+  "questions": [
+    "How exactly are the Dirichlet log-probability and entropy computed within the SAC actor and critic update steps, and is a Jacobian correction applied to account for the simplex constraint? How was alpha=0.2 calibrated relative to the varying action-simplex dimension?",
+    "Do the reported Euro Stoxx 50 alpha results (and ensemble alpha) survive a standard multiple-testing correction—e.g., Benjamini-Hochberg FDR across all ~75 strategy-market-metric tests—and if not, how should the paper's conclusions be reframed?",
+    "Does the outperformance observed on Euro Stoxx 50 persist when transaction costs are raised to 5 bps, 10 bps, and 20 bps to reflect realistic institutional frictions including bid-ask spread and market impact?",
+    "How were split-adjusted prices and total returns handled for delisted index constituents in yfinance (which typically drops delisted tickers), and were the resulting return series cross-validated against Bloomberg or another authoritative source?",
+    "Will code and processed data be made publicly available upon acceptance? If Bloomberg constituent membership data cannot be shared, will the authors at minimum release exported ticker-date membership matrices so independent replication is feasible?"
+  ],
+  "recommendation": "major_revision",
+  "revision_targets": [
+    {
+      "evidence": "SAC was originally formulated for unbounded continuous (Gaussian) action spaces, with the entropy term scaled to the action dimension. The paper substitutes a Dirichlet output head but never specifies (i) how the Dirichlet log-probability and entropy are computed for the reparameterized sample, (ii) whether the squashing/Jacobian correction needed for valid SAC updates on the simplex is applied, or (iii) how the fixed alpha=0.2 was chosen given that Dirichlet entropy scales with the simplex dimension (N+1 with cash, top-k of 10-30 here). The paper only justifies fixing alpha empirically (instability), which does not address the dimensional mismatch concern.",
+      "id": "weakness-1",
+      "locator": "Section 5.5 (Model Architecture); Table 4",
+      "required_update": "State explicitly the Dirichlet log-prob/entropy formulae used in the actor and critic targets, justify alpha=0.2 versus the action-simplex dimension, and report sensitivity of results to alpha.",
+      "source_path": "corrections/2605.17307/paper.tex",
+      "source_role": "technical_correctness",
+      "status": "open",
+      "target_kind": "paper_tex",
+      "verification_check": "Re-review should confirm `Section 5.5 (Model Architecture); Table 4` is corrected or justified.",
+      "weakness_index": 0
+    },
+    {
+      "evidence": "The reported HAC p-values and bootstrap p-values in Tables 7 and 9 are internally consistent with the textual claims. However, the paper runs ~75 hypothesis tests (5 strategies x 3 markets x 3 statistics, plus ensemble and 9 sub-period sets) at the 10% level without any multiple-testing correction (Bonferroni, Holm, or Benjamini-Hochberg) and without a deflated Sharpe ratio in the spirit of the Bailey-Lopez de Prado work the paper itself cites. With family-wise error uncorrected, ~7-8 spurious 10%-level rejections are expected even under the null, which is comparable to the count of 'significant' alpha rejections in Table 8 (LSTM_1, LSTM_2, LSTM_NC_2, Transformer for EURO STOXX 50; LSTM_1, LSTM_2 for ensemble).",
+      "id": "weakness-2",
+      "locator": "Section 6.4, Tables 7-8; Section 8, Table 9",
+      "required_update": "Apply a family-wise or false-discovery-rate correction across all tested strategy-market-metric combinations, or report deflated Sharpe ratios (Bailey & Lopez de Prado 2014) and re-state which findings survive.",
+      "source_path": "corrections/2605.17307/paper.tex",
+      "source_role": "technical_correctness",
+      "status": "open",
+      "target_kind": "paper_tex",
+      "verification_check": "Re-review should confirm `Section 6.4, Tables 7-8; Section 8, Table 9` is corrected or justified.",
+      "weakness_index": 1
+    },
+    {
+      "evidence": "IBKR's tiered schedule is quoted in bps per share, not bps of notional turnover; converting the 0.05-0.35 bps-per-share range to a portfolio-turnover cost depends on average trade size and price, and typically yields a wider range, often closer to 5-10 bps for diversified equity rebalancing once bid-ask spread and market impact are included. The 2 bps assumption excludes spread and impact and is at the optimistic end. Sensitivity to higher cost levels is mentioned as a limitation but not tested in the empirical results.",
+      "id": "weakness-3",
+      "locator": "Section 5.5, Table 6 and note",
+      "required_update": "Re-run a sensitivity analysis at 5, 10, and 20 bps to show whether the EURO STOXX 50 alpha and ensemble alpha survive realistic frictions; clarify the basis on which 2 bps maps to IBKR per-share fees.",
+      "source_path": "corrections/2605.17307/paper.tex",
+      "source_role": "technical_correctness",
+      "status": "open",
+      "target_kind": "paper_tex",
+      "verification_check": "Re-review should confirm `Section 5.5, Table 6 and note` is corrected or justified.",
+      "weakness_index": 2
+    },
+    {
+      "evidence": "Bloomberg membership records do address survivorship of index constituents over time, which is a real strength. However, yfinance is known to (i) silently back-adjust prices for splits/dividends only for currently listed tickers, (ii) drop or alter tickers after delisting, and (iii) have inconsistent total-return vs. price-return treatment across exchanges (notably EWJ/FEZ and Japanese listings). The paper does not document handling of corporate actions, total-return adjustments, or how delisted-asset prices were obtained, all of which can re-introduce survivorship/look-ahead bias even with a correct membership matrix.",
+      "id": "weakness-4",
+      "locator": "Section 3.2",
+      "required_update": "Document the corporate-action adjustment policy, the source of price data for delisted tickers (since yfinance often loses them), and clarify whether returns are total returns or price returns; ideally cross-validate a subset against Bloomberg pricing.",
+      "source_path": "corrections/2605.17307/paper.tex",
+      "source_role": "technical_correctness",
+      "status": "open",
+      "target_kind": "paper_tex",
+      "verification_check": "Re-review should confirm `Section 3.2` is corrected or justified.",
+      "weakness_index": 3
+    },
+    {
+      "evidence": "Common SAC parameters are reported, but the predefined candidate configurations, fold-specific selected settings, concentration penalties by configuration, random seeds, number of runs, and deterministic training settings are not fully specified.",
+      "id": "weakness-5",
+      "locator": "experiment configuration",
+      "required_update": "Publish the exact experiment configuration: random seeds, candidate grids, fold boundaries/calendars, initialization policy, package versions, top-k choices, and penalty settings.",
+      "source_path": "boundaries/calendars",
+      "source_role": "reproducibility",
+      "status": "open",
+      "target_kind": "code",
+      "verification_check": "Re-review should confirm exact seeds, grids, folds, package versions, and configuration choices are specified.",
+      "weakness_index": 4
+    },
+    {
+      "evidence": "As written, the inner maximization is over t but the expression inside (R_{i,T} - R_{i,s}) does not depend on t, so the inner max is degenerate. The intended formula for maximum peak-to-trough drawdown is something like MD = max_{0<=s<=t<=T} (P_s - P_t)/P_s or, in return-space, max_t ( max_{s<=t} R_s - R_t ). The published equation as typeset is mathematically inconsistent with the standard MD definition the paper actually uses in the tables.",
+      "id": "weakness-6",
+      "locator": "Section 5.8, Eq. eq:md",
+      "required_update": "Replace Eq. eq:md with the standard peak-to-trough formulation, e.g., MD = max_{0<=s<=t<=T} ( max_{u<=t} V_u - V_t ) / max_{u<=t} V_u, where V_t is the equity curve.",
+      "source_path": "corrections/2605.17307/paper.tex",
+      "source_role": "technical_correctness",
+      "status": "open",
+      "target_kind": "paper_tex",
+      "verification_check": "Re-review should confirm `Section 5.8, Eq. eq:md` is corrected or justified.",
+      "weakness_index": 5
+    },
+    {
+      "evidence": "Bibliography entry [12] is 'Lin, Yu-Fei et al., 2021, IEEE Transactions on Emerging Topics in Computational Intelligence', not the Giles, Lawrence & Tsoi (2001) paper 'Noisy time series prediction using recurrent neural networks and grammatical inference' (Machine Learning). The in-text discussion and the bibliography are inconsistent.",
+      "id": "weakness-7",
+      "locator": "Bibliography entry [12]",
+      "required_update": "Replace entry [12] with Giles, Lawrence & Tsoi (2001), or update the in-text citation key to match the Lin et al. (2021) paper actually in the bibliography.",
+      "source_path": "corrections/2605.17307/paper.tex",
+      "source_role": "technical_correctness",
+      "status": "open",
+      "target_kind": "paper_tex",
+      "verification_check": "Re-review should confirm `Bibliography entry [12]` is corrected or justified.",
+      "weakness_index": 6
+    }
+  ],
+  "strengths": [
+    "First unified multi-market RL portfolio evaluation across US (NASDAQ-100), Asian (Nikkei 225), and European (Euro Stoxx 50) equity markets using an identical rigorous walk-forward methodology with 16 out-of-sample folds spanning 17 years.",
+    "Novel hierarchical Dirichlet policy architecture that separates the equity-cash allocation decision from individual asset selection, addressing a structural limitation of flat portfolio policies.",
+    "Performance-based adaptive retraining criterion with explicit, well-defined triggering conditions that reduces computational cost while preserving deployment realism.",
+    "Comprehensive regime decomposition linking RL outperformance to elevated-uncertainty periods, providing actionable insight into when active allocation adds value over passive strategies.",
+    "Systematic comparison of five model configurations varying reward formulation, policy structure, constraints, and temporal encoder (LSTM vs. Transformer), providing useful design guidance for practitioners."
+  ],
+  "summary": "This paper presents an incremental but methodologically substantive extension of deep RL portfolio management, providing the first unified multi-market comparison across three economically distinct equity benchmarks (NASDAQ-100, Nikkei 225, Euro Stoxx 50) over a 17-year out-of-sample horizon. The core innovations—a hierarchical Dirichlet policy separating equity-cash allocation from asset selection, and a performance-based adaptive retraining criterion—are clearly described, and the walk-forward evaluation design is rigorous. However, four major methodological concerns must be addressed before publication: (1) the SAC adaptation to the portfolio simplex is underspecified, leaving the validity of the actor-critic update unclear; (2) approximately 75 hypothesis tests are conducted at the 10% level without multiple-testing correction, which is comparable to the number of 'significant' Euro Stoxx 50 alpha findings and renders the main positive result statistically fragile; (3) transaction costs are modelled at an optimistic 2 bps with no sensitivity analysis at realistic frictions; and (4) the yfinance data pipeline lacks documentation of corporate-action handling and delisted-ticker treatment, potentially reintroducing survivorship bias despite the Bloomberg membership data. Reproducibility is critically deficient: no code is released, Bloomberg constituent data are restricted, and hyperparameters and fold boundaries are not fully operationalised. The citation specialist review failed to complete (timeout), leaving citation quality partially unverified; two bibliography errors were identified by the technical reviewer. The paper requires major revision before it can be published with confidence.",
+  "weaknesses": [
+    "The SAC adaptation to the portfolio simplex is underspecified: the paper does not state the Dirichlet log-probability or entropy formulae used in actor and critic targets, does not confirm whether a Jacobian correction is applied, and does not justify the fixed entropy coefficient alpha=0.2 relative to the variable action-simplex dimension (10–30 assets plus cash).",
+    "Approximately 75 hypothesis tests are conducted at the 10% significance level without any family-wise error rate or false-discovery-rate correction; the expected number of spurious rejections (~7–8) is comparable to the count of 'significant' Euro Stoxx 50 alpha findings, making the main positive result statistically fragile.",
+    "Transaction costs are modelled at an optimistic 2 bps with no sensitivity analysis; realistic institutional frictions including bid-ask spread and market impact are typically 5–10 bps, and the paper does not demonstrate that the Euro Stoxx 50 alpha survives under more realistic cost assumptions.",
+    "The yfinance data pipeline lacks documentation of corporate-action adjustment, total-return versus price-return treatment, and handling of delisted tickers, which may reintroduce survivorship or look-ahead bias despite the use of Bloomberg constituent membership data.",
+    "Reproducibility is critically deficient: no code, scripts, or model artifacts are released; Bloomberg constituent membership data are restricted; hyperparameters (candidate configurations, fold-specific selections, random seeds) and evaluation details (exact fold boundaries, HAC lag choices, stationary bootstrap parameters) are not fully operationalised (reproducibility score 0.28).",
+    "The Maximum Drawdown formula as typeset (Section 5.8, Eq. eq:md) is mathematically degenerate—the inner maximisation over t does not affect the expression R_{i,T}-R_{i,s}—and does not correspond to the standard peak-to-trough definition.",
+    "The foundational SAC reference (Haarnoja et al. 2018) is cited in-text but absent from the bibliography; bibliography entry [12] labelled 'Giles2001' maps to a 2021 IEEE paper rather than the intended Giles, Lawrence & Tsoi (2001) work."
+  ]
+}
+\end{verbatim}
+
+\subsection*{novelty (\texttt{gemini-3-flash-preview})}
+\begin{verbatim}
+{
+  "confidence": 0.9,
+  "missing_prior_art": [
+    {
+      "reason": "The paper explicitly states that its methodology is based on the Soft Actor-Critic algorithm and includes an in-text citation [@Haarnoja2018], yet the foundational work for this algorithm is omitted from the bibliography list in the metadata.",
+      "title": "Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor"
+    }
+  ],
+  "novelty_score": 0.6,
+  "related_work": [
+    {
+      "citation_key": "yang2020deep",
+      "delta": "Extends the ensemble deep reinforcement learning strategy by applying it to cross-market portfolio aggregation and introducing a hierarchical Dirichlet policy structure that separates equity-cash allocation from individual asset selection.",
+      "relation": "builds_on",
+      "title": "Deep reinforcement learning for automated stock trading: An ensemble strategy"
+    },
+    {
+      "citation_key": "analytics2030031",
+      "delta": "While both papers utilize hierarchical reinforcement learning, the current study focuses on a Dirichlet-based allocation for continuous weight management rather than a model-based selection between regime-specialized agents.",
+      "relation": "prior_art",
+      "title": "Hierarchical Model-Based Deep Reinforcement Learning for Single-Asset Trading"
+    },
+    {
+      "citation_key": "DE_MIGEUL",
+      "delta": "Validates the RL strategies against the 1/N benchmark across diverse global markets and regimes, empirically demonstrating the difficulty of consistently outperforming naive diversification.",
+      "relation": "prior_art",
+      "title": "Optimal Versus Naive Diversification: How Inefficient is the 1/{N} Portfolio Strategy?"
+    },
+    {
+      "citation_key": "Liu_2025",
+      "delta": "Contrasts with the general-purpose FinRL-Meta framework by providing a specific, unified multi-market evaluation using adaptive retraining and walk-forward optimization.",
+      "relation": "prior_art",
+      "title": "{FinRL-Meta}: A universe of near-real market environments for data-driven deep reinforcement learning in quantitative finance"
+    }
+  ],
+  "verdict": "incremental"
+}
+\end{verbatim}
+
+\subsection*{reproducibility (\texttt{gpt-5.5})}
+\begin{verbatim}
+{
+  "code_availability": "unspecified",
+  "code_url": null,
+  "concerns": [
+    {
+      "area": "code",
+      "description": "No repository, scripts, notebooks, or model artifacts are cited. The paper describes a custom SAC portfolio environment, Dirichlet policy variants, adaptive retraining, benchmarks, and statistical tests, so reproduction would require reimplementing a large pipeline from prose.",
+      "severity": "critical"
+    },
+    {
+      "area": "data",
+      "description": "The dataset depends on Bloomberg Terminal Anywhere historical constituent membership data, and no exported membership files or processed dataset are supplied. This makes exact universe reconstruction restricted and difficult to audit.",
+      "severity": "critical"
+    },
+    {
+      "area": "data",
+      "description": "Price data are obtained from yfinance, but no versioned raw snapshot, exact ticker mapping, corporate-action handling record, VIX source, or download date is provided; yfinance histories can change over time.",
+      "severity": "major"
+    },
+    {
+      "area": "hyperparameters",
+      "description": "Common SAC parameters are reported, but the predefined candidate configurations, fold-specific selected settings, concentration penalties by configuration, random seeds, number of runs, and deterministic training settings are not fully specified.",
+      "severity": "major"
+    },
+    {
+      "area": "evaluation",
+      "description": "The walk-forward design is described, but exact fold boundaries, retraining decisions, benchmark optimizer constraints such as maximum position caps, HAC lag choices, stationary bootstrap parameters, and regression specifications are not fully operationalized.",
+      "severity": "major"
+    },
+    {
+      "area": "compute",
+      "description": "Hardware and approximate per-cycle training times are reported, but the full compute budget across markets, folds, configurations, and repeated runs is not quantified; reproduction appears expensive on an NVIDIA L4-class GPU.",
+      "severity": "minor"
+    }
+  ],
+  "confidence": 0.87,
+  "data_availability": "restricted",
+  "data_url": null,
+  "environment": {
+    "dependencies": [
+      "yfinance API",
+      "Bloomberg Terminal Anywhere subscription"
+    ],
+    "hardware": "Cloud G2-standard instance with NVIDIA L4 GPU (24GB VRAM) and 30GB system memory",
+    "software": null
+  },
+  "reproducibility_score": 0.28
+}
+\end{verbatim}
+
+\subsection*{summary (\texttt{claude-haiku-4-5-20251001})}
+\begin{verbatim}
+{
+  "audience": "Quantitative finance researchers, asset managers and portfolio optimization professionals, machine learning practitioners interested in financial applications, and investors exploring algorithmic trading strategies",
+  "key_contributions": [
+    "Multi-market evaluation framework: First unified analysis of RL portfolio strategies across three economically distinct equity markets (US, Asia, Europe) using identical walk-forward optimization procedures",
+    "Novel hierarchical policy architecture: Introduction of a hierarchical Dirichlet policy that separates equity-cash allocation from individual asset selection, improving upon flat policy structures in prior work",
+    "Adaptive retraining criterion: Development of a performance-based retraining mechanism that selectively updates the model based on validation performance, reducing computational costs while maintaining deployment realism",
+    "Systematic regime analysis: Comprehensive decomposition of performance across three macroeconomic periods showing RL adds value primarily during elevated uncertainty and market regime changes",
+    "Design choice comparison: Systematic evaluation of five model configurations examining reward formulation, policy structure, portfolio constraints, and temporal encoders (LSTM versus Transformer)"
+  ],
+  "plain_language_summary": "This paper presents a machine-learning system that automatically decides how much money to allocate to different stocks across three major global stock markets (US Nasdaq-100, Japan's Nikkei 225, and Europe's Euro Stoxx 50) from 2003 to 2026. Rather than using traditional mathematical optimization or simple buy-and-hold strategies, the authors employ reinforcement learning—similar to how systems learn to win games by trial and error—to discover investment strategies that adapt to changing market conditions. The system was tested with five different configurations that varied in their reward structure, policy design, and the way they process historical price data.\n\nThe results are mixed but informative. The reinforcement learning strategies performed particularly well in European markets, achieving statistically significant excess returns compared to a simple buy-and-hold approach. However, when tested across all three markets simultaneously and using rigorous statistical tests, no strategy achieved consistent outperformance. The authors found that the RL approach works best during periods of elevated market uncertainty—when traditional passive investment tends to underperform—suggesting that active machine-learning-based allocation has value in volatile environments but cannot reliably beat simple strategies in trending markets.\n\nThe paper makes several methodological contributions, including testing a novel hierarchical decision-making structure that separately handles the decision to hold cash versus invest, and an adaptive retraining system that updates the model based on validation performance rather than simply training once. The research demonstrates that while reinforcement learning offers promise for portfolio management, success depends critically on market regime, reward function design, and careful validation against multiple benchmarks.",
+  "tldr": "A deep reinforcement learning framework for portfolio allocation across global equity markets shows competitive performance in European markets but achieves statistically significant excess returns only inconsistently, with benefits concentrated during high-uncertainty periods."
+}
+\end{verbatim}
+
+\subsection*{technical_correctness (\texttt{claude-opus-4-7})}
+\begin{verbatim}
+{
+  "claims": [
+    {
+      "assessment": "partially_supported",
+      "claim": "The Soft Actor-Critic algorithm is used with Dirichlet policy outputs for portfolio weights, with entropy coefficient alpha held fixed at 0.2 across all experiments.",
+      "evidence": "SAC was originally formulated for unbounded continuous (Gaussian) action spaces, with the entropy term scaled to the action dimension. The paper substitutes a Dirichlet output head but never specifies (i) how the Dirichlet log-probability and entropy are computed for the reparameterized sample, (ii) whether the squashing/Jacobian correction needed for valid SAC updates on the simplex is applied, or (iii) how the fixed alpha=0.2 was chosen given that Dirichlet entropy scales with the simplex dimension (N+1 with cash, top-k of 10-30 here). The paper only justifies fixing alpha empirically (instability), which does not address the dimensional mismatch concern.",
+      "id": "C1",
+      "location": "Section 5.5 (Model Architecture); Table 4",
+      "severity": "major",
+      "suggested_fix": "State explicitly the Dirichlet log-prob/entropy formulae used in the actor and critic targets, justify alpha=0.2 versus the action-simplex dimension, and report sensitivity of results to alpha."
+    },
+    {
+      "assessment": "incorrect",
+      "claim": "The Maximum Drawdown is defined as MD(T) = max_{s in [0,T]} ( max_{t in [0,s]} (R_{i,T} - R_{i,s}) ) * 100%.",
+      "evidence": "As written, the inner maximization is over t but the expression inside (R_{i,T} - R_{i,s}) does not depend on t, so the inner max is degenerate. The intended formula for maximum peak-to-trough drawdown is something like MD = max_{0<=s<=t<=T} (P_s - P_t)/P_s or, in return-space, max_t ( max_{s<=t} R_s - R_t ). The published equation as typeset is mathematically inconsistent with the standard MD definition the paper actually uses in the tables.",
+      "id": "C2",
+      "location": "Section 5.8, Eq. eq:md",
+      "severity": "minor",
+      "suggested_fix": "Replace Eq. eq:md with the standard peak-to-trough formulation, e.g., MD = max_{0<=s<=t<=T} ( max_{u<=t} V_u - V_t ) / max_{u<=t} V_u, where V_t is the equity curve."
+    },
+    {
+      "assessment": "supported",
+      "claim": "Modified Information Ratio IR2 = IR1 * ARC * sign(ARC) / MD is used as the primary risk-adjusted criterion.",
+      "evidence": "This is the (Slepaczuk et al.) IR** convention cited via [michankow2022lstm, PairTrading]. Algebraically it equals ARC*|ARC|/(ASD*MD), which is internally consistent and matches its usage in Tables [perf_metric_*] where it scales with ARC^2 and inversely with ASD and MD. No mathematical error, but the metric is non-standard outside this group's prior work and is not in widespread use, which the paper does not flag.",
+      "id": "C3",
+      "location": "Section 5.8, Eq. eq:ir-starstar",
+      "severity": "info",
+      "suggested_fix": "Briefly state the relationship IR2 = ARC*|ARC|/(ASD*MD) and acknowledge that this is a non-standard metric specific to the cited line of work."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "The Sharpe ratio is computed as SR = (mean R / sigma_R) * sqrt(252).",
+      "evidence": "The formula omits the risk-free rate, treating the gross mean as the excess return. Over 2009-2026 the average short-term USD/EUR/JPY risk-free rate is non-trivial, so the reported Sharpe ratios are upward-biased relative to the textbook definition. The paper does not justify this choice or test sensitivity to a non-zero rf.",
+      "id": "C4",
+      "location": "Section 5.8, Eq. eq:sharpe",
+      "severity": "minor",
+      "suggested_fix": "Either subtract a documented daily risk-free proxy (e.g., 3M T-bill / Euribor / TONA) or explicitly redefine the metric as a gross Sharpe and acknowledge the deviation."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Across all three markets none of the RL strategies achieve statistically significant mean-return differences relative to Buy & Hold under HAC-robust inference, but LSTM_1/LSTM_2/Transformer have statistically significant positive alphas on the EURO STOXX 50 and LSTM_1/LSTM_2 ensembles show significant alphas at the 10% level.",
+      "evidence": "The reported HAC p-values and bootstrap p-values in Tables 7 and 9 are internally consistent with the textual claims. However, the paper runs ~75 hypothesis tests (5 strategies x 3 markets x 3 statistics, plus ensemble and 9 sub-period sets) at the 10% level without any multiple-testing correction (Bonferroni, Holm, or Benjamini-Hochberg) and without a deflated Sharpe ratio in the spirit of the Bailey-Lopez de Prado work the paper itself cites. With family-wise error uncorrected, ~7-8 spurious 10%-level rejections are expected even under the null, which is comparable to the count of 'significant' alpha rejections in Table 8 (LSTM_1, LSTM_2, LSTM_NC_2, Transformer for EURO STOXX 50; LSTM_1, LSTM_2 for ensemble).",
+      "id": "C5",
+      "location": "Section 6.4, Tables 7-8; Section 8, Table 9",
+      "severity": "major",
+      "suggested_fix": "Apply a family-wise or false-discovery-rate correction across all tested strategy-market-metric combinations, or report deflated Sharpe ratios (Bailey & Lopez de Prado 2014) and re-state which findings survive."
+    },
+    {
+      "assessment": "supported",
+      "claim": "The walk-forward optimization uses 5 trading years for training, 1 year for validation, and 1 year for testing, with 16 out-of-sample folds spanning 2003-2026.",
+      "evidence": "Trading begins 2009-04-06 = 2003-01-02 + 5y training + 1y validation + ~3 months alignment, which is consistent with the WFO design. The 17-year out-of-sample window (2009-04-2026-03) divided by 1-year non-anchored test windows yields roughly 16 folds, matching the abstract's claim.",
+      "id": "C6",
+      "location": "Abstract; Section 5.6.1; Figure 6",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "supported",
+      "claim": "H = sum w_i^2 has minimum HHI^min = 1/N_t, corresponding to an equal-weight allocation.",
+      "evidence": "For weights summing to 1, by Cauchy-Schwarz the minimum of sum w_i^2 over the simplex is 1/N at w_i = 1/N. Correct.",
+      "id": "C7",
+      "location": "Section 5.3, Eq. eq:HHI",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "supported",
+      "claim": "Top-k momentum pre-selection guarantees a constant state-vector dimension regardless of the time-varying universe size N_t.",
+      "evidence": "If k is fixed and at least k assets are tradable each day, the resulting per-step asset count is constant. The paper does not explicitly state what happens if fewer than k constituents are tradable at a given date (rare, but possible during membership churn near 2003 or during the 2008 boundary), which is a minor gap.",
+      "id": "C8",
+      "location": "Section 5.1 (Dynamic asset universe)",
+      "severity": "info",
+      "suggested_fix": "Add a sentence describing the fallback when fewer than k assets pass the tradability mask."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Transaction costs of 2 basis points per unit of turnover are 'consistent with the lower bound of equity commissions available to institutional and high-volume traders on IBKR'.",
+      "evidence": "IBKR's tiered schedule is quoted in bps per share, not bps of notional turnover; converting the 0.05-0.35 bps-per-share range to a portfolio-turnover cost depends on average trade size and price, and typically yields a wider range, often closer to 5-10 bps for diversified equity rebalancing once bid-ask spread and market impact are included. The 2 bps assumption excludes spread and impact and is at the optimistic end. Sensitivity to higher cost levels is mentioned as a limitation but not tested in the empirical results.",
+      "id": "C9",
+      "location": "Section 5.5, Table 6 and note",
+      "severity": "major",
+      "suggested_fix": "Re-run a sensitivity analysis at 5, 10, and 20 bps to show whether the EURO STOXX 50 alpha and ensemble alpha survive realistic frictions; clarify the basis on which 2 bps maps to IBKR per-share fees."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Daily price data from yfinance with forward-filling of missing observations, combined with Bloomberg constituent membership, eliminates survivorship bias.",
+      "evidence": "Bloomberg membership records do address survivorship of index constituents over time, which is a real strength. However, yfinance is known to (i) silently back-adjust prices for splits/dividends only for currently listed tickers, (ii) drop or alter tickers after delisting, and (iii) have inconsistent total-return vs. price-return treatment across exchanges (notably EWJ/FEZ and Japanese listings). The paper does not document handling of corporate actions, total-return adjustments, or how delisted-asset prices were obtained, all of which can re-introduce survivorship/look-ahead bias even with a correct membership matrix.",
+      "id": "C10",
+      "location": "Section 3.2",
+      "severity": "major",
+      "suggested_fix": "Document the corporate-action adjustment policy, the source of price data for delisted tickers (since yfinance often loses them), and clarify whether returns are total returns or price returns; ideally cross-validate a subset against Bloomberg pricing."
+    },
+    {
+      "assessment": "supported",
+      "claim": "The adaptive retraining threshold theta_k = median(S_{k-m},...,S_{k-1}) - 0.5*std(S_{k-m},...,S_{k-1}) with m=5 triggers retraining when validation Sharpe falls below it, when validation Sharpe is negative, or after three folds without retraining.",
+      "evidence": "The conditions are well-defined; cold-start (k<3) defaults to always-retrain, which is sensible. The threshold is ad hoc but explicit. No mathematical error.",
+      "id": "C11",
+      "location": "Section 5.6.2, Eq. eq:retrain_threshold",
+      "severity": "info",
+      "suggested_fix": "Acknowledge the ad hoc nature of the threshold and report sensitivity to m and the 0.5 std multiplier, since these choices add researcher-degrees-of-freedom."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "The reward 1000 * log(1 + r_net) - lambda_TO * TO * 100 - lambda_conc * (HHI - 1/N) * 100 balances return, turnover, and concentration terms.",
+      "evidence": "The scaling is plausible at the per-step level (daily log returns ~1e-4 to 1e-3 -> 0.1 to 1 after x1000; turnover 0-2 -> 0-0.6 after x100*lambda_TO=0.003; HHI gap 0-1 -> 0-50 after x100*lambda_conc<=0.5). The concentration term can dominate the return term by an order of magnitude in early training, which may explain why all configurations end up holding broadly diversified portfolios. The paper does not report ablations isolating each term's contribution to the learning signal.",
+      "id": "C12",
+      "location": "Section 5.3, reward equation",
+      "severity": "minor",
+      "suggested_fix": "Report per-component reward magnitudes during training, or remove one term at a time, to show the gradient signal is well-balanced."
+    },
+    {
+      "assessment": "incorrect",
+      "claim": "Reference [12] Giles2001 in the bibliography (cited in text as @Giles2001 for early RNN benchmarking on financial data) corresponds to the paper that established the early RNN benchmark and proposed the zero-crossing rate.",
+      "evidence": "Bibliography entry [12] is 'Lin, Yu-Fei et al., 2021, IEEE Transactions on Emerging Topics in Computational Intelligence', not the Giles, Lawrence & Tsoi (2001) paper 'Noisy time series prediction using recurrent neural networks and grammatical inference' (Machine Learning). The in-text discussion and the bibliography are inconsistent.",
+      "id": "C13",
+      "location": "Bibliography entry [12]",
+      "severity": "minor",
+      "suggested_fix": "Replace entry [12] with Giles, Lawrence & Tsoi (2001), or update the in-text citation key to match the Lin et al. (2021) paper actually in the bibliography."
+    },
+    {
+      "assessment": "supported",
+      "claim": "The Markov assumption P(s_{t+1} | s_t, a_t, s_{t-1}, a_{t-1}, ...) = P(s_{t+1} | s_t, a_t) is approximated by including a window of past observations in the state.",
+      "evidence": "This is the standard 'frame-stacking / lookback window' trick used to embed a non-Markov environment into an approximately Markov one. The 60-day lookback (Table 6) is consistent with this rationale. Correct treatment.",
+      "id": "C14",
+      "location": "Section 4.1",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "supported",
+      "claim": "LSTM_1 ensemble achieves IR2 = 0.41 versus the equal-weight Buy&Hold ensemble benchmark IR2 = 0.34, with HAC-adjusted alpha = 0.0001 and p = 0.0496 (10% significance).",
+      "evidence": "The numbers in Table 9 are internally consistent with the textual claims. The alpha magnitude (1 bp/day ~= 2.5% annual) is plausible given the reported ARC differential. The 0.0496 p-value is correctly described as significant at 10% but not at 5%, matching the bolded entry.",
+      "id": "C15",
+      "location": "Section 8, Table 9",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "unsupported",
+      "claim": "For the NASDAQ-100, LSTM_NC_1 attains the highest absolute return of 1666.4% yet its IR2 is 0.39.",
+      "evidence": "The performance metrics tables for NASDAQ-100 are referenced as Table tab:perf_metric_qqq but the table content itself is not included in the structured paper body provided to this reviewer. The textual values (1666.4%, IR2=0.39) cannot be cross-checked against the table; if the table reports different numbers, the discussion would be inconsistent. This is a verification gap rather than a known error.",
+      "id": "C16",
+      "location": "Section 6.5 (Summary)",
+      "severity": "minor",
+      "suggested_fix": "Include the performance-metric tables in the main body (currently rendered only as references), and verify the cited numbers match."
+    },
+    {
+      "assessment": "supported",
+      "claim": "The non-anchored walk-forward parameters (5y train, 1y validation, 1y test, retraining threshold) were not subject to systematic sensitivity analysis, introducing risk of meta-overfitting.",
+      "evidence": "The authors explicitly acknowledge this limitation and cite Bailey et al. (2014). The acknowledgment is honest, but no robustness checks (varying the windows) are provided, so the empirical results remain conditional on the chosen WFO geometry.",
+      "id": "C17",
+      "location": "Section 10 (Conclusions/Limitations); Section 5.6.1",
+      "severity": "info",
+      "suggested_fix": "Run the analysis with at least one alternative WFO configuration (e.g., 3y train / 1y val / 1y test) and report whether the EURO STOXX 50 alpha persists."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "The Buy&Hold benchmark 'incurs no transaction costs', justifying it as the most stringent benchmark.",
+      "evidence": "Buy&Hold is implemented via the QQQ/FEZ/EWJ ETFs (Section 5.9), which themselves carry expense ratios (~0.20% for QQQ, ~0.29% for FEZ, ~0.50% for EWJ annually) that are not deducted in the analysis. While these are small relative to RL turnover costs, claiming zero cost overstates the benchmark's purity.",
+      "id": "C18",
+      "location": "Section 5.9",
+      "severity": "minor",
+      "suggested_fix": "Either deduct ETF expense ratios from the Buy&Hold equity curve or note explicitly that Buy&Hold ignores ETF expense ratios and that the comparison is therefore slightly biased in favor of Buy&Hold."
+    }
+  ],
+  "confidence": 0.68,
+  "overall_correctness": "mostly_sound"
+}
+\end{verbatim}
+
+\section*{Corrections}
+% corrections rendered from corrections table; empty on first publish
+No corrections have been recorded.
+
+\section*{Bibliography}
+No bibliography extracted.
+
+% \bibliographystyle{plain}
+% \bibliography{references}
+\end{document}
