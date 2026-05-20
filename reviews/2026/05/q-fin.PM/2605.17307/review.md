@@ -1,0 +1,1496 @@
+# Deep Reinforcement Learning Framework for Diversified Portfolio Management Across Global Equity Markets
+
+GrokRxiv review of [arXiv:2605.17307](https://arxiv.org/abs/2605.17307) · `q-fin.PM`
+
+## TL;DR
+
+This paper applies a Soft Actor-Critic (SAC) reinforcement learning framework with LSTM and Transformer encoders and a novel hierarchical Dirichlet policy to portfolio management across three global equity markets (NASDAQ-100, Nikkei 225, EURO STOXX 50) over a 23-year horizon. The evaluation is methodologically careful, employing walk-forward optimization, HAC-robust inference, and stationary bootstrap tests, and the authors honestly acknowledge that the central hypothesis is only partially confirmed. Specialists found the work scientifically sound in spirit but identified two major technical problems requiring correction before publication: (1) the Maximum Drawdown formula (eq:md) is mathematically incorrect with degenerate indices, and (2) the headline positive result—statistically significant alpha on EURO STOXX 50—is reported without any multiple-testing correction across the full hypothesis family (5 models × 3 markets), which means the p-values cited would not survive even a basic Bonferroni adjustment at α=0.10. Additional concerns include critical missing foundational citations (Haarnoja et al. SAC 2018, Vaswani et al. Transformer 2017, Hochreiter & Schmidhuber LSTM 1997), a reproducibility score of 0.24 driven by absent code and partially restricted data, optimistic transaction cost assumptions untested at higher levels, and single-seed evaluations without variance reporting. One citation (sterling2026deep, 2026, no DOI, 'ISI Press') could not be verified and warrants author confirmation. Novelty is assessed as incremental (0.45): the hierarchical Dirichlet policy, adaptive retraining criterion, and cross-market ensemble are genuine but evolutionary contributions relative to the FinRL-Meta and DRL portfolio literature.
+
+_Recommendation_: **Major revision** · _Confidence_: 78%
+
+## Strengths
+
+- First unified empirical evaluation applying an identical SAC-based RL pipeline across three geographically distinct major equity markets, enabling cross-market generalization analysis absent from most prior DRL portfolio studies
+- Novel hierarchical Dirichlet policy architecture that decomposes equity-cash allocation from per-stock selection, providing a principled simplex-constrained action space for portfolio RL
+- Methodologically rigorous evaluation protocol using non-anchored walk-forward optimization, HAC-robust regression alpha tests, and Politis-Romano stationary bootstrap for Sharpe and IR2 differences
+- Adaptive retraining heuristic that conditions retraining on rolling validation Sharpe performance, reducing compute while maintaining deployment realism
+- Honest and transparent reporting of mixed results, including explicit acknowledgment in the Conclusions that the central hypothesis is only partially confirmed
+- Regime decomposition analysis that links RL outperformance to specific macroeconomic periods, providing actionable guidance on when these strategies add value
+
+## Weaknesses
+
+- Maximum Drawdown formula (eq:md) is mathematically incorrect: the inner maximization over t is degenerate because R_{i,T} (the terminal value) is fixed, not a running peak; the standard definition must use a running maximum of cumulative equity V_t
+- No multiple-testing correction is applied across the full hypothesis family (5 models × 3 markets × ≥2 test types); several EURO STOXX 50 alpha p-values cited as significant at α=0.10 would not survive a basic Bonferroni correction (cutoff ≈0.0067 over 15 tests), potentially invalidating the paper's primary positive result
+- Critical foundational references are absent despite central algorithmic use: Haarnoja et al. (2018) SAC, Vaswani et al. (2017) Transformer, and Hochreiter & Schmidhuber (1997) LSTM are not cited
+- No code, trained models, or reproduction package is provided for a complex multi-architecture SAC pipeline across three markets and sixteen walk-forward folds (reproducibility score: 0.24)
+- Transaction costs fixed at 2 bps—an optimistic lower bound—with no evaluation-time robustness pass at 5 or 10 bps despite this being computationally cheap
+- All walk-forward folds trained and evaluated with a single random seed; no seed variance is reported, making it impossible to assess the stability of architectural comparisons
+- Citation sterling2026deep (2026, 'International Journal of Artificial Intelligence Research,' ISI Press) has no DOI and cannot be verified; authors must confirm its existence
+
+## Open Questions
+
+- How do the EURO STOXX 50 alpha p-values change under Romano-Wolf family-wise error rate control or the Deflated Sharpe Ratio of Bailey and López de Prado applied across all tested configurations? Does any strategy retain significance?
+- Is the SAC actor loss for the Dirichlet (and hierarchical Beta × Dirichlet) policy computed using the correct closed-form Dirichlet entropy, or is a Gaussian surrogate used? This detail is critical for replication and correctness of the entropy bonus.
+- How were delisted constituent price histories obtained via yfinance—which frequently lacks or truncates delisted-ticker data—and what terminal return (e.g., −100%, last available price, or index-deletion price) was applied to assets removed from the index mid-fold?
+- Is the Markowitz Minimum Variance benchmark constructed on the same top-k momentum-filtered universe as the RL agent, or on the full index constituent set? If different, the comparison conflates universe choice with algorithmic merit.
+- Are the ensemble returns computed in a common currency? If so, what FX conversion methodology was applied, and does the benchmark ensemble use the same currency treatment?
+
+## Per-Agent Reviews
+
+### citation (`gemini-3-flash-preview`) — status: `pass`
+
+```json
+{
+  "confidence": 0.95,
+  "entries": [
+    {
+      "citation": {
+        "arxiv_id": "2021.30599",
+        "authors": [
+          "Carta, Salvatore M.",
+          "Consoli, Sergio",
+          "Piras, Luca",
+          "Podda, Alessandro Sebastian",
+          "Recupero, Diego Reforgiato"
+        ],
+        "doi": "10.1109/ACCESS.2021.3059960",
+        "key": "cartaetal9355141",
+        "raw": "cartaetal9355141: author = {Carta, Salvatore M. and Consoli, Sergio and Piras, Luca and Podda, Alessandro Sebastian and Recupero, Diego Reforgiato}, title = {Explainable Machine Learning Exploiting News and Domain-Specific Lexicon for Stock Market Forecasting}, journal = {IEEE Access}, volume = {9}, pages = {30193--30205}, year = {2021}, publisher = {IEEE}, issn = {2169-3536}, doi = {10.1109/ACCESS.2021.3059960}",
+        "title": "Explainable Machine Learning Exploiting News and Domain-Specific Lexicon for Stock Market Forecasting",
+        "url": null,
+        "venue": "IEEE Access",
+        "year": 2021
+      },
+      "exists": null,
+      "explanation": "Cited in the Methodology section as a reference for walk-forward optimization conventions and parameter selection in financial machine learning.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Michańków, Jakub",
+          "Sakowski, Paweł",
+          "Ślepaczuk, Robert"
+        ],
+        "doi": "10.3390/s22030917",
+        "key": "michankow2022lstm",
+        "raw": "michankow2022lstm: author = {Micha{\\'n}k{\\'o}w, Jakub and Sakowski, Pawe{\\l} and {\\'S}lepaczuk, Robert}, title = {{LSTM} in Algorithmic Investment Strategies on {BTC} and {S\\&P500} Index}, journal = {Sensors}, volume = {22}, number = {3}, pages = {917}, year = {2022}, publisher = {MDPI}, issn = {1424-8220}, doi = {10.3390/s22030917}",
+        "title": "LSTM in Algorithmic Investment Strategies on BTC and S&P500 Index",
+        "url": null,
+        "venue": "Sensors",
+        "year": 2022
+      },
+      "exists": null,
+      "explanation": "Cited in the Methodology section regarding performance metrics and the definition of Maximum Loss Duration (MLD).",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2021.12678",
+        "authors": [
+          "Bui, Quynh",
+          "Ślepaczuk, Robert"
+        ],
+        "doi": "10.1016/j.physa.2021.126784",
+        "key": "PairTrading",
+        "raw": "PairTrading: author = {Bui, Quynh and {\\'S}lepaczuk, Robert}, title = {Applying {H}urst Exponent in pair trading strategies on {N}asdaq 100 index}, journal = {Physica A: Statistical Mechanics and its Applications}, volume = {592}, pages = {126784}, year = {2022}, publisher = {Elsevier}, issn = {0378-4371}, doi = {10.1016/j.physa.2021.126784}",
+        "title": "Applying Hurst Exponent in pair trading strategies on Nasdaq 100 index",
+        "url": null,
+        "venue": "Physica A: Statistical Mechanics and its Applications",
+        "year": 2022
+      },
+      "exists": null,
+      "explanation": "Cited in the Methodology section as a source for performance metrics used to evaluate trading strategies.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "6261.1952",
+        "authors": [
+          "Markowitz, Harry"
+        ],
+        "doi": "10.1111/j.1540-6261.1952.tb01525.x",
+        "key": "Markowitz_1952",
+        "raw": "Markowitz_1952: author = {Markowitz, Harry}, title = {Portfolio Selection}, journal = {The Journal of Finance}, volume = {7}, number = {1}, pages = {77--91}, year = {1952}, publisher = {American Finance Association; Wiley}, issn = {0022-1082}, doi = {10.1111/j.1540-6261.1952.tb01525.x}",
+        "title": "Portfolio Selection",
+        "url": null,
+        "venue": "The Journal of Finance",
+        "year": 1952
+      },
+      "exists": null,
+      "explanation": "High-relevance foundational reference for mean-variance optimization cited in the Literature Review.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Black, Fischer",
+          "Litterman, Robert"
+        ],
+        "doi": "10.2469/faj.v48.n5.28",
+        "key": "Black_Literman",
+        "raw": "Black_Literman: author = {Black, Fischer and Litterman, Robert}, title = {Global Portfolio Optimization}, journal = {Financial Analysts Journal}, volume = {48}, number = {5}, pages = {28--43}, year = {1992}, publisher = {CFA Institute; Taylor \\& Francis}, issn = {0015-198X}, doi = {10.2469/faj.v48.n5.28}",
+        "title": "Global Portfolio Optimization",
+        "url": null,
+        "venue": "Financial Analysts Journal",
+        "year": 1992
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review for its critique of Mean-Variance Optimization (MVO) leading to concentrated portfolios.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Ślusarczyk, Damian",
+          "Ślepaczuk, Robert"
+        ],
+        "doi": "10.1186/s40537-025-01164-z",
+        "key": "slusarczyk2025optimal",
+        "raw": "slusarczyk2025optimal: author = {{\\'S}lusarczyk, Damian and {\\'S}lepaczuk, Robert}, title = {Optimal {M}arkowitz portfolio using returns forecasted with time series and machine learning models}, journal = {Journal of Big Data}, volume = {12}, number = {1}, pages = {127}, year = {2025}, publisher = {Springer}, issn = {2196-1115}, doi = {10.1186/s40537-025-01164-z}",
+        "title": "Optimal Markowitz portfolio using returns forecasted with time series and machine learning models",
+        "url": null,
+        "venue": "Journal of Big Data",
+        "year": 2025
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review as an example of modernizing MVO with machine learning forecasting.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Kim, Kyoung-jae"
+        ],
+        "doi": "10.1016/S0925-2312(03)00372-2",
+        "key": "Kim2003",
+        "raw": "Kim2003: author = {Kim, Kyoung-jae}, title = {Financial time series forecasting using support vector machines}, journal = {Neurocomputing}, volume = {55}, number = {1--2}, pages = {307--319}, year = {2003}, publisher = {Elsevier}, issn = {0925-2312}, doi = {10.1016/S0925-2312(03)00372-2}",
+        "title": "Financial time series forecasting using support vector machines",
+        "url": null,
+        "venue": "Neurocomputing",
+        "year": 2003
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review for demonstrating SVM performance in financial forecasting.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "1605.00003",
+        "authors": [
+          "Khaidem, Luckyson",
+          "Saha, Snehanshu",
+          "Dey, Sudeepa Roy"
+        ],
+        "doi": "10.48550/arXiv.1605.00003",
+        "key": "Khaidem2016",
+        "raw": "Khaidem2016: author = {Khaidem, Luckyson and Saha, Snehanshu and Dey, Sudeepa Roy}, title = {Predicting the direction of stock market prices using random forest}, journal = {arXiv preprint arXiv:1605.00003}, year = {2016}, eprint = {1605.00003}, archivePrefix = {arXiv}, primaryClass = {cs.LG}, doi = {10.48550/arXiv.1605.00003}",
+        "title": "Predicting the direction of stock market prices using random forest",
+        "url": null,
+        "venue": "arXiv preprint arXiv:1605.00003",
+        "year": 2016
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review for using Random Forests to capture complex market patterns.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2023.10205",
+        "authors": [
+          "Grudniewicz, Jan",
+          "Ślepaczuk, Robert"
+        ],
+        "doi": "10.1016/j.ribaf.2023.102052",
+        "key": "Grudniewicz_Slepaczuk_2023",
+        "raw": "Grudniewicz_Slepaczuk_2023: author = {Grudniewicz, Jan and {\\'S}lepaczuk, Robert}, title = {Application of machine learning in algorithmic investment strategies on global stock markets}, journal = {Research in International Business and Finance}, volume = {66}, pages = {102052}, year = {2023}, publisher = {Elsevier}, issn = {0275-5319}, doi = {10.1016/j.ribaf.2023.102052}",
+        "title": "Application of machine learning in algorithmic investment strategies on global stock markets",
+        "url": null,
+        "venue": "Research in International Business and Finance",
+        "year": 2023
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review regarding the performance of Linear SVM in algorithmic trading.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Bailey, David H.",
+          "Borwein, Jonathan M.",
+          "López de Prado, Marcos",
+          "Zhu, Qiji Jim"
+        ],
+        "doi": "10.21314/JCF.2016.322",
+        "key": "Bailey2014",
+        "raw": "Bailey2014: author = {Bailey, David H. and Borwein, Jonathan M. and {L\\'opez de Prado}, Marcos and Zhu, Qiji Jim}, title = {The probability of backtest overfitting}, journal = {The Journal of Computational Finance}, volume = {20}, number = {4}, pages = {39--69}, year = {2017}, publisher = {Infopro Digital Risk}, issn = {1460-1559}, doi = {10.21314/JCF.2016.322}",
+        "title": "The probability of backtest overfitting",
+        "url": null,
+        "venue": "The Journal of Computational Finance",
+        "year": 2017
+      },
+      "exists": null,
+      "explanation": "High-relevance reference cited multiple times (Literature Review, Methodology, Conclusions) regarding the risks of backtest overfitting.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "López de Prado, Marcos"
+        ],
+        "doi": "10.3905/jpm.2018.44.6.120",
+        "key": "LopezDePrado2018",
+        "raw": "LopezDePrado2018: author = {{L\\'opez de Prado}, Marcos}, title = {The 10 reasons most machine learning funds fail}, journal = {The Journal of Portfolio Management}, volume = {44}, number = {6}, pages = {120--133}, year = {2018}, publisher = {Portfolio Management Research}, issn = {0095-4918}, doi = {10.3905/jpm.2018.44.6.120}",
+        "title": "The 10 reasons most machine learning funds fail",
+        "url": null,
+        "venue": "The Journal of Portfolio Management",
+        "year": 2018
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review regarding the failure of ML funds and the need for robust backtesting.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2020.29712",
+        "authors": [
+          "Lin, Yu-Fei",
+          "Huang, Tzu-Ming",
+          "Chung, Wei-Ho",
+          "Ueng, Yeong-Luh"
+        ],
+        "doi": "10.1109/TETCI.2020.2971218",
+        "key": "Giles2001",
+        "raw": "Giles2001: author = {Lin, Yu-Fei and Huang, Tzu-Ming and Chung, Wei-Ho and Ueng, Yeong-Luh}, title = {Forecasting Fluctuations in the Financial Index Using a Recurrent Neural Network Based on Price Features}, journal = {IEEE Transactions on Emerging Topics in Computational Intelligence}, volume = {5}, number = {5}, pages = {780--791}, year = {2021}, publisher = {IEEE}, issn = {2471-285X}, doi = {10.1109/TETCI.2020.2971218}",
+        "title": "Forecasting Fluctuations in the Financial Index Using a Recurrent Neural Network Based on Price Features",
+        "url": null,
+        "venue": "IEEE Transactions on Emerging Topics in Computational Intelligence",
+        "year": 2021
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review as an early benchmark for RNNs in capturing stock price dynamics.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Bieganowski, Bartosz",
+          "Ślepaczuk, Robert"
+        ],
+        "doi": "10.1186/s40537-025-01267-7",
+        "key": "Bieganowski_Slepaczuk_2024",
+        "raw": "Bieganowski_Slepaczuk_2024: author = {Bieganowski, Bartosz and {\\'S}lepaczuk, Robert}, title = {Supervised autoencoder {MLP} for financial time series forecasting}, journal = {Journal of Big Data}, volume = {12}, number = {1}, pages = {207}, year = {2025}, publisher = {Springer}, issn = {2196-1115}, doi = {10.1186/s40537-025-01267-7}",
+        "title": "Supervised autoencoder MLP for financial time series forecasting",
+        "url": null,
+        "venue": "Journal of Big Data",
+        "year": 2025
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review for utilizing supervised autoencoders with recurrent structures.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Fischer, Thomas",
+          "Krauss, Christopher"
+        ],
+        "doi": "10.1016/j.ejor.2017.11.054",
+        "key": "Fischer2018",
+        "raw": "Fischer2018: author = {Fischer, Thomas and Krauss, Christopher}, title = {Deep learning with long short-term memory networks for financial market predictions}, journal = {European Journal of Operational Research}, volume = {270}, number = {2}, pages = {654--669}, year = {2018}, publisher = {Elsevier}, issn = {0377-2217}, doi = {10.1016/j.ejor.2017.11.054}",
+        "title": "Deep learning with long short-term memory networks for financial market predictions",
+        "url": null,
+        "venue": "European Journal of Operational Research",
+        "year": 2018
+      },
+      "exists": null,
+      "explanation": "High-relevance reference cited in the Literature Review as the gold standard for LSTM application in finance.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Krynska, Katarzyna",
+          "Ślepaczuk, Robert"
+        ],
+        "doi": "10.2139/ssrn.4628806",
+        "key": "Krynska_Slepaczuk_2022",
+        "raw": "Krynska_Slepaczuk_2022: author = {Krynska, Katarzyna and {\\'S}lepaczuk, Robert}, title = {Daily and intraday application of various architectures of the {LSTM} model in algorithmic investment strategies on {B}itcoin and the {S\\&P} 500 Index}, journal = {SSRN Electronic Journal}, year = {2023}, publisher = {Elsevier}, note = {Available at SSRN: 4628806}, doi = {10.2139/ssrn.4628806}",
+        "title": "Daily and intraday application of various architectures of the LSTM model in algorithmic investment strategies on Bitcoin and the S&P 500 Index",
+        "url": null,
+        "venue": "SSRN Electronic Journal",
+        "year": 2023
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review for comparing various LSTM architectures.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2025.11356",
+        "authors": [
+          "Kashif, Kamil",
+          "Ślepaczuk, Robert"
+        ],
+        "doi": "10.1016/j.knosys.2025.113563",
+        "key": "Kashif_Slepaczuk_2024",
+        "raw": "Kashif_Slepaczuk_2024: author = {Kashif, Kamil and {\\'S}lepaczuk, Robert}, title = {{LSTM-ARIMA} as a hybrid approach in algorithmic investment strategies}, journal = {Knowledge-Based Systems}, volume = {320}, pages = {113563}, year = {2025}, publisher = {Elsevier}, issn = {0950-7051}, doi = {10.1016/j.knosys.2025.113563}",
+        "title": "LSTM-ARIMA as a hybrid approach in algorithmic investment strategies",
+        "url": null,
+        "venue": "Knowledge-Based Systems",
+        "year": 2025
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review for developing a hybrid LSTM-ARIMA model.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2503.18096",
+        "authors": [
+          "Stefaniuk, Filip",
+          "Ślepaczuk, Robert"
+        ],
+        "doi": "10.48550/arXiv.2503.18096",
+        "key": "Stefaniuk_Slepaczuk_2025",
+        "raw": "Stefaniuk_Slepaczuk_2025: author = {Stefaniuk, Filip and {\\'S}lepaczuk, Robert}, title = {Informer in algorithmic investment strategies on high frequency bitcoin data}, journal = {arXiv preprint arXiv:2503.18096}, year = {2025}, eprint = {2503.18096}, archivePrefix = {arXiv}, primaryClass = {q-fin.TR}, doi = {10.48550/arXiv.2503.18096}",
+        "title": "Informer in algorithmic investment strategies on high frequency bitcoin data",
+        "url": null,
+        "venue": "arXiv preprint arXiv:2503.18096",
+        "year": 2025
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review for applying the Informer architecture to Bitcoin data.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Hambly, Ben",
+          "Xu, Renyuan",
+          "Yang, Huining"
+        ],
+        "doi": "10.1111/mafi.12382",
+        "key": "Hambly_2023",
+        "raw": "Hambly_2023: author = {Hambly, Ben and Xu, Renyuan and Yang, Huining}, title = {Recent advances in reinforcement learning in finance}, journal = {Mathematical Finance}, volume = {33}, number = {3}, pages = {437--503}, year = {2023}, publisher = {Wiley}, issn = {0960-1627}, doi = {10.1111/mafi.12382}",
+        "title": "Recent advances in reinforcement learning in finance",
+        "url": null,
+        "venue": "Mathematical Finance",
+        "year": 2023
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review and Conclusions as a survey of modern financial RL.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Moody, John",
+          "Saffell, Matthew"
+        ],
+        "doi": "10.1109/72.935097",
+        "key": "MOODY",
+        "raw": "MOODY: author = {Moody, John and Saffell, Matthew}, title = {Learning to trade via direct reinforcement}, journal = {IEEE Transactions on Neural Networks}, volume = {12}, number = {4}, pages = {875--889}, year = {2001}, publisher = {IEEE}, issn = {1045-9227}, doi = {10.1109/72.935097}",
+        "title": "Learning to trade via direct reinforcement",
+        "url": null,
+        "venue": "IEEE Transactions on Neural Networks",
+        "year": 2001
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review for introducing the Direct Reinforcement (DR) approach.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2016.25224",
+        "authors": [
+          "Deng, Yue",
+          "Bao, Feng",
+          "Kong, Youyong",
+          "Ren, Zhiquan",
+          "Dai, Qionghai"
+        ],
+        "doi": "10.1109/TNNLS.2016.2522401",
+        "key": "Deng2016",
+        "raw": "Deng2016: author = {Deng, Yue and Bao, Feng and Kong, Youyong and Ren, Zhiquan and Dai, Qionghai}, title = {Deep Direct Reinforcement Learning for Financial Signal Representation and Trading}, journal = {IEEE Transactions on Neural Networks and Learning Systems}, volume = {28}, number = {3}, pages = {653--664}, year = {2017}, publisher = {IEEE}, issn = {2162-237X}, doi = {10.1109/TNNLS.2016.2522401}",
+        "title": "Deep Direct Reinforcement Learning for Financial Signal Representation and Trading",
+        "url": null,
+        "venue": "IEEE Transactions on Neural Networks and Learning Systems",
+        "year": 2017
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review for proposing a recurrent deep neural network framework for financial signal representation.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2510.09247",
+        "authors": [
+          "Bracha, Zofia",
+          "Sakowski, Paweł",
+          "Michańków, Jakub"
+        ],
+        "doi": "10.48550/arXiv.2510.09247",
+        "key": "bracha2025application",
+        "raw": "bracha2025application: author = {Bracha, Zofia and Sakowski, Pawe{\\l} and Micha{\\'n}k{\\'o}w, Jakub}, title = {Application of Deep Reinforcement Learning to At-the-Money {S\\&P} 500 Options Hedging}, journal = {arXiv preprint arXiv:2510.09247}, year = {2025}, eprint = {2510.09247}, archivePrefix = {arXiv}, primaryClass = {q-fin.TR}, doi = {10.48550/arXiv.2510.09247}",
+        "title": "Application of Deep Reinforcement Learning to At-the-Money S&P 500 Options Hedging",
+        "url": null,
+        "venue": "arXiv preprint arXiv:2510.09247",
+        "year": 2025
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review regarding deep hedging applications for options.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Zhang, Haoran",
+          "Li, Xiaofei",
+          "Wan, Tianjiao",
+          "Du, Junjie"
+        ],
+        "doi": "10.3390/sym18010112",
+        "key": "Meng2026",
+        "raw": "Meng2026: author = {Zhang, Haoran and Li, Xiaofei and Wan, Tianjiao and Du, Junjie}, title = {Deep Reinforcement Learning for Financial Trading: Enhanced by Cluster Embedding and Zero-Shot Prediction}, journal = {Symmetry}, volume = {18}, number = {1}, pages = {112}, year = {2026}, publisher = {MDPI}, issn = {2073-8994}, doi = {10.3390/sym18010112}",
+        "title": "Deep Reinforcement Learning for Financial Trading: Enhanced by Cluster Embedding and Zero-Shot Prediction",
+        "url": null,
+        "venue": "Symmetry",
+        "year": 2026
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review for enhancing financial trading RL with cluster embedding and zero-shot prediction.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2112.06753",
+        "authors": [
+          "Liu, Xiao-Yang",
+          "Rui, Jingyang",
+          "Gao, Jiechao",
+          "Yang, Liuqing",
+          "Yang, Hongyang",
+          "Wang, Zhaoran",
+          "Wang, Christina Dan",
+          "Guo, Jian"
+        ],
+        "doi": "10.48550/arXiv.2112.06753",
+        "key": "Liu_2025",
+        "raw": "Liu_2025: author = {Liu, Xiao-Yang and Rui, Jingyang and Gao, Jiechao and Yang, Liuqing and Yang, Hongyang and Wang, Zhaoran and Wang, Christina Dan and Guo, Jian}, title = {{FinRL-Meta}: A universe of near-real market environments for data-driven deep reinforcement learning in quantitative finance}, journal = {arXiv preprint arXiv:2112.06753}, year = {2021}, eprint = {2112.06753}, archivePrefix = {arXiv}, primaryClass = {q-fin.TR}, doi = {10.48550/arXiv.2112.06753}",
+        "title": "FinRL-Meta: A universe of near-real market environments for data-driven deep reinforcement learning in quantitative finance",
+        "url": null,
+        "venue": "arXiv preprint arXiv:2112.06753",
+        "year": 2021
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review for proposing the FinRL-Meta framework.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2019.15716",
+        "authors": [
+          "Buehler, Hans",
+          "Gonon, Lukas",
+          "Teichmann, Josef",
+          "Wood, Ben"
+        ],
+        "doi": "10.1080/14697688.2019.1571683",
+        "key": "Buehler_2019",
+        "raw": "Buehler_2019: author = {Buehler, Hans and Gonon, Lukas and Teichmann, Josef and Wood, Ben}, title = {Deep hedging}, journal = {Quantitative Finance}, volume = {19}, number = {8}, pages = {1271--1291}, year = {2019}, publisher = {Taylor \\& Francis}, issn = {1469-7688}, doi = {10.1080/14697688.2019.1571683}",
+        "title": "Deep hedging",
+        "url": null,
+        "venue": "Quantitative Finance",
+        "year": 2019
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review regarding the deep hedging framework for derivatives.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Maringer, Dietmar",
+          "Ramtohul, Tikesh"
+        ],
+        "doi": "10.1007/s10287-011-0131-1",
+        "key": "maringer2012regime",
+        "raw": "maringer2012regime: author = {Maringer, Dietmar and Ramtohul, Tikesh}, title = {Regime-switching recurrent reinforcement learning for investment decision making}, journal = {Computational Management Science}, volume = {9}, number = {1}, pages = {89--107}, year = {2012}, publisher = {Springer}, issn = {1619-697X}, doi = {10.1007/s10287-011-0131-1}",
+        "title": "Regime-switching recurrent reinforcement learning for investment decision making",
+        "url": null,
+        "venue": "Computational Management Science",
+        "year": 2012
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review for proposing regime-switching extensions to reinforcement learning models.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Du, Jiayi",
+          "Jin, Muyang",
+          "Kolm, Petter N.",
+          "Ritter, Gordon",
+          "Wang, Yixuan",
+          "Zhang, Bofei"
+        ],
+        "doi": "10.3905/jfds.2020.1.045",
+        "key": "Zhang_2020",
+        "raw": "Zhang_2020: author = {Du, Jiayi and Jin, Muyang and Kolm, Petter N. and Ritter, Gordon and Wang, Yixuan and Zhang, Bofei}, title = {Deep reinforcement learning for option replication and hedging}, journal = {The Journal of Financial Data Science}, volume = {2}, number = {4}, pages = {44--57}, year = {2020}, publisher = {Portfolio Management Research}, issn = {2640-3943}, doi = {10.3905/jfds.2020.1.045}",
+        "title": "Deep reinforcement learning for option replication and hedging",
+        "url": null,
+        "venue": "The Journal of Financial Data Science",
+        "year": 2020
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review for option replication and hedging using deep RL.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2022.32036",
+        "authors": [
+          "Kabbani, Taylan",
+          "Duman, Ekrem"
+        ],
+        "doi": "10.1109/ACCESS.2022.3203697",
+        "key": "kabbani2022deep",
+        "raw": "kabbani2022deep: author = {Kabbani, Taylan and Duman, Ekrem}, title = {Deep reinforcement learning approach for trading automation in the stock market}, journal = {IEEE Access}, volume = {10}, pages = {93564--93574}, year = {2022}, publisher = {IEEE}, issn = {2169-3536}, doi = {10.1109/ACCESS.2022.3203697}",
+        "title": "Deep reinforcement learning approach for trading automation in the stock market",
+        "url": null,
+        "venue": "IEEE Access",
+        "year": 2022
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review for formulating stock trading automation as a partially observed MDP.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2025.11293",
+        "authors": [
+          "Rani, Ishta",
+          "Gandhi, Hina",
+          "Kumar, Ramesh",
+          "Marannan, Nithya",
+          "Kim, Na Kyung",
+          "Kumar, Tejaswini"
+        ],
+        "doi": "10.1109/ICSIT65336.2025.11293906",
+        "key": "rani2025deep",
+        "raw": "rani2025deep: author = {Rani, Ishta and Gandhi, Hina and Kumar, Ramesh and Marannan, Nithya and Kim, Na Kyung and Kumar, Tejaswini}, title = {Deep Reinforcement Learning for High-Frequency Trading with Market Impact Modeling}, booktitle = {2025 International Conference on Sustainability, Innovation \\& Technology (ICSIT)}, pages = {1--6}, year = {2025}, publisher = {IEEE}, doi = {10.1109/ICSIT65336.2025.11293906}",
+        "title": "Deep Reinforcement Learning for High-Frequency Trading with Market Impact Modeling",
+        "url": null,
+        "venue": "2025 International Conference on Sustainability, Innovation & Technology (ICSIT)",
+        "year": 2025
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review regarding optimal trade execution with market impact.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Yang, Hongyang",
+          "Liu, Xiao-Yang",
+          "Zhong, Shan",
+          "Walid, Anwar"
+        ],
+        "doi": "10.1145/3383455.3422540",
+        "key": "yang2020deep",
+        "raw": "yang2020deep: author = {Yang, Hongyang and Liu, Xiao-Yang and Zhong, Shan and Walid, Anwar}, title = {Deep reinforcement learning for automated stock trading: An ensemble strategy}, booktitle = {Proceedings of the First ACM International Conference on AI in Finance (ICAIF '20)}, pages = {1--8}, year = {2020}, publisher = {Association for Computing Machinery}, address = {New York, NY, USA}, doi = {10.1145/3383455.3422540}",
+        "title": "Deep reinforcement learning for automated stock trading: An ensemble strategy",
+        "url": null,
+        "venue": "Proceedings of the First ACM International Conference on AI in Finance (ICAIF '20)",
+        "year": 2020
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review and Conclusions regarding ensemble deep reinforcement learning strategies.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2025.35339",
+        "authors": [
+          "Enkhsaikhan, Bayaraa",
+          "Jo, Ohyun"
+        ],
+        "doi": "10.1109/TBDATA.2025.3533905",
+        "key": "Ohyun2025",
+        "raw": "Ohyun2025: author = {Enkhsaikhan, Bayaraa and Jo, Ohyun}, title = {Risk-Constrained Reinforcement Learning With Augmented {L}agrangian Multiplier for Portfolio Optimization}, journal = {IEEE Transactions on Big Data}, volume = {11}, number = {5}, pages = {2489--2502}, year = {2025}, publisher = {IEEE}, issn = {2332-7790}, doi = {10.1109/TBDATA.2025.3533905}",
+        "title": "Risk-Constrained Reinforcement Learning With Augmented Lagrangian Multiplier for Portfolio Optimization",
+        "url": null,
+        "venue": "IEEE Transactions on Big Data",
+        "year": 2025
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review for formulating portfolio optimization as a risk-averse CMDP.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2024.10744",
+        "authors": [
+          "Tamuly, Adrika",
+          "Bhutani, Gariman",
+          "Sukriti"
+        ],
+        "doi": "10.1109/INDISCON62179.2024.10744403",
+        "key": "park2022portfolio",
+        "raw": "park2022portfolio: author = {Tamuly, Adrika and Bhutani, Gariman and Sukriti}, title = {Portfolio Optimization using Deep Reinforcement Learning}, booktitle = {2024 IEEE 5th India Council International Subsections Conference (INDISCON)}, pages = {1--6}, year = {2024}, publisher = {IEEE}, address = {Piscataway, NJ, USA}, doi = {10.1109/INDISCON62179.2024.10744403}",
+        "title": "Portfolio Optimization using Deep Reinforcement Learning",
+        "url": null,
+        "venue": "2024 IEEE 5th India Council International Subsections Conference (INDISCON)",
+        "year": 2024
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review for applying a DQN framework with experience replay to portfolio optimization.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2020.11345",
+        "authors": [
+          "Soleymani, Farzan",
+          "Paquet, Eric"
+        ],
+        "doi": "10.1016/j.eswa.2020.113456",
+        "key": "SOLEYMANI2020113456",
+        "raw": "SOLEYMANI2020113456: author = {Soleymani, Farzan and Paquet, Eric}, title = {Financial portfolio optimization with online deep reinforcement learning and restricted stacked autoencoder---{D}eep{B}reath}, journal = {Expert Systems with Applications}, volume = {156}, pages = {113456}, year = {2020}, publisher = {Elsevier}, issn = {0957-4174}, doi = {10.1016/j.eswa.2020.113456}",
+        "title": "Financial portfolio optimization with online deep reinforcement learning and restricted stacked autoencoder---DeepBreath",
+        "url": null,
+        "venue": "Expert Systems with Applications",
+        "year": 2020
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review regarding the DeepBreath framework for portfolio management.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2024.10101",
+        "authors": [
+          "Jiang, Yifu",
+          "Olmo, Jose",
+          "Atwi, Majed"
+        ],
+        "doi": "10.1016/j.gfj.2024.101016",
+        "key": "JIANG2024101016",
+        "raw": "JIANG2024101016: author = {Jiang, Yifu and Olmo, Jose and Atwi, Majed}, title = {Deep reinforcement learning for portfolio selection}, journal = {Global Finance Journal}, volume = {62}, pages = {101016}, year = {2024}, publisher = {Elsevier}, issn = {1044-0283}, doi = {10.1016/j.gfj.2024.101016}",
+        "title": "Deep reinforcement learning for portfolio selection",
+        "url": null,
+        "venue": "Global Finance Journal",
+        "year": 2024
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review and Conclusions regarding model-free deep reinforcement learning for portfolio selection.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Sterling, Helena J.",
+          "Thorne, Marcus V."
+        ],
+        "doi": null,
+        "key": "sterling2026deep",
+        "raw": "sterling2026deep: author = {Sterling, Helena J. and Thorne, Marcus V.}, title = {Deep Reinforcement Learning for Dynamic Portfolio Optimization in Financial Markets}, journal = {International Journal of Artificial Intelligence Research}, volume = {1}, number = {1}, year = {2026}, publisher = {ISI Press}",
+        "title": "Deep Reinforcement Learning for Dynamic Portfolio Optimization in Financial Markets",
+        "url": null,
+        "venue": "International Journal of Artificial Intelligence Research",
+        "year": 2026
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review regarding deep reinforcement learning as an adaptive alternative to traditional static allocation methods.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2024.12780",
+        "authors": [
+          "Cheng, Li-Chen",
+          "Sun, Jian-Shiou"
+        ],
+        "doi": "10.1016/j.neucom.2024.127800",
+        "key": "cheng2024multiagent",
+        "raw": "cheng2024multiagent: author = {Cheng, Li-Chen and Sun, Jian-Shiou}, title = {Multiagent-based deep reinforcement learning framework for multi-asset adaptive trading and portfolio management}, journal = {Neurocomputing}, volume = {594}, pages = {127800}, year = {2024}, publisher = {Elsevier}, issn = {0925-2312}, doi = {10.1016/j.neucom.2024.127800}",
+        "title": "Multiagent-based deep reinforcement learning framework for multi-asset adaptive trading and portfolio management",
+        "url": null,
+        "venue": "Neurocomputing",
+        "year": 2024
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review for proposing a multi-agent deep reinforcement learning framework.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Millea, Adrian"
+        ],
+        "doi": "10.3390/analytics2030031",
+        "key": "analytics2030031",
+        "raw": "analytics2030031: author = {Millea, Adrian}, title = {Hierarchical Model-Based Deep Reinforcement Learning for Single-Asset Trading}, journal = {Analytics}, volume = {2}, number = {3}, pages = {560--576}, year = {2023}, publisher = {MDPI}, issn = {2813-2203}, doi = {10.3390/analytics2030031}",
+        "title": "Hierarchical Model-Based Deep Reinforcement Learning for Single-Asset Trading",
+        "url": null,
+        "venue": "Analytics",
+        "year": 2023
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review for proposing a hierarchical model-based deep RL framework.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Hao, Zheng",
+          "Zhang, Haowei",
+          "Zhang, Yipu"
+        ],
+        "doi": "10.3390/jrfm16030201",
+        "key": "jrfm16030201",
+        "raw": "jrfm16030201: author = {Hao, Zheng and Zhang, Haowei and Zhang, Yipu}, title = {Stock Portfolio Management by Using Fuzzy Ensemble Deep Reinforcement Learning Algorithm}, journal = {Journal of Risk and Financial Management}, volume = {16}, number = {3}, pages = {201}, year = {2023}, publisher = {MDPI}, issn = {1911-8074}, doi = {10.3390/jrfm16030201}",
+        "title": "Stock Portfolio Management by Using Fuzzy Ensemble Deep Reinforcement Learning Algorithm",
+        "url": null,
+        "venue": "Journal of Risk and Financial Management",
+        "year": 2023
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review for proposing a fuzzy ensemble deep RL framework.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2022.11812",
+        "authors": [
+          "Shavandi, Ali",
+          "Khedmati, Majid"
+        ],
+        "doi": "10.1016/j.eswa.2022.118124",
+        "key": "shavandi2022multi",
+        "raw": "shavandi2022multi: author = {Shavandi, Ali and Khedmati, Majid}, title = {A multi-agent deep reinforcement learning framework for algorithmic trading in financial markets}, journal = {Expert Systems with Applications}, volume = {208}, pages = {118124}, year = {2022}, publisher = {Elsevier}, issn = {0957-4174}, doi = {10.1016/j.eswa.2022.118124}",
+        "title": "A multi-agent deep reinforcement learning framework for algorithmic trading in financial markets",
+        "url": null,
+        "venue": "Expert Systems with Applications",
+        "year": 2022
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review regarding multi-agent deep reinforcement learning specialized in distinct timeframes.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Wu, Xing",
+          "Chen, Haolei",
+          "Wang, Jianjia",
+          "Troiano, Luigi",
+          "Loia, Vincenzo",
+          "Fujita, Hamido"
+        ],
+        "doi": "10.1016/j.ins.2020.05.066",
+        "key": "wu2020adaptive",
+        "raw": "wu2020adaptive: author = {Wu, Xing and Chen, Haolei champion = {Adaptive stock trading strategies with deep reinforcement learning methods}, journal = {Information Sciences}, volume = {538}, pages = {142--158}, year = {2020}, publisher = {Elsevier}, issn = {0020-0255}, doi = {10.1016/j.ins.2020.05.066}",
+        "title": "Adaptive stock trading strategies with deep reinforcement learning methods",
+        "url": null,
+        "venue": "Information Sciences",
+        "year": 2020
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review for integrating GRUs for feature extraction in financial time-series.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Mnih, Volodymyr",
+          "Kavukcuoglu, Koray",
+          "Silver, David",
+          "Rusu, Andrei A.",
+          "Veness, Joel",
+          "Bellemare, Marc G.",
+          "Graves, Alex",
+          "Riedmiller, Martin",
+          "Fidjeland, Andreas K.",
+          "Ostrovski, Georg"
+        ],
+        "doi": "10.1038/nature14236",
+        "key": "mnih2015human",
+        "raw": "mnih2015human: author = {Mnih, Volodymyr and Kavukcuoglu, Koray and Silver, David and Rusu, Andrei A. and Veness, Joel and Bellemare, Marc G. and Graves, Alex and Riedmiller, Martin and Fidjeland, Andreas K. and Ostrovski, Georg and others}, title = {Human-level control through deep reinforcement learning}, journal = {Nature}, volume = {518}, number = {7540}, pages = {529--533}, year = {2015}, publisher = {Nature Publishing Group}, issn = {0028-0836}, doi = {10.1038/nature14236}",
+        "title": "Human-level control through deep reinforcement learning",
+        "url": null,
+        "venue": "Nature",
+        "year": 2015
+      },
+      "exists": null,
+      "explanation": "Foundational deep RL paper cited in the Literature Review for introducing DQN.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "1707.06347",
+        "authors": [
+          "Schulman, John",
+          "Wolski, Filip",
+          "Dhariwal, Prafulla",
+          "Radford, Alec",
+          "Klimov, Oleg"
+        ],
+        "doi": "10.48550/arXiv.1707.06347",
+        "key": "schulman2017proximal",
+        "raw": "schulman2017proximal: author = {Schulman, John and Wolski, Filip and Dhariwal, Prafulla and Radford, Alec and Klimov, Oleg}, title = {Proximal policy optimization algorithms}, journal = {arXiv preprint arXiv:1707.06347}, year = {2017}, eprint = {1707.06347}, archivePrefix = {arXiv}, primaryClass = {cs.LG}, doi = {10.48550/arXiv.1707.06347}",
+        "title": "Proximal policy optimization algorithms",
+        "url": null,
+        "venue": "arXiv preprint arXiv:1707.06347",
+        "year": 2017
+      },
+      "exists": null,
+      "explanation": "High-relevance foundational paper for Proximal Policy Optimization (PPO) cited in the Literature Review.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "López de Prado, Marcos",
+          "Simonian, Joseph",
+          "Fabozzi, Francesco A.",
+          "Fabozzi, Frank J."
+        ],
+        "doi": "10.1007/s10479-024-06257-1",
+        "key": "lopez2025enhancing",
+        "raw": "lopez2025enhancing: author = {{L\\'opez de Prado}, Marcos and Simonian, Joseph and Fabozzi, Francesco A. and Fabozzi, Frank J.}, title = {Enhancing {M}arkowitz's portfolio selection paradigm with machine learning}, journal = {Annals of Operations Research}, volume = {346}, number = {1}, pages = {319--340}, year = {2025}, publisher = {Springer}, issn = {0254-5330}, doi = {10.1007/s10479-024-06257-1}",
+        "title": "Enhancing Markowitz's portfolio selection paradigm with machine learning",
+        "url": null,
+        "venue": "Annals of Operations Research",
+        "year": 2025
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review regarding incorporation of ML into the Markowitz framework.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Chaweewanchon, Apichat",
+          "Chaysiri, Rujira"
+        ],
+        "doi": "10.3390/ijfs10030064",
+        "key": "chaweewanchon2022markowitz",
+        "raw": "chaweewanchon2022markowitz: author = {Chaweewanchon, Apichat and Chaysiri, Rujira}, title = {{M}arkowitz mean-variance portfolio optimization with predictive stock selection using machine learning}, journal = {International Journal of Financial Studies}, volume = {10}, number = {3}, pages = {64}, year = {2022}, publisher = {MDPI}, issn = {2227-7072}, doi = {10.3390/ijfs10030064}",
+        "title": "Markowitz mean-variance portfolio optimization with predictive stock selection using machine learning",
+        "url": null,
+        "venue": "International Journal of Financial Studies",
+        "year": 2022
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review as a hybrid portfolio optimization framework.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Newey, Whitney K.",
+          "West, Kenneth D."
+        ],
+        "doi": "10.2307/1913610",
+        "key": "NEWEY_WEST",
+        "raw": "NEWEY_WEST: author = {Newey, Whitney K. and West, Kenneth D.}, title = {A Simple, Positive Semi-Definite, Heteroskedasticity and Autocorrelation Consistent Covariance Matrix}, journal = {Econometrica}, volume = {55}, number = {3}, pages = {703--708}, year = {1987}, publisher = {Wiley; Econometric Society}, issn = {0012-9682}, doi = {10.2307/1913610}",
+        "title": "A Simple, Positive Semi-Definite, Heteroskedasticity and Autocorrelation Consistent Covariance Matrix",
+        "url": null,
+        "venue": "Econometrica",
+        "year": 1987
+      },
+      "exists": null,
+      "explanation": "High-relevance econometric reference cited in Empirical results for robust standard errors.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "1994.10476",
+        "authors": [
+          "Politis, Dimitris N.",
+          "Romano, Joseph P."
+        ],
+        "doi": "10.1080/01621459.1994.10476870",
+        "key": "POLITIS",
+        "raw": "POLITIS: author = {Politis, Dimitris N. and Romano, Joseph P.}, title = {The Stationary Bootstrap}, journal = {Journal of the American Statistical Association}, volume = {89}, number = {428}, pages = {1303--1313}, year = {1994}, publisher = {Taylor \\& Francis}, issn = {0162-1459}, doi = {10.1080/01621459.1994.10476870}",
+        "title": "The Stationary Bootstrap",
+        "url": null,
+        "venue": "Journal of the American Statistical Association",
+        "year": 1994
+      },
+      "exists": null,
+      "explanation": "High-relevance statistical reference cited in Empirical results for assessing significance via bootstrap.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "DeMiguel, Victor",
+          "Garlappi, Lorenzo",
+          "Uppal, Raman"
+        ],
+        "doi": "10.1093/rfs/hhm075",
+        "key": "DE_MIGEUL",
+        "raw": "DE_MIGEUL: author = {DeMiguel, Victor and Garlappi, Lorenzo and Uppal, Raman}, title = {Optimal Versus Naive Diversification: How Inefficient is the 1/{N} Portfolio Strategy?}, journal = {The Review of Financial Studies}, volume = {22}, number = {5}, pages = {1915--1953}, year = {2009}, publisher = {Oxford University Press}, issn = {0893-9454}, doi = {10.1093/rfs/hhm075}",
+        "title": "Optimal Versus Naive Diversification: How Inefficient is the 1/N Portfolio Strategy?",
+        "url": null,
+        "venue": "The Review of Financial Studies",
+        "year": 2009
+      },
+      "exists": null,
+      "explanation": "Very high relevance; cited multiple times (Literature Review, Methodology, Discussion, Conclusions) regarding the difficulty of outperforming the 1/N strategy.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Kabir, Md R.",
+          "Bhadra, Dipayan",
+          "Ridoy, Moinul",
+          "Milanova, Mariofanna"
+        ],
+        "doi": "10.3390/sci7010007",
+        "key": "Ding2025",
+        "raw": "Ding2025: author = {Kabir, Md R. and Bhadra, Dipayan and Ridoy, Moinul and Milanova, Mariofanna}, title = {{LSTM--Transformer}-Based Robust Hybrid Deep Learning Model for Financial Time series Forecasting}, journal = {Sci}, volume = {7}, number = {1}, pages = {7}, year = {2025}, publisher = {MDPI}, issn = {2413-4155}, doi = {10.3390/sci7010007}",
+        "title": "LSTM–Transformer-Based Robust Hybrid Deep Learning Model for Financial Time Series Forecasting",
+        "url": null,
+        "venue": "Sci",
+        "year": 2025
+      },
+      "exists": null,
+      "explanation": "Cited in the Literature Review for comparing LSTMs and Transformers.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    }
+  ],
+  "missing_references": [
+    {
+      "reason": "Since the paper uses Soft Actor-Critic (SAC) as its core algorithm, the original foundational paper is essential context for the methodology.",
+      "title": "Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor (Haarnoja et al., 2018)"
+    },
+    {
+      "reason": "Mentioned in the Literature Review context for @LopezDePrado2018 but not formally cited in the bibliography. It is the standard reference for financial ML research protocols used in this study.",
+      "title": "Advances in Financial Machine Learning (Lopez de Prado, 2018)"
+    },
+    {
+      "reason": "The paper uses a Transformer-based model; this foundational work on the attention mechanism and the Transformer architecture is a critical missing reference for the model design.",
+      "title": "Attention is All You Need (Vaswani et al., 2017)"
+    },
+    {
+      "reason": "The paper uses LSTMs as a core temporal encoder; the original LSTM paper is the appropriate foundational reference for this choice.",
+      "title": "Long Short-Term Memory (Hochreiter & Schmidhuber, 1997)"
+    }
+  ],
+  "summary": "The paper provides a comprehensive review of classical and modern portfolio management literature, with a strong focus on Reinforcement Learning (RL) and deep learning architectures (LSTMs, Transformers). The bibliography includes foundational works like Markowitz (1952) and DeMiguel et al. (2009), as well as many very recent papers from 2022-2026, which is appropriate given the study's scope. However, several foundational technical references for the algorithms used (SAC, Transformer, LSTM) are notably missing from the bibliography despite their central role in the methodology."
+}
+```
+
+### meta_reviewer (`claude-sonnet-4-6`) — status: `pass`
+
+```json
+{
+  "confidence": 0.78,
+  "questions": [
+    "How do the EURO STOXX 50 alpha p-values change under Romano-Wolf family-wise error rate control or the Deflated Sharpe Ratio of Bailey and López de Prado applied across all tested configurations? Does any strategy retain significance?",
+    "Is the SAC actor loss for the Dirichlet (and hierarchical Beta × Dirichlet) policy computed using the correct closed-form Dirichlet entropy, or is a Gaussian surrogate used? This detail is critical for replication and correctness of the entropy bonus.",
+    "How were delisted constituent price histories obtained via yfinance—which frequently lacks or truncates delisted-ticker data—and what terminal return (e.g., −100%, last available price, or index-deletion price) was applied to assets removed from the index mid-fold?",
+    "Is the Markowitz Minimum Variance benchmark constructed on the same top-k momentum-filtered universe as the RL agent, or on the full index constituent set? If different, the comparison conflates universe choice with algorithmic merit.",
+    "Are the ensemble returns computed in a common currency? If so, what FX conversion methodology was applied, and does the benchmark ensemble use the same currency treatment?"
+  ],
+  "recommendation": "major_revision",
+  "strengths": [
+    "First unified empirical evaluation applying an identical SAC-based RL pipeline across three geographically distinct major equity markets, enabling cross-market generalization analysis absent from most prior DRL portfolio studies",
+    "Novel hierarchical Dirichlet policy architecture that decomposes equity-cash allocation from per-stock selection, providing a principled simplex-constrained action space for portfolio RL",
+    "Methodologically rigorous evaluation protocol using non-anchored walk-forward optimization, HAC-robust regression alpha tests, and Politis-Romano stationary bootstrap for Sharpe and IR2 differences",
+    "Adaptive retraining heuristic that conditions retraining on rolling validation Sharpe performance, reducing compute while maintaining deployment realism",
+    "Honest and transparent reporting of mixed results, including explicit acknowledgment in the Conclusions that the central hypothesis is only partially confirmed",
+    "Regime decomposition analysis that links RL outperformance to specific macroeconomic periods, providing actionable guidance on when these strategies add value"
+  ],
+  "summary": "This paper applies a Soft Actor-Critic (SAC) reinforcement learning framework with LSTM and Transformer encoders and a novel hierarchical Dirichlet policy to portfolio management across three global equity markets (NASDAQ-100, Nikkei 225, EURO STOXX 50) over a 23-year horizon. The evaluation is methodologically careful, employing walk-forward optimization, HAC-robust inference, and stationary bootstrap tests, and the authors honestly acknowledge that the central hypothesis is only partially confirmed. Specialists found the work scientifically sound in spirit but identified two major technical problems requiring correction before publication: (1) the Maximum Drawdown formula (eq:md) is mathematically incorrect with degenerate indices, and (2) the headline positive result—statistically significant alpha on EURO STOXX 50—is reported without any multiple-testing correction across the full hypothesis family (5 models × 3 markets), which means the p-values cited would not survive even a basic Bonferroni adjustment at α=0.10. Additional concerns include critical missing foundational citations (Haarnoja et al. SAC 2018, Vaswani et al. Transformer 2017, Hochreiter & Schmidhuber LSTM 1997), a reproducibility score of 0.24 driven by absent code and partially restricted data, optimistic transaction cost assumptions untested at higher levels, and single-seed evaluations without variance reporting. One citation (sterling2026deep, 2026, no DOI, 'ISI Press') could not be verified and warrants author confirmation. Novelty is assessed as incremental (0.45): the hierarchical Dirichlet policy, adaptive retraining criterion, and cross-market ensemble are genuine but evolutionary contributions relative to the FinRL-Meta and DRL portfolio literature.",
+  "weaknesses": [
+    "Maximum Drawdown formula (eq:md) is mathematically incorrect: the inner maximization over t is degenerate because R_{i,T} (the terminal value) is fixed, not a running peak; the standard definition must use a running maximum of cumulative equity V_t",
+    "No multiple-testing correction is applied across the full hypothesis family (5 models × 3 markets × ≥2 test types); several EURO STOXX 50 alpha p-values cited as significant at α=0.10 would not survive a basic Bonferroni correction (cutoff ≈0.0067 over 15 tests), potentially invalidating the paper's primary positive result",
+    "Critical foundational references are absent despite central algorithmic use: Haarnoja et al. (2018) SAC, Vaswani et al. (2017) Transformer, and Hochreiter & Schmidhuber (1997) LSTM are not cited",
+    "No code, trained models, or reproduction package is provided for a complex multi-architecture SAC pipeline across three markets and sixteen walk-forward folds (reproducibility score: 0.24)",
+    "Transaction costs fixed at 2 bps—an optimistic lower bound—with no evaluation-time robustness pass at 5 or 10 bps despite this being computationally cheap",
+    "All walk-forward folds trained and evaluated with a single random seed; no seed variance is reported, making it impossible to assess the stability of architectural comparisons",
+    "Citation sterling2026deep (2026, 'International Journal of Artificial Intelligence Research,' ISI Press) has no DOI and cannot be verified; authors must confirm its existence"
+  ]
+}
+```
+
+### novelty (`gemini-3-flash-preview`) — status: `pass`
+
+```json
+{
+  "confidence": 0.9,
+  "missing_prior_art": [
+    {
+      "reason": "The paper utilizes Dirichlet distributions for portfolio weight parameterization but does not reference foundational work on using Dirichlet distributions within Policy Gradient or Actor-Critic frameworks in the general machine learning literature, which established the mathematical basis for such probability distributions in continuous action spaces.",
+      "title": "On the Use of Dirichlet Distributions in Reinforcement Learning"
+    }
+  ],
+  "novelty_score": 0.45,
+  "related_work": [
+    {
+      "citation_key": "MOODY",
+      "delta": "Transitions from the foundational Recurrent Reinforcement Learning (RRL) approach to a Deep Soft Actor-Critic (SAC) framework capable of learning in high-dimensional continuous action spaces with complex reward regularization.",
+      "relation": "prior_art",
+      "title": "Learning to trade via direct reinforcement"
+    },
+    {
+      "citation_key": "Liu_2025",
+      "delta": "Extends the standardized environment paradigm by introducing a specific hierarchical Dirichlet policy structure and an adaptive retraining mechanism based on rolling validation performance.",
+      "relation": "builds_on",
+      "title": "FinRL-Meta: A universe of near-real market environments for data-driven deep reinforcement learning in quantitative finance"
+    },
+    {
+      "citation_key": "DE_MIGEUL",
+      "delta": "Directly addresses the 1/N benchmark challenge by demonstrating that while RL can be competitive, outperforming naive diversification remains statistically difficult under HAC-robust inference.",
+      "relation": "prior_art",
+      "title": "Optimal Versus Naive Diversification: How Inefficient is the 1/{N} Portfolio Strategy?"
+    },
+    {
+      "citation_key": "JIANG2024101016",
+      "delta": "Provides a competing model-free DRL approach for portfolio selection; this paper differentiates itself through hierarchical equity-cash allocation and systematic regime-based decomposition across three global markets.",
+      "relation": "competing",
+      "title": "Deep reinforcement learning for portfolio selection"
+    }
+  ],
+  "verdict": "incremental"
+}
+```
+
+### reproducibility (`gpt-5.5`) — status: `pass`
+
+```json
+{
+  "code_availability": "unspecified",
+  "code_url": null,
+  "concerns": [
+    {
+      "area": "code",
+      "description": "No implementation, repository, scripts, trained models, or reproduction package are specified, despite a complex SAC-based portfolio pipeline with multiple architectures and walk-forward folds.",
+      "severity": "critical"
+    },
+    {
+      "area": "data",
+      "description": "Key data are not fully public: prices are collected through yfinance, but historical index membership additions and deletions are retrieved from Bloomberg Terminal Anywhere, a restricted subscription source, and the processed datasets are not provided.",
+      "severity": "major"
+    },
+    {
+      "area": "hyperparameters",
+      "description": "Several common parameters are reported, but exact per-configuration settings, candidate hyperparameter grids, random seeds, initialization details, model-selection rules, and concentration/top-k choices by market are not specified enough for exact replication.",
+      "severity": "major"
+    },
+    {
+      "area": "evaluation",
+      "description": "The paper describes walk-forward testing, HAC tests, bootstrap inference, and benchmarks, but without code or released intermediate returns/allocations it is difficult to verify metric calculations, fold boundaries, adaptive retraining decisions, and statistical results.",
+      "severity": "major"
+    },
+    {
+      "area": "compute",
+      "description": "Hardware and approximate training times are reported, but software stack, library versions, deterministic settings, and total compute budget across all markets, folds, and configurations are not provided.",
+      "severity": "minor"
+    }
+  ],
+  "confidence": 0.84,
+  "data_availability": "restricted",
+  "data_url": null,
+  "environment": {
+    "dependencies": [
+      "yfinance API",
+      "Bloomberg Terminal Anywhere"
+    ],
+    "hardware": "Cloud-based G2-standard instance with NVIDIA L4 GPU (24GB VRAM) and 30GB system memory",
+    "software": null
+  },
+  "reproducibility_score": 0.24
+}
+```
+
+### summary (`claude-haiku-4-5-20251001`) — status: `pass`
+
+```json
+{
+  "audience": "Quantitative finance researchers, portfolio managers, algorithmic trading practitioners, financial technology professionals, and institutional investors exploring machine learning applications to portfolio management and dynamic asset allocation.",
+  "key_contributions": [
+    "First unified multi-market evaluation framework applying identical walk-forward optimization procedures across three geographically distinct equity markets (U.S., Japan, Europe), enabling rigorous cross-market comparison absent in prior studies",
+    "Novel hierarchical Dirichlet policy architecture that separates equity-cash allocation from individual stock selection, extending flat policy structures used in related research",
+    "Adaptive model retraining criterion that selectively updates the system based on rolling validation performance, reducing computational cost while maintaining realistic deployment conditions",
+    "Comprehensive regime decomposition analysis identifying specific macroeconomic periods (post-GFC recovery, secular bull market, COVID/rate hike cycle) where RL strategies add value relative to passive and classical benchmarks",
+    "Ensemble aggregation method combining strategies across markets that improves risk-adjusted returns and quantifies the benefits of geographic diversification"
+  ],
+  "plain_language_summary": "This paper addresses a fundamental challenge in finance: automatically deciding which stocks to buy and sell to maximize returns while managing risk. Rather than using traditional statistical formulas or predicting future stock prices, the researchers applied reinforcement learning—a type of artificial intelligence where a computer system learns through trial and error, similar to how human traders improve through experience. They trained a system called Soft Actor-Critic on 23 years of stock market data from three major equity markets (U.S. Nasdaq-100, Japan's Nikkei 225, and Europe's Euro Stoxx 50), teaching it to allocate money across stocks while accounting for real-world constraints like transaction fees and rebalancing costs.\n\nThe researchers tested five different versions of their system, varying how rewards were calculated, whether the AI made allocation decisions in one step or two (choosing cash vs. stocks first, then individual stocks), and what neural network architecture they used to identify patterns in historical data. The results were encouraging but not conclusive. In European markets, the AI system achieved returns better than simply buying and holding the index, with some statistically significant outperformance. However, when applying rigorous statistical tests across all three markets simultaneously, the AI system did not consistently beat the straightforward strategy of buying the index and holding it through the entire period.\n\nThe analysis revealed that the AI system performed best during periods of high market uncertainty and volatility, suggesting its value depends on market conditions rather than being universally beneficial. Combining predictions across all three markets improved overall performance, demonstrating that geographic diversification enhances the approach. These findings indicate that while reinforcement learning shows promise for portfolio management, it requires careful implementation and is most valuable during specific market environments rather than all conditions.",
+  "tldr": "A deep reinforcement learning system using Soft Actor-Critic algorithm achieves competitive risk-adjusted returns on some global stock indices (particularly European markets) but fails to consistently beat simple buy-and-hold strategies across all markets."
+}
+```
+
+### technical_correctness (`claude-opus-4-7`) — status: `pass`
+
+```json
+{
+  "claims": [
+    {
+      "assessment": "partially_supported",
+      "claim": "Central hypothesis: SAC-based RL portfolio strategies achieve robust and economically meaningful risk-adjusted performance under realistic constraints, with effectiveness influenced by architectural and economic design choices.",
+      "evidence": "Authors themselves report (Section 6.4, Table 7) that no RL strategy achieves statistically significant excess returns relative to Buy & Hold under HAC-adjusted inference or stationary bootstrap on Sharpe/IR2 differences across any of the three markets. Only the regression-based alpha test on EURO STOXX 50 yields p<0.10 for several configurations. The Conclusions explicitly state the hypothesis is 'only partially confirmed.' Treating this as 'partial support' is consistent with the evidence; the abstract's framing of 'competitive risk-adjusted performance' is fairly hedged.",
+      "id": "C1",
+      "location": "Introduction; Discussion; Conclusions",
+      "severity": "minor",
+      "suggested_fix": "Tighten the abstract by explicitly noting that the central hypothesis is rejected for two of three markets under HAC-robust inference, and qualify the EURO STOXX result as the only market with abnormal returns under a regression specification."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "For EURO STOXX 50, several LSTM and Transformer RL strategies exhibit positive and statistically significant abnormal returns (alpha) at the 10% level after HAC adjustment.",
+      "evidence": "Table 8 reports one-sided HAC p-values of 0.0333 (LSTM-1), 0.0120 (LSTM-2), 0.0417 (LSTM-NC-2), 0.0291 (Transformer) for EURO STOXX 50 at the 10% level. However, no multiple-testing correction (e.g., Bonferroni, Holm, Romano–Wolf, or the Hansen SPA / Bailey–López de Prado Deflated Sharpe Ratio that the authors themselves cite via Bailey2014/LopezDePrado2018) is applied across 5 models × 3 markets × 2 hypotheses (mean diff + alpha). Some of the 'significant' p-values would not survive even a basic Bonferroni adjustment at α=0.10 over 15 alpha tests (cutoff ≈0.0067). The α magnitudes (~0.0001–0.0002 per day) are also so small that they sit within the 4 s.f. rounding band of 0.0001 reported standard errors, raising questions about precision.",
+      "id": "C2",
+      "location": "Section 6.4; Table 8 (tab:alpha_regression_all)",
+      "severity": "major",
+      "suggested_fix": "Report family-wise or false-discovery-controlled p-values (Romano–Wolf bootstrap reality check is standard for trading strategy multiplicity). Also report the Deflated Sharpe Ratio of Bailey & López de Prado for the best in-sample fold-selected configurations. Increase reported precision of SE(α) beyond 4 decimal places."
+    },
+    {
+      "assessment": "incorrect",
+      "claim": "Maximum Drawdown is defined as MD(T) = max_{s∈[0,T]}( max_{t∈[0,s]}( R_{i,T} − R_{i,s} ) ) × 100%.",
+      "evidence": "As written, the inner argument R_{i,T} − R_{i,s} uses the terminal value R_{i,T} (fixed), not a running peak before s, so the inner max over t is degenerate (it does not depend on t). The textual description ('maximum percentage drawdown throughout the investment') matches the standard MD = max_{s} ( max_{t≤s} V_t − V_s ) / max_{t≤s} V_t, but the formula has the wrong indices and is dimensionally a return difference rather than a drawdown ratio. This is an error in the equation, not just notation.",
+      "id": "C3",
+      "location": "Section 5.8 (Performance Metrics), Equation eq:md",
+      "severity": "major",
+      "suggested_fix": "Replace with the standard expression in terms of cumulative equity V_t: MD = max_{s∈[0,T]} ( max_{t∈[0,s]} V_t − V_s ) / max_{t∈[0,s]} V_t. Verify reported MD values in Tables 7/8 and the panel tables were computed with the correct definition."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "The Modified Information Ratio IR2 = IR* × ARC × sign(ARC) / MD is the 'most important' evaluation metric.",
+      "evidence": "The metric is well-defined when MD>0 and ARC≠0, but: (i) for strategies with negative ARC the sign(ARC) trick flips MD into a penalty for losers and reward for absolute-value of losses, which is reasonable but non-standard; (ii) IR2 is not the conventional Information Ratio of Grinold–Kahn (excess return over benchmark / tracking error). The label 'Information Ratio' for IR* = ARC/ASD overlaps semantically with Sharpe ratio (which is also reported separately as SR) since no risk-free or benchmark excess return is involved. This is naming inconsistency rather than a calculation error, but it complicates cross-paper comparison.",
+      "id": "C4",
+      "location": "Section 5.8, Equation eq:ir-starstar",
+      "severity": "minor",
+      "suggested_fix": "Rename IR1/IR2/IR3 to 'Adjusted Calmar-style ratios' or similar; explicitly distinguish from Grinold–Kahn IR. Or use established names: Calmar = ARC/MD, Sterling, Burke, etc."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Sharpe ratio is computed as SR = (mean R) / σ_R × √252, without subtracting a risk-free rate.",
+      "evidence": "Omitting the risk-free rate is common in algorithmic trading literature but is technically the 'reward-to-variability' ratio rather than the Sharpe ratio per Sharpe (1994). Over the 2009–2026 sample this matters most for the early QE-era (near-zero rf) versus the 2022–2024 hiking cycle (~4–5% rf), where the bias differs across regimes. This could affect regime-decomposition conclusions.",
+      "id": "C5",
+      "location": "Section 5.8, Equation eq:sharpe",
+      "severity": "minor",
+      "suggested_fix": "State the assumption explicitly (rf=0) and, ideally, report a robustness column using a representative T-bill series, especially for the 2020–2026 regime where the rate cycle is non-trivial."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "The hierarchical Dirichlet policy (LSTM_2) consistently improves risk-adjusted performance over the flat Dirichlet policy (LSTM_1).",
+      "evidence": "The narrative claims lower volatility/drawdown for LSTM_2 vs LSTM_1 across all three markets. However, the authors explicitly acknowledge that the configurations are not ceteris paribus (reward, constraint, and policy structure co-vary across the five named configurations), and only LSTM_1 vs LSTM_2 share the same reward and constraints. Numbers cited in text (e.g., NASDAQ LSTM_2 IR2=0.46, ASD=18.67%, MD=28.77%) are consistent with the qualitative claim, but the comparison rests on a single random seed per fold (no seed-variance discussion).",
+      "id": "C6",
+      "location": "Discussion (RQ2); Section 6 panels",
+      "severity": "minor",
+      "suggested_fix": "Report cross-seed variance (mean ± std over ≥5 seeds) per configuration per fold, and confine the policy-structure claim to the LSTM_1 vs LSTM_2 pair where the contrast is clean."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "LSTM-based encoders outperform the Transformer encoder on risk-adjusted metrics across all three markets.",
+      "evidence": "Only one Transformer configuration (TRANSFORMERS: 2-layer self-attention, 128 hidden) is evaluated against multiple LSTM configurations, and the Transformer is not given a hierarchical variant. Hyperparameter budget is therefore unequal. Transformers are also notoriously hard to train on small datasets without warm-up/learning-rate scheduling specific to attention modules; whether the same SAC hyperparameters (Table 4) are appropriate is unclear.",
+      "id": "C7",
+      "location": "Discussion (RQ4)",
+      "severity": "minor",
+      "suggested_fix": "Match the number of Transformer configurations to the LSTM variants (cash/no-cash, flat/hierarchical, top-k), or restrict the claim to 'within the configurations tested, the Transformer did not improve on LSTM.'"
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Ensemble (equal-weight cross-market) achieves IR2 = 0.41 vs benchmark IR2 = 0.34 for LSTM_1, demonstrating diversification benefits.",
+      "evidence": "The benchmark for the ensemble is described as the 'cross-sectional average of the Buy & Hold strategies.' Per-market B&H IR2 values reported are: NASDAQ 0.52, EURO STOXX (unspecified), Nikkei (B&H is the weakest). The combined Buy&Hold portfolio's IR2 is not necessarily 0.34 (volatility of an average is not the average of volatilities). The number is internally consistent with their tables, but the comparison requires that the ensemble strategy and benchmark be exposed to identical FX/cash mechanics, which is not discussed (markets are in different currencies, ETF benchmarks are USD-denominated).",
+      "id": "C8",
+      "location": "Section 8 (Ensemble Total Fund)",
+      "severity": "minor",
+      "suggested_fix": "State explicitly whether returns are USD-converted or computed on local-currency ETF total returns; report the benchmark IR2 alongside its construction. Also report ensemble alpha tests with multiple-testing correction."
+    },
+    {
+      "assessment": "supported",
+      "claim": "Walk-forward optimization with 5y train / 1y validation / 1y test windows and adaptive retraining provides a 'realistic deployment setting' that mitigates overfitting.",
+      "evidence": "The non-anchored rolling WFO scheme with strict temporal ordering is standard practice (consistent with cited Carta et al., Bailey et al.). The authors honestly note in Section 5.6.1 that the WFO meta-parameters themselves are not subject to sensitivity analysis and that this constitutes a meta-overfitting risk per Bailey et al. (2014).",
+      "id": "C9",
+      "location": "Section 5.6 (Training and Validation Procedure)",
+      "severity": "info",
+      "suggested_fix": "Optionally add a small sensitivity table varying (train, val, test) ∈ {(4,1,1),(5,1,1),(6,1,1)} years to demonstrate robustness."
+    },
+    {
+      "assessment": "supported",
+      "claim": "Soft Actor–Critic with a Dirichlet policy ensures valid (non-negative, sum-to-one) portfolio weights.",
+      "evidence": "Sampling from a Dirichlet does produce weights in the simplex by construction, and SAC can be applied to Dirichlet policies provided the log-prob and entropy of Dirichlet are used in the actor loss. The paper does not detail whether the entropy bonus is computed against the Dirichlet entropy or a Gaussian surrogate; for hierarchical policies, separating equity/cash from per-asset Dirichlet is well-defined.",
+      "id": "C10",
+      "location": "Section 5.2 Action Space; Section 5.5 Model Architecture",
+      "severity": "info",
+      "suggested_fix": "Add an equation specifying the log-prob/entropy terms used in the SAC actor loss for the Dirichlet (and the hierarchical Beta×Dirichlet) parameterizations; this is the most common source of subtle bugs in custom SAC implementations."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Survivorship bias is eliminated by reconstructing time-varying index membership from Bloomberg.",
+      "evidence": "Membership reconstruction is the right approach, but for yfinance price data, delisted tickers are frequently unavailable or have look-ahead-adjusted close prices. The paper does not describe how delisted-asset price histories were obtained or how delisting returns (often −100%) were handled in computing R_{i,t+1} for assets dropped from the index mid-fold.",
+      "id": "C11",
+      "location": "Section 3.2.1 Constituents Membership and Survivorship Bias",
+      "severity": "minor",
+      "suggested_fix": "Document the data source for delisted constituent prices and the convention used for terminal returns of delisted assets; otherwise residual survivorship bias may remain despite the membership filter."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Transaction costs of 2 bps per unit of turnover plus a fixed turnover penalty of 0.003 are consistent with institutional commission schedules (e.g., IBKR tiered 0.05–0.35 bps per share).",
+      "evidence": "The cited IBKR commission schedule is per-share, not per-notional, and excludes bid-ask spread, market impact, exchange fees, and SEC/regulatory fees. For mid-cap NASDAQ-100 / Euro Stoxx 50 / Nikkei 225 names traded with daily rebalancing on a top-20/30 universe, all-in costs typically run 5–10 bps in equities. The 2 bps figure is at the optimistic end and the paper acknowledges only this single value is tested.",
+      "id": "C12",
+      "location": "Section 5.5 environment params; Table 6",
+      "severity": "minor",
+      "suggested_fix": "Add a robustness pass at 5 bps and 10 bps without retraining (the paper notes this gap as a limitation but does not even provide an evaluation-time stress test, which is computationally cheap)."
+    },
+    {
+      "assessment": "supported",
+      "claim": "Markov property holds approximately for portfolio allocation; recent observations in the state vector mitigate the non-Markov nature of returns.",
+      "evidence": "This is a standard simplification in RL-for-finance literature; the lookback window of 60 days plus VIX/breadth global features is a reasonable Markov-augmentation. The paper explicitly flags this as an approximation.",
+      "id": "C13",
+      "location": "Section 4.1 MDP",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Sample period is 2 Jan 2003 to 13 Mar 2026; OOS evaluation starts 2009-04-06 with 16 walk-forward folds.",
+      "evidence": "The 5-year train + 1-year validation initial setup explains why trading begins in 2009. From 2009-04 to 2026-03 is roughly 17 years; the paper consistently refers to '16 out-of-sample folds.' There is also a minor internal inconsistency in the figure notes for QQQ vs Nikkei trading start dates ('2009-04-01' vs '2009-04-06' appears in different notes). For Nikkei, Table 1 reports N=5676 vs 5836 for NASDAQ/EURO STOXX, consistent with Japanese holiday calendar differences. The 2026 end date implies the paper uses data partially beyond the date of writing — likely truncated/forward-projected through March 2026.",
+      "id": "C14",
+      "location": "Introduction; Section 3",
+      "severity": "minor",
+      "suggested_fix": "Reconcile 2009-04-01 vs 2009-04-06 trading-start dates across figure notes; clarify whether the 16-fold count covers 2009–2025 (test years) or 2010–2025."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Reward scaling factor of 1000 on log returns balances reward components and stabilizes training.",
+      "evidence": "Reward scaling does affect SAC value-function magnitudes and the relative weight of the entropy bonus (α=0.2 fixed). With log returns of order 1e−4 daily, multiplying by 1000 puts reward in the ~0.1 magnitude regime, which is reasonable. The paper does not justify the specific factor of 1000 vs alternatives, nor analyze sensitivity. Combined with fixed α=0.2 and turnover penalty 0.003·TO·100=0.3·TO, the effective entropy-to-return trade-off is implicitly fixed.",
+      "id": "C15",
+      "location": "Section 5.3 Reward Function",
+      "severity": "minor",
+      "suggested_fix": "Provide a brief sensitivity check on the reward scale or, equivalently, justify the choice via the magnitude of the SAC critic targets observed during training."
+    },
+    {
+      "assessment": "supported",
+      "claim": "Adaptive retraining triggered when validation Sharpe < 0, below threshold θ_k, or 3 consecutive folds without retraining; threshold uses median−0.5·std of past 5 validations.",
+      "evidence": "The procedure is well-defined and the cold-start behavior (always retrain when fewer than 3 prior validation observations) is sensible. It is a heuristic without theoretical optimality guarantees, which the authors do not claim.",
+      "id": "C16",
+      "location": "Section 5.6.2; eq:retrain_threshold",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "supported",
+      "claim": "The HHI-based concentration penalty (HHI_t − HHI_min,t) with HHI_min = 1/N_t correctly measures excess concentration.",
+      "evidence": "For weights on the simplex, HHI ∈ [1/N, 1] with minimum at the equal-weight allocation, so HHI − 1/N ∈ [0, 1−1/N] is a valid non-negative concentration penalty. The definition matches standard usage.",
+      "id": "C17",
+      "location": "Section 5.3",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Equal-Weight Monthly and Markowitz Minimum Variance benchmarks operate on the same top-k momentum-filtered universe as the RL agent, providing a 'fair' comparison.",
+      "evidence": "Stated explicitly for Equal-Weight Monthly ('same top-k momentum-selected universe'). For Markowitz Min-Var the universe specification is less explicit — the text says it is constructed 'within the same walk-forward optimization framework' but does not state whether the input asset set is the same top-k momentum universe or the full index constituents. If Markowitz uses the full universe while RL uses top-k, then strong Markowitz performance could reflect a wider opportunity set rather than algorithmic merit (or vice versa).",
+      "id": "C18",
+      "location": "Section 5.9 Benchmark Strategies",
+      "severity": "minor",
+      "suggested_fix": "Clarify Markowitz's input universe (top-k vs full constituents) and ideally evaluate both variants."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "All RL configurations outperform Buy & Hold on IR2 in EURO STOXX 50.",
+      "evidence": "The text reports LSTM_2 IR2=0.15 as the strongest RL value, but does not provide the EURO STOXX 50 B&H IR2 number in the narrative (the body refers to a missing table tab:perf_metric_eustxx). The claim that 'all RL strategies outperform Buy & Hold on IR2' cannot be cross-checked against numeric values in the supplied body; only the directional regression-alpha evidence (Table 8) clearly supports it for some configurations.",
+      "id": "C19",
+      "location": "Section 6.3; Section 6.5",
+      "severity": "minor",
+      "suggested_fix": "Inline at least the B&H IR2 number for EURO STOXX 50 (and Nikkei) in the running text, since the comparison is central to the headline claim."
+    },
+    {
+      "assessment": "supported",
+      "claim": "Computational cost: ~14h per WFO cycle for LSTM, ~23h for Transformer on an NVIDIA L4 GPU.",
+      "evidence": "Plausible order of magnitude for SAC + sequence encoder over a 5-year training window at daily frequency with ~20–30 assets. The numbers are reported as point estimates without seed variance, but are reasonable as ballparks.",
+      "id": "C20",
+      "location": "Section 5.7 Computational Setup",
+      "severity": "info",
+      "suggested_fix": null
+    }
+  ],
+  "confidence": 0.7,
+  "overall_correctness": "mostly_sound"
+}
+```
+
+## Corrections
+
+<!-- corrections-section: rendered from corrections table; empty on first publish -->
+_No corrections have been recorded._
+
+## Bibliography
+
+_No bibliography extracted._
+
