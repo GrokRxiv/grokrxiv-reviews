@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Deep Reinforcement Learning Framework for Diversified Portfolio Management Across Global Equity Markets — GrokRxiv Review</title>
+  <meta name="generator" content="grokrxiv-render">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <header>
+    <h1>Deep Reinforcement Learning Framework for Diversified Portfolio Management Across Global Equity Markets</h1>
+    <p class="muted"><span class="brand">GrokRxiv</span> review of <a class="meta-link" href="https://arxiv.org/abs/2605.17307">arXiv:2605.17307</a> · <span>q-fin.PM</span></p>
+  </header>
+  <main>
+    <section>
+      <h2>TL;DR</h2>
+      <p>This paper applies a Soft Actor-Critic (SAC) reinforcement learning framework with LSTM and Transformer encoders and a novel hierarchical Dirichlet policy to portfolio management across three global equity markets (NASDAQ-100, Nikkei 225, EURO STOXX 50) over a 23-year horizon. The evaluation is methodologically careful, employing walk-forward optimization, HAC-robust inference, and stationary bootstrap tests, and the authors honestly acknowledge that the central hypothesis is only partially confirmed. Specialists found the work scientifically sound in spirit but identified two major technical problems requiring correction before publication: (1) the Maximum Drawdown formula (eq:md) is mathematically incorrect with degenerate indices, and (2) the headline positive result—statistically significant alpha on EURO STOXX 50—is reported without any multiple-testing correction across the full hypothesis family (5 models × 3 markets), which means the p-values cited would not survive even a basic Bonferroni adjustment at α=0.10. Additional concerns include critical missing foundational citations (Haarnoja et al. SAC 2018, Vaswani et al. Transformer 2017, Hochreiter &amp; Schmidhuber LSTM 1997), a reproducibility score of 0.24 driven by absent code and partially restricted data, optimistic transaction cost assumptions untested at higher levels, and single-seed evaluations without variance reporting. One citation (sterling2026deep, 2026, no DOI, &#x27;ISI Press&#x27;) could not be verified and warrants author confirmation. Novelty is assessed as incremental (0.45): the hierarchical Dirichlet policy, adaptive retraining criterion, and cross-market ensemble are genuine but evolutionary contributions relative to the FinRL-Meta and DRL portfolio literature.</p>
+      <p class="muted">Recommendation: <strong>Major revision</strong> · Confidence: 78%</p>
+    </section>
+    <section>
+      <h2>Strengths</h2>
+      <ul><li>First unified empirical evaluation applying an identical SAC-based RL pipeline across three geographically distinct major equity markets, enabling cross-market generalization analysis absent from most prior DRL portfolio studies</li><li>Novel hierarchical Dirichlet policy architecture that decomposes equity-cash allocation from per-stock selection, providing a principled simplex-constrained action space for portfolio RL</li><li>Methodologically rigorous evaluation protocol using non-anchored walk-forward optimization, HAC-robust regression alpha tests, and Politis-Romano stationary bootstrap for Sharpe and IR2 differences</li><li>Adaptive retraining heuristic that conditions retraining on rolling validation Sharpe performance, reducing compute while maintaining deployment realism</li><li>Honest and transparent reporting of mixed results, including explicit acknowledgment in the Conclusions that the central hypothesis is only partially confirmed</li><li>Regime decomposition analysis that links RL outperformance to specific macroeconomic periods, providing actionable guidance on when these strategies add value</li></ul>
+    </section>
+    <section>
+      <h2>Weaknesses</h2>
+      <ul><li>Maximum Drawdown formula (eq:md) is mathematically incorrect: the inner maximization over t is degenerate because R_{i,T} (the terminal value) is fixed, not a running peak; the standard definition must use a running maximum of cumulative equity V_t</li><li>No multiple-testing correction is applied across the full hypothesis family (5 models × 3 markets × ≥2 test types); several EURO STOXX 50 alpha p-values cited as significant at α=0.10 would not survive a basic Bonferroni correction (cutoff ≈0.0067 over 15 tests), potentially invalidating the paper&#x27;s primary positive result</li><li>Critical foundational references are absent despite central algorithmic use: Haarnoja et al. (2018) SAC, Vaswani et al. (2017) Transformer, and Hochreiter &amp; Schmidhuber (1997) LSTM are not cited</li><li>No code, trained models, or reproduction package is provided for a complex multi-architecture SAC pipeline across three markets and sixteen walk-forward folds (reproducibility score: 0.24)</li><li>Transaction costs fixed at 2 bps—an optimistic lower bound—with no evaluation-time robustness pass at 5 or 10 bps despite this being computationally cheap</li><li>All walk-forward folds trained and evaluated with a single random seed; no seed variance is reported, making it impossible to assess the stability of architectural comparisons</li><li>Citation sterling2026deep (2026, &#x27;International Journal of Artificial Intelligence Research,&#x27; ISI Press) has no DOI and cannot be verified; authors must confirm its existence</li></ul>
+    </section>
+    <section>
+      <h2>Open Questions</h2>
+      <ul><li>How do the EURO STOXX 50 alpha p-values change under Romano-Wolf family-wise error rate control or the Deflated Sharpe Ratio of Bailey and López de Prado applied across all tested configurations? Does any strategy retain significance?</li><li>Is the SAC actor loss for the Dirichlet (and hierarchical Beta × Dirichlet) policy computed using the correct closed-form Dirichlet entropy, or is a Gaussian surrogate used? This detail is critical for replication and correctness of the entropy bonus.</li><li>How were delisted constituent price histories obtained via yfinance—which frequently lacks or truncates delisted-ticker data—and what terminal return (e.g., −100%, last available price, or index-deletion price) was applied to assets removed from the index mid-fold?</li><li>Is the Markowitz Minimum Variance benchmark constructed on the same top-k momentum-filtered universe as the RL agent, or on the full index constituent set? If different, the comparison conflates universe choice with algorithmic merit.</li><li>Are the ensemble returns computed in a common currency? If so, what FX conversion methodology was applied, and does the benchmark ensemble use the same currency treatment?</li></ul>
+    </section>
+    <section>
+      <h2>Corrections</h2>
+      <p class="muted">No corrections have been recorded.</p>
+    </section>
+    <section>
+      <h2>Bibliography</h2>
+      <p class="muted">No bibliography extracted.</p>
+    </section>
+  </main>
+  <footer class="footer-disclaimer">
+    <p class="muted">Rendered by <span class="brand">GrokRxiv</span>. Source: <a href="https://arxiv.org/abs/2605.17307">arXiv:2605.17307</a>.</p>
+  </footer>
+</body>
+</html>
