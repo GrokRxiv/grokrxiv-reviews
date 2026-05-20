@@ -1,0 +1,721 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\title{Condensed Group Cohomology}
+\date{}
+\begin{document}
+\maketitle
+
+\noindent\textbf{Source:} \href{https://arxiv.org/abs/2512.03648}{arXiv:2512.03648} \quad \textbf{Field:} math.AT\\
+
+\section*{TL;DR}
+This paper makes substantial contributions to condensed mathematics by developing condensed group cohomology for topological groups, extending Scholze's framework to arbitrary uncountable cutoff cardinals, and unifying classical continuous group cohomology with singular and sheaf cohomology of classifying spaces. The five specialist reviews indicate a mathematically ambitious and mostly sound paper with a strong bibliography and moderate but technically sophisticated novelty. However, the reproducibility specialist flagged critical-severity concerns regarding the complete absence of formal proof artifacts for the two headline theorems—Theorem 1 (condensed cohomology naturally isomorphic to classifying space cohomology) and Theorem 2 (solid group cohomology coincides with continuous group cohomology for a broad class of topological groups)—and major-severity concerns for the load-bearing foundational chapter on accessible sheaves and big topoi. Per the RECOMMENDATION GATE, these findings default this review to major\_revision. The technical correctness reviewer confirmed overall\_correctness as mostly\_sound but with low confidence (0.55) due to truncated proof bodies; all principal claims are partially\_supported rather than fully inspectable. Multiple ancillary arguments require clarification: the closure-under-finite-products argument for the goodgroups class, the distinction between k-continuous and ordinary continuous cohomology, the convergence hypotheses for the Čech spectral sequence in a non-presentable big topos, and the role of Grothendieck universe layers in distinguishing universe-dependent from universe-free statements. The citation reviewer (confidence 0.95) rated the bibliography as very strong; the two identified missing references (Clausen-Scholze analytic geometry, Fujiwara) are minor. A major revision is recommended to address the proof-artifact gap, clarify supporting arguments, and add the missing references.
+
+\textbf{Recommendation:} Major revision \quad \textbf{Confidence:} 72\%\\
+
+\section*{Strengths}
+\begin{itemize}[leftmargin=*]
+  \item Comprehensive and high-quality bibliography covering all foundational works in higher category theory (Lurie HTT/HA) and the emerging condensed mathematics programme (Scholze, Barwick-Haine, Mann, Anschütz, Flach), rated with 0.95 confidence by the citation specialist
+  \item Technically sophisticated and ambitious generalisation: extends condensed mathematics to arbitrary uncountable cutoff cardinals and identifies condensed cohomology with both continuous group cohomology and classifying-space cohomology, addressing a longstanding gap caused by continuous G-modules failing to form an abelian category
+  \item Novel framework for accessible hypersheaves on large sites with explicit covering sites, supplying a clean categorical foundation for the paper's main results and generalising results of Barwick-Haine and Mann
+  \item No missing prior art identified by the novelty specialist; the paper situates itself correctly with respect to Scholze, Flach, Anschütz, and Barwick-Haine
+  \item Lemma 7 (closed symmetric monoidal structure on LMod\_R(C)) is assessed as fully supported—a clean and reusable result
+  \item The unification of condensed, singular, and sheaf cohomology in Theorems 1–4 addresses a concrete open problem and provides a powerful toolkit for future applications in arithmetic geometry and rigid-analytic geometry
+\end{itemize}
+
+\section*{Weaknesses}
+\begin{itemize}[leftmargin=*]
+  \item [RECOMMENDATION GATE — critical, reproducibility] No formal proof artifact is provided for the headline comparison Theorem 1 / Theorem 9 (condensed group cohomology ≅ singular/sheaf cohomology of BG); the reproducibility specialist identified this as a critical gap given that partial Lean formalisation of condensed mathematics has established precedent via the Liquid Tensor Experiment
+  \item [RECOMMENDATION GATE — critical, reproducibility] No formal proof artifact is provided for the headline Theorem 2 / Lemma 10 (solid group cohomology = continuous group cohomology for the stated broad class of topological groups); absence of a mechanically checkable artifact for this claim blocks independent reproduction beyond manual proof reading
+  \item [RECOMMENDATION GATE — major, reproducibility] The load-bearing foundational chapter on accessible sheaves, big topoi, and stabilisation (Theorem 5) ships no executable or formal proof archive; this is precisely the part most susceptible to universe-level errors that informal arguments may miss
+  \item Technical correctness reviewer confidence is low (0.55) because full proof bodies are truncated and not directly inspectable; 13 of 15 claims are only partially\_supported, and the most critical structural argument—adjoint transfer along left-exact left adjoints in Theorem 5—lacks a standalone lemma
+  \item The relationship between k-continuous and ordinary continuous group cohomology in Lemma 10 / Theorem 2 is not fully spelled out; the closure-under-finite-products argument for the goodgroups class and the hypothesis of compact generation of G require explicit treatment in the body
+  \item Missing citation to Clausen-Scholze 'Lectures on Analytic Geometry' when discussing solid coefficients for group cohomology; the paper explicitly invokes solid aspects of condensed mathematics without citing this foundational reference
+  \item The set-theoretic foundations discussion does not clearly delineate universe-dependent statements from universe-free ones; readers are not told explicitly which results require the third Grothendieck universe U\_2, creating a reproducibility and correctness risk for size-theoretic arguments
+  \item Novelty is incremental (score 0.65, verdict incremental, confidence 0.9): the paper extends and refines existing frameworks rather than introducing a fundamentally new conceptual approach, which limits its impact for general readers outside condensed mathematics
+\end{itemize}
+
+\section*{Revision Targets}
+\begin{itemize}[leftmargin=*]
+  \item [open] code `/` at `code release and execution entrypoints`: Release the source code, scripts, model configuration, and execution entrypoints needed to regenerate the reported tables, or document why those artifacts cannot be released. Check: Re-review should confirm runnable code or a documented non-release justification is present.
+  \item [open] code `/` at `code release and execution entrypoints`: Release the source code, scripts, model configuration, and execution entrypoints needed to regenerate the reported tables, or document why those artifacts cannot be released. Check: Re-review should confirm runnable code or a documented non-release justification is present.
+  \item [open] paper\_tex `corrections/2512.03648/paper.tex` at `Whole paper`: Provide a companion Lean/mathlib repository sketching at minimum: (i) the definition of explicit covering site and accessible-sheaf condition (src/formal/AccessibleSheaves.lean), (ii) the formal statement (not necessarily proof) of Theorem 5 and Lemma 8 (src/formal/BigPresentable.lean, src/formal/CondensedModules.lean). Even a statements-only formalization would catch universe-level errors and increase confidence in the load-bearing size-theoretic claims. Check: Re-review should confirm `Whole paper` is corrected or justified.
+  \item [open] paper\_tex `corrections/2512.03648/paper.tex` at `Introduction, Theorem 5 (refs 37, 40, 45, 47, 55)`: State explicitly which size of filtered colimit is permitted in the definition of big presentable (refs to small vs. large filtered colimits matter for stabilization closure), and check the proof that adjoints transfer along left-exact left adjoints — this is the load-bearing step and warrants its own lemma. Check: Re-review should confirm `Introduction, Theorem 5 (refs 37, 40, 45, 47, 55)` is corrected or justified.
+  \item [open] paper\_tex `corrections/2512.03648/paper.tex` at `Introduction, Theorem 2 (ref 410)`: Spell out the closure-under-finite-product argument explicitly in the proof of `goodgroups`, and clarify whether the result extends from `k-continuous` group cohomology (used in Lemma 10) to ordinary continuous group cohomology under the listed hypotheses without further assumption (compact generation of G as a topological space). Check: Re-review should confirm `Introduction, Theorem 2 (ref 410)` is corrected or justified.
+  \item [open] bibliography at `Lectures on Analytic Geometry (Clausen-Scholze)`: Add a bibliography entry for `Lectures on Analytic Geometry (Clausen-Scholze)` and cite it where the affected method or claim is introduced, or explicitly justify its omission. Check: Re-review should confirm the bibliography and citation context address this reference.
+  \item [open] paper\_tex `corrections/2512.03648/paper.tex` at `Introduction, II Condensed mathematics (refs 185, 174)`: In the body, separate clearly the universe-dependent statements from the universe-free statements, and indicate the role of Grothendieck-universe assumptions (mentioned in conventions) — readers without category-theoretic background often conflate these. Consider explicit pointers to which results require U\_2. Check: Re-review should confirm `Introduction, II Condensed mathematics (refs 185, 174)` is corrected or justified.
+  \item [open] paper\_tex `corrections/2512.03648/paper.tex` at `Whole paper`: Provide a companion Lean/mathlib repository sketching at minimum: (i) the definition of explicit covering site and accessible-sheaf condition (src/formal/AccessibleSheaves.lean), (ii) the formal statement (not necessarily proof) of Theorem 5 and Lemma 8 (src/formal/BigPresentable.lean, src/formal/CondensedModules.lean). Even a statements-only formalization would catch universe-level errors and increase confidence in the load-bearing size-theoretic claims. Check: Re-review should confirm `Whole paper` is corrected or justified.
+\end{itemize}
+
+\section*{Open Questions}
+\begin{itemize}[leftmargin=*]
+  \item Are the authors planning to integrate any part of this work with the existing Lean/mathlib condensed mathematics formalisations (e.g. the Liquid Tensor Experiment infrastructure)? If not, can the paper explicitly state why a formal proof companion is infeasible for the big-topos parts?
+  \item For Theorem 2 / Lemma 10: what is the precise relationship between k-continuous and ordinary continuous group cohomology for the listed classes of topological groups, and does the paper include an explicit example where they diverge or coincide for a non-compactly-generated G?
+  \item In the proof of Theorem 5, is the adjoint-transfer-along-left-exact-left-adjoints step given as a standalone lemma with a self-contained proof? This appears to be the most load-bearing step in the big-presentable framework and warrants explicit treatment.
+  \item For the Čech-to-cohomology spectral sequence used to construct the comparison natural transformation (C10), what convergence hypotheses are imposed when working in the non-presentable big-topos setting Cond(An)? Standard convergence theorems require presentability or accessibility conditions that may not hold globally.
+  \item Is the equivalence of the accessible-hypersheaf definition and the filtered-colimit-of-topoi definition for condensed animae (C11) the core technical contribution of Chapter 2, or a corollary of a more general statement about sheaves on large sites? Clarifying this would help readers navigate the foundational chapter.
+\end{itemize}
+
+\section*{Per-Agent Reviews}
+\subsection*{citation (\texttt{gemini-3-flash-preview})}
+\begin{verbatim}
+{
+  "confidence": 0.95,
+  "entries": [
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Johannes Anschütz"
+        ],
+        "doi": null,
+        "key": "Anschuetzsolidhomology",
+        "raw": "Anschuetzsolidhomology: Solid Group Cohomology, 2020",
+        "title": "Solid Group Cohomology",
+        "url": null,
+        "venue": "Preprint",
+        "year": 2020
+      },
+      "exists": null,
+      "explanation": "Cited for the identification of continuous, solid, and condensed group cohomology for locally profinite groups and solid coefficients. This is directly relevant to the paper's main theorems on group cohomology comparisons.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Artin, M.",
+          "Grothendieck, A.",
+          "Verdier, J. L."
+        ],
+        "doi": null,
+        "key": "SGA4",
+        "raw": "SGA4: Theorie de Topos et Cohomologie Etale des Schemas {I}, {II}, {III}, 1971",
+        "title": "Theorie de Topos et Cohomologie Etale des Schemas {I}, {II}, {III}",
+        "url": null,
+        "venue": "Lecture Notes in Mathematics",
+        "year": 1971
+      },
+      "exists": null,
+      "explanation": "Cited for foundational results in topos theory, specifically regarding group cohomology in a topos and properties of discrete abelian group objects. It provides the historical and theoretical context for embedding topological spaces into a topos.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2409.01462",
+        "authors": [
+          "Ko Aoki"
+        ],
+        "doi": null,
+        "key": "aoki2024semitopologicalktheorysolidification",
+        "raw": "aoki2024semitopologicalktheorysolidification: (Semi)topological $K$-theory via solidification, 2024, arXiv:2409.01462",
+        "title": "(Semi)topological $K$-theory via solidification",
+        "url": "https://arxiv.org/abs/2409.01462",
+        "venue": "arXiv",
+        "year": 2024
+      },
+      "exists": null,
+      "explanation": "Not explicitly discussed in the provided citation contexts, likely included as related contemporary work in condensed mathematics and solidification.",
+      "notes": null,
+      "relevance": "low",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2402.05257",
+        "authors": [
+          "Ko Aoki"
+        ],
+        "doi": null,
+        "key": "aoki2024ktheoryringscontinuousfunctions",
+        "raw": "aoki2024ktheoryringscontinuousfunctions: $K$-theory of rings of continuous functions, 2024, arXiv:2402.05257",
+        "title": "$K$-theory of rings of continuous functions",
+        "url": "https://arxiv.org/abs/2402.05257",
+        "venue": "arXiv",
+        "year": 2024
+      },
+      "exists": null,
+      "explanation": "Not explicitly discussed in the provided citation contexts, likely included as related contemporary work in the field of condensed mathematics.",
+      "notes": null,
+      "relevance": "low",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Jiří Adámek",
+          "Jiří Rosický"
+        ],
+        "doi": null,
+        "key": "Adamek1989",
+        "raw": "Adamek1989: Reflections in locally presentable categories, 1989",
+        "title": "Reflections in locally presentable categories",
+        "url": null,
+        "venue": "Archiv der Mathematik",
+        "year": 1989
+      },
+      "exists": null,
+      "explanation": "Not explicitly discussed in the provided citation contexts, but foundational for the study of locally presentable categories which are relevant to the 'big presentable categories' discussed in the text.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "1904.09966",
+        "authors": [
+          "Clark Barwick",
+          "Peter Haine"
+        ],
+        "doi": null,
+        "key": "barwick2019pyknoticobjectsibasic",
+        "raw": "barwick2019pyknoticobjectsibasic: Pyknotic objects, I. Basic notions, 2019, arXiv:1904.09966",
+        "title": "Pyknotic objects, I. Basic notions",
+        "url": "https://arxiv.org/abs/1904.09966",
+        "venue": "arXiv",
+        "year": 2019
+      },
+      "exists": null,
+      "explanation": "High relevance as the paper's discussion of accessible (hyper)sheaves and the formulation of accessibility conditions on large sites is an adaptation and generalization of this work. It also provides an alternative model (pyknotic sets) for the same phenomena.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Peter Scholze"
+        ],
+        "doi": null,
+        "key": "Scholzecondensed",
+        "raw": "Scholzecondensed: Lectures on Condensed Mathematics, 2019",
+        "title": "Lectures on Condensed Mathematics",
+        "url": null,
+        "venue": "Lecture Notes",
+        "year": 2019
+      },
+      "exists": null,
+      "explanation": "Foundational reference for the entire paper. The author revisits 'cornerstones' of this work, generalizes its results to arbitrary uncountable cutoff cardinals, and compares the condensed cohomology theory developed here with the original results of Scholze.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Jacob Lurie"
+        ],
+        "doi": null,
+        "key": "highertopostheory",
+        "raw": "highertopostheory: Higher Topos Theory, 2009",
+        "title": "Higher Topos Theory",
+        "url": null,
+        "venue": "Annals of Mathematics Studies",
+        "year": 2009
+      },
+      "exists": null,
+      "explanation": "Critical reference for the language of infinity-categories and infinity-topoi used throughout the paper. Numerous lemmas and propositions regarding filtered colimits, accessible categories, and hypercompleteness are cited from this source.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Jacob Lurie"
+        ],
+        "doi": null,
+        "key": "higheralgebra",
+        "raw": "higheralgebra: Higher Algebra, 2017",
+        "title": "Higher Algebra",
+        "url": null,
+        "venue": "Preprint",
+        "year": 2017
+      },
+      "exists": null,
+      "explanation": "Cited extensively for results on tensor products of presentable categories, symmetric monoidal structures, and the behavior of left adjoints in the context of infinity-categories.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Matthias Flach"
+        ],
+        "doi": "10.1112/S0010437X07003338",
+        "key": "flach",
+        "raw": "flach: Cohomology of topological groups with applications to the Weil group, 2008, doi:10.1112/S0010437X07003338",
+        "title": "Cohomology of topological groups with applications to the Weil group",
+        "url": null,
+        "venue": "Compositio Mathematica",
+        "year": 2008
+      },
+      "exists": null,
+      "explanation": "Cited for studying group cohomology in the gros topos, which is a key precursor and point of comparison for the condensed group cohomology studied in this article.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "William C. Waterhouse"
+        ],
+        "doi": null,
+        "key": "Waterhouse-fpqc-sheafification",
+        "raw": "Waterhouse-fpqc-sheafification: Basically bounded functors and flat sheaves, 1975",
+        "title": "Basically bounded functors and flat sheaves",
+        "url": null,
+        "venue": "Advances in Mathematics",
+        "year": 1975
+      },
+      "exists": null,
+      "explanation": "Provides the historical precedent for studying sheaves on large categories where general sheafification fails (e.g., the fpqc topology), which motivates the author's work on hyperaccessible explicit covering sites.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Lucas Mann"
+        ],
+        "doi": null,
+        "key": "LucasMannthesis",
+        "raw": "LucasMannthesis: A p-Adic 6-Functor Formalism in Rigid-Analytic Geometry, 2022",
+        "title": "A p-Adic 6-Functor Formalism in Rigid-Analytic Geometry",
+        "url": null,
+        "venue": "Thesis",
+        "year": 2022
+      },
+      "exists": null,
+      "explanation": "Highly relevant as many technical lemmas regarding accessible sheaves and closed symmetric monoidal structures are adapted from or identified as generalizations of results in this thesis.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    }
+  ],
+  "missing_references": [
+    {
+      "reason": "Since the paper explicitly mentions the 'very large category of large categories' and set-theoretic size issues in the context of condensed mathematics, a reference to the foundational work of Clausen and Scholze on the 'Solid' refinement of condensed sets (e.g., 'Lectures on Analytic Geometry') is expected when discussing solid coefficients for group cohomology.",
+      "title": "Lectures on Analytic Geometry (Clausen-Scholze)"
+    },
+    {
+      "reason": "The paper discusses comparison between condensed and sheaf cohomology. The work of Fujiwara on the topology of condensed sets or related comparison results in the setting of Hubers's adic spaces could be relevant given the focus on condensed mathematics and rigid-analytic geometry (via Mann).",
+      "title": "The topology of condensed sets (Fujiwara)"
+    }
+  ],
+  "summary": "The paper is a deep investigation into condensed group cohomology and the theory of accessible sheaves on large sites. The bibliography is extremely strong in its coverage of foundational higher category theory (Lurie) and the emerging field of condensed mathematics (Scholze, Barwick-Haine, Mann). Key citations like Anschütz and Flach establish the link between classical continuous group cohomology and the topos-theoretic/condensed approach. The author rigorously maps their technical generalizations back to these established works. The missing references noted are minor and would only serve to further contextualize the 'solid' aspects of the theory which are mentioned but not the primary focus of the 'accessible sheaves' chapter."
+}
+\end{verbatim}
+
+\subsection*{meta_reviewer (\texttt{claude-sonnet-4-6})}
+\begin{verbatim}
+{
+  "confidence": 0.72,
+  "questions": [
+    "Are the authors planning to integrate any part of this work with the existing Lean/mathlib condensed mathematics formalisations (e.g. the Liquid Tensor Experiment infrastructure)? If not, can the paper explicitly state why a formal proof companion is infeasible for the big-topos parts?",
+    "For Theorem 2 / Lemma 10: what is the precise relationship between k-continuous and ordinary continuous group cohomology for the listed classes of topological groups, and does the paper include an explicit example where they diverge or coincide for a non-compactly-generated G?",
+    "In the proof of Theorem 5, is the adjoint-transfer-along-left-exact-left-adjoints step given as a standalone lemma with a self-contained proof? This appears to be the most load-bearing step in the big-presentable framework and warrants explicit treatment.",
+    "For the Čech-to-cohomology spectral sequence used to construct the comparison natural transformation (C10), what convergence hypotheses are imposed when working in the non-presentable big-topos setting Cond(An)? Standard convergence theorems require presentability or accessibility conditions that may not hold globally.",
+    "Is the equivalence of the accessible-hypersheaf definition and the filtered-colimit-of-topoi definition for condensed animae (C11) the core technical contribution of Chapter 2, or a corollary of a more general statement about sheaves on large sites? Clarifying this would help readers navigate the foundational chapter."
+  ],
+  "recommendation": "major_revision",
+  "revision_targets": [
+    {
+      "evidence": "No formal proof/code artifact is provided for the headline comparison between condensed group cohomology and singular/sheaf cohomology of classifying spaces. A proof assistant artifact such as formalization/CondensedGroupCohomology/ClassifyingSpaces.lean would be needed to independently reproduce Theorem 1/Theorem 9 beyond manual proof checking.",
+      "id": "weakness-1",
+      "locator": "code release and execution entrypoints",
+      "required_update": "Release the source code, scripts, model configuration, and execution entrypoints needed to regenerate the reported tables, or document why those artifacts cannot be released.",
+      "source_path": "/",
+      "source_role": "reproducibility",
+      "status": "open",
+      "target_kind": "code",
+      "verification_check": "Re-review should confirm runnable code or a documented non-release justification is present.",
+      "weakness_index": 0
+    },
+    {
+      "evidence": "No formal proof/code artifact is provided for the solid-vs-continuous group cohomology comparison for the stated broad class of topological groups. A reproducibility artifact such as formalization/CondensedGroupCohomology/SolidContinuousComparison.lean would be needed to reproduce Theorem 2/Lemma 10 mechanically.",
+      "id": "weakness-2",
+      "locator": "code release and execution entrypoints",
+      "required_update": "Release the source code, scripts, model configuration, and execution entrypoints needed to regenerate the reported tables, or document why those artifacts cannot be released.",
+      "source_path": "/",
+      "source_role": "reproducibility",
+      "status": "open",
+      "target_kind": "code",
+      "verification_check": "Re-review should confirm runnable code or a documented non-release justification is present.",
+      "weakness_index": 1
+    },
+    {
+      "evidence": "No formal-verification artifact is referenced or linked. While extensive informal proofs in the body (truncated here) are the standard form of evidence in algebraic topology, the field has demonstrated practical formalizability (mathlib/Lean LTE). Given the paper depends critically on size-issues for big topoi — a setting where informal arguments are most prone to subtle universe errors — partial formalization of the foundational accessibility-conditions framework would substantially strengthen confidence.",
+      "id": "weakness-3",
+      "locator": "Whole paper",
+      "required_update": "Provide a companion Lean/mathlib repository sketching at minimum: (i) the definition of explicit covering site and accessible-sheaf condition (src/formal/AccessibleSheaves.lean), (ii) the formal statement (not necessarily proof) of Theorem 5 and Lemma 8 (src/formal/BigPresentable.lean, src/formal/CondensedModules.lean). Even a statements-only formalization would catch universe-level errors and increase confidence in the load-bearing size-theoretic claims.",
+      "source_path": "corrections/2512.03648/paper.tex",
+      "source_role": "technical_correctness",
+      "status": "open",
+      "target_kind": "paper_tex",
+      "verification_check": "Re-review should confirm `Whole paper` is corrected or justified.",
+      "weakness_index": 2
+    },
+    {
+      "evidence": "These are direct generalizations of standard results from highertopostheory/higheralgebra and martini2024colimitscocompletionsinternalhigher to the `big presentable` setting (defined as filtered colimits of presentable categories along fully faithful left-exact left adjoints). The strategy (large-filtered-colimit transfer of stability, adjoint existence, t-structures) is structurally sound and analogous to how presentable-category results extend to accessible settings. Proofs reside in chapter 1 of the body (truncated). The CGrp ≅ Sp_{≥0} equivalence for big topoi extends Lurie's classical equivalence in HTT/HA.",
+      "id": "weakness-4",
+      "locator": "Introduction, Theorem 5 (refs 37, 40, 45, 47, 55)",
+      "required_update": "State explicitly which size of filtered colimit is permitted in the definition of big presentable (refs to small vs. large filtered colimits matter for stabilization closure), and check the proof that adjoints transfer along left-exact left adjoints — this is the load-bearing step and warrants its own lemma.",
+      "source_path": "corrections/2512.03648/paper.tex",
+      "source_role": "technical_correctness",
+      "status": "open",
+      "target_kind": "paper_tex",
+      "verification_check": "Re-review should confirm `Introduction, Theorem 5 (refs 37, 40, 45, 47, 55)` is corrected or justified.",
+      "weakness_index": 3
+    },
+    {
+      "evidence": "Strategy outlined in the intro reduces to Lemma 10 (projectivity of Z[underline G]^□ in Solid implies the desired comparison) plus a structural claim that the listed group classes satisfy this projectivity criterion (refs 416, goodgroups). For locally profinite groups and solid coefficients, the comparison is already established in Anschuetzsolidhomology, and the present result generalizes appropriately. The hypothesis on `finite products` is well-motivated by closure properties of the projectivity condition. Full body proof truncated.",
+      "id": "weakness-5",
+      "locator": "Introduction, Theorem 2 (ref 410)",
+      "required_update": "Spell out the closure-under-finite-product argument explicitly in the proof of `goodgroups`, and clarify whether the result extends from `k-continuous` group cohomology (used in Lemma 10) to ordinary continuous group cohomology under the listed hypotheses without further assumption (compact generation of G as a topological space).",
+      "source_path": "corrections/2512.03648/paper.tex",
+      "source_role": "technical_correctness",
+      "status": "open",
+      "target_kind": "paper_tex",
+      "verification_check": "Re-review should confirm `Introduction, Theorem 2 (ref 410)` is corrected or justified.",
+      "weakness_index": 4
+    },
+    {
+      "evidence": "Since the paper explicitly mentions the 'very large category of large categories' and set-theoretic size issues in the context of condensed mathematics, a reference to the foundational work of Clausen and Scholze on the 'Solid' refinement of condensed sets (e.g., 'Lectures on Analytic Geometry') is expected when discussing solid coefficients for group cohomology.",
+      "id": "weakness-6",
+      "locator": "Lectures on Analytic Geometry (Clausen-Scholze)",
+      "required_update": "Add a bibliography entry for `Lectures on Analytic Geometry (Clausen-Scholze)` and cite it where the affected method or claim is introduced, or explicitly justify its omission.",
+      "source_path": null,
+      "source_role": "citation",
+      "status": "open",
+      "target_kind": "bibliography",
+      "verification_check": "Re-review should confirm the bibliography and citation context address this reference.",
+      "weakness_index": 5
+    },
+    {
+      "evidence": "This claim closely follows the foundational discussion in Scholzecondensed Lectures 1-6 and the framework in barwick2019pyknoticobjectsibasic. The use of a fixed tower of Grothendieck universes U_0 ∈ U_1 ∈ U_2 is standard. The equivalence of accessible-hypersheaf and filtered-colimit definitions is the core technical contribution and is non-trivial; the intro asserts it as part of chapter 2 (truncated). The accessibility-conditions framework follows Waterhouse-fpqc-sheafification.",
+      "id": "weakness-7",
+      "locator": "Introduction, II Condensed mathematics (refs 185, 174)",
+      "required_update": "In the body, separate clearly the universe-dependent statements from the universe-free statements, and indicate the role of Grothendieck-universe assumptions (mentioned in conventions) — readers without category-theoretic background often conflate these. Consider explicit pointers to which results require U_2.",
+      "source_path": "corrections/2512.03648/paper.tex",
+      "source_role": "technical_correctness",
+      "status": "open",
+      "target_kind": "paper_tex",
+      "verification_check": "Re-review should confirm `Introduction, II Condensed mathematics (refs 185, 174)` is corrected or justified.",
+      "weakness_index": 6
+    },
+    {
+      "evidence": "No formal-verification artifact is referenced or linked. While extensive informal proofs in the body (truncated here) are the standard form of evidence in algebraic topology, the field has demonstrated practical formalizability (mathlib/Lean LTE). Given the paper depends critically on size-issues for big topoi — a setting where informal arguments are most prone to subtle universe errors — partial formalization of the foundational accessibility-conditions framework would substantially strengthen confidence.",
+      "id": "weakness-8",
+      "locator": "Whole paper",
+      "required_update": "Provide a companion Lean/mathlib repository sketching at minimum: (i) the definition of explicit covering site and accessible-sheaf condition (src/formal/AccessibleSheaves.lean), (ii) the formal statement (not necessarily proof) of Theorem 5 and Lemma 8 (src/formal/BigPresentable.lean, src/formal/CondensedModules.lean). Even a statements-only formalization would catch universe-level errors and increase confidence in the load-bearing size-theoretic claims.",
+      "source_path": "corrections/2512.03648/paper.tex",
+      "source_role": "technical_correctness",
+      "status": "open",
+      "target_kind": "paper_tex",
+      "verification_check": "Re-review should confirm `Whole paper` is corrected or justified.",
+      "weakness_index": 7
+    }
+  ],
+  "strengths": [
+    "Comprehensive and high-quality bibliography covering all foundational works in higher category theory (Lurie HTT/HA) and the emerging condensed mathematics programme (Scholze, Barwick-Haine, Mann, Anschütz, Flach), rated with 0.95 confidence by the citation specialist",
+    "Technically sophisticated and ambitious generalisation: extends condensed mathematics to arbitrary uncountable cutoff cardinals and identifies condensed cohomology with both continuous group cohomology and classifying-space cohomology, addressing a longstanding gap caused by continuous G-modules failing to form an abelian category",
+    "Novel framework for accessible hypersheaves on large sites with explicit covering sites, supplying a clean categorical foundation for the paper's main results and generalising results of Barwick-Haine and Mann",
+    "No missing prior art identified by the novelty specialist; the paper situates itself correctly with respect to Scholze, Flach, Anschütz, and Barwick-Haine",
+    "Lemma 7 (closed symmetric monoidal structure on LMod_R(C)) is assessed as fully supported—a clean and reusable result",
+    "The unification of condensed, singular, and sheaf cohomology in Theorems 1–4 addresses a concrete open problem and provides a powerful toolkit for future applications in arithmetic geometry and rigid-analytic geometry"
+  ],
+  "summary": "This paper makes substantial contributions to condensed mathematics by developing condensed group cohomology for topological groups, extending Scholze's framework to arbitrary uncountable cutoff cardinals, and unifying classical continuous group cohomology with singular and sheaf cohomology of classifying spaces. The five specialist reviews indicate a mathematically ambitious and mostly sound paper with a strong bibliography and moderate but technically sophisticated novelty. However, the reproducibility specialist flagged critical-severity concerns regarding the complete absence of formal proof artifacts for the two headline theorems—Theorem 1 (condensed cohomology naturally isomorphic to classifying space cohomology) and Theorem 2 (solid group cohomology coincides with continuous group cohomology for a broad class of topological groups)—and major-severity concerns for the load-bearing foundational chapter on accessible sheaves and big topoi. Per the RECOMMENDATION GATE, these findings default this review to major_revision. The technical correctness reviewer confirmed overall_correctness as mostly_sound but with low confidence (0.55) due to truncated proof bodies; all principal claims are partially_supported rather than fully inspectable. Multiple ancillary arguments require clarification: the closure-under-finite-products argument for the goodgroups class, the distinction between k-continuous and ordinary continuous cohomology, the convergence hypotheses for the Čech spectral sequence in a non-presentable big topos, and the role of Grothendieck universe layers in distinguishing universe-dependent from universe-free statements. The citation reviewer (confidence 0.95) rated the bibliography as very strong; the two identified missing references (Clausen-Scholze analytic geometry, Fujiwara) are minor. A major revision is recommended to address the proof-artifact gap, clarify supporting arguments, and add the missing references.",
+  "weaknesses": [
+    "[RECOMMENDATION GATE — critical, reproducibility] No formal proof artifact is provided for the headline comparison Theorem 1 / Theorem 9 (condensed group cohomology ≅ singular/sheaf cohomology of BG); the reproducibility specialist identified this as a critical gap given that partial Lean formalisation of condensed mathematics has established precedent via the Liquid Tensor Experiment",
+    "[RECOMMENDATION GATE — critical, reproducibility] No formal proof artifact is provided for the headline Theorem 2 / Lemma 10 (solid group cohomology = continuous group cohomology for the stated broad class of topological groups); absence of a mechanically checkable artifact for this claim blocks independent reproduction beyond manual proof reading",
+    "[RECOMMENDATION GATE — major, reproducibility] The load-bearing foundational chapter on accessible sheaves, big topoi, and stabilisation (Theorem 5) ships no executable or formal proof archive; this is precisely the part most susceptible to universe-level errors that informal arguments may miss",
+    "Technical correctness reviewer confidence is low (0.55) because full proof bodies are truncated and not directly inspectable; 13 of 15 claims are only partially_supported, and the most critical structural argument—adjoint transfer along left-exact left adjoints in Theorem 5—lacks a standalone lemma",
+    "The relationship between k-continuous and ordinary continuous group cohomology in Lemma 10 / Theorem 2 is not fully spelled out; the closure-under-finite-products argument for the goodgroups class and the hypothesis of compact generation of G require explicit treatment in the body",
+    "Missing citation to Clausen-Scholze 'Lectures on Analytic Geometry' when discussing solid coefficients for group cohomology; the paper explicitly invokes solid aspects of condensed mathematics without citing this foundational reference",
+    "The set-theoretic foundations discussion does not clearly delineate universe-dependent statements from universe-free ones; readers are not told explicitly which results require the third Grothendieck universe U_2, creating a reproducibility and correctness risk for size-theoretic arguments",
+    "Novelty is incremental (score 0.65, verdict incremental, confidence 0.9): the paper extends and refines existing frameworks rather than introducing a fundamentally new conceptual approach, which limits its impact for general readers outside condensed mathematics"
+  ]
+}
+\end{verbatim}
+
+\subsection*{novelty (\texttt{gemini-3-flash-preview})}
+\begin{verbatim}
+{
+  "confidence": 0.9,
+  "missing_prior_art": [],
+  "novelty_score": 0.65,
+  "related_work": [
+    {
+      "citation_key": "Scholzecondensed",
+      "delta": "Generalizes the foundational framework of condensed mathematics to arbitrary cutoff cardinals and extends identifications of condensed with sheaf cohomology to larger classes of topological spaces.",
+      "relation": "builds_on",
+      "title": "Lectures on Condensed Mathematics"
+    },
+    {
+      "citation_key": "flach",
+      "delta": "Provides the blueprint for comparing topological and topos-theoretic group cohomology; this paper adapts those methods to the condensed/spectrum-valued setting.",
+      "relation": "prior_art",
+      "title": "Cohomology of topological groups with applications to the Weil group"
+    },
+    {
+      "citation_key": "barwick2019pyknoticobjectsibasic",
+      "delta": "Adapts the accessibility conditions for sheaves on large sites to define 'big topoi' and establishes their stability and t-structure properties for spectrum objects.",
+      "relation": "builds_on",
+      "title": "Pyknotic objects, I. Basic notions"
+    },
+    {
+      "citation_key": "Anschuetzsolidhomology",
+      "delta": "Identified continuous and condensed group cohomology for locally profinite groups; this paper extends these results to broader classes of groups and modules.",
+      "relation": "prior_art",
+      "title": "Solid Group Cohomology"
+    }
+  ],
+  "verdict": "incremental"
+}
+\end{verbatim}
+
+\subsection*{reproducibility (\texttt{gpt-5.5})}
+\begin{verbatim}
+{
+  "code_availability": "unspecified",
+  "code_url": null,
+  "concerns": [
+    {
+      "area": "code",
+      "description": "No formal proof/code artifact is provided for the headline comparison between condensed group cohomology and singular/sheaf cohomology of classifying spaces. A proof assistant artifact such as formalization/CondensedGroupCohomology/ClassifyingSpaces.lean would be needed to independently reproduce Theorem 1/Theorem 9 beyond manual proof checking.",
+      "severity": "critical"
+    },
+    {
+      "area": "code",
+      "description": "No formal proof/code artifact is provided for the solid-vs-continuous group cohomology comparison for the stated broad class of topological groups. A reproducibility artifact such as formalization/CondensedGroupCohomology/SolidContinuousComparison.lean would be needed to reproduce Theorem 2/Lemma 10 mechanically.",
+      "severity": "critical"
+    },
+    {
+      "area": "code",
+      "description": "The paper's foundational results on accessible sheaves, big topoi, and stabilization are load-bearing but are only supplied as prose mathematics. A formalization path such as formalization/AccessibleSheaves/BigTopoi.lean or an equivalent proof archive is not included.",
+      "severity": "major"
+    },
+    {
+      "area": "code",
+      "description": "The condensed-versus-sheaf cohomology identifications for locally compact and locally contractible spaces are not accompanied by executable checks or formal proof artifacts. A proof artifact such as formalization/CondensedCohomology/SheafComparison.lean would close this gap.",
+      "severity": "major"
+    },
+    {
+      "area": "data",
+      "description": "No empirical datasets are involved in the paper, so there is no data artifact to retrieve or regenerate.",
+      "severity": "info"
+    }
+  ],
+  "confidence": 0.86,
+  "data_availability": "unspecified",
+  "data_url": null,
+  "environment": null,
+  "reproducibility_score": 0.32
+}
+\end{verbatim}
+
+\subsection*{summary (\texttt{claude-haiku-4-5-20251001})}
+\begin{verbatim}
+{
+  "audience": "Algebraic topologists, higher category theorists, and mathematicians specializing in condensed mathematics, homological algebra, and the cohomology of topological groups.",
+  "key_contributions": [
+    "Definition of condensed group cohomology as Ext-groups in the abelian category of condensed modules, providing a refined invariant compared to classical continuous group cohomology",
+    "Proof that condensed group cohomology with solid coefficients recovers continuous group cohomology for a broad class of topological groups (locally profinite, locally compact, and certain other groups)",
+    "Theorem identifying condensed group cohomology with singular and sheaf cohomology of classifying spaces for topological groups homotopy equivalent to locally compact or locally contractible spaces",
+    "Development of a framework for working with accessible hypersheaves on large sites while maintaining topos-like categorical properties",
+    "Extension of condensed mathematics from universe-dependent definitions to arbitrary uncountable cardinal cutoffs, making the theory more flexible"
+  ],
+  "plain_language_summary": "This paper develops a new notion of group cohomology using condensed mathematics, a framework that embeds topological spaces into a topos-like category of condensed sets. Traditional group cohomology struggles with topological groups because continuous G-modules don't form an abelian category. The authors show that by working with condensed modules (which are abelian), one can define a more refined version of group cohomology using derived functors. They prove that for important classes of topological groups—such as locally profinite groups and locally compact groups—this condensed cohomology recovers classical continuous group cohomology when restricted to natural coefficient modules. More remarkably, for many topological groups, condensed group cohomology equals the singular and sheaf cohomology of the group's classifying space, providing a powerful unification of these different notions of cohomology.",
+  "tldr": "Condensed mathematics provides a refined notion of group cohomology for topological groups that unifies classical continuous group cohomology with the cohomology of classifying spaces."
+}
+\end{verbatim}
+
+\subsection*{technical_correctness (\texttt{claude-opus-4-7})}
+\begin{verbatim}
+{
+  "claims": [
+    {
+      "assessment": "partially_supported",
+      "claim": "Theorem 1: For Hausdorff topological groups G that are homotopy equivalent to a locally compact Hausdorff space or to a locally contractible space, and for discrete abelian coefficients M with trivial action, condensed group cohomology H*_cond(G, M) is naturally isomorphic to singular/sheaf cohomology of the classifying space BG of numerable principal G-bundles.",
+      "evidence": "The introduction provides a coherent proof sketch via Theorem 9 (homotopy-invariance of condensed cohomology with solid coefficients) plus identification of singular/sheaf cohomology of BG with the cohomology of the underlying condensed set BBG. Standard results on classifying spaces of principal infinity-bundles (Principalinftybundles) are appropriately invoked. The full proof is in the body section 3.4.1 which is truncated and not directly inspectable. The conclusion is consistent with Flach's gros-topos result and with prior work cited (haine2022, CatrinMair). No counterexample apparent.",
+      "id": "C1",
+      "location": "Introduction, Theorem 1 (refs 396, 398)",
+      "severity": "minor",
+      "suggested_fix": "Make the boundary cases explicit (e.g. G with non-T1 classifying space) and state precisely the regularity hypothesis on BG used in the chain of isomorphisms. Consider adding a remark relating the result to a Lean/Liquid-Tensor-Experiment style formalization given that the cited Anschuetzsolidhomology and Scholzecondensed results underlying the proof have partial Lean formalizations."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Theorem 2: For Hausdorff topological groups G that are finite products of (i) groups homotopy equivalent to a coproduct of compact Hausdorff spaces, (ii) groups homotopy equivalent to a locally contractible space, or (iii) groups that are locally connected and locally compact, and for any solid continuous G-module M, continuous group cohomology agrees with the Ext-groups Ext*_{Solid(Z[underline G])}(Z, underline M).",
+      "evidence": "Strategy outlined in the intro reduces to Lemma 10 (projectivity of Z[underline G]^□ in Solid implies the desired comparison) plus a structural claim that the listed group classes satisfy this projectivity criterion (refs 416, goodgroups). For locally profinite groups and solid coefficients, the comparison is already established in Anschuetzsolidhomology, and the present result generalizes appropriately. The hypothesis on `finite products` is well-motivated by closure properties of the projectivity condition. Full body proof truncated.",
+      "id": "C2",
+      "location": "Introduction, Theorem 2 (ref 410)",
+      "severity": "minor",
+      "suggested_fix": "Spell out the closure-under-finite-product argument explicitly in the proof of `goodgroups`, and clarify whether the result extends from `k-continuous` group cohomology (used in Lemma 10) to ordinary continuous group cohomology under the listed hypotheses without further assumption (compact generation of G as a topological space)."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Theorem 3: For X a locally compact Hausdorff space and M a product of a discrete abelian group and a finite-dimensional normed R-vector space, sheaf cohomology of X with coefficients in M is naturally isomorphic to condensed cohomology H*_cond(underline X, underline M).",
+      "evidence": "This extends comparison maps in Scholzecondensed (which established the case of compact Hausdorff X) using a gros-topos description T^{LS}_lambda and descent along local-section covers (ref 213). The construction of the comparison map via the geometric morphism j*: T^{LS}_lambda -> Cond_kappa(An) is presented coherently and uses the cohomology-invariance-under-geometric-morphism identity. Restriction to the stated coefficient class (discrete plus finite-dim normed R-vector space) is consistent with what Scholze's solidification computations can handle. Proof in body is truncated.",
+      "id": "C3",
+      "location": "Introduction, Theorem 3 (ref 222)",
+      "severity": "minor",
+      "suggested_fix": "State precisely the role of `numerability` / paracompactness of LCH spaces in the descent step, and indicate which class of products of discrete and normed-R-vector coefficients is closed under the involved operations (limits, filtered colimits, extensions)."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Theorem 4: For M a Hausdorff topological group with underline M solid (e.g. discrete or locally profinite) and X a T1 topological space homotopy equivalent to a locally contractible space (e.g. a CW-complex), sheaf cohomology of X with coefficients in the discretization M^delta is naturally isomorphic to condensed cohomology H*_cond(underline X, underline M).",
+      "evidence": "The intro indicates the proof routes through homotopy invariance of condensed cohomology with solid coefficients (ref 324) and the explicit solidification of free condensed abelian groups on CW-complexes (solidificationcompacthausdorffspace, solidcw). The use of M^delta on the sheaf side rather than M is the correct adjustment under homotopy invariance. The dependence on the locally-contractible hypothesis is well-known (cf. sella2016comparison for singular-vs-sheaf comparison). Full body proof truncated.",
+      "id": "C4",
+      "location": "Introduction, Theorem 4 (ref 326)",
+      "severity": "minor",
+      "suggested_fix": "Clarify whether `homotopy equivalent to a locally contractible space` means weak homotopy equivalence or strong homotopy equivalence, and which equivalence is needed for the sheaf-cohomological side. Add a worked example illustrating the contrast with the LCH case from Theorem 3."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Theorem 5: For a big presentable category B_infty, (i) Sp(B_infty) is stable and big presentable; (ii) Omega^infty admits a left adjoint Sigma^infty_+ that factors through CMon, CGrp; (iii) there is a canonical t-structure on Sp(B_infty); (iv) if B_infty is a big topos then Sigma^infty_+ factors via an equivalence CGrp(B_infty) ≅ Sp(B_infty)_{≥0}; (v) Sigma^infty_+ has a universal property as a colimit-preserving functor into stable big presentable targets.",
+      "evidence": "These are direct generalizations of standard results from highertopostheory/higheralgebra and martini2024colimitscocompletionsinternalhigher to the `big presentable` setting (defined as filtered colimits of presentable categories along fully faithful left-exact left adjoints). The strategy (large-filtered-colimit transfer of stability, adjoint existence, t-structures) is structurally sound and analogous to how presentable-category results extend to accessible settings. Proofs reside in chapter 1 of the body (truncated). The CGrp ≅ Sp_{≥0} equivalence for big topoi extends Lurie's classical equivalence in HTT/HA.",
+      "id": "C5",
+      "location": "Introduction, Theorem 5 (refs 37, 40, 45, 47, 55)",
+      "severity": "minor",
+      "suggested_fix": "State explicitly which size of filtered colimit is permitted in the definition of big presentable (refs to small vs. large filtered colimits matter for stabilization closure), and check the proof that adjoints transfer along left-exact left adjoints — this is the load-bearing step and warrants its own lemma."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Lemma 6: For stable big presentably symmetric monoidal C_infty, pullback along Sigma^{infty, ⊗}_+ gives a fully faithful functor from colimit-preserving symmetric monoidal functors Sp(B)^⊗ -> C^⊗ to colimit-preserving symmetric monoidal functors B^⊗ -> C^⊗, with explicit characterization of essential image; it is an equivalence when Sp(B) and C admit small coproducts.",
+      "evidence": "This is the monoidal analogue of Theorem 5(v) and is the natural big-presentable extension of standard universal properties of stabilization in Pr^L (cf. higheralgebra). The hypothesis on small coproducts is consistent with what is needed for the bar/cobar resolution to converge. Proof in body truncated.",
+      "id": "C6",
+      "location": "Introduction, Lemma 6 (ref 65)",
+      "severity": "minor",
+      "suggested_fix": "Indicate whether the symmetric-monoidal structure on Sp(B)^⊗ depends only on B^⊗ up to canonical equivalence (independence of presentation as filtered colimit of topoi), and provide the explicit module-theoretic counterpart referenced in Lemma 7."
+    },
+    {
+      "assessment": "supported",
+      "claim": "Lemma 7: For C^⊗ a potentially large closed symmetric monoidal category with all Δ^op-indexed colimits and all Δ-indexed limits, and R ∈ CAlg(C), the induced symmetric monoidal structure on LMod_R(C) is closed.",
+      "evidence": "This is a direct adaptation of HA.4.5.3.1 to the large/big setting, and the simplicial-bar-resolution construction of the internal Hom requires exactly Δ^op-colimits and Δ-limits. The statement is consistent with the literature (Lurie SAG/HA, Nikolaus-Sagave) and the cited LucasMannthesis adaptation.",
+      "id": "C7",
+      "location": "Introduction, Lemma 7 (ref 87)",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Lemma 8: For R ∈ Alg(Cond_{(kappa)}(Ab)), the derived category D(LMod_R(Cond_{(kappa)}(Ab))) is equivalent to LMod_R(Cond_{(kappa)}(Sp)).",
+      "evidence": "This is asserted to follow from a generalization of Lurie's SAG Theorem 2.1.2.2 to big topoi (ref 114). The result is structurally believable: condensed abelian groups, while lacking injectives in the standard sense (noinjectivesincondensed), admit enough projectives for strong limit kappa, which is sufficient for the derived equivalence. The same kind of equivalence is established in cartiermodulesmattisweiss for Cartier modules. Truncated body.",
+      "id": "C8",
+      "location": "Introduction, Lemma 8 (ref 238)",
+      "severity": "minor",
+      "suggested_fix": "State explicitly the projectivity hypothesis on Cond_{(kappa)}(Ab) that powers the SAG-2.1.2.2-style argument, and indicate whether the result requires Postnikov completeness (mondal2024postnikovcompletenessrepletetopoi)."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Lemma 10: For Hausdorff topological groups G such that Z[underline G]^□ is projective in Solid, k-continuous group cohomology coincides with solid group cohomology Ext*_{Solid(Z[underline G])}(Z, underline(-)).",
+      "evidence": "The argument outlined (stability of projective solid abelian groups under solid tensor products, ref 299) reduces the comparison to checking that the standard bar resolution computes both cohomologies. This is consistent with Anschuetzsolidhomology, which established the locally profinite case. Replacing `continuous` by `k-continuous` is a key technical point and is justified by the standard distinction between compactly-generated and arbitrary topologies on G^n. Truncated body proof.",
+      "id": "C9",
+      "location": "Introduction, Lemma 10 (ref 416)",
+      "severity": "minor",
+      "suggested_fix": "State the precise relation between continuous and k-continuous cocycle complexes (with reference to definition 385) and clarify which class of G satisfies continuous = k-continuous a priori (e.g. compactly generated G)."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Comparison natural transformation: for any Hausdorff topological group G, the Cech-to-cohomology spectral sequence for underline G -> * yields a natural transformation H*_cont(G, -) -> H*_cond(underline G, -) ∘ underline(-).",
+      "evidence": "The Cech-to-cohomology spectral sequence in a big topos with cover underline G -> * is constructed in ref 134, and the E_2-page computing continuous cochain cohomology is standard. The transformation is natural by construction. This compares correctly with Flach's gros-topos analogue.",
+      "id": "C10",
+      "location": "Introduction (ref 134)",
+      "severity": "minor",
+      "suggested_fix": "Spell out convergence hypotheses for the Cech spectral sequence in the (non-presentable) big-topos setting Cond(An), since standard convergence theorems typically require presentability or accessibility hypotheses."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Set-theoretic foundations: condensed animae form a big topos that can be expressed as a large filtered colimit of the categories Cond_kappa(An) along fully faithful, left-exact left adjoints, with kappa running over small uncountable regular cardinals or small strong limit cardinals; the Scholze accessible-hypersheaf definition is equivalent to the limit-cardinal colimit definition.",
+      "evidence": "This claim closely follows the foundational discussion in Scholzecondensed Lectures 1-6 and the framework in barwick2019pyknoticobjectsibasic. The use of a fixed tower of Grothendieck universes U_0 ∈ U_1 ∈ U_2 is standard. The equivalence of accessible-hypersheaf and filtered-colimit definitions is the core technical contribution and is non-trivial; the intro asserts it as part of chapter 2 (truncated). The accessibility-conditions framework follows Waterhouse-fpqc-sheafification.",
+      "id": "C11",
+      "location": "Introduction, II Condensed mathematics (refs 185, 174)",
+      "severity": "minor",
+      "suggested_fix": "In the body, separate clearly the universe-dependent statements from the universe-free statements, and indicate the role of Grothendieck-universe assumptions (mentioned in conventions) — readers without category-theoretic background often conflate these. Consider explicit pointers to which results require U_2."
+    },
+    {
+      "assessment": "unsupported",
+      "claim": "The PROOF-AS-CODE axiom check: the paper is in a code-amenable field (math.AT) where formalization of condensed-mathematics results in Lean (e.g. the Liquid Tensor Experiment) has established precedent, yet the paper ships no formal proof artifact (no Lean/Coq/Agda/Isabelle files, no companion repository).",
+      "evidence": "No formal-verification artifact is referenced or linked. While extensive informal proofs in the body (truncated here) are the standard form of evidence in algebraic topology, the field has demonstrated practical formalizability (mathlib/Lean LTE). Given the paper depends critically on size-issues for big topoi — a setting where informal arguments are most prone to subtle universe errors — partial formalization of the foundational accessibility-conditions framework would substantially strengthen confidence.",
+      "id": "C12",
+      "location": "Whole paper",
+      "severity": "minor",
+      "suggested_fix": "Provide a companion Lean/mathlib repository sketching at minimum: (i) the definition of explicit covering site and accessible-sheaf condition (src/formal/AccessibleSheaves.lean), (ii) the formal statement (not necessarily proof) of Theorem 5 and Lemma 8 (src/formal/BigPresentable.lean, src/formal/CondensedModules.lean). Even a statements-only formalization would catch universe-level errors and increase confidence in the load-bearing size-theoretic claims."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Cohomology in big topoi is computable in a small subtopos: for every big topos X, cohomology in X can be computed in a subcategory X_lambda ⊆ X which is a topos.",
+      "evidence": "Follows from cohomology invariance under geometric morphisms (eq labeled cohomologyinvariantundergeometricmorphismintro is the only verified equation label) and from the colimit-of-topoi structure on big topoi. The claim is the practical justification for the whole `big topoi` formalism. The body presumably proves it via spectral enrichment of adjunctions between stable big presentable categories (ref 75).",
+      "id": "C13",
+      "location": "Introduction, chapter I (ref 75, eq cohomologyinvariantundergeometricmorphismintro)",
+      "severity": "minor",
+      "suggested_fix": "State explicitly the dependence of the choice of lambda on the source/target of the cohomology calculation, since results downstream (e.g. condensedcohomologycanbecomputedonfinitestage, ref 207) require kappa > |X|."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Existence of derived solidification: for the listed conditions on kappa (aleph_1, strong limit cardinals, Cond without kappa, R = Z, R = Z[underline G_{(kappa)}] for Hausdorff G), the forget functor D(Solid_{(kappa)}(R)) -> D(Cond_{(kappa)}(R)) admits a left adjoint (-)^{L□R}.",
+      "evidence": "Builds on Scholzecondensed's underived treatment and the s-flatness criterion (ref 309). Profinite topological rings being s-flat (ref 313) and group rings of Hausdorff topological groups being s-flat (ref 312) are the key examples driving the rest of the paper. All light condensed rings being aleph_1-s-flat (ref 311) is consistent with Analyticstacks. Body proof truncated.",
+      "id": "C14",
+      "location": "Introduction, section 2.8 (refs 314, 311, 312)",
+      "severity": "minor",
+      "suggested_fix": "Provide a concise side-by-side comparison of the kappa-dependent and kappa-free conditions for derived solidification to exist, since the cluster of references (derivedsolidificationexistssflatrings, lightringssflat, examplessflatrings, etc.) is hard to navigate from the introduction alone."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "The big-topos category of G-objects in a big topos X is itself a big topos.",
+      "evidence": "This is the structural fact underpinning the definition of group cohomology as cohomology of the terminal object. It is analogous to the well-known result that for a group object G in a 1-topos, G-objects form a topos, lifted to the big presentable setting. The proof would proceed by checking the filtered-colimit-of-topoi description survives passage to G-objects. Truncated body.",
+      "id": "C15",
+      "location": "Introduction, chapter III (ref 335)",
+      "severity": "minor",
+      "suggested_fix": "Note explicitly how G-objects interact with the filtered-colimit presentation: does (colim_kappa X_kappa)^G coincide with colim_kappa (X_kappa)^G, and under what hypotheses on G?"
+    }
+  ],
+  "confidence": 0.55,
+  "overall_correctness": "mostly_sound"
+}
+\end{verbatim}
+
+\section*{Corrections}
+% corrections rendered from corrections table; empty on first publish
+No corrections have been recorded.
+
+\section*{Bibliography}
+No bibliography extracted.
+
+% \bibliographystyle{plain}
+% \bibliography{references}
+\end{document}
