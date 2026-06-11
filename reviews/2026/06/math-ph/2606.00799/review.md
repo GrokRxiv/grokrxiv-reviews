@@ -1,0 +1,3555 @@
+# Weyl-type theorems in Galilei and Carroll geometry
+
+GrokRxiv review of [arXiv:2606.00799](https://arxiv.org/abs/2606.00799) · `math-ph`
+
+_Authors_: Philip K. Schwartz, James Read, Quentin Vigneron
+
+## TL;DR
+
+The paper extends Weyl's classical theorem—that a Weyl metric is determined by its conformal and projective structures—to both Galilean and Carrollian geometries. The specialist review was severely hampered by an incomplete submission artifact containing only the abstract and bibliography; no theorem statements, definitions, or proofs were present. Consequently, the technical correctness reviewer reached only 0.35 confidence, and the four main claims (C3, C4, C6, C7) could only be assessed as partially_supported. The novelty specialist (confidence 0.90) rates the contribution as incremental (0.65): the Galilei case has clear prior art in Curiel (2015) and the competing contemporaneous March (2025), while the Carroll case appears to be a genuine addition. Reproducibility raised two critical concerns—the proof body is absent from the submitted artifact, and no formal proof-assistant artifact (Lean/Coq/Agda) was provided—and one major concern about the absence of any toolchain specification. Because the paper is in math-ph (a code-amenable field) and the reproducibility reviewer flagged a missing proof-as-code artifact at critical severity, the recommendation gate defaults to major_revision. Citation hygiene is strong, though two foundational references are absent: Ehlers-Pirani-Schild (1972) and Duval-Burdet-Künzle-Perrin (1985). Specialists do not materially disagree with each other; the technical reviewer's lower confidence reflects data absence, not contradiction of the novelty reviewer's judgment.
+
+_Recommendation_: **Major revision** · _Confidence_: 72%
+
+## Strengths
+
+- The paper addresses a well-posed foundational question by extending Weyl's classical characterization of metric geometry to both non-relativistic and ultra-relativistic degenerate settings in a single unified framework.
+- Citation coverage is comprehensive, bridging classical differential geometry and the modern non-Lorentzian geometry literature, including very recent (2025–2026) works, indicating thorough engagement with the field.
+- The Carroll case—a Weyl-type uniqueness theorem for ultra-relativistic geometry—appears to go beyond the prior art, which had focused primarily on the Galilean/Newton-Cartan setting (Curiel 2015, March 2025).
+- Treating both Galilei and Carroll limits in parallel under a single framework (building on Vigneron-Barzegar-Read 2025) offers conceptual clarity and structural economy over piecemeal prior results.
+
+## Weaknesses
+
+- The submitted artifact is incomplete: only the abstract and bibliography were provided, leaving all theorem statements, definitions, lemmas, and proofs inaccessible to reviewers, which prevented a line-by-line technical audit (technical_correctness C8, severity major).
+- No formal proof artifact (Lean, Coq, Agda, or equivalent symbolic script) is provided for the headline uniqueness theorems, a critical gap for a math-ph result for which machine-checked derivations would substantially raise confidence (reproducibility concern, severity critical).
+- Novelty over the competing contemporaneous paper March (2025) on Newton-Cartan Weyl-type theorems is not established from the abstract alone; without the body it is impossible to verify what new generality—torsion classes, Carroll extension, degenerate-metric handling—the present paper contributes (technical_correctness C7, severity major).
+- The specific notions of conformal structure for Galilei and Carroll geometries are described only as 'suitably defined,' with no explicit definition in the abstract or accessible body text, making the central hypothesis of the theorems unverifiable (technical_correctness C6, severity minor).
+- Two foundational references are absent: Ehlers-Pirani-Schild (1972), the standard relativistic starting point for Weyl's result, and Duval-Burdet-Künzle-Perrin (1985), the Bargmann framework unifying Galilean and Carrollian structures (citation review, missing_references).
+
+## Revision Targets
+
+- [ ] **Manuscript: reproducibility appendix**
+  - Location: `corrections/2606.00799/paper.tex` at `reproducibility appendix`
+  - Evidence: The supplied artifact contains only the abstract and bibliography, with no theorem statements, assumptions, definitions, or proof sections for the Galilei and Carroll Weyl-type results; a detailed proof supplement such as `proofs/main_theorems.pdf` would be needed to independently check the claims.
+  - Required change: Add a reproducibility note that resolves this concern: The supplied artifact contains only the abstract and bibliography, with no theorem statements, assumptions, definitions, or proof sections for the Galilei and Carroll Weyl-type results; a detailed proof supplement such as `proofs/main_theorems.pdf` would be needed to independently check the claims.
+  - Verification: Re-review should confirm the reproducibility concern is addressed with a concrete artifact or manuscript update.
+- [ ] **Code release and entrypoints**
+  - Location: code/reproducibility artifacts: `code release and execution entrypoints`
+  - Evidence: No formal proof artifact, proof-assistant development, or symbolic derivation code is provided for the load-bearing Weyl-type theorems; an artifact such as `proofs/weyl_type_galilei_carroll.lean` or an equivalent checked derivation would close this gap.
+  - Required change: Release the source code, scripts, model configuration, and execution entrypoints needed to regenerate the reported tables, or document why those artifacts cannot be released.
+  - Verification: Re-review should confirm runnable code or a documented non-release justification is present.
+- [ ] **Manuscript: Abstract (overall framing)**
+  - Location: `corrections/2606.00799/paper.tex` at `Abstract (overall framing)`
+  - Evidence: Several of the cited works already address Weyl-type theorems in non-relativistic geometry: Curiel 2015 [17] for geometrised Newtonian gravity, March 2025 [43] explicitly titled 'A note on Newton-Cartan Weyl-type theorems', Dewar-Read 2020 [18] on conformal invariance of the Newtonian Weyl tensor, and Vigneron-Barzegar-Read 2025 [50] on affine connections for Galilean and Carrollian structures. Without the body of the paper it is impossible to verify how the present results differ from or extend these. The novelty claim implicit in the abstract is therefore not auditable here.
+  - Required change: Include a clear statement in the introduction comparing the theorems proved here with Curiel 2015, March 2025, Dewar-Read 2020, and Vigneron-Barzegar-Read 2025, specifying the new generality (e.g., torsion classes, Carroll case, degenerate-metric handling) that is genuinely new.
+  - Verification: Re-review should confirm `Abstract (overall framing)` is corrected or justified.
+- [ ] **Manuscript: Abstract (main thesis)**
+  - Location: `corrections/2606.00799/paper.tex` at `Abstract (main thesis)`
+  - Evidence: As with C3, only the abstract is available. The Carroll case is plausible given recent work in the area (Duval et al. 2014b [24], Ciambelli et al. 2019 [16], Herfray 2022 [38], March-Read 2025 [44], Vigneron-Barzegar-Read 2025 [50], Bergshoeff et al. 2026 [9]), but the precise notion of conformal Carroll structure, the class of connections under consideration, and any genuine uniqueness/Weyl-type statement (versus a no-go or weakened version) cannot be checked without the proof.
+  - Required change: Include in the manuscript body: (i) explicit definition(s) of conformal Carroll structure used, (ii) the precise Weyl-type theorem with hypotheses (e.g., torsion-freeness, compatibility), and (iii) a proof or an indication of which projective data is or is not sufficient for uniqueness in the degenerate-metric setting.
+  - Verification: Re-review should confirm `Abstract (main thesis)` is corrected or justified.
+- [ ] **Bibliography: Duval, C., Burdet, G., Künzle, H. P., and Perrin, M. (1985). Bargmann structures and Newton-C...**
+  - Location: bibliography entry: `Duval, C., Burdet, G., Künzle, H. P., and Perrin, M. (1985). Bargmann structures and Newton-Cartan theory.`
+  - Evidence: Foundational work on the Bargmann framework, which unifies Galilean and Carrollian structures as different null reductions, providing the geometric context for the connection compatibility discussed.
+  - Required change: Add a bibliography entry for `Duval, C., Burdet, G., Künzle, H. P., and Perrin, M. (1985). Bargmann structures and Newton-Cartan theory` and cite it where the affected method or claim is introduced, or explicitly justify its omission.
+  - Verification: Re-review should confirm the bibliography and citation context address this reference.
+
+## Open Questions
+
+- How do the Galilei Weyl-type theorems proved here differ precisely from Curiel (2015) and March (2025)—does the treatment extend to connections with torsion, to more general compatibility conditions, or to higher-dimensional cases not covered previously?
+- What is the explicit definition of conformal structure adopted for Galilei geometry (e.g., joint rescaling of temporal form and spatial cometric), and is it equivalent to, or a generalization of, the definitions in Duval-Horváthy and related works?
+- What is the explicit definition of conformal Carroll structure, and does a fully analogous uniqueness result hold, or does the rank-(n−1) degenerate metric introduce obstructions that require a weakened or conditional uniqueness statement?
+- Is the absence of a Lean/Coq formalization a deliberate methodological choice, and if so, what alternative verification strategy (e.g., coordinate computation in SageMath or xAct) supports the headline uniqueness claims?
+
+## Per-Agent Reviews
+
+### build_knowledge_graph (`deterministic`) — status: `pass`
+
+```json
+{
+  "counts": {
+    "bibliography": 53,
+    "claims": 5
+  },
+  "edges": [
+    {
+      "relation": "depends_on",
+      "source": "weyl_theorem",
+      "target": "def_weyl_metric"
+    },
+    {
+      "relation": "cites",
+      "source": "weyl_theorem",
+      "target": "Weyl:1921"
+    },
+    {
+      "relation": "depends_on",
+      "source": "weyl_theorem_equivalent",
+      "target": "weyl_theorem"
+    },
+    {
+      "relation": "cites",
+      "source": "weyl_theorem_equivalent",
+      "target": "Weyl:1921"
+    },
+    {
+      "relation": "depends_on",
+      "source": "analogous_results_exist",
+      "target": "weyl_theorem"
+    },
+    {
+      "relation": "depends_on",
+      "source": "analogous_results_exist",
+      "target": "def_galilei_carroll_geometries"
+    }
+  ],
+  "nodes": [
+    {
+      "confidence": 1.0,
+      "id": "def_weyl_metric",
+      "kind": "definition",
+      "statement": "A Weyl metric is a natural generalisation of a pseudo-Riemannian metric."
+    },
+    {
+      "confidence": 0.95,
+      "id": "weyl_theorem",
+      "kind": "citation_claim",
+      "statement": "A Weyl metric is uniquely determined by its conformal and projective structures (i.e. by its conformal structure and its set of unparametrised geodesics)."
+    },
+    {
+      "confidence": 0.95,
+      "id": "weyl_theorem_equivalent",
+      "kind": "citation_claim",
+      "statement": "A torsion-free linear connection compatible with a pseudo-Riemannian conformal structure is uniquely determined by its projective structure."
+    },
+    {
+      "confidence": 1.0,
+      "id": "def_galilei_carroll_geometries",
+      "kind": "definition",
+      "statement": "Galilei and Carroll geometries are spacetime geometries that arise as the 'non-relativistic' and 'ultra-relativistic' limits of Lorentzian geometry, respectively."
+    },
+    {
+      "confidence": 0.9,
+      "id": "analogous_results_exist",
+      "kind": "theorem",
+      "statement": "Analogous results to Weyl's theorem exist for suitably defined notions of conformal structure for Galilei and Carroll geometry."
+    }
+  ],
+  "paper": {
+    "arxiv_id": "2606.00799",
+    "title": "Weyl-type theorems in Galilei and Carroll geometry"
+  }
+}
+```
+
+### citation (`gemini-3-flash-preview`) — status: `warn`
+
+```json
+{
+  "confidence": 0.95,
+  "entries": [
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Hermann Weyl"
+        ],
+        "doi": null,
+        "key": "Weyl:1921",
+        "raw": "Weyl:1921: Zur {Infinitesimalgeometrie}: {Einordnung} der projektiven und der konformen {Auffassung}, 1921",
+        "title": "Zur {Infinitesimalgeometrie}: {Einordnung} der projektiven und der konformen {Auffassung}",
+        "url": null,
+        "venue": null,
+        "year": 1921
+      },
+      "exists": null,
+      "explanation": "This is the foundational paper for the Weyl-type theorem discussed in the abstract, establishing that a Weyl metric is determined by its conformal and projective structures.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "1510.02089",
+        "authors": [
+          "Erik Curiel"
+        ],
+        "doi": null,
+        "key": "Curiel:2015",
+        "raw": "Curiel:2015: A {Weyl}-Type Theorem for Geometrized {Newtonian} Gravity, 2015, arXiv:1510.02089",
+        "title": "A {Weyl}-Type Theorem for Geometrized {Newtonian} Gravity",
+        "url": null,
+        "venue": null,
+        "year": 2015
+      },
+      "exists": null,
+      "explanation": "Directly relevant as it provides a Weyl-type theorem for Newtonian (Galilean) gravity, which is one of the main topics (non-relativistic limit) of the paper.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "1403.4213",
+        "authors": [
+          "Christian Duval",
+          "G. W. Gibbons",
+          "P. A. Horvathy"
+        ],
+        "doi": "10.1088/1751-8113/47/33/335204",
+        "key": "Duval.EtAl:2014b",
+        "raw": "Duval.EtAl:2014b: Conformal {Carroll} groups, 2014, doi:10.1088/1751-8113/47/33/335204, arXiv:1403.4213",
+        "title": "Conformal {Carroll} groups",
+        "url": null,
+        "venue": null,
+        "year": 2014
+      },
+      "exists": null,
+      "explanation": "Fundamental reference for the conformal structure of Carroll geometry, which the paper aims to analyze in the context of Weyl-type theorems.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "1402.0657",
+        "authors": [
+          "Christian Duval",
+          "G. W. Gibbons",
+          "P. A. Horvathy",
+          "P. M. Zhang"
+        ],
+        "doi": "10.1088/0264-9381/31/8/085016",
+        "key": "Duval.EtAl:2014",
+        "raw": "Duval.EtAl:2014: Carroll versus {Newton} and {Galilei}: two dual non-{Einstein\\-ian} concepts of time, 2014, doi:10.1088/0264-9381/31/8/085016, arXiv:1402.0657",
+        "title": "Carroll versus {Newton} and {Galilei}: two dual non-{Einstein\\-ian} concepts of time",
+        "url": null,
+        "venue": null,
+        "year": 2014
+      },
+      "exists": null,
+      "explanation": "Provides the conceptual bridge and duality between Galilei and Carroll structures, essential for a unified discussion of Weyl-type theorems in both limits.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "1905.02221",
+        "authors": [
+          "Luca Ciambelli",
+          "Charles Marteau"
+        ],
+        "doi": "10.1103/PhysRevD.100.046010",
+        "key": "Ciambelli.EtAl:2019",
+        "raw": "Ciambelli.EtAl:2019: Carroll structures, null geometry, and conformal isometries, 2019, doi:10.1103/PhysRevD.100.046010, arXiv:1905.02221",
+        "title": "Carroll structures, null geometry, and conformal isometries",
+        "url": null,
+        "venue": null,
+        "year": 2019
+      },
+      "exists": null,
+      "explanation": "Detailed study of Carrollian conformal isometries and null geometry, highly relevant to the paper's focus on conformal structures in Carrollian limits.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2112.09048",
+        "authors": [
+          "Yannick Herfray"
+        ],
+        "doi": "10.1088/1361-6382/ac635f",
+        "key": "Herfray:2022",
+        "raw": "Herfray:2022: Carrollian manifolds and null infinity: a view from Cartan geometry, 2022, doi:10.1088/1361-6382/ac635f, arXiv:2112.09048",
+        "title": "Carrollian manifolds and null infinity: a view from Cartan geometry",
+        "url": null,
+        "venue": null,
+        "year": 2022
+      },
+      "exists": null,
+      "explanation": "Relates Carrollian geometry to Cartan geometry and null infinity, providing a modern geometric framework for the discussion of connections and structures.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2206.10780",
+        "authors": [
+          "Venkatesa Chandrasekaran",
+          "Roberto Longo",
+          "Geoffrey Penington",
+          "Edward Witten"
+        ],
+        "doi": "10.1007/JHEP02(2023)082",
+        "key": "Chandrasekaran.EtAl:2023",
+        "raw": "Chandrasekaran.EtAl:2023: An algebra of observables for {de Sitter} space, 2023, doi:10.1007/JHEP02(2023)082, arXiv:2206.10780",
+        "title": "An algebra of observables for {de Sitter} space",
+        "url": null,
+        "venue": null,
+        "year": 2023
+      },
+      "exists": null,
+      "explanation": "While high-profile, this paper focuses on observables in de Sitter space and von Neumann algebras. Its connection to Weyl-type theorems in Galilei/Carroll geometry is likely tangential or motivational.",
+      "notes": null,
+      "relevance": "low",
+      "resolved_doi": null,
+      "resolved_url": null
+    }
+  ],
+  "missing_references": [
+    {
+      "reason": "Classical reference for the projective and conformal structure of Lorentzian manifolds (EPS axioms), which is the standard relativistic starting point for Weyl's result.",
+      "title": "Ehlers, J., Pirani, F. A. E., and Schild, A. (1972). The geometry of free fall and light propagation."
+    },
+    {
+      "reason": "Foundational work on the Bargmann framework, which unifies Galilean and Carrollian structures as different null reductions, providing the geometric context for the connection compatibility discussed.",
+      "title": "Duval, C., Burdet, G., Künzle, H. P., and Perrin, M. (1985). Bargmann structures and Newton-Cartan theory."
+    }
+  ],
+  "summary": "The paper demonstrates excellent citation hygiene, covering both the foundational historical work by Weyl and Cartan as well as the modern resurgence of interest in Carrollian and Galilean geometries. The bibliography effectively bridges the gap between mathematical relativity and non-Lorentzian field theory. The inclusion of very recent (2025/2026) works suggests a comprehensive and up-to-date engagement with the field."
+}
+```
+
+### citation_validator (`paper-review.citation`) — status: `warn`
+
+```json
+{
+  "output": {
+    "confidence": 0.95,
+    "entries": [
+      {
+        "citation": {
+          "arxiv_id": null,
+          "authors": [
+            "Hermann Weyl"
+          ],
+          "doi": null,
+          "key": "Weyl:1921",
+          "raw": "Weyl:1921: Zur {Infinitesimalgeometrie}: {Einordnung} der projektiven und der konformen {Auffassung}, 1921",
+          "title": "Zur {Infinitesimalgeometrie}: {Einordnung} der projektiven und der konformen {Auffassung}",
+          "url": null,
+          "venue": null,
+          "year": 1921
+        },
+        "exists": null,
+        "explanation": "This is the foundational paper for the Weyl-type theorem discussed in the abstract, establishing that a Weyl metric is determined by its conformal and projective structures.",
+        "notes": null,
+        "relevance": "high",
+        "resolved_doi": null,
+        "resolved_url": null
+      },
+      {
+        "citation": {
+          "arxiv_id": "1510.02089",
+          "authors": [
+            "Erik Curiel"
+          ],
+          "doi": null,
+          "key": "Curiel:2015",
+          "raw": "Curiel:2015: A {Weyl}-Type Theorem for Geometrized {Newtonian} Gravity, 2015, arXiv:1510.02089",
+          "title": "A {Weyl}-Type Theorem for Geometrized {Newtonian} Gravity",
+          "url": null,
+          "venue": null,
+          "year": 2015
+        },
+        "exists": null,
+        "explanation": "Directly relevant as it provides a Weyl-type theorem for Newtonian (Galilean) gravity, which is one of the main topics (non-relativistic limit) of the paper.",
+        "notes": null,
+        "relevance": "high",
+        "resolved_doi": null,
+        "resolved_url": null
+      },
+      {
+        "citation": {
+          "arxiv_id": "1403.4213",
+          "authors": [
+            "Christian Duval",
+            "G. W. Gibbons",
+            "P. A. Horvathy"
+          ],
+          "doi": "10.1088/1751-8113/47/33/335204",
+          "key": "Duval.EtAl:2014b",
+          "raw": "Duval.EtAl:2014b: Conformal {Carroll} groups, 2014, doi:10.1088/1751-8113/47/33/335204, arXiv:1403.4213",
+          "title": "Conformal {Carroll} groups",
+          "url": null,
+          "venue": null,
+          "year": 2014
+        },
+        "exists": null,
+        "explanation": "Fundamental reference for the conformal structure of Carroll geometry, which the paper aims to analyze in the context of Weyl-type theorems.",
+        "notes": null,
+        "relevance": "high",
+        "resolved_doi": null,
+        "resolved_url": null
+      },
+      {
+        "citation": {
+          "arxiv_id": "1402.0657",
+          "authors": [
+            "Christian Duval",
+            "G. W. Gibbons",
+            "P. A. Horvathy",
+            "P. M. Zhang"
+          ],
+          "doi": "10.1088/0264-9381/31/8/085016",
+          "key": "Duval.EtAl:2014",
+          "raw": "Duval.EtAl:2014: Carroll versus {Newton} and {Galilei}: two dual non-{Einstein\\-ian} concepts of time, 2014, doi:10.1088/0264-9381/31/8/085016, arXiv:1402.0657",
+          "title": "Carroll versus {Newton} and {Galilei}: two dual non-{Einstein\\-ian} concepts of time",
+          "url": null,
+          "venue": null,
+          "year": 2014
+        },
+        "exists": null,
+        "explanation": "Provides the conceptual bridge and duality between Galilei and Carroll structures, essential for a unified discussion of Weyl-type theorems in both limits.",
+        "notes": null,
+        "relevance": "high",
+        "resolved_doi": null,
+        "resolved_url": null
+      },
+      {
+        "citation": {
+          "arxiv_id": "1905.02221",
+          "authors": [
+            "Luca Ciambelli",
+            "Charles Marteau"
+          ],
+          "doi": "10.1103/PhysRevD.100.046010",
+          "key": "Ciambelli.EtAl:2019",
+          "raw": "Ciambelli.EtAl:2019: Carroll structures, null geometry, and conformal isometries, 2019, doi:10.1103/PhysRevD.100.046010, arXiv:1905.02221",
+          "title": "Carroll structures, null geometry, and conformal isometries",
+          "url": null,
+          "venue": null,
+          "year": 2019
+        },
+        "exists": null,
+        "explanation": "Detailed study of Carrollian conformal isometries and null geometry, highly relevant to the paper's focus on conformal structures in Carrollian limits.",
+        "notes": null,
+        "relevance": "high",
+        "resolved_doi": null,
+        "resolved_url": null
+      },
+      {
+        "citation": {
+          "arxiv_id": "2112.09048",
+          "authors": [
+            "Yannick Herfray"
+          ],
+          "doi": "10.1088/1361-6382/ac635f",
+          "key": "Herfray:2022",
+          "raw": "Herfray:2022: Carrollian manifolds and null infinity: a view from Cartan geometry, 2022, doi:10.1088/1361-6382/ac635f, arXiv:2112.09048",
+          "title": "Carrollian manifolds and null infinity: a view from Cartan geometry",
+          "url": null,
+          "venue": null,
+          "year": 2022
+        },
+        "exists": null,
+        "explanation": "Relates Carrollian geometry to Cartan geometry and null infinity, providing a modern geometric framework for the discussion of connections and structures.",
+        "notes": null,
+        "relevance": "medium",
+        "resolved_doi": null,
+        "resolved_url": null
+      },
+      {
+        "citation": {
+          "arxiv_id": "2206.10780",
+          "authors": [
+            "Venkatesa Chandrasekaran",
+            "Roberto Longo",
+            "Geoffrey Penington",
+            "Edward Witten"
+          ],
+          "doi": "10.1007/JHEP02(2023)082",
+          "key": "Chandrasekaran.EtAl:2023",
+          "raw": "Chandrasekaran.EtAl:2023: An algebra of observables for {de Sitter} space, 2023, doi:10.1007/JHEP02(2023)082, arXiv:2206.10780",
+          "title": "An algebra of observables for {de Sitter} space",
+          "url": null,
+          "venue": null,
+          "year": 2023
+        },
+        "exists": null,
+        "explanation": "While high-profile, this paper focuses on observables in de Sitter space and von Neumann algebras. Its connection to Weyl-type theorems in Galilei/Carroll geometry is likely tangential or motivational.",
+        "notes": null,
+        "relevance": "low",
+        "resolved_doi": null,
+        "resolved_url": null
+      }
+    ],
+    "missing_references": [
+      {
+        "reason": "Classical reference for the projective and conformal structure of Lorentzian manifolds (EPS axioms), which is the standard relativistic starting point for Weyl's result.",
+        "title": "Ehlers, J., Pirani, F. A. E., and Schild, A. (1972). The geometry of free fall and light propagation."
+      },
+      {
+        "reason": "Foundational work on the Bargmann framework, which unifies Galilean and Carrollian structures as different null reductions, providing the geometric context for the connection compatibility discussed.",
+        "title": "Duval, C., Burdet, G., Künzle, H. P., and Perrin, M. (1985). Bargmann structures and Newton-Cartan theory."
+      }
+    ],
+    "summary": "The paper demonstrates excellent citation hygiene, covering both the foundational historical work by Weyl and Cartan as well as the modern resurgence of interest in Carrollian and Galilean geometries. The bibliography effectively bridges the gap between mathematical relativity and non-Lorentzian field theory. The inclusion of very recent (2025/2026) works suggests a comprehensive and up-to-date engagement with the field."
+  },
+  "source": "paper-review.citation",
+  "verifier_notes": {
+    "citation": {
+      "notes": {
+        "checked": 53,
+        "entries": [
+          {
+            "arxiv_id": null,
+            "author": null,
+            "citation_key": "Adlam.Linnemann.Read",
+            "doi": "10.1093/9780198922391.001.0001",
+            "exists": true,
+            "raw": "Adlam.Linnemann.Read:2025: Constructive axiomatics for spacetime physics, 2025, doi:10.1093/9780198922391.001.0001",
+            "reason": null,
+            "resolved_doi": "10.1093/9780198922391.001.0001",
+            "resolved_url": "https://doi.org/10.1093/9780198922391.001.0001",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "Constructive axiomatics for spacetime physics",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": "0903.3953",
+            "author": null,
+            "citation_key": "Alishahiha.Davody.Vahedi",
+            "doi": "10.1088/1126-6708/2009/08/022",
+            "exists": true,
+            "raw": "Alishahiha.Davody.Vahedi:2009: On {AdS/CFT} of {Galilean} Conformal Field Theories, 2009, doi:10.1088/1126-6708/2009/08/022, arXiv:0903.3953",
+            "reason": null,
+            "resolved_doi": "10.1088/1126-6708/2009/08/022",
+            "resolved_url": "https://doi.org/10.1088/1126-6708/2009/08/022",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "On {AdS/CFT} of {Galilean} Conformal Field Theories",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": "1408.0810",
+            "author": null,
+            "citation_key": "Bagchi.Basu.Mehra",
+            "doi": "10.1007/JHEP11(2014)061",
+            "exists": true,
+            "raw": "Bagchi.Basu.Mehra:2014: Galilean Conformal Electrodynamics, 2014, doi:10.1007/JHEP11(2014)061, arXiv:1408.0810",
+            "reason": null,
+            "resolved_doi": "10.1007/JHEP11(2014)061",
+            "resolved_url": "https://doi.org/10.1007/JHEP11(2014)061",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "Galilean Conformal Electrodynamics",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": "1712.05631",
+            "author": null,
+            "citation_key": "Bagchi.Chakrabortty.Mehra",
+            "doi": "10.1007/JHEP04(2018)144",
+            "exists": true,
+            "raw": "Bagchi.Chakrabortty.Mehra:2018: Galilean field theories and conformal structure, 2018, doi:10.1007/JHEP04(2018)144, arXiv:1712.05631",
+            "reason": null,
+            "resolved_doi": "10.1007/JHEP04(2018)144",
+            "resolved_url": "https://doi.org/10.1007/JHEP04(2018)144",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "Galilean field theories and conformal structure",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": "0902.1385",
+            "author": null,
+            "citation_key": "Bagchi.Gopakumar",
+            "doi": "10.1088/1126-6708/2009/07/037",
+            "exists": true,
+            "raw": "Bagchi.Gopakumar:2009: Galilean conformal algebras and {AdS/CFT}, 2009, doi:10.1088/1126-6708/2009/07/037, arXiv:0902.1385",
+            "reason": null,
+            "resolved_doi": "10.1088/1126-6708/2009/07/037",
+            "resolved_url": "https://doi.org/10.1088/1126-6708/2009/07/037",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "Galilean conformal algebras and {AdS/CFT}",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": "0903.4524",
+            "author": null,
+            "citation_key": "Bagchi.Mandal",
+            "doi": "10.1016/j.physletb.2009.04.030",
+            "exists": true,
+            "raw": "Bagchi.Mandal:2009: On representations and correlation functions of {Galilean} conformal algebras, 2009, doi:10.1016/j.physletb.2009.04.030, arXiv:0903.4524",
+            "reason": null,
+            "resolved_doi": "10.1016/j.physletb.2009.04.030",
+            "resolved_url": "https://doi.org/10.1016/j.physletb.2009.04.030",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "On representations and correlation functions of {Galilean} conformal algebras",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": "1405.2264",
+            "author": null,
+            "citation_key": "Bergshoeff.EtAl",
+            "doi": "10.1088/0264-9381/31/20/205009",
+            "exists": true,
+            "raw": "Bergshoeff.EtAl:2014: Dynamics of {Carroll} particles, 2014, doi:10.1088/0264-9381/31/20/205009, arXiv:1405.2264",
+            "reason": null,
+            "resolved_doi": "10.1088/0264-9381/31/20/205009",
+            "resolved_url": "https://doi.org/10.1088/0264-9381/31/20/205009",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "Dynamics of {Carroll} particles",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": "1701.06156",
+            "author": null,
+            "citation_key": "Bergshoeff.EtAl",
+            "doi": "10.1007/JHEP03(2017)165",
+            "exists": true,
+            "raw": "Bergshoeff.EtAl:2017: Carroll versus {Galilei} gravity, 2017, doi:10.1007/JHEP03(2017)165, arXiv:1701.06156",
+            "reason": null,
+            "resolved_doi": "10.1007/JHEP03(2017)165",
+            "resolved_url": "https://doi.org/10.1007/JHEP03(2017)165",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "Carroll versus {Galilei} gravity",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": null,
+            "author": null,
+            "citation_key": "Bergshoeff.EtAl",
+            "doi": "10.1007/978-3-032-03921-7_33",
+            "exists": true,
+            "raw": "Bergshoeff.EtAl:2026: Applied Conformal {Carroll} Geometry, 2026, doi:10.1007/978-3-032-03921-7_33",
+            "reason": null,
+            "resolved_doi": "10.1007/978-3-032-03921-7_33",
+            "resolved_url": "https://doi.org/10.1007/978-3-032-03921-7_33",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "Applied Conformal {Carroll} Geometry",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": null,
+            "author": null,
+            "citation_key": "Cartan",
+            "doi": "10.24033/asens.751",
+            "exists": true,
+            "raw": "Cartan:1923: Sur les variétés à connexion affine et la théorie de la relativité généralisée (première partie), 1923, doi:10.24033/asens.751",
+            "reason": null,
+            "resolved_doi": "10.24033/asens.751",
+            "resolved_url": "https://doi.org/10.24033/asens.751",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "Sur les variétés à connexion affine et la théorie de la relativité généralisée (première partie)",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": null,
+            "author": null,
+            "citation_key": "Cartan",
+            "doi": "10.24033/asens.753",
+            "exists": true,
+            "raw": "Cartan:1924: Sur les variétés à connexion affine et la théorie de la relativité généralisée (première partie) ({Suite}), 1924, doi:10.24033/asens.753",
+            "reason": null,
+            "resolved_doi": "10.24033/asens.753",
+            "resolved_url": "https://doi.org/10.24033/asens.753",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "Sur les variétés à connexion affine et la théorie de la relativité généralisée (première partie) ({Suite})",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": null,
+            "author": null,
+            "citation_key": "Cartan",
+            "doi": null,
+            "exists": null,
+            "raw": "Cartan:1986: On Manifolds with an Affine Connection and the Theory of General Relativity, 1986",
+            "reason": "not verified by Crossref bibliographic search; no match above score threshold",
+            "resolved_doi": null,
+            "resolved_url": null,
+            "source": "crossref_bibliographic",
+            "status": "unverified",
+            "title": "On Manifolds with an Affine Connection and the Theory of General Relativity",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": "2206.10780",
+            "author": null,
+            "citation_key": "Chandrasekaran.EtAl",
+            "doi": "10.1007/JHEP02(2023)082",
+            "exists": true,
+            "raw": "Chandrasekaran.EtAl:2023: An algebra of observables for {de Sitter} space, 2023, doi:10.1007/JHEP02(2023)082, arXiv:2206.10780",
+            "reason": null,
+            "resolved_doi": "10.1007/JHEP02(2023)082",
+            "resolved_url": "https://doi.org/10.1007/JHEP02(2023)082",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "An algebra of observables for {de Sitter} space",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": "2203.10490",
+            "author": null,
+            "citation_key": "Chen.Liu",
+            "doi": "10.1007/JHEP05(2023)224",
+            "exists": true,
+            "raw": "Chen.Liu:2023: The shadow formalism of {Galilean CFT\\textsubscript{2}}, 2023, doi:10.1007/JHEP05(2023)224, arXiv:2203.10490",
+            "reason": null,
+            "resolved_doi": "10.1007/JHEP05(2023)224",
+            "resolved_url": "https://doi.org/10.1007/JHEP05(2023)224",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "The shadow formalism of {Galilean CFT\\textsubscript{2}}",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": "2406.17451",
+            "author": null,
+            "citation_key": "Chen.Sun.Zheng",
+            "doi": "10.1103/PhysRevD.110.125010",
+            "exists": true,
+            "raw": "Chen.Sun.Zheng:2024: Quantization of {Carrollian} conformal scalar theories, 2024, doi:10.1103/PhysRevD.110.125010, arXiv:2406.17451",
+            "reason": null,
+            "resolved_doi": "10.1103/PhysRevD.110.125010",
+            "resolved_url": "https://doi.org/10.1103/PhysRevD.110.125010",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "Quantization of {Carrollian} conformal scalar theories",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": "1905.02221",
+            "author": null,
+            "citation_key": "Ciambelli.EtAl",
+            "doi": "10.1103/PhysRevD.100.046010",
+            "exists": true,
+            "raw": "Ciambelli.EtAl:2019: Carroll structures, null geometry, and conformal isometries, 2019, doi:10.1103/PhysRevD.100.046010, arXiv:1905.02221",
+            "reason": null,
+            "resolved_doi": "10.1103/PhysRevD.100.046010",
+            "resolved_url": "https://doi.org/10.1103/PhysRevD.100.046010",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "Carroll structures, null geometry, and conformal isometries",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": "1510.02089",
+            "author": null,
+            "citation_key": "Curiel",
+            "doi": null,
+            "exists": true,
+            "raw": "Curiel:2015: A {Weyl}-Type Theorem for Geometrized {Newtonian} Gravity, 2015, arXiv:1510.02089",
+            "reason": null,
+            "resolved_doi": null,
+            "resolved_url": "https://arxiv.org/abs/1510.02089",
+            "source": "arxiv",
+            "status": "resolved",
+            "title": "A {Weyl}-Type Theorem for Geometrized {Newtonian} Gravity",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": "2009.09733",
+            "author": null,
+            "citation_key": "Dewar.Read",
+            "doi": "10.1007/s10701-020-00386-w",
+            "exists": true,
+            "raw": "Dewar.Read:2020: Conformal Invariance of the {Newtonian} {Weyl} Tensor, 2020, doi:10.1007/s10701-020-00386-w, arXiv:2009.09733",
+            "reason": null,
+            "resolved_doi": "10.1007/s10701-020-00386-w",
+            "resolved_url": "https://doi.org/10.1007/s10701-020-00386-w",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "Conformal Invariance of the {Newtonian} {Weyl} Tensor",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": "1707.00563",
+            "author": null,
+            "citation_key": "Dewar.Weatherall",
+            "doi": "10.1007/s10701-018-0151-6",
+            "exists": true,
+            "raw": "Dewar.Weatherall:2018: On Gravitational Energy in {Newtonian} Theories, 2018, doi:10.1007/s10701-018-0151-6, arXiv:1707.00563",
+            "reason": null,
+            "resolved_doi": "10.1007/s10701-018-0151-6",
+            "resolved_url": "https://doi.org/10.1007/s10701-018-0151-6",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "On Gravitational Energy in {Newtonian} Theories",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": null,
+            "author": null,
+            "citation_key": "Dombrowski.Horneffer",
+            "doi": "10.1007/BF01110404",
+            "exists": true,
+            "raw": "Dombrowski.Horneffer:1964: Die Differentialgeometrie des Galileischen Relativitätsprinzips, 1964, doi:10.1007/BF01110404",
+            "reason": null,
+            "resolved_doi": "10.1007/BF01110404",
+            "resolved_url": "https://doi.org/10.1007/BF01110404",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "Die Differentialgeometrie des Galileischen Relativitätsprinzips",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": "1502.03034",
+            "author": null,
+            "citation_key": "Dunajski.Gundry",
+            "doi": "10.1007/s00220-015-2557-8",
+            "exists": true,
+            "raw": "Dunajski.Gundry:2016: Non-Relativistic Twistor Theory and {Newton--Cartan} Geometry, 2016, doi:10.1007/s00220-015-2557-8, arXiv:1502.03034",
+            "reason": null,
+            "resolved_doi": "10.1007/s00220-015-2557-8",
+            "resolved_url": "https://doi.org/10.1007/s00220-015-2557-8",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "Non-Relativistic Twistor Theory and {Newton--Cartan} Geometry",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": "2203.08567",
+            "author": null,
+            "citation_key": "Dunajski.Penrose",
+            "doi": "10.1016/j.aop.2023.169243",
+            "exists": true,
+            "raw": "Dunajski.Penrose:2023: Quantum state reduction, and {Newtonian} twistor theory, 2023, doi:10.1016/j.aop.2023.169243, arXiv:2203.08567",
+            "reason": null,
+            "resolved_doi": "10.1016/j.aop.2023.169243",
+            "resolved_url": "https://doi.org/10.1016/j.aop.2023.169243",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "Quantum state reduction, and {Newtonian} twistor theory",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": "2212.11002",
+            "author": null,
+            "citation_key": "Dutta",
+            "doi": "10.1016/j.physletb.2024.138672",
+            "exists": true,
+            "raw": "Dutta:2024: Stress tensors of 3d {Carroll CFTs}, 2024, doi:10.1016/j.physletb.2024.138672, arXiv:2212.11002",
+            "reason": null,
+            "resolved_doi": "10.1016/j.physletb.2024.138672",
+            "resolved_url": "https://doi.org/10.1016/j.physletb.2024.138672",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "Stress tensors of 3d {Carroll CFTs}",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": "1403.4213",
+            "author": null,
+            "citation_key": "Duval.EtAl",
+            "doi": "10.1088/1751-8113/47/33/335204",
+            "exists": true,
+            "raw": "Duval.EtAl:2014b: Conformal {Carroll} groups, 2014, doi:10.1088/1751-8113/47/33/335204, arXiv:1403.4213",
+            "reason": null,
+            "resolved_doi": "10.1088/1751-8113/47/33/335204",
+            "resolved_url": "https://doi.org/10.1088/1751-8113/47/33/335204",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "Conformal {Carroll} groups",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": "1402.0657",
+            "author": null,
+            "citation_key": "Duval.EtAl",
+            "doi": "10.1088/0264-9381/31/8/085016",
+            "exists": true,
+            "raw": "Duval.EtAl:2014: Carroll versus {Newton} and {Galilei}: two dual non-{Einstein\\-ian} concepts of time, 2014, doi:10.1088/0264-9381/31/8/085016, arXiv:1402.0657",
+            "reason": null,
+            "resolved_doi": "10.1088/0264-9381/31/8/085016",
+            "resolved_url": "https://doi.org/10.1088/0264-9381/31/8/085016",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "Carroll versus {Newton} and {Galilei}: two dual non-{Einstein\\-ian} concepts of time",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": "1104.1502",
+            "author": null,
+            "citation_key": "Duval.Horvathy",
+            "doi": "10.1088/1751-8113/44/33/335203",
+            "exists": true,
+            "raw": "Duval.Horvathy:2011: Conformal {Galilei} groups, {Veronese} curves, and {Newton}--{Hooke} spacetimes, 2011, doi:10.1088/1751-8113/44/33/335203, arXiv:1104.1502",
+            "reason": null,
+            "resolved_doi": "10.1088/1751-8113/44/33/335203",
+            "resolved_url": "https://doi.org/10.1088/1751-8113/44/33/335203",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "Conformal {Galilei} groups, {Veronese} curves, and {Newton}--{Hooke} spacetimes",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": null,
+            "author": null,
+            "citation_key": "Ehlers",
+            "doi": null,
+            "exists": null,
+            "raw": "Ehlers:1981a: Über den Newtonschen Grenzwert der Einsteinschen Gravitationstheorie, 1981",
+            "reason": "not verified by Crossref bibliographic search; no match above score threshold",
+            "resolved_doi": null,
+            "resolved_url": null,
+            "source": "crossref_bibliographic",
+            "status": "unverified",
+            "title": "Über den Newtonschen Grenzwert der Einsteinschen Gravitationstheorie",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": null,
+            "author": null,
+            "citation_key": "Ehlers",
+            "doi": "10.1007/s10714-019-2624-0",
+            "exists": true,
+            "raw": "Ehlers:1981b: On the {Newtonian} limit of {Einstein's} theory of gravitation, 2019, doi:10.1007/s10714-019-2624-0",
+            "reason": null,
+            "resolved_doi": "10.1007/s10714-019-2624-0",
+            "resolved_url": "https://doi.org/10.1007/s10714-019-2624-0",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "On the {Newtonian} limit of {Einstein's} theory of gravitation",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": "0907.2645",
+            "author": null,
+            "citation_key": "Ehlers.Buchert",
+            "doi": "10.1007/s10714-009-0855-1",
+            "exists": true,
+            "raw": "Ehlers.Buchert:2009: On the {Newtonian} Limit of the {Weyl} Tensor, 2009, doi:10.1007/s10714-009-0855-1, arXiv:0907.2645",
+            "reason": null,
+            "resolved_doi": "10.1007/s10714-009-0855-1",
+            "resolved_url": "https://doi.org/10.1007/s10714-009-0855-1",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "On the {Newtonian} Limit of the {Weyl} Tensor",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": null,
+            "author": null,
+            "citation_key": "EPS",
+            "doi": null,
+            "exists": null,
+            "raw": "EPS:1972: The geometry of free fall and light propagation, 1972",
+            "reason": "not verified by Crossref bibliographic search; no match above score threshold",
+            "resolved_doi": null,
+            "resolved_url": null,
+            "source": "crossref_bibliographic",
+            "status": "unverified",
+            "title": "The geometry of free fall and light propagation",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": null,
+            "author": null,
+            "citation_key": "EPS",
+            "doi": "10.1007/s10714-012-1353-4",
+            "exists": true,
+            "raw": "EPS:2012: The geometry of free fall and light propagation, 2012, doi:10.1007/s10714-012-1353-4",
+            "reason": null,
+            "resolved_doi": "10.1007/s10714-012-1353-4",
+            "resolved_url": "https://doi.org/10.1007/s10714-012-1353-4",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "The geometry of free fall and light propagation",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": null,
+            "author": null,
+            "citation_key": "Ewen.Schmidt",
+            "doi": "10.1063/1.528279",
+            "exists": true,
+            "raw": "Ewen.Schmidt:1989: Geometry of free fall and simultaneity, 1989, doi:10.1063/1.528279",
+            "reason": null,
+            "resolved_doi": "10.1063/1.528279",
+            "resolved_url": "https://doi.org/10.1063/1.528279",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "Geometry of free fall and simultaneity",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": null,
+            "author": null,
+            "citation_key": "Friedrichs",
+            "doi": "10.1007/BF01451608",
+            "exists": true,
+            "raw": "Friedrichs:1928: Eine invariante Formulierung des Newtonschen Gravitationsgesetzes und des Grenzüberganges vom Einsteinschen zum Newtonschen Gesetz, 1928, doi:10.1007/BF01451608",
+            "reason": null,
+            "resolved_doi": "10.1007/BF01451608",
+            "resolved_url": "https://doi.org/10.1007/BF01451608",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "Eine invariante Formulierung des Newtonschen Gravitationsgesetzes und des Grenzüberganges vom Einsteinschen zum Newtonschen Gesetz",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": "2001.03056",
+            "author": null,
+            "citation_key": "Gupta.Suryanarayana",
+            "doi": "10.1007/JHEP03(2021)194",
+            "exists": true,
+            "raw": "Gupta.Suryanarayana:2021: Constructing {Carrollian CFTs}, 2021, doi:10.1007/JHEP03(2021)194, arXiv:2001.03056",
+            "reason": null,
+            "resolved_doi": "10.1007/JHEP03(2021)194",
+            "resolved_url": "https://doi.org/10.1007/JHEP03(2021)194",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "Constructing {Carrollian CFTs}",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": null,
+            "author": null,
+            "citation_key": "Hagen",
+            "doi": "10.1103/PhysRevD.5.377",
+            "exists": true,
+            "raw": "Hagen:1972: Scale and Conformal Transformations in {Galilean}-Covariant Field Theory, 1972, doi:10.1103/PhysRevD.5.377",
+            "reason": null,
+            "resolved_doi": "10.1103/PhysRevD.5.377",
+            "resolved_url": "https://doi.org/10.1103/PhysRevD.5.377",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "Scale and Conformal Transformations in {Galilean}-Covariant Field Theory",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": "1904.05706",
+            "author": null,
+            "citation_key": "Hansen.EtAl",
+            "doi": "10.1142/S0218271819440103",
+            "exists": true,
+            "raw": "Hansen.EtAl:2019: Gravity between {Newton} and {Einstein}, 2019, doi:10.1142/S0218271819440103, arXiv:1904.05706",
+            "reason": null,
+            "resolved_doi": "10.1142/S0218271819440103",
+            "resolved_url": "https://doi.org/10.1142/S0218271819440103",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "Gravity between {Newton} and {Einstein}",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": "2212.11309",
+            "author": null,
+            "citation_key": "Hartong.EtAl",
+            "doi": "10.3389/fphy.2023.1116888",
+            "exists": true,
+            "raw": "Hartong.EtAl:2023: Review on non-relativistic gravity, 2023, doi:10.3389/fphy.2023.1116888, arXiv:2212.11309",
+            "reason": null,
+            "resolved_doi": "10.3389/fphy.2023.1116888",
+            "resolved_url": "https://doi.org/10.3389/fphy.2023.1116888",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "Review on non-relativistic gravity",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": "2112.09048",
+            "author": null,
+            "citation_key": "Herfray",
+            "doi": "10.1088/1361-6382/ac635f",
+            "exists": true,
+            "raw": "Herfray:2022: Carrollian manifolds and null infinity: a view from Cartan geometry, 2022, doi:10.1088/1361-6382/ac635f, arXiv:2112.09048",
+            "reason": null,
+            "resolved_doi": "10.1088/1361-6382/ac635f",
+            "resolved_url": "https://doi.org/10.1088/1361-6382/ac635f",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "Carrollian manifolds and null infinity: a view from Cartan geometry",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": null,
+            "author": null,
+            "citation_key": "Kuenzle",
+            "doi": null,
+            "exists": null,
+            "raw": "Kuenzle:1972: Galilei and {Lorentz} structures on space-time : Comparison of the corresponding geometry and physics, 1972",
+            "reason": "not verified by Crossref bibliographic search; no match above score threshold",
+            "resolved_doi": null,
+            "resolved_url": null,
+            "source": "crossref_bibliographic",
+            "status": "unverified",
+            "title": "Galilei and {Lorentz} structures on space-time : Comparison of the corresponding geometry and physics",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": null,
+            "author": null,
+            "citation_key": "Kuenzle",
+            "doi": "10.1007/BF00766139",
+            "exists": true,
+            "raw": "Kuenzle:1976: Covariant {Newtonian} Limit of {Lorentz} Space-Times, 1976, doi:10.1007/BF00766139",
+            "reason": null,
+            "resolved_doi": "10.1007/BF00766139",
+            "resolved_url": "https://doi.org/10.1007/BF00766139",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "Covariant {Newtonian} Limit of {Lorentz} Space-Times",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": null,
+            "author": null,
+            "citation_key": "Malament",
+            "doi": null,
+            "exists": true,
+            "raw": "Malament:2012: Topics in the Foundations of General Relativity and Newtonian Gravitation Theory, 2012",
+            "reason": null,
+            "resolved_doi": "10.7208/chicago/9780226502472.001.0001",
+            "resolved_url": "https://doi.org/10.7208/chicago/9780226502472.001.0001",
+            "source": "crossref_bibliographic",
+            "status": "resolved",
+            "title": "Topics in the Foundations of General Relativity and Newtonian Gravitation Theory",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": null,
+            "author": null,
+            "citation_key": "March",
+            "doi": null,
+            "exists": null,
+            "raw": "March:2023: Non-relativistic twistor theory: {Newtonian} limits and gravitational collapse, 2023",
+            "reason": "not verified by Crossref bibliographic search; no match above score threshold",
+            "resolved_doi": null,
+            "resolved_url": null,
+            "source": "crossref_bibliographic",
+            "status": "unverified",
+            "title": "Non-relativistic twistor theory: {Newtonian} limits and gravitational collapse",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": null,
+            "author": null,
+            "citation_key": "March",
+            "doi": null,
+            "exists": null,
+            "raw": "March:2025: A note on Newton-Cartan Weyl-type theorems, 2025",
+            "reason": "not verified by Crossref bibliographic search; no match above score threshold",
+            "resolved_doi": null,
+            "resolved_url": null,
+            "source": "crossref_bibliographic",
+            "status": "unverified",
+            "title": "A note on Newton-Cartan Weyl-type theorems",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": "2409.12200",
+            "author": null,
+            "citation_key": "March.Read",
+            "doi": "10.1088/1361-6382/adaf03",
+            "exists": true,
+            "raw": "March.Read:2025: A primer on {Carroll} gravity, 2025, doi:10.1088/1361-6382/adaf03, arXiv:2409.12200",
+            "reason": null,
+            "resolved_doi": "10.1088/1361-6382/adaf03",
+            "resolved_url": "https://doi.org/10.1088/1361-6382/adaf03",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "A primer on {Carroll} gravity",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": null,
+            "author": null,
+            "citation_key": "Reichenbach",
+            "doi": null,
+            "exists": null,
+            "raw": "Reichenbach:1969: Axiomatization of the Theory of Relativity, 1969",
+            "reason": "not verified by Crossref bibliographic search; no match above score threshold",
+            "resolved_doi": null,
+            "resolved_url": null,
+            "source": "crossref_bibliographic",
+            "status": "unverified",
+            "title": "Axiomatization of the Theory of Relativity",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": "2403.15460",
+            "author": null,
+            "citation_key": "Schwartz",
+            "doi": "10.1088/1361-6382/ad922f",
+            "exists": true,
+            "raw": "Schwartz:2025: The classification of general affine connections in {Newton--Cartan} geometry: Towards metric-affine {Newton--Cartan} gravity, 2025, doi:10.1088/1361-6382/ad922f, arXiv:2403.15460",
+            "reason": null,
+            "resolved_doi": "10.1088/1361-6382/ad922f",
+            "resolved_url": "https://doi.org/10.1088/1361-6382/ad922f",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "The classification of general affine connections in {Newton--Cartan} geometry: Towards metric-affine {Newton--Cartan} gravity",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": null,
+            "author": null,
+            "citation_key": "Schwartz",
+            "doi": "10.1007/978-3-032-03967-5",
+            "exists": true,
+            "raw": "Schwartz:NC_gravity: {Newton--Cartan} Gravity: A Modern Introduction to Geometrised Newtonian Gravity, 2026, doi:10.1007/978-3-032-03967-5",
+            "reason": null,
+            "resolved_doi": "10.1007/978-3-032-03967-5",
+            "resolved_url": "https://doi.org/10.1007/978-3-032-03967-5",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "{Newton--Cartan} Gravity: A Modern Introduction to Geometrised Newtonian Gravity",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": null,
+            "author": null,
+            "citation_key": "Trautman",
+            "doi": null,
+            "exists": true,
+            "raw": "Trautman:1963: Sur la théorie newtonienne de la gravitation, 1963",
+            "reason": null,
+            "resolved_doi": "10.1051/978-2-7598-0272-2.c010",
+            "resolved_url": "https://doi.org/10.1051/978-2-7598-0272-2.c010",
+            "source": "crossref_bibliographic",
+            "status": "resolved",
+            "title": "Sur la théorie newtonienne de la gravitation",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": null,
+            "author": null,
+            "citation_key": "Trautman",
+            "doi": null,
+            "exists": null,
+            "raw": "Trautman:1965: Foundations and current problems of general relativity, 1965",
+            "reason": "not verified by Crossref bibliographic search; no match above score threshold",
+            "resolved_doi": null,
+            "resolved_url": null,
+            "source": "crossref_bibliographic",
+            "status": "unverified",
+            "title": "Foundations and current problems of general relativity",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": "2506.03936",
+            "author": null,
+            "citation_key": "Vigneron.Barzegar.Read",
+            "doi": "10.1088/1361-6382/adfc1e",
+            "exists": true,
+            "raw": "Vigneron.Barzegar.Read:2025: Affine connections for {Galilean} and {Carrollian} structures: a unified perspective, 2025, doi:10.1088/1361-6382/adfc1e, arXiv:2506.03936",
+            "reason": null,
+            "resolved_doi": "10.1088/1361-6382/adfc1e",
+            "resolved_url": "https://doi.org/10.1088/1361-6382/adfc1e",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "Affine connections for {Galilean} and {Carrollian} structures: a unified perspective",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": null,
+            "author": null,
+            "citation_key": "Weyl",
+            "doi": null,
+            "exists": true,
+            "raw": "Weyl:1921: Zur {Infinitesimalgeometrie}: {Einordnung} der projektiven und der konformen {Auffassung}, 1921",
+            "reason": null,
+            "resolved_doi": "10.1007/978-3-663-05500-6_2",
+            "resolved_url": "https://doi.org/10.1007/978-3-663-05500-6_2",
+            "source": "crossref_bibliographic",
+            "status": "resolved",
+            "title": "Zur {Infinitesimalgeometrie}: {Einordnung} der projektiven und der konformen {Auffassung}",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": "2112.12828",
+            "author": null,
+            "citation_key": "Witten",
+            "doi": "10.1007/JHEP10(2022)008",
+            "exists": true,
+            "raw": "Witten:2022: Gravity and the crossed product, 2022, doi:10.1007/JHEP10(2022)008, arXiv:2112.12828",
+            "reason": null,
+            "resolved_doi": "10.1007/JHEP10(2022)008",
+            "resolved_url": "https://doi.org/10.1007/JHEP10(2022)008",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "Gravity and the crossed product",
+            "url": null,
+            "year": null
+          },
+          {
+            "arxiv_id": "2307.10074",
+            "author": null,
+            "citation_key": "Wolf.Sanchioni.Read",
+            "doi": "10.1007/s13194-024-00617-1",
+            "exists": true,
+            "raw": "Wolf.Sanchioni.Read:2024: Underdetermination in Classic and Modern Tests of General Relativity, 2024, doi:10.1007/s13194-024-00617-1, arXiv:2307.10074",
+            "reason": null,
+            "resolved_doi": "10.1007/s13194-024-00617-1",
+            "resolved_url": "https://doi.org/10.1007/s13194-024-00617-1",
+            "source": "crossref",
+            "status": "resolved",
+            "title": "Underdetermination in Classic and Modern Tests of General Relativity",
+            "url": null,
+            "year": null
+          }
+        ],
+        "malformed": [],
+        "resolved_via_bibliographic_query": 3,
+        "unknown": [],
+        "unresolved": [],
+        "unresolved_fraction": 0.0,
+        "unverified": [
+          "Cartan:1986: On Manifolds with an Affine Connection and the Theory of General Relativity, 1986",
+          "Ehlers:1981a: Über den Newtonschen Grenzwert der Einsteinschen Gravitationstheorie, 1981",
+          "EPS:1972: The geometry of free fall and light propagation, 1972",
+          "Kuenzle:1972: Galilei and {Lorentz} structures on space-time : Comparison of the corresponding geometry and physics, 1972",
+          "March:2023: Non-relativistic twistor theory: {Newtonian} limits and gravitational collapse, 2023",
+          "March:2025: A note on Newton-Cartan Weyl-type theorems, 2025",
+          "Reichenbach:1969: Axiomatization of the Theory of Relativity, 1969",
+          "Trautman:1965: Foundations and current problems of general relativity, 1965"
+        ]
+      },
+      "status": "warn"
+    },
+    "json_schema": {
+      "notes": {},
+      "status": "pass"
+    },
+    "metadata": {
+      "notes": {
+        "arxiv_shape_ok": true,
+        "field_present": true,
+        "missing": [],
+        "source_id_kind": "arxiv",
+        "source_id_shape_ok": true,
+        "subject_kind": "paper"
+      },
+      "status": "pass"
+    },
+    "render": {
+      "notes": {},
+      "status": "pass"
+    },
+    "support": {
+      "notes": {
+        "non_empty_arrays": 9,
+        "substantive_strings": 60
+      },
+      "status": "pass"
+    },
+    "tone": {
+      "notes": {},
+      "status": "pass"
+    }
+  },
+  "verifier_status": "warn"
+}
+```
+
+### claim_extractor (`gemini-2.5-pro`) — status: `pass`
+
+```json
+{
+  "claims": [
+    {
+      "citations": [],
+      "confidence": 1.0,
+      "dependencies": [],
+      "formalization_hint": "Define a pseudo-Riemannian metric and then the generalization that constitutes a Weyl metric.",
+      "id": "def_weyl_metric",
+      "kind": "definition",
+      "statement": "A Weyl metric is a natural generalisation of a pseudo-Riemannian metric."
+    },
+    {
+      "citations": [
+        "Weyl:1921"
+      ],
+      "confidence": 0.95,
+      "dependencies": [
+        "def_weyl_metric"
+      ],
+      "formalization_hint": "This claim can be formalized by defining a Weyl metric, its associated conformal structure, and its projective structure (the set of unparametrised geodesics), and then demonstrating that the metric is a unique function of the latter two structures.",
+      "id": "weyl_theorem",
+      "kind": "citation_claim",
+      "statement": "A Weyl metric is uniquely determined by its conformal and projective structures (i.e. by its conformal structure and its set of unparametrised geodesics)."
+    },
+    {
+      "citations": [
+        "Weyl:1921"
+      ],
+      "confidence": 0.95,
+      "dependencies": [
+        "weyl_theorem"
+      ],
+      "formalization_hint": "This is stated as an equivalent formulation of Weyl's theorem. Formalization would involve defining each term (torsion-free linear connection, compatibility with conformal structure, projective structure) and then proving the uniqueness claim. Proving the equivalence to the other formulation would be a further step.",
+      "id": "weyl_theorem_equivalent",
+      "kind": "citation_claim",
+      "statement": "A torsion-free linear connection compatible with a pseudo-Riemannian conformal structure is uniquely determined by its projective structure."
+    },
+    {
+      "citations": [],
+      "confidence": 1.0,
+      "dependencies": [],
+      "formalization_hint": "Define Lorentzian geometry and the corresponding metric. Then define the limiting process (e.g., in terms of the speed of light c) that results in Galilean geometry (c -> infinity) and Carrollian geometry (c -> 0).",
+      "id": "def_galilei_carroll_geometries",
+      "kind": "definition",
+      "statement": "Galilei and Carroll geometries are spacetime geometries that arise as the 'non-relativistic' and 'ultra-relativistic' limits of Lorentzian geometry, respectively."
+    },
+    {
+      "citations": [],
+      "confidence": 0.9,
+      "dependencies": [
+        "weyl_theorem",
+        "def_galilei_carroll_geometries"
+      ],
+      "formalization_hint": "This is the main thesis of the paper. Formalization would require defining conformal structures for Galilei and Carroll geometries and then proving a uniqueness theorem analogous to Weyl's for each case.",
+      "id": "analogous_results_exist",
+      "kind": "theorem",
+      "statement": "Analogous results to Weyl's theorem exist for suitably defined notions of conformal structure for Galilei and Carroll geometry."
+    }
+  ]
+}
+```
+
+### fetch_paper (`deterministic`) — status: `pass`
+
+```json
+{
+  "body_md_chars": 0,
+  "references_count": 53,
+  "source_manifest": {
+    "arxiv_id": "2606.00799",
+    "field": "math-ph",
+    "paper_id": "b553444b-90b6-48e7-a036-c16c212509a0",
+    "review_id": "0ec2b75d-173f-41d1-8f2b-755a3d6844f2",
+    "source_id": "2606.00799",
+    "source_kind": "arxiv",
+    "title": "Weyl-type theorems in Galilei and Carroll geometry"
+  }
+}
+```
+
+### lean_verifier (`lean-cli`) — status: `fail`
+
+```json
+{
+  "command": [
+    "lean",
+    "/var/folders/6z/np99jwkj4ys5z6l5y0xpwdx80000gn/T/.tmp0xpyiN/ReviewLoop.lean"
+  ],
+  "contains_unverified_markers": true,
+  "exit_code": 1,
+  "obligations_total": 7,
+  "status": "fail",
+  "stderr": "info: Version 4.2.3 of elan is available! Use `elan self update` to update.\ninfo: downloading https://releases.lean-lang.org/lean4/v4.30.0/lean-4.30.0-darwin_aarch64.tar.zst\ninfo: installing /Users/mlong/.elan/toolchains/leanprover--lean4---v4.30.0\n",
+  "stdout": "/var/folders/6z/np99jwkj4ys5z6l5y0xpwdx80000gn/T/.tmp0xpyiN/ReviewLoop.lean:3:0: error: invalid 'import' command, it must be used in the beginning of the file\n",
+  "verified": false
+}
+```
+
+### meta_reviewer (`claude-sonnet-4-6`) — status: `pass`
+
+```json
+{
+  "confidence": 0.72,
+  "questions": [
+    "How do the Galilei Weyl-type theorems proved here differ precisely from Curiel (2015) and March (2025)—does the treatment extend to connections with torsion, to more general compatibility conditions, or to higher-dimensional cases not covered previously?",
+    "What is the explicit definition of conformal structure adopted for Galilei geometry (e.g., joint rescaling of temporal form and spatial cometric), and is it equivalent to, or a generalization of, the definitions in Duval-Horváthy and related works?",
+    "What is the explicit definition of conformal Carroll structure, and does a fully analogous uniqueness result hold, or does the rank-(n−1) degenerate metric introduce obstructions that require a weakened or conditional uniqueness statement?",
+    "Is the absence of a Lean/Coq formalization a deliberate methodological choice, and if so, what alternative verification strategy (e.g., coordinate computation in SageMath or xAct) supports the headline uniqueness claims?"
+  ],
+  "recommendation": "major_revision",
+  "revision_targets": [
+    {
+      "evidence": "The supplied artifact contains only the abstract and bibliography, with no theorem statements, assumptions, definitions, or proof sections for the Galilei and Carroll Weyl-type results; a detailed proof supplement such as `proofs/main_theorems.pdf` would be needed to independently check the claims.",
+      "id": "weakness-1",
+      "locator": "reproducibility appendix",
+      "required_update": "Add a reproducibility note that resolves this concern: The supplied artifact contains only the abstract and bibliography, with no theorem statements, assumptions, definitions, or proof sections for the Galilei and Carroll Weyl-type results; a detailed proof supplement such as `proofs/main_theorems.pdf` would be needed to independently check the claims.",
+      "source_path": "corrections/2606.00799/paper.tex",
+      "source_role": "reproducibility",
+      "status": "open",
+      "target_kind": "paper_tex",
+      "verification_check": "Re-review should confirm the reproducibility concern is addressed with a concrete artifact or manuscript update.",
+      "weakness_index": 0
+    },
+    {
+      "evidence": "No formal proof artifact, proof-assistant development, or symbolic derivation code is provided for the load-bearing Weyl-type theorems; an artifact such as `proofs/weyl_type_galilei_carroll.lean` or an equivalent checked derivation would close this gap.",
+      "id": "weakness-2",
+      "locator": "code release and execution entrypoints",
+      "required_update": "Release the source code, scripts, model configuration, and execution entrypoints needed to regenerate the reported tables, or document why those artifacts cannot be released.",
+      "source_path": null,
+      "source_role": "reproducibility",
+      "status": "open",
+      "target_kind": "code",
+      "verification_check": "Re-review should confirm runnable code or a documented non-release justification is present.",
+      "weakness_index": 1
+    },
+    {
+      "evidence": "Several of the cited works already address Weyl-type theorems in non-relativistic geometry: Curiel 2015 [17] for geometrised Newtonian gravity, March 2025 [43] explicitly titled 'A note on Newton-Cartan Weyl-type theorems', Dewar-Read 2020 [18] on conformal invariance of the Newtonian Weyl tensor, and Vigneron-Barzegar-Read 2025 [50] on affine connections for Galilean and Carrollian structures. Without the body of the paper it is impossible to verify how the present results differ from or extend these. The novelty claim implicit in the abstract is therefore not auditable here.",
+      "id": "weakness-3",
+      "locator": "Abstract (overall framing)",
+      "required_update": "Include a clear statement in the introduction comparing the theorems proved here with Curiel 2015, March 2025, Dewar-Read 2020, and Vigneron-Barzegar-Read 2025, specifying the new generality (e.g., torsion classes, Carroll case, degenerate-metric handling) that is genuinely new.",
+      "source_path": "corrections/2606.00799/paper.tex",
+      "source_role": "technical_correctness",
+      "status": "open",
+      "target_kind": "paper_tex",
+      "verification_check": "Re-review should confirm `Abstract (overall framing)` is corrected or justified.",
+      "weakness_index": 2
+    },
+    {
+      "evidence": "As with C3, only the abstract is available. The Carroll case is plausible given recent work in the area (Duval et al. 2014b [24], Ciambelli et al. 2019 [16], Herfray 2022 [38], March-Read 2025 [44], Vigneron-Barzegar-Read 2025 [50], Bergshoeff et al. 2026 [9]), but the precise notion of conformal Carroll structure, the class of connections under consideration, and any genuine uniqueness/Weyl-type statement (versus a no-go or weakened version) cannot be checked without the proof.",
+      "id": "weakness-4",
+      "locator": "Abstract (main thesis)",
+      "required_update": "Include in the manuscript body: (i) explicit definition(s) of conformal Carroll structure used, (ii) the precise Weyl-type theorem with hypotheses (e.g., torsion-freeness, compatibility), and (iii) a proof or an indication of which projective data is or is not sufficient for uniqueness in the degenerate-metric setting.",
+      "source_path": "corrections/2606.00799/paper.tex",
+      "source_role": "technical_correctness",
+      "status": "open",
+      "target_kind": "paper_tex",
+      "verification_check": "Re-review should confirm `Abstract (main thesis)` is corrected or justified.",
+      "weakness_index": 3
+    },
+    {
+      "evidence": "Foundational work on the Bargmann framework, which unifies Galilean and Carrollian structures as different null reductions, providing the geometric context for the connection compatibility discussed.",
+      "id": "weakness-5",
+      "locator": "Duval, C., Burdet, G., Künzle, H. P., and Perrin, M. (1985). Bargmann structures and Newton-Cartan theory.",
+      "required_update": "Add a bibliography entry for `Duval, C., Burdet, G., Künzle, H. P., and Perrin, M. (1985). Bargmann structures and Newton-Cartan theory` and cite it where the affected method or claim is introduced, or explicitly justify its omission.",
+      "source_path": null,
+      "source_role": "citation",
+      "status": "open",
+      "target_kind": "bibliography",
+      "verification_check": "Re-review should confirm the bibliography and citation context address this reference.",
+      "weakness_index": 4
+    }
+  ],
+  "strengths": [
+    "The paper addresses a well-posed foundational question by extending Weyl's classical characterization of metric geometry to both non-relativistic and ultra-relativistic degenerate settings in a single unified framework.",
+    "Citation coverage is comprehensive, bridging classical differential geometry and the modern non-Lorentzian geometry literature, including very recent (2025–2026) works, indicating thorough engagement with the field.",
+    "The Carroll case—a Weyl-type uniqueness theorem for ultra-relativistic geometry—appears to go beyond the prior art, which had focused primarily on the Galilean/Newton-Cartan setting (Curiel 2015, March 2025).",
+    "Treating both Galilei and Carroll limits in parallel under a single framework (building on Vigneron-Barzegar-Read 2025) offers conceptual clarity and structural economy over piecemeal prior results."
+  ],
+  "summary": "The paper extends Weyl's classical theorem—that a Weyl metric is determined by its conformal and projective structures—to both Galilean and Carrollian geometries. The specialist review was severely hampered by an incomplete submission artifact containing only the abstract and bibliography; no theorem statements, definitions, or proofs were present. Consequently, the technical correctness reviewer reached only 0.35 confidence, and the four main claims (C3, C4, C6, C7) could only be assessed as partially_supported. The novelty specialist (confidence 0.90) rates the contribution as incremental (0.65): the Galilei case has clear prior art in Curiel (2015) and the competing contemporaneous March (2025), while the Carroll case appears to be a genuine addition. Reproducibility raised two critical concerns—the proof body is absent from the submitted artifact, and no formal proof-assistant artifact (Lean/Coq/Agda) was provided—and one major concern about the absence of any toolchain specification. Because the paper is in math-ph (a code-amenable field) and the reproducibility reviewer flagged a missing proof-as-code artifact at critical severity, the recommendation gate defaults to major_revision. Citation hygiene is strong, though two foundational references are absent: Ehlers-Pirani-Schild (1972) and Duval-Burdet-Künzle-Perrin (1985). Specialists do not materially disagree with each other; the technical reviewer's lower confidence reflects data absence, not contradiction of the novelty reviewer's judgment.",
+  "weaknesses": [
+    "The submitted artifact is incomplete: only the abstract and bibliography were provided, leaving all theorem statements, definitions, lemmas, and proofs inaccessible to reviewers, which prevented a line-by-line technical audit (technical_correctness C8, severity major).",
+    "No formal proof artifact (Lean, Coq, Agda, or equivalent symbolic script) is provided for the headline uniqueness theorems, a critical gap for a math-ph result for which machine-checked derivations would substantially raise confidence (reproducibility concern, severity critical).",
+    "Novelty over the competing contemporaneous paper March (2025) on Newton-Cartan Weyl-type theorems is not established from the abstract alone; without the body it is impossible to verify what new generality—torsion classes, Carroll extension, degenerate-metric handling—the present paper contributes (technical_correctness C7, severity major).",
+    "The specific notions of conformal structure for Galilei and Carroll geometries are described only as 'suitably defined,' with no explicit definition in the abstract or accessible body text, making the central hypothesis of the theorems unverifiable (technical_correctness C6, severity minor).",
+    "Two foundational references are absent: Ehlers-Pirani-Schild (1972), the standard relativistic starting point for Weyl's result, and Duval-Burdet-Künzle-Perrin (1985), the Bargmann framework unifying Galilean and Carrollian structures (citation review, missing_references)."
+  ]
+}
+```
+
+### novelty (`gemini-3-flash-preview`) — status: `pass`
+
+```json
+{
+  "confidence": 0.9,
+  "missing_prior_art": [],
+  "novelty_score": 0.65,
+  "related_work": [
+    {
+      "citation_key": "Weyl:1921",
+      "delta": "This paper generalizes Weyl's original result—which established that pseudo-Riemannian metrics are determined by conformal and projective structures—to the degenerate cases of Galilean and Carrollian geometries.",
+      "relation": "prior_art",
+      "title": "Zur Infinitesimalgeometrie: Einordnung der projektiven und der konformen Auffassung"
+    },
+    {
+      "citation_key": "Curiel:2015",
+      "delta": "While Curiel proved the Weyl-type theorem for the Newtonian (Galilean) case, this work provides a more general framework that encompasses Carrollian geometry as well.",
+      "relation": "prior_art",
+      "title": "A Weyl-Type Theorem for Geometrized Newtonian Gravity"
+    },
+    {
+      "citation_key": "Vigneron.Barzegar.Read:2025",
+      "delta": "This paper utilizes the unified technical framework for affine connections developed in the authors' previous work to formulate and prove the theorems in both limits.",
+      "relation": "builds_on",
+      "title": "Affine connections for Galilean and Carrollian structures: a unified perspective"
+    },
+    {
+      "citation_key": "March:2025",
+      "delta": "This is a contemporaneous work focusing on the Newton-Cartan (Galilean) results; the current paper offers a broader perspective by treating both Galilei and Carroll structures in parallel.",
+      "relation": "competing",
+      "title": "A note on Newton-Cartan Weyl-type theorems"
+    }
+  ],
+  "verdict": "incremental"
+}
+```
+
+### pr_fixer (`gpt-5.5`) — status: `pass`
+
+```json
+{
+  "fixes": [
+    {
+      "action": "update",
+      "patch": "[{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/0/exists\",\"value\":true},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/0/resolved_doi\",\"value\":\"10.1007/978-3-663-05500-6_2\"},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/0/resolved_url\",\"value\":\"https://doi.org/10.1007/978-3-663-05500-6_2\"},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/1/exists\",\"value\":true},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/1/resolved_url\",\"value\":\"https://arxiv.org/abs/1510.02089\"},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/2/exists\",\"value\":true},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/2/resolved_doi\",\"value\":\"10.1088/1751-8113/47/33/335204\"},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/2/resolved_url\",\"value\":\"https://doi.org/10.1088/1751-8113/47/33/335204\"},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/3/exists\",\"value\":true},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/3/resolved_doi\",\"value\":\"10.1088/0264-9381/31/8/085016\"},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/3/resolved_url\",\"value\":\"https://doi.org/10.1088/0264-9381/31/8/085016\"},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/4/exists\",\"value\":true},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/4/resolved_doi\",\"value\":\"10.1103/PhysRevD.100.046010\"},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/4/resolved_url\",\"value\":\"https://doi.org/10.1103/PhysRevD.100.046010\"},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/5/exists\",\"value\":true},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/5/resolved_doi\",\"value\":\"10.1088/1361-6382/ac635f\"},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/5/resolved_url\",\"value\":\"https://doi.org/10.1088/1361-6382/ac635f\"},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/6/exists\",\"value\":true},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/6/resolved_doi\",\"value\":\"10.1007/JHEP02(2023)082\"},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/6/resolved_url\",\"value\":\"https://doi.org/10.1007/JHEP02(2023)082\"}]",
+      "reason": "The citation role left exists and resolved_* as null for displayed entries even though verifier evidence resolved them via Crossref or arXiv.",
+      "target_artifact": "review_input.json#/citation_validation/output/entries"
+    },
+    {
+      "action": "remove",
+      "patch": "[{\"op\":\"remove\",\"path\":\"/citation_validation/output/missing_references/0\"}]",
+      "reason": "The EPS reference should not be listed as simply missing: verifier evidence includes EPS:1972 as unverified and EPS:2012 as resolved, so this should be handled as citation normalization/verification rather than absence from the bibliography.",
+      "target_artifact": "review_input.json#/citation_validation/output/missing_references"
+    },
+    {
+      "action": "update",
+      "patch": "Move the union of all required_imports to the very start of the generated Lean file before any comments, declarations, namespaces, or generated prose:\nimport Mathlib.CategoryTheory.Category.Basic\nimport Mathlib.CategoryTheory.Functor.Basic\nimport Mathlib.CategoryTheory.Products.Basic\nimport Mathlib.CategoryTheory.Conservative\nimport Mathlib.CategoryTheory.Iso",
+      "reason": "Lean verification failed before checking obligations because an import command appeared at line 3; Lean imports must be at the beginning of the file.",
+      "target_artifact": "generated ReviewLoop.lean"
+    },
+    {
+      "action": "update",
+      "patch": "For ob_functor_weyl_to_conformal_functoriality, ob_functor_weyl_to_projective_functoriality, and ob_functor_conn_to_projective_functoriality, replace stubs of the form `structure Name : Source ⥤ Target where ...` with `def Name : Source ⥤ Target where ...`; keep obj, map, map_id, and map_comp as functor fields.",
+      "reason": "The current functor obligations use invalid Lean syntax by declaring a structure whose type is a functor. They should define functor values instead.",
+      "target_artifact": "review_input.json#/proof_obligations/obligations"
+    },
+    {
+      "action": "annotate",
+      "patch": "Add a proof-status annotation that all seven Lean obligations are unverified until the generated Lean file compiles without `sorry` or other unverified markers; downstream review text must not cite these obligations as formally proved while lean_verification.status is fail.",
+      "reason": "lean_verification reports contains_unverified_markers=true, verified=false, exit_code=1, and status=fail, so the proof artifact is diagnostic only.",
+      "target_artifact": "review_input.json#/proof_obligations"
+    },
+    {
+      "action": "annotate",
+      "patch": "Mark claims `analogous_results_exist` and `def_galilei_carroll_geometries` as semantically unresolved unless the artifact supplies precise Galilei/Carroll conformal structures, reconstruction functors, parameterized limiting data, and the categorical sense of the limits c -> infinity and c -> 0.",
+      "reason": "The proof obligation extractor explicitly states that these claims cannot be formalized without inventing assumptions absent from the evidence.",
+      "target_artifact": "review_input.json#/proof_obligations/unformalized_claims"
+    }
+  ],
+  "requires_human_review": true
+}
+```
+
+### proof_obligation_generator (`claude-opus-4-7`) — status: `pass`
+
+```json
+{
+  "obligations": [
+    {
+      "claim_ids": [
+        "weyl_theorem"
+      ],
+      "id": "ob_functor_weyl_to_conformal_functoriality",
+      "lean_stub": "structure ConformalStructureOf : WeylMetric ⥤ ConformalStructure where\n  obj : WeylMetric → ConformalStructure\n  map : ∀ {X Y : WeylMetric}, (X ⟶ Y) → (obj X ⟶ obj Y)\n  map_id : ∀ X : WeylMetric, map (𝟙 X) = 𝟙 (obj X) := by sorry\n  map_comp : ∀ {X Y Z : WeylMetric} (f : X ⟶ Y) (g : Y ⟶ Z),\n    map (f ≫ g) = map f ≫ map g := by sorry",
+      "required_imports": [
+        "Mathlib.CategoryTheory.Category.Basic",
+        "Mathlib.CategoryTheory.Functor.Basic"
+      ],
+      "statement": "The assignment ConformalStructureOf from WeylMetric to ConformalStructure preserves identities and composition of morphisms, i.e. it is a functor between the categories WeylMetric and ConformalStructure."
+    },
+    {
+      "claim_ids": [
+        "weyl_theorem"
+      ],
+      "id": "ob_functor_weyl_to_projective_functoriality",
+      "lean_stub": "structure ProjectiveStructureOf : WeylMetric ⥤ ProjectiveStructure where\n  obj : WeylMetric → ProjectiveStructure\n  map : ∀ {X Y : WeylMetric}, (X ⟶ Y) → (obj X ⟶ obj Y)\n  map_id : ∀ X : WeylMetric, map (𝟙 X) = 𝟙 (obj X) := by sorry\n  map_comp : ∀ {X Y Z : WeylMetric} (f : X ⟶ Y) (g : Y ⟶ Z),\n    map (f ≫ g) = map f ≫ map g := by sorry",
+      "required_imports": [
+        "Mathlib.CategoryTheory.Category.Basic",
+        "Mathlib.CategoryTheory.Functor.Basic"
+      ],
+      "statement": "The assignment ProjectiveStructureOf from WeylMetric to ProjectiveStructure preserves identities and composition of morphisms, i.e. it is a functor between the categories WeylMetric and ProjectiveStructure."
+    },
+    {
+      "claim_ids": [
+        "weyl_theorem_equivalent"
+      ],
+      "id": "ob_functor_conn_to_projective_functoriality",
+      "lean_stub": "structure ProjectiveStructureOfConnection : TorsionFreeLinearConnection ⥤ ProjectiveStructure where\n  obj : TorsionFreeLinearConnection → ProjectiveStructure\n  map : ∀ {X Y : TorsionFreeLinearConnection}, (X ⟶ Y) → (obj X ⟶ obj Y)\n  map_id : ∀ X : TorsionFreeLinearConnection, map (𝟙 X) = 𝟙 (obj X) := by sorry\n  map_comp : ∀ {X Y Z : TorsionFreeLinearConnection} (f : X ⟶ Y) (g : Y ⟶ Z),\n    map (f ≫ g) = map f ≫ map g := by sorry",
+      "required_imports": [
+        "Mathlib.CategoryTheory.Category.Basic",
+        "Mathlib.CategoryTheory.Functor.Basic"
+      ],
+      "statement": "The assignment ProjectiveStructureOfConnection from TorsionFreeLinearConnection to ProjectiveStructure preserves identities and composition of morphisms, i.e. it is a functor between the categories TorsionFreeLinearConnection and ProjectiveStructure."
+    },
+    {
+      "claim_ids": [
+        "weyl_theorem"
+      ],
+      "id": "ob_weyl_theorem_unique_reconstruction",
+      "lean_stub": "theorem weyl_theorem_unique_reconstruction\n  (W₁ W₂ : WeylMetric)\n  (hC : ConformalStructureOf.obj W₁ ≅ ConformalStructureOf.obj W₂)\n  (hP : ProjectiveStructureOf.obj W₁ ≅ ProjectiveStructureOf.obj W₂) :\n  W₁ ≅ W₂ := by sorry",
+      "required_imports": [
+        "Mathlib.CategoryTheory.Category.Basic",
+        "Mathlib.CategoryTheory.Functor.Basic",
+        "Mathlib.CategoryTheory.Products.Basic",
+        "Mathlib.CategoryTheory.Conservative"
+      ],
+      "statement": "For any two Weyl metrics W₁ W₂, if ConformalStructureOf W₁ ≅ ConformalStructureOf W₂ and ProjectiveStructureOf W₁ ≅ ProjectiveStructureOf W₂ in the respective target categories, then W₁ ≅ W₂ in WeylMetric. Equivalently, the pairing functor (ConformalStructureOf, ProjectiveStructureOf) : WeylMetric ⥤ ConformalStructure × ProjectiveStructure is conservative (reflects isomorphisms)."
+    },
+    {
+      "claim_ids": [
+        "weyl_theorem_equivalent"
+      ],
+      "id": "ob_weyl_theorem_equivalent_unique_tf_connection",
+      "lean_stub": "theorem weyl_theorem_equivalent_unique_tf_connection\n  (C : ConformalStructure) (P : ProjectiveStructure)\n  (∇₁ ∇₂ : TorsionFreeLinearConnection)\n  (hP₁ : ProjectiveStructureOfConnection.obj ∇₁ = P)\n  (hP₂ : ProjectiveStructureOfConnection.obj ∇₂ = P)\n  (hC₁ : compatibilityWithConformal ∇₁ = C)\n  (hC₂ : compatibilityWithConformal ∇₂ = C) :\n  ∇₁ ≅ ∇₂ := by sorry",
+      "required_imports": [
+        "Mathlib.CategoryTheory.Category.Basic",
+        "Mathlib.CategoryTheory.Functor.Basic",
+        "Mathlib.CategoryTheory.Iso"
+      ],
+      "statement": "For any conformal structure C and projective structure P such that there exists a torsion-free linear connection ∇ with ProjectiveStructureOfConnection ∇ = P and ∇ compatible with C (witnessed by mor_tf_conn_compatible_conformal), such ∇ is unique up to isomorphism in TorsionFreeLinearConnection."
+    },
+    {
+      "claim_ids": [
+        "def_weyl_metric"
+      ],
+      "id": "ob_generalise_pseudo_to_weyl_well_defined",
+      "lean_stub": "def generalise : PseudoRiemannianMetric → WeylMetric := by sorry\n\ntheorem generalise_well_defined :\n  ∀ (g : PseudoRiemannianMetric), ∃ (W : WeylMetric), W = generalise g := by sorry",
+      "required_imports": [
+        "Mathlib.CategoryTheory.Category.Basic",
+        "Mathlib.CategoryTheory.Functor.Basic"
+      ],
+      "statement": "The assignment generalise : PseudoRiemannianMetric → WeylMetric is a well-defined morphism of categories, i.e. every pseudo-Riemannian metric canonically determines a Weyl metric, and the construction respects the morphisms in PseudoRiemannianMetric."
+    },
+    {
+      "claim_ids": [
+        "weyl_theorem_equivalent"
+      ],
+      "id": "ob_tf_conn_compatibility_with_conformal_well_defined",
+      "lean_stub": "def compatibilityWithConformal : TorsionFreeLinearConnection → ConformalStructure := by sorry\n\ntheorem compatibilityWithConformal_well_defined :\n  ∀ (∇ : TorsionFreeLinearConnection),\n    ∃! (C : ConformalStructure), C = compatibilityWithConformal ∇ := by sorry",
+      "required_imports": [
+        "Mathlib.CategoryTheory.Category.Basic",
+        "Mathlib.CategoryTheory.Functor.Basic"
+      ],
+      "statement": "The morphism compatibilityWithConformal : TorsionFreeLinearConnection → ConformalStructure is a well-defined assignment, i.e. every torsion-free linear connection determines (or is compatible with) at most one conformal structure in a categorically coherent way."
+    }
+  ],
+  "unformalized_claims": [
+    {
+      "claim_id": "analogous_results_exist",
+      "reason": "The semantic model explicitly records (in unresolved_claims) that the precise definitions of conformal structure for Galilei and Carroll geometries, the corresponding reconstruction functors, and any natural transformations witnessing the analogy with the Lorentzian/Weyl construction are not specified. No functors GalileiConformalStructureOf or CarrollConformalStructureOf appear in the model, so a Lean obligation cannot be stated without inventing unstated assumptions."
+    },
+    {
+      "claim_id": "def_galilei_carroll_geometries",
+      "reason": "The morphisms mor_nonrelativistic_limit (c → ∞) and mor_ultrarelativistic_limit (c → 0) are described as physical limit constructions on LorentzianGeometry. The model does not specify the underlying parameterised family of geometries, the topology/limit structure on the parameter c, or in what categorical sense the limit is taken; formalising these as Lean morphisms would require introducing limiting-procedure assumptions not present in the evidence."
+    }
+  ]
+}
+```
+
+### reproducibility (`gpt-5.5`) — status: `pass`
+
+```json
+{
+  "code_availability": "unspecified",
+  "code_url": null,
+  "concerns": [
+    {
+      "area": "other",
+      "description": "The supplied artifact contains only the abstract and bibliography, with no theorem statements, assumptions, definitions, or proof sections for the Galilei and Carroll Weyl-type results; a detailed proof supplement such as `proofs/main_theorems.pdf` would be needed to independently check the claims.",
+      "severity": "critical"
+    },
+    {
+      "area": "code",
+      "description": "No formal proof artifact, proof-assistant development, or symbolic derivation code is provided for the load-bearing Weyl-type theorems; an artifact such as `proofs/weyl_type_galilei_carroll.lean` or an equivalent checked derivation would close this gap.",
+      "severity": "critical"
+    },
+    {
+      "area": "compute",
+      "description": "No software environment or dependency versions are specified for any possible formal verification or symbolic checks; if such artifacts exist, files such as `lakefile.lean`, `requirements.txt`, or a container definition should pin the toolchain.",
+      "severity": "major"
+    }
+  ],
+  "confidence": 0.78,
+  "data_availability": "unspecified",
+  "data_url": null,
+  "environment": {
+    "dependencies": [],
+    "hardware": null,
+    "software": null
+  },
+  "reproducibility_score": 0.15
+}
+```
+
+### review_scorer (`gpt-5.5`) — status: `pass`
+
+```json
+{
+  "issues": [
+    {
+      "message": "Lean verification failed with exit_code=1 because an import command appeared after the beginning of the generated file, so none of the seven proof obligations can be treated as verified.",
+      "node": "formal_evidence.lean_verification",
+      "severity": "high"
+    },
+    {
+      "message": "The formal artifact contains unverified markers and all generated obligations use diagnostic stubs rather than checked proofs; publisher text must not claim formal proof coverage.",
+      "node": "formal_evidence.proof_obligations",
+      "severity": "high"
+    },
+    {
+      "message": "Core Galilei and Carroll claims remain semantically unresolved: the evidence lacks precise conformal structures, reconstruction functors, parameterized limiting data, and the categorical sense of the c -> infinity and c -> 0 limits.",
+      "node": "semantic_evidence.unresolved_claims",
+      "severity": "high"
+    },
+    {
+      "message": "Citation validation is only partially integrated: the scorer-facing entries leave exists and resolved_* null despite verifier resolutions, and 8 of 53 checked citations remain unverified.",
+      "node": "citation_evidence",
+      "severity": "medium"
+    },
+    {
+      "message": "The fix evidence requires human review, including citation normalization and Lean artifact repairs, so the loop is not publisher-ready.",
+      "node": "fix_evidence.requires_human_review",
+      "severity": "medium"
+    },
+    {
+      "message": "No dedicated novelty or reproducibility evidence is supplied beyond citation coverage, deterministic validators, and the failed Lean run, limiting confidence in those scores.",
+      "node": "review_input",
+      "severity": "low"
+    }
+  ],
+  "publisher_ready": false,
+  "scores": {
+    "citation_integrity": 0.72,
+    "formal_soundness": 0.12,
+    "novelty": 0.5,
+    "proof_coverage": 0.18,
+    "reproducibility": 0.42,
+    "semantic_consistency": 0.48
+  },
+  "status": "fail"
+}
+```
+
+### score_review_artifacts (`deterministic`) — status: `pass`
+
+```json
+{
+  "citation_evidence": {
+    "output": {
+      "confidence": 0.95,
+      "entries": [
+        {
+          "citation": {
+            "arxiv_id": null,
+            "authors": [
+              "Hermann Weyl"
+            ],
+            "doi": null,
+            "key": "Weyl:1921",
+            "raw": "Weyl:1921: Zur {Infinitesimalgeometrie}: {Einordnung} der projektiven und der konformen {Auffassung}, 1921",
+            "title": "Zur {Infinitesimalgeometrie}: {Einordnung} der projektiven und der konformen {Auffassung}",
+            "url": null,
+            "venue": null,
+            "year": 1921
+          },
+          "exists": null,
+          "explanation": "This is the foundational paper for the Weyl-type theorem discussed in the abstract, establishing that a Weyl metric is determined by its conformal and projective structures.",
+          "notes": null,
+          "relevance": "high",
+          "resolved_doi": null,
+          "resolved_url": null
+        },
+        {
+          "citation": {
+            "arxiv_id": "1510.02089",
+            "authors": [
+              "Erik Curiel"
+            ],
+            "doi": null,
+            "key": "Curiel:2015",
+            "raw": "Curiel:2015: A {Weyl}-Type Theorem for Geometrized {Newtonian} Gravity, 2015, arXiv:1510.02089",
+            "title": "A {Weyl}-Type Theorem for Geometrized {Newtonian} Gravity",
+            "url": null,
+            "venue": null,
+            "year": 2015
+          },
+          "exists": null,
+          "explanation": "Directly relevant as it provides a Weyl-type theorem for Newtonian (Galilean) gravity, which is one of the main topics (non-relativistic limit) of the paper.",
+          "notes": null,
+          "relevance": "high",
+          "resolved_doi": null,
+          "resolved_url": null
+        },
+        {
+          "citation": {
+            "arxiv_id": "1403.4213",
+            "authors": [
+              "Christian Duval",
+              "G. W. Gibbons",
+              "P. A. Horvathy"
+            ],
+            "doi": "10.1088/1751-8113/47/33/335204",
+            "key": "Duval.EtAl:2014b",
+            "raw": "Duval.EtAl:2014b: Conformal {Carroll} groups, 2014, doi:10.1088/1751-8113/47/33/335204, arXiv:1403.4213",
+            "title": "Conformal {Carroll} groups",
+            "url": null,
+            "venue": null,
+            "year": 2014
+          },
+          "exists": null,
+          "explanation": "Fundamental reference for the conformal structure of Carroll geometry, which the paper aims to analyze in the context of Weyl-type theorems.",
+          "notes": null,
+          "relevance": "high",
+          "resolved_doi": null,
+          "resolved_url": null
+        },
+        {
+          "citation": {
+            "arxiv_id": "1402.0657",
+            "authors": [
+              "Christian Duval",
+              "G. W. Gibbons",
+              "P. A. Horvathy",
+              "P. M. Zhang"
+            ],
+            "doi": "10.1088/0264-9381/31/8/085016",
+            "key": "Duval.EtAl:2014",
+            "raw": "Duval.EtAl:2014: Carroll versus {Newton} and {Galilei}: two dual non-{Einstein\\-ian} concepts of time, 2014, doi:10.1088/0264-9381/31/8/085016, arXiv:1402.0657",
+            "title": "Carroll versus {Newton} and {Galilei}: two dual non-{Einstein\\-ian} concepts of time",
+            "url": null,
+            "venue": null,
+            "year": 2014
+          },
+          "exists": null,
+          "explanation": "Provides the conceptual bridge and duality between Galilei and Carroll structures, essential for a unified discussion of Weyl-type theorems in both limits.",
+          "notes": null,
+          "relevance": "high",
+          "resolved_doi": null,
+          "resolved_url": null
+        },
+        {
+          "citation": {
+            "arxiv_id": "1905.02221",
+            "authors": [
+              "Luca Ciambelli",
+              "Charles Marteau"
+            ],
+            "doi": "10.1103/PhysRevD.100.046010",
+            "key": "Ciambelli.EtAl:2019",
+            "raw": "Ciambelli.EtAl:2019: Carroll structures, null geometry, and conformal isometries, 2019, doi:10.1103/PhysRevD.100.046010, arXiv:1905.02221",
+            "title": "Carroll structures, null geometry, and conformal isometries",
+            "url": null,
+            "venue": null,
+            "year": 2019
+          },
+          "exists": null,
+          "explanation": "Detailed study of Carrollian conformal isometries and null geometry, highly relevant to the paper's focus on conformal structures in Carrollian limits.",
+          "notes": null,
+          "relevance": "high",
+          "resolved_doi": null,
+          "resolved_url": null
+        },
+        {
+          "citation": {
+            "arxiv_id": "2112.09048",
+            "authors": [
+              "Yannick Herfray"
+            ],
+            "doi": "10.1088/1361-6382/ac635f",
+            "key": "Herfray:2022",
+            "raw": "Herfray:2022: Carrollian manifolds and null infinity: a view from Cartan geometry, 2022, doi:10.1088/1361-6382/ac635f, arXiv:2112.09048",
+            "title": "Carrollian manifolds and null infinity: a view from Cartan geometry",
+            "url": null,
+            "venue": null,
+            "year": 2022
+          },
+          "exists": null,
+          "explanation": "Relates Carrollian geometry to Cartan geometry and null infinity, providing a modern geometric framework for the discussion of connections and structures.",
+          "notes": null,
+          "relevance": "medium",
+          "resolved_doi": null,
+          "resolved_url": null
+        },
+        {
+          "citation": {
+            "arxiv_id": "2206.10780",
+            "authors": [
+              "Venkatesa Chandrasekaran",
+              "Roberto Longo",
+              "Geoffrey Penington",
+              "Edward Witten"
+            ],
+            "doi": "10.1007/JHEP02(2023)082",
+            "key": "Chandrasekaran.EtAl:2023",
+            "raw": "Chandrasekaran.EtAl:2023: An algebra of observables for {de Sitter} space, 2023, doi:10.1007/JHEP02(2023)082, arXiv:2206.10780",
+            "title": "An algebra of observables for {de Sitter} space",
+            "url": null,
+            "venue": null,
+            "year": 2023
+          },
+          "exists": null,
+          "explanation": "While high-profile, this paper focuses on observables in de Sitter space and von Neumann algebras. Its connection to Weyl-type theorems in Galilei/Carroll geometry is likely tangential or motivational.",
+          "notes": null,
+          "relevance": "low",
+          "resolved_doi": null,
+          "resolved_url": null
+        }
+      ],
+      "missing_references": [
+        {
+          "reason": "Classical reference for the projective and conformal structure of Lorentzian manifolds (EPS axioms), which is the standard relativistic starting point for Weyl's result.",
+          "title": "Ehlers, J., Pirani, F. A. E., and Schild, A. (1972). The geometry of free fall and light propagation."
+        },
+        {
+          "reason": "Foundational work on the Bargmann framework, which unifies Galilean and Carrollian structures as different null reductions, providing the geometric context for the connection compatibility discussed.",
+          "title": "Duval, C., Burdet, G., Künzle, H. P., and Perrin, M. (1985). Bargmann structures and Newton-Cartan theory."
+        }
+      ],
+      "summary": "The paper demonstrates excellent citation hygiene, covering both the foundational historical work by Weyl and Cartan as well as the modern resurgence of interest in Carrollian and Galilean geometries. The bibliography effectively bridges the gap between mathematical relativity and non-Lorentzian field theory. The inclusion of very recent (2025/2026) works suggests a comprehensive and up-to-date engagement with the field."
+    },
+    "source": "paper-review.citation",
+    "verifier_notes": {
+      "citation": {
+        "notes": {
+          "checked": 53,
+          "entries": [
+            {
+              "arxiv_id": null,
+              "author": null,
+              "citation_key": "Adlam.Linnemann.Read",
+              "doi": "10.1093/9780198922391.001.0001",
+              "exists": true,
+              "raw": "Adlam.Linnemann.Read:2025: Constructive axiomatics for spacetime physics, 2025, doi:10.1093/9780198922391.001.0001",
+              "reason": null,
+              "resolved_doi": "10.1093/9780198922391.001.0001",
+              "resolved_url": "https://doi.org/10.1093/9780198922391.001.0001",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "Constructive axiomatics for spacetime physics",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": "0903.3953",
+              "author": null,
+              "citation_key": "Alishahiha.Davody.Vahedi",
+              "doi": "10.1088/1126-6708/2009/08/022",
+              "exists": true,
+              "raw": "Alishahiha.Davody.Vahedi:2009: On {AdS/CFT} of {Galilean} Conformal Field Theories, 2009, doi:10.1088/1126-6708/2009/08/022, arXiv:0903.3953",
+              "reason": null,
+              "resolved_doi": "10.1088/1126-6708/2009/08/022",
+              "resolved_url": "https://doi.org/10.1088/1126-6708/2009/08/022",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "On {AdS/CFT} of {Galilean} Conformal Field Theories",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": "1408.0810",
+              "author": null,
+              "citation_key": "Bagchi.Basu.Mehra",
+              "doi": "10.1007/JHEP11(2014)061",
+              "exists": true,
+              "raw": "Bagchi.Basu.Mehra:2014: Galilean Conformal Electrodynamics, 2014, doi:10.1007/JHEP11(2014)061, arXiv:1408.0810",
+              "reason": null,
+              "resolved_doi": "10.1007/JHEP11(2014)061",
+              "resolved_url": "https://doi.org/10.1007/JHEP11(2014)061",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "Galilean Conformal Electrodynamics",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": "1712.05631",
+              "author": null,
+              "citation_key": "Bagchi.Chakrabortty.Mehra",
+              "doi": "10.1007/JHEP04(2018)144",
+              "exists": true,
+              "raw": "Bagchi.Chakrabortty.Mehra:2018: Galilean field theories and conformal structure, 2018, doi:10.1007/JHEP04(2018)144, arXiv:1712.05631",
+              "reason": null,
+              "resolved_doi": "10.1007/JHEP04(2018)144",
+              "resolved_url": "https://doi.org/10.1007/JHEP04(2018)144",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "Galilean field theories and conformal structure",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": "0902.1385",
+              "author": null,
+              "citation_key": "Bagchi.Gopakumar",
+              "doi": "10.1088/1126-6708/2009/07/037",
+              "exists": true,
+              "raw": "Bagchi.Gopakumar:2009: Galilean conformal algebras and {AdS/CFT}, 2009, doi:10.1088/1126-6708/2009/07/037, arXiv:0902.1385",
+              "reason": null,
+              "resolved_doi": "10.1088/1126-6708/2009/07/037",
+              "resolved_url": "https://doi.org/10.1088/1126-6708/2009/07/037",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "Galilean conformal algebras and {AdS/CFT}",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": "0903.4524",
+              "author": null,
+              "citation_key": "Bagchi.Mandal",
+              "doi": "10.1016/j.physletb.2009.04.030",
+              "exists": true,
+              "raw": "Bagchi.Mandal:2009: On representations and correlation functions of {Galilean} conformal algebras, 2009, doi:10.1016/j.physletb.2009.04.030, arXiv:0903.4524",
+              "reason": null,
+              "resolved_doi": "10.1016/j.physletb.2009.04.030",
+              "resolved_url": "https://doi.org/10.1016/j.physletb.2009.04.030",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "On representations and correlation functions of {Galilean} conformal algebras",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": "1405.2264",
+              "author": null,
+              "citation_key": "Bergshoeff.EtAl",
+              "doi": "10.1088/0264-9381/31/20/205009",
+              "exists": true,
+              "raw": "Bergshoeff.EtAl:2014: Dynamics of {Carroll} particles, 2014, doi:10.1088/0264-9381/31/20/205009, arXiv:1405.2264",
+              "reason": null,
+              "resolved_doi": "10.1088/0264-9381/31/20/205009",
+              "resolved_url": "https://doi.org/10.1088/0264-9381/31/20/205009",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "Dynamics of {Carroll} particles",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": "1701.06156",
+              "author": null,
+              "citation_key": "Bergshoeff.EtAl",
+              "doi": "10.1007/JHEP03(2017)165",
+              "exists": true,
+              "raw": "Bergshoeff.EtAl:2017: Carroll versus {Galilei} gravity, 2017, doi:10.1007/JHEP03(2017)165, arXiv:1701.06156",
+              "reason": null,
+              "resolved_doi": "10.1007/JHEP03(2017)165",
+              "resolved_url": "https://doi.org/10.1007/JHEP03(2017)165",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "Carroll versus {Galilei} gravity",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": null,
+              "author": null,
+              "citation_key": "Bergshoeff.EtAl",
+              "doi": "10.1007/978-3-032-03921-7_33",
+              "exists": true,
+              "raw": "Bergshoeff.EtAl:2026: Applied Conformal {Carroll} Geometry, 2026, doi:10.1007/978-3-032-03921-7_33",
+              "reason": null,
+              "resolved_doi": "10.1007/978-3-032-03921-7_33",
+              "resolved_url": "https://doi.org/10.1007/978-3-032-03921-7_33",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "Applied Conformal {Carroll} Geometry",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": null,
+              "author": null,
+              "citation_key": "Cartan",
+              "doi": "10.24033/asens.751",
+              "exists": true,
+              "raw": "Cartan:1923: Sur les variétés à connexion affine et la théorie de la relativité généralisée (première partie), 1923, doi:10.24033/asens.751",
+              "reason": null,
+              "resolved_doi": "10.24033/asens.751",
+              "resolved_url": "https://doi.org/10.24033/asens.751",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "Sur les variétés à connexion affine et la théorie de la relativité généralisée (première partie)",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": null,
+              "author": null,
+              "citation_key": "Cartan",
+              "doi": "10.24033/asens.753",
+              "exists": true,
+              "raw": "Cartan:1924: Sur les variétés à connexion affine et la théorie de la relativité généralisée (première partie) ({Suite}), 1924, doi:10.24033/asens.753",
+              "reason": null,
+              "resolved_doi": "10.24033/asens.753",
+              "resolved_url": "https://doi.org/10.24033/asens.753",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "Sur les variétés à connexion affine et la théorie de la relativité généralisée (première partie) ({Suite})",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": null,
+              "author": null,
+              "citation_key": "Cartan",
+              "doi": null,
+              "exists": null,
+              "raw": "Cartan:1986: On Manifolds with an Affine Connection and the Theory of General Relativity, 1986",
+              "reason": "not verified by Crossref bibliographic search; no match above score threshold",
+              "resolved_doi": null,
+              "resolved_url": null,
+              "source": "crossref_bibliographic",
+              "status": "unverified",
+              "title": "On Manifolds with an Affine Connection and the Theory of General Relativity",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": "2206.10780",
+              "author": null,
+              "citation_key": "Chandrasekaran.EtAl",
+              "doi": "10.1007/JHEP02(2023)082",
+              "exists": true,
+              "raw": "Chandrasekaran.EtAl:2023: An algebra of observables for {de Sitter} space, 2023, doi:10.1007/JHEP02(2023)082, arXiv:2206.10780",
+              "reason": null,
+              "resolved_doi": "10.1007/JHEP02(2023)082",
+              "resolved_url": "https://doi.org/10.1007/JHEP02(2023)082",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "An algebra of observables for {de Sitter} space",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": "2203.10490",
+              "author": null,
+              "citation_key": "Chen.Liu",
+              "doi": "10.1007/JHEP05(2023)224",
+              "exists": true,
+              "raw": "Chen.Liu:2023: The shadow formalism of {Galilean CFT\\textsubscript{2}}, 2023, doi:10.1007/JHEP05(2023)224, arXiv:2203.10490",
+              "reason": null,
+              "resolved_doi": "10.1007/JHEP05(2023)224",
+              "resolved_url": "https://doi.org/10.1007/JHEP05(2023)224",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "The shadow formalism of {Galilean CFT\\textsubscript{2}}",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": "2406.17451",
+              "author": null,
+              "citation_key": "Chen.Sun.Zheng",
+              "doi": "10.1103/PhysRevD.110.125010",
+              "exists": true,
+              "raw": "Chen.Sun.Zheng:2024: Quantization of {Carrollian} conformal scalar theories, 2024, doi:10.1103/PhysRevD.110.125010, arXiv:2406.17451",
+              "reason": null,
+              "resolved_doi": "10.1103/PhysRevD.110.125010",
+              "resolved_url": "https://doi.org/10.1103/PhysRevD.110.125010",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "Quantization of {Carrollian} conformal scalar theories",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": "1905.02221",
+              "author": null,
+              "citation_key": "Ciambelli.EtAl",
+              "doi": "10.1103/PhysRevD.100.046010",
+              "exists": true,
+              "raw": "Ciambelli.EtAl:2019: Carroll structures, null geometry, and conformal isometries, 2019, doi:10.1103/PhysRevD.100.046010, arXiv:1905.02221",
+              "reason": null,
+              "resolved_doi": "10.1103/PhysRevD.100.046010",
+              "resolved_url": "https://doi.org/10.1103/PhysRevD.100.046010",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "Carroll structures, null geometry, and conformal isometries",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": "1510.02089",
+              "author": null,
+              "citation_key": "Curiel",
+              "doi": null,
+              "exists": true,
+              "raw": "Curiel:2015: A {Weyl}-Type Theorem for Geometrized {Newtonian} Gravity, 2015, arXiv:1510.02089",
+              "reason": null,
+              "resolved_doi": null,
+              "resolved_url": "https://arxiv.org/abs/1510.02089",
+              "source": "arxiv",
+              "status": "resolved",
+              "title": "A {Weyl}-Type Theorem for Geometrized {Newtonian} Gravity",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": "2009.09733",
+              "author": null,
+              "citation_key": "Dewar.Read",
+              "doi": "10.1007/s10701-020-00386-w",
+              "exists": true,
+              "raw": "Dewar.Read:2020: Conformal Invariance of the {Newtonian} {Weyl} Tensor, 2020, doi:10.1007/s10701-020-00386-w, arXiv:2009.09733",
+              "reason": null,
+              "resolved_doi": "10.1007/s10701-020-00386-w",
+              "resolved_url": "https://doi.org/10.1007/s10701-020-00386-w",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "Conformal Invariance of the {Newtonian} {Weyl} Tensor",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": "1707.00563",
+              "author": null,
+              "citation_key": "Dewar.Weatherall",
+              "doi": "10.1007/s10701-018-0151-6",
+              "exists": true,
+              "raw": "Dewar.Weatherall:2018: On Gravitational Energy in {Newtonian} Theories, 2018, doi:10.1007/s10701-018-0151-6, arXiv:1707.00563",
+              "reason": null,
+              "resolved_doi": "10.1007/s10701-018-0151-6",
+              "resolved_url": "https://doi.org/10.1007/s10701-018-0151-6",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "On Gravitational Energy in {Newtonian} Theories",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": null,
+              "author": null,
+              "citation_key": "Dombrowski.Horneffer",
+              "doi": "10.1007/BF01110404",
+              "exists": true,
+              "raw": "Dombrowski.Horneffer:1964: Die Differentialgeometrie des Galileischen Relativitätsprinzips, 1964, doi:10.1007/BF01110404",
+              "reason": null,
+              "resolved_doi": "10.1007/BF01110404",
+              "resolved_url": "https://doi.org/10.1007/BF01110404",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "Die Differentialgeometrie des Galileischen Relativitätsprinzips",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": "1502.03034",
+              "author": null,
+              "citation_key": "Dunajski.Gundry",
+              "doi": "10.1007/s00220-015-2557-8",
+              "exists": true,
+              "raw": "Dunajski.Gundry:2016: Non-Relativistic Twistor Theory and {Newton--Cartan} Geometry, 2016, doi:10.1007/s00220-015-2557-8, arXiv:1502.03034",
+              "reason": null,
+              "resolved_doi": "10.1007/s00220-015-2557-8",
+              "resolved_url": "https://doi.org/10.1007/s00220-015-2557-8",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "Non-Relativistic Twistor Theory and {Newton--Cartan} Geometry",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": "2203.08567",
+              "author": null,
+              "citation_key": "Dunajski.Penrose",
+              "doi": "10.1016/j.aop.2023.169243",
+              "exists": true,
+              "raw": "Dunajski.Penrose:2023: Quantum state reduction, and {Newtonian} twistor theory, 2023, doi:10.1016/j.aop.2023.169243, arXiv:2203.08567",
+              "reason": null,
+              "resolved_doi": "10.1016/j.aop.2023.169243",
+              "resolved_url": "https://doi.org/10.1016/j.aop.2023.169243",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "Quantum state reduction, and {Newtonian} twistor theory",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": "2212.11002",
+              "author": null,
+              "citation_key": "Dutta",
+              "doi": "10.1016/j.physletb.2024.138672",
+              "exists": true,
+              "raw": "Dutta:2024: Stress tensors of 3d {Carroll CFTs}, 2024, doi:10.1016/j.physletb.2024.138672, arXiv:2212.11002",
+              "reason": null,
+              "resolved_doi": "10.1016/j.physletb.2024.138672",
+              "resolved_url": "https://doi.org/10.1016/j.physletb.2024.138672",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "Stress tensors of 3d {Carroll CFTs}",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": "1403.4213",
+              "author": null,
+              "citation_key": "Duval.EtAl",
+              "doi": "10.1088/1751-8113/47/33/335204",
+              "exists": true,
+              "raw": "Duval.EtAl:2014b: Conformal {Carroll} groups, 2014, doi:10.1088/1751-8113/47/33/335204, arXiv:1403.4213",
+              "reason": null,
+              "resolved_doi": "10.1088/1751-8113/47/33/335204",
+              "resolved_url": "https://doi.org/10.1088/1751-8113/47/33/335204",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "Conformal {Carroll} groups",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": "1402.0657",
+              "author": null,
+              "citation_key": "Duval.EtAl",
+              "doi": "10.1088/0264-9381/31/8/085016",
+              "exists": true,
+              "raw": "Duval.EtAl:2014: Carroll versus {Newton} and {Galilei}: two dual non-{Einstein\\-ian} concepts of time, 2014, doi:10.1088/0264-9381/31/8/085016, arXiv:1402.0657",
+              "reason": null,
+              "resolved_doi": "10.1088/0264-9381/31/8/085016",
+              "resolved_url": "https://doi.org/10.1088/0264-9381/31/8/085016",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "Carroll versus {Newton} and {Galilei}: two dual non-{Einstein\\-ian} concepts of time",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": "1104.1502",
+              "author": null,
+              "citation_key": "Duval.Horvathy",
+              "doi": "10.1088/1751-8113/44/33/335203",
+              "exists": true,
+              "raw": "Duval.Horvathy:2011: Conformal {Galilei} groups, {Veronese} curves, and {Newton}--{Hooke} spacetimes, 2011, doi:10.1088/1751-8113/44/33/335203, arXiv:1104.1502",
+              "reason": null,
+              "resolved_doi": "10.1088/1751-8113/44/33/335203",
+              "resolved_url": "https://doi.org/10.1088/1751-8113/44/33/335203",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "Conformal {Galilei} groups, {Veronese} curves, and {Newton}--{Hooke} spacetimes",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": null,
+              "author": null,
+              "citation_key": "Ehlers",
+              "doi": null,
+              "exists": null,
+              "raw": "Ehlers:1981a: Über den Newtonschen Grenzwert der Einsteinschen Gravitationstheorie, 1981",
+              "reason": "not verified by Crossref bibliographic search; no match above score threshold",
+              "resolved_doi": null,
+              "resolved_url": null,
+              "source": "crossref_bibliographic",
+              "status": "unverified",
+              "title": "Über den Newtonschen Grenzwert der Einsteinschen Gravitationstheorie",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": null,
+              "author": null,
+              "citation_key": "Ehlers",
+              "doi": "10.1007/s10714-019-2624-0",
+              "exists": true,
+              "raw": "Ehlers:1981b: On the {Newtonian} limit of {Einstein's} theory of gravitation, 2019, doi:10.1007/s10714-019-2624-0",
+              "reason": null,
+              "resolved_doi": "10.1007/s10714-019-2624-0",
+              "resolved_url": "https://doi.org/10.1007/s10714-019-2624-0",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "On the {Newtonian} limit of {Einstein's} theory of gravitation",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": "0907.2645",
+              "author": null,
+              "citation_key": "Ehlers.Buchert",
+              "doi": "10.1007/s10714-009-0855-1",
+              "exists": true,
+              "raw": "Ehlers.Buchert:2009: On the {Newtonian} Limit of the {Weyl} Tensor, 2009, doi:10.1007/s10714-009-0855-1, arXiv:0907.2645",
+              "reason": null,
+              "resolved_doi": "10.1007/s10714-009-0855-1",
+              "resolved_url": "https://doi.org/10.1007/s10714-009-0855-1",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "On the {Newtonian} Limit of the {Weyl} Tensor",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": null,
+              "author": null,
+              "citation_key": "EPS",
+              "doi": null,
+              "exists": null,
+              "raw": "EPS:1972: The geometry of free fall and light propagation, 1972",
+              "reason": "not verified by Crossref bibliographic search; no match above score threshold",
+              "resolved_doi": null,
+              "resolved_url": null,
+              "source": "crossref_bibliographic",
+              "status": "unverified",
+              "title": "The geometry of free fall and light propagation",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": null,
+              "author": null,
+              "citation_key": "EPS",
+              "doi": "10.1007/s10714-012-1353-4",
+              "exists": true,
+              "raw": "EPS:2012: The geometry of free fall and light propagation, 2012, doi:10.1007/s10714-012-1353-4",
+              "reason": null,
+              "resolved_doi": "10.1007/s10714-012-1353-4",
+              "resolved_url": "https://doi.org/10.1007/s10714-012-1353-4",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "The geometry of free fall and light propagation",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": null,
+              "author": null,
+              "citation_key": "Ewen.Schmidt",
+              "doi": "10.1063/1.528279",
+              "exists": true,
+              "raw": "Ewen.Schmidt:1989: Geometry of free fall and simultaneity, 1989, doi:10.1063/1.528279",
+              "reason": null,
+              "resolved_doi": "10.1063/1.528279",
+              "resolved_url": "https://doi.org/10.1063/1.528279",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "Geometry of free fall and simultaneity",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": null,
+              "author": null,
+              "citation_key": "Friedrichs",
+              "doi": "10.1007/BF01451608",
+              "exists": true,
+              "raw": "Friedrichs:1928: Eine invariante Formulierung des Newtonschen Gravitationsgesetzes und des Grenzüberganges vom Einsteinschen zum Newtonschen Gesetz, 1928, doi:10.1007/BF01451608",
+              "reason": null,
+              "resolved_doi": "10.1007/BF01451608",
+              "resolved_url": "https://doi.org/10.1007/BF01451608",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "Eine invariante Formulierung des Newtonschen Gravitationsgesetzes und des Grenzüberganges vom Einsteinschen zum Newtonschen Gesetz",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": "2001.03056",
+              "author": null,
+              "citation_key": "Gupta.Suryanarayana",
+              "doi": "10.1007/JHEP03(2021)194",
+              "exists": true,
+              "raw": "Gupta.Suryanarayana:2021: Constructing {Carrollian CFTs}, 2021, doi:10.1007/JHEP03(2021)194, arXiv:2001.03056",
+              "reason": null,
+              "resolved_doi": "10.1007/JHEP03(2021)194",
+              "resolved_url": "https://doi.org/10.1007/JHEP03(2021)194",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "Constructing {Carrollian CFTs}",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": null,
+              "author": null,
+              "citation_key": "Hagen",
+              "doi": "10.1103/PhysRevD.5.377",
+              "exists": true,
+              "raw": "Hagen:1972: Scale and Conformal Transformations in {Galilean}-Covariant Field Theory, 1972, doi:10.1103/PhysRevD.5.377",
+              "reason": null,
+              "resolved_doi": "10.1103/PhysRevD.5.377",
+              "resolved_url": "https://doi.org/10.1103/PhysRevD.5.377",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "Scale and Conformal Transformations in {Galilean}-Covariant Field Theory",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": "1904.05706",
+              "author": null,
+              "citation_key": "Hansen.EtAl",
+              "doi": "10.1142/S0218271819440103",
+              "exists": true,
+              "raw": "Hansen.EtAl:2019: Gravity between {Newton} and {Einstein}, 2019, doi:10.1142/S0218271819440103, arXiv:1904.05706",
+              "reason": null,
+              "resolved_doi": "10.1142/S0218271819440103",
+              "resolved_url": "https://doi.org/10.1142/S0218271819440103",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "Gravity between {Newton} and {Einstein}",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": "2212.11309",
+              "author": null,
+              "citation_key": "Hartong.EtAl",
+              "doi": "10.3389/fphy.2023.1116888",
+              "exists": true,
+              "raw": "Hartong.EtAl:2023: Review on non-relativistic gravity, 2023, doi:10.3389/fphy.2023.1116888, arXiv:2212.11309",
+              "reason": null,
+              "resolved_doi": "10.3389/fphy.2023.1116888",
+              "resolved_url": "https://doi.org/10.3389/fphy.2023.1116888",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "Review on non-relativistic gravity",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": "2112.09048",
+              "author": null,
+              "citation_key": "Herfray",
+              "doi": "10.1088/1361-6382/ac635f",
+              "exists": true,
+              "raw": "Herfray:2022: Carrollian manifolds and null infinity: a view from Cartan geometry, 2022, doi:10.1088/1361-6382/ac635f, arXiv:2112.09048",
+              "reason": null,
+              "resolved_doi": "10.1088/1361-6382/ac635f",
+              "resolved_url": "https://doi.org/10.1088/1361-6382/ac635f",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "Carrollian manifolds and null infinity: a view from Cartan geometry",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": null,
+              "author": null,
+              "citation_key": "Kuenzle",
+              "doi": null,
+              "exists": null,
+              "raw": "Kuenzle:1972: Galilei and {Lorentz} structures on space-time : Comparison of the corresponding geometry and physics, 1972",
+              "reason": "not verified by Crossref bibliographic search; no match above score threshold",
+              "resolved_doi": null,
+              "resolved_url": null,
+              "source": "crossref_bibliographic",
+              "status": "unverified",
+              "title": "Galilei and {Lorentz} structures on space-time : Comparison of the corresponding geometry and physics",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": null,
+              "author": null,
+              "citation_key": "Kuenzle",
+              "doi": "10.1007/BF00766139",
+              "exists": true,
+              "raw": "Kuenzle:1976: Covariant {Newtonian} Limit of {Lorentz} Space-Times, 1976, doi:10.1007/BF00766139",
+              "reason": null,
+              "resolved_doi": "10.1007/BF00766139",
+              "resolved_url": "https://doi.org/10.1007/BF00766139",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "Covariant {Newtonian} Limit of {Lorentz} Space-Times",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": null,
+              "author": null,
+              "citation_key": "Malament",
+              "doi": null,
+              "exists": true,
+              "raw": "Malament:2012: Topics in the Foundations of General Relativity and Newtonian Gravitation Theory, 2012",
+              "reason": null,
+              "resolved_doi": "10.7208/chicago/9780226502472.001.0001",
+              "resolved_url": "https://doi.org/10.7208/chicago/9780226502472.001.0001",
+              "source": "crossref_bibliographic",
+              "status": "resolved",
+              "title": "Topics in the Foundations of General Relativity and Newtonian Gravitation Theory",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": null,
+              "author": null,
+              "citation_key": "March",
+              "doi": null,
+              "exists": null,
+              "raw": "March:2023: Non-relativistic twistor theory: {Newtonian} limits and gravitational collapse, 2023",
+              "reason": "not verified by Crossref bibliographic search; no match above score threshold",
+              "resolved_doi": null,
+              "resolved_url": null,
+              "source": "crossref_bibliographic",
+              "status": "unverified",
+              "title": "Non-relativistic twistor theory: {Newtonian} limits and gravitational collapse",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": null,
+              "author": null,
+              "citation_key": "March",
+              "doi": null,
+              "exists": null,
+              "raw": "March:2025: A note on Newton-Cartan Weyl-type theorems, 2025",
+              "reason": "not verified by Crossref bibliographic search; no match above score threshold",
+              "resolved_doi": null,
+              "resolved_url": null,
+              "source": "crossref_bibliographic",
+              "status": "unverified",
+              "title": "A note on Newton-Cartan Weyl-type theorems",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": "2409.12200",
+              "author": null,
+              "citation_key": "March.Read",
+              "doi": "10.1088/1361-6382/adaf03",
+              "exists": true,
+              "raw": "March.Read:2025: A primer on {Carroll} gravity, 2025, doi:10.1088/1361-6382/adaf03, arXiv:2409.12200",
+              "reason": null,
+              "resolved_doi": "10.1088/1361-6382/adaf03",
+              "resolved_url": "https://doi.org/10.1088/1361-6382/adaf03",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "A primer on {Carroll} gravity",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": null,
+              "author": null,
+              "citation_key": "Reichenbach",
+              "doi": null,
+              "exists": null,
+              "raw": "Reichenbach:1969: Axiomatization of the Theory of Relativity, 1969",
+              "reason": "not verified by Crossref bibliographic search; no match above score threshold",
+              "resolved_doi": null,
+              "resolved_url": null,
+              "source": "crossref_bibliographic",
+              "status": "unverified",
+              "title": "Axiomatization of the Theory of Relativity",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": "2403.15460",
+              "author": null,
+              "citation_key": "Schwartz",
+              "doi": "10.1088/1361-6382/ad922f",
+              "exists": true,
+              "raw": "Schwartz:2025: The classification of general affine connections in {Newton--Cartan} geometry: Towards metric-affine {Newton--Cartan} gravity, 2025, doi:10.1088/1361-6382/ad922f, arXiv:2403.15460",
+              "reason": null,
+              "resolved_doi": "10.1088/1361-6382/ad922f",
+              "resolved_url": "https://doi.org/10.1088/1361-6382/ad922f",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "The classification of general affine connections in {Newton--Cartan} geometry: Towards metric-affine {Newton--Cartan} gravity",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": null,
+              "author": null,
+              "citation_key": "Schwartz",
+              "doi": "10.1007/978-3-032-03967-5",
+              "exists": true,
+              "raw": "Schwartz:NC_gravity: {Newton--Cartan} Gravity: A Modern Introduction to Geometrised Newtonian Gravity, 2026, doi:10.1007/978-3-032-03967-5",
+              "reason": null,
+              "resolved_doi": "10.1007/978-3-032-03967-5",
+              "resolved_url": "https://doi.org/10.1007/978-3-032-03967-5",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "{Newton--Cartan} Gravity: A Modern Introduction to Geometrised Newtonian Gravity",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": null,
+              "author": null,
+              "citation_key": "Trautman",
+              "doi": null,
+              "exists": true,
+              "raw": "Trautman:1963: Sur la théorie newtonienne de la gravitation, 1963",
+              "reason": null,
+              "resolved_doi": "10.1051/978-2-7598-0272-2.c010",
+              "resolved_url": "https://doi.org/10.1051/978-2-7598-0272-2.c010",
+              "source": "crossref_bibliographic",
+              "status": "resolved",
+              "title": "Sur la théorie newtonienne de la gravitation",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": null,
+              "author": null,
+              "citation_key": "Trautman",
+              "doi": null,
+              "exists": null,
+              "raw": "Trautman:1965: Foundations and current problems of general relativity, 1965",
+              "reason": "not verified by Crossref bibliographic search; no match above score threshold",
+              "resolved_doi": null,
+              "resolved_url": null,
+              "source": "crossref_bibliographic",
+              "status": "unverified",
+              "title": "Foundations and current problems of general relativity",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": "2506.03936",
+              "author": null,
+              "citation_key": "Vigneron.Barzegar.Read",
+              "doi": "10.1088/1361-6382/adfc1e",
+              "exists": true,
+              "raw": "Vigneron.Barzegar.Read:2025: Affine connections for {Galilean} and {Carrollian} structures: a unified perspective, 2025, doi:10.1088/1361-6382/adfc1e, arXiv:2506.03936",
+              "reason": null,
+              "resolved_doi": "10.1088/1361-6382/adfc1e",
+              "resolved_url": "https://doi.org/10.1088/1361-6382/adfc1e",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "Affine connections for {Galilean} and {Carrollian} structures: a unified perspective",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": null,
+              "author": null,
+              "citation_key": "Weyl",
+              "doi": null,
+              "exists": true,
+              "raw": "Weyl:1921: Zur {Infinitesimalgeometrie}: {Einordnung} der projektiven und der konformen {Auffassung}, 1921",
+              "reason": null,
+              "resolved_doi": "10.1007/978-3-663-05500-6_2",
+              "resolved_url": "https://doi.org/10.1007/978-3-663-05500-6_2",
+              "source": "crossref_bibliographic",
+              "status": "resolved",
+              "title": "Zur {Infinitesimalgeometrie}: {Einordnung} der projektiven und der konformen {Auffassung}",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": "2112.12828",
+              "author": null,
+              "citation_key": "Witten",
+              "doi": "10.1007/JHEP10(2022)008",
+              "exists": true,
+              "raw": "Witten:2022: Gravity and the crossed product, 2022, doi:10.1007/JHEP10(2022)008, arXiv:2112.12828",
+              "reason": null,
+              "resolved_doi": "10.1007/JHEP10(2022)008",
+              "resolved_url": "https://doi.org/10.1007/JHEP10(2022)008",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "Gravity and the crossed product",
+              "url": null,
+              "year": null
+            },
+            {
+              "arxiv_id": "2307.10074",
+              "author": null,
+              "citation_key": "Wolf.Sanchioni.Read",
+              "doi": "10.1007/s13194-024-00617-1",
+              "exists": true,
+              "raw": "Wolf.Sanchioni.Read:2024: Underdetermination in Classic and Modern Tests of General Relativity, 2024, doi:10.1007/s13194-024-00617-1, arXiv:2307.10074",
+              "reason": null,
+              "resolved_doi": "10.1007/s13194-024-00617-1",
+              "resolved_url": "https://doi.org/10.1007/s13194-024-00617-1",
+              "source": "crossref",
+              "status": "resolved",
+              "title": "Underdetermination in Classic and Modern Tests of General Relativity",
+              "url": null,
+              "year": null
+            }
+          ],
+          "malformed": [],
+          "resolved_via_bibliographic_query": 3,
+          "unknown": [],
+          "unresolved": [],
+          "unresolved_fraction": 0.0,
+          "unverified": [
+            "Cartan:1986: On Manifolds with an Affine Connection and the Theory of General Relativity, 1986",
+            "Ehlers:1981a: Über den Newtonschen Grenzwert der Einsteinschen Gravitationstheorie, 1981",
+            "EPS:1972: The geometry of free fall and light propagation, 1972",
+            "Kuenzle:1972: Galilei and {Lorentz} structures on space-time : Comparison of the corresponding geometry and physics, 1972",
+            "March:2023: Non-relativistic twistor theory: {Newtonian} limits and gravitational collapse, 2023",
+            "March:2025: A note on Newton-Cartan Weyl-type theorems, 2025",
+            "Reichenbach:1969: Axiomatization of the Theory of Relativity, 1969",
+            "Trautman:1965: Foundations and current problems of general relativity, 1965"
+          ]
+        },
+        "status": "warn"
+      },
+      "json_schema": {
+        "notes": {},
+        "status": "pass"
+      },
+      "metadata": {
+        "notes": {
+          "arxiv_shape_ok": true,
+          "field_present": true,
+          "missing": [],
+          "source_id_kind": "arxiv",
+          "source_id_shape_ok": true,
+          "subject_kind": "paper"
+        },
+        "status": "pass"
+      },
+      "render": {
+        "notes": {},
+        "status": "pass"
+      },
+      "support": {
+        "notes": {
+          "non_empty_arrays": 9,
+          "substantive_strings": 60
+        },
+        "status": "pass"
+      },
+      "tone": {
+        "notes": {},
+        "status": "pass"
+      }
+    },
+    "verifier_status": "warn"
+  },
+  "fix_evidence": {
+    "fixes": [
+      {
+        "action": "update",
+        "patch": "[{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/0/exists\",\"value\":true},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/0/resolved_doi\",\"value\":\"10.1007/978-3-663-05500-6_2\"},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/0/resolved_url\",\"value\":\"https://doi.org/10.1007/978-3-663-05500-6_2\"},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/1/exists\",\"value\":true},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/1/resolved_url\",\"value\":\"https://arxiv.org/abs/1510.02089\"},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/2/exists\",\"value\":true},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/2/resolved_doi\",\"value\":\"10.1088/1751-8113/47/33/335204\"},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/2/resolved_url\",\"value\":\"https://doi.org/10.1088/1751-8113/47/33/335204\"},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/3/exists\",\"value\":true},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/3/resolved_doi\",\"value\":\"10.1088/0264-9381/31/8/085016\"},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/3/resolved_url\",\"value\":\"https://doi.org/10.1088/0264-9381/31/8/085016\"},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/4/exists\",\"value\":true},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/4/resolved_doi\",\"value\":\"10.1103/PhysRevD.100.046010\"},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/4/resolved_url\",\"value\":\"https://doi.org/10.1103/PhysRevD.100.046010\"},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/5/exists\",\"value\":true},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/5/resolved_doi\",\"value\":\"10.1088/1361-6382/ac635f\"},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/5/resolved_url\",\"value\":\"https://doi.org/10.1088/1361-6382/ac635f\"},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/6/exists\",\"value\":true},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/6/resolved_doi\",\"value\":\"10.1007/JHEP02(2023)082\"},{\"op\":\"replace\",\"path\":\"/citation_validation/output/entries/6/resolved_url\",\"value\":\"https://doi.org/10.1007/JHEP02(2023)082\"}]",
+        "reason": "The citation role left exists and resolved_* as null for displayed entries even though verifier evidence resolved them via Crossref or arXiv.",
+        "target_artifact": "review_input.json#/citation_validation/output/entries"
+      },
+      {
+        "action": "remove",
+        "patch": "[{\"op\":\"remove\",\"path\":\"/citation_validation/output/missing_references/0\"}]",
+        "reason": "The EPS reference should not be listed as simply missing: verifier evidence includes EPS:1972 as unverified and EPS:2012 as resolved, so this should be handled as citation normalization/verification rather than absence from the bibliography.",
+        "target_artifact": "review_input.json#/citation_validation/output/missing_references"
+      },
+      {
+        "action": "update",
+        "patch": "Move the union of all required_imports to the very start of the generated Lean file before any comments, declarations, namespaces, or generated prose:\nimport Mathlib.CategoryTheory.Category.Basic\nimport Mathlib.CategoryTheory.Functor.Basic\nimport Mathlib.CategoryTheory.Products.Basic\nimport Mathlib.CategoryTheory.Conservative\nimport Mathlib.CategoryTheory.Iso",
+        "reason": "Lean verification failed before checking obligations because an import command appeared at line 3; Lean imports must be at the beginning of the file.",
+        "target_artifact": "generated ReviewLoop.lean"
+      },
+      {
+        "action": "update",
+        "patch": "For ob_functor_weyl_to_conformal_functoriality, ob_functor_weyl_to_projective_functoriality, and ob_functor_conn_to_projective_functoriality, replace stubs of the form `structure Name : Source ⥤ Target where ...` with `def Name : Source ⥤ Target where ...`; keep obj, map, map_id, and map_comp as functor fields.",
+        "reason": "The current functor obligations use invalid Lean syntax by declaring a structure whose type is a functor. They should define functor values instead.",
+        "target_artifact": "review_input.json#/proof_obligations/obligations"
+      },
+      {
+        "action": "annotate",
+        "patch": "Add a proof-status annotation that all seven Lean obligations are unverified until the generated Lean file compiles without `sorry` or other unverified markers; downstream review text must not cite these obligations as formally proved while lean_verification.status is fail.",
+        "reason": "lean_verification reports contains_unverified_markers=true, verified=false, exit_code=1, and status=fail, so the proof artifact is diagnostic only.",
+        "target_artifact": "review_input.json#/proof_obligations"
+      },
+      {
+        "action": "annotate",
+        "patch": "Mark claims `analogous_results_exist` and `def_galilei_carroll_geometries` as semantically unresolved unless the artifact supplies precise Galilei/Carroll conformal structures, reconstruction functors, parameterized limiting data, and the categorical sense of the limits c -> infinity and c -> 0.",
+        "reason": "The proof obligation extractor explicitly states that these claims cannot be formalized without inventing assumptions absent from the evidence.",
+        "target_artifact": "review_input.json#/proof_obligations/unformalized_claims"
+      }
+    ],
+    "requires_human_review": true
+  },
+  "formal_evidence": {
+    "lean_verification": {
+      "command": [
+        "lean",
+        "/var/folders/6z/np99jwkj4ys5z6l5y0xpwdx80000gn/T/.tmp0xpyiN/ReviewLoop.lean"
+      ],
+      "contains_unverified_markers": true,
+      "exit_code": 1,
+      "obligations_total": 7,
+      "status": "fail",
+      "stderr": "info: Version 4.2.3 of elan is available! Use `elan self update` to update.\ninfo: downloading https://releases.lean-lang.org/lean4/v4.30.0/lean-4.30.0-darwin_aarch64.tar.zst\ninfo: installing /Users/mlong/.elan/toolchains/leanprover--lean4---v4.30.0\n",
+      "stdout": "/var/folders/6z/np99jwkj4ys5z6l5y0xpwdx80000gn/T/.tmp0xpyiN/ReviewLoop.lean:3:0: error: invalid 'import' command, it must be used in the beginning of the file\n",
+      "verified": false
+    },
+    "proof_obligations": {
+      "obligations": [
+        {
+          "claim_ids": [
+            "weyl_theorem"
+          ],
+          "id": "ob_functor_weyl_to_conformal_functoriality",
+          "lean_stub": "structure ConformalStructureOf : WeylMetric ⥤ ConformalStructure where\n  obj : WeylMetric → ConformalStructure\n  map : ∀ {X Y : WeylMetric}, (X ⟶ Y) → (obj X ⟶ obj Y)\n  map_id : ∀ X : WeylMetric, map (𝟙 X) = 𝟙 (obj X) := by sorry\n  map_comp : ∀ {X Y Z : WeylMetric} (f : X ⟶ Y) (g : Y ⟶ Z),\n    map (f ≫ g) = map f ≫ map g := by sorry",
+          "required_imports": [
+            "Mathlib.CategoryTheory.Category.Basic",
+            "Mathlib.CategoryTheory.Functor.Basic"
+          ],
+          "statement": "The assignment ConformalStructureOf from WeylMetric to ConformalStructure preserves identities and composition of morphisms, i.e. it is a functor between the categories WeylMetric and ConformalStructure."
+        },
+        {
+          "claim_ids": [
+            "weyl_theorem"
+          ],
+          "id": "ob_functor_weyl_to_projective_functoriality",
+          "lean_stub": "structure ProjectiveStructureOf : WeylMetric ⥤ ProjectiveStructure where\n  obj : WeylMetric → ProjectiveStructure\n  map : ∀ {X Y : WeylMetric}, (X ⟶ Y) → (obj X ⟶ obj Y)\n  map_id : ∀ X : WeylMetric, map (𝟙 X) = 𝟙 (obj X) := by sorry\n  map_comp : ∀ {X Y Z : WeylMetric} (f : X ⟶ Y) (g : Y ⟶ Z),\n    map (f ≫ g) = map f ≫ map g := by sorry",
+          "required_imports": [
+            "Mathlib.CategoryTheory.Category.Basic",
+            "Mathlib.CategoryTheory.Functor.Basic"
+          ],
+          "statement": "The assignment ProjectiveStructureOf from WeylMetric to ProjectiveStructure preserves identities and composition of morphisms, i.e. it is a functor between the categories WeylMetric and ProjectiveStructure."
+        },
+        {
+          "claim_ids": [
+            "weyl_theorem_equivalent"
+          ],
+          "id": "ob_functor_conn_to_projective_functoriality",
+          "lean_stub": "structure ProjectiveStructureOfConnection : TorsionFreeLinearConnection ⥤ ProjectiveStructure where\n  obj : TorsionFreeLinearConnection → ProjectiveStructure\n  map : ∀ {X Y : TorsionFreeLinearConnection}, (X ⟶ Y) → (obj X ⟶ obj Y)\n  map_id : ∀ X : TorsionFreeLinearConnection, map (𝟙 X) = 𝟙 (obj X) := by sorry\n  map_comp : ∀ {X Y Z : TorsionFreeLinearConnection} (f : X ⟶ Y) (g : Y ⟶ Z),\n    map (f ≫ g) = map f ≫ map g := by sorry",
+          "required_imports": [
+            "Mathlib.CategoryTheory.Category.Basic",
+            "Mathlib.CategoryTheory.Functor.Basic"
+          ],
+          "statement": "The assignment ProjectiveStructureOfConnection from TorsionFreeLinearConnection to ProjectiveStructure preserves identities and composition of morphisms, i.e. it is a functor between the categories TorsionFreeLinearConnection and ProjectiveStructure."
+        },
+        {
+          "claim_ids": [
+            "weyl_theorem"
+          ],
+          "id": "ob_weyl_theorem_unique_reconstruction",
+          "lean_stub": "theorem weyl_theorem_unique_reconstruction\n  (W₁ W₂ : WeylMetric)\n  (hC : ConformalStructureOf.obj W₁ ≅ ConformalStructureOf.obj W₂)\n  (hP : ProjectiveStructureOf.obj W₁ ≅ ProjectiveStructureOf.obj W₂) :\n  W₁ ≅ W₂ := by sorry",
+          "required_imports": [
+            "Mathlib.CategoryTheory.Category.Basic",
+            "Mathlib.CategoryTheory.Functor.Basic",
+            "Mathlib.CategoryTheory.Products.Basic",
+            "Mathlib.CategoryTheory.Conservative"
+          ],
+          "statement": "For any two Weyl metrics W₁ W₂, if ConformalStructureOf W₁ ≅ ConformalStructureOf W₂ and ProjectiveStructureOf W₁ ≅ ProjectiveStructureOf W₂ in the respective target categories, then W₁ ≅ W₂ in WeylMetric. Equivalently, the pairing functor (ConformalStructureOf, ProjectiveStructureOf) : WeylMetric ⥤ ConformalStructure × ProjectiveStructure is conservative (reflects isomorphisms)."
+        },
+        {
+          "claim_ids": [
+            "weyl_theorem_equivalent"
+          ],
+          "id": "ob_weyl_theorem_equivalent_unique_tf_connection",
+          "lean_stub": "theorem weyl_theorem_equivalent_unique_tf_connection\n  (C : ConformalStructure) (P : ProjectiveStructure)\n  (∇₁ ∇₂ : TorsionFreeLinearConnection)\n  (hP₁ : ProjectiveStructureOfConnection.obj ∇₁ = P)\n  (hP₂ : ProjectiveStructureOfConnection.obj ∇₂ = P)\n  (hC₁ : compatibilityWithConformal ∇₁ = C)\n  (hC₂ : compatibilityWithConformal ∇₂ = C) :\n  ∇₁ ≅ ∇₂ := by sorry",
+          "required_imports": [
+            "Mathlib.CategoryTheory.Category.Basic",
+            "Mathlib.CategoryTheory.Functor.Basic",
+            "Mathlib.CategoryTheory.Iso"
+          ],
+          "statement": "For any conformal structure C and projective structure P such that there exists a torsion-free linear connection ∇ with ProjectiveStructureOfConnection ∇ = P and ∇ compatible with C (witnessed by mor_tf_conn_compatible_conformal), such ∇ is unique up to isomorphism in TorsionFreeLinearConnection."
+        },
+        {
+          "claim_ids": [
+            "def_weyl_metric"
+          ],
+          "id": "ob_generalise_pseudo_to_weyl_well_defined",
+          "lean_stub": "def generalise : PseudoRiemannianMetric → WeylMetric := by sorry\n\ntheorem generalise_well_defined :\n  ∀ (g : PseudoRiemannianMetric), ∃ (W : WeylMetric), W = generalise g := by sorry",
+          "required_imports": [
+            "Mathlib.CategoryTheory.Category.Basic",
+            "Mathlib.CategoryTheory.Functor.Basic"
+          ],
+          "statement": "The assignment generalise : PseudoRiemannianMetric → WeylMetric is a well-defined morphism of categories, i.e. every pseudo-Riemannian metric canonically determines a Weyl metric, and the construction respects the morphisms in PseudoRiemannianMetric."
+        },
+        {
+          "claim_ids": [
+            "weyl_theorem_equivalent"
+          ],
+          "id": "ob_tf_conn_compatibility_with_conformal_well_defined",
+          "lean_stub": "def compatibilityWithConformal : TorsionFreeLinearConnection → ConformalStructure := by sorry\n\ntheorem compatibilityWithConformal_well_defined :\n  ∀ (∇ : TorsionFreeLinearConnection),\n    ∃! (C : ConformalStructure), C = compatibilityWithConformal ∇ := by sorry",
+          "required_imports": [
+            "Mathlib.CategoryTheory.Category.Basic",
+            "Mathlib.CategoryTheory.Functor.Basic"
+          ],
+          "statement": "The morphism compatibilityWithConformal : TorsionFreeLinearConnection → ConformalStructure is a well-defined assignment, i.e. every torsion-free linear connection determines (or is compatible with) at most one conformal structure in a categorically coherent way."
+        }
+      ],
+      "unformalized_claims": [
+        {
+          "claim_id": "analogous_results_exist",
+          "reason": "The semantic model explicitly records (in unresolved_claims) that the precise definitions of conformal structure for Galilei and Carroll geometries, the corresponding reconstruction functors, and any natural transformations witnessing the analogy with the Lorentzian/Weyl construction are not specified. No functors GalileiConformalStructureOf or CarrollConformalStructureOf appear in the model, so a Lean obligation cannot be stated without inventing unstated assumptions."
+        },
+        {
+          "claim_id": "def_galilei_carroll_geometries",
+          "reason": "The morphisms mor_nonrelativistic_limit (c → ∞) and mor_ultrarelativistic_limit (c → 0) are described as physical limit constructions on LorentzianGeometry. The model does not specify the underlying parameterised family of geometries, the topology/limit structure on the parameter c, or in what categorical sense the limit is taken; formalising these as Lean morphisms would require introducing limiting-procedure assumptions not present in the evidence."
+        }
+      ]
+    }
+  },
+  "semantic_evidence": {
+    "adjunctions": [],
+    "functors": [
+      {
+        "evidence_claims": [
+          "weyl_theorem"
+        ],
+        "id": "functor_weyl_to_conformal",
+        "name": "ConformalStructureOf",
+        "source_category": "obj_weyl_metric",
+        "target_category": "obj_conformal_structure"
+      },
+      {
+        "evidence_claims": [
+          "weyl_theorem"
+        ],
+        "id": "functor_weyl_to_projective",
+        "name": "ProjectiveStructureOf",
+        "source_category": "obj_weyl_metric",
+        "target_category": "obj_projective_structure"
+      },
+      {
+        "evidence_claims": [
+          "weyl_theorem_equivalent"
+        ],
+        "id": "functor_conn_to_projective",
+        "name": "ProjectiveStructureOfConnection",
+        "source_category": "obj_tf_linear_connection",
+        "target_category": "obj_projective_structure"
+      }
+    ],
+    "morphisms": [
+      {
+        "codomain": "obj_weyl_metric",
+        "domain": "obj_pseudo_riem_metric",
+        "evidence_claims": [
+          "def_weyl_metric"
+        ],
+        "id": "mor_generalize_pseudo_to_weyl",
+        "name": "generalise"
+      },
+      {
+        "codomain": "obj_galilei_geometry",
+        "domain": "obj_lorentzian_geometry",
+        "evidence_claims": [
+          "def_galilei_carroll_geometries"
+        ],
+        "id": "mor_nonrelativistic_limit",
+        "name": "nonrelativisticLimit_c_to_infinity"
+      },
+      {
+        "codomain": "obj_carroll_geometry",
+        "domain": "obj_lorentzian_geometry",
+        "evidence_claims": [
+          "def_galilei_carroll_geometries"
+        ],
+        "id": "mor_ultrarelativistic_limit",
+        "name": "ultrarelativisticLimit_c_to_zero"
+      },
+      {
+        "codomain": "obj_conformal_structure",
+        "domain": "obj_tf_linear_connection",
+        "evidence_claims": [
+          "weyl_theorem_equivalent"
+        ],
+        "id": "mor_tf_conn_compatible_conformal",
+        "name": "compatibilityWithConformal"
+      }
+    ],
+    "natural_transformations": [],
+    "objects": [
+      {
+        "evidence_claims": [
+          "def_weyl_metric"
+        ],
+        "id": "obj_pseudo_riem_metric",
+        "name": "PseudoRiemannianMetric"
+      },
+      {
+        "evidence_claims": [
+          "def_weyl_metric",
+          "weyl_theorem"
+        ],
+        "id": "obj_weyl_metric",
+        "name": "WeylMetric"
+      },
+      {
+        "evidence_claims": [
+          "weyl_theorem",
+          "weyl_theorem_equivalent"
+        ],
+        "id": "obj_conformal_structure",
+        "name": "ConformalStructure"
+      },
+      {
+        "evidence_claims": [
+          "weyl_theorem",
+          "weyl_theorem_equivalent"
+        ],
+        "id": "obj_projective_structure",
+        "name": "ProjectiveStructure"
+      },
+      {
+        "evidence_claims": [
+          "weyl_theorem_equivalent"
+        ],
+        "id": "obj_tf_linear_connection",
+        "name": "TorsionFreeLinearConnection"
+      },
+      {
+        "evidence_claims": [
+          "def_galilei_carroll_geometries"
+        ],
+        "id": "obj_lorentzian_geometry",
+        "name": "LorentzianGeometry"
+      },
+      {
+        "evidence_claims": [
+          "def_galilei_carroll_geometries",
+          "analogous_results_exist"
+        ],
+        "id": "obj_galilei_geometry",
+        "name": "GalileiGeometry"
+      },
+      {
+        "evidence_claims": [
+          "def_galilei_carroll_geometries",
+          "analogous_results_exist"
+        ],
+        "id": "obj_carroll_geometry",
+        "name": "CarrollGeometry"
+      }
+    ],
+    "unresolved_claims": [
+      "analogous_results_exist: the precise definitions of conformal structure for Galilei and Carroll geometries, the corresponding functors (e.g. GalileiConformalStructureOf, CarrollConformalStructureOf), and any natural transformations witnessing the analogy with the Lorentzian/Weyl construction are not yet specified by the claim and require further formalisation.",
+      "weyl_theorem: the uniqueness statement is consistent with an equivalence (or fully faithful reconstruction functor) between WeylMetric and the product category ConformalStructure x ProjectiveStructure, but the evidence does not specify a left/right adjoint pair, so no adjunction is asserted here.",
+      "weyl_theorem_equivalent: the uniqueness of a torsion-free connection compatible with a conformal structure given its projective structure suggests a section/retraction structure on functor_conn_to_projective restricted to conformally compatible connections, but the categorical form (adjunction vs equivalence) is not fixed by the claim."
+    ]
+  }
+}
+```
+
+### semantic_category_mapper (`claude-opus-4-7`) — status: `pass`
+
+```json
+{
+  "adjunctions": [],
+  "functors": [
+    {
+      "evidence_claims": [
+        "weyl_theorem"
+      ],
+      "id": "functor_weyl_to_conformal",
+      "name": "ConformalStructureOf",
+      "source_category": "obj_weyl_metric",
+      "target_category": "obj_conformal_structure"
+    },
+    {
+      "evidence_claims": [
+        "weyl_theorem"
+      ],
+      "id": "functor_weyl_to_projective",
+      "name": "ProjectiveStructureOf",
+      "source_category": "obj_weyl_metric",
+      "target_category": "obj_projective_structure"
+    },
+    {
+      "evidence_claims": [
+        "weyl_theorem_equivalent"
+      ],
+      "id": "functor_conn_to_projective",
+      "name": "ProjectiveStructureOfConnection",
+      "source_category": "obj_tf_linear_connection",
+      "target_category": "obj_projective_structure"
+    }
+  ],
+  "morphisms": [
+    {
+      "codomain": "obj_weyl_metric",
+      "domain": "obj_pseudo_riem_metric",
+      "evidence_claims": [
+        "def_weyl_metric"
+      ],
+      "id": "mor_generalize_pseudo_to_weyl",
+      "name": "generalise"
+    },
+    {
+      "codomain": "obj_galilei_geometry",
+      "domain": "obj_lorentzian_geometry",
+      "evidence_claims": [
+        "def_galilei_carroll_geometries"
+      ],
+      "id": "mor_nonrelativistic_limit",
+      "name": "nonrelativisticLimit_c_to_infinity"
+    },
+    {
+      "codomain": "obj_carroll_geometry",
+      "domain": "obj_lorentzian_geometry",
+      "evidence_claims": [
+        "def_galilei_carroll_geometries"
+      ],
+      "id": "mor_ultrarelativistic_limit",
+      "name": "ultrarelativisticLimit_c_to_zero"
+    },
+    {
+      "codomain": "obj_conformal_structure",
+      "domain": "obj_tf_linear_connection",
+      "evidence_claims": [
+        "weyl_theorem_equivalent"
+      ],
+      "id": "mor_tf_conn_compatible_conformal",
+      "name": "compatibilityWithConformal"
+    }
+  ],
+  "natural_transformations": [],
+  "objects": [
+    {
+      "evidence_claims": [
+        "def_weyl_metric"
+      ],
+      "id": "obj_pseudo_riem_metric",
+      "name": "PseudoRiemannianMetric"
+    },
+    {
+      "evidence_claims": [
+        "def_weyl_metric",
+        "weyl_theorem"
+      ],
+      "id": "obj_weyl_metric",
+      "name": "WeylMetric"
+    },
+    {
+      "evidence_claims": [
+        "weyl_theorem",
+        "weyl_theorem_equivalent"
+      ],
+      "id": "obj_conformal_structure",
+      "name": "ConformalStructure"
+    },
+    {
+      "evidence_claims": [
+        "weyl_theorem",
+        "weyl_theorem_equivalent"
+      ],
+      "id": "obj_projective_structure",
+      "name": "ProjectiveStructure"
+    },
+    {
+      "evidence_claims": [
+        "weyl_theorem_equivalent"
+      ],
+      "id": "obj_tf_linear_connection",
+      "name": "TorsionFreeLinearConnection"
+    },
+    {
+      "evidence_claims": [
+        "def_galilei_carroll_geometries"
+      ],
+      "id": "obj_lorentzian_geometry",
+      "name": "LorentzianGeometry"
+    },
+    {
+      "evidence_claims": [
+        "def_galilei_carroll_geometries",
+        "analogous_results_exist"
+      ],
+      "id": "obj_galilei_geometry",
+      "name": "GalileiGeometry"
+    },
+    {
+      "evidence_claims": [
+        "def_galilei_carroll_geometries",
+        "analogous_results_exist"
+      ],
+      "id": "obj_carroll_geometry",
+      "name": "CarrollGeometry"
+    }
+  ],
+  "unresolved_claims": [
+    "analogous_results_exist: the precise definitions of conformal structure for Galilei and Carroll geometries, the corresponding functors (e.g. GalileiConformalStructureOf, CarrollConformalStructureOf), and any natural transformations witnessing the analogy with the Lorentzian/Weyl construction are not yet specified by the claim and require further formalisation.",
+    "weyl_theorem: the uniqueness statement is consistent with an equivalence (or fully faithful reconstruction functor) between WeylMetric and the product category ConformalStructure x ProjectiveStructure, but the evidence does not specify a left/right adjoint pair, so no adjunction is asserted here.",
+    "weyl_theorem_equivalent: the uniqueness of a torsion-free connection compatible with a conformal structure given its projective structure suggests a section/retraction structure on functor_conn_to_projective restricted to conformally compatible connections, but the categorical form (adjunction vs equivalence) is not fixed by the claim."
+  ]
+}
+```
+
+### summary (`claude-haiku-4-5-20251001`) — status: `pass`
+
+```json
+{
+  "audience": "Mathematicians and theoretical physicists working on differential geometry, spacetime structure, foundations of gravity, and non-relativistic limits of relativistic theories.",
+  "key_contributions": [
+    "Establishes Weyl-type uniqueness theorem for Galilean geometry: a compatible connection is determined by its conformal and projective structures",
+    "Establishes Weyl-type uniqueness theorem for Carrollian geometry: a compatible connection is determined by its conformal and projective structures",
+    "Develops appropriate notions of conformal structure for non-relativistic and ultra-relativistic spacetimes",
+    "Demonstrates analogy between the classical Weyl theorem and its extensions to non-relativistic and ultra-relativistic limits"
+  ],
+  "plain_language_summary": "Hermann Weyl proved a foundational result in differential geometry: a Weyl metric (a generalization of the metric structure used in Einstein's relativity) is uniquely determined by two pieces of data—its conformal structure (which angles are preserved) and its projective structure (which geodesic curves are followed by freely-moving objects). Equivalently, the geometric information about how space and time are measured can be recovered entirely from knowing conformal and projective information.\n\nThis paper establishes analogous theorems for two non-Riemannian geometries that arise as limits of relativistic spacetime: Galilean geometry (the geometry underlying classical Newtonian mechanics) and Carrollian geometry (an ultra-relativistic limit where light speed is infinite rather than finite). The authors define suitable notions of conformal structure for these geometries and show that, like in Weyl's classical setting, a compatible geometric connection can be uniquely reconstructed from conformal and projective data.\n\nThese results provide a unified perspective on how geometric structure is encoded across relativistic, non-relativistic, and ultra-relativistic frameworks. They clarify the role of conformal and projective geometry in settings beyond Einstein's general relativity, with potential applications to the foundations of spacetime geometry and the mathematical structure underlying gravitational theories.",
+  "tldr": "Extends a classical theorem characterizing metrics via conformal and projective structures to non-relativistic and ultra-relativistic spacetime geometries."
+}
+```
+
+### technical_correctness (`claude-opus-4-7`) — status: `warn`
+
+```json
+{
+  "claims": [
+    {
+      "assessment": "supported",
+      "claim": "Weyl's classical theorem: a Weyl metric (generalisation of a pseudo-Riemannian metric) is uniquely determined by its conformal and projective structures.",
+      "evidence": "This is a well-known classical result of Weyl (1921), cited in the bibliography as entry [51] Weyl:1921. It is standard textbook material in conformal/projective differential geometry and has been reproven and extended in many references in the bibliography (e.g., Ehlers-Pirani-Schild 1972, Malament 2012).",
+      "id": "C1",
+      "location": "Abstract",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "supported",
+      "claim": "Equivalent reformulation: a torsion-free linear connection compatible with a pseudo-Riemannian conformal structure is uniquely determined by its projective structure.",
+      "evidence": "This equivalence is standard in the literature on conformal and projective structures (see e.g. Ehlers-Pirani-Schild and Malament 2012, both in the bibliography). The reformulation in terms of compatibility plus projective equivalence is well-established.",
+      "id": "C2",
+      "location": "Abstract",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Analogous Weyl-type theorems hold for suitably defined notions of conformal structure on Galilei geometry (non-relativistic limit).",
+      "evidence": "The reviewer was provided only the abstract, bibliography, and metadata; no body sections, theorem statements, or proofs were available in review_input.json (sections: []). Prior work by Curiel (2015, [17]), Dewar-Read (2020, [18]), and March (2025, [43]) does establish Weyl-type results for Newton-Cartan/Galilei structures, making the claim highly plausible, but the specific theorem(s) and their hypotheses in this paper cannot be verified from the abstract alone.",
+      "id": "C3",
+      "location": "Abstract (main thesis)",
+      "severity": "minor",
+      "suggested_fix": "Provide the body of the paper (definitions of Galilei conformal structure, statement of the analogue of Weyl's theorem, and proof) so that uniqueness, compatibility conditions, and any torsion assumptions can be audited line by line."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Analogous Weyl-type theorems hold for suitably defined notions of conformal structure on Carroll geometry (ultra-relativistic limit).",
+      "evidence": "As with C3, only the abstract is available. The Carroll case is plausible given recent work in the area (Duval et al. 2014b [24], Ciambelli et al. 2019 [16], Herfray 2022 [38], March-Read 2025 [44], Vigneron-Barzegar-Read 2025 [50], Bergshoeff et al. 2026 [9]), but the precise notion of conformal Carroll structure, the class of connections under consideration, and any genuine uniqueness/Weyl-type statement (versus a no-go or weakened version) cannot be checked without the proof.",
+      "id": "C4",
+      "location": "Abstract (main thesis)",
+      "severity": "minor",
+      "suggested_fix": "Include in the manuscript body: (i) explicit definition(s) of conformal Carroll structure used, (ii) the precise Weyl-type theorem with hypotheses (e.g., torsion-freeness, compatibility), and (iii) a proof or an indication of which projective data is or is not sufficient for uniqueness in the degenerate-metric setting."
+    },
+    {
+      "assessment": "supported",
+      "claim": "The Galilei and Carroll geometries are obtainable as 'non-relativistic' and 'ultra-relativistic' limits of Lorentzian geometry.",
+      "evidence": "This characterisation is standard and well-documented in the cited literature, e.g., Duval et al. 2014 [25], Bergshoeff et al. 2017 [8], Hartong et al. 2023 [37], March-Read 2025 [44]. The c->infinity (Galilei) and c->0 (Carroll) contraction limits of the Lorentzian/Poincare structure are textbook.",
+      "id": "C5",
+      "location": "Abstract",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "The notions of 'conformal structure' for Galilei and Carroll geometry used in the paper are 'suitably defined' to enable a Weyl-type theorem.",
+      "evidence": "The abstract concedes that the definitions must be tailored ('suitably defined'). Because the degenerate metric in Galilei (rank-1 temporal form plus spatial cometric) and Carroll (rank-(n-1) spatial metric plus null vector) settings does not admit a single conformal factor in the Lorentzian sense, the choice of conformal equivalence relation is nontrivial and central to the result. The specific definitions are not visible in the provided text, so their adequacy cannot be audited.",
+      "id": "C6",
+      "location": "Abstract (qualifier 'suitably defined notions of conformal structure')",
+      "severity": "minor",
+      "suggested_fix": "State the chosen conformal equivalence relations explicitly in the abstract or introduction (e.g., joint rescaling of temporal form and spatial cometric for Galilei; analogous rescaling for Carroll), and reference prior definitions (e.g., Duval-Horvathy [26], Duval et al. [24]) being adopted or modified."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "The paper presents original results (not just a survey), establishing Weyl-type uniqueness theorems in the Galilei and Carroll settings.",
+      "evidence": "Several of the cited works already address Weyl-type theorems in non-relativistic geometry: Curiel 2015 [17] for geometrised Newtonian gravity, March 2025 [43] explicitly titled 'A note on Newton-Cartan Weyl-type theorems', Dewar-Read 2020 [18] on conformal invariance of the Newtonian Weyl tensor, and Vigneron-Barzegar-Read 2025 [50] on affine connections for Galilean and Carrollian structures. Without the body of the paper it is impossible to verify how the present results differ from or extend these. The novelty claim implicit in the abstract is therefore not auditable here.",
+      "id": "C7",
+      "location": "Abstract (overall framing)",
+      "severity": "major",
+      "suggested_fix": "Include a clear statement in the introduction comparing the theorems proved here with Curiel 2015, March 2025, Dewar-Read 2020, and Vigneron-Barzegar-Read 2025, specifying the new generality (e.g., torsion classes, Carroll case, degenerate-metric handling) that is genuinely new."
+    },
+    {
+      "assessment": "unsupported",
+      "claim": "Mathematical correctness of the detailed derivations (definitions of conformal/projective structures, compatibility conditions, uniqueness proofs) cannot be assessed.",
+      "evidence": "The review_input.json contains an empty 'sections' array and no figures. Only the abstract, author list, field tag, and bibliography are available. Without theorem statements, definitions, lemmas, or proofs, a claim-by-claim technical audit is impossible. The Proof-as-Code Axiom additionally notes that for math-ph papers, formalisation in Lean/Coq/Agda/Isabelle of the main uniqueness results would substantially raise confidence in correctness; none is shipped with this submission.",
+      "id": "C8",
+      "location": "Body of paper (not provided)",
+      "severity": "major",
+      "suggested_fix": "Provide the full text (definitions, lemmas, proofs) for technical review. For headline uniqueness theorems, consider a companion Lean/Coq mechanisation under e.g. 'src/proofs/GalileiWeyl.lean' and 'src/proofs/CarrollWeyl.lean', or at minimum a symbolic-computation script (SageMath/xAct) under 'src/checks/weyl_uniqueness.ipynb' that verifies the key compatibility and rescaling identities in coordinates."
+    }
+  ],
+  "confidence": 0.35,
+  "overall_correctness": "mostly_sound"
+}
+```
+
+## Corrections
+
+<!-- corrections-section: rendered from corrections table; empty on first publish -->
+_No corrections have been recorded._
+
+## Bibliography
+
+1. Adlam.Linnemann.Read:2025: Constructive axiomatics for spacetime physics, 2025, doi:10.1093/9780198922391.001.0001 doi:[10.1093/9780198922391.001.0001](https://doi.org/10.1093/9780198922391.001.0001)
+2. Alishahiha.Davody.Vahedi:2009: On {AdS/CFT} of {Galilean} Conformal Field Theories, 2009, doi:10.1088/1126-6708/2009/08/022, arXiv:0903.3953 doi:[10.1088/1126-6708/2009/08/022](https://doi.org/10.1088/1126-6708/2009/08/022) arXiv:[0903.3953](https://arxiv.org/abs/0903.3953)
+3. Bagchi.Basu.Mehra:2014: Galilean Conformal Electrodynamics, 2014, doi:10.1007/JHEP11(2014)061, arXiv:1408.0810 doi:[10.1007/JHEP11(2014)061](https://doi.org/10.1007/JHEP11(2014)061) arXiv:[1408.0810](https://arxiv.org/abs/1408.0810)
+4. Bagchi.Chakrabortty.Mehra:2018: Galilean field theories and conformal structure, 2018, doi:10.1007/JHEP04(2018)144, arXiv:1712.05631 doi:[10.1007/JHEP04(2018)144](https://doi.org/10.1007/JHEP04(2018)144) arXiv:[1712.05631](https://arxiv.org/abs/1712.05631)
+5. Bagchi.Gopakumar:2009: Galilean conformal algebras and {AdS/CFT}, 2009, doi:10.1088/1126-6708/2009/07/037, arXiv:0902.1385 doi:[10.1088/1126-6708/2009/07/037](https://doi.org/10.1088/1126-6708/2009/07/037) arXiv:[0902.1385](https://arxiv.org/abs/0902.1385)
+6. Bagchi.Mandal:2009: On representations and correlation functions of {Galilean} conformal algebras, 2009, doi:10.1016/j.physletb.2009.04.030, arXiv:0903.4524 doi:[10.1016/j.physletb.2009.04.030](https://doi.org/10.1016/j.physletb.2009.04.030) arXiv:[0903.4524](https://arxiv.org/abs/0903.4524)
+7. Bergshoeff.EtAl:2014: Dynamics of {Carroll} particles, 2014, doi:10.1088/0264-9381/31/20/205009, arXiv:1405.2264 doi:[10.1088/0264-9381/31/20/205009](https://doi.org/10.1088/0264-9381/31/20/205009) arXiv:[1405.2264](https://arxiv.org/abs/1405.2264)
+8. Bergshoeff.EtAl:2017: Carroll versus {Galilei} gravity, 2017, doi:10.1007/JHEP03(2017)165, arXiv:1701.06156 doi:[10.1007/JHEP03(2017)165](https://doi.org/10.1007/JHEP03(2017)165) arXiv:[1701.06156](https://arxiv.org/abs/1701.06156)
+9. Bergshoeff.EtAl:2026: Applied Conformal {Carroll} Geometry, 2026, doi:10.1007/978-3-032-03921-7_33 doi:[10.1007/978-3-032-03921-7_33](https://doi.org/10.1007/978-3-032-03921-7_33)
+10. Cartan:1923: Sur les variétés à connexion affine et la théorie de la relativité généralisée (première partie), 1923, doi:10.24033/asens.751 doi:[10.24033/asens.751](https://doi.org/10.24033/asens.751)
+11. Cartan:1924: Sur les variétés à connexion affine et la théorie de la relativité généralisée (première partie) ({Suite}), 1924, doi:10.24033/asens.753 doi:[10.24033/asens.753](https://doi.org/10.24033/asens.753)
+12. Cartan:1986: On Manifolds with an Affine Connection and the Theory of General Relativity, 1986
+13. Chandrasekaran.EtAl:2023: An algebra of observables for {de Sitter} space, 2023, doi:10.1007/JHEP02(2023)082, arXiv:2206.10780 doi:[10.1007/JHEP02(2023)082](https://doi.org/10.1007/JHEP02(2023)082) arXiv:[2206.10780](https://arxiv.org/abs/2206.10780)
+14. Chen.Liu:2023: The shadow formalism of {Galilean CFT\textsubscript{2}}, 2023, doi:10.1007/JHEP05(2023)224, arXiv:2203.10490 doi:[10.1007/JHEP05(2023)224](https://doi.org/10.1007/JHEP05(2023)224) arXiv:[2203.10490](https://arxiv.org/abs/2203.10490)
+15. Chen.Sun.Zheng:2024: Quantization of {Carrollian} conformal scalar theories, 2024, doi:10.1103/PhysRevD.110.125010, arXiv:2406.17451 doi:[10.1103/PhysRevD.110.125010](https://doi.org/10.1103/PhysRevD.110.125010) arXiv:[2406.17451](https://arxiv.org/abs/2406.17451)
+16. Ciambelli.EtAl:2019: Carroll structures, null geometry, and conformal isometries, 2019, doi:10.1103/PhysRevD.100.046010, arXiv:1905.02221 doi:[10.1103/PhysRevD.100.046010](https://doi.org/10.1103/PhysRevD.100.046010) arXiv:[1905.02221](https://arxiv.org/abs/1905.02221)
+17. Curiel:2015: A {Weyl}-Type Theorem for Geometrized {Newtonian} Gravity, 2015, arXiv:1510.02089 arXiv:[1510.02089](https://arxiv.org/abs/1510.02089)
+18. Dewar.Read:2020: Conformal Invariance of the {Newtonian} {Weyl} Tensor, 2020, doi:10.1007/s10701-020-00386-w, arXiv:2009.09733 doi:[10.1007/s10701-020-00386-w](https://doi.org/10.1007/s10701-020-00386-w) arXiv:[2009.09733](https://arxiv.org/abs/2009.09733)
+19. Dewar.Weatherall:2018: On Gravitational Energy in {Newtonian} Theories, 2018, doi:10.1007/s10701-018-0151-6, arXiv:1707.00563 doi:[10.1007/s10701-018-0151-6](https://doi.org/10.1007/s10701-018-0151-6) arXiv:[1707.00563](https://arxiv.org/abs/1707.00563)
+20. Dombrowski.Horneffer:1964: Die Differentialgeometrie des Galileischen Relativitätsprinzips, 1964, doi:10.1007/BF01110404 doi:[10.1007/BF01110404](https://doi.org/10.1007/BF01110404)
+21. Dunajski.Gundry:2016: Non-Relativistic Twistor Theory and {Newton--Cartan} Geometry, 2016, doi:10.1007/s00220-015-2557-8, arXiv:1502.03034 doi:[10.1007/s00220-015-2557-8](https://doi.org/10.1007/s00220-015-2557-8) arXiv:[1502.03034](https://arxiv.org/abs/1502.03034)
+22. Dunajski.Penrose:2023: Quantum state reduction, and {Newtonian} twistor theory, 2023, doi:10.1016/j.aop.2023.169243, arXiv:2203.08567 doi:[10.1016/j.aop.2023.169243](https://doi.org/10.1016/j.aop.2023.169243) arXiv:[2203.08567](https://arxiv.org/abs/2203.08567)
+23. Dutta:2024: Stress tensors of 3d {Carroll CFTs}, 2024, doi:10.1016/j.physletb.2024.138672, arXiv:2212.11002 doi:[10.1016/j.physletb.2024.138672](https://doi.org/10.1016/j.physletb.2024.138672) arXiv:[2212.11002](https://arxiv.org/abs/2212.11002)
+24. Duval.EtAl:2014b: Conformal {Carroll} groups, 2014, doi:10.1088/1751-8113/47/33/335204, arXiv:1403.4213 doi:[10.1088/1751-8113/47/33/335204](https://doi.org/10.1088/1751-8113/47/33/335204) arXiv:[1403.4213](https://arxiv.org/abs/1403.4213)
+25. Duval.EtAl:2014: Carroll versus {Newton} and {Galilei}: two dual non-{Einstein\-ian} concepts of time, 2014, doi:10.1088/0264-9381/31/8/085016, arXiv:1402.0657 doi:[10.1088/0264-9381/31/8/085016](https://doi.org/10.1088/0264-9381/31/8/085016) arXiv:[1402.0657](https://arxiv.org/abs/1402.0657)
+26. Duval.Horvathy:2011: Conformal {Galilei} groups, {Veronese} curves, and {Newton}--{Hooke} spacetimes, 2011, doi:10.1088/1751-8113/44/33/335203, arXiv:1104.1502 doi:[10.1088/1751-8113/44/33/335203](https://doi.org/10.1088/1751-8113/44/33/335203) arXiv:[1104.1502](https://arxiv.org/abs/1104.1502)
+27. Ehlers:1981a: Über den Newtonschen Grenzwert der Einsteinschen Gravitationstheorie, 1981
+28. Ehlers:1981b: On the {Newtonian} limit of {Einstein's} theory of gravitation, 2019, doi:10.1007/s10714-019-2624-0 doi:[10.1007/s10714-019-2624-0](https://doi.org/10.1007/s10714-019-2624-0)
+29. Ehlers.Buchert:2009: On the {Newtonian} Limit of the {Weyl} Tensor, 2009, doi:10.1007/s10714-009-0855-1, arXiv:0907.2645 doi:[10.1007/s10714-009-0855-1](https://doi.org/10.1007/s10714-009-0855-1) arXiv:[0907.2645](https://arxiv.org/abs/0907.2645)
+30. EPS:1972: The geometry of free fall and light propagation, 1972
+31. EPS:2012: The geometry of free fall and light propagation, 2012, doi:10.1007/s10714-012-1353-4 doi:[10.1007/s10714-012-1353-4](https://doi.org/10.1007/s10714-012-1353-4)
+32. Ewen.Schmidt:1989: Geometry of free fall and simultaneity, 1989, doi:10.1063/1.528279 doi:[10.1063/1.528279](https://doi.org/10.1063/1.528279)
+33. Friedrichs:1928: Eine invariante Formulierung des Newtonschen Gravitationsgesetzes und des Grenzüberganges vom Einsteinschen zum Newtonschen Gesetz, 1928, doi:10.1007/BF01451608 doi:[10.1007/BF01451608](https://doi.org/10.1007/BF01451608)
+34. Gupta.Suryanarayana:2021: Constructing {Carrollian CFTs}, 2021, doi:10.1007/JHEP03(2021)194, arXiv:2001.03056 doi:[10.1007/JHEP03(2021)194](https://doi.org/10.1007/JHEP03(2021)194) arXiv:[2001.03056](https://arxiv.org/abs/2001.03056)
+35. Hagen:1972: Scale and Conformal Transformations in {Galilean}-Covariant Field Theory, 1972, doi:10.1103/PhysRevD.5.377 doi:[10.1103/PhysRevD.5.377](https://doi.org/10.1103/PhysRevD.5.377)
+36. Hansen.EtAl:2019: Gravity between {Newton} and {Einstein}, 2019, doi:10.1142/S0218271819440103, arXiv:1904.05706 doi:[10.1142/S0218271819440103](https://doi.org/10.1142/S0218271819440103) arXiv:[1904.05706](https://arxiv.org/abs/1904.05706)
+37. Hartong.EtAl:2023: Review on non-relativistic gravity, 2023, doi:10.3389/fphy.2023.1116888, arXiv:2212.11309 doi:[10.3389/fphy.2023.1116888](https://doi.org/10.3389/fphy.2023.1116888) arXiv:[2212.11309](https://arxiv.org/abs/2212.11309)
+38. Herfray:2022: Carrollian manifolds and null infinity: a view from Cartan geometry, 2022, doi:10.1088/1361-6382/ac635f, arXiv:2112.09048 doi:[10.1088/1361-6382/ac635f](https://doi.org/10.1088/1361-6382/ac635f) arXiv:[2112.09048](https://arxiv.org/abs/2112.09048)
+39. Kuenzle:1972: Galilei and {Lorentz} structures on space-time : Comparison of the corresponding geometry and physics, 1972
+40. Kuenzle:1976: Covariant {Newtonian} Limit of {Lorentz} Space-Times, 1976, doi:10.1007/BF00766139 doi:[10.1007/BF00766139](https://doi.org/10.1007/BF00766139)
+41. Malament:2012: Topics in the Foundations of General Relativity and Newtonian Gravitation Theory, 2012
+42. March:2023: Non-relativistic twistor theory: {Newtonian} limits and gravitational collapse, 2023
+43. March:2025: A note on Newton-Cartan Weyl-type theorems, 2025
+44. March.Read:2025: A primer on {Carroll} gravity, 2025, doi:10.1088/1361-6382/adaf03, arXiv:2409.12200 doi:[10.1088/1361-6382/adaf03](https://doi.org/10.1088/1361-6382/adaf03) arXiv:[2409.12200](https://arxiv.org/abs/2409.12200)
+45. Reichenbach:1969: Axiomatization of the Theory of Relativity, 1969
+46. Schwartz:2025: The classification of general affine connections in {Newton--Cartan} geometry: Towards metric-affine {Newton--Cartan} gravity, 2025, doi:10.1088/1361-6382/ad922f, arXiv:2403.15460 doi:[10.1088/1361-6382/ad922f](https://doi.org/10.1088/1361-6382/ad922f) arXiv:[2403.15460](https://arxiv.org/abs/2403.15460)
+47. Schwartz:NC_gravity: {Newton--Cartan} Gravity: A Modern Introduction to Geometrised Newtonian Gravity, 2026, doi:10.1007/978-3-032-03967-5 doi:[10.1007/978-3-032-03967-5](https://doi.org/10.1007/978-3-032-03967-5)
+48. Trautman:1963: Sur la théorie newtonienne de la gravitation, 1963
+49. Trautman:1965: Foundations and current problems of general relativity, 1965
+50. Vigneron.Barzegar.Read:2025: Affine connections for {Galilean} and {Carrollian} structures: a unified perspective, 2025, doi:10.1088/1361-6382/adfc1e, arXiv:2506.03936 doi:[10.1088/1361-6382/adfc1e](https://doi.org/10.1088/1361-6382/adfc1e) arXiv:[2506.03936](https://arxiv.org/abs/2506.03936)
+51. Weyl:1921: Zur {Infinitesimalgeometrie}: {Einordnung} der projektiven und der konformen {Auffassung}, 1921
+52. Witten:2022: Gravity and the crossed product, 2022, doi:10.1007/JHEP10(2022)008, arXiv:2112.12828 doi:[10.1007/JHEP10(2022)008](https://doi.org/10.1007/JHEP10(2022)008) arXiv:[2112.12828](https://arxiv.org/abs/2112.12828)
+53. Wolf.Sanchioni.Read:2024: Underdetermination in Classic and Modern Tests of General Relativity, 2024, doi:10.1007/s13194-024-00617-1, arXiv:2307.10074 doi:[10.1007/s13194-024-00617-1](https://doi.org/10.1007/s13194-024-00617-1) arXiv:[2307.10074](https://arxiv.org/abs/2307.10074)
+
