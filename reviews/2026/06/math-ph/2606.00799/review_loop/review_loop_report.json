@@ -1,0 +1,210 @@
+{
+  "artifact_paths": {
+    "citation_validation": "review_loop/citation_validation_report.json",
+    "claims": "review_loop/claims.json",
+    "haskell": "review_loop/haskell/results.json",
+    "knowledge_graph": "review_loop/knowledge_graph.json",
+    "lean": "review_loop/lean/results.json",
+    "policy_gate": "review_loop/policy_gate.json",
+    "pr_fixes": "review_loop/pr_fixes.json",
+    "semantic_model": "review_loop/semantic_model.json"
+  },
+  "blocking_issues": [
+    "Meta-review recommendation is `major_revision`, not `accept`.",
+    "Haskell semantic model did not compile cleanly.",
+    "PR fixer did not produce compile-reviewed corrected artifacts."
+  ],
+  "dag_type": "review-loop",
+  "deterministic_status": "fail",
+  "fix_attempts": {
+    "haskell": [
+      {
+        "attempt": 1,
+        "author_role": "haskell_semantic_author",
+        "codex_review": {
+          "confidence": 0.86,
+          "issues": [
+            {
+              "line": 48,
+              "message": "The claimText fields do not preserve the supplied paper-derived claim texts from review_input.json; they replace the canonical evidence with short labels such as \"Citation hygiene assessment\", so the semantic model does not faithfully represent the claims it was asked to model.",
+              "severity": "blocking"
+            },
+            {
+              "line": 134,
+              "message": "publisherReadyLowerBound evaluates to True for this input because it only rejects Fail statuses, even though the represented review includes warning statuses, a major_revision recommendation, unverifiable headline theorems, and a critical reproducibility gap. That makes the readiness signal misleading for the supplied review evidence.",
+              "severity": "warning"
+            }
+          ],
+          "status": "fail",
+          "summary": "SemanticModel.hs compiles, but it loses the canonical claim text and exposes a publisher-readiness boolean that is inconsistent with the review evidence."
+        },
+        "compile": {
+          "command": [
+            "ghc",
+            "-fno-code",
+            "SemanticModel.hs"
+          ],
+          "duration_ms": 1958,
+          "exit_code": 0,
+          "status": "pass",
+          "stderr": "",
+          "stdout": "Loaded package environment from /Users/mlong/.ghc/aarch64-darwin-9.14.1/environments/default\n[1 of 1] Compiling SemanticModel    ( SemanticModel.hs, nothing )\n"
+        },
+        "final_path": ".agenthero/artifacts/grokrxiv/reviews/76665eba-7670-47ef-b69d-42a0af86eba7/review_loop/haskell/SemanticModel.hs",
+        "generation": {
+          "code": "module SemanticModel where\n\n-- | Review roles emitted by the GrokRxiv specialist pipeline.\ndata ReviewRole\n  = Citation\n  | MetaReviewer\n  | Novelty\n  | Summary\n  | TechnicalCorrectness\n  deriving (Eq, Show)\n\n-- | Verifier statuses attached to each emitted claim.\ndata VerifierStatus\n  = Pass\n  | Warn\n  | Fail\n  deriving (Eq, Show)\n\n-- | Paper-derived claim record.\ndata Claim = Claim\n  { claimId     :: String\n  , claimRole   :: ReviewRole\n  , claimText   :: String\n  , claimStatus :: VerifierStatus\n  } deriving (Eq, Show)\n\n-- | Stable review identifier from the canonical input.\nreviewId :: String\nreviewId = \"76665eba-7670-47ef-b69d-42a0af86eba7\"\n\n-- | Total number of claims represented in the semantic model.\nclaimCount :: Int\nclaimCount = 43\n\n-- | Category histogram exactly matching the supplied semantic_model block.\ncategoryCounts :: [(ReviewRole, Int)]\ncategoryCounts =\n  [ (Citation,             12)\n  , (MetaReviewer,         15)\n  , (Novelty,               9)\n  , (Summary,               6)\n  , (TechnicalCorrectness,  1)\n  ]\n\n-- | Twelve claims emitted by the citation specialist (all verifier_status = warn).\ncitationClaims :: [Claim]\ncitationClaims =\n  [ Claim \"claim_1\"  Citation \"Citation hygiene assessment\"                Warn\n  , Claim \"claim_2\"  Citation \"Weyl 1921 historical source\"                Warn\n  , Claim \"claim_3\"  Citation \"Co-authored by James Read\"                  Warn\n  , Claim \"claim_4\"  Citation \"Philosophical and axiomatic context\"        Warn\n  , Claim \"claim_5\"  Citation \"Modern Carrollian physics contribution\"     Warn\n  , Claim \"claim_6\"  Citation \"Newton-Cartan geometry foundation\"          Warn\n  , Claim \"claim_7\"  Citation \"Galilean Weyl-type theorem reference\"       Warn\n  , Claim \"claim_8\"  Citation \"Galilei-Carroll duality reference\"          Warn\n  , Claim \"claim_9\"  Citation \"EPS framework reference\"                    Warn\n  , Claim \"claim_10\" Citation \"Constructive spacetime geometry reference\"  Warn\n  , Claim \"claim_11\" Citation \"Primary author self-reference\"              Warn\n  , Claim \"claim_12\" Citation \"Connection classification background\"       Warn\n  ]\n\n-- | Fifteen meta-reviewer claims (all verifier_status = pass).\nmetaReviewerClaims :: [Claim]\nmetaReviewerClaims =\n  [ Claim \"claim_13\" MetaReviewer \"Significant extension of Weyl's theorem\" Pass\n  , Claim \"claim_14\" MetaReviewer \"major_revision\"                          Pass\n  , Claim \"claim_15\" MetaReviewer \"Unification across c-limits\"             Pass\n  , Claim \"claim_16\" MetaReviewer \"Cumulative lineage and progress\"         Pass\n  , Claim \"claim_17\" MetaReviewer \"Bibliography quality\"                    Pass\n  , Claim \"claim_18\" MetaReviewer \"Connection-level reformulation\"          Pass\n  , Claim \"claim_19\" MetaReviewer \"Missing conformal-structure definitions\" Pass\n  , Claim \"claim_20\" MetaReviewer \"Headline theorems unverifiable\"          Pass\n  , Claim \"claim_21\" MetaReviewer \"No formal proof artifact provided\"       Pass\n  , Claim \"claim_22\" MetaReviewer \"Missing Carrollian references\"           Pass\n  , Claim \"claim_23\" MetaReviewer \"Galilei conformal structure question\"    Pass\n  , Claim \"claim_24\" MetaReviewer \"Carroll rank-degeneracy question\"        Pass\n  , Claim \"claim_25\" MetaReviewer \"Torsion-free necessity question\"         Pass\n  , Claim \"claim_26\" MetaReviewer \"Proof-assistant formalisation request\"   Pass\n  , Claim \"claim_27\" MetaReviewer \"Failure conditions question\"             Pass\n  ]\n\n-- | Nine novelty claims (all verifier_status = pass).\nnoveltyClaims :: [Claim]\nnoveltyClaims =\n  [ Claim \"claim_28\" Novelty \"significant\"                              Pass\n  , Claim \"claim_29\" Novelty \"prior_art\"                                Pass\n  , Claim \"claim_30\" Novelty \"Foundational pseudo-Riemannian result\"    Pass\n  , Claim \"claim_31\" Novelty \"prior_art\"                                Pass\n  , Claim \"claim_32\" Novelty \"Newtonian Weyl-type extension\"            Pass\n  , Claim \"claim_33\" Novelty \"builds_on\"                                Pass\n  , Claim \"claim_34\" Novelty \"Newton-Cartan recent developments\"        Pass\n  , Claim \"claim_35\" Novelty \"builds_on\"                                Pass\n  , Claim \"claim_36\" Novelty \"Unified affine connection toolkit\"        Pass\n  ]\n\n-- | Six summary claims (all verifier_status = pass).\nsummaryClaims :: [Claim]\nsummaryClaims =\n  [ Claim \"claim_37\" Summary \"Extends Weyl to non-Lorentzian geometries\" Pass\n  , Claim \"claim_38\" Summary \"Plain-language description of Weyl extension\" Pass\n  , Claim \"claim_39\" Summary \"Extension to Galilei geometry\"              Pass\n  , Claim \"claim_40\" Summary \"Extension to Carroll geometry\"              Pass\n  , Claim \"claim_41\" Summary \"Connection and projective formulations\"    Pass\n  , Claim \"claim_42\" Summary \"Foundational results for non-Lorentzian limits\" Pass\n  ]\n\n-- | One technical-correctness claim (verifier_status = warn).\ntechnicalCorrectnessClaims :: [Claim]\ntechnicalCorrectnessClaims =\n  [ Claim \"claim_43\" TechnicalCorrectness \"questionable\" Warn\n  ]\n\n-- | All paper-derived claims in canonical ordering.\nallClaims :: [Claim]\nallClaims =\n     citationClaims\n  ++ metaReviewerClaims\n  ++ noveltyClaims\n  ++ summaryClaims\n  ++ technicalCorrectnessClaims\n\n-- | Number of claims for a given review role, derived from 'allClaims'.\nclaimsForRole :: ReviewRole -> [Claim]\nclaimsForRole r = filter (\\c -> claimRole c == r) allClaims\n\n-- | Lower-bound publisher-readiness check.\n--\n-- The check is intentionally conservative: it returns 'True' only when the\n-- represented claim set is internally consistent (cardinality matches\n-- 'claimCount', no failure-status claims, every claim carries a non-empty id\n-- and body, and every declared category count matches the materialised\n-- claims).  It does NOT assert that the paper itself is publisher-ready.\npublisherReadyLowerBound :: Bool\npublisherReadyLowerBound =\n     length allClaims == claimCount\n  && all wellFormedClaim allClaims\n  && not (any failed allClaims)\n  && all matchesHistogram categoryCounts\n  where\n    wellFormedClaim c =\n      not (null (claimId c)) && not (null (claimText c))\n    failed c = claimStatus c == Fail\n    matchesHistogram (role, expected) =\n      length (claimsForRole role) == expected\n",
+          "confidence": 0.9,
+          "filename": "SemanticModel.hs",
+          "language": "haskell",
+          "notes": [
+            "Module SemanticModel defines pure Haskell types ReviewRole, VerifierStatus and Claim with no external imports.",
+            "claimCount :: Int is set to 43 to match the canonical semantic_model.claim_count from review_input.json.",
+            "categoryCounts mirrors the histogram in review_input.json (citation 12, meta_reviewer 15, novelty 9, summary 6, technical_correctness 1).",
+            "All 43 claims from base.claims.claims are represented with their id, role and verifier_status; long claim texts are summarised to keep the source self-contained while preserving identifiers.",
+            "publisherReadyLowerBound is a conservative structural check: cardinality, per-role histogram, well-formed ids/texts, and absence of Fail-status claims; it never asserts true publisher-readiness, only a lower bound.",
+            "Compiles with ghc -fno-code SemanticModel.hs (no language extensions, no imports, pure Haskell 2010)."
+          ]
+        },
+        "reviewer_role": "haskell_code_reviewer",
+        "source_path": ".agenthero/artifacts/grokrxiv/reviews/76665eba-7670-47ef-b69d-42a0af86eba7/review_loop/haskell/round_1/SemanticModel.hs",
+        "status": "fail"
+      },
+      {
+        "attempt": 2,
+        "author_error": "`claude` exited with Some(1) for role haskell_code_fixer: ",
+        "author_role": "haskell_code_fixer",
+        "status": "fail"
+      }
+    ],
+    "lean": [
+      {
+        "attempt": 1,
+        "author_role": "lean_proof_author",
+        "codex_review": {
+          "confidence": 0.98,
+          "issues": [
+            {
+              "line": 15,
+              "message": "The generated source includes the forbidden placeholder tokens in a comment, which triggers the preflight check reported in compile.stderr before Lean verification can run. Rephrase this comment to avoid spelling those terms anywhere in the file.",
+              "severity": "blocking"
+            }
+          ],
+          "status": "fail",
+          "summary": "GrokRxiv/Proofs.lean does not pass the configured verification path because the generated code contains forbidden terms in its header comment."
+        },
+        "compile": {
+          "command": [
+            "lean",
+            "GrokRxiv/Proofs.lean"
+          ],
+          "duration_ms": 0,
+          "exit_code": null,
+          "status": "fail",
+          "stderr": "generated code contains forbidden terms: sorry, admit, axiom",
+          "stdout": ""
+        },
+        "final_path": ".agenthero/artifacts/grokrxiv/reviews/76665eba-7670-47ef-b69d-42a0af86eba7/review_loop/lean/GrokRxiv/Proofs.lean",
+        "generation": {
+          "code": "/-\n  GrokRxiv/Proofs.lean\n\n  Lean proofs discharging the proof obligations attached to the GrokRxiv\n  review-loop semantic model.\n\n  Review ID : 76665eba-7670-47ef-b69d-42a0af86eba7\n  Source    : review_loop/semantic_model.json\n  Companion : review_loop/haskell/SemanticModel.hs\n\n  Proof obligations (from review_input.json):\n    * claim_count_nonnegative  (blocking)  --  0 ≤ 43\n\n  This file uses only core Lean 4 (no Mathlib imports) and contains no\n  `sorry`, `admit`, or `axiom` declarations.\n-/\n\nnamespace GrokRxiv\n\n/-- Review roles emitted by the GrokRxiv specialist pipeline.\n    Mirrors the `ReviewRole` ADT in `SemanticModel.hs`. -/\ninductive ReviewRole\n  | citation\n  | metaReviewer\n  | novelty\n  | summary\n  | technicalCorrectness\n  deriving DecidableEq\n\n/-- Verifier statuses attached to each emitted claim.\n    Mirrors the `VerifierStatus` ADT in `SemanticModel.hs`. -/\ninductive VerifierStatus\n  | pass\n  | warn\n  | fail\n  deriving DecidableEq\n\n/-- A paper-derived claim record, in 1-1 correspondence with the Haskell\n    `Claim` record used by the semantic model. -/\nstructure Claim where\n  id     : String\n  role   : ReviewRole\n  text   : String\n  status : VerifierStatus\n\n/-- Stable review identifier from the canonical input. -/\ndef reviewId : String := \"76665eba-7670-47ef-b69d-42a0af86eba7\"\n\n/-- Total number of claims represented in the semantic model.\n    Matches `semantic_model.claim_count` in `review_input.json`. -/\ndef claimCount : Nat := 43\n\n/-- Category histogram exactly matching the supplied `semantic_model.categories`\n    block: citation 12, meta_reviewer 15, novelty 9, summary 6,\n    technical_correctness 1. -/\ndef categoryCounts : List (ReviewRole × Nat) :=\n  [ (ReviewRole.citation,             12),\n    (ReviewRole.metaReviewer,         15),\n    (ReviewRole.novelty,               9),\n    (ReviewRole.summary,               6),\n    (ReviewRole.technicalCorrectness,  1) ]\n\n/-- Sum of every per-role count in the declared histogram. -/\ndef categoryTotal : Nat :=\n  (categoryCounts.map Prod.snd).foldl (· + ·) 0\n\n/-- Internal-consistency lemma: the per-role histogram sums to the declared\n    claim count.  Closed-form numeric equality, discharged by `decide`. -/\ntheorem categoryTotal_eq_claimCount : categoryTotal = claimCount := by\n  decide\n\n/-!\n## Blocking obligation: `claim_count_nonnegative`\n\n  Statement (from `review_loop/semantic_model.json`):\n      `0 <= 43`\n\n  In Lean's `Nat`, every natural number is bounded below by zero, so the\n  obligation is discharged by `Nat.zero_le` applied to `claimCount`.\n-/\n\n/-- Blocking proof obligation `claim_count_nonnegative`. -/\ntheorem claim_count_nonnegative : 0 ≤ claimCount :=\n  Nat.zero_le claimCount\n\n/-- The same obligation phrased with the literal `43` that appears in the\n    source JSON, included so the discharged statement is textually identical\n    to the obligation string `0 <= 43`. -/\ntheorem claim_count_nonnegative_literal : (0 : Nat) ≤ 43 :=\n  Nat.zero_le 43\n\nend GrokRxiv\n",
+          "confidence": 0.82,
+          "filename": "GrokRxiv/Proofs.lean",
+          "language": "lean",
+          "notes": [
+            "File targets core Lean 4 only: no Mathlib or external imports, so `lean GrokRxiv/Proofs.lean` succeeds against a stock toolchain.",
+            "Contains no `sorry`, `admit`, or `axiom` declarations, as required by review_input.json.",
+            "Mirrors the Haskell semantic model: `ReviewRole`, `VerifierStatus`, and `Claim` correspond to the ADTs in `SemanticModel.hs`, and `claimCount`, `categoryCounts`, `reviewId` reproduce the canonical values from `review_input.json`.",
+            "Blocking obligation `claim_count_nonnegative` (`0 ≤ 43`) is discharged twice: once symbolically via `Nat.zero_le claimCount`, and once with the literal `43` to match the obligation string verbatim.",
+            "Internal-consistency lemma `categoryTotal_eq_claimCount` checks that the per-role histogram (12 + 15 + 9 + 6 + 1) sums to the declared `claimCount = 43`, discharged by `decide` over closed `Nat` terms.",
+            "`deriving DecidableEq` on the two enumerations gives downstream proofs the equality decidability they need without pulling in Mathlib."
+          ]
+        },
+        "reviewer_role": "lean_code_reviewer",
+        "source_path": ".agenthero/artifacts/grokrxiv/reviews/76665eba-7670-47ef-b69d-42a0af86eba7/review_loop/lean/round_1/GrokRxiv/Proofs.lean",
+        "status": "fail"
+      },
+      {
+        "attempt": 2,
+        "author_role": "lean_code_fixer",
+        "codex_review": {
+          "confidence": 0.94,
+          "issues": [],
+          "status": "pass",
+          "summary": "GrokRxiv/Proofs.lean satisfies the supplied Lean proof obligation, avoids forbidden proof placeholders, and the recorded compile command passed with exit code 0."
+        },
+        "compile": {
+          "command": [
+            "lean",
+            "GrokRxiv/Proofs.lean"
+          ],
+          "duration_ms": 2655,
+          "exit_code": 0,
+          "status": "pass",
+          "stderr": "",
+          "stdout": ""
+        },
+        "final_path": ".agenthero/artifacts/grokrxiv/reviews/76665eba-7670-47ef-b69d-42a0af86eba7/review_loop/lean/GrokRxiv/Proofs.lean",
+        "generation": {
+          "code": "/-\n  GrokRxiv/Proofs.lean\n\n  Lean proofs discharging the proof obligations attached to the GrokRxiv\n  review-loop semantic model.\n\n  Review ID : 76665eba-7670-47ef-b69d-42a0af86eba7\n  Source    : review_loop/semantic_model.json\n  Companion : review_loop/haskell/SemanticModel.hs\n\n  Proof obligations (from review_input.json):\n    * claim_count_nonnegative  (blocking)  --  0 ≤ 43\n\n  This file uses only core Lean 4 (no Mathlib imports) and every theorem is\n  closed by an explicit proof term or by `decide`.\n-/\n\nnamespace GrokRxiv\n\n/-- Review roles emitted by the GrokRxiv specialist pipeline.\n    Mirrors the `ReviewRole` ADT in `SemanticModel.hs`. -/\ninductive ReviewRole\n  | citation\n  | metaReviewer\n  | novelty\n  | summary\n  | technicalCorrectness\n  deriving DecidableEq\n\n/-- Verifier statuses attached to each emitted claim.\n    Mirrors the `VerifierStatus` ADT in `SemanticModel.hs`. -/\ninductive VerifierStatus\n  | pass\n  | warn\n  | fail\n  deriving DecidableEq\n\n/-- A paper-derived claim record, in 1-1 correspondence with the Haskell\n    `Claim` record used by the semantic model. -/\nstructure Claim where\n  id     : String\n  role   : ReviewRole\n  text   : String\n  status : VerifierStatus\n\n/-- Stable review identifier from the canonical input. -/\ndef reviewId : String := \"76665eba-7670-47ef-b69d-42a0af86eba7\"\n\n/-- Total number of claims represented in the semantic model.\n    Matches `semantic_model.claim_count` in `review_input.json`. -/\ndef claimCount : Nat := 43\n\n/-- Category histogram exactly matching the supplied `semantic_model.categories`\n    block: citation 12, meta_reviewer 15, novelty 9, summary 6,\n    technical_correctness 1. -/\ndef categoryCounts : List (ReviewRole × Nat) :=\n  [ (ReviewRole.citation,             12),\n    (ReviewRole.metaReviewer,         15),\n    (ReviewRole.novelty,               9),\n    (ReviewRole.summary,               6),\n    (ReviewRole.technicalCorrectness,  1) ]\n\n/-- Sum of every per-role count in the declared histogram. -/\ndef categoryTotal : Nat :=\n  (categoryCounts.map Prod.snd).foldl (· + ·) 0\n\n/-- Internal-consistency lemma: the per-role histogram sums to the declared\n    claim count.  Closed-form numeric equality, discharged by `decide`. -/\ntheorem categoryTotal_eq_claimCount : categoryTotal = claimCount := by\n  decide\n\n/-!\n## Blocking obligation: `claim_count_nonnegative`\n\n  Statement (from `review_loop/semantic_model.json`):\n      `0 <= 43`\n\n  In Lean's `Nat`, every natural number is bounded below by zero, so the\n  obligation is discharged by `Nat.zero_le` applied to `claimCount`.\n-/\n\n/-- Blocking proof obligation `claim_count_nonnegative`. -/\ntheorem claim_count_nonnegative : 0 ≤ claimCount :=\n  Nat.zero_le claimCount\n\n/-- The same obligation phrased with the literal `43` that appears in the\n    source JSON, included so the discharged statement is textually identical\n    to the obligation string `0 <= 43`. -/\ntheorem claim_count_nonnegative_literal : (0 : Nat) ≤ 43 :=\n  Nat.zero_le 43\n\nend GrokRxiv\n",
+          "confidence": 0.9,
+          "filename": "GrokRxiv/Proofs.lean",
+          "language": "lean",
+          "notes": [
+            "Removed the forbidden token list from the header comment so the preflight check no longer trips on the words it scans for.",
+            "No `sorry`/`admit`/`axiom`-class tokens appear anywhere in the file; every theorem is closed by an explicit proof term or by `decide`.",
+            "Structure and proofs are identical to the prior attempt: the blocking obligation `claim_count_nonnegative` (0 ≤ 43) is discharged via `Nat.zero_le`.",
+            "File targets core Lean 4 with no external imports and lives under namespace `GrokRxiv`."
+          ]
+        },
+        "reviewer_role": "lean_code_reviewer",
+        "source_path": ".agenthero/artifacts/grokrxiv/reviews/76665eba-7670-47ef-b69d-42a0af86eba7/review_loop/lean/round_2/GrokRxiv/Proofs.lean",
+        "status": "pass"
+      }
+    ],
+    "pr_review": [
+      {
+        "attempt": 1,
+        "author_error": "CliRunner timed out after 360s for role pr_artifact_fixer",
+        "author_role": "pr_artifact_fixer",
+        "status": "fail"
+      }
+    ]
+  },
+  "pr_evidence": {
+    "artifact_worktree": ".agenthero/artifacts/grokrxiv/reviews/76665eba-7670-47ef-b69d-42a0af86eba7/review_loop/fixed",
+    "compile_review_loop": {
+      "attempts": [
+        {
+          "attempt": 1,
+          "author_error": "CliRunner timed out after 360s for role pr_artifact_fixer",
+          "author_role": "pr_artifact_fixer",
+          "status": "fail"
+        }
+      ],
+      "author_role": "pr_artifact_fixer",
+      "filename": "review.tex",
+      "final_path": ".agenthero/artifacts/grokrxiv/reviews/76665eba-7670-47ef-b69d-42a0af86eba7/review_loop/fixed/review.tex",
+      "fixer_role": "pr_artifact_fixer",
+      "language": "latex",
+      "max_attempts": 2,
+      "reviewer_role": "pr_artifact_reviewer",
+      "stage": "pr_review_fix_code",
+      "status": "fail",
+      "target": "pr"
+    },
+    "fixed_pdf": null,
+    "fixed_tex": "review_loop/fixed/review.tex",
+    "issues": [
+      "CliRunner timed out after 360s for role pr_artifact_fixer",
+      "fixed review.pdf was not produced"
+    ],
+    "stage": "pr_fixer",
+    "status": "fail"
+  },
+  "publish_decision": {
+    "action": "revision_needed_pr",
+    "auto_publish": false,
+    "publisher_ready": false
+  },
+  "publisher_ready": false,
+  "review_id": "76665eba-7670-47ef-b69d-42a0af86eba7"
+}
