@@ -1,0 +1,39 @@
+{
+  "blocking_issues": [
+    "Meta-review recommendation is `major_revision`, not `accept`.",
+    "Semantic IR did not extract theorem candidates for Lean formalization.",
+    "Lean proof obligations did not verify cleanly.",
+    "Semantic adequacy check found unproved or overclaimed theorem statements.",
+    "PR fixer did not produce compile-reviewed corrected artifacts."
+  ],
+  "component_status": {
+    "citation_validation": "warn",
+    "haskell": "pass",
+    "lean": "fail",
+    "pr_fixer": "fail",
+    "publication_gate": "fail",
+    "semantic_adequacy": "fail"
+  },
+  "deterministic_status": "fail",
+  "publishability_vector": {
+    "citation": "warn",
+    "formal": "failed",
+    "integrity": "pass",
+    "reproducibility": "not_run",
+    "safety": "fail",
+    "semantic_adequacy": "fail"
+  },
+  "publisher_ready": false,
+  "release_tier": {
+    "lifecycle_state": "needs_update",
+    "tier": "in_review"
+  },
+  "score_thresholds": {
+    "citation_validation": "pass_or_warn",
+    "haskell_compile": "pass",
+    "lean_theorem_formalization": "proved",
+    "pr_artifacts": "fixed_tex_and_pdf_present",
+    "publication_gate": "pass",
+    "semantic_adequacy": "all_theorem_claims_match_proved_lean_declarations"
+  }
+}

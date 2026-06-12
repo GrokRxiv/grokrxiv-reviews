@@ -1,0 +1,272 @@
+{
+  "agent_output_audit_summary": {
+    "accepted": 2,
+    "by_role": {
+      "haskell_code_reviewer": {
+        "accepted": 1,
+        "rejected": 0,
+        "total": 1
+      },
+      "haskell_semantic_author": {
+        "accepted": 1,
+        "rejected": 0,
+        "total": 1
+      }
+    },
+    "rejected": 0,
+    "total": 2
+  },
+  "attempts": [
+    {
+      "agent_output_audits": [
+        {
+          "artifact_dir": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_semantic_author",
+          "artifacts": {
+            "decision": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_semantic_author/decision.json",
+            "input": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_semantic_author/input.json",
+            "output": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_semantic_author/output.json",
+            "raw_stderr": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_semantic_author/raw_stderr.txt",
+            "raw_stdout": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_semantic_author/raw_stdout.txt",
+            "schema": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_semantic_author/schema.json",
+            "schema_validation": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_semantic_author/schema_validation.json",
+            "semantic_validation": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_semantic_author/semantic_validation.json",
+            "tool_validation": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_semantic_author/tool_validation.json"
+          },
+          "attempt": 1,
+          "decision": {
+            "reason": "generated artifact accepted by schema, semantic validator, compiler, and reviewer",
+            "status": "accepted"
+          },
+          "latency_ms": 238818,
+          "model": "claude-opus-4-7",
+          "phase": "generate",
+          "role": "haskell_semantic_author",
+          "runner": "cli",
+          "schema_path": "schemas/review_loop_code_artifact.schema.json",
+          "schema_validation": {
+            "reason": "runner returned JSON already validated against role output schema",
+            "schema_path": "schemas/review_loop_code_artifact.schema.json",
+            "status": "pass"
+          },
+          "semantic_validation": {
+            "issues": [],
+            "status": "pass"
+          },
+          "tokens_in": null,
+          "tokens_out": null,
+          "tool_validation": {
+            "command": [
+              "ghc",
+              "-fno-code",
+              "SemanticModel.hs"
+            ],
+            "duration_ms": 89,
+            "exit_code": 0,
+            "status": "pass",
+            "stderr": "",
+            "stdout": "Loaded package environment from /Users/mlong/.ghc/aarch64-darwin-9.14.1/environments/default\n[1 of 1] Compiling SemanticModel    ( SemanticModel.hs, nothing )\n"
+          }
+        },
+        {
+          "artifact_dir": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_code_reviewer",
+          "artifacts": {
+            "decision": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_code_reviewer/decision.json",
+            "input": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_code_reviewer/input.json",
+            "output": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_code_reviewer/output.json",
+            "raw_stderr": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_code_reviewer/raw_stderr.txt",
+            "raw_stdout": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_code_reviewer/raw_stdout.txt",
+            "schema": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_code_reviewer/schema.json",
+            "schema_validation": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_code_reviewer/schema_validation.json",
+            "semantic_validation": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_code_reviewer/semantic_validation.json",
+            "tool_validation": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_code_reviewer/tool_validation.json"
+          },
+          "attempt": 1,
+          "decision": {
+            "reason": "reviewer output schema-valid with status=pass",
+            "status": "accepted"
+          },
+          "latency_ms": 73952,
+          "model": "gpt-5.5",
+          "phase": "review",
+          "role": "haskell_code_reviewer",
+          "runner": "cli",
+          "schema_path": "schemas/review_loop_code_review.schema.json",
+          "schema_validation": {
+            "reason": "runner returned JSON already validated against role output schema",
+            "schema_path": "schemas/review_loop_code_review.schema.json",
+            "status": "pass"
+          },
+          "semantic_validation": {
+            "issues": [],
+            "status": "pass"
+          },
+          "tokens_in": null,
+          "tokens_out": null,
+          "tool_validation": {
+            "command": [
+              "ghc",
+              "-fno-code",
+              "SemanticModel.hs"
+            ],
+            "duration_ms": 89,
+            "exit_code": 0,
+            "status": "pass",
+            "stderr": "",
+            "stdout": "Loaded package environment from /Users/mlong/.ghc/aarch64-darwin-9.14.1/environments/default\n[1 of 1] Compiling SemanticModel    ( SemanticModel.hs, nothing )\n"
+          }
+        }
+      ],
+      "attempt": 1,
+      "author_role": "haskell_semantic_author",
+      "codex_review": {
+        "confidence": 0.86,
+        "issues": [
+          {
+            "line": 221,
+            "message": "The Lean renderer emits negation as \"~ ...\". If a future canonical IR contains PNot, obligationToLean may produce Lean 4 syntax that is not accepted; the current artifact is not blocked because the canonical IR contains no proof obligations.",
+            "severity": "warning"
+          }
+        ],
+        "status": "pass",
+        "summary": "SemanticModel.hs compiles according to the provided diagnostics and faithfully represents the empty canonical semantic IR without promoting review-role claims into Lean obligations."
+      },
+      "compile": {
+        "command": [
+          "ghc",
+          "-fno-code",
+          "SemanticModel.hs"
+        ],
+        "duration_ms": 89,
+        "exit_code": 0,
+        "status": "pass",
+        "stderr": "",
+        "stdout": "Loaded package environment from /Users/mlong/.ghc/aarch64-darwin-9.14.1/environments/default\n[1 of 1] Compiling SemanticModel    ( SemanticModel.hs, nothing )\n"
+      },
+      "compile_timeout_secs": 900,
+      "final_path": ".agenthero/artifacts/grokrxiv/reviews/eca527eb-3930-49e6-a828-66dd64611430/review_loop/haskell/SemanticModel.hs",
+      "generation": {
+        "code": "module SemanticModel where\n\nimport Data.List (nub)\n\n-- SourceSpan: provenance pointer into a paper artifact (semantic_ir.json,\n-- equations.json, theorem_graph.json, body.md) used so every IR record can\n-- be traced back to its origin and replayed against canonical inputs.\ndata SourceSpan = SourceSpan\n  { sourceArtifact :: String\n  , sourcePaperId  :: Maybe String\n  , sourceClaimId  :: Maybe String\n  , sourceLocator  :: Maybe String\n  } deriving (Eq, Show)\n\n-- MathType: typed mathematical universe used by the transcription IR.\n-- These constructors describe the kind of mathematical object a Term or\n-- Definition inhabits (manifolds, connections, conformal/projective\n-- structures, metrics, tensors), not any review-process category.\ndata MathType\n  = TyManifold\n  | TyVectorBundle MathType\n  | TyTangentBundle\n  | TyCotangentBundle\n  | TyConnection MathType\n  | TyMetric MathType\n  | TyConformalStructure MathType\n  | TyProjectiveStructure MathType\n  | TyOneForm\n  | TyTensor Int Int\n  | TyProp\n  | TyFun MathType MathType\n  | TyNamed String\n  deriving (Eq, Show)\n\n-- Binder: a typed variable name introduced by a quantifier, lambda, or\n-- definition signature.\ndata Binder = Binder\n  { binderName :: String\n  , binderType :: MathType\n  } deriving (Eq, Show)\n\n-- Term: typed mathematical expression. The IR keeps lambda-calculus shape\n-- so theorem statements can be re-emitted into Lean 4 syntax later. Terms\n-- never encode review categories or histograms.\ndata Term\n  = TVar String MathType\n  | TConst String MathType\n  | TApp Term Term\n  | TLam Binder Term\n  | TAnnot Term MathType\n  deriving (Eq, Show)\n\n-- Proposition: typed logical statement at TyProp. Used for theorem\n-- statements, assumptions, and definitional equalities transcribed from\n-- the paper.\ndata Proposition\n  = PEq Term Term\n  | PForall Binder Proposition\n  | PExists Binder Proposition\n  | PImplies Proposition Proposition\n  | PAnd Proposition Proposition\n  | POr Proposition Proposition\n  | PNot Proposition\n  | PHolds Term\n  deriving (Eq, Show)\n\n-- Definition: a named, typed entity introduced (or referenced) by the\n-- paper. The body is optional because some definitions are imported by\n-- name from prior work cited in the paper.\ndata Definition = Definition\n  { defName    :: String\n  , defBinders :: [Binder]\n  , defType    :: MathType\n  , defBody    :: Maybe Term\n  , defSource  :: SourceSpan\n  } deriving (Eq, Show)\n\n-- Assumption: a typed proposition serving as a hypothesis of a theorem.\ndata Assumption = Assumption\n  { assumptionId        :: String\n  , assumptionStatement :: Proposition\n  , assumptionSource    :: SourceSpan\n  } deriving (Eq, Show)\n\n-- TheoremIR: a candidate theorem in transcription IR form. Statement is a\n-- typed Proposition under explicit binders and assumptions, with full\n-- source provenance so Lean emission is deterministic.\ndata TheoremIR = TheoremIR\n  { theoremId          :: String\n  , theoremBinders     :: [Binder]\n  , theoremAssumptions :: [Assumption]\n  , theoremStatement   :: Proposition\n  , theoremSource      :: SourceSpan\n  } deriving (Eq, Show)\n\n-- SemanticCategory: annotation describing what kind of paper-derived\n-- content a ClaimIR carries. Per the formalization policy these are\n-- annotations OVER typed mathematics, never substitutes for it. Review\n-- roles (summary, novelty, citation, meta_reviewer, technical_correctness)\n-- are deliberately absent here; the corresponding claims land under\n-- CatNonFormalContext.\ndata SemanticCategory\n  = CatTheoremStatement\n  | CatDefinition\n  | CatAssumption\n  | CatEquation\n  | CatProofObligation\n  | CatNonFormalContext\n  deriving (Eq, Show)\n\n-- ClaimIR: a paper-derived claim with provenance, semantic category, and\n-- (when applicable) its typed Proposition. Lean-eligibility is decided by\n-- category, not by review role.\ndata ClaimIR = ClaimIR\n  { claimId           :: String\n  , claimSource       :: SourceSpan\n  , claimCategory     :: SemanticCategory\n  , claimStatement    :: Maybe Proposition\n  , claimLeanEligible :: Bool\n  } deriving (Eq, Show)\n\n-- ProofObligation: a typed mathematical goal to discharge in Lean,\n-- including the binders in scope and the assumptions available. Always\n-- derived from a ClaimIR in a formal category.\ndata ProofObligation = ProofObligation\n  { obligationId          :: String\n  , obligationClaimId     :: String\n  , obligationBinders     :: [Binder]\n  , obligationAssumptions :: [Assumption]\n  , obligationGoal        :: Proposition\n  , obligationSource      :: SourceSpan\n  } deriving (Eq, Show)\n\n-- LeanTarget: a deterministically-emitted Lean 4 declaration descriptor.\n-- The signature is a textual rendering of the typed goal; sorry/admit/\n-- axiom are never emitted by construction.\ndata LeanTarget = LeanTarget\n  { leanDeclName   :: String\n  , leanSignature  :: String\n  , leanObligation :: String\n  , leanSource     :: SourceSpan\n  } deriving (Eq, Show)\n\n-- Categories that yield Lean obligations. Theorem statements,\n-- definitions, assumptions, equations, and explicit proof obligations are\n-- formal mathematical content; non-formal review context is not.\nformalCategories :: [SemanticCategory]\nformalCategories =\n  [ CatTheoremStatement\n  , CatDefinition\n  , CatAssumption\n  , CatEquation\n  , CatProofObligation\n  ]\n\n-- isFormalCategory: predicate used by the obligation generators to gate\n-- which claims may seed Lean targets.\nisFormalCategory :: SemanticCategory -> Bool\nisFormalCategory cat = cat `elem` formalCategories\n\n-- categoryToObligations: select claims of the given category from a pool\n-- and turn each into its proof obligation(s). Non-formal categories yield\n-- no obligations, enforcing the policy that review roles never reach Lean.\ncategoryToObligations :: SemanticCategory -> [ClaimIR] -> [ProofObligation]\ncategoryToObligations cat claims\n  | isFormalCategory cat = concatMap claimToObligations matching\n  | otherwise            = []\n  where\n    matching = filter (\\c -> claimCategory c == cat) claims\n\n-- claimToObligations: lift a single ClaimIR to its proof obligation list.\n-- A claim contributes nothing unless it is Lean-eligible, lives in a\n-- formal category, and carries a transcribed Proposition.\nclaimToObligations :: ClaimIR -> [ProofObligation]\nclaimToObligations c\n  | not (claimLeanEligible c)         = []\n  | not (isFormalCategory (claimCategory c)) = []\n  | otherwise = case claimStatement c of\n      Nothing   -> []\n      Just prop ->\n        [ ProofObligation\n            { obligationId          = \"obl_\" ++ claimId c\n            , obligationClaimId     = claimId c\n            , obligationBinders     = []\n            , obligationAssumptions = []\n            , obligationGoal        = prop\n            , obligationSource      = claimSource c\n            }\n        ]\n\n-- obligationToLean: deterministic Lean 4 target emission. The declaration\n-- name is derived from the obligation id; the signature is rendered from\n-- the typed goal. No proof body is emitted here; the forbidden Lean terms\n-- (sorry, admit, axiom) cannot be introduced by this function.\nobligationToLean :: ProofObligation -> LeanTarget\nobligationToLean o = LeanTarget\n  { leanDeclName   = \"thm_\" ++ obligationId o\n  , leanSignature  = renderProposition (obligationGoal o)\n  , leanObligation = obligationId o\n  , leanSource     = obligationSource o\n  }\n\n-- renderProposition / renderTerm / renderType: total textual rendering of\n-- the typed IR for Lean signature emission. Intentionally minimal; not a\n-- parser, not a proof checker, not a normalizer.\nrenderProposition :: Proposition -> String\nrenderProposition (PEq a b)      =\n  \"(\" ++ renderTerm a ++ \" = \" ++ renderTerm b ++ \")\"\nrenderProposition (PForall b p)  =\n  \"(forall \" ++ binderName b ++ \" : \" ++ renderType (binderType b)\n    ++ \", \" ++ renderProposition p ++ \")\"\nrenderProposition (PExists b p)  =\n  \"(exists \" ++ binderName b ++ \" : \" ++ renderType (binderType b)\n    ++ \", \" ++ renderProposition p ++ \")\"\nrenderProposition (PImplies a b) =\n  \"(\" ++ renderProposition a ++ \" -> \" ++ renderProposition b ++ \")\"\nrenderProposition (PAnd a b)     =\n  \"(\" ++ renderProposition a ++ \" /\\\\ \" ++ renderProposition b ++ \")\"\nrenderProposition (POr a b)      =\n  \"(\" ++ renderProposition a ++ \" \\\\/ \" ++ renderProposition b ++ \")\"\nrenderProposition (PNot p)       = \"(~ \" ++ renderProposition p ++ \")\"\nrenderProposition (PHolds t)     = renderTerm t\n\nrenderTerm :: Term -> String\nrenderTerm (TVar n _)    = n\nrenderTerm (TConst n _)  = n\nrenderTerm (TApp f x)    = \"(\" ++ renderTerm f ++ \" \" ++ renderTerm x ++ \")\"\nrenderTerm (TLam b body) =\n  \"(fun \" ++ binderName b ++ \" : \" ++ renderType (binderType b)\n    ++ \" => \" ++ renderTerm body ++ \")\"\nrenderTerm (TAnnot t ty) =\n  \"(\" ++ renderTerm t ++ \" : \" ++ renderType ty ++ \")\"\n\nrenderType :: MathType -> String\nrenderType TyManifold                = \"Manifold\"\nrenderType (TyVectorBundle b)        = \"VectorBundle \" ++ renderType b\nrenderType TyTangentBundle           = \"TangentBundle\"\nrenderType TyCotangentBundle         = \"CotangentBundle\"\nrenderType (TyConnection m)          = \"Connection \" ++ renderType m\nrenderType (TyMetric m)              = \"Metric \" ++ renderType m\nrenderType (TyConformalStructure m)  = \"ConformalStructure \" ++ renderType m\nrenderType (TyProjectiveStructure m) = \"ProjectiveStructure \" ++ renderType m\nrenderType TyOneForm                 = \"OneForm\"\nrenderType (TyTensor p q)            = \"Tensor \" ++ show p ++ \" \" ++ show q\nrenderType TyProp                    = \"Prop\"\nrenderType (TyFun a b)               =\n  \"(\" ++ renderType a ++ \" -> \" ++ renderType b ++ \")\"\nrenderType (TyNamed n)               = n\n\n-- The canonical IR for review eca527eb-3930-49e6-a828-66dd64611430\n-- (arxiv:2606.00799). semantic_ir.json reports an empty theorem_graph and\n-- equations list and a single limitation: \"no_paper_math_transcribed\".\n-- The Haskell artifact is a faithful round-trip of that state: no formal\n-- definitions, assumptions, or theorem candidates are encoded inline.\ncanonicalDefinitions :: [Definition]\ncanonicalDefinitions = []\n\ncanonicalAssumptions :: [Assumption]\ncanonicalAssumptions = []\n\ncanonicalTheorems :: [TheoremIR]\ncanonicalTheorems = []\n\n-- Review-output records (summary / novelty / citation / meta_reviewer /\n-- technical_correctness claims) are NOT modelled here. They are context,\n-- not formal math sources, per the formalization policy\n-- (reject_review_role_histograms = True). Keeping this list empty is the\n-- enforcement: no obligations can be derived from review roles.\nnonformalContextClaims :: [ClaimIR]\nnonformalContextClaims = []\n\n-- canonicalObligations: all obligations derivable from the canonical IR.\n-- Empty by construction while no paper math has been transcribed.\ncanonicalObligations :: [ProofObligation]\ncanonicalObligations =\n  concatMap (\\cat -> categoryToObligations cat nonformalContextClaims)\n            formalCategories\n\n-- canonicalLeanTargets: Lean 4 declarations emitted from canonical\n-- obligations. Empty whenever canonicalObligations is empty.\ncanonicalLeanTargets :: [LeanTarget]\ncanonicalLeanTargets = map obligationToLean canonicalObligations\n\n-- obligationIdsUnique: structural invariant the IR must satisfy. True\n-- trivially when canonicalObligations is empty; required to remain True\n-- as the IR is populated from paper sources.\nobligationIdsUnique :: Bool\nobligationIdsUnique =\n  let ids = map obligationId canonicalObligations\n  in length ids == length (nub ids)\n",
+        "confidence": 0.9,
+        "filename": "SemanticModel.hs",
+        "language": "haskell",
+        "notes": [
+          "Module SemanticModel defined with pure Haskell only (imports only Data.List.nub from base).",
+          "Types provided: SourceSpan, MathType, Term, Binder, Proposition, Definition, Assumption, TheoremIR, SemanticCategory, ClaimIR, ProofObligation, LeanTarget.",
+          "Functions provided: categoryToObligations, claimToObligations, obligationToLean (plus total rendering helpers renderProposition/renderTerm/renderType).",
+          "SemanticCategory annotates typed math (CatTheoremStatement, CatDefinition, CatAssumption, CatEquation, CatProofObligation, CatNonFormalContext); review roles such as summary/novelty/citation/meta_reviewer/technical_correctness are intentionally not constructors here.",
+          "Lean-eligibility is decided by category, not by review role: claimToObligations returns [] for any claim whose category is not in formalCategories or whose claimLeanEligible is False, enforcing the policy that review-output histograms cannot seed Lean targets.",
+          "canonicalDefinitions, canonicalAssumptions, canonicalTheorems, nonformalContextClaims, canonicalObligations, and canonicalLeanTargets are all empty, faithfully round-tripping semantic_ir.json for arxiv:2606.00799 (empty theorem_graph and equations, single limitation no_paper_math_transcribed).",
+          "obligationToLean never emits sorry, admit, or axiom; it only renders a deterministic declaration name (thm_ + obligation id) and a textual signature for the typed Proposition goal.",
+          "Verified compile with ghc -fno-code SemanticModel.hs (ghc 9.14.1): one module compiled, no errors, no warnings beyond default."
+        ]
+      },
+      "git": {
+        "branch": "review-loop/haskell/eca527eb3930",
+        "commit": {
+          "add": {
+            "command": [
+              "git",
+              "add",
+              "."
+            ],
+            "duration_ms": 21,
+            "exit_code": 0,
+            "status": "pass",
+            "stderr": "",
+            "stdout": ""
+          },
+          "cached_diff_stat": {
+            "command": [
+              "git",
+              "diff",
+              "--cached",
+              "--stat"
+            ],
+            "duration_ms": 10,
+            "exit_code": 0,
+            "status": "pass",
+            "stderr": "",
+            "stdout": " README.md                        |    3 +\n SemanticModel.hs                 |  290 ++++++++\n harness.json                     |  109 +++\n prompt.md                        |    9 +\n review_input.json                | 1407 ++++++++++++++++++++++++++++++++++++++\n round_1/SemanticModel.hs         |  290 ++++++++\n round_1/codex_review.json        |   12 +\n round_1/compile.json             |   12 +\n round_1/generation.json          |   16 +\n round_1/semantic_validation.json |    4 +\n schema.json                      |   62 ++\n system.md                        |    1 +\n 12 files changed, 2215 insertions(+)\n"
+          },
+          "commit": {
+            "command": [
+              "git",
+              "commit",
+              "-m",
+              "review-loop haskell attempt 1"
+            ],
+            "duration_ms": 20,
+            "exit_code": 0,
+            "status": "pass",
+            "stderr": "",
+            "stdout": "[review-loop/haskell/eca527eb3930 05a6061] review-loop haskell attempt 1\n 12 files changed, 2215 insertions(+)\n create mode 100644 README.md\n create mode 100644 SemanticModel.hs\n create mode 100644 harness.json\n create mode 100644 prompt.md\n create mode 100644 review_input.json\n create mode 100644 round_1/SemanticModel.hs\n create mode 100644 round_1/codex_review.json\n create mode 100644 round_1/compile.json\n create mode 100644 round_1/generation.json\n create mode 100644 round_1/semantic_validation.json\n create mode 100644 schema.json\n create mode 100644 system.md\n"
+          },
+          "head": {
+            "command": [
+              "git",
+              "rev-parse",
+              "--short",
+              "HEAD"
+            ],
+            "duration_ms": 7,
+            "exit_code": 0,
+            "status": "pass",
+            "stderr": "",
+            "stdout": "05a6061\n"
+          }
+        },
+        "path": ".agenthero/artifacts/grokrxiv/reviews/eca527eb-3930-49e6-a828-66dd64611430/review_loop/haskell",
+        "status_after": {
+          "command": [
+            "git",
+            "status",
+            "--short"
+          ],
+          "duration_ms": 7,
+          "exit_code": 0,
+          "status": "pass",
+          "stderr": "",
+          "stdout": ""
+        },
+        "status_before": {
+          "command": [
+            "git",
+            "status",
+            "--short"
+          ],
+          "duration_ms": 22,
+          "exit_code": 0,
+          "status": "pass",
+          "stderr": "",
+          "stdout": "?? README.md\n?? SemanticModel.hs\n?? harness.json\n?? prompt.md\n?? review_input.json\n?? round_1/\n?? schema.json\n?? system.md\n"
+        }
+      },
+      "harness": {
+        "branch": "review-loop/haskell/eca527eb3930",
+        "path": ".agenthero/artifacts/grokrxiv/reviews/eca527eb-3930-49e6-a828-66dd64611430/review_loop/haskell"
+      },
+      "reviewer_role": "haskell_code_reviewer",
+      "semantic_validation": {
+        "issues": [],
+        "status": "pass"
+      },
+      "source_path": ".agenthero/artifacts/grokrxiv/reviews/eca527eb-3930-49e6-a828-66dd64611430/review_loop/haskell/round_1/SemanticModel.hs",
+      "status": "pass"
+    }
+  ],
+  "author_role": "haskell_semantic_author",
+  "compile_timeout_secs": 900,
+  "filename": "SemanticModel.hs",
+  "final_path": ".agenthero/artifacts/grokrxiv/reviews/eca527eb-3930-49e6-a828-66dd64611430/review_loop/haskell/SemanticModel.hs",
+  "fixer_role": "haskell_code_fixer",
+  "harness": {
+    "branch": "review-loop/haskell/eca527eb3930",
+    "path": ".agenthero/artifacts/grokrxiv/reviews/eca527eb-3930-49e6-a828-66dd64611430/review_loop/haskell"
+  },
+  "language": "haskell",
+  "max_attempts": 2,
+  "reviewer_role": "haskell_code_reviewer",
+  "stage": "haskell_review_fix_code",
+  "status": "pass",
+  "target": "haskell"
+}
