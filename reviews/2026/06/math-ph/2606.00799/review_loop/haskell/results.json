@@ -1,0 +1,265 @@
+{
+  "agent_output_audit_summary": {
+    "accepted": 2,
+    "by_role": {
+      "haskell_code_reviewer": {
+        "accepted": 1,
+        "rejected": 0,
+        "total": 1
+      },
+      "haskell_semantic_author": {
+        "accepted": 1,
+        "rejected": 0,
+        "total": 1
+      }
+    },
+    "rejected": 0,
+    "total": 2
+  },
+  "attempts": [
+    {
+      "agent_output_audits": [
+        {
+          "artifact_dir": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_semantic_author",
+          "artifacts": {
+            "decision": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_semantic_author/decision.json",
+            "input": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_semantic_author/input.json",
+            "output": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_semantic_author/output.json",
+            "raw_stderr": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_semantic_author/raw_stderr.txt",
+            "raw_stdout": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_semantic_author/raw_stdout.txt",
+            "schema": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_semantic_author/schema.json",
+            "schema_validation": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_semantic_author/schema_validation.json",
+            "semantic_validation": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_semantic_author/semantic_validation.json",
+            "tool_validation": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_semantic_author/tool_validation.json"
+          },
+          "attempt": 1,
+          "decision": {
+            "reason": "generated artifact accepted by schema, semantic validator, compiler, and reviewer",
+            "status": "accepted"
+          },
+          "latency_ms": 145229,
+          "model": "claude-opus-4-7",
+          "phase": "generate",
+          "role": "haskell_semantic_author",
+          "runner": "cli",
+          "schema_path": "schemas/review_loop_code_artifact.schema.json",
+          "schema_validation": {
+            "reason": "runner returned JSON already validated against role output schema",
+            "schema_path": "schemas/review_loop_code_artifact.schema.json",
+            "status": "pass"
+          },
+          "semantic_validation": {
+            "issues": [],
+            "status": "pass"
+          },
+          "tokens_in": null,
+          "tokens_out": null,
+          "tool_validation": {
+            "command": [
+              "ghc",
+              "-fno-code",
+              "SemanticModel.hs"
+            ],
+            "duration_ms": 492,
+            "exit_code": 0,
+            "status": "pass",
+            "stderr": "",
+            "stdout": "Loaded package environment from /Users/mlong/.ghc/aarch64-darwin-9.14.1/environments/default\n[1 of 1] Compiling SemanticModel    ( SemanticModel.hs, nothing )\n"
+          }
+        },
+        {
+          "artifact_dir": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_code_reviewer",
+          "artifacts": {
+            "decision": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_code_reviewer/decision.json",
+            "input": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_code_reviewer/input.json",
+            "output": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_code_reviewer/output.json",
+            "raw_stderr": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_code_reviewer/raw_stderr.txt",
+            "raw_stdout": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_code_reviewer/raw_stdout.txt",
+            "schema": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_code_reviewer/schema.json",
+            "schema_validation": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_code_reviewer/schema_validation.json",
+            "semantic_validation": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_code_reviewer/semantic_validation.json",
+            "tool_validation": "review_loop/agent_outputs/haskell_review_fix_code/round_1/haskell_code_reviewer/tool_validation.json"
+          },
+          "attempt": 1,
+          "decision": {
+            "reason": "reviewer output schema-valid with status=pass",
+            "status": "accepted"
+          },
+          "latency_ms": 35853,
+          "model": "gpt-5.5",
+          "phase": "review",
+          "role": "haskell_code_reviewer",
+          "runner": "cli",
+          "schema_path": "schemas/review_loop_code_review.schema.json",
+          "schema_validation": {
+            "reason": "runner returned JSON already validated against role output schema",
+            "schema_path": "schemas/review_loop_code_review.schema.json",
+            "status": "pass"
+          },
+          "semantic_validation": {
+            "issues": [],
+            "status": "pass"
+          },
+          "tokens_in": null,
+          "tokens_out": null,
+          "tool_validation": {
+            "command": [
+              "ghc",
+              "-fno-code",
+              "SemanticModel.hs"
+            ],
+            "duration_ms": 492,
+            "exit_code": 0,
+            "status": "pass",
+            "stderr": "",
+            "stdout": "Loaded package environment from /Users/mlong/.ghc/aarch64-darwin-9.14.1/environments/default\n[1 of 1] Compiling SemanticModel    ( SemanticModel.hs, nothing )\n"
+          }
+        }
+      ],
+      "attempt": 1,
+      "author_role": "haskell_semantic_author",
+      "codex_review": {
+        "confidence": 0.93,
+        "issues": [],
+        "status": "pass",
+        "summary": "SemanticModel.hs compiles with ghc -fno-code, contains no forbidden terms, and accurately models the provided evidence by leaving formal assumptions, definitions, theorems, claims, obligations, and Lean targets empty because the canonical semantic IR contains no paper-transcribed formal mathematics."
+      },
+      "compile": {
+        "command": [
+          "ghc",
+          "-fno-code",
+          "SemanticModel.hs"
+        ],
+        "duration_ms": 492,
+        "exit_code": 0,
+        "status": "pass",
+        "stderr": "",
+        "stdout": "Loaded package environment from /Users/mlong/.ghc/aarch64-darwin-9.14.1/environments/default\n[1 of 1] Compiling SemanticModel    ( SemanticModel.hs, nothing )\n"
+      },
+      "compile_timeout_secs": 900,
+      "final_path": ".agenthero/artifacts/grokrxiv/reviews/53c9f4e1-3d3b-4f97-950f-65a749bf01dd/review_loop/haskell/SemanticModel.hs",
+      "generation": {
+        "code": "module SemanticModel where\n\n-- | Source span pointing at the canonical IR artifact location.\ndata SourceSpan = SourceSpan\n  { spanArtifact      :: String\n  , spanPaperSourceId :: String\n  , spanClaimId       :: Maybe String\n  , spanTextExcerpt   :: Maybe String\n  } deriving (Eq, Show)\n\n-- | Typed mathematical sort for a term or proposition.\ndata MathType\n  = TyProp\n  | TyType\n  | TySet         String\n  | TyFun         MathType MathType\n  | TyDependent   String MathType MathType\n  | TyConstructor String [MathType]\n  deriving (Eq, Show)\n\n-- | Variable binder in a definition, theorem statement, or proof.\ndata Binder = Binder\n  { binderName     :: String\n  , binderType     :: MathType\n  , binderImplicit :: Bool\n  } deriving (Eq, Show)\n\n-- | Term-level expression (paper-derived, free of review metadata).\ndata Term\n  = TVar   String\n  | TConst String\n  | TApp   Term [Term]\n  | TLam   [Binder] Term\n  | TPi    [Binder] Term\n  | TLet   String Term Term\n  | TAnnot Term MathType\n  deriving (Eq, Show)\n\n-- | Propositional content of a definition, assumption, or theorem.\ndata Proposition\n  = PTerm    Term\n  | PEq      Term Term\n  | PForall  [Binder] Proposition\n  | PExists  [Binder] Proposition\n  | PImplies Proposition Proposition\n  | PAnd     [Proposition]\n  | POr      [Proposition]\n  | PNot     Proposition\n  deriving (Eq, Show)\n\n-- | Paper-introduced definition lifted into typed IR.\ndata Definition = Definition\n  { defName    :: String\n  , defBinders :: [Binder]\n  , defType    :: MathType\n  , defBody    :: Maybe Term\n  , defSpan    :: SourceSpan\n  } deriving (Eq, Show)\n\n-- | Paper-stated hypothesis/assumption.\ndata Assumption = Assumption\n  { assumeId        :: String\n  , assumeStatement :: Proposition\n  , assumeSpan      :: SourceSpan\n  } deriving (Eq, Show)\n\n-- | Paper-asserted theorem in typed mathematical IR form.\ndata TheoremIR = TheoremIR\n  { thmId         :: String\n  , thmBinders    :: [Binder]\n  , thmHypotheses :: [Proposition]\n  , thmConclusion :: Proposition\n  , thmSpan       :: SourceSpan\n  } deriving (Eq, Show)\n\n-- | Review-role provenance category. Annotates typed math; does NOT replace\n-- it. Only CatFormalMath ever participates in Lean obligation lifting.\ndata ClaimCategory\n  = CatFormalMath\n  | CatSummary\n  | CatNovelty\n  | CatCitation\n  | CatTechnicalCorrectness\n  | CatReproducibility\n  | CatMetaReviewer\n  deriving (Eq, Show)\n\n-- | A claim from the review pipeline. Only CatFormalMath with a typed\n-- Proposition and claimLeanEligible == True becomes a proof obligation.\ndata ClaimIR = ClaimIR\n  { claimId           :: String\n  , claimCategory     :: ClaimCategory\n  , claimContent      :: Maybe Proposition\n  , claimSpan         :: SourceSpan\n  , claimLeanEligible :: Bool\n  } deriving (Eq, Show)\n\n-- | Proof obligation derived from typed mathematical content only.\ndata ProofObligation = ProofObligation\n  { obligationId        :: String\n  , obligationContext   :: [Assumption]\n  , obligationStatement :: Proposition\n  , obligationOrigin    :: SourceSpan\n  } deriving (Eq, Show)\n\n-- | Lean 4 declaration target deterministically emitted from an obligation.\ndata LeanTarget = LeanTarget\n  { leanModule      :: String\n  , leanDeclaration :: String\n  , leanSignature   :: String\n  , leanOrigin      :: SourceSpan\n  } deriving (Eq, Show)\n\n-- ---------------------------------------------------------------------------\n-- Canonical IR contents derived from review_loop/semantic_ir.json.\n-- The canonical IR contains NO paper-transcribed math (see limitation\n-- no_paper_math_transcribed in semantic_ir.limitations); these lists are\n-- therefore empty. Empty is the only honest projection of the IR.\n-- ---------------------------------------------------------------------------\n\nassumptionsIR :: [Assumption]\nassumptionsIR = []\n\ndefinitionsIR :: [Definition]\ndefinitionsIR = []\n\ntheoremsIR :: [TheoremIR]\ntheoremsIR = []\n\n-- | Review-role claims emitted by the pipeline are non-formal and are NOT\n-- lifted into typed IR claims here; see semantic_ir.nonformal_review_claims.\nclaimsIR :: [ClaimIR]\nclaimsIR = []\n\n-- ---------------------------------------------------------------------------\n-- Mapping functions.\n-- ---------------------------------------------------------------------------\n\n-- | Map a semantic category onto the proof obligations that category emits.\n-- Only CatFormalMath emits obligations. Every other review category is\n-- treated strictly as annotation and produces no Lean obligation.\ncategoryToObligations :: ClaimCategory -> [ClaimIR] -> [ProofObligation]\ncategoryToObligations CatFormalMath cs =\n  concatMap claimToObligations\n    [c | c <- cs, claimCategory c == CatFormalMath, claimLeanEligible c]\ncategoryToObligations _ _ = []\n\n-- | Map a single claim onto its proof obligations. Review-role claims emit\n-- none; only typed mathematical content (CatFormalMath with a Proposition)\n-- is lifted into an obligation.\nclaimToObligations :: ClaimIR -> [ProofObligation]\nclaimToObligations c =\n  case (claimCategory c, claimContent c, claimLeanEligible c) of\n    (CatFormalMath, Just p, True) ->\n      [ProofObligation\n        { obligationId        = \"obligation_\" ++ claimId c\n        , obligationContext   = assumptionsIR\n        , obligationStatement = p\n        , obligationOrigin    = claimSpan c\n        }]\n    _ -> []\n\n-- | Deterministic Lean 4 declaration target for an obligation. The signature\n-- is the rendered Proposition; downstream proof terms MUST NOT use sorry,\n-- admit, or axiom (see formalization_policy.forbidden_lean_terms).\nobligationToLean :: ProofObligation -> LeanTarget\nobligationToLean o = LeanTarget\n  { leanModule      = \"GrokRxiv.SemanticIR.Generated\"\n  , leanDeclaration = \"theorem \" ++ obligationId o\n  , leanSignature   = renderProposition (obligationStatement o)\n  , leanOrigin      = obligationOrigin o\n  }\n\n-- ---------------------------------------------------------------------------\n-- Pure structural renderers (no review-role data participates).\n-- ---------------------------------------------------------------------------\n\nrenderProposition :: Proposition -> String\nrenderProposition (PTerm t)      = renderTerm t\nrenderProposition (PEq l r)      = renderTerm l ++ \" = \" ++ renderTerm r\nrenderProposition (PForall bs p) = \"forall \" ++ renderBinders bs ++ \", \" ++ renderProposition p\nrenderProposition (PExists bs p) = \"exists \" ++ renderBinders bs ++ \", \" ++ renderProposition p\nrenderProposition (PImplies p q) = \"(\" ++ renderProposition p ++ \") -> (\" ++ renderProposition q ++ \")\"\nrenderProposition (PAnd ps)      = \"(\" ++ intercalateStr \" /\\\\ \" (map renderProposition ps) ++ \")\"\nrenderProposition (POr  ps)      = \"(\" ++ intercalateStr \" \\\\/ \" (map renderProposition ps) ++ \")\"\nrenderProposition (PNot p)       = \"~(\" ++ renderProposition p ++ \")\"\n\nrenderTerm :: Term -> String\nrenderTerm (TVar n)      = n\nrenderTerm (TConst n)    = n\nrenderTerm (TApp f xs)   = \"(\" ++ renderTerm f ++ concatMap ((\" \" ++) . renderTerm) xs ++ \")\"\nrenderTerm (TLam bs b)   = \"(fun \" ++ renderBinders bs ++ \" => \" ++ renderTerm b ++ \")\"\nrenderTerm (TPi  bs b)   = \"(forall \" ++ renderBinders bs ++ \", \" ++ renderTerm b ++ \")\"\nrenderTerm (TLet n v b)  = \"let \" ++ n ++ \" := \" ++ renderTerm v ++ \" in \" ++ renderTerm b\nrenderTerm (TAnnot t ty) = \"(\" ++ renderTerm t ++ \" : \" ++ renderType ty ++ \")\"\n\nrenderBinders :: [Binder] -> String\nrenderBinders bs = intercalateStr \" \" (map renderBinder bs)\n\nrenderBinder :: Binder -> String\nrenderBinder b\n  | binderImplicit b = \"{\" ++ binderName b ++ \" : \" ++ renderType (binderType b) ++ \"}\"\n  | otherwise        = \"(\" ++ binderName b ++ \" : \" ++ renderType (binderType b) ++ \")\"\n\nrenderType :: MathType -> String\nrenderType TyProp                 = \"Prop\"\nrenderType TyType                 = \"Type\"\nrenderType (TySet s)              = s\nrenderType (TyFun a b)            = \"(\" ++ renderType a ++ \" -> \" ++ renderType b ++ \")\"\nrenderType (TyDependent n a b)    = \"(\" ++ n ++ \" : \" ++ renderType a ++ \") -> \" ++ renderType b\nrenderType (TyConstructor n args) = \"(\" ++ n ++ concatMap ((\" \" ++) . renderType) args ++ \")\"\n\nintercalateStr :: String -> [String] -> String\nintercalateStr _   []     = \"\"\nintercalateStr _   [x]    = x\nintercalateStr sep (x:xs) = x ++ sep ++ intercalateStr sep xs\n\n-- ---------------------------------------------------------------------------\n-- Derived top-level artifacts.\n-- ---------------------------------------------------------------------------\n\nobligationsIR :: [ProofObligation]\nobligationsIR = categoryToObligations CatFormalMath claimsIR\n\nleanTargetsIR :: [LeanTarget]\nleanTargetsIR = map obligationToLean obligationsIR\n",
+        "confidence": 0.82,
+        "filename": "SemanticModel.hs",
+        "language": "haskell",
+        "notes": [
+          "Module SemanticModel defined with no imports; compiles with ghc -fno-code SemanticModel.hs using only Prelude.",
+          "All required types declared: SourceSpan, MathType, Term, Proposition, Binder, Definition, Assumption, TheoremIR, ClaimIR, ProofObligation, LeanTarget.",
+          "Required mapping functions present: categoryToObligations, claimToObligations, obligationToLean.",
+          "Canonical IR semantic_ir.json contains no transcribed paper math (limitation no_paper_math_transcribed); assumptionsIR, definitionsIR, theoremsIR, and claimsIR are therefore empty - the only honest projection of the IR.",
+          "ClaimCategory annotates provenance over typed math; only CatFormalMath with a Proposition and claimLeanEligible=True is lifted to a ProofObligation. CatSummary, CatNovelty, CatCitation, CatReproducibility, CatTechnicalCorrectness, and CatMetaReviewer never yield obligations.",
+          "obligationToLean emits a Lean 4 theorem signature via renderProposition; forbidden terms (sorry, admit, axiom) are not produced by this module.",
+          "No review-role histograms, claimCount, publisherReadyLowerBound, or category counts are modeled; the file is a typed mathematical IR consumer/round-trip artifact only."
+        ]
+      },
+      "git": {
+        "branch": "review-loop/haskell/53c9f4e13d3b",
+        "commit": {
+          "add": {
+            "command": [
+              "git",
+              "add",
+              "."
+            ],
+            "duration_ms": 19,
+            "exit_code": 0,
+            "status": "pass",
+            "stderr": "",
+            "stdout": ""
+          },
+          "cached_diff_stat": {
+            "command": [
+              "git",
+              "diff",
+              "--cached",
+              "--stat"
+            ],
+            "duration_ms": 9,
+            "exit_code": 0,
+            "status": "pass",
+            "stderr": "",
+            "stdout": " README.md                        |    3 +\n SemanticModel.hs                 |  226 +++++\n harness.json                     |  109 +++\n prompt.md                        |    9 +\n review_input.json                | 1920 ++++++++++++++++++++++++++++++++++++++\n round_1/SemanticModel.hs         |  226 +++++\n round_1/codex_review.json        |    6 +\n round_1/compile.json             |   12 +\n round_1/generation.json          |   15 +\n round_1/semantic_validation.json |    4 +\n schema.json                      |   62 ++\n system.md                        |    1 +\n 12 files changed, 2593 insertions(+)\n"
+          },
+          "commit": {
+            "command": [
+              "git",
+              "commit",
+              "-m",
+              "review-loop haskell attempt 1"
+            ],
+            "duration_ms": 19,
+            "exit_code": 0,
+            "status": "pass",
+            "stderr": "",
+            "stdout": "[review-loop/haskell/53c9f4e13d3b 68ee033] review-loop haskell attempt 1\n 12 files changed, 2593 insertions(+)\n create mode 100644 README.md\n create mode 100644 SemanticModel.hs\n create mode 100644 harness.json\n create mode 100644 prompt.md\n create mode 100644 review_input.json\n create mode 100644 round_1/SemanticModel.hs\n create mode 100644 round_1/codex_review.json\n create mode 100644 round_1/compile.json\n create mode 100644 round_1/generation.json\n create mode 100644 round_1/semantic_validation.json\n create mode 100644 schema.json\n create mode 100644 system.md\n"
+          },
+          "head": {
+            "command": [
+              "git",
+              "rev-parse",
+              "--short",
+              "HEAD"
+            ],
+            "duration_ms": 7,
+            "exit_code": 0,
+            "status": "pass",
+            "stderr": "",
+            "stdout": "68ee033\n"
+          }
+        },
+        "path": ".agenthero/artifacts/grokrxiv/reviews/53c9f4e1-3d3b-4f97-950f-65a749bf01dd/review_loop/haskell",
+        "status_after": {
+          "command": [
+            "git",
+            "status",
+            "--short"
+          ],
+          "duration_ms": 7,
+          "exit_code": 0,
+          "status": "pass",
+          "stderr": "",
+          "stdout": ""
+        },
+        "status_before": {
+          "command": [
+            "git",
+            "status",
+            "--short"
+          ],
+          "duration_ms": 20,
+          "exit_code": 0,
+          "status": "pass",
+          "stderr": "",
+          "stdout": "?? README.md\n?? SemanticModel.hs\n?? harness.json\n?? prompt.md\n?? review_input.json\n?? round_1/\n?? schema.json\n?? system.md\n"
+        }
+      },
+      "harness": {
+        "branch": "review-loop/haskell/53c9f4e13d3b",
+        "path": ".agenthero/artifacts/grokrxiv/reviews/53c9f4e1-3d3b-4f97-950f-65a749bf01dd/review_loop/haskell"
+      },
+      "reviewer_role": "haskell_code_reviewer",
+      "semantic_validation": {
+        "issues": [],
+        "status": "pass"
+      },
+      "source_path": ".agenthero/artifacts/grokrxiv/reviews/53c9f4e1-3d3b-4f97-950f-65a749bf01dd/review_loop/haskell/round_1/SemanticModel.hs",
+      "status": "pass"
+    }
+  ],
+  "author_role": "haskell_semantic_author",
+  "compile_timeout_secs": 900,
+  "filename": "SemanticModel.hs",
+  "final_path": ".agenthero/artifacts/grokrxiv/reviews/53c9f4e1-3d3b-4f97-950f-65a749bf01dd/review_loop/haskell/SemanticModel.hs",
+  "fixer_role": "haskell_code_fixer",
+  "harness": {
+    "branch": "review-loop/haskell/53c9f4e13d3b",
+    "path": ".agenthero/artifacts/grokrxiv/reviews/53c9f4e1-3d3b-4f97-950f-65a749bf01dd/review_loop/haskell"
+  },
+  "language": "haskell",
+  "max_attempts": 2,
+  "reviewer_role": "haskell_code_reviewer",
+  "stage": "haskell_review_fix_code",
+  "status": "pass",
+  "target": "haskell"
+}

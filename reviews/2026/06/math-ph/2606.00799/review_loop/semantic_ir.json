@@ -1,0 +1,795 @@
+{
+  "assumptions": [],
+  "definitions": [],
+  "formalization_policy": {
+    "canonical_ir_artifact": "review_loop/semantic_ir.json",
+    "forbidden_lean_terms": [
+      "sorry",
+      "admit",
+      "axiom"
+    ],
+    "haskell_is_derived_checked_artifact": true,
+    "lean_statements_are_deterministically_emitted": true,
+    "lean_verifies_only_formal_math": true,
+    "reject_metadata_only_models": true,
+    "reject_review_role_histograms": true,
+    "requires_theorem_level_lean": true
+  },
+  "knowledge_graph_summary": {
+    "edges": 59,
+    "nodes": 64
+  },
+  "limitations": [
+    {
+      "id": "no_paper_math_transcribed",
+      "kind": "semantic_gap",
+      "source_claim_id": "paper_math_sources",
+      "source_span": {
+        "artifact": "paper_math_sources",
+        "claim_id": "paper_math_sources",
+        "paper_source_id": "paper_math_sources"
+      },
+      "statement": "No paper-derived theorem or equation sources were transcribed into typed IR."
+    }
+  ],
+  "nonformal_review_claims": [
+    {
+      "id": "nonformal_claim_1",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_1",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_1",
+        "role": "citation",
+        "text_excerpt": "Citation-use agent failed before producing a normal citation relevance review. Deterministic citation verification still runs separately; see external citation checks and verifier provenance for existence, DOI, URL, and resolver evidence. Failure: CliRunner t..."
+      },
+      "statement": "Citation-use agent failed before producing a normal citation relevance review. Deterministic citation verification still runs separately; see external citation checks and verifier provenance for existence, DOI, URL, and resolver evidence. Failure: CliRunner timed out after 360s for role citation Deterministic citation verifier checked 53 bibliography entries."
+    },
+    {
+      "id": "nonformal_claim_2",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_2",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_2",
+        "role": "citation",
+        "text_excerpt": "resolved via crossref"
+      },
+      "statement": "resolved via crossref"
+    },
+    {
+      "id": "nonformal_claim_3",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_3",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_3",
+        "role": "citation",
+        "text_excerpt": "Deterministic citation verifier result; citation-use agent timed out before relevance analysis."
+      },
+      "statement": "Deterministic citation verifier result; citation-use agent timed out before relevance analysis."
+    },
+    {
+      "id": "nonformal_claim_4",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_4",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_4",
+        "role": "citation",
+        "text_excerpt": "resolved via crossref"
+      },
+      "statement": "resolved via crossref"
+    },
+    {
+      "id": "nonformal_claim_5",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_5",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_5",
+        "role": "citation",
+        "text_excerpt": "Deterministic citation verifier result; citation-use agent timed out before relevance analysis."
+      },
+      "statement": "Deterministic citation verifier result; citation-use agent timed out before relevance analysis."
+    },
+    {
+      "id": "nonformal_claim_6",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_6",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_6",
+        "role": "citation",
+        "text_excerpt": "resolved via crossref"
+      },
+      "statement": "resolved via crossref"
+    },
+    {
+      "id": "nonformal_claim_7",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_7",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_7",
+        "role": "citation",
+        "text_excerpt": "Deterministic citation verifier result; citation-use agent timed out before relevance analysis."
+      },
+      "statement": "Deterministic citation verifier result; citation-use agent timed out before relevance analysis."
+    },
+    {
+      "id": "nonformal_claim_8",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_8",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_8",
+        "role": "citation",
+        "text_excerpt": "resolved via crossref"
+      },
+      "statement": "resolved via crossref"
+    },
+    {
+      "id": "nonformal_claim_9",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_9",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_9",
+        "role": "citation",
+        "text_excerpt": "Deterministic citation verifier result; citation-use agent timed out before relevance analysis."
+      },
+      "statement": "Deterministic citation verifier result; citation-use agent timed out before relevance analysis."
+    },
+    {
+      "id": "nonformal_claim_10",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_10",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_10",
+        "role": "citation",
+        "text_excerpt": "resolved via crossref"
+      },
+      "statement": "resolved via crossref"
+    },
+    {
+      "id": "nonformal_claim_11",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_11",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_11",
+        "role": "citation",
+        "text_excerpt": "Deterministic citation verifier result; citation-use agent timed out before relevance analysis."
+      },
+      "statement": "Deterministic citation verifier result; citation-use agent timed out before relevance analysis."
+    },
+    {
+      "id": "nonformal_claim_12",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_12",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_12",
+        "role": "citation",
+        "text_excerpt": "resolved via crossref"
+      },
+      "statement": "resolved via crossref"
+    },
+    {
+      "id": "nonformal_claim_13",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_13",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_13",
+        "role": "citation",
+        "text_excerpt": "Deterministic citation verifier result; citation-use agent timed out before relevance analysis."
+      },
+      "statement": "Deterministic citation verifier result; citation-use agent timed out before relevance analysis."
+    },
+    {
+      "id": "nonformal_claim_14",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_14",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_14",
+        "role": "citation",
+        "text_excerpt": "resolved via crossref"
+      },
+      "statement": "resolved via crossref"
+    },
+    {
+      "id": "nonformal_claim_15",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_15",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_15",
+        "role": "citation",
+        "text_excerpt": "Deterministic citation verifier result; citation-use agent timed out before relevance analysis."
+      },
+      "statement": "Deterministic citation verifier result; citation-use agent timed out before relevance analysis."
+    },
+    {
+      "id": "nonformal_claim_16",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_16",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_16",
+        "role": "citation",
+        "text_excerpt": "resolved via crossref"
+      },
+      "statement": "resolved via crossref"
+    },
+    {
+      "id": "nonformal_claim_17",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_17",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_17",
+        "role": "citation",
+        "text_excerpt": "Deterministic citation verifier result; citation-use agent timed out before relevance analysis."
+      },
+      "statement": "Deterministic citation verifier result; citation-use agent timed out before relevance analysis."
+    },
+    {
+      "id": "nonformal_claim_18",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_18",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_18",
+        "role": "citation",
+        "text_excerpt": "resolved via crossref"
+      },
+      "statement": "resolved via crossref"
+    },
+    {
+      "id": "nonformal_claim_19",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_19",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_19",
+        "role": "citation",
+        "text_excerpt": "Deterministic citation verifier result; citation-use agent timed out before relevance analysis."
+      },
+      "statement": "Deterministic citation verifier result; citation-use agent timed out before relevance analysis."
+    },
+    {
+      "id": "nonformal_claim_20",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_20",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_20",
+        "role": "citation",
+        "text_excerpt": "resolved via crossref"
+      },
+      "statement": "resolved via crossref"
+    },
+    {
+      "id": "nonformal_claim_21",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_21",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_21",
+        "role": "citation",
+        "text_excerpt": "Deterministic citation verifier result; citation-use agent timed out before relevance analysis."
+      },
+      "statement": "Deterministic citation verifier result; citation-use agent timed out before relevance analysis."
+    },
+    {
+      "id": "nonformal_claim_22",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_22",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_22",
+        "role": "citation",
+        "text_excerpt": "resolved via crossref"
+      },
+      "statement": "resolved via crossref"
+    },
+    {
+      "id": "nonformal_claim_23",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_23",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_23",
+        "role": "citation",
+        "text_excerpt": "Deterministic citation verifier result; citation-use agent timed out before relevance analysis."
+      },
+      "statement": "Deterministic citation verifier result; citation-use agent timed out before relevance analysis."
+    },
+    {
+      "id": "nonformal_claim_24",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_24",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_24",
+        "role": "citation",
+        "text_excerpt": "unverified via crossref_bibliographic: not verified by Crossref bibliographic search; no match above score threshold"
+      },
+      "statement": "unverified via crossref_bibliographic: not verified by Crossref bibliographic search; no match above score threshold"
+    },
+    {
+      "id": "nonformal_claim_25",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_25",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_25",
+        "role": "citation",
+        "text_excerpt": "Deterministic citation verifier result; citation-use agent timed out before relevance analysis."
+      },
+      "statement": "Deterministic citation verifier result; citation-use agent timed out before relevance analysis."
+    },
+    {
+      "id": "nonformal_claim_26",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_26",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_26",
+        "role": "meta_reviewer",
+        "text_excerpt": "The five specialist outputs describe a paper that extends Weyl's classical uniqueness theorem — previously established for pseudo-Riemannian manifolds — to both Galilei (non-relativistic) and Carroll (ultra-relativistic) geometry. The novelty specialist rates..."
+      },
+      "statement": "The five specialist outputs describe a paper that extends Weyl's classical uniqueness theorem — previously established for pseudo-Riemannian manifolds — to both Galilei (non-relativistic) and Carroll (ultra-relativistic) geometry. The novelty specialist rates the contribution as significant (score 0.75, confidence 0.9), identifying clear predecessor work that the paper explicitly generalises. However, two structural problems dominate the review. First, the pipeline received only the abstract an…"
+    },
+    {
+      "id": "nonformal_claim_28",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_28",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_28",
+        "role": "meta_reviewer",
+        "text_excerpt": "The paper addresses a clearly motivated and underexplored gap: while Weyl's theorem has been extended to Newtonian and Newton-Cartan geometry individually (Curiel:2015, March:2025), no prior work provides a unified and systematic treatment covering both Galil..."
+      },
+      "statement": "The paper addresses a clearly motivated and underexplored gap: while Weyl's theorem has been extended to Newtonian and Newton-Cartan geometry individually (Curiel:2015, March:2025), no prior work provides a unified and systematic treatment covering both Galilei and Carroll geometry simultaneously."
+    },
+    {
+      "id": "nonformal_claim_29",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_29",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_29",
+        "role": "meta_reviewer",
+        "text_excerpt": "The novelty specialist (confidence 0.9, score 0.75) finds the contribution significant, with well-identified prior art that the paper builds on and extends rather than duplicates."
+      },
+      "statement": "The novelty specialist (confidence 0.9, score 0.75) finds the contribution significant, with well-identified prior art that the paper builds on and extends rather than duplicates."
+    },
+    {
+      "id": "nonformal_claim_30",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_30",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_30",
+        "role": "meta_reviewer",
+        "text_excerpt": "Abstract-level attribution is accurate: the founding theorem is correctly credited to Weyl:1921, the physical motivation to EPS:1972, and the limiting-case picture to the dual c-to-infinity and c-to-zero contractions established in Duval et al.:2014."
+      },
+      "statement": "Abstract-level attribution is accurate: the founding theorem is correctly credited to Weyl:1921, the physical motivation to EPS:1972, and the limiting-case picture to the dual c-to-infinity and c-to-zero contractions established in Duval et al.:2014."
+    },
+    {
+      "id": "nonformal_claim_31",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_31",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_31",
+        "role": "meta_reviewer",
+        "text_excerpt": "The paper situates itself within a coherent and active research area, directly building on the unified connection framework of Vigneron.Barzegar.Read:2025, giving readers a clear entry point into the technical setting."
+      },
+      "statement": "The paper situates itself within a coherent and active research area, directly building on the unified connection framework of Vigneron.Barzegar.Read:2025, giving readers a clear entry point into the technical setting."
+    },
+    {
+      "id": "nonformal_claim_32",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_32",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_32",
+        "role": "meta_reviewer",
+        "text_excerpt": "The entire paper body — theorem statements, definitions of Galilei and Carroll conformal and projective structures, lemmas, and proofs — is absent from the review artifact (sections[] is empty), making independent technical verification of the headline unique..."
+      },
+      "statement": "The entire paper body — theorem statements, definitions of Galilei and Carroll conformal and projective structures, lemmas, and proofs — is absent from the review artifact (sections[] is empty), making independent technical verification of the headline uniqueness claims impossible (technical_correctness C8, severity critical)."
+    },
+    {
+      "id": "nonformal_claim_33",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_33",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_33",
+        "role": "meta_reviewer",
+        "text_excerpt": "No machine-checkable proof artifact is provided for either the Galilei or Carroll Weyl-type theorem in a proof assistant such as Lean 4, Coq, Agda, or Isabelle, leaving the load-bearing uniqueness claims unverifiable by automated means in a math-amenable fiel..."
+      },
+      "statement": "No machine-checkable proof artifact is provided for either the Galilei or Carroll Weyl-type theorem in a proof assistant such as Lean 4, Coq, Agda, or Isabelle, leaving the load-bearing uniqueness claims unverifiable by automated means in a math-amenable field; reproducibility flagged both gaps at critical severity, with suggested locators proofs/galilei_weyl_type_theorem.lean and proofs/carroll_weyl_type_theorem.lean."
+    },
+    {
+      "id": "nonformal_claim_34",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_34",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_34",
+        "role": "meta_reviewer",
+        "text_excerpt": "The abstract's phrasing 'We discuss analogous results' does not distinguish original theorems from restatements of Curiel:2015, Dewar.Read:2020, or March:2025, all of which establish Newton-Cartan or Galilean Weyl-type results; without the body, the paper's i..."
+      },
+      "statement": "The abstract's phrasing 'We discuss analogous results' does not distinguish original theorems from restatements of Curiel:2015, Dewar.Read:2020, or March:2025, all of which establish Newton-Cartan or Galilean Weyl-type results; without the body, the paper's independent contribution cannot be assessed (technical_correctness C7, severity major)."
+    },
+    {
+      "id": "nonformal_claim_35",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_35",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_35",
+        "role": "meta_reviewer",
+        "text_excerpt": "The definition of 'suitably defined conformal structure' for Galilei and Carroll spacetimes — the central object of both theorems — is not fixed or justified in any available material, leaving the theorem hypotheses ambiguous and the choice of conformal struc..."
+      },
+      "statement": "The definition of 'suitably defined conformal structure' for Galilei and Carroll spacetimes — the central object of both theorems — is not fixed or justified in any available material, leaving the theorem hypotheses ambiguous and the choice of conformal structure unmotivated relative to alternatives in Duval-Horvathy:2011 and Duval et al.:2014b (technical_correctness C6, C3, C4, severity minor to major)."
+    },
+    {
+      "id": "nonformal_claim_36",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_36",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_36",
+        "role": "meta_reviewer",
+        "text_excerpt": "No code or data repository of any kind is provided and code availability is unspecified; the reproducibility specialist assigned a score of 0.12."
+      },
+      "statement": "No code or data repository of any kind is provided and code availability is unspecified; the reproducibility specialist assigned a score of 0.12."
+    },
+    {
+      "id": "nonformal_claim_37",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_37",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_37",
+        "role": "meta_reviewer",
+        "text_excerpt": "Which theorems are original to this paper, and which are restatements or mild generalisations of Curiel:2015, Dewar.Read:2020, or March:2025? Can the introduction explicitly tabulate the new contributions and distinguish them from prior results?"
+      },
+      "statement": "Which theorems are original to this paper, and which are restatements or mild generalisations of Curiel:2015, Dewar.Read:2020, or March:2025? Can the introduction explicitly tabulate the new contributions and distinguish them from prior results?"
+    },
+    {
+      "id": "nonformal_claim_38",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_38",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_38",
+        "role": "meta_reviewer",
+        "text_excerpt": "What precise definition of Galilei conformal structure is adopted, and how does it relate to the alternatives studied in Duval-Horvathy:2011 and Duval et al.:2014b? Is the same definitional choice made for the Carroll case, and if so, what justifies it as the..."
+      },
+      "statement": "What precise definition of Galilei conformal structure is adopted, and how does it relate to the alternatives studied in Duval-Horvathy:2011 and Duval et al.:2014b? Is the same definitional choice made for the Carroll case, and if so, what justifies it as the canonical analogue for a Weyl-type argument?"
+    },
+    {
+      "id": "nonformal_claim_39",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_39",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_39",
+        "role": "meta_reviewer",
+        "text_excerpt": "Do the sections of the paper contain complete, self-contained proofs of the Galilei and Carroll Weyl-type theorems, or are proofs deferred to a companion paper? If proofs are present, what caused the review pipeline to extract an empty sections array?"
+      },
+      "statement": "Do the sections of the paper contain complete, self-contained proofs of the Galilei and Carroll Weyl-type theorems, or are proofs deferred to a companion paper? If proofs are present, what caused the review pipeline to extract an empty sections array?"
+    },
+    {
+      "id": "nonformal_claim_40",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_40",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_40",
+        "role": "meta_reviewer",
+        "text_excerpt": "Would the authors consider providing machine-checkable proof files in Lean 4 or Coq for the headline uniqueness theorems in a public repository, given that the math-ph community increasingly expects formal verification for foundational geometric results?"
+      },
+      "statement": "Would the authors consider providing machine-checkable proof files in Lean 4 or Coq for the headline uniqueness theorems in a public repository, given that the math-ph community increasingly expects formal verification for foundational geometric results?"
+    },
+    {
+      "id": "nonformal_claim_41",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_41",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_41",
+        "role": "meta_reviewer",
+        "text_excerpt": "The citation specialist timed out and left no verifiable evidence regarding reference existence or DOI resolution; are there unusual citation formats or very recent preprints without stable DOIs in the bibliography that may have caused this failure?"
+      },
+      "statement": "The citation specialist timed out and left no verifiable evidence regarding reference existence or DOI resolution; are there unusual citation formats or very recent preprints without stable DOIs in the bibliography that may have caused this failure?"
+    },
+    {
+      "id": "nonformal_claim_44",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_44",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_44",
+        "role": "novelty",
+        "text_excerpt": "Establishes the foundational theorem for pseudo-Riemannian manifolds; the current work generalizes this to the degenerate metric cases of Galilean and Carrollian geometry."
+      },
+      "statement": "Establishes the foundational theorem for pseudo-Riemannian manifolds; the current work generalizes this to the degenerate metric cases of Galilean and Carrollian geometry."
+    },
+    {
+      "id": "nonformal_claim_46",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_46",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_46",
+        "role": "novelty",
+        "text_excerpt": "Provides the physical and geometric motivation for determining the metric via projective and conformal structures in the Lorentzian case; this paper performs the analogous derivation for the non-relativistic and ultra-relativistic limits."
+      },
+      "statement": "Provides the physical and geometric motivation for determining the metric via projective and conformal structures in the Lorentzian case; this paper performs the analogous derivation for the non-relativistic and ultra-relativistic limits."
+    },
+    {
+      "id": "nonformal_claim_48",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_48",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_48",
+        "role": "novelty",
+        "text_excerpt": "Previously extended the theorem to the specific context of Newtonian gravity; the current work provides a more general and systematic treatment covering both Galilean and Carrollian structures."
+      },
+      "statement": "Previously extended the theorem to the specific context of Newtonian gravity; the current work provides a more general and systematic treatment covering both Galilean and Carrollian structures."
+    },
+    {
+      "id": "nonformal_claim_50",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_50",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_50",
+        "role": "novelty",
+        "text_excerpt": "Recent work focusing on the Newton-Cartan case; the current paper expands upon these insights to include a comprehensive analysis of Carrollian geometry."
+      },
+      "statement": "Recent work focusing on the Newton-Cartan case; the current paper expands upon these insights to include a comprehensive analysis of Carrollian geometry."
+    },
+    {
+      "id": "nonformal_claim_52",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_52",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_52",
+        "role": "novelty",
+        "text_excerpt": "Provides the unified geometric framework for connections in these limits which the authors utilize here to state and prove their results."
+      },
+      "statement": "Provides the unified geometric framework for connections in these limits which the authors utilize here to state and prove their results."
+    },
+    {
+      "id": "nonformal_claim_53",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_53",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_53",
+        "role": "summary",
+        "text_excerpt": "A classical theorem about spacetime geometry is proven to hold in both the non-relativistic (Newtonian) and ultra-relativistic (speed-of-light) limits of Einstein's relativity."
+      },
+      "statement": "A classical theorem about spacetime geometry is proven to hold in both the non-relativistic (Newtonian) and ultra-relativistic (speed-of-light) limits of Einstein's relativity."
+    },
+    {
+      "id": "nonformal_claim_54",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_54",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_54",
+        "role": "summary",
+        "text_excerpt": "In modern physics, spacetime geometry is often described using mathematical structures called metrics. A classical theorem by Hermann Weyl showed that a particular type of metric can be uniquely reconstructed if you know two pieces of information: its conform..."
+      },
+      "statement": "In modern physics, spacetime geometry is often described using mathematical structures called metrics. A classical theorem by Hermann Weyl showed that a particular type of metric can be uniquely reconstructed if you know two pieces of information: its conformal structure (which angles are preserved) and its projective structure (which paths are straightest lines). This is a powerful result because it says that these two pieces of geometric information completely determine the metric.\n\nThis pape…"
+    },
+    {
+      "id": "nonformal_claim_55",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_55",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_55",
+        "role": "summary",
+        "text_excerpt": "Extends Weyl's uniqueness theorem to Galilei (non-relativistic) geometry"
+      },
+      "statement": "Extends Weyl's uniqueness theorem to Galilei (non-relativistic) geometry"
+    },
+    {
+      "id": "nonformal_claim_56",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_56",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_56",
+        "role": "summary",
+        "text_excerpt": "Extends Weyl's uniqueness theorem to Carroll (ultra-relativistic) geometry"
+      },
+      "statement": "Extends Weyl's uniqueness theorem to Carroll (ultra-relativistic) geometry"
+    },
+    {
+      "id": "nonformal_claim_57",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_57",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_57",
+        "role": "summary",
+        "text_excerpt": "Defines conformal and projective structures for non-relativistic spacetime geometries"
+      },
+      "statement": "Defines conformal and projective structures for non-relativistic spacetime geometries"
+    },
+    {
+      "id": "nonformal_claim_58",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_58",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_58",
+        "role": "summary",
+        "text_excerpt": "Proves that torsion-free connections compatible with conformal structures are uniquely determined by projective structure in Galilei and Carroll settings"
+      },
+      "statement": "Proves that torsion-free connections compatible with conformal structures are uniquely determined by projective structure in Galilei and Carroll settings"
+    },
+    {
+      "id": "nonformal_claim_59",
+      "kind": "nonformal_review_claim",
+      "lean_eligible": false,
+      "reason": "review_output_used_as_context_not_formal_math_source",
+      "source_claim_id": "claim_59",
+      "source_span": {
+        "artifact": "review_loop/claims.json",
+        "claim_id": "claim_59",
+        "role": "technical_correctness",
+        "text_excerpt": "mostly_sound"
+      },
+      "statement": "mostly_sound"
+    }
+  ],
+  "paper_math_sources": {
+    "artifact_sources": [
+      "review_inputs.artifact",
+      "review_input:/Users/mlong/Documents/Development/grokrxiv-data/papers/2606.00799/review_input.json",
+      "equations.json",
+      "theorem_graph.json"
+    ],
+    "body": {
+      "artifact": "body.md",
+      "sections": [],
+      "text": ""
+    },
+    "equations": {
+      "arxiv_id": "2606.00799",
+      "equations": []
+    },
+    "paper_id": "b553444b-90b6-48e7-a036-c16c212509a0",
+    "schema_version": "1.0.0",
+    "semantic_ast": null,
+    "source": "paper_extract_artifacts",
+    "theorem_graph": {
+      "arxiv_id": "2606.00799",
+      "nodes": []
+    },
+    "warnings": []
+  },
+  "review_id": "53c9f4e1-3d3b-4f97-950f-65a749bf01dd",
+  "schema_version": "1.0.0",
+  "source": "paper_math_sources",
+  "theorem_candidates": []
+}
