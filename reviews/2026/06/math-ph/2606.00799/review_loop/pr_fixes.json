@@ -1,0 +1,88 @@
+{
+  "artifact_worktree": ".agenthero/artifacts/grokrxiv/reviews/eca527eb-3930-49e6-a828-66dd64611430/review_loop/fixed",
+  "compile_review_loop": {
+    "agent_output_audit_summary": {
+      "accepted": 0,
+      "by_role": {
+        "pr_artifact_fixer": {
+          "accepted": 0,
+          "rejected": 1,
+          "total": 1
+        }
+      },
+      "rejected": 1,
+      "total": 1
+    },
+    "attempts": [
+      {
+        "agent_output_audits": [
+          {
+            "artifact_dir": "review_loop/agent_outputs/pr_fixer/round_1/pr_artifact_fixer",
+            "artifacts": {
+              "decision": "review_loop/agent_outputs/pr_fixer/round_1/pr_artifact_fixer/decision.json",
+              "input": "review_loop/agent_outputs/pr_fixer/round_1/pr_artifact_fixer/input.json",
+              "output": "review_loop/agent_outputs/pr_fixer/round_1/pr_artifact_fixer/output.json",
+              "raw_stderr": "review_loop/agent_outputs/pr_fixer/round_1/pr_artifact_fixer/raw_stderr.txt",
+              "raw_stdout": "review_loop/agent_outputs/pr_fixer/round_1/pr_artifact_fixer/raw_stdout.txt",
+              "schema": "review_loop/agent_outputs/pr_fixer/round_1/pr_artifact_fixer/schema.json",
+              "schema_validation": "review_loop/agent_outputs/pr_fixer/round_1/pr_artifact_fixer/schema_validation.json",
+              "semantic_validation": "review_loop/agent_outputs/pr_fixer/round_1/pr_artifact_fixer/semantic_validation.json",
+              "tool_validation": "review_loop/agent_outputs/pr_fixer/round_1/pr_artifact_fixer/tool_validation.json"
+            },
+            "attempt": 1,
+            "decision": {
+              "reason": "CliRunner timed out after 360s for role pr_artifact_fixer",
+              "status": "rejected"
+            },
+            "latency_ms": null,
+            "model": null,
+            "phase": "generate",
+            "role": "pr_artifact_fixer",
+            "runner": null,
+            "schema_path": "schemas/review_loop_code_artifact.schema.json",
+            "schema_validation": {
+              "reason": "CliRunner timed out after 360s for role pr_artifact_fixer",
+              "schema_path": "schemas/review_loop_code_artifact.schema.json",
+              "status": "fail"
+            },
+            "semantic_validation": {
+              "status": "not_applicable"
+            },
+            "tokens_in": null,
+            "tokens_out": null,
+            "tool_validation": {
+              "status": "not_applicable"
+            }
+          }
+        ],
+        "attempt": 1,
+        "author_error": "CliRunner timed out after 360s for role pr_artifact_fixer",
+        "author_role": "pr_artifact_fixer",
+        "status": "fail"
+      }
+    ],
+    "author_role": "pr_artifact_fixer",
+    "compile_timeout_secs": 120,
+    "filename": "review.tex",
+    "final_path": ".agenthero/artifacts/grokrxiv/reviews/eca527eb-3930-49e6-a828-66dd64611430/review_loop/fixed/review.tex",
+    "fixer_role": "pr_artifact_fixer",
+    "harness": {
+      "branch": "review-loop/pr/eca527eb3930",
+      "path": ".agenthero/artifacts/grokrxiv/reviews/eca527eb-3930-49e6-a828-66dd64611430/review_loop/fixed"
+    },
+    "language": "latex",
+    "max_attempts": 2,
+    "reviewer_role": "pr_artifact_reviewer",
+    "stage": "pr_review_fix_code",
+    "status": "fail",
+    "target": "pr"
+  },
+  "fixed_pdf": null,
+  "fixed_tex": "review_loop/fixed/review.tex",
+  "issues": [
+    "CliRunner timed out after 360s for role pr_artifact_fixer",
+    "fixed review.pdf was not produced"
+  ],
+  "stage": "pr_fixer",
+  "status": "fail"
+}
