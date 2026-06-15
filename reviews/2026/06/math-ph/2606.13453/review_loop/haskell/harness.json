@@ -1,0 +1,109 @@
+{
+  "baseline_commit": {
+    "add": {
+      "command": [
+        "git",
+        "add",
+        "."
+      ],
+      "duration_ms": 10,
+      "exit_code": 0,
+      "status": "pass",
+      "stderr": "",
+      "stdout": ""
+    },
+    "cached_diff_stat": {
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--stat"
+      ],
+      "duration_ms": 8,
+      "exit_code": 0,
+      "status": "pass",
+      "stderr": "",
+      "stdout": " GROKRXIV_HARNESS.md     |    9 +\n harness_task_input.json | 8238 +++++++++++++++++++++++++++++++++++++++++++++++\n 2 files changed, 8247 insertions(+)\n"
+    },
+    "commit": {
+      "command": [
+        "git",
+        "commit",
+        "-m",
+        "baseline review-loop harness"
+      ],
+      "duration_ms": 21,
+      "exit_code": 0,
+      "status": "pass",
+      "stderr": "",
+      "stdout": "[review-loop/haskell/9f90f0086e59 (root-commit) 1dee880] baseline review-loop harness\n 2 files changed, 8247 insertions(+)\n create mode 100644 GROKRXIV_HARNESS.md\n create mode 100644 harness_task_input.json\n"
+    },
+    "head": {
+      "command": [
+        "git",
+        "rev-parse",
+        "--short",
+        "HEAD"
+      ],
+      "duration_ms": 7,
+      "exit_code": 0,
+      "status": "pass",
+      "stderr": "",
+      "stdout": "1dee880\n"
+    }
+  },
+  "branch": "review-loop/haskell/9f90f0086e59",
+  "path": ".agenthero/artifacts/grokrxiv/reviews/9f90f008-6e59-4227-8336-d1351de284c5/review_loop/haskell",
+  "setup": [
+    {
+      "command": [
+        "git",
+        "init"
+      ],
+      "duration_ms": 14,
+      "exit_code": 0,
+      "status": "pass",
+      "stderr": "",
+      "stdout": "Initialized empty Git repository in /Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/9f90f008-6e59-4227-8336-d1351de284c5/review_loop/haskell/.git/\n"
+    },
+    {
+      "command": [
+        "git",
+        "config",
+        "user.name",
+        "GrokRxiv Review Loop"
+      ],
+      "duration_ms": 7,
+      "exit_code": 0,
+      "status": "pass",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "git",
+        "config",
+        "user.email",
+        "review-loop@grokrxiv.local"
+      ],
+      "duration_ms": 6,
+      "exit_code": 0,
+      "status": "pass",
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "command": [
+        "git",
+        "checkout",
+        "-B",
+        "review-loop/haskell/9f90f0086e59"
+      ],
+      "duration_ms": 7,
+      "exit_code": 0,
+      "status": "pass",
+      "stderr": "Switched to a new branch 'review-loop/haskell/9f90f0086e59'\n",
+      "stdout": ""
+    }
+  ]
+}
