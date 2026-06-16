@@ -1,0 +1,212 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes} 
+
+\usepackage[
+  backend=biber,
+  style=numeric,   % common in math; gives labels like [Smi23]
+  url=false,          % suppress URLs
+  doi=false,          % suppress DOIs
+  isbn=false,         % suppress ISBNs
+  giveninits=true,    % turns "John" into "J."
+  maxnames=99,        % never truncate author lists with "et al."
+  sorting=none        % nyt -> sort by name → year → title
+]{biblatex}
+\AtEveryBibitem{\clearfield{issn}}   % suppress ISSNs
+\addbibresource{bibliografia.bib}
+\DeclareFieldFormat{eprint:arxiv}{%
+  \href{https://arxiv.org/abs/#1}{arXiv\addcolon\space#1}%
+}
+\DeclareFieldFormat{eprint:stackexchange}{%
+  \href{#1}{#1}%
+}
+\renewbibmacro{in:}{}
+
+\usepackage{authblk}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{xfrac}
+\usepackage{parskip} % careful with some document classes, but OK here
+\usepackage{fancyhdr}
+\usepackage{vmargin}
+\usepackage{listings}
+%\usepackage[inline]{showlabels}
+\usepackage{dsfont}
+\usepackage{tabu}
+\usepackage{enumitem}
+\usepackage{pdflscape}
+\usepackage{systeme}
+\usepackage{stmaryrd}
+\usepackage{physics}
+\usepackage{pdfpages}
+\usepackage{float}
+\usepackage{tikz-cd}
+\usepackage{mathrsfs}
+\usepackage{tensor}
+\usepackage{upgreek}
+% \usepackage[inline]{showlabels} % <--- comment out while debugging
+\setmarginsrb{3 cm}{0 cm}{3 cm}{2.5 cm}{1 cm}{1.5 cm}{1 cm}{1.5 cm}
+\usepackage{tikzit}
+% \input{style.tikzstyles} % <--- comment out while debugging (this file can redefine macros)
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[colorlinks,citecolor={blue},urlcolor={blue}]{hyperref}
+\usepackage{varioref}
+\usepackage[capitalise]{cleveref}
+\usepackage{array}
+\usepackage{makecell}
+
+\usetikzlibrary{patterns.meta}
+
+\newcommand{\bb}[1]{\mathbb{#1}}
+\newcommand{\Grad}[1]{\textup{grad}_{#1}\,}
+\newcommand{\Ker}{\textup{Ker }} 
+
+\newtheoremstyle{break}
+{\topsep}{\topsep}% 
+{\itshape}{}% 
+{\bfseries}{}% 
+%{\newline}{}% 
+\theoremstyle{break} 
+\newtheorem{theorem}{Theorem}[section] 
+\newtheorem{definition}[theorem]{Definition} 
+\newtheorem{corollary}[theorem]{Corollary} 
+\newtheorem{lemma}[theorem]{Lemma} 
+\newtheorem{proposition}[theorem]{Proposition} 
+\newtheorem{remark}[theorem]{Remark} 
+\newtheorem{notation}[theorem]{Notation} 
+\newtheorem{example}[theorem]{Example} 
+\newtheorem{assumption}[theorem]{Assumption} 
+\newtheorem{conjecture}[theorem]{Conjecture} 
+\newtheorem*{theorem-non}{Theorem} 
+\newtheorem*{corollary-non}{Corollary} 
+\newtheorem*{conjecture-non}{Conjecture}
+\newtheorem*{lemma-non}{Lemma} 
+
+\crefname{assumption}{Assumption}{Assumptions} 
+\crefname{notation}{notation}{notations}
+
+
+%\pagestyle{fancy}
+%\fancyhf{}
+%\lhead{\leftmark}
+%\cfoot{\thepage}
+
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.5em}
+\allowdisplaybreaks
+\numberwithin{equation}{section}
+%\setcitestyle{square}
+
+\makeatletter
+\renewcommand\@maketitle{%
+  \newpage
+  \null
+  \begin{center}%
+    {\LARGE \@title \par}%
+    \vskip 1em%
+    {\large
+      \lineskip .5em%
+      \begin{tabular}[t]{c}%
+        \@author
+      \end{tabular}\par}%
+  \end{center}%
+  \par
+  \vskip 1.5em}
+\makeatother
+
+\interfootnotelinepenalty=10000
+
+\crefformat{equation}{Eq.~(#2#1#3)} %So that the eq numbers appear in italics whenever needed. 
+
+%\makeatletter
+%\renewcommand{\maketitle}{
+%  \begin{center}
+%    {\LARGE \@title \par}
+%    \vskip 1em
+%    {\large \@author \par}
+%  \end{center}
+%}
+%\makeatother
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\renewcommand{\Affilfont}{\footnotesize}
+
+\title{Rapid mixing for Gibbs measures in Riemannian manifolds}
+
+\author[1,2]{Ángela Capel}
+\author[3]{Marco Castrillón López}
+\author[4]{Sofyan Iblisdir}
+\author[5]{Angelo Lucia}
+\author[6,7]{Pablo~Páez Velasco\thanks{pablopaez@ucm.es}}
+\author[6,7]{David Pérez García}
+
+\affil[1]{\textit{Department of Applied Mathematics and Theoretical Physics, University of Cambridge, Wilberforce Road, Cambridge, CB3 0WA, United Kingdom}}
+\affil[2]{\textit{Fachbereich Mathematik, Universität Tübingen, 72076 Tübingen, Germany}}
+\affil[3]{\textit{Departamento de Álgebra, Geometría y Topología, Facultad de Matematicas, Universidad Complutense de Madrid, 28040 Madrid, Spain}}
+\affil[4]{\textit{Departament de Física Quàntica i Astrofísica \& Institut de Ciències del Cosmos,
+Universitat de Barcelona, 08028 Barcelona, Spain}}
+\affil[5]{\textit{Dipartimento di Matematica, Politecnico di Milano, 20133 Milano, Italy}}
+\affil[6]{\textit{Departamento de An\'{a}lisis Matemático y Matemática Aplicada, Facultad de Matemáticas, Universidad Complutense de Madrid, 28040 Madrid, Spain}}
+\affil[7]{\textit{Instituto de Ciencias Matemáticas, 28049 Madrid, Spain}}
+
+\begin{document}
+\maketitle
+\renewcommand{\thefootnote}{\arabic{footnote}}
+\setcounter{footnote}{0}
+
+\begin{abstract}
+Langevin dynamics on Riemannian manifolds is analyzed. Conditions ensuring the existence of a suitable logarithmic Sobolev inequality (rapid mixing to the Gibbs measure) are identified. These conditions involve the curvature of the manifold, the inverse temperature, escaping directions from saddle points, and exclude barren plateaus and spurious local minima. We show that when these conditions are met, mixing times polynomial in the dimension of the manifold are achievable. This result is obtained through a relation between Langevin processes in the domain and in the image of a Riemannian submersion. Such a relation can be of independent interest. 
+\end{abstract}
+\newpage
+
+\hypersetup{linkcolor=black}
+\tableofcontents
+\hypersetup{linkcolor=red}
+
+\newpage 
+
+\input{TikzFigures/preamble}
+
+\input{Chapters/Intro}
+\newpage
+\input{Chapters/PoincareIneq}
+\newpage
+\input{Chapters/Lifting_Poincare}
+\newpage
+\input{Chapters/Upgrading}
+\newpage 
+\input{Chapters/ProofThm}
+\newpage
+\input{Chapters/Suboptimality}
+\newpage
+\input{Chapters/Examples}
+\newpage
+
+\section*{Acknowledgements}
+
+P.\,P.\,V. would like to thank Pablo Hidalgo Palencia for many fruitful conversations throughout the development of this work, and Tomasz Kania for generously providing the argument for the escaping time estimates of the generalized CIR process (see \cref{prop:boundsol}). A.\,C. acknowledges the support of the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation) - Project-ID 470903074 - TRR 352. This project was funded within the QuantERA II Programme which has received funding from the EU’s H2020 research and innovation programme under the GA No 101017733. M.\,C.\,L. was supported by  Project PID2024-156578NB-I00 funded by MICIU /AEI /10.13039/501100011033 / FEDER, EU. S.\,I. acknowledges financial support from the “Center of Excellence Maria de Maeztu 2025-2029” award to the Institute of Cosmos Sciences, grant CEX2024-001451-M, funded by MICIU/AEI/10.13039/501100011033. A.\,L. acknowledges support from the Italian Ministry of University and Research (MUR), through ``Programma per Giovani Ricercatori Rita Levi Montalcini'', the grant ``Dipartimento di Eccellenza 2023-2027'' of Dipartimento di Matematica, Politecnico di Milano, as well as the National Group of Mathematical Physics (GNFM) of the Italian Institute for High Mathematics (INdAM). P.\,P.\, V. acknowledges support of the Spanish Ministry of Science and Innovation MCIN/AEI/10.13039/501100011033 (CEX2023-001347-S,CEX2019-000904-S, CEX2019-000904-S-21-2). This work has been funded by the Spanish Ministry of Science, Innovation and Universities MICIU/AEI/10.13039/501100011033 (CEX2023-001347-S, PID2023-146758NB- I00), Comunidad de Madrid (TEC-2024/COM-84-QUITEMAD-CM), Universidad Complutense de Madrid (FEI-EU-22-06),  and the Ministry for Digital Transformation and of Civil Service of the Spanish Government through the QUANTUM ENIA project call - Quantum Spain project, and by the European Union through the Recovery, Transformation and Resilience Plan - NextGenerationEU within the framework of the Digital Spain 2026 Agenda. 
+
+%\bibliographystyle{unsrtnat} % We choose the "plain" reference style
+%\bibliography{bibliografia} % Entries are in
+%\nocite{*}
+\printbibliography[heading=bibintoc]
+
+\newpage 
+
+\appendix 
+\input{Chapters/Geometry}
+\newpage
+\input{Chapters/Sobolev_Spaces}
+\newpage 
+\input{Chapters/BakrEmery}
+\newpage
+\input{Chapters/Misc}
+\newpage
+\input{Chapters/PDEs}
+\newpage
+\input{Chapters/Laplacian}
+\end{document}
