@@ -1,0 +1,1776 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Rapid mixing for Gibbs measures in Riemannian manifolds — GrokRxiv Review</title>
+  <meta name="generator" content="grokrxiv-render">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- KaTeX is rendered client-side; math is kept as \( ... \) and \[ ... \] delimiters. -->
+  <style>
+    :root { color-scheme: light dark; --fg: #111; --muted: #555; --bg: #fff;
+            --accent: #1f6feb; --border: #d0d7de; --banner: #fff3cd; --banner-fg: #664d03; }
+    @media (prefers-color-scheme: dark) {
+      :root { --fg: #e6edf3; --muted: #8b949e; --bg: #0d1117; --accent: #58a6ff;
+              --border: #30363d; --banner: #3a2f0b; --banner-fg: #f1c453; }
+    }
+    body { font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+           color: var(--fg); background: var(--bg); max-width: 820px;
+           margin: 0 auto; padding: 24px; }
+    h1 { font-size: 1.7rem; line-height: 1.25; margin: 0 0 0.5rem; }
+    h2 { font-size: 1.2rem; margin-top: 2rem; border-bottom: 1px solid var(--border); padding-bottom: .25rem; }
+    .muted { color: var(--muted); }
+    .disclaimer { background: var(--banner); color: var(--banner-fg); border: 1px solid var(--border);
+                  padding: .75rem 1rem; border-radius: 6px; margin: 0 0 1.5rem; font-weight: 600; }
+    .footer-disclaimer { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--border);
+                         color: var(--muted); font-size: .9rem; }
+    .brand { font-weight: 700; color: var(--accent); }
+    details { border: 1px solid var(--border); border-radius: 6px; padding: .75rem 1rem; margin: .5rem 0; }
+    details > summary { cursor: pointer; font-weight: 600; }
+    .meta-link { font-size: .9rem; }
+    ul { padding-left: 1.25rem; }
+    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .agent-grid { display: grid; gap: .5rem; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 999px;
+             background: var(--border); color: var(--fg); font-size: .8rem; }
+    .badge.pass { background: #1f883d; color: #fff; }
+    .badge.warn { background: #bf8700; color: #fff; }
+    .badge.fail { background: #cf222e; color: #fff; }
+    .target-grid { display: grid; gap: .75rem; padding: 0; list-style: none; }
+    .revision-target { border: 1px solid var(--border); border-radius: 6px; padding: .9rem 1rem;
+                       background: rgba(127, 127, 127, .08); }
+    .target-title { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: 0 0 .75rem; }
+    .target-fields { display: grid; gap: .5rem; margin: 0; }
+    .target-field { display: grid; gap: .35rem; border: 1px solid var(--border);
+                    border-radius: 6px; padding: .65rem .75rem; }
+    .target-field.required { border-color: #bf8700; background: rgba(191, 135, 0, .12); }
+    .field-label { color: var(--muted); font-size: .75rem; font-weight: 700; text-transform: uppercase; }
+    .field-value { margin: 0; overflow-wrap: anywhere; }
+    .field-value.codeish { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Rapid mixing for Gibbs measures in Riemannian manifolds</h1>
+    <p class="muted">
+      <span class="brand">GrokRxiv</span> review of
+      <a class="meta-link" href="https://arxiv.org/abs/2606.13453">arXiv:2606.13453</a>
+       · <span>math-ph</span>
+    </p>
+    <p class="muted">
+      Ángela Capel, Marco Castrillón-López, Sofyan Iblisdir, Angelo Lucia, Pablo Páez-Velasco, David Pérez-García
+    </p>
+  </header>
+
+  <section>
+    <h2>TL;DR</h2>
+    <p>The paper makes a significant contribution by establishing sufficient conditions for rapid mixing of Langevin dynamics on compact Riemannian manifolds, extending prior results from product-of-spheres settings (Li &amp; Erdogdu 2023) to a substantially broader class of manifolds including Lie group quotients via a Riemannian submersion lifting technique. The novelty specialist rates the work significant (score 0.75, confidence 0.90), and the technical correctness specialist finds the core analytical architecture mostly sound (confidence 0.62), with the principal results—the Poincaré inequality on the quotient manifold (C2), the local escape time bound (C3), the CD-to-LSI tightening (C4), and the Riemannian submersion lifting (C7)—all assessed as supported. The primary critical gap identified across two specialists is the complete absence of executable or formally verified proof artifacts: the reproducibility specialist flags a missing formal proof artifact at critical severity and missing executable benchmarks for the trace-ratio and Ising applications at major severity, and the technical correctness specialist independently flags the same absence as an unsupported major claim (C9). Since the paper&#x27;s field (stat.ML &#x2f; math.PR) lies within the code-amenable set and two specialists flagged proof-as-code artifacts missing at major or critical severity, the recommendation defaults to major_revision. Additional minor technical issues include a typographical error in Lemma 80 (R stated as 2ε&#x2f;A_2 instead of √(2ε&#x2f;A_2)), an imprecise mixing-time statement in Remark 16 that conflates the TV-decay rate with the actual mixing time to ε, and unverified polynomial scaling of 13+ geometric constants in any concrete manifold family. Citation quality is excellent overall, with two missing references (Hebey on Sobolev spaces, McClean et al. on barren plateaus) and one Mathematics Stack Exchange post used as the primary source for a technical CIR escape-time lemma.</p>
+    <p class="muted">Recommendation: <strong>Major revision</strong> · Confidence: 78%</p>
+  </section>
+
+  <section>
+    <h2>Strengths</h2>
+    <ul>
+      <li>The generalization of rapid mixing analysis from products of spheres to compact Riemannian quotient manifolds via Riemannian submersions is technically non-trivial and substantially broadens the scope of provably-efficient Gibbs sampling on curved spaces.</li><li>Explicit closed-form constants are tracked throughout the main results (LSI constants α_M and α_{M&#x2f;G}, Poincaré constant λ_*&#x2f;184), making the bounds concrete and actionable rather than merely existential.</li><li>The modular proof architecture—Poincaré inequality on quotient, submersion lifting, CD-to-LSI tightening—is clean and internally consistent, with each module independently verified by the technical correctness specialist.</li><li>The Riemannian submersion framework (Section 3) provides an elegant mechanism for handling symmetry-induced multiple global minima by reducing to the orbit space where the minimum is unique, and the lifting argument is correctly grounded in the classical Fubini-on-submersions decomposition.</li><li>The bibliography (87 entries) is comprehensive and accurately cited, spanning classical Riemannian geometry, stochastic calculus, Bakry-Émery theory, and modern physics applications with only minor hygiene issues.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Weaknesses</h2>
+    <ul>
+      <li>No executable or formally verified proof artifact accompanies the paper; the polynomial-in-dimension mixing claim cannot be independently corroborated by simulation or machine-checked proof, despite the stat.ML &#x2f; math.PR field being directly amenable to both Langevin discretization experiments and Lean&#x2f;Coq formalization.</li><li>The headline polynomial mixing time claim (Remark 16, Theorem 14) is not verified for any concrete manifold family: 13+ geometric constants are assumed to scale polynomially in dim(M) but are not established for the named applications (Stiefel quotients, mean-field Ising).</li><li>Lemma 80 contains a typographical error, stating R = 2ε&#x2f;A_2 while the proof body and Lemma 79 both require R = √(2ε&#x2f;A_2); the proof is correct under the square-root reading but the misprint is potentially misleading.</li><li>Remark 16 does not write the mixing-time-to-ε bound explicitly; the implicit scaling t_mix(ε) = poly(dim) · O(log dim) is understated and a less careful reader may conclude TV is small at t = O(1&#x2f;poly(dim)).</li><li>A Mathematics Stack Exchange post (preguntastack, 2025) is cited as the primary source for a technical CIR escape-time calculation used in Proposition 48; this non-peer-reviewed reference should be replaced or supplemented with a self-contained proof or peer-reviewed citation.</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Revision Targets</h2>
+    <div class="target-grid">
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              
+              
+              Section 1 (Theorem 14, Remark 16); Section 7 (sec:traceratio).
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">The paper is a math.PR &#x2f; stat.ML manuscript whose central operational claim — that mixing times are polynomial in dim(M) under stated assumptions — is exactly the kind of quantitative claim that benefits from empirical corroboration. The named applications (trace-ratio quotient minimization, 2D ferromagnetic Ising mean-field) are explicitly numerical&#x2f;algorithmic: one can simulate Langevin dynamics on Stiefel quotients and on small Ising configurations, and verify the empirical TV-decay scaling vs. dim. The paper does not ship any such artifact, nor a Lean&#x2f;Coq formalization of any of the headline inequalities (Theorem 34, Theorem 68, Theorem 78). Per the Proof-as-Code axiom for math.* &#x2f; stat.ML papers, this counts as a notable weakness.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Ship a small companion code release. Concretely: (i) `experiments&#x2f;trace_ratio&#x2f;run.py` — discretized Langevin on St(n,m)&#x2f;U(m) with empirical TV vs. iteration count for a family of dimensions, to test the dim-polynomial-mixing claim; (ii) `experiments&#x2f;ising_2d&#x2f;run.py` — mean-field Ising Gibbs sampling verifying β-scaling concentration of Theorem 78. Optionally: (iii) `proofs&#x2f;CD_to_LSI.lean` (or Coq equivalent) formalizing Theorem 68 since it is a self-contained 3-step argument.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm `Section 1 (Theorem 14, Remark 16); Section 7 (sec:traceratio).` is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              
+              
+              Section 1, Remark 16 (and Theorem 14 informal scaling).
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">The claim is a direct consequence of substituting polynomial-in-dim bounds into the explicit formulas for α_M, α_{M&#x2f;G}. Algebraically this is straightforward. However, the claim is conditional on 13+ geometric quantities all scaling polynomially in dim(M); the paper does not verify this for any concrete sequence of manifolds beyond the brief Section 7 references (trace ratio and 2D Ising mean-field). For the trace quotient on Stiefel&#x2f;Grassmann manifolds, several of these constants (injectivity radius, convexity radius, K) are known to scale non-trivially with dimension and merit explicit verification.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Add an explicit table or appendix giving polynomial scaling for each constant in at least one nontrivial family (e.g. complex Stiefel St(n,m) with n,m growing, or product of spheres). A numerical Langevin simulation `experiments&#x2f;mixing_scaling&#x2f;{stiefel,spheres}.py` recording empirical TV-decay vs. dim would directly corroborate the headline scaling claim, which is currently only an algebraic consequence of unverified per-family bounds.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm `Section 1, Remark 16 (and Theorem 14 informal scaling).` is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              
+              
+              Section 6, Theorem 78 (thm:MainFormal2), proved via Lemmas 79–80
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">Lemma 79 follows Li-Erdogdu C.1; Lemma 80 lower-bounds the partition-function denominator using Croke&#x27;s geodesic-sphere volume comparison (valid for ρ ≤ i(M)&#x2f;2). The exponentiation and Gamma-function inequalities (Batir 2008) are correctly applied. However, the statement of Lemma 80 prints &#x27;R = 2ε&#x2f;A_2&#x27;, whereas the proof and Lemma 79 both use R = √(2ε&#x2f;A_2) (and the proof&#x27;s computation `1&#x2f;(A_2 R²) = 1&#x2f;(2ε)` is only consistent with R = √(2ε&#x2f;A_2)). This is almost certainly a typographical error in the statement of Lemma 80, not a substantive one; the proof&#x27;s final inequality is correct under R = √(2ε&#x2f;A_2).</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Correct the statement of Lemma 80 to &#x27;R = √(2ε&#x2f;A_2)&#x27; to match Lemma 79 and the proof body.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm `Section 6, Theorem 78 (thm:MainFormal2), proved via Lemmas 79–80` is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              
+              
+              Section 1, Remark 16.
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">Algebraically correct given the formal LSI constants. However, the TV bound ‖ν−ρ_t‖² ≤ β · max F · e^{−2α t} requires t to grow at least like (log(β · max F))&#x2f;α to obtain ε accuracy. If β = poly(dim) and max F = poly(dim), then &#x27;log&#x27; is logarithmic in dim, so mixing-to-ε scales as α^{-1} · O(log dim) = poly(dim) · O(log dim). The remark is consistent with this reading but does not state it explicitly; a less careful reader may conclude TV is small at t = O(1&#x2f;poly(dim)), which is not what the bound shows.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">In Remark 16, write out the mixing-time-to-ε bound explicitly: t_mix(ε) = α^{-1} · log(β · max F &#x2f; ε²) = poly(dim) · log(poly(dim)&#x2f;ε), rather than just naming the exponent rate.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm `Section 1, Remark 16.` is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              
+              
+              Section 1, Remark 11; supporting Proposition prop:projectedHessian (referenced).
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">This is stated as a consequence of how the Hessian decomposes along horizontal and vertical directions for a Riemannian submersion with fiber-invariant F. The result is plausible and standard for Riemannian submersions with totally geodesic fibers (where the second fundamental form vanishes), but the full proof (Proposition 168) is in an appendix not shown here. The reduction of Assumption 9–10 on F̃ to a condition on F via Remark 11 depends critically on this projection lemma being correctly stated.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Ensure the proof of Proposition 168 (projected Hessian) explicitly treats the vertical&#x2f;horizontal split using O&#x27;Neill&#x27;s formulas and the totally-geodesic-fiber hypothesis; cross-reference here for the reader.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm `Section 1, Remark 11; supporting Proposition prop:projectedHessian (referenced).` is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+    </div>
+  </section>
+
+  <section>
+    <h2>Open Questions</h2>
+    <ul>
+      <li>Can the authors verify that each of the 13+ geometric constants (injectivity radius, convexity radius, sectional curvature bound K, etc.) scales polynomially in dim(M) for at least one non-trivial manifold family, such as complex Stiefel manifolds St(n,m) with n,m growing, and add an explicit table or appendix to the paper documenting these bounds?</li><li>Would the authors release a companion code artifact—for example, a discretized Langevin simulation on Stiefel quotients and on the mean-field Ising model—to empirically corroborate the claimed polynomial mixing scaling and the β-scaling concentration of Theorem 78?</li><li>For the Stack Exchange citation (preguntastack) used in the proof of Proposition 48, can the authors either include a self-contained proof of the CIR escape time bound in an appendix or cite a peer-reviewed equivalent, demoting the forum post to an acknowledgment?</li><li>In the proof of Proposition 168 (projected Hessian), can the authors explicitly exhibit the vertical&#x2f;horizontal decomposition using O&#x27;Neill&#x27;s formulas and invoke the totally-geodesic-fiber hypothesis, so that the reduction of Assumptions 9–10 on F̃ to conditions on F via Remark 11 is self-contained for the reader?</li><li>Would the authors add an explicit formula for t_mix(ε) to Remark 16—specifically t_mix(ε) = O(α^{-1} log(β · max F &#x2f; ε²)) = poly(dim) · O(log dim)—to prevent readers from conflating the exponential TV-decay rate with the mixing time?</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Per-Agent Reviews</h2>
+    <div class="agent-grid">
+      
+      <details>
+        <summary>
+          citation — <span class="muted">gemini-3-flash-preview</span>
+          <span class="badge warn">warn</span>
+        </summary>
+        <pre>{
+  &quot;confidence&quot;: 0.95,
+  &quot;entries&quot;: [
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Dominique Bakry&quot;,
+          &quot;Franck Barthe&quot;,
+          &quot;Patrick Cattiaux&quot;,
+          &quot;Arnaud Guillin&quot;
+        ],
+        &quot;doi&quot;: &quot;10.1214&#x2f;ECP.v13-1352&quot;,
+        &quot;key&quot;: &quot;Bakry2008&quot;,
+        &quot;raw&quot;: &quot;Bakry2008: author = Dominique Bakry and Franck Barthe and Patrick Cattiaux and Arnaud Guillin, title = A simple proof of the Poincaré inequality for a large class of probability measures, volume = 13, journal = Electronic Communications in Probability, publisher = Institute of Mathematical Statistics and Bernoulli Society, pages = 60 -- 66, keywords = log-concave measure, Lyapunov functions, Poincaré inequality, year = 2008, doi = 10.1214&#x2f;ECP.v13-1352, URL = https:&#x2f;&#x2f;doi.org&#x2f;10.1214&#x2f;ECP.v13-1352&quot;,
+        &quot;title&quot;: &quot;A simple proof of the Poincaré inequality for a large class of probability measures&quot;,
+        &quot;url&quot;: &quot;https:&#x2f;&#x2f;doi.org&#x2f;10.1214&#x2f;ECP.v13-1352&quot;,
+        &quot;venue&quot;: &quot;Electronic Communications in Probability&quot;,
+        &quot;year&quot;: 2008
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Provides a foundational proof for Poincaré inequalities, used in the paper&#x27;s convergence analysis.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Michael Creutz&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;Creutz_2023&quot;,
+        &quot;raw&quot;: &quot;Creutz_2023: place=Cambridge, series=Cambridge Monographs on Mathematical Physics, title=Quarks, Gluons and Lattices, publisher=Cambridge University Press, author=Creutz, Michael, year=2023, collection=Cambridge Monographs on Mathematical Physics&quot;,
+        &quot;title&quot;: &quot;Quarks, Gluons and Lattices&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Cambridge University Press&quot;,
+        &quot;year&quot;: 2023
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited for motivation in high-energy physics applications (lattice gauge theory).&quot;,
+      &quot;notes&quot;: &quot;Referencing the 2023 edition of this classic text.&quot;,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: &quot;0465.53032&quot;,
+        &quot;authors&quot;: [
+          &quot;Christopher B. Croke&quot;
+        ],
+        &quot;doi&quot;: &quot;10.24033&#x2f;asens.1390&quot;,
+        &quot;key&quot;: &quot;Croke1980&quot;,
+        &quot;raw&quot;: &quot;Croke1980: author = Croke, Christopher B., title = Some isoperimetric inequalities and eigenvalue estimates, journal = Annales scientifiques de l&#x27;\\&#x27;Ecole Normale Sup\\&#x27;erieure, pages = 419--435, publisher = Elsevier, volume = Ser. 4, 13, number = 4, year = 1980, doi = 10.24033&#x2f;asens.1390, zbl = 0465.53032, url = http:&#x2f;&#x2f;www.numdam.org&#x2f;articles&#x2f;10.24033&#x2f;asens.1390&#x2f;&quot;,
+        &quot;title&quot;: &quot;Some isoperimetric inequalities and eigenvalue estimates&quot;,
+        &quot;url&quot;: &quot;http:&#x2f;&#x2f;www.numdam.org&#x2f;articles&#x2f;10.24033&#x2f;asens.1390&#x2f;&quot;,
+        &quot;venue&quot;: &quot;Annales scientifiques de l&#x27;École Normale Supérieure&quot;,
+        &quot;year&quot;: 1980
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Provides geometric isoperimetric inequalities used for volume estimates in Theorem 78.&quot;,
+      &quot;notes&quot;: &quot;The arxiv_id provided (0465.53032) is actually a Zentralblatt MATH (ZBL) identifier, not an arXiv ID.&quot;,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;F. Verstraete&quot;,
+          &quot;D. Porras&quot;,
+          &quot;J. I. Cirac&quot;
+        ],
+        &quot;doi&quot;: &quot;10.1103&#x2f;PhysRevLett.93.227205&quot;,
+        &quot;key&quot;: &quot;DMRGFrank&quot;,
+        &quot;raw&quot;: &quot;DMRGFrank: title = Density Matrix Renormalization Group and Periodic Boundary Conditions: A Quantum Information Perspective, author = Verstraete, F. and Porras, D. and Cirac, J. I., journal = Phys. Rev. Lett., volume = 93, issue = 22, pages = 227205, numpages = 4, year = 2004, publisher = American Physical Society, doi = 10.1103&#x2f;PhysRevLett.93.227205, url = https:&#x2f;&#x2f;link.aps.org&#x2f;doi&#x2f;10.1103&#x2f;PhysRevLett.93.227205&quot;,
+        &quot;title&quot;: &quot;Density Matrix Renormalization Group and Periodic Boundary Conditions: A Quantum Information Perspective&quot;,
+        &quot;url&quot;: &quot;https:&#x2f;&#x2f;link.aps.org&#x2f;doi&#x2f;10.1103&#x2f;PhysRevLett.93.227205&quot;,
+        &quot;venue&quot;: &quot;Physical Review Letters&quot;,
+        &quot;year&quot;: 2004
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited for applications in quantum information theory and tensor networks.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Albrecht Böttcher&quot;,
+          &quot;David Wenzel&quot;
+        ],
+        &quot;doi&quot;: &quot;10.1016&#x2f;j.laa.2008.05.020&quot;,
+        &quot;key&quot;: &quot;FrobeniusNorm&quot;,
+        &quot;raw&quot;: &quot;FrobeniusNorm: doi = 10.1016&#x2f;j.laa.2008.05.020, year = 2008, month = oct, publisher = Elsevier BV, volume = 429, number = 8-9, pages = 1864--1885, author = Albrecht B\\\&quot;ottcher and David Wenzel, title = The Frobenius norm and the commutator, journal = Linear Algebra and its Applications&quot;,
+        &quot;title&quot;: &quot;The Frobenius norm and the commutator&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Linear Algebra and its Applications&quot;,
+        &quot;year&quot;: 2008
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Provides matrix norm inequalities used in the analysis of the trace ratio minimization problem.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;A. Gray&quot;,
+          &quot;L. Vanhecke&quot;
+        ],
+        &quot;doi&quot;: &quot;10.1007&#x2f;BF02395060&quot;,
+        &quot;key&quot;: &quot;Gray1979&quot;,
+        &quot;raw&quot;: &quot;Gray1979: author = A. Gray and L. Vanhecke, title = Riemannian geometry as determined by the volumes of small geodesic balls, volume = 142, journal = Acta Mathematica, publisher = Institut Mittag-Leffler, pages = 157 -- 198, year = 1979, doi = 10.1007&#x2f;BF02395060, URL = https:&#x2f;&#x2f;doi.org&#x2f;10.1007&#x2f;BF02395060,&quot;,
+        &quot;title&quot;: &quot;Riemannian geometry as determined by the volumes of small geodesic balls&quot;,
+        &quot;url&quot;: &quot;https:&#x2f;&#x2f;doi.org&#x2f;10.1007&#x2f;BF02395060&quot;,
+        &quot;venue&quot;: &quot;Acta Mathematica&quot;,
+        &quot;year&quot;: 1979
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Used for estimates of volumes of spheres and geodesic balls on manifolds.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Alexander Grigor’yan&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;Grigoryan_2024&quot;,
+        &quot;raw&quot;: &quot;Grigoryan_2024: title=Lecture notes on Analysis on Manifolds, author=Grigor’yan, Alexander, year=2024, publisher=Bielefeld University, url=https:&#x2f;&#x2f;www.math.uni-bielefeld.de&#x2f; grigor&#x2f;anman2.pdf&quot;,
+        &quot;title&quot;: &quot;Lecture notes on Analysis on Manifolds&quot;,
+        &quot;url&quot;: &quot;https:&#x2f;&#x2f;www.math.uni-bielefeld.de&#x2f; grigor&#x2f;anman2.pdf&quot;,
+        &quot;venue&quot;: &quot;Bielefeld University&quot;,
+        &quot;year&quot;: 2024
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Primary source for the construction and definitions of Sobolev spaces on manifolds.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Ching-Peng Huang&quot;,
+          &quot;Dominik Inauen&quot;,
+          &quot;Govind Menon&quot;
+        ],
+        &quot;doi&quot;: &quot;10.1214&#x2f;23-ECP540&quot;,
+        &quot;key&quot;: &quot;HIM23&quot;,
+        &quot;raw&quot;: &quot;HIM23: author = Ching-Peng Huang and Dominik Inauen and Govind Menon, title = Motion by mean curvature and Dyson Brownian Motion, volume = 28, journal = Electronic Communications in Probability, publisher = Institute of Mathematical Statistics and Bernoulli Society, pages = 1 -- 10, keywords = Dyson Brownian motion, mean curvature, Riemannian submersion, year = 2023, doi = 10.1214&#x2f;23-ECP540, URL = https:&#x2f;&#x2f;doi.org&#x2f;10.1214&#x2f;23-ECP540&quot;,
+        &quot;title&quot;: &quot;Motion by mean curvature and Dyson Brownian Motion&quot;,
+        &quot;url&quot;: &quot;https:&#x2f;&#x2f;doi.org&#x2f;10.1214&#x2f;23-ECP540&quot;,
+        &quot;venue&quot;: &quot;Electronic Communications in Probability&quot;,
+        &quot;year&quot;: 2023
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Recent work using Riemannian submersions to relate stochastic processes, mirroring the paper&#x27;s strategy.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;W. Klingenberg&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;Klingenberg&quot;,
+        &quot;raw&quot;: &quot;Klingenberg: ISSN = 0003486X, 19398980, URL = http:&#x2f;&#x2f;www.jstor.org&#x2f;stable&#x2f;1970029, author = W. Klingenberg, journal = Annals of Mathematics, number = 3, pages = 654--666, publisher = [Annals of Mathematics, Trustees of Princeton University on Behalf of the Annals of Mathematics, Mathematics Department, Princeton University], title = Contributions to Riemannian Geometry in the Large, urldate = 2024-06-25, volume = 69, year = 1959&quot;,
+        &quot;title&quot;: &quot;Contributions to Riemannian Geometry in the Large&quot;,
+        &quot;url&quot;: &quot;http:&#x2f;&#x2f;www.jstor.org&#x2f;stable&#x2f;1970029&quot;,
+        &quot;venue&quot;: &quot;Annals of Mathematics&quot;,
+        &quot;year&quot;: 1959
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Classical reference for global Riemannian geometry, specifically for curvature and injectivity radius.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Mufan Li&quot;,
+          &quot;Murat A. Erdogdu&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;LiErd2022&quot;,
+        &quot;raw&quot;: &quot;LiErd2022: title=Riemannian Langevin algorithm for solving semidefinite programs, author=Li, Mufan and Erdogdu, Murat A, journal=Bernoulli, volume=29, number=4, pages=3093--3113, year=2023, publisher=Bernoulli Society for Mathematical Statistics and Probability&quot;,
+        &quot;title&quot;: &quot;Riemannian Langevin algorithm for solving semidefinite programs&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Bernoulli&quot;,
+        &quot;year&quot;: 2023
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;The most direct predecessor; the paper generalizes the results of Li &amp; Erdogdu from spheres to broader manifolds.&quot;,
+      &quot;notes&quot;: &quot;Mismatch between key (2022) and actual publication year (2023).&quot;,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Mufan Li&quot;,
+          &quot;Murat A. Erdogdu&quot;
+        ],
+        &quot;doi&quot;: &quot;10.3150&#x2f;22-BEJ1576SUPP&quot;,
+        &quot;key&quot;: &quot;LiErd2022Supp&quot;,
+        &quot;raw&quot;: &quot;LiErd2022Supp: author = Mufan Li and Murat A. Erdogdu, title = Supplement to \&quot;Riemannian Langevin algorithm for solving semidefinite programs\&quot;, year = 2023, doi = 10.3150&#x2f;22-BEJ1576SUPP, URL = https:&#x2f;&#x2f;doi.org&#x2f;10.3150&#x2f;22-BEJ1576SUPP&quot;,
+        &quot;title&quot;: &quot;Supplement to \&quot;Riemannian Langevin algorithm for solving semidefinite programs\&quot;&quot;,
+        &quot;url&quot;: &quot;https:&#x2f;&#x2f;doi.org&#x2f;10.3150&#x2f;22-BEJ1576SUPP&quot;,
+        &quot;venue&quot;: &quot;Bernoulli (Supplement)&quot;,
+        &quot;year&quot;: 2023
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Supplementary material for LiErd2022, containing technical lemmas and appendices directly adapted in this work.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Zhongmin Qian&quot;
+        ],
+        &quot;doi&quot;: &quot;10.1017&#x2f;S0308210500023568&quot;,
+        &quot;key&quot;: &quot;Qian1997&quot;,
+        &quot;raw&quot;: &quot;Qian1997: title=A gradient estimate on a manifold with convex boundary, volume=127, DOI=10.1017&#x2f;S0308210500023568, number=1, journal=Proceedings of the Royal Society of Edinburgh: Section A Mathematics, publisher=Royal Society of Edinburgh Scotland Foundation, author=Qian, Zhongmin, year=1997, pages=171–179,&quot;,
+        &quot;title&quot;: &quot;A gradient estimate on a manifold with convex boundary&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Proceedings of the Royal Society of Edinburgh: Section A Mathematics&quot;,
+        &quot;year&quot;: 1997
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited for results on gradient estimates and convexity in the context of Bakry-Émery theory.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;J. Ignacio Cirac&quot;,
+          &quot;David Pérez-García&quot;,
+          &quot;Norbert Schuch&quot;,
+          &quot;Frank Verstraete&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;RevModPhys&quot;,
+        &quot;raw&quot;: &quot;RevModPhys: title = Matrix product states and projected entangled pair states: Concepts, symmetries, theorems, author = Cirac, J. Ignacio and P\\&#x27;erez-Garc\\&#x27;\\ia, David and Schuch, Norbert and Verstraete, Frank, journal = Rev. Mod. Phys., volume = 93, issue = 4, pages = 045003, numpages = 65, year = 2021, publisher = American Physical Society,&quot;,
+        &quot;title&quot;: &quot;Matrix product states and projected entangled pair states: Concepts, symmetries, theorems&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Reviews of Modern Physics&quot;,
+        &quot;year&quot;: 2021
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Foundational review for tensor networks, providing motivation for sampling and optimization on matrix manifolds.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Alexandre B. Tsybakov&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;Tsybakov2008&quot;,
+        &quot;raw&quot;: &quot;Tsybakov2008: title=Introduction to Nonparametric Estimation, author=Tsybakov, Alexandre B., year=2008, publisher=Springer New York, NY&quot;,
+        &quot;title&quot;: &quot;Introduction to Nonparametric Estimation&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Springer&quot;,
+        &quot;year&quot;: 2008
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Used for relative entropy and Chi-squared divergence bounds in Section 4.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Feng-Yu Wang&quot;
+        ],
+        &quot;doi&quot;: &quot;10.1142&#x2f;8737&quot;,
+        &quot;key&quot;: &quot;WangAnalysisforDiffusion&quot;,
+        &quot;raw&quot;: &quot;WangAnalysisforDiffusion: author = Wang, Feng-Yu, title = Analysis for Diffusion Processes on Riemannian Manifolds, publisher = World Scientific, year = 2013, doi = 10.1142&#x2f;8737, address = , edition = ,&quot;,
+        &quot;title&quot;: &quot;Analysis for Diffusion Processes on Riemannian Manifolds&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;World Scientific&quot;,
+        &quot;year&quot;: 2013
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Primary foundational textbook for diffusion processes on Riemannian manifolds and functional inequalities.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;P-A Absil&quot;,
+          &quot;Robert Mahony&quot;,
+          &quot;Rodolphe Sepulchre&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;absil2008optimization&quot;,
+        &quot;raw&quot;: &quot;absil2008optimization: title=Optimization algorithms on matrix manifolds, author=Absil, P-A and Mahony, Robert and Sepulchre, Rodolphe, year=2008, publisher=Princeton University Press&quot;,
+        &quot;title&quot;: &quot;Optimization algorithms on matrix manifolds&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Princeton University Press&quot;,
+        &quot;year&quot;: 2008
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Standard reference for optimization on Riemannian manifolds, providing algorithmic context.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;P-A Absil&quot;,
+          &quot;Simon Mataigne&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;absil2025ultimate&quot;,
+        &quot;raw&quot;: &quot;absil2025ultimate: title=The ultimate upper bound on the injectivity radius of the Stiefel manifold, author=Absil, P-A and Mataigne, Simon, journal=SIAM Journal on Matrix Analysis and Applications, volume=46, number=2, pages=1145--1167, year=2025, publisher=SIAM&quot;,
+        &quot;title&quot;: &quot;The ultimate upper bound on the injectivity radius of the Stiefel manifold&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;SIAM Journal on Matrix Analysis and Applications&quot;,
+        &quot;year&quot;: 2025
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Provides a recent sharp bound on the injectivity radius, crucial for the paper&#x27;s manifold analysis.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;D. Bakry&quot;,
+          &quot;I. Gentil&quot;,
+          &quot;M. Ledoux&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;bakry2013analysis&quot;,
+        &quot;raw&quot;: &quot;bakry2013analysis: title=Analysis and Geometry of Markov Diffusion Operators, author=Bakry, D. and Gentil, I. and Ledoux, M., isbn=9783319002279, lccn=2013952461, series=Grundlehren der mathematischen Wissenschaften, url=https:&#x2f;&#x2f;books.google.es&#x2f;books?id=gU3ABAAAQBAJ, year=2013, publisher=Springer International Publishing&quot;,
+        &quot;title&quot;: &quot;Analysis and Geometry of Markov Diffusion Operators&quot;,
+        &quot;url&quot;: &quot;https:&#x2f;&#x2f;books.google.es&#x2f;books?id=gU3ABAAAQBAJ&quot;,
+        &quot;venue&quot;: &quot;Springer&quot;,
+        &quot;year&quot;: 2013
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;The definitive textbook on Bakry-Émery theory, log-Sobolev inequalities, and Markov diffusion operators.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Nicolas Boumal&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;boumal2022intromanifolds&quot;,
+        &quot;raw&quot;: &quot;boumal2022intromanifolds: title = An introduction to optimization on smooth manifolds, author = Boumal, Nicolas, howpublished = To appear with Cambridge University Press, year = 2022, url = https:&#x2f;&#x2f;www.nicolasboumal.net&#x2f;book,&quot;,
+        &quot;title&quot;: &quot;An introduction to optimization on smooth manifolds&quot;,
+        &quot;url&quot;: &quot;https:&#x2f;&#x2f;www.nicolasboumal.net&#x2f;book&quot;,
+        &quot;venue&quot;: &quot;Cambridge University Press&quot;,
+        &quot;year&quot;: 2022
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Primary introduction for optimization on manifolds, frequently cited for definitions and theorems.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;A. Bovier&quot;,
+          &quot;F. den Hollander&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;bovier2015metastability&quot;,
+        &quot;raw&quot;: &quot;bovier2015metastability: title=Metastability: A Potential-Theoretic Approach, author=Bovier, A. and den Hollander, F., isbn=9783319247762, series=Die Grundlehren der mathematischen Wissenschaften, url=https:&#x2f;&#x2f;books.google.es&#x2f;books?id=yzDlzQEACAAJ, year=2015, publisher=Springer International Publishing&quot;,
+        &quot;title&quot;: &quot;Metastability: A Potential-Theoretic Approach&quot;,
+        &quot;url&quot;: &quot;https:&#x2f;&#x2f;books.google.es&#x2f;books?id=yzDlzQEACAAJ&quot;,
+        &quot;venue&quot;: &quot;Springer&quot;,
+        &quot;year&quot;: 2015
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Foundational text for metastability, used to bound transition times between local minima.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;mathusername&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;preguntastack&quot;,
+        &quot;raw&quot;: &quot;preguntastack: title = Escaping time of a modified CIR process, author = mathusername, howpublished = Mathematics Stack Exchange, eprint = https:&#x2f;&#x2f;math.stackexchange.com&#x2f;q&#x2f;5117199, archivePrefix=stackexchange, year = 2025, URL = https:&#x2f;&#x2f;math.stackexchange.com&#x2f;q&#x2f;5117199&quot;,
+        &quot;title&quot;: &quot;Escaping time of a modified CIR process&quot;,
+        &quot;url&quot;: &quot;https:&#x2f;&#x2f;math.stackexchange.com&#x2f;q&#x2f;5117199&quot;,
+        &quot;venue&quot;: &quot;Mathematics Stack Exchange&quot;,
+        &quot;year&quot;: 2025
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Provides a specific calculation for the escaping time of a stochastic process, credited in the acknowledgements.&quot;,
+      &quot;notes&quot;: &quot;Citation to a non-peer-reviewed social media&#x2f;forum post (Stack Exchange).&quot;,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Daniel Revuz&quot;,
+          &quot;Marc Yor&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;revuz2013continuous&quot;,
+        &quot;raw&quot;: &quot;revuz2013continuous: title=Continuous martingales and Brownian motion, author=Revuz, Daniel and Yor, Marc, volume=293, year=2013, publisher=Springer Science \\&amp; Business Media&quot;,
+        &quot;title&quot;: &quot;Continuous martingales and Brownian motion&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Springer&quot;,
+        &quot;year&quot;: 2013
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Standard reference for martingale theory and stochastic calculus, establishing the notation for the paper.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Elton P. Hsu&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;hsustochastic&quot;,
+        &quot;raw&quot;: &quot;hsustochastic: title=Stochastic Analysis on Manifolds, author=Hsu, E.P., isbn=9780821883884, series=Contemporary Mathematics, url=https:&#x2f;&#x2f;books.google.es&#x2f;books?id=2NM0Z7svRmEC, publisher=American Mathematical Soc., year = 2002&quot;,
+        &quot;title&quot;: &quot;Stochastic Analysis on Manifolds&quot;,
+        &quot;url&quot;: &quot;https:&#x2f;&#x2f;books.google.es&#x2f;books?id=2NM0Z7svRmEC&quot;,
+        &quot;venue&quot;: &quot;American Mathematical Society&quot;,
+        &quot;year&quot;: 2002
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Primary reference for the existence and uniqueness of the Langevin diffusion process on manifolds.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;C. Villani&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;villani2008optimal&quot;,
+        &quot;raw&quot;: &quot;villani2008optimal: title=Optimal Transport: Old and New, author=Villani, C., isbn=9783540710509, lccn=2008932183, series=Grundlehren der mathematischen Wissenschaften, url=https:&#x2f;&#x2f;books.google.es&#x2f;books?id=hV8o5R7\\_5tkC, year=2008, publisher=Springer Berlin Heidelberg&quot;,
+        &quot;title&quot;: &quot;Optimal Transport: Old and New&quot;,
+        &quot;url&quot;: &quot;https:&#x2f;&#x2f;books.google.es&#x2f;books?id=hV8o5R7_5tkC&quot;,
+        &quot;venue&quot;: &quot;Springer&quot;,
+        &quot;year&quot;: 2008
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Foundational text for optimal transport, cited for the HWI inequality and related functional inequalities.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    }
+  ],
+  &quot;missing_references&quot;: [
+    {
+      &quot;reason&quot;: &quot;This is a standard reference for Sobolev spaces on Riemannian manifolds, providing much deeper geometric context for the constructions in Appendix B.&quot;,
+      &quot;title&quot;: &quot;Hebey, E. (1996). Sobolev Spaces on Riemannian Manifolds. Springer.&quot;
+    },
+    {
+      &quot;reason&quot;: &quot;Since the paper explicitly mentions &#x27;barren plateaus&#x27; in the abstract and relates to quantum information, this seminal paper defining the phenomenon is a key missing reference.&quot;,
+      &quot;title&quot;: &quot;McClean, J. R., Boixo, S., Smelyanskiy, V. N., Babbush, R., &amp; Neven, H. (2018). Barren plateaus in quantum neural network training landscapes. Nature communications.&quot;
+    }
+  ],
+  &quot;summary&quot;: &quot;The paper exhibits excellent citation hygiene with a comprehensive bibliography of 87 entries that spans classical geometry, stochastic analysis, and modern physics. The authors provide thorough context for both foundational results and recent related work, particularly the predecessor work by Li &amp; Erdogdu. Minor issues include an incorrect label of a ZBL number as an arXiv ID and the use of a non-peer-reviewed forum post as a primary source for a technical lemma.&quot;
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          meta_reviewer — <span class="muted">claude-sonnet-4-6</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <p>The paper makes a significant contribution by establishing sufficient conditions for rapid mixing of Langevin dynamics on compact Riemannian manifolds, extending prior results from product-of-spheres settings (Li &amp; Erdogdu 2023) to a substantially broader class of manifolds including Lie group quotients via a Riemannian submersion lifting technique. The novelty specialist rates the work significant (score 0.75, confidence 0.90), and the technical correctness specialist finds the core analytical architecture mostly sound (confidence 0.62), with the principal results—the Poincaré inequality on the quotient manifold (C2), the local escape time bound (C3), the CD-to-LSI tightening (C4), and the Riemannian submersion lifting (C7)—all assessed as supported. The primary critical gap identified across two specialists is the complete absence of executable or formally verified proof artifacts: the reproducibility specialist flags a missing formal proof artifact at critical severity and missing executable benchmarks for the trace-ratio and Ising applications at major severity, and the technical correctness specialist independently flags the same absence as an unsupported major claim (C9). Since the paper&#x27;s field (stat.ML &#x2f; math.PR) lies within the code-amenable set and two specialists flagged proof-as-code artifacts missing at major or critical severity, the recommendation defaults to major_revision. Additional minor technical issues include a typographical error in Lemma 80 (R stated as 2ε&#x2f;A_2 instead of √(2ε&#x2f;A_2)), an imprecise mixing-time statement in Remark 16 that conflates the TV-decay rate with the actual mixing time to ε, and unverified polynomial scaling of 13+ geometric constants in any concrete manifold family. Citation quality is excellent overall, with two missing references (Hebey on Sobolev spaces, McClean et al. on barren plateaus) and one Mathematics Stack Exchange post used as the primary source for a technical CIR escape-time lemma.</p>
+        <p class="muted">Recommendation: <strong>Major revision</strong> · Confidence: 78%</p>
+        <h3>Strengths</h3>
+        <ul>
+          <li>The generalization of rapid mixing analysis from products of spheres to compact Riemannian quotient manifolds via Riemannian submersions is technically non-trivial and substantially broadens the scope of provably-efficient Gibbs sampling on curved spaces.</li><li>Explicit closed-form constants are tracked throughout the main results (LSI constants α_M and α_{M&#x2f;G}, Poincaré constant λ_*&#x2f;184), making the bounds concrete and actionable rather than merely existential.</li><li>The modular proof architecture—Poincaré inequality on quotient, submersion lifting, CD-to-LSI tightening—is clean and internally consistent, with each module independently verified by the technical correctness specialist.</li><li>The Riemannian submersion framework (Section 3) provides an elegant mechanism for handling symmetry-induced multiple global minima by reducing to the orbit space where the minimum is unique, and the lifting argument is correctly grounded in the classical Fubini-on-submersions decomposition.</li><li>The bibliography (87 entries) is comprehensive and accurately cited, spanning classical Riemannian geometry, stochastic calculus, Bakry-Émery theory, and modern physics applications with only minor hygiene issues.</li>
+        </ul>
+        <h3>Weaknesses</h3>
+        <ul>
+          <li>No executable or formally verified proof artifact accompanies the paper; the polynomial-in-dimension mixing claim cannot be independently corroborated by simulation or machine-checked proof, despite the stat.ML &#x2f; math.PR field being directly amenable to both Langevin discretization experiments and Lean&#x2f;Coq formalization.</li><li>The headline polynomial mixing time claim (Remark 16, Theorem 14) is not verified for any concrete manifold family: 13+ geometric constants are assumed to scale polynomially in dim(M) but are not established for the named applications (Stiefel quotients, mean-field Ising).</li><li>Lemma 80 contains a typographical error, stating R = 2ε&#x2f;A_2 while the proof body and Lemma 79 both require R = √(2ε&#x2f;A_2); the proof is correct under the square-root reading but the misprint is potentially misleading.</li><li>Remark 16 does not write the mixing-time-to-ε bound explicitly; the implicit scaling t_mix(ε) = poly(dim) · O(log dim) is understated and a less careful reader may conclude TV is small at t = O(1&#x2f;poly(dim)).</li><li>A Mathematics Stack Exchange post (preguntastack, 2025) is cited as the primary source for a technical CIR escape-time calculation used in Proposition 48; this non-peer-reviewed reference should be replaced or supplemented with a self-contained proof or peer-reviewed citation.</li>
+        </ul>
+        <h3>Revision Targets</h3>
+        <div class="target-grid">
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  
+                  
+                  Section 1 (Theorem 14, Remark 16); Section 7 (sec:traceratio).
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">The paper is a math.PR &#x2f; stat.ML manuscript whose central operational claim — that mixing times are polynomial in dim(M) under stated assumptions — is exactly the kind of quantitative claim that benefits from empirical corroboration. The named applications (trace-ratio quotient minimization, 2D ferromagnetic Ising mean-field) are explicitly numerical&#x2f;algorithmic: one can simulate Langevin dynamics on Stiefel quotients and on small Ising configurations, and verify the empirical TV-decay scaling vs. dim. The paper does not ship any such artifact, nor a Lean&#x2f;Coq formalization of any of the headline inequalities (Theorem 34, Theorem 68, Theorem 78). Per the Proof-as-Code axiom for math.* &#x2f; stat.ML papers, this counts as a notable weakness.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Ship a small companion code release. Concretely: (i) `experiments&#x2f;trace_ratio&#x2f;run.py` — discretized Langevin on St(n,m)&#x2f;U(m) with empirical TV vs. iteration count for a family of dimensions, to test the dim-polynomial-mixing claim; (ii) `experiments&#x2f;ising_2d&#x2f;run.py` — mean-field Ising Gibbs sampling verifying β-scaling concentration of Theorem 78. Optionally: (iii) `proofs&#x2f;CD_to_LSI.lean` (or Coq equivalent) formalizing Theorem 68 since it is a self-contained 3-step argument.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm `Section 1 (Theorem 14, Remark 16); Section 7 (sec:traceratio).` is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  
+                  
+                  Section 1, Remark 16 (and Theorem 14 informal scaling).
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">The claim is a direct consequence of substituting polynomial-in-dim bounds into the explicit formulas for α_M, α_{M&#x2f;G}. Algebraically this is straightforward. However, the claim is conditional on 13+ geometric quantities all scaling polynomially in dim(M); the paper does not verify this for any concrete sequence of manifolds beyond the brief Section 7 references (trace ratio and 2D Ising mean-field). For the trace quotient on Stiefel&#x2f;Grassmann manifolds, several of these constants (injectivity radius, convexity radius, K) are known to scale non-trivially with dimension and merit explicit verification.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Add an explicit table or appendix giving polynomial scaling for each constant in at least one nontrivial family (e.g. complex Stiefel St(n,m) with n,m growing, or product of spheres). A numerical Langevin simulation `experiments&#x2f;mixing_scaling&#x2f;{stiefel,spheres}.py` recording empirical TV-decay vs. dim would directly corroborate the headline scaling claim, which is currently only an algebraic consequence of unverified per-family bounds.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm `Section 1, Remark 16 (and Theorem 14 informal scaling).` is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  
+                  
+                  Section 6, Theorem 78 (thm:MainFormal2), proved via Lemmas 79–80
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">Lemma 79 follows Li-Erdogdu C.1; Lemma 80 lower-bounds the partition-function denominator using Croke&#x27;s geodesic-sphere volume comparison (valid for ρ ≤ i(M)&#x2f;2). The exponentiation and Gamma-function inequalities (Batir 2008) are correctly applied. However, the statement of Lemma 80 prints &#x27;R = 2ε&#x2f;A_2&#x27;, whereas the proof and Lemma 79 both use R = √(2ε&#x2f;A_2) (and the proof&#x27;s computation `1&#x2f;(A_2 R²) = 1&#x2f;(2ε)` is only consistent with R = √(2ε&#x2f;A_2)). This is almost certainly a typographical error in the statement of Lemma 80, not a substantive one; the proof&#x27;s final inequality is correct under R = √(2ε&#x2f;A_2).</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Correct the statement of Lemma 80 to &#x27;R = √(2ε&#x2f;A_2)&#x27; to match Lemma 79 and the proof body.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm `Section 6, Theorem 78 (thm:MainFormal2), proved via Lemmas 79–80` is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  
+                  
+                  Section 1, Remark 16.
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">Algebraically correct given the formal LSI constants. However, the TV bound ‖ν−ρ_t‖² ≤ β · max F · e^{−2α t} requires t to grow at least like (log(β · max F))&#x2f;α to obtain ε accuracy. If β = poly(dim) and max F = poly(dim), then &#x27;log&#x27; is logarithmic in dim, so mixing-to-ε scales as α^{-1} · O(log dim) = poly(dim) · O(log dim). The remark is consistent with this reading but does not state it explicitly; a less careful reader may conclude TV is small at t = O(1&#x2f;poly(dim)), which is not what the bound shows.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">In Remark 16, write out the mixing-time-to-ε bound explicitly: t_mix(ε) = α^{-1} · log(β · max F &#x2f; ε²) = poly(dim) · log(poly(dim)&#x2f;ε), rather than just naming the exponent rate.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm `Section 1, Remark 16.` is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  
+                  
+                  Section 1, Remark 11; supporting Proposition prop:projectedHessian (referenced).
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">This is stated as a consequence of how the Hessian decomposes along horizontal and vertical directions for a Riemannian submersion with fiber-invariant F. The result is plausible and standard for Riemannian submersions with totally geodesic fibers (where the second fundamental form vanishes), but the full proof (Proposition 168) is in an appendix not shown here. The reduction of Assumption 9–10 on F̃ to a condition on F via Remark 11 depends critically on this projection lemma being correctly stated.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Ensure the proof of Proposition 168 (projected Hessian) explicitly treats the vertical&#x2f;horizontal split using O&#x27;Neill&#x27;s formulas and the totally-geodesic-fiber hypothesis; cross-reference here for the reader.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm `Section 1, Remark 11; supporting Proposition prop:projectedHessian (referenced).` is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+        </div>
+        <h3>Questions</h3>
+        <ul>
+          <li>Can the authors verify that each of the 13+ geometric constants (injectivity radius, convexity radius, sectional curvature bound K, etc.) scales polynomially in dim(M) for at least one non-trivial manifold family, such as complex Stiefel manifolds St(n,m) with n,m growing, and add an explicit table or appendix to the paper documenting these bounds?</li><li>Would the authors release a companion code artifact—for example, a discretized Langevin simulation on Stiefel quotients and on the mean-field Ising model—to empirically corroborate the claimed polynomial mixing scaling and the β-scaling concentration of Theorem 78?</li><li>For the Stack Exchange citation (preguntastack) used in the proof of Proposition 48, can the authors either include a self-contained proof of the CIR escape time bound in an appendix or cite a peer-reviewed equivalent, demoting the forum post to an acknowledgment?</li><li>In the proof of Proposition 168 (projected Hessian), can the authors explicitly exhibit the vertical&#x2f;horizontal decomposition using O&#x27;Neill&#x27;s formulas and invoke the totally-geodesic-fiber hypothesis, so that the reduction of Assumptions 9–10 on F̃ to conditions on F via Remark 11 is self-contained for the reader?</li><li>Would the authors add an explicit formula for t_mix(ε) to Remark 16—specifically t_mix(ε) = O(α^{-1} log(β · max F &#x2f; ε²)) = poly(dim) · O(log dim)—to prevent readers from conflating the exponential TV-decay rate with the mixing time?</li>
+        </ul>
+      </details>
+      
+      <details>
+        <summary>
+          novelty — <span class="muted">gemini-3-flash-preview</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;confidence&quot;: 0.9,
+  &quot;missing_prior_art&quot;: [],
+  &quot;novelty_score&quot;: 0.75,
+  &quot;related_work&quot;: [
+    {
+      &quot;citation_key&quot;: &quot;LiErd2022&quot;,
+      &quot;delta&quot;: &quot;The authors generalize the rapid mixing analysis, previously established for products of spheres, to a significantly broader class of Riemannian manifolds (including quotient manifolds) by employing a Riemannian submersion framework to factor out symmetries.&quot;,
+      &quot;relation&quot;: &quot;builds_on&quot;,
+      &quot;title&quot;: &quot;Riemannian Langevin algorithm for solving semidefinite programs&quot;
+    },
+    {
+      &quot;citation_key&quot;: &quot;menz2014&quot;,
+      &quot;delta&quot;: &quot;While this prior work handles multiple minima in Euclidean space via energy landscape decomposition, the current paper specifically addresses the multiplicity of minima arising from group symmetries in the Riemannian setting by analyzing the process on the orbit space.&quot;,
+      &quot;relation&quot;: &quot;prior_art&quot;,
+      &quot;title&quot;: &quot;Poincaré and logarithmic Sobolev inequalities by decomposition of the energy landscape&quot;
+    },
+    {
+      &quot;citation_key&quot;: &quot;bakry2013analysis&quot;,
+      &quot;delta&quot;: &quot;This paper extends foundational Bakry-Émery theory to scenarios where the curvature-dimension condition may be negative (low-temperature regime), utilizing Lyapunov functions and submersion lifting techniques to recover tight log-Sobolev inequalities.&quot;,
+      &quot;relation&quot;: &quot;prior_art&quot;,
+      &quot;title&quot;: &quot;Analysis and Geometry of Markov Diffusion Operators&quot;
+    },
+    {
+      &quot;citation_key&quot;: &quot;HIM23&quot;,
+      &quot;delta&quot;: &quot;The paper applies the geometric insights of Riemannian submersions—studied in HIM23 for Dyson Brownian motion—to the specific problem of obtaining polynomial mixing times for Langevin dynamics in high dimensions.&quot;,
+      &quot;relation&quot;: &quot;prior_art&quot;,
+      &quot;title&quot;: &quot;Motion by mean curvature and Dyson Brownian Motion&quot;
+    }
+  ],
+  &quot;verdict&quot;: &quot;significant&quot;
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          reproducibility — <span class="muted">gpt-5.5</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;code_availability&quot;: &quot;unspecified&quot;,
+  &quot;code_url&quot;: null,
+  &quot;concerns&quot;: [
+    {
+      &quot;area&quot;: &quot;code&quot;,
+      &quot;description&quot;: &quot;No code repository, notebooks, scripts, or machine-checkable proof artifacts are specified, so the main rapid-mixing and concentration claims cannot be reproduced or checked by an executable artifact.&quot;,
+      &quot;severity&quot;: &quot;major&quot;
+    },
+    {
+      &quot;area&quot;: &quot;other&quot;,
+      &quot;description&quot;: &quot;The headline theoretical results depend on a long chain of analytic lemmas and theorems, but no formal proof artifact such as proofs&#x2f;main_results.lean or proofs&#x2f;poincare_lsi.lean is provided to mechanically verify the proof dependencies.&quot;,
+      &quot;severity&quot;: &quot;critical&quot;
+    },
+    {
+      &quot;area&quot;: &quot;evaluation&quot;,
+      &quot;description&quot;: &quot;The trace-ratio and mean-field Ising scenarios are discussed analytically, but no executable examples or parameterized calculations are provided to reproduce the claimed polynomial scaling of constants in concrete instances.&quot;,
+      &quot;severity&quot;: &quot;major&quot;
+    },
+    {
+      &quot;area&quot;: &quot;data&quot;,
+      &quot;description&quot;: &quot;No dataset is required for the core theory, and no external benchmark or generated instance set is specified for reproducing the illustrative applications.&quot;,
+      &quot;severity&quot;: &quot;info&quot;
+    },
+    {
+      &quot;area&quot;: &quot;other&quot;,
+      &quot;description&quot;: &quot;Verifier could not reach `https:&#x2f;&#x2f;books.google.es&#x2f;books?id=Xnu0o` (status=404)&quot;,
+      &quot;severity&quot;: &quot;minor&quot;
+    },
+    {
+      &quot;area&quot;: &quot;other&quot;,
+      &quot;description&quot;: &quot;Verifier could not reach `https:&#x2f;&#x2f;books.google.es&#x2f;books?id=hV8o5R7` (status=404)&quot;,
+      &quot;severity&quot;: &quot;minor&quot;
+    }
+  ],
+  &quot;confidence&quot;: 0.82,
+  &quot;data_availability&quot;: &quot;unspecified&quot;,
+  &quot;data_url&quot;: null,
+  &quot;environment&quot;: null,
+  &quot;reproducibility_score&quot;: 0.32
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          summary — <span class="muted">claude-haiku-4-5-20251001</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;audience&quot;: &quot;Researchers in probability theory, stochastic processes, and differential geometry; mathematical physicists working on sampling and lattice gauge theory; machine learning theorists interested in optimization convergence guarantees on manifolds; mathematicians studying Markov chains and Bakry-Émery theory&quot;,
+  &quot;key_contributions&quot;: [
+    &quot;Establishes conditions (curvature, temperature, escape directions, gradient bounds) ensuring logarithmic Sobolev inequality and rapid mixing for Langevin dynamics on compact Riemannian manifolds&quot;,
+    &quot;Proves exponential convergence of Langevin diffusion to Gibbs measures with polynomial-in-dimension mixing time constants&quot;,
+    &quot;Develops technique for lifting Poincaré inequalities from quotient manifolds to total spaces via Riemannian submersions, handling symmetry-induced multiple minima&quot;,
+    &quot;Extends rapid mixing results from product of spheres (prior work) to general classes of Riemannian manifolds including quotient manifolds&quot;,
+    &quot;Provides explicit bounds on convergence rates in terms of geometric and functional properties (Ricci curvature, injectivity radius, critical point spacing, gradient lower bounds)&quot;
+  ],
+  &quot;plain_language_summary&quot;: &quot;Sampling from complex probability distributions is a fundamental problem in physics and machine learning. The Gibbs distribution is a natural choice for many applications, but sampling it directly is usually impossible. Langevin dynamics—a continuous-time stochastic process that combines gradient descent with random noise—provides one way to approximate sampling. This paper studies how fast Langevin dynamics converge to the target Gibbs distribution when the underlying space is a Riemannian manifold (a curved geometric space) rather than ordinary flat Euclidean space.\n\nThe main contribution is identifying concrete conditions on the manifold&#x27;s geometry and the objective function that guarantee rapid convergence. These conditions involve the manifold&#x27;s curvature, the temperature parameter of the Gibbs distribution, the ability to escape saddle points, and the absence of flat regions (barren plateaus) where the gradient becomes too small. When these conditions hold, the paper proves the convergence happens exponentially fast, with mixing times that scale only polynomially with the dimension of the manifold.\n\nThe authors use a clever technique based on Riemannian submersions (projections of manifolds that preserve geometric structure) to handle cases where the objective function has multiple global minima due to symmetry. They factor out these symmetries via a Lie group action, reducing the problem to the quotient manifold where the minimum is unique. The results extend and generalize prior work limited to product spaces of spheres, and have applications to physics (lattice gauge theory), optimization on manifolds, and differential privacy.&quot;,
+  &quot;tldr&quot;: &quot;This paper establishes conditions under which Langevin dynamics on Riemannian manifolds rapidly converge to Gibbs measures, achieving polynomial mixing times by controlling curvature, avoiding barren plateaus, and ensuring saddle points can be escaped.&quot;
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          technical_correctness — <span class="muted">claude-opus-4-7</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;claims&quot;: [
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;Under Assumptions 1–12 and the stated polynomial lower bound on β, the Markov triples (M,ν,Γ) and (M&#x2f;G,ν̃,Γ̃) satisfy logarithmic Sobolev inequalities with constants α_M = 1&#x2f;(4β(A_2+R_M)diam(M)^2 · max(184&#x2f;λ_*, diam(G)^2 β&#x2f;π^2)) and α_{M&#x2f;G} = λ_*&#x2f;(736 β(A_2+R_{M&#x2f;G})diam(M&#x2f;G)^2), implying total-variation convergence ‖ν−ρ_t‖²_TV ≤ β e^{−2α_M t} max F (Theorem 14 &#x2f; Theorem 76 &#x2f; Corollary 77).&quot;,
+      &quot;evidence&quot;: &quot;The proof is a clean composition of three steps each proved earlier in the paper: (i) PI(λ_*&#x2f;184) on M&#x2f;G via Theorem 34, (ii) lifting via the Riemannian submersion (Theorem 59), and (iii) tightening PI to LSI via the curvature-dimension condition (Theorem 68). Each step is internally derived. The Pinsker step (Prop. 66) and bound on H(ρ_0|ν) (Prop. 67) are standard. However, the final TV bound is stated with prefactor `β · max F` rather than the (1&#x2f;2)·β·max F that Pinsker+Prop. 67 would give; this is a harmless absorption of constants but not flagged. No independent or empirical verification of the assembled constants is shown.&quot;,
+      &quot;id&quot;: &quot;C1&quot;,
+      &quot;location&quot;: &quot;Section 1 (Theorem 14), Section 5 (Theorem 76, Corollary 77), eqs. for 1&#x2f;α_M, 1&#x2f;α_{M&#x2f;G}&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;State explicitly that the leading 1&#x2f;2 from Pinsker has been absorbed when writing β·max F, or carry the 1&#x2f;2 through. Add a short numerical experiment (e.g. simulate Langevin dynamics on a small product of spheres) to corroborate the dependence of α on the listed parameters; an `experiments&#x2f;mixing_scaling&#x2f;run.py` would directly validate the headline scaling claim.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;Under Assumptions 25–33 (with κ ≥ 1, the curvature bound, gradient&#x2f;Hessian Lipschitz constants, escape direction and &#x27;no barren plateaus&#x27; conditions) and the explicit lower bounds on a^2 and β, the Markov triple (B,ν̃,Γ̃) satisfies PI(λ_*&#x2f;184) (Theorem 34).&quot;,
+      &quot;evidence&quot;: &quot;Two Lyapunov functions W_1 = exp(β F̃&#x2f;2) and W_2 = E[exp(λ_* τ*&#x2f;16)] are constructed (Prop. 39, Cor. 49). The local Poincaré inequality on the basin of the global minimum follows from the curvature-dimension condition under geodesic convexity (Lemma 50). The Lyapunov extension uses a smooth bump function (Lemma 52), Green&#x27;s identity in the Neumann form (Lemma 53), and the standard product Gamma inequality, all chained algebraically; constants 184, 32, 64 are tracked explicitly. The argument closely mirrors and generalizes Li-Erdogdu (2022, Appendix D), with the simplifying assumption of a unique minimum of F̃ correctly exploited.&quot;,
+      &quot;id&quot;: &quot;C2&quot;,
+      &quot;location&quot;: &quot;Section 2, Theorem 34 (prop9.12); proof in Section 2.3&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;The first escape time τ* of X̃_t from U(a&#x2f;√β, S̃) has exponentially decaying tails: P[τ* ≥ t | X̃_0 = x] ≤ C exp(−λ_* t&#x2f;8) (Proposition 48, Local Escape Time Bound).&quot;,
+      &quot;evidence&quot;: &quot;The proof uses Itô&#x27;s formula on (1&#x2f;2)r̃²(X̃_t) (eq. originalSDE), lower-bounds the drift to obtain D(x) ≥ λ_* r̃(x)² + 1&#x2f;(4β) via three explicitly checked inequalities (auxbound1, auxbound2, AuxLemma3), then constructs a comparison process Y_t whose tail is bounded by the moment-generating function argument in Prop. 216. The choice β ≥ 72² dim(M)^5 A_2 A_3² K² a^6 is chosen exactly to dominate the two error terms in the drift bound (gives 1&#x2f;8 + 1&#x2f;8 = 1&#x2f;4 margin), which is consistent with the algebra. The proof follows Li-Erdogdu Prop. D.6 in structure but is adapted for the projected Hessian via the auxiliary linearization H_y.&quot;,
+      &quot;id&quot;: &quot;C3&quot;,
+      &quot;location&quot;: &quot;Section 2.2, Proposition 48 (prop9.6) and its proof (Itô SDE for r̃²(X̃_t), SDE comparison giving Y_t).&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;If a Markov triple satisfies CD(−κ_1) with κ_1 &gt; 0 (curvature-dimension condition with negative constant) and PI(κ_2) with κ_2 &gt; 0, then it satisfies LSI(α) with 1&#x2f;α = 4β κ_1 diam(M)² &#x2f; κ_2 (Theorem 68).&quot;,
+      &quot;evidence&quot;: &quot;The proof correctly invokes Villani&#x27;s HWI inequality (Cor. 20.13 of Villani 2008), bounds W_2 ≤ 2 diam(M) (Remark 74 — uses ‖μ−η‖_TV ≤ 2, correct since both are probability measures), applies Young&#x27;s inequality to extract a defective LSI(1&#x2f;(εβ), A), and then tightens via the standard Bakry-Émery argument (Prop. 5.1.3 of Bakry-Gentil-Ledoux 2014). The choice ε = diam(M)&#x2f;√(βκ_2) minimizes the resulting expression. The final algebra absorbs the WLOG normalizations β ≥ 1, κ_2 ≤ 1, diam(M) ≥ 1, κ_1 &gt; 1 to reach the compact 4β κ_1 diam(M)²&#x2f;κ_2 bound; this absorbs constants generously but is monotone in the right direction.&quot;,
+      &quot;id&quot;: &quot;C4&quot;,
+      &quot;location&quot;: &quot;Section 4, Theorem 68 (prop9.15) and its proof using HWI inequality (Prop. 72), Wasserstein bound (Remark 74), Young&#x27;s inequality, and Bakry-Émery tightening (Prop. 75).&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;Theorem 78 (formal Suboptimality of the Gibbs distribution): for ε ≤ ε_max = min(i(M)² A_2&#x2f;8, 1) and β ≥ (2&#x2f;ε)(1&#x2f;2 + d² log(d³ A_2 Vol(M)√(2π)&#x2f;(δε))), the Gibbs measure satisfies ν(F − min F ≥ ε) ≤ δ.&quot;,
+      &quot;evidence&quot;: &quot;Lemma 79 follows Li-Erdogdu C.1; Lemma 80 lower-bounds the partition-function denominator using Croke&#x27;s geodesic-sphere volume comparison (valid for ρ ≤ i(M)&#x2f;2). The exponentiation and Gamma-function inequalities (Batir 2008) are correctly applied. However, the statement of Lemma 80 prints &#x27;R = 2ε&#x2f;A_2&#x27;, whereas the proof and Lemma 79 both use R = √(2ε&#x2f;A_2) (and the proof&#x27;s computation `1&#x2f;(A_2 R²) = 1&#x2f;(2ε)` is only consistent with R = √(2ε&#x2f;A_2)). This is almost certainly a typographical error in the statement of Lemma 80, not a substantive one; the proof&#x27;s final inequality is correct under R = √(2ε&#x2f;A_2).&quot;,
+      &quot;id&quot;: &quot;C5&quot;,
+      &quot;location&quot;: &quot;Section 6, Theorem 78 (thm:MainFormal2), proved via Lemmas 79–80&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Correct the statement of Lemma 80 to &#x27;R = √(2ε&#x2f;A_2)&#x27; to match Lemma 79 and the proof body.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;Polynomial mixing time scaling (Remark 16 &#x2f; informal): if diam(M), diam(M&#x2f;G), diam(G), R_M, R_{M&#x2f;G}, K, 1&#x2f;i(M), 1&#x2f;i(M&#x2f;G), 1&#x2f;conv(M&#x2f;G), 1&#x2f;λ_*, 1&#x2f;D, 1&#x2f;C_{F̃}, A_2, A_3 all scale polynomially in dim(M), and max F scales polynomially in dim(M), then the TV distance to ν decays at rate Ω(1&#x2f;poly(dim(M))).&quot;,
+      &quot;evidence&quot;: &quot;The claim is a direct consequence of substituting polynomial-in-dim bounds into the explicit formulas for α_M, α_{M&#x2f;G}. Algebraically this is straightforward. However, the claim is conditional on 13+ geometric quantities all scaling polynomially in dim(M); the paper does not verify this for any concrete sequence of manifolds beyond the brief Section 7 references (trace ratio and 2D Ising mean-field). For the trace quotient on Stiefel&#x2f;Grassmann manifolds, several of these constants (injectivity radius, convexity radius, K) are known to scale non-trivially with dimension and merit explicit verification.&quot;,
+      &quot;id&quot;: &quot;C6&quot;,
+      &quot;location&quot;: &quot;Section 1, Remark 16 (and Theorem 14 informal scaling).&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Add an explicit table or appendix giving polynomial scaling for each constant in at least one nontrivial family (e.g. complex Stiefel St(n,m) with n,m growing, or product of spheres). A numerical Langevin simulation `experiments&#x2f;mixing_scaling&#x2f;{stiefel,spheres}.py` recording empirical TV-decay vs. dim would directly corroborate the headline scaling claim, which is currently only an algebraic consequence of unverified per-family bounds.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;Riemannian submersion lifting (Theorem 59-equivalent, Section 3): a Poincaré inequality on (M&#x2f;G, ν̃, Γ̃) lifts to a Poincaré inequality on (M, ν, Γ) with constant max(1&#x2f;κ_{M&#x2f;G}, diam(G)² β&#x2f;π²), via Fubini-on-submersions (Theorem 54 &#x2f; Corollary 55) and the fact that the compact-fiber group (G,ĝ) satisfies a Poincaré inequality.&quot;,
+      &quot;evidence&quot;: &quot;The Fubini-style decomposition is a classical result (Sulanke-Wintgen, 1972, ch. III §2 Thm 1), correctly specialized to Riemannian submersions where dVol_g = dVol_ĝ ∧ π* dVol_h via the horizontal&#x2f;vertical decomposition. Upgraded regularity (Prop. 56) is justified via local trivialization. The π²&#x2f;diam(G)² factor is the standard Poincaré constant on a compact manifold with non-negative Ricci (consistent with Assumption 2 on fibers being totally geodesic with non-negative Ricci).&quot;,
+      &quot;id&quot;: &quot;C7&quot;,
+      &quot;location&quot;: &quot;Section 3 (SectionLift), Corollary 55 (LiftingSobolev), Proposition 56.&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;Assumption 4 (F constant on fibers) plus Assumptions 9–10 (escape direction at saddles, attractor at minimum) imply that the only non-zero eigenvalues of ∇²F coincide with those of ∇²F̃ (Proposition 168, projected Hessian).&quot;,
+      &quot;evidence&quot;: &quot;This is stated as a consequence of how the Hessian decomposes along horizontal and vertical directions for a Riemannian submersion with fiber-invariant F. The result is plausible and standard for Riemannian submersions with totally geodesic fibers (where the second fundamental form vanishes), but the full proof (Proposition 168) is in an appendix not shown here. The reduction of Assumption 9–10 on F̃ to a condition on F via Remark 11 depends critically on this projection lemma being correctly stated.&quot;,
+      &quot;id&quot;: &quot;C8&quot;,
+      &quot;location&quot;: &quot;Section 1, Remark 11; supporting Proposition prop:projectedHessian (referenced).&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Ensure the proof of Proposition 168 (projected Hessian) explicitly treats the vertical&#x2f;horizontal split using O&#x27;Neill&#x27;s formulas and the totally-geodesic-fiber hypothesis; cross-reference here for the reader.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;unsupported&quot;,
+      &quot;claim&quot;: &quot;The polynomial-in-dimension mixing claim is supported by formal analytical proof; no numerical or symbolic verification artifact is provided despite the field being amenable to executable benchmarks for the trace-quotient and Ising examples named in Section 7.&quot;,
+      &quot;evidence&quot;: &quot;The paper is a math.PR &#x2f; stat.ML manuscript whose central operational claim — that mixing times are polynomial in dim(M) under stated assumptions — is exactly the kind of quantitative claim that benefits from empirical corroboration. The named applications (trace-ratio quotient minimization, 2D ferromagnetic Ising mean-field) are explicitly numerical&#x2f;algorithmic: one can simulate Langevin dynamics on Stiefel quotients and on small Ising configurations, and verify the empirical TV-decay scaling vs. dim. The paper does not ship any such artifact, nor a Lean&#x2f;Coq formalization of any of the headline inequalities (Theorem 34, Theorem 68, Theorem 78). Per the Proof-as-Code axiom for math.* &#x2f; stat.ML papers, this counts as a notable weakness.&quot;,
+      &quot;id&quot;: &quot;C9&quot;,
+      &quot;location&quot;: &quot;Section 1 (Theorem 14, Remark 16); Section 7 (sec:traceratio).&quot;,
+      &quot;severity&quot;: &quot;major&quot;,
+      &quot;suggested_fix&quot;: &quot;Ship a small companion code release. Concretely: (i) `experiments&#x2f;trace_ratio&#x2f;run.py` — discretized Langevin on St(n,m)&#x2f;U(m) with empirical TV vs. iteration count for a family of dimensions, to test the dim-polynomial-mixing claim; (ii) `experiments&#x2f;ising_2d&#x2f;run.py` — mean-field Ising Gibbs sampling verifying β-scaling concentration of Theorem 78. Optionally: (iii) `proofs&#x2f;CD_to_LSI.lean` (or Coq equivalent) formalizing Theorem 68 since it is a self-contained 3-step argument.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;Existence and uniqueness of the Langevin diffusion solving the martingale problem (Definition 19), and the equivalence of the formal SDE dX_t = −grad F(X_t) dt + √(2&#x2f;β) dW_t to the martingale problem, follow from Hsu, Theorems 1.3.4 and 1.3.6.&quot;,
+      &quot;evidence&quot;: &quot;Standard reference; Hsu&#x27;s &#x27;Stochastic Analysis on Manifolds&#x27; (AMS GSM 38) is the canonical citation. Definitions of carré du champ and Markov triple are standard (Bakry-Gentil-Ledoux 2014).&quot;,
+      &quot;id&quot;: &quot;C10&quot;,
+      &quot;location&quot;: &quot;Section 2, Definition 19 (def:LangevinDiffusion).&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;The assertion in Remark 16 that whenever max F = poly(dim(M)) the prefactor β · max F still allows Ω(1&#x2f;poly(dim(M))) effective TV-decay rate.&quot;,
+      &quot;evidence&quot;: &quot;Algebraically correct given the formal LSI constants. However, the TV bound ‖ν−ρ_t‖² ≤ β · max F · e^{−2α t} requires t to grow at least like (log(β · max F))&#x2f;α to obtain ε accuracy. If β = poly(dim) and max F = poly(dim), then &#x27;log&#x27; is logarithmic in dim, so mixing-to-ε scales as α^{-1} · O(log dim) = poly(dim) · O(log dim). The remark is consistent with this reading but does not state it explicitly; a less careful reader may conclude TV is small at t = O(1&#x2f;poly(dim)), which is not what the bound shows.&quot;,
+      &quot;id&quot;: &quot;C11&quot;,
+      &quot;location&quot;: &quot;Section 1, Remark 16.&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;In Remark 16, write out the mixing-time-to-ε bound explicitly: t_mix(ε) = α^{-1} · log(β · max F &#x2f; ε²) = poly(dim) · log(poly(dim)&#x2f;ε), rather than just naming the exponent rate.&quot;
+    }
+  ],
+  &quot;confidence&quot;: 0.62,
+  &quot;overall_correctness&quot;: &quot;mostly_sound&quot;
+}</pre>
+      </details>
+      
+    </div>
+  </section>
+
+  <!-- corrections rendered from corrections table; empty on first publish -->
+  <section>
+    <h2>Corrections</h2>
+    <p class="muted">No corrections have been recorded.</p>
+  </section>
+
+  <section>
+    <h2>Bibliography</h2>
+    
+    <ol>
+      
+        <li>
+          Bakry2008: author = Dominique Bakry and Franck Barthe and Patrick Cattiaux and Arnaud Guillin, title = A simple proof of the Poincaré inequality for a large class of probability measures, volume = 13, journal = Electronic Communications in Probability, publisher = Institute of Mathematical Statistics and Bernoulli Society, pages = 60 -- 66, keywords = log-concave measure, Lyapunov functions, Poincaré inequality, year = 2008, doi = 10.1214&#x2f;ECP.v13-1352, URL = https:&#x2f;&#x2f;doi.org&#x2f;10.1214&#x2f;ECP.v13-1352
+          <a href="https://doi.org/10.1214&#x2f;ECP.v13-1352">doi:10.1214&#x2f;ECP.v13-1352</a>
+          
+        </li>
+      
+        <li>
+          Creutz_2023: place=Cambridge, series=Cambridge Monographs on Mathematical Physics, title=Quarks, Gluons and Lattices, publisher=Cambridge University Press, author=Creutz, Michael, year=2023, collection=Cambridge Monographs on Mathematical Physics
+          
+          
+        </li>
+      
+        <li>
+          Croke1980: author = Croke, Christopher B., title = Some isoperimetric inequalities and eigenvalue estimates, journal = Annales scientifiques de l&#x27;\&#x27;Ecole Normale Sup\&#x27;erieure, pages = 419--435, publisher = Elsevier, volume = Ser. 4, 13, number = 4, year = 1980, doi = 10.24033&#x2f;asens.1390, zbl = 0465.53032, url = http:&#x2f;&#x2f;www.numdam.org&#x2f;articles&#x2f;10.24033&#x2f;asens.1390&#x2f;
+          <a href="https://doi.org/10.24033&#x2f;asens.1390">doi:10.24033&#x2f;asens.1390</a>
+          <a href="https://arxiv.org/abs/0465.53032">arXiv:0465.53032</a>
+        </li>
+      
+        <li>
+          DMRGFrank: title = Density Matrix Renormalization Group and Periodic Boundary Conditions: A Quantum Information Perspective, author = Verstraete, F. and Porras, D. and Cirac, J. I., journal = Phys. Rev. Lett., volume = 93, issue = 22, pages = 227205, numpages = 4, year = 2004, publisher = American Physical Society, doi = 10.1103&#x2f;PhysRevLett.93.227205, url = https:&#x2f;&#x2f;link.aps.org&#x2f;doi&#x2f;10.1103&#x2f;PhysRevLett.93.227205
+          <a href="https://doi.org/10.1103&#x2f;PhysRevLett.93.227205">doi:10.1103&#x2f;PhysRevLett.93.227205</a>
+          
+        </li>
+      
+        <li>
+          FrobeniusNorm: doi = 10.1016&#x2f;j.laa.2008.05.020, year = 2008, month = oct, publisher = Elsevier BV, volume = 429, number = 8-9, pages = 1864--1885, author = Albrecht B\&quot;ottcher and David Wenzel, title = The Frobenius norm and the commutator, journal = Linear Algebra and its Applications
+          <a href="https://doi.org/10.1016&#x2f;j.laa.2008.05.020">doi:10.1016&#x2f;j.laa.2008.05.020</a>
+          
+        </li>
+      
+        <li>
+          Gray1979: author = A. Gray and L. Vanhecke, title = Riemannian geometry as determined by the volumes of small geodesic balls, volume = 142, journal = Acta Mathematica, publisher = Institut Mittag-Leffler, pages = 157 -- 198, year = 1979, doi = 10.1007&#x2f;BF02395060, URL = https:&#x2f;&#x2f;doi.org&#x2f;10.1007&#x2f;BF02395060,
+          <a href="https://doi.org/10.1007&#x2f;BF02395060">doi:10.1007&#x2f;BF02395060</a>
+          
+        </li>
+      
+        <li>
+          Grigoryan_2024: title=Lecture notes on Analysis on Manifolds, author=Grigor’yan, Alexander, year=2024, publisher=Bielefeld University, url=https:&#x2f;&#x2f;www.math.uni-bielefeld.de&#x2f; grigor&#x2f;anman2.pdf
+          
+          
+        </li>
+      
+        <li>
+          HIM23: author = Ching-Peng Huang and Dominik Inauen and Govind Menon, title = Motion by mean curvature and Dyson Brownian Motion, volume = 28, journal = Electronic Communications in Probability, publisher = Institute of Mathematical Statistics and Bernoulli Society, pages = 1 -- 10, keywords = Dyson Brownian motion, mean curvature, Riemannian submersion, year = 2023, doi = 10.1214&#x2f;23-ECP540, URL = https:&#x2f;&#x2f;doi.org&#x2f;10.1214&#x2f;23-ECP540
+          <a href="https://doi.org/10.1214&#x2f;23-ECP540">doi:10.1214&#x2f;23-ECP540</a>
+          
+        </li>
+      
+        <li>
+          Klingenberg: ISSN = 0003486X, 19398980, URL = http:&#x2f;&#x2f;www.jstor.org&#x2f;stable&#x2f;1970029, author = W. Klingenberg, journal = Annals of Mathematics, number = 3, pages = 654--666, publisher = [Annals of Mathematics, Trustees of Princeton University on Behalf of the Annals of Mathematics, Mathematics Department, Princeton University], title = Contributions to Riemannian Geometry in the Large, urldate = 2024-06-25, volume = 69, year = 1959
+          
+          
+        </li>
+      
+        <li>
+          LiErd2022: title=Riemannian Langevin algorithm for solving semidefinite programs, author=Li, Mufan and Erdogdu, Murat A, journal=Bernoulli, volume=29, number=4, pages=3093--3113, year=2023, publisher=Bernoulli Society for Mathematical Statistics and Probability
+          
+          
+        </li>
+      
+        <li>
+          LiErd2022Supp: author = Mufan Li and Murat A. Erdogdu, title = Supplement to &quot;Riemannian Langevin algorithm for solving semidefinite programs&quot;, year = 2023, doi = 10.3150&#x2f;22-BEJ1576SUPP, URL = https:&#x2f;&#x2f;doi.org&#x2f;10.3150&#x2f;22-BEJ1576SUPP
+          <a href="https://doi.org/10.3150&#x2f;22-BEJ1576SUPP">doi:10.3150&#x2f;22-BEJ1576SUPP</a>
+          
+        </li>
+      
+        <li>
+          Qian1997: title=A gradient estimate on a manifold with convex boundary, volume=127, DOI=10.1017&#x2f;S0308210500023568, number=1, journal=Proceedings of the Royal Society of Edinburgh: Section A Mathematics, publisher=Royal Society of Edinburgh Scotland Foundation, author=Qian, Zhongmin, year=1997, pages=171–179,
+          <a href="https://doi.org/10.1017&#x2f;S0308210500023568">doi:10.1017&#x2f;S0308210500023568</a>
+          
+        </li>
+      
+        <li>
+          RevModPhys: title = Matrix product states and projected entangled pair states: Concepts, symmetries, theorems, author = Cirac, J. Ignacio and P\&#x27;erez-Garc\&#x27;\ia, David and Schuch, Norbert and Verstraete, Frank, journal = Rev. Mod. Phys., volume = 93, issue = 4, pages = 045003, numpages = 65, year = 2021, publisher = American Physical Society,
+          
+          
+        </li>
+      
+        <li>
+          Tsybakov2008: title=Introduction to Nonparametric Estimation, author=Tsybakov, Alexandre B., year=2008, publisher=Springer New York, NY
+          
+          
+        </li>
+      
+        <li>
+          WangAnalysisforDiffusion: author = Wang, Feng-Yu, title = Analysis for Diffusion Processes on Riemannian Manifolds, publisher = World Scientific, year = 2013, doi = 10.1142&#x2f;8737, address = , edition = ,
+          <a href="https://doi.org/10.1142&#x2f;8737">doi:10.1142&#x2f;8737</a>
+          
+        </li>
+      
+        <li>
+          absil2008optimization: title=Optimization algorithms on matrix manifolds, author=Absil, P-A and Mahony, Robert and Sepulchre, Rodolphe, year=2008, publisher=Princeton University Press
+          
+          
+        </li>
+      
+        <li>
+          absil2025ultimate: title=The ultimate upper bound on the injectivity radius of the Stiefel manifold, author=Absil, P-A and Mataigne, Simon, journal=SIAM Journal on Matrix Analysis and Applications, volume=46, number=2, pages=1145--1167, year=2025, publisher=SIAM
+          
+          
+        </li>
+      
+        <li>
+          akhtari2024cox: title=The Cox-Ingersoll-Ross process under volatility uncertainty, author=Akhtari, Bahar and Li, Hanwu, journal=Journal of Mathematical Analysis and Applications, volume=531, number=1, pages=127867, year=2024, publisher=Elsevier
+          
+          
+        </li>
+      
+        <li>
+          andrews2010ricci: title=The Ricci flow in Riemannian geometry: a complete proof of the differentiable 1&#x2f;4-pinching sphere theorem, author=Andrews, Ben and Hopper, Christopher, year=2010, publisher=Springer
+          
+          
+        </li>
+      
+        <li>
+          autenried2014sub: title=Sub-Riemannian geometry of Stiefel manifolds, author=Autenried, Christian and Markina, Irina, journal=SIAM Journal on Control and Optimization, volume=52, number=2, pages=939--959, year=2014, publisher=SIAM
+          
+          
+        </li>
+      
+        <li>
+          bakry2013analysis: title=Analysis and Geometry of Markov Diffusion Operators, author=Bakry, D. and Gentil, I. and Ledoux, M., isbn=9783319002279, lccn=2013952461, series=Grundlehren der mathematischen Wissenschaften, url=https:&#x2f;&#x2f;books.google.es&#x2f;books?id=gU3ABAAAQBAJ, year=2013, publisher=Springer International Publishing
+          
+          
+        </li>
+      
+        <li>
+          batir2008inequalities: title=Inequalities for the gamma function, author=Batir, Necdet, journal=Archiv der Mathematik, volume=91, number=6, pages=554--563, year=2008, publisher=Birkh user-Verlag, Basel
+          
+          
+        </li>
+      
+        <li>
+          bendokat2024grassmann: title=A Grassmann manifold handbook: Basic geometry and computational aspects, author=Bendokat, Thomas and Zimmermann, Ralf and Absil, P-A, journal=Advances in Computational Mathematics, volume=50, number=1, pages=6, year=2024, publisher=Springer
+          
+          
+        </li>
+      
+        <li>
+          berger2007panoramic: title=A Panoramic View of Riemannian Geometry, author=Berger, M., isbn=9783540653172, lccn=2007925272, url=https:&#x2f;&#x2f;books.google.es&#x2f;books?id=d_SsagQckaQC, year=2007, publisher=Springer Berlin Heidelberg
+          
+          
+        </li>
+      
+        <li>
+          besse2007einstein: title=Einstein Manifolds, author=Besse, A.L., isbn=9783540741206, lccn=2007938035, series=Classics in Mathematics, url=https:&#x2f;&#x2f;books.google.es&#x2f;books?id=aVUjiBNCyogC, year=2007, publisher=Springer Berlin Heidelberg
+          
+          
+        </li>
+      
+        <li>
+          boumal2022intromanifolds: title = An introduction to optimization on smooth manifolds, author = Boumal, Nicolas, howpublished = To appear with Cambridge University Press, year = 2022, url = https:&#x2f;&#x2f;www.nicolasboumal.net&#x2f;book,
+          
+          
+        </li>
+      
+        <li>
+          bovier2015metastability: title=Metastability: A Potential-Theoretic Approach, author=Bovier, A. and den Hollander, F., isbn=9783319247762, series=Die Grundlehren der mathematischen Wissenschaften, url=https:&#x2f;&#x2f;books.google.es&#x2f;books?id=yzDlzQEACAAJ, year=2015, publisher=Springer International Publishing
+          
+          
+        </li>
+      
+        <li>
+          brooks2011handbook: title=Handbook of markov chain monte carlo, author=Brooks, Steve and Gelman, Andrew and Jones, Galin and Meng, Xiao-Li, year=2011, publisher=CRC press
+          
+          
+        </li>
+      
+        <li>
+          cao2025dynamicalapproacharealaw: title=Dynamical approach to area law for lattice Yang-Mills, author=Sky Cao and Ron Nissim and Scott Sheffield, year=2025, eprint=2509.04688, archivePrefix=arXiv, url=https:&#x2f;&#x2f;arxiv.org&#x2f;abs&#x2f;2509.04688,
+          
+          <a href="https://arxiv.org/abs/2509.04688">arXiv:2509.04688</a>
+        </li>
+      
+        <li>
+          carlen2004logarithmic: title=Logarithmic Sobolev inequalities and spectral gaps, author=Carlen, Eric and Loss, Michael, journal=Contemporary Mathematics, volume=353, pages=53--60, year=2004, publisher=Providence, RI; American Mathematical Society; 1999
+          
+          
+        </li>
+      
+        <li>
+          cattiaux2007weak: title=Weak logarithmic Sobolev inequalities and entropic convergence, author=Cattiaux, Patrick and Gentil, Ivan and Guillin, Arnaud, journal=Probability theory and related fields, volume=139, number=3, pages=563--603, year=2007, publisher=Springer
+          
+          
+        </li>
+      
+        <li>
+          cheeger1975comparison: title=Comparison theorems in Riemannian geometry, author=Cheeger, Jeff and Ebin, David G and Ebin, David Gregory, volume=9, year=1975, publisher=North-Holland Amsterdam
+          
+          
+        </li>
+      
+        <li>
+          cheng2022efficient: title=Efficient sampling on Riemannian manifolds via Langevin MCMC, author=Cheng, Xiang and Zhang, Jingzhao and Sra, Suvrit, journal=Advances in Neural Information Processing Systems, volume=35, pages=5995--6006, year=2022
+          
+          
+        </li>
+      
+        <li>
+          chewi2025analysis: title=Analysis of langevin monte carlo from poincare to log-sobolev, author=Chewi, Sinho and Erdogdu, Murat A and Li, Mufan and Shen, Ruoqi and Zhang, Matthew S, journal=Foundations of Computational Mathematics, volume=25, number=4, pages=1345--1395, year=2025, publisher=Springer
+          
+          
+        </li>
+      
+        <li>
+          cohen1998topology: title=The topology of fiber bundles lecture notes, author=Cohen, Ralph L, journal=Standford University, year=1998
+          
+          
+        </li>
+      
+        <li>
+          cox1985theory: title=A theory of the term structure of interest rates, author=Cox, John C and Ingersoll, Jonathan E and Ross, Stephen A and others, journal=Econometrica, volume=53, number=2, pages=385--407, year=1985, publisher=World Scientific
+          
+          
+        </li>
+      
+        <li>
+          diffpriv1: title=Differential privacy dynamics of langevin diffusion and noisy gradient descent, author=Chourasia, Rishav and Ye, Jiayuan and Shokri, Reza, journal=Advances in Neural Information Processing Systems, volume=34, pages=14771--14781, year=2021
+          
+          
+        </li>
+      
+        <li>
+          diffpriv2: title=Can stochastic gradient Langevin dynamics provide differential privacy for deep learning?, author=Heller, Guy and Fetaya, Ethan, booktitle=2023 IEEE Conference on Secure and Trustworthy Machine Learning (SaTML), pages=68--106, year=2023, organization=IEEE
+          
+          
+        </li>
+      
+        <li>
+          diffpriv3: title=Differential Privacy Guarantees for Stochastic Gradient Langevin Dynamics, author=Théo Ryffel and Francis Bach and David Pointcheval, year=2022, eprint=2201.11980, archivePrefix=arXiv, url=https:&#x2f;&#x2f;arxiv.org&#x2f;abs&#x2f;2201.11980,
+          
+          <a href="https://arxiv.org/abs/2201.11980">arXiv:2201.11980</a>
+        </li>
+      
+        <li>
+          doCarmoriemannian: title=Riemannian geometry, author=Do Carmo, Manfredo Perdigao and Flaherty Francis, J, volume=6, year=1992, publisher=Springer
+          
+          
+        </li>
+      
+        <li>
+          escobales1975riemannian: title=Riemannian submersions with totally geodesic fibers, author=Escobales Jr, Richard H, journal=Journal of Differential Geometry, volume=10, number=2, pages=253--276, year=1975, publisher=Lehigh University
+          
+          
+        </li>
+      
+        <li>
+          evans2010partial: title=Partial Differential Equations, author=Evans, L.C., isbn=9780821849743, lccn=2009044716, series=Graduate studies in mathematics, url=https:&#x2f;&#x2f;books.google.es&#x2f;books?id=Xnu0o\_EJrCQC, year=2010, publisher=American Mathematical Society
+          
+          
+        </li>
+      
+        <li>
+          fukumizu2019semi: title=Semi-flat minima and saddle points by embedding neural networks to overparameterization, author=Fukumizu, Kenji and Yamaguchi, Shoichiro and Mototake, Yoh-ichi and Tanaka, Mirai, journal=Advances in neural information processing systems, volume=32, year=2019
+          
+          
+        </li>
+      
+        <li>
+          fulton2013representation: title=Representation theory: a first course, author=Fulton, William and Harris, Joe, year=2013, publisher=Springer Science \&amp; Business Media
+          
+          
+        </li>
+      
+        <li>
+          gallier2020differential: title=Differential geometry and lie groups, author=Gallier, JEAN QUAINTANCE and Quaintance, Jocelyn, volume=12, year=2020, publisher=Springer
+          
+          
+        </li>
+      
+        <li>
+          gelman1995bayesian: title=Bayesian data analysis, author=Gelman, Andrew and Carlin, John B and Stern, Hal S and Rubin, Donald B, year=1995, publisher=Chapman and Hall&#x2f;CRC
+          
+          
+        </li>
+      
+        <li>
+          gilbarg1977elliptic: title=Elliptic partial differential equations of second order, author=Gilbarg, David and Trudinger, Neil S, year=1977, publisher=Springer
+          
+          
+        </li>
+      
+        <li>
+          hirsch2012differential: title=Differential topology, author=Hirsch, Morris W, year=2012, publisher=Springer Science \&amp; Business Media
+          
+          
+        </li>
+      
+        <li>
+          horn2012matrix: title=Matrix analysis, author=Horn, Roger A and Johnson, Charles R, year=2012, publisher=Cambridge university press
+          
+          
+        </li>
+      
+        <li>
+          hsu2008brownian: title=A brief introduction to Brownian motion on a Riemannian manifold, author=Hsu, Elton P, journal=lecture notes, year=2008
+          
+          
+        </li>
+      
+        <li>
+          hsustochastic: title=Stochastic Analysis on Manifolds, author=Hsu, E.P., isbn=9780821883884, series=Contemporary Mathematics, url=https:&#x2f;&#x2f;books.google.es&#x2f;books?id=2NM0Z7svRmEC, publisher=American Mathematical Soc., year = 2002
+          
+          
+        </li>
+      
+        <li>
+          jerrum1993polynomial: title=Polynomial-time approximation algorithms for the Ising model, author=Jerrum, Mark and Sinclair, Alistair, journal=SIAM Journal on computing, volume=22, number=5, pages=1087--1116, year=1993, publisher=SIAM
+          
+          
+        </li>
+      
+        <li>
+          jolliffe2011principal: title=Principal component analysis, author=Jolliffe, Ian, booktitle=International encyclopedia of statistical science, pages=1094--1096, year=2011, publisher=Springer
+          
+          
+        </li>
+      
+        <li>
+          lando2013graphs: title=Graphs on surfaces and their applications, author=Lando, Sergei K and Zvonkin, Alexander K, volume=141, year=2013, publisher=Springer Science \&amp; Business Media
+          
+          
+        </li>
+      
+        <li>
+          lee2018introductionRiemannian: title=Introduction to Riemannian manifolds, author=Lee, John M, volume=2, year=2018, publisher=Springer
+          
+          
+        </li>
+      
+        <li>
+          mackay2003information: title=Information theory, inference and learning algorithms, author=MacKay, David JC, year=2003, publisher=Cambridge university press
+          
+          
+        </li>
+      
+        <li>
+          menon2024geometrydeeplinearnetwork: title=The geometry of the deep linear network, author=Govind Menon, year=2024, eprint=2411.09004, archivePrefix=arXiv, url=https:&#x2f;&#x2f;arxiv.org&#x2f;abs&#x2f;2411.09004,
+          
+          <a href="https://arxiv.org/abs/2411.09004">arXiv:2411.09004</a>
+        </li>
+      
+        <li>
+          menon2026implicitregularizationlangevindynamics: title=On the implicit regularization of Langevin dynamics with projected noise, author=Govind Menon and Austin J. Stromme and Adrien Vacher, year=2026, eprint=2602.12257, archivePrefix=arXiv, url=https:&#x2f;&#x2f;arxiv.org&#x2f;abs&#x2f;2602.12257,
+          
+          <a href="https://arxiv.org/abs/2602.12257">arXiv:2602.12257</a>
+        </li>
+      
+        <li>
+          menz2014: author = Georg Menz and Andr\&#x27;e Schlichting, title = Poincaré and logarithmic Sobolev inequalities by decomposition of the energy landscape, volume = 42, journal = The Annals of Probability, number = 5, publisher = Institute of Mathematical Statistics, pages = 1809 -- 1884, keywords = diffusion process, Eyring–Kramers formula, Kramers law, Logarithmic Sobolev inequality, metastability, Poincaré inequality, spectral gap, weighted transport distance, year = 2014, doi = 10.1214&#x2f;14-AOP908, URL = https:&#x2f;&#x2f;doi.org&#x2f;10.1214&#x2f;14-AOP908
+          <a href="https://doi.org/10.1214&#x2f;14-AOP908">doi:10.1214&#x2f;14-AOP908</a>
+          
+        </li>
+      
+        <li>
+          milnor1997topology: title=Topology from the differentiable viewpoint, author=Milnor, John Willard and Weaver, David W, volume=21, year=1997, publisher=Princeton university press
+          
+          
+        </li>
+      
+        <li>
+          montvay1994quantum: title=Quantum fields on a lattice, author=Montvay, Istv\&#x27;an and M\&quot;unster, Gernot, year=1994, publisher=Cambridge University Press
+          
+          
+        </li>
+      
+        <li>
+          oksendal2013stochastic: title=Stochastic differential equations: an introduction with applications, author=Oksendal, Bernt, year=2013, publisher=Springer Science \&amp; Business Media
+          
+          
+        </li>
+      
+        <li>
+          oneil1967submersions: title=Submersions and geodesics, author=O’Neill, Barrett, journal=Duke Math. J., volume=34, number=1, pages=363--373, year=1967
+          
+          
+        </li>
+      
+        <li>
+          oneill1966fundamental: title=The fundamental equations of a submersion., author=O&#x27;Neill, Barrett, journal=Michigan Mathematical Journal, volume=13, number=4, pages=459--469, year=1966, publisher=University of Michigan, Department of Mathematics
+          
+          
+        </li>
+      
+        <li>
+          ourwork: author = &quot;Páez Velasco, Pablo&quot;, title = &quot;Tensor network manifolds and Riemannian fundamental theorem for tensor networks&quot;, note = &quot;unpublished&quot;
+          
+          
+        </li>
+      
+        <li>
+          pardoux2014stochastic: title=Stochastic Differential Equations, Backward SDEs, Partial Differential Equations, author=Pardoux, E. and R\ua\cscanu, A., isbn=9783319057149, series=Stochastic Modelling and Applied Probability, url=https:&#x2f;&#x2f;books.google.es&#x2f;books?id=j4nkAwAAQBAJ, year=2014, publisher=Springer International Publishing
+          
+          
+        </li>
+      
+        <li>
+          petersen2006riemannian: title=Riemannian Geometry, author=Petersen, P., isbn=9780387294032, lccn=97005786, series=Graduate Texts in Mathematics, url=https:&#x2f;&#x2f;books.google.es&#x2f;books?id=9cekXdo52hEC, year=2006, publisher=Springer New York
+          
+          
+        </li>
+      
+        <li>
+          preguntastack: title = Escaping time of a modified CIR process, author = mathusername, howpublished = Mathematics Stack Exchange, eprint = https:&#x2f;&#x2f;math.stackexchange.com&#x2f;q&#x2f;5117199, archivePrefix=stackexchange, year = 2025, URL = https:&#x2f;&#x2f;math.stackexchange.com&#x2f;q&#x2f;5117199
+          
+          
+        </li>
+      
+        <li>
+          rentmeesters2013algorithms: title=Algorithms for data fitting on some common homogeneous spaces, author=Rentmeesters, Quentin and others, year=2013, school=Ph. D. thesis, Universit\&#x27;e Catholique de Louvain, Louvain, Belgium
+          
+          
+        </li>
+      
+        <li>
+          revuz2013continuous: title=Continuous martingales and Brownian motion, author=Revuz, Daniel and Yor, Marc, volume=293, year=2013, publisher=Springer Science \&amp; Business Media
+          
+          
+        </li>
+      
+        <li>
+          robert2004monte: title=Monte Carlo statistical methods, author=Robert, Christian P and Casella, George and Casella, George, volume=2, year=2004, publisher=Springer
+          
+          
+        </li>
+      
+        <li>
+          safran2021effects: title=The effects of mild over-parameterization on the optimization landscape of shallow relu neural networks, author=Safran, Itay M and Yehudai, Gilad and Shamir, Ohad, booktitle=Conference on Learning Theory, pages=3889--3934, year=2021, organization=PMLR
+          
+          
+        </li>
+      
+        <li>
+          schutz1980geometrical: title=Geometrical methods of mathematical physics, author=Schutz, Bernard F, year=1980, publisher=Cambridge university press
+          
+          
+        </li>
+      
+        <li>
+          shen2010tracequotient: title=A geometric revisit to the trace quotient problem, author=Shen, Hao and Diepold, Klaus and H\&quot;uper, Knut, booktitle=Proceedings of the 19th International Symposium of Mathematical Theory of Networks and Systems (MTNS 2010), pages=1, year=2010
+          
+          
+        </li>
+      
+        <li>
+          steele2012stochastic: title=Stochastic Calculus and Financial Applications, author=Steele, J.M., isbn=9781468493054, series=Stochastic Modelling and Applied Probability, url=https:&#x2f;&#x2f;books.google.es&#x2f;books?id=fsgkBAAAQBAJ, year=2012, publisher=Springer New York
+          
+          
+        </li>
+      
+        <li>
+          stewart1998matrix: title=Matrix algorithms: volume 1: basic decompositions, author=Stewart, Gilbert W, year=1998, publisher=SIAM
+          
+          
+        </li>
+      
+        <li>
+          sulanke1972differentialgeometrie: title=Differentialgeometrie und Faserb\&quot;undel, author=Sulanke, Rolf and Wintgen, Peter, volume=48, year=1972, publisher=Springer
+          
+          
+        </li>
+      
+        <li>
+          vempala2019rapid: title=Rapid convergence of the unadjusted langevin algorithm: Isoperimetry suffices, author=Vempala, Santosh and Wibisono, Andre, journal=Advances in neural information processing systems, volume=32, year=2019
+          
+          
+        </li>
+      
+        <li>
+          villani2008optimal: title=Optimal Transport: Old and New, author=Villani, C., isbn=9783540710509, lccn=2008932183, series=Grundlehren der mathematischen Wissenschaften, url=https:&#x2f;&#x2f;books.google.es&#x2f;books?id=hV8o5R7\_5tkC, year=2008, publisher=Springer Berlin Heidelberg
+          
+          
+        </li>
+      
+        <li>
+          wainwright2019high: title=High-Dimensional Statistics: A Non-Asymptotic Viewpoint, author=Wainwright, M.J., isbn=9781108498029, lccn=2018043475, series=Cambridge Series in Statistical and Probabilistic Mathematics, url=https:&#x2f;&#x2f;books.google.es&#x2f;books?id=8C8nuQEACAAJ, year=2019, publisher=Cambridge University Press
+          
+          
+        </li>
+      
+        <li>
+          wang2006functional: title=Functional inequalities Markov semigroups and spectral theory, author=Wang, Fengyu, year=2006, publisher=Elsevier
+          
+          
+        </li>
+      
+        <li>
+          wang2009log: title=Log-Sobolev inequality on non-convex Riemannian manifolds, author=Wang, Feng-Yu, journal=Advances in Mathematics, volume=222, number=5, pages=1503--1520, year=2009, publisher=Elsevier
+          
+          
+        </li>
+      
+        <li>
+          wibisono2019proximal: title=Proximal Langevin Algorithm: Rapid Convergence Under Isoperimetry, author=Andre Wibisono, year=2019, eprint=1911.01469, archivePrefix=arXiv, url=https:&#x2f;&#x2f;arxiv.org&#x2f;abs&#x2f;1911.01469,
+          
+          <a href="https://arxiv.org/abs/1911.01469">arXiv:1911.01469</a>
+        </li>
+      
+        <li>
+          xuquotient: title=Quotient-Space Diffusion Model, author=Xu, Yixian and Wang, Yusong and Luo, Shengjie and Gao, Kaiyuan and He, Tianyu and Liu, Chang and He, Di, note=Submitted to The Fourteenth International Conference on Learning Representations. Under review, year = 2026
+          
+          
+        </li>
+      
+        <li>
+          yan2005graph: title=Graph embedding: A general framework for dimensionality reduction, author=Yan, Shuicheng and Xu, Dong and Zhang, Benyu and Zhang, Hong-Jiang, booktitle=2005 IEEE Computer Society Conference on Computer Vision and Pattern Recognition (CVPR&#x27;05), volume=2, pages=830--837, year=2005, organization=IEEE
+          
+          
+        </li>
+      
+        <li>
+          yanguez2025efficient: title=Efficient Quantum Measurements: Computational Max- and Measured R\&#x27;enyi Divergences and Applications, author=Álvaro Yángüez and Thomas A. Hahn and Jan Kochanowski, year=2025, eprint=2509.21308, archivePrefix=arXiv, url=https:&#x2f;&#x2f;arxiv.org&#x2f;abs&#x2f;2509.21308,
+          
+          <a href="https://arxiv.org/abs/2509.21308">arXiv:2509.21308</a>
+        </li>
+      
+        <li>
+          zhong1984estimate: title=On the estimate of first eigenvalue of a compact Riemannian manifold, author=Zhong, Jia Qing, journal=Sci. Sinica Ser. A, volume=27, pages=1265--1273, year=1984
+          
+          
+        </li>
+      
+    </ol>
+    
+  </section>
+
+  <footer class="footer-disclaimer">
+    <p class="muted">Rendered by <span class="brand">GrokRxiv</span>. Source: <a href="https://arxiv.org/abs/2606.13453">arXiv:2606.13453</a>.</p>
+  </footer>
+</body>
+</html>
