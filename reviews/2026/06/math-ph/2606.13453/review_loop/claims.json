@@ -1,0 +1,257 @@
+{
+  "claims": [
+    {
+      "id": "claim_1",
+      "role": "citation",
+      "text": "The paper maintains high citation hygiene, relying on authoritative textbooks for geometric and stochastic background and correctly identifying its primary methodological predecessor (Li & Erdogdu 2023). All technical claims regarding log-Sobolev and Poincaré inequalities are supported by relevant literature. The inclusion of application-specific citations for trace ratio minimization and quantum information demonstrates a good grasp of the interdisciplinary context.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_2",
+      "role": "citation",
+      "text": "Standard reference for Poincaré inequalities using Lyapunov functions, cited to support the claim that LSI implies Poincaré.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_3",
+      "role": "citation",
+      "text": "Motivation for Gibbs sampling in high-energy physics and lattice gauge theory.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_4",
+      "role": "citation",
+      "text": "Used for lower bounds on volumes of geodesic balls in compact manifolds, supporting the suboptimality analysis.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_5",
+      "role": "citation",
+      "text": "Cited as an application of sampling problems in quantum information theory.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_6",
+      "role": "citation",
+      "text": "The paper uses the citation key 'LiErd2022' for the 2023 Bernoulli publication.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_7",
+      "role": "citation",
+      "text": "Primary predecessor paper; provides the proof strategy for Poincaré inequalities and rapid mixing that this work generalizes to broader manifold classes.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_8",
+      "role": "citation",
+      "text": "The fundamental reference for Bakry-Émery theory and diffusion operators used throughout the paper for LSI and Poincaré derivations.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_9",
+      "role": "citation",
+      "text": "Standard reference for optimization on manifolds, cited for the connection between sampling and constrained optimization.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_10",
+      "role": "citation",
+      "text": "Key reference for the trace quotient problem used in the examples section to demonstrate the application of the main results.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_11",
+      "role": "meta_reviewer",
+      "text": "The paper establishes polynomial-in-dimension mixing-time guarantees for Langevin dynamics on Riemannian manifolds under conditions on curvature, energy landscape geometry, and symmetry, with a central technical innovation using Riemannian submersions to factor out Lie group symmetries and lift Poincaré inequalities from quotient base spaces to total spaces. The novelty specialist rates the contribution significant (0.75/1.0) with high confidence (0.90), and the citation specialist finds strong…",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_12",
+      "role": "meta_reviewer",
+      "text": "major_revision",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_13",
+      "role": "meta_reviewer",
+      "text": "The Riemannian-submersion lifting strategy elegantly reduces the hard problem of multiple global minima to a quotient manifold with a unique minimum, then lifts Poincaré inequalities back — a conceptually clean and reusable technique.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_14",
+      "role": "meta_reviewer",
+      "text": "The multi-step proof architecture (Lyapunov-function Poincaré on the base following Li-Erdogdu 2023, submersion lifting, Bakry-Émery upgrade to LSI, TV-distance decay via Pinsker) is internally consistent and cites well-established classical inputs correctly.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_15",
+      "role": "meta_reviewer",
+      "text": "The novelty specialist finds no missing prior art and assigns a significant verdict (0.75) with high confidence, confirming the contribution meaningfully extends beyond Li-Erdogdu 2023 to a general class of symmetric Riemannian manifolds.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_16",
+      "role": "meta_reviewer",
+      "text": "Citation hygiene is high (confidence 0.95): authoritative monographs are used for geometric and stochastic background, the primary methodological predecessor is correctly identified, and application-specific references demonstrate genuine interdisciplinary reach.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_17",
+      "role": "meta_reviewer",
+      "text": "The self-contained treatment of Riemannian geometry, Sobolev spaces, and SDEs, together with concrete worked examples (trace-ratio on Stiefel/Grassmann, mean-field Ising), makes the theoretical results accessible and verifiable in principle.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_18",
+      "role": "meta_reviewer",
+      "text": "No simulation code, numerical experiment, or formal proof artifact is provided to empirically confirm that mixing times and log-Sobolev constants scale polynomially in dim(M) on the §7 examples; both technical_correctness (C1, C10 at major severity) and reproducibility (concerns 1–3 at major severity) flag this as the primary gap, making the headline quantitative claim (Theorem 14) only structurally plausible rather than computationally verified.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_19",
+      "role": "meta_reviewer",
+      "text": "Reproducibility is critically low (score 0.46): no public repository, no license, no machine-checkable proof artifact (e.g., proofs/main_results.lean), and the key constants β and mixing-time exponents are given only as asymptotic polynomial dependencies on geometric parameters rather than concrete values for any reproducible instance.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_20",
+      "role": "meta_reviewer",
+      "text": "The polynomial-in-dimension scaling of β (Remark 16) is explicitly conditional on all auxiliary geometric parameters (injectivity radius, convexity radius, curvature bounds, etc.) scaling polynomially in dim(M), but this is not verified for the §7 worked examples; the degradation of 1/i(M) and 1/conv(M) on some natural families could break the conclusion.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_21",
+      "role": "meta_reviewer",
+      "text": "The Hessian kernel regularity condition implicit in Assumption 9-10 — that ker(∇²F(x)) coincides with the vertical subspace ker(dπ|_x) at the minimum fiber — is presented as a consequence of submersion calculus but is a non-trivial additional hypothesis on F that need not hold for generic G-invariant smooth functions and should be stated explicitly.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_22",
+      "role": "meta_reviewer",
+      "text": "Two foundational citations are absent: Holley and Stroock (1986), which provides the original perturbation lemma underpinning the defective-to-tight LSI argument, and O'Neill (1966), the seminal source for the fundamental submersion equations used throughout Sections 3 and 5.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_23",
+      "role": "meta_reviewer",
+      "text": "For the trace-ratio example on the complex Stiefel manifold (§7), what are the closed-form or asymptotic scalings in (n,m) of i(M), conv(M), R_M, diam(M), K, A_2, and λ*, and do these confirm that the resulting β threshold from Theorem 14 is genuinely polynomial in dim(M) = 2m(n-m)?",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_24",
+      "role": "meta_reviewer",
+      "text": "Can the authors provide at minimum a small-scale numerical experiment — e.g., running the discretized Langevin diffusion on the trace-ratio problem for m=2 and n=3..10 — reporting empirical TV distance to the Gibbs measure and fitting an empirical mixing time, to check whether the polynomial prediction is consistent with simulation?",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_25",
+      "role": "meta_reviewer",
+      "text": "Is the condition ker(∇²F(x)) = ker(dπ|_x) at fibers above the minimum x* automatically satisfied for G-invariant Morse-Bott functions on principal G-bundles, or does it require a separate structural assumption; can the authors verify it explicitly for the trace-ratio example?",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_26",
+      "role": "meta_reviewer",
+      "text": "For the mean-field 2D ferromagnetic Ising example, what is the precise compact Riemannian manifold M and Lie group G, and does F on M satisfy all of Assumptions 1-10, particularly the escape-direction condition (Assumption 9) and the injectivity-radius lower bound needed for ε_max in Theorem 15?",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_27",
+      "role": "novelty",
+      "text": "significant",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_28",
+      "role": "novelty",
+      "text": "builds_on",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_29",
+      "role": "novelty",
+      "text": "Extends the convergence analysis of Langevin dynamics beyond products of spheres to a general class of Riemannian manifolds (symmetric spaces and quotient manifolds) by employing the geometric framework of Riemannian submersions to factor out symmetries and lift Poincaré inequalities.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_30",
+      "role": "novelty",
+      "text": "prior_art",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_31",
+      "role": "novelty",
+      "text": "Generalizes the treatment of multiple minima from the Euclidean setting of Menz and Schlichting to a Riemannian manifold setting, specifically using Lie group actions and quotient manifolds to reduce the complexity of the energy landscape to a unique minimum.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_32",
+      "role": "novelty",
+      "text": "prior_art",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_33",
+      "role": "novelty",
+      "text": "Adapts foundational Bakry-Émery theory to the specific context of Riemannian submersions and Langevin processes in the low-temperature regime, providing explicit polynomial mixing bounds with respect to manifold dimension.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_34",
+      "role": "summary",
+      "text": "Langevin dynamics on Riemannian manifolds converge rapidly to Gibbs measures under conditions on curvature and energy landscape geometry, with mixing times polynomial in dimension.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_35",
+      "role": "summary",
+      "text": "This paper addresses how to efficiently sample from Gibbs distributions on curved spaces (Riemannian manifolds). Sampling from complex distributions is fundamental to physics and machine learning, but direct sampling is usually impossible. Langevin dynamics—a stochastic process combining random noise and gradient descent—naturally approaches the target distribution over time. The central question is how fast this convergence occurs, which the paper calls 'rapid mixing.' Classical results exist …",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_36",
+      "role": "summary",
+      "text": "Identifies conditions combining manifold curvature, inverse temperature, and energy landscape structure ensuring logarithmic Sobolev inequalities for Langevin dynamics on Riemannian manifolds",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_37",
+      "role": "summary",
+      "text": "Proves polynomial-in-dimension mixing times for convergence to Gibbs measures under these conditions",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_38",
+      "role": "summary",
+      "text": "Develops lifting techniques for Poincaré inequalities from quotient manifolds to total spaces via Riemannian submersions",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_39",
+      "role": "summary",
+      "text": "Establishes that isolated critical points with adequate spacing, non-degenerate global minima, and absence of barren plateaus permit rapid mixing",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_40",
+      "role": "summary",
+      "text": "Handles multiple global minima by factoring out symmetries: reduces to quotient manifolds with unique minima via group actions",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_41",
+      "role": "summary",
+      "text": "Provides explicit verification of assumptions for trace ratio minimization and two-dimensional ferromagnetic Ising model on manifolds",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_42",
+      "role": "technical_correctness",
+      "text": "mostly_sound",
+      "verifier_status": "pass"
+    }
+  ],
+  "review_id": "778bf428-106c-496d-b89c-15a6d9521dbc"
+}
