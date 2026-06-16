@@ -1,0 +1,1451 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Angles, orthogonality, and Pythagorean theorem in Banach spaces with two related applications — GrokRxiv Review</title>
+  <meta name="generator" content="grokrxiv-render">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- KaTeX is rendered client-side; math is kept as \( ... \) and \[ ... \] delimiters. -->
+  <style>
+    :root { color-scheme: light dark; --fg: #111; --muted: #555; --bg: #fff;
+            --accent: #1f6feb; --border: #d0d7de; --banner: #fff3cd; --banner-fg: #664d03; }
+    @media (prefers-color-scheme: dark) {
+      :root { --fg: #e6edf3; --muted: #8b949e; --bg: #0d1117; --accent: #58a6ff;
+              --border: #30363d; --banner: #3a2f0b; --banner-fg: #f1c453; }
+    }
+    body { font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+           color: var(--fg); background: var(--bg); max-width: 820px;
+           margin: 0 auto; padding: 24px; }
+    h1 { font-size: 1.7rem; line-height: 1.25; margin: 0 0 0.5rem; }
+    h2 { font-size: 1.2rem; margin-top: 2rem; border-bottom: 1px solid var(--border); padding-bottom: .25rem; }
+    .muted { color: var(--muted); }
+    .disclaimer { background: var(--banner); color: var(--banner-fg); border: 1px solid var(--border);
+                  padding: .75rem 1rem; border-radius: 6px; margin: 0 0 1.5rem; font-weight: 600; }
+    .footer-disclaimer { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--border);
+                         color: var(--muted); font-size: .9rem; }
+    .brand { font-weight: 700; color: var(--accent); }
+    details { border: 1px solid var(--border); border-radius: 6px; padding: .75rem 1rem; margin: .5rem 0; }
+    details > summary { cursor: pointer; font-weight: 600; }
+    .meta-link { font-size: .9rem; }
+    ul { padding-left: 1.25rem; }
+    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .agent-grid { display: grid; gap: .5rem; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 999px;
+             background: var(--border); color: var(--fg); font-size: .8rem; }
+    .badge.pass { background: #1f883d; color: #fff; }
+    .badge.warn { background: #bf8700; color: #fff; }
+    .badge.fail { background: #cf222e; color: #fff; }
+    .target-grid { display: grid; gap: .75rem; padding: 0; list-style: none; }
+    .revision-target { border: 1px solid var(--border); border-radius: 6px; padding: .9rem 1rem;
+                       background: rgba(127, 127, 127, .08); }
+    .target-title { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: 0 0 .75rem; }
+    .target-fields { display: grid; gap: .5rem; margin: 0; }
+    .target-field { display: grid; gap: .35rem; border: 1px solid var(--border);
+                    border-radius: 6px; padding: .65rem .75rem; }
+    .target-field.required { border-color: #bf8700; background: rgba(191, 135, 0, .12); }
+    .field-label { color: var(--muted); font-size: .75rem; font-weight: 700; text-transform: uppercase; }
+    .field-value { margin: 0; overflow-wrap: anywhere; }
+    .field-value.codeish { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Angles, orthogonality, and Pythagorean theorem in Banach spaces with two related applications</h1>
+    <p class="muted">
+      <span class="brand">GrokRxiv</span> review of
+      <a class="meta-link" href="https://arxiv.org/abs/2605.00009">arXiv:2605.00009</a>
+       · <span>math.GM</span>
+    </p>
+    <p class="muted">
+      Antonio Cicone, Stefano Serra-Capizzano, Giacomo Tento, Haomin Zhou
+    </p>
+  </header>
+
+  <section>
+    <h2>TL;DR</h2>
+    <p>The paper develops a dual-space weak inner product for general Banach spaces, recovering the classical L^2 inner product as a special case, and applies the resulting generalized Pythagorean theorem to two domains: L^1 orthogonality of FIF intrinsic mode functions (IMFs) and l^p-norm circulant preconditioning of Toeplitz linear systems. The novelty is genuine (novelty specialist verdict: significant, score 0.65) and the dual-track application structure is distinctive relative to the prior semi-inner product literature (Lumer 1961). However, three major correctness gaps and a reproducibility score of 0.38 preclude acceptance without revision. The most critical gap, flagged independently by technical_correctness (C5, major, unsupported) and reproducibility (area &#x27;other&#x27;, major), concerns Theorem 4: the claim that FIF IMFs are pairwise orthogonal in the L^1 sense is unjustified because Theorem 3 is a Fourier-domain L^1 energy-conservation result whereas Theorem 2 is a time-domain pairwise statement; bridging them requires an N-term extension of the pairwise iff and a Fourier-versus-time domain reconciliation, neither of which is provided. Theorem 1 in generic Banach spaces leaves the duality selection implicit (C1, major), rendering the formulation ill-posed when the duality map is multivalued. The empirical PCG iteration counts in Tables 1-2 (C10, major) are unreproducible: no code, tolerance, initialization, or right-hand side is supplied and the conclusion rests on only two parameter triples. The field (math.*) falls within the code-amenable set; absent proof artifacts and experiment scripts constitute load-bearing gaps under the recommendation gate, defaulting the recommendation to major_revision.</p>
+    <p class="muted">Recommendation: <strong>Major revision</strong> · Confidence: 78%</p>
+  </section>
+
+  <section>
+    <h2>Strengths</h2>
+    <ul>
+      <li>The weak inner product framework reduces correctly to the classical L^2 inner product (C2, supported), providing validated theoretical foundations for the generalization.</li><li>The L^1 Pythagorean theorem (Theorem 2, C3, supported) is an algebraically rigorous result that cleanly characterizes L^1 orthogonality and directly motivates the signal processing application.</li><li>The closed-form l^p circulant minimizer (C6, supported) and its eigenvalue formula (C7, supported) are explicit, verifiable contributions to the Toeplitz preconditioning literature.</li><li>The paper bridges non-stationary signal decomposition and structured linear algebra under a single geometric framework, a combination absent from the cited prior art.</li><li>Citation hygiene is strong for the iterative filtering (Cicone 2021, 2024), GLT (GLT-bookI&#x2f;IV), and classical preconditioning (CN-Sirev, Ng 2004) literature, and the distinction from Lumer&#x27;s semi-inner product is explicitly acknowledged.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Weaknesses</h2>
+    <ul>
+      <li>Theorem 4 (IMF pairwise L^1 orthogonality) is unsupported: the proof conflates Fourier-domain L^1 energy conservation (Theorem 3) with time-domain L^1 pairwise orthogonality (Theorem 2), without providing the N-term extension of the pairwise iff or the domain reconciliation required to bridge them (C5, major, unsupported).</li><li>Theorem 1 (Generalized Pythagorean Theorem) does not specify the duality selection convention in generic Banach spaces, leaving the result ill-posed when the normalized duality map J: X → 2^{X*} is multivalued at non-smooth points of the norm (C1, major, partially_supported).</li><li>The empirical PCG iteration counts in Tables 1-2 are unreproducible: no experiment code, stopping tolerance, initial guess, right-hand side, or handling of singular cases is provided, and the &#x27;lower p is better&#x27; conclusion rests on only two (α,β,γ) parameter triples (C10, major, unsupported).</li><li>No proof artifacts (Lean&#x2f;Coq&#x2f;Agda for Theorems 1-4) or paper-specific experiment scripts are deposited, yielding a reproducibility score of 0.38 and leaving all headline claims unverifiable by code (reproducibility specialist, four major concerns).</li><li>The abstract&#x27;s claim of an &#x27;L^p Pythagorean theorem&#x27; is misleading: the result is a dual-pairing identity, not the norm-power equality ||f+g||_p^p = ||f||_p^p + ||g||_p^p that the phrase connotes, and the framing requires correction (C4, minor).</li><li>The bibliography omits canonical Banach-space orthogonality references (Birkhoff 1935, James 1947, Dragomir 2004), making it impossible to assess whether the proposed orthogonality coincides with or strictly extends Birkhoff-James orthogonality.</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Revision Targets</h2>
+    <div class="target-grid">
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              
+              
+              Examples &#x2f; Signal Processing, Theorem 4
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">Theorem 2 is a pairwise statement: ||f+g||_1 = ||f||_1 + ||g||_1 iff f ⊥_{L^1} g. The FIF decomposition involves m + 1 components (s = Σ IMF_k + r), and Theorem 3 gives E_1(s) = Σ E_1(IMF_k) + E_1(r), i.e. ||\hat s||_1 = Σ ||\widehat{IMF}_k||_1. To deduce pairwise orthogonality from a multi-term L^1 additivity one must (a) bootstrap the pairwise iff to N terms (which requires nonnegativity-style arguments, since ||·||_1 only satisfies a triangle inequality), and (b) cope with the fact that energy conservation is stated on the Fourier-side L^1 norm (||\hat s||_1) while the orthogonality definition (Def. 4 &#x2f; Theorem 2) is in the time-domain L^1. The paper does not address the Fourier-vs-time discrepancy nor the N-term extension; the one-line &#x27;direct consequence&#x27; justification is incomplete.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Either (i) restate Theorem 4 explicitly as Fourier-domain L^1 orthogonality of the \widehat{IMF}_k (using Theorem 2 applied to the transforms), and provide the N-term induction relying on the no-unwanted-oscillation Theorem 3 condition Σ_k |\widehat{φ}_k(ξ)| = |\hat s(ξ)| pointwise; or (ii) provide a separate result establishing time-domain L^1 orthogonality. Ship a formal proof at src&#x2f;proofs&#x2f;IMFOrthogonalityL1.lean and a numerical sanity check at experiments&#x2f;imf_l1_orthogonality.py exercising both pairwise and aggregate orthogonality.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm `Examples &#x2f; Signal Processing, Theorem 4` is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              
+              
+              Main results, Theorem 1, eq:pytha_X
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">Algebraically, expanding 0 = (1&#x2f;2) ∫ [f((f+g)* - f*) + g((f+g)* - g*)] dx and rearranging directly yields ∫(f+g)(f+g)* = ∫ f f* + ∫ g g*, so the equivalence is essentially a tautology of the chosen &#x27;weak inner product&#x27; definition. However, in a generic Banach space the duality mapping is in general multivalued (e.g. at points where the norm is not Gateaux differentiable), so f*, g*, (f+g)* are not canonically determined, and the theorem&#x27;s statement does not specify which dual elements must be used or whether orthogonality should hold for all admissible selections or some. No formal proof is provided, and the dependence on the choice of duality map is not analyzed.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">State the duality selection convention explicitly (e.g. via the normalized duality mapping J: X → 2^{X*}), formalize Theorem 1 as a one-line algebraic identity, and discuss the multivalued case. Provide a machine-checkable proof of the iff in src&#x2f;proofs&#x2f;PythagoreanBanach.lean (or .v &#x2f; .agda).</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm `Main results, Theorem 1, eq:pytha_X` is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>code</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              HAC&#x2f;bootstrap
+               at 
+              evaluation and statistical-testing pipeline
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">The preconditioning tables specify n, p, and selected alpha&#x2f;beta&#x2f;gamma cases, but omit the right-hand side, initialization, PCG stopping tolerance, precision, implementation details, and handling of singular or indefinite preconditioners, making exact iteration counts hard to reproduce.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Publish evaluation scripts or executable pseudocode for walk-forward retraining, validation selection, HAC&#x2f;bootstrap settings, benchmark construction, and table regeneration.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm the evaluation pipeline can reproduce the reported statistical tests and benchmarks.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>code</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              Lean&#x2f;Coq&#x2f;Agda
+               at 
+              code release and execution entrypoints
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">The paper gives only a general FIF algorithm URL and does not provide paper-specific scripts, a repository, license, commit, or release for regenerating the figures, energy checks, or preconditioning tables.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Release the source code, scripts, model configuration, and execution entrypoints needed to regenerate the reported tables, or document why those artifacts cannot be released.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm runnable code or a documented non-release justification is present.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              
+              
+              Main results &#x2f; Special cases &#x2f; L^p spaces, eq:InnerProd
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">The text restates Definition 3 with the canonical L^p–L^q duality. The duality mapping in L^p is single-valued and equals J(f)(x) = |f(x)|^{p-1} sign(f(x)) · ||f||_p^{2-p}; with that choice the statement is a special case of Theorem 1. However, the paper neither specifies the choice of f*, g*, (f+g)* (e.g. via J or unnormalized as |f|^{p-1} sign f) nor verifies a Pythagorean identity analogous to ||f+g||_p^p = ||f||_p^p + ||g||_p^p; in fact such a p-power identity does not generally hold for p ≠ 1, 2, so the &#x27;L^p Pythagorean theorem&#x27; advertised in the abstract is only the implicit equality ∫(f+g)(f+g)* = ∫ f f* + ∫ g g*, which is not the standard L^p Pythagorean statement and may be misleading.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Make the duality selection explicit, exhibit the closed-form equality the orthogonality implies in L^p (it is NOT ||f+g||_p^p = ||f||_p^p + ||g||_p^p), and tone down the abstract to reflect that the L^p version is only the dual-pairing identity.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm `Main results &#x2f; Special cases &#x2f; L^p spaces, eq:InnerProd` is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>bibliography</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              
+              
+              Birkhoff, G. (1935). Orthogonality in normed linear spaces. Transactions of the American Mathematical Society.
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">The paper proposes a new definition for orthogonality in Banach spaces but does not mention the most standard existing definition in this field, Birkhoff-James orthogonality, which is fundamental to any discussion of non-Hilbert orthogonality.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Add a bibliography entry for `Birkhoff, G. (1935). Orthogonality in normed linear spaces. Transactions of the American Mathematical Society` and cite it where the affected method or claim is introduced, or explicitly justify its omission.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm the bibliography and citation context address this reference.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+    </div>
+  </section>
+
+  <section>
+    <h2>Open Questions</h2>
+    <ul>
+      <li>In Theorem 4, does &#x27;pairwise L^1 orthogonality&#x27; refer to time-domain or Fourier-domain L^1? If Fourier-domain, apply Theorem 2 to the transforms and state this explicitly; if time-domain, provide the proof step that bootstraps Theorem 3 (a Fourier-domain sum over N components) to time-domain pairwise orthogonality for each pair.</li><li>For Theorem 1 in a generic Banach space, which selection of the normalized duality map J: X → 2^{X*} must be used for the iff to hold—all admissible selections, or a specific one—and how does the result behave at points where the norm is not Gateaux differentiable?</li><li>What stopping tolerance, initial vector, and right-hand side were used for the PCG experiments in Tables 1-2, and how were the singular or indefinite cases (marked &#x27;#&#x27;) detected and handled?</li><li>How does the &#x27;weak inner product&#x27; orthogonality of Definition 1 relate to Birkhoff-James orthogonality in the same Banach space—are they equivalent, and if not, which is strictly coarser?</li><li>Is the &#x27;optimal p&#x27; heuristic of Remark 5 stable across a broader (α,β,γ) sweep beyond the two parameter triples in Tables 1-2, and are there regimes where smaller p does not minimize PCG iterations?</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Per-Agent Reviews</h2>
+    <div class="agent-grid">
+      
+      <details>
+        <summary>
+          citation — <span class="muted">gemini-3-flash-preview</span>
+          <span class="badge warn">warn</span>
+        </summary>
+        <pre>{
+  &quot;confidence&quot;: 0.95,
+  &quot;entries&quot;: [
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Rajendra Bhatia&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;Bhatia&quot;,
+        &quot;raw&quot;: &quot;Bhatia&quot;,
+        &quot;title&quot;: &quot;Matrix Analysis&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Springer&quot;,
+        &quot;year&quot;: 1997
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited for foundational results on Schatten p-norms and eigenvalue interlacing theorems, which are used to justify the matrix-theoretic extensions in the paper.&quot;,
+      &quot;notes&quot;: &quot;Likely refers to the seminal textbook &#x27;Matrix Analysis&#x27; by R. Bhatia.&quot;,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Raymond H. Chan&quot;,
+          &quot;Michael K. Ng&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;CN-Sirev&quot;,
+        &quot;raw&quot;: &quot;CN-Sirev&quot;,
+        &quot;title&quot;: &quot;Conjugate Gradient Methods for Toeplitz Systems&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;SIAM Review&quot;,
+        &quot;year&quot;: 1996
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;A core reference for circulant preconditioning and the use of Strang-type corrections in the solution of Toeplitz systems.&quot;,
+      &quot;notes&quot;: &quot;Standard survey paper for the preconditioning techniques discussed.&quot;,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Carlo Gilli&quot;,
+          &quot;M. Lazzaro&quot;,
+          &quot;Stefano Serra-Capizzano&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;GLT-bookI&quot;,
+        &quot;raw&quot;: &quot;GLT-bookI&quot;,
+        &quot;title&quot;: &quot;Generalized Locally Toeplitz Sequences: Theory and Applications (Volume I)&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Springer&quot;,
+        &quot;year&quot;: null
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Foundational theoretical reference for Generalized Locally Toeplitz (GLT) sequences, which provide the framework for the preconditioning analysis.&quot;,
+      &quot;notes&quot;: &quot;Primary reference for the GLT theory used throughout the numerical section.&quot;,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;GLT-bookIV&quot;,
+        &quot;raw&quot;: &quot;GLT-bookIV&quot;,
+        &quot;title&quot;: &quot;Generalized Locally Toeplitz Sequences: Theory and Applications (Volume IV)&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Springer&quot;,
+        &quot;year&quot;: null
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;References the extension of GLT theory to multilevel and block structures, mentioned as a direction for generalization.&quot;,
+      &quot;notes&quot;: &quot;Volume IV of the GLT series.&quot;,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;Koro1&quot;,
+        &quot;raw&quot;: &quot;Koro1&quot;,
+        &quot;title&quot;: null,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: null,
+        &quot;year&quot;: null
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited for classical preconditioning results; likely refers to Korovkin-type theorems applied to Toeplitz preconditioning.&quot;,
+      &quot;notes&quot;: &quot;Context: &#x27;classical results on preconditioning [CN-Sirev; Koro1]&#x27;. Likely refers to work by Serra-Capizzano or Korovkin.&quot;,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;F. Longo&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;Longo2025AdaptiveSL&quot;,
+        &quot;raw&quot;: &quot;Longo2025AdaptiveSL&quot;,
+        &quot;title&quot;: &quot;Adaptive signal processing for gravitational wave signals&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: null,
+        &quot;year&quot;: 2025
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Used as a primary application example for non-stationary signal decomposition (gravitational waves) where L1 energy conservation is relevant.&quot;,
+      &quot;notes&quot;: &quot;Recent work providing the physical motivation for the signal processing part.&quot;,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Michael K. Ng&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;Ng_book&quot;,
+        &quot;raw&quot;: &quot;Ng_book&quot;,
+        &quot;title&quot;: &quot;Iterative Methods for Toeplitz Systems&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;SIAM&quot;,
+        &quot;year&quot;: 2004
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Key textbook for iterative methods and preconditioning of Toeplitz systems, cited for the arithmetic cost and spectral properties of circulants.&quot;,
+      &quot;notes&quot;: &quot;Central reference for the numerical linear algebra section.&quot;,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Gene H. Golub&quot;,
+          &quot;Charles F. Van Loan&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;Van_Loan&quot;,
+        &quot;raw&quot;: &quot;Van_Loan&quot;,
+        &quot;title&quot;: &quot;Matrix Computations&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Johns Hopkins University Press&quot;,
+        &quot;year&quot;: 2013
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Standard reference for the arithmetic cost of the Fast Fourier Transform (FFT).&quot;,
+      &quot;notes&quot;: &quot;Classic textbook for numerical linear algebra costs.&quot;,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Sheldon Axler&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;axler1997numerical&quot;,
+        &quot;raw&quot;: &quot;axler1997numerical&quot;,
+        &quot;title&quot;: &quot;Linear Algebra Done Right&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Springer&quot;,
+        &quot;year&quot;: 1997
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited for the extension of the concept of angles to operators.&quot;,
+      &quot;notes&quot;: &quot;Provides mathematical context for operator angles.&quot;,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;beyond&quot;,
+        &quot;raw&quot;: &quot;beyond&quot;,
+        &quot;title&quot;: null,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: null,
+        &quot;year&quot;: null
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited for numerical experimentation results showing that lower p values can improve clustering and convergence speed in preconditioning.&quot;,
+      &quot;notes&quot;: &quot;Likely refers to a paper titled &#x27;Beyond circulant preconditioners...&#x27; or similar.&quot;,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Antonio Cicone&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;cicone2021numerical&quot;,
+        &quot;raw&quot;: &quot;cicone2021numerical&quot;,
+        &quot;title&quot;: &quot;Numerical Analysis of the Fast Iterative Filtering Algorithm&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: null,
+        &quot;year&quot;: 2021
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Core reference for the Fast Iterative Filtering (FIF) algorithm, which is the main signal processing method analyzed.&quot;,
+      &quot;notes&quot;: &quot;Primary algorithm reference.&quot;,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Antonio Cicone&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;cicone2022multivariate&quot;,
+        &quot;raw&quot;: &quot;cicone2022multivariate&quot;,
+        &quot;title&quot;: null,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: null,
+        &quot;year&quot;: 2022
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited to support the observation that Intrinsic Mode Functions (IMFs) are generally not orthogonal in the L2 sense.&quot;,
+      &quot;notes&quot;: &quot;Supports the motivation for seeking a new orthogonality definition.&quot;,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Antonio Cicone&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;cicone2024new&quot;,
+        &quot;raw&quot;: &quot;cicone2024new&quot;,
+        &quot;title&quot;: &quot;A new definition of energy and its conservation&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: null,
+        &quot;year&quot;: 2024
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Foundational paper that proved L1 energy conservation in FIF, directly motivating the generalization of the Pythagorean theorem.&quot;,
+      &quot;notes&quot;: &quot;Direct precursor to the current work.&quot;,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;extreme1&quot;,
+        &quot;raw&quot;: &quot;extreme1&quot;,
+        &quot;title&quot;: null,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: null,
+        &quot;year&quot;: null
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited for spectral approximation results and the behavior of the condition number for Toeplitz matrices.&quot;,
+      &quot;notes&quot;: &quot;Context: &#x27;Euclidean condition number... converges to a constant... see [extreme1]&#x27;.&quot;,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;extreme2&quot;,
+        &quot;raw&quot;: &quot;extreme2&quot;,
+        &quot;title&quot;: null,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: null,
+        &quot;year&quot;: null
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Companion reference to extreme1 for spectral results.&quot;,
+      &quot;notes&quot;: &quot;Related to extreme eigenvalues of Toeplitz matrices.&quot;,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Karl Gustafson&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;gustafson1968angle&quot;,
+        &quot;raw&quot;: &quot;gustafson1968angle&quot;,
+        &quot;title&quot;: &quot;The angle of an operator&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Proceedings of the American Mathematical Society&quot;,
+        &quot;year&quot;: 1968
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Seminal reference for the concept of the angle of an operator, providing historical mathematical context.&quot;,
+      &quot;notes&quot;: &quot;Key reference for previous attempts to generalize angles.&quot;,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Norden E. Huang&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;huang1998empirical&quot;,
+        &quot;raw&quot;: &quot;huang1998empirical&quot;,
+        &quot;title&quot;: &quot;The empirical mode decomposition and the Hilbert spectrum for nonlinear and non-stationary time series analysis&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Proceedings of the Royal Society of London&quot;,
+        &quot;year&quot;: 1998
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Seminal paper for Empirical Mode Decomposition (EMD), the precursor to the Iterative Filtering methods discussed.&quot;,
+      &quot;notes&quot;: &quot;Historical context for the signal processing methods.&quot;,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;imag1&quot;,
+        &quot;raw&quot;: &quot;imag1&quot;,
+        &quot;title&quot;: null,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: null,
+        &quot;year&quot;: null
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited for the use of non-convex functional minimization in imaging as a justification for the proposed L1&#x2f;Lp approaches.&quot;,
+      &quot;notes&quot;: &quot;Application-based precedent.&quot;,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;imag2&quot;,
+        &quot;raw&quot;: &quot;imag2&quot;,
+        &quot;title&quot;: null,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: null,
+        &quot;year&quot;: null
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Companion reference to imag1 for imaging applications.&quot;,
+      &quot;notes&quot;: &quot;Relates to sparse approximation in imaging.&quot;,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;L. Lin&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;lin2009iterative&quot;,
+        &quot;raw&quot;: &quot;lin2009iterative&quot;,
+        &quot;title&quot;: &quot;Iterative filtering as an alternative to empirical mode decomposition&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Advances in Adaptive Data Analysis&quot;,
+        &quot;year&quot;: 2009
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Foundational reference for the Iterative Filtering (IF) algorithm.&quot;,
+      &quot;notes&quot;: &quot;Key method reference for non-stationary signal analysis.&quot;,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Gunter Lumer&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;lumer1961semi&quot;,
+        &quot;raw&quot;: &quot;lumer1961semi&quot;,
+        &quot;title&quot;: &quot;Semi-inner-product spaces&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Transactions of the American Mathematical Society&quot;,
+        &quot;year&quot;: 1961
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Primary mathematical reference for semi-inner product spaces, used to differentiate the paper&#x27;s &#x27;weak inner product&#x27; from existing theory.&quot;,
+      &quot;notes&quot;: &quot;Essential context for the functional analysis part of the paper.&quot;,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;sparse_appr1&quot;,
+        &quot;raw&quot;: &quot;sparse_appr1&quot;,
+        &quot;title&quot;: null,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: null,
+        &quot;year&quot;: null
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited for applications of band structures in approximation of PDEs or graph problems.&quot;,
+      &quot;notes&quot;: &quot;Relates to the structured linear systems section.&quot;,
+      &quot;relevance&quot;: &quot;low&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;sparse_appr2&quot;,
+        &quot;raw&quot;: &quot;sparse_appr2&quot;,
+        &quot;title&quot;: null,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: null,
+        &quot;year&quot;: null
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Companion reference to sparse_appr1.&quot;,
+      &quot;notes&quot;: &quot;Peripheral application reference.&quot;,
+      &quot;relevance&quot;: &quot;low&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Luca Spogli&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;spogli2025investigating&quot;,
+        &quot;raw&quot;: &quot;spogli2025investigating&quot;,
+        &quot;title&quot;: &quot;Investigating geophysical signals related to the upper atmosphere&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: null,
+        &quot;year&quot;: 2025
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Used as an application example in geophysics to demonstrate the need for decomposing signals into quasi-stationary bands.&quot;,
+      &quot;notes&quot;: &quot;Recent application case.&quot;,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    }
+  ],
+  &quot;missing_references&quot;: [
+    {
+      &quot;reason&quot;: &quot;The paper proposes a new definition for orthogonality in Banach spaces but does not mention the most standard existing definition in this field, Birkhoff-James orthogonality, which is fundamental to any discussion of non-Hilbert orthogonality.&quot;,
+      &quot;title&quot;: &quot;Birkhoff, G. (1935). Orthogonality in normed linear spaces. Transactions of the American Mathematical Society.&quot;
+    },
+    {
+      &quot;reason&quot;: &quot;Given the focus on generalizations of inner products to Banach spaces, the work of Dragomir on semi-inner products and related inequalities is a significant omission.&quot;,
+      &quot;title&quot;: &quot;Dragomir, S. S. (2004). Semi-Inner Products and Applications. CRC Press.&quot;
+    },
+    {
+      &quot;reason&quot;: &quot;Since the paper discusses the Pythagorean theorem in L1 and Banach spaces, the classic work of James on orthogonality and its relationship to the Pythagorean theorem should be acknowledged.&quot;,
+      &quot;title&quot;: &quot;James, R. C. (1947). Orthogonality in normed linear spaces. Duke Mathematical Journal.&quot;
+    }
+  ],
+  &quot;summary&quot;: &quot;The paper exhibits high citation hygiene, particularly in its thorough referencing of the authors&#x27; previous work on Iterative Filtering and the Generalized Locally Toeplitz (GLT) framework. It successfully bridges signal processing and numerical linear algebra by drawing from established literature in both fields. However, the theoretical grounding in Banach space geometry could be improved by citing standard concepts like Birkhoff-James orthogonality to better distinguish the proposed &#x27;weak inner product&#x27; from classical functional analysis definitions.&quot;
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          meta_reviewer — <span class="muted">claude-sonnet-4-6</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <p>The paper develops a dual-space weak inner product for general Banach spaces, recovering the classical L^2 inner product as a special case, and applies the resulting generalized Pythagorean theorem to two domains: L^1 orthogonality of FIF intrinsic mode functions (IMFs) and l^p-norm circulant preconditioning of Toeplitz linear systems. The novelty is genuine (novelty specialist verdict: significant, score 0.65) and the dual-track application structure is distinctive relative to the prior semi-inner product literature (Lumer 1961). However, three major correctness gaps and a reproducibility score of 0.38 preclude acceptance without revision. The most critical gap, flagged independently by technical_correctness (C5, major, unsupported) and reproducibility (area &#x27;other&#x27;, major), concerns Theorem 4: the claim that FIF IMFs are pairwise orthogonal in the L^1 sense is unjustified because Theorem 3 is a Fourier-domain L^1 energy-conservation result whereas Theorem 2 is a time-domain pairwise statement; bridging them requires an N-term extension of the pairwise iff and a Fourier-versus-time domain reconciliation, neither of which is provided. Theorem 1 in generic Banach spaces leaves the duality selection implicit (C1, major), rendering the formulation ill-posed when the duality map is multivalued. The empirical PCG iteration counts in Tables 1-2 (C10, major) are unreproducible: no code, tolerance, initialization, or right-hand side is supplied and the conclusion rests on only two parameter triples. The field (math.*) falls within the code-amenable set; absent proof artifacts and experiment scripts constitute load-bearing gaps under the recommendation gate, defaulting the recommendation to major_revision.</p>
+        <p class="muted">Recommendation: <strong>Major revision</strong> · Confidence: 78%</p>
+        <h3>Strengths</h3>
+        <ul>
+          <li>The weak inner product framework reduces correctly to the classical L^2 inner product (C2, supported), providing validated theoretical foundations for the generalization.</li><li>The L^1 Pythagorean theorem (Theorem 2, C3, supported) is an algebraically rigorous result that cleanly characterizes L^1 orthogonality and directly motivates the signal processing application.</li><li>The closed-form l^p circulant minimizer (C6, supported) and its eigenvalue formula (C7, supported) are explicit, verifiable contributions to the Toeplitz preconditioning literature.</li><li>The paper bridges non-stationary signal decomposition and structured linear algebra under a single geometric framework, a combination absent from the cited prior art.</li><li>Citation hygiene is strong for the iterative filtering (Cicone 2021, 2024), GLT (GLT-bookI&#x2f;IV), and classical preconditioning (CN-Sirev, Ng 2004) literature, and the distinction from Lumer&#x27;s semi-inner product is explicitly acknowledged.</li>
+        </ul>
+        <h3>Weaknesses</h3>
+        <ul>
+          <li>Theorem 4 (IMF pairwise L^1 orthogonality) is unsupported: the proof conflates Fourier-domain L^1 energy conservation (Theorem 3) with time-domain L^1 pairwise orthogonality (Theorem 2), without providing the N-term extension of the pairwise iff or the domain reconciliation required to bridge them (C5, major, unsupported).</li><li>Theorem 1 (Generalized Pythagorean Theorem) does not specify the duality selection convention in generic Banach spaces, leaving the result ill-posed when the normalized duality map J: X → 2^{X*} is multivalued at non-smooth points of the norm (C1, major, partially_supported).</li><li>The empirical PCG iteration counts in Tables 1-2 are unreproducible: no experiment code, stopping tolerance, initial guess, right-hand side, or handling of singular cases is provided, and the &#x27;lower p is better&#x27; conclusion rests on only two (α,β,γ) parameter triples (C10, major, unsupported).</li><li>No proof artifacts (Lean&#x2f;Coq&#x2f;Agda for Theorems 1-4) or paper-specific experiment scripts are deposited, yielding a reproducibility score of 0.38 and leaving all headline claims unverifiable by code (reproducibility specialist, four major concerns).</li><li>The abstract&#x27;s claim of an &#x27;L^p Pythagorean theorem&#x27; is misleading: the result is a dual-pairing identity, not the norm-power equality ||f+g||_p^p = ||f||_p^p + ||g||_p^p that the phrase connotes, and the framing requires correction (C4, minor).</li><li>The bibliography omits canonical Banach-space orthogonality references (Birkhoff 1935, James 1947, Dragomir 2004), making it impossible to assess whether the proposed orthogonality coincides with or strictly extends Birkhoff-James orthogonality.</li>
+        </ul>
+        <h3>Revision Targets</h3>
+        <div class="target-grid">
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  
+                  
+                  Examples &#x2f; Signal Processing, Theorem 4
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">Theorem 2 is a pairwise statement: ||f+g||_1 = ||f||_1 + ||g||_1 iff f ⊥_{L^1} g. The FIF decomposition involves m + 1 components (s = Σ IMF_k + r), and Theorem 3 gives E_1(s) = Σ E_1(IMF_k) + E_1(r), i.e. ||\hat s||_1 = Σ ||\widehat{IMF}_k||_1. To deduce pairwise orthogonality from a multi-term L^1 additivity one must (a) bootstrap the pairwise iff to N terms (which requires nonnegativity-style arguments, since ||·||_1 only satisfies a triangle inequality), and (b) cope with the fact that energy conservation is stated on the Fourier-side L^1 norm (||\hat s||_1) while the orthogonality definition (Def. 4 &#x2f; Theorem 2) is in the time-domain L^1. The paper does not address the Fourier-vs-time discrepancy nor the N-term extension; the one-line &#x27;direct consequence&#x27; justification is incomplete.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Either (i) restate Theorem 4 explicitly as Fourier-domain L^1 orthogonality of the \widehat{IMF}_k (using Theorem 2 applied to the transforms), and provide the N-term induction relying on the no-unwanted-oscillation Theorem 3 condition Σ_k |\widehat{φ}_k(ξ)| = |\hat s(ξ)| pointwise; or (ii) provide a separate result establishing time-domain L^1 orthogonality. Ship a formal proof at src&#x2f;proofs&#x2f;IMFOrthogonalityL1.lean and a numerical sanity check at experiments&#x2f;imf_l1_orthogonality.py exercising both pairwise and aggregate orthogonality.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm `Examples &#x2f; Signal Processing, Theorem 4` is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  
+                  
+                  Main results, Theorem 1, eq:pytha_X
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">Algebraically, expanding 0 = (1&#x2f;2) ∫ [f((f+g)* - f*) + g((f+g)* - g*)] dx and rearranging directly yields ∫(f+g)(f+g)* = ∫ f f* + ∫ g g*, so the equivalence is essentially a tautology of the chosen &#x27;weak inner product&#x27; definition. However, in a generic Banach space the duality mapping is in general multivalued (e.g. at points where the norm is not Gateaux differentiable), so f*, g*, (f+g)* are not canonically determined, and the theorem&#x27;s statement does not specify which dual elements must be used or whether orthogonality should hold for all admissible selections or some. No formal proof is provided, and the dependence on the choice of duality map is not analyzed.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">State the duality selection convention explicitly (e.g. via the normalized duality mapping J: X → 2^{X*}), formalize Theorem 1 as a one-line algebraic identity, and discuss the multivalued case. Provide a machine-checkable proof of the iff in src&#x2f;proofs&#x2f;PythagoreanBanach.lean (or .v &#x2f; .agda).</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm `Main results, Theorem 1, eq:pytha_X` is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>code</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  HAC&#x2f;bootstrap
+                   at 
+                  evaluation and statistical-testing pipeline
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">The preconditioning tables specify n, p, and selected alpha&#x2f;beta&#x2f;gamma cases, but omit the right-hand side, initialization, PCG stopping tolerance, precision, implementation details, and handling of singular or indefinite preconditioners, making exact iteration counts hard to reproduce.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Publish evaluation scripts or executable pseudocode for walk-forward retraining, validation selection, HAC&#x2f;bootstrap settings, benchmark construction, and table regeneration.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm the evaluation pipeline can reproduce the reported statistical tests and benchmarks.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>code</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  Lean&#x2f;Coq&#x2f;Agda
+                   at 
+                  code release and execution entrypoints
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">The paper gives only a general FIF algorithm URL and does not provide paper-specific scripts, a repository, license, commit, or release for regenerating the figures, energy checks, or preconditioning tables.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Release the source code, scripts, model configuration, and execution entrypoints needed to regenerate the reported tables, or document why those artifacts cannot be released.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm runnable code or a documented non-release justification is present.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  
+                  
+                  Main results &#x2f; Special cases &#x2f; L^p spaces, eq:InnerProd
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">The text restates Definition 3 with the canonical L^p–L^q duality. The duality mapping in L^p is single-valued and equals J(f)(x) = |f(x)|^{p-1} sign(f(x)) · ||f||_p^{2-p}; with that choice the statement is a special case of Theorem 1. However, the paper neither specifies the choice of f*, g*, (f+g)* (e.g. via J or unnormalized as |f|^{p-1} sign f) nor verifies a Pythagorean identity analogous to ||f+g||_p^p = ||f||_p^p + ||g||_p^p; in fact such a p-power identity does not generally hold for p ≠ 1, 2, so the &#x27;L^p Pythagorean theorem&#x27; advertised in the abstract is only the implicit equality ∫(f+g)(f+g)* = ∫ f f* + ∫ g g*, which is not the standard L^p Pythagorean statement and may be misleading.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Make the duality selection explicit, exhibit the closed-form equality the orthogonality implies in L^p (it is NOT ||f+g||_p^p = ||f||_p^p + ||g||_p^p), and tone down the abstract to reflect that the L^p version is only the dual-pairing identity.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm `Main results &#x2f; Special cases &#x2f; L^p spaces, eq:InnerProd` is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>bibliography</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  
+                  
+                  Birkhoff, G. (1935). Orthogonality in normed linear spaces. Transactions of the American Mathematical Society.
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">The paper proposes a new definition for orthogonality in Banach spaces but does not mention the most standard existing definition in this field, Birkhoff-James orthogonality, which is fundamental to any discussion of non-Hilbert orthogonality.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Add a bibliography entry for `Birkhoff, G. (1935). Orthogonality in normed linear spaces. Transactions of the American Mathematical Society` and cite it where the affected method or claim is introduced, or explicitly justify its omission.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm the bibliography and citation context address this reference.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+        </div>
+        <h3>Questions</h3>
+        <ul>
+          <li>In Theorem 4, does &#x27;pairwise L^1 orthogonality&#x27; refer to time-domain or Fourier-domain L^1? If Fourier-domain, apply Theorem 2 to the transforms and state this explicitly; if time-domain, provide the proof step that bootstraps Theorem 3 (a Fourier-domain sum over N components) to time-domain pairwise orthogonality for each pair.</li><li>For Theorem 1 in a generic Banach space, which selection of the normalized duality map J: X → 2^{X*} must be used for the iff to hold—all admissible selections, or a specific one—and how does the result behave at points where the norm is not Gateaux differentiable?</li><li>What stopping tolerance, initial vector, and right-hand side were used for the PCG experiments in Tables 1-2, and how were the singular or indefinite cases (marked &#x27;#&#x27;) detected and handled?</li><li>How does the &#x27;weak inner product&#x27; orthogonality of Definition 1 relate to Birkhoff-James orthogonality in the same Banach space—are they equivalent, and if not, which is strictly coarser?</li><li>Is the &#x27;optimal p&#x27; heuristic of Remark 5 stable across a broader (α,β,γ) sweep beyond the two parameter triples in Tables 1-2, and are there regimes where smaller p does not minimize PCG iterations?</li>
+        </ul>
+      </details>
+      
+      <details>
+        <summary>
+          novelty — <span class="muted">gemini-3-flash-preview</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;confidence&quot;: 0.85,
+  &quot;missing_prior_art&quot;: [],
+  &quot;novelty_score&quot;: 0.65,
+  &quot;related_work&quot;: [
+    {
+      &quot;citation_key&quot;: &quot;cicone2021numerical&quot;,
+      &quot;delta&quot;: &quot;This paper uses the FIF algorithm as a primary application case to demonstrate L1 energy conservation and uses it to justify the new definition of Banach space orthogonality.&quot;,
+      &quot;relation&quot;: &quot;builds_on&quot;,
+      &quot;title&quot;: &quot;Numerical analysis of the Fast Iterative Filtering algorithm&quot;
+    },
+    {
+      &quot;citation_key&quot;: &quot;cicone2024new&quot;,
+      &quot;delta&quot;: &quot;While the previous work defined L1 Fourier energy conservation, this paper provides the theoretical grounding by defining a weak inner product and a generalized Pythagorean theorem in Banach spaces to explain that conservation as a form of orthogonality.&quot;,
+      &quot;relation&quot;: &quot;builds_on&quot;,
+      &quot;title&quot;: &quot;A new definition of energy for non-stationary signals&quot;
+    },
+    {
+      &quot;citation_key&quot;: &quot;lumer1961semi&quot;,
+      &quot;delta&quot;: &quot;The authors distinguish their &#x27;weak inner product&#x27; from Lumer&#x27;s semi-inner product, noting that theirs does not necessarily induce the norm but allows for a Pythagorean theorem that matches the L1 norm&#x27;s behavior.&quot;,
+      &quot;relation&quot;: &quot;prior_art&quot;,
+      &quot;title&quot;: &quot;Semi-inner-product spaces&quot;
+    },
+    {
+      &quot;citation_key&quot;: &quot;Ng_book&quot;,
+      &quot;delta&quot;: &quot;Extends the classical Frobenius (L2) optimal circulant preconditioning to a general Lp framework, showing that p-norm minimizers can outperform the standard L2 approach.&quot;,
+      &quot;relation&quot;: &quot;builds_on&quot;,
+      &quot;title&quot;: &quot;Iterative Methods for Toeplitz Systems&quot;
+    },
+    {
+      &quot;citation_key&quot;: &quot;axler1997numerical&quot;,
+      &quot;delta&quot;: &quot;Contrasts the operator-based angle definitions with the element-wise weak inner product proposed for general Banach spaces.&quot;,
+      &quot;relation&quot;: &quot;prior_art&quot;,
+      &quot;title&quot;: &quot;The numerical range of an operator&quot;
+    }
+  ],
+  &quot;verdict&quot;: &quot;significant&quot;
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          reproducibility — <span class="muted">gpt-5.5</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;code_availability&quot;: &quot;unspecified&quot;,
+  &quot;code_url&quot;: &quot;www.cicone.com&quot;,
+  &quot;concerns&quot;: [
+    {
+      &quot;area&quot;: &quot;code&quot;,
+      &quot;description&quot;: &quot;The paper gives only a general FIF algorithm URL and does not provide paper-specific scripts, a repository, license, commit, or release for regenerating the figures, energy checks, or preconditioning tables.&quot;,
+      &quot;severity&quot;: &quot;major&quot;
+    },
+    {
+      &quot;area&quot;: &quot;hyperparameters&quot;,
+      &quot;description&quot;: &quot;The signal-processing example specifies the test signal and two FIF parameter pairs, but omits the sampling size, filter construction, delta&#x2f;stopping criteria, numerical tolerances, and exact settings needed to reproduce the plotted decompositions and machine-precision energy conservation.&quot;,
+      &quot;severity&quot;: &quot;major&quot;
+    },
+    {
+      &quot;area&quot;: &quot;evaluation&quot;,
+      &quot;description&quot;: &quot;The preconditioning tables specify n, p, and selected alpha&#x2f;beta&#x2f;gamma cases, but omit the right-hand side, initialization, PCG stopping tolerance, precision, implementation details, and handling of singular or indefinite preconditioners, making exact iteration counts hard to reproduce.&quot;,
+      &quot;severity&quot;: &quot;major&quot;
+    },
+    {
+      &quot;area&quot;: &quot;other&quot;,
+      &quot;description&quot;: &quot;The load-bearing mathematical claims are not accompanied by formal proof artifacts; files such as proofs&#x2f;generalized_pythagorean.lean and proofs&#x2f;fif_l1_orthogonality.lean would close this proof-as-code gap for the generalized Pythagorean theorem and FIF L1 orthogonality result.&quot;,
+      &quot;severity&quot;: &quot;major&quot;
+    },
+    {
+      &quot;area&quot;: &quot;data&quot;,
+      &quot;description&quot;: &quot;The experiments appear to use synthetic signals and generated Toeplitz systems, but no generated arrays, IMF outputs, or figure&#x2f;table source data are deposited for exact comparison.&quot;,
+      &quot;severity&quot;: &quot;minor&quot;
+    }
+  ],
+  &quot;confidence&quot;: 0.82,
+  &quot;data_availability&quot;: &quot;synthetic&quot;,
+  &quot;data_url&quot;: null,
+  &quot;environment&quot;: {
+    &quot;dependencies&quot;: [
+      &quot;FIF algorithm&quot;
+    ],
+    &quot;hardware&quot;: null,
+    &quot;software&quot;: &quot;Matlab, Python, and C implementations of the FIF algorithm are mentioned; no versions or numerical linear algebra stack are specified.&quot;
+  },
+  &quot;reproducibility_score&quot;: 0.38
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          summary — <span class="muted">claude-haiku-4-5-20251001</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;audience&quot;: &quot;Mathematicians in functional analysis and Banach space theory; signal processing researchers using intrinsic mode decomposition; numerical linear algebra specialists working on matrix approximation and preconditioning; applied mathematicians bridging theoretical analysis and computational methods.&quot;,
+  &quot;key_contributions&quot;: [
+    &quot;Generalization of angles, orthogonality, and the Pythagorean theorem from L^2 spaces to generic Banach spaces via a weak inner product formulation&quot;,
+    &quot;Definition of weak inner product for Banach spaces using dual spaces to enable angle and orthogonality definitions&quot;,
+    &quot;Theoretical analysis showing that intrinsic mode functions from Fast Iterative Filtering are orthogonal in the L^1 sense&quot;,
+    &quot;Design of new classes of l^p-norm circulant preconditioners for Toeplitz linear systems inspired by the generalized Pythagorean theorem&quot;,
+    &quot;Numerical experiments demonstrating the effectiveness of l^p preconditioners for ill-conditioned Toeplitz matrices&quot;
+  ],
+  &quot;plain_language_summary&quot;: &quot;In standard mathematics, concepts like angles, orthogonality (perpendicularity), and the Pythagorean theorem are well-defined in Hilbert spaces, the natural setting for much of physics and engineering. This paper extends these intuitive geometric concepts to more general Banach spaces, which arise naturally in signal processing and numerical analysis. The motivation comes from observing that when certain signal decomposition algorithms (FIF) process non-stationary signals, they conserve energy in the L^1 norm rather than the familiar L^2 norm. The authors develop a framework based on a \&quot;weak inner product\&quot; defined using dual spaces, which allows them to define angles and orthogonality in any Banach space. They then show that intrinsic mode functions from signal processing are orthogonal with respect to this new L^1 definition. Additionally, they apply these ideas to design new preconditioners for efficiently solving large, structured linear systems that arise in scientific computing.&quot;,
+  &quot;tldr&quot;: &quot;The paper generalizes classical notions of angles, orthogonality, and the Pythagorean theorem from Hilbert spaces to arbitrary Banach spaces, with applications to signal decomposition and preconditioning of structured linear systems.&quot;
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          technical_correctness — <span class="muted">claude-opus-4-7</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;claims&quot;: [
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;Generalized Pythagorean Theorem (Theorem 1): For f,g in a Banach space X with chosen duality elements f*, g*, (f+g)* in X*, f and g are orthogonal in the X-sense (weak inner product equals zero) if and only if ∫(f+g)(f+g)* dx = ∫ f f* dx + ∫ g g* dx.&quot;,
+      &quot;evidence&quot;: &quot;Algebraically, expanding 0 = (1&#x2f;2) ∫ [f((f+g)* - f*) + g((f+g)* - g*)] dx and rearranging directly yields ∫(f+g)(f+g)* = ∫ f f* + ∫ g g*, so the equivalence is essentially a tautology of the chosen &#x27;weak inner product&#x27; definition. However, in a generic Banach space the duality mapping is in general multivalued (e.g. at points where the norm is not Gateaux differentiable), so f*, g*, (f+g)* are not canonically determined, and the theorem&#x27;s statement does not specify which dual elements must be used or whether orthogonality should hold for all admissible selections or some. No formal proof is provided, and the dependence on the choice of duality map is not analyzed.&quot;,
+      &quot;id&quot;: &quot;C1&quot;,
+      &quot;location&quot;: &quot;Main results, Theorem 1, eq:pytha_X&quot;,
+      &quot;severity&quot;: &quot;major&quot;,
+      &quot;suggested_fix&quot;: &quot;State the duality selection convention explicitly (e.g. via the normalized duality mapping J: X → 2^{X*}), formalize Theorem 1 as a one-line algebraic identity, and discuss the multivalued case. Provide a machine-checkable proof of the iff in src&#x2f;proofs&#x2f;PythagoreanBanach.lean (or .v &#x2f; .agda).&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;Hilbert special case: when X = L^2, the weak inner product of Definition 1 coincides with the classical L^2 inner product (and induces the 2-norm), justified by the factor 1&#x2f;2.&quot;,
+      &quot;evidence&quot;: &quot;In L^2 the Riesz representation gives f* = f, g* = g, (f+g)* = f+g. Substituting into eq:Inner_X yields (1&#x2f;2) ∫ [f((f+g) - f) + g((f+g) - g)] dx = (1&#x2f;2) ∫ [fg + gf] dx = ∫ fg dx, exactly the standard L^2 inner product. The induced norm is therefore the L^2 norm.&quot;,
+      &quot;id&quot;: &quot;C2&quot;,
+      &quot;location&quot;: &quot;Main results &#x2f; Special cases &#x2f; Hilbert space&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;L^1 Pythagorean theorem (Theorem 2): f, g ∈ L^1 are orthogonal in the L^1 sense (Def. 4 &#x2f; Cor. 1) iff ||f+g||_1 = ||f||_1 + ||g||_1.&quot;,
+      &quot;evidence&quot;: &quot;The L^1 weak inner product (eq:Inner_L1) expands to (1&#x2f;2)[∫(f+g) sign(f+g) dx − ∫ f sign(f) dx − ∫ g sign(g) dx] = (1&#x2f;2)(||f+g||_1 − ||f||_1 − ||g||_1) (using x·sign(x) = |x| a.e. and sign(0) being arbitrary on a measure-zero set when f or g vanishes). Setting this to zero recovers exactly the equality ||f+g||_1 = ||f||_1 + ||g||_1. The iff is algebraic.&quot;,
+      &quot;id&quot;: &quot;C3&quot;,
+      &quot;location&quot;: &quot;Main results &#x2f; Special cases &#x2f; L^1 space, Theorem 2, eq:pytha_L1&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: &quot;For completeness, briefly address the measure-zero ambiguity of sign(0) when f or g vanishes on a positive-measure set (any consistent selection of sign(0) ∈ [-1,1] preserves x·sign(x) = |x|).&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;L^p special case (1 &lt; p &lt; ∞): With duality partners in L^q (1&#x2f;p + 1&#x2f;q = 1), the weak inner product (eq:InnerProd) vanishing characterizes &#x27;L^p-orthogonality&#x27; between f and g.&quot;,
+      &quot;evidence&quot;: &quot;The text restates Definition 3 with the canonical L^p–L^q duality. The duality mapping in L^p is single-valued and equals J(f)(x) = |f(x)|^{p-1} sign(f(x)) · ||f||_p^{2-p}; with that choice the statement is a special case of Theorem 1. However, the paper neither specifies the choice of f*, g*, (f+g)* (e.g. via J or unnormalized as |f|^{p-1} sign f) nor verifies a Pythagorean identity analogous to ||f+g||_p^p = ||f||_p^p + ||g||_p^p; in fact such a p-power identity does not generally hold for p ≠ 1, 2, so the &#x27;L^p Pythagorean theorem&#x27; advertised in the abstract is only the implicit equality ∫(f+g)(f+g)* = ∫ f f* + ∫ g g*, which is not the standard L^p Pythagorean statement and may be misleading.&quot;,
+      &quot;id&quot;: &quot;C4&quot;,
+      &quot;location&quot;: &quot;Main results &#x2f; Special cases &#x2f; L^p spaces, eq:InnerProd&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Make the duality selection explicit, exhibit the closed-form equality the orthogonality implies in L^p (it is NOT ||f+g||_p^p = ||f||_p^p + ||g||_p^p), and tone down the abstract to reflect that the L^p version is only the dual-pairing identity.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;unsupported&quot;,
+      &quot;claim&quot;: &quot;Theorem 4 (IMF orthogonality): IMFs produced by FIF with a double convolution filter are pairwise orthogonal in the L^1 sense, as a direct consequence of Theorem 3 (L^1 Fourier energy conservation) and Theorem 2 (L^1 Pythagorean theorem).&quot;,
+      &quot;evidence&quot;: &quot;Theorem 2 is a pairwise statement: ||f+g||_1 = ||f||_1 + ||g||_1 iff f ⊥_{L^1} g. The FIF decomposition involves m + 1 components (s = Σ IMF_k + r), and Theorem 3 gives E_1(s) = Σ E_1(IMF_k) + E_1(r), i.e. ||\\hat s||_1 = Σ ||\\widehat{IMF}_k||_1. To deduce pairwise orthogonality from a multi-term L^1 additivity one must (a) bootstrap the pairwise iff to N terms (which requires nonnegativity-style arguments, since ||·||_1 only satisfies a triangle inequality), and (b) cope with the fact that energy conservation is stated on the Fourier-side L^1 norm (||\\hat s||_1) while the orthogonality definition (Def. 4 &#x2f; Theorem 2) is in the time-domain L^1. The paper does not address the Fourier-vs-time discrepancy nor the N-term extension; the one-line &#x27;direct consequence&#x27; justification is incomplete.&quot;,
+      &quot;id&quot;: &quot;C5&quot;,
+      &quot;location&quot;: &quot;Examples &#x2f; Signal Processing, Theorem 4&quot;,
+      &quot;severity&quot;: &quot;major&quot;,
+      &quot;suggested_fix&quot;: &quot;Either (i) restate Theorem 4 explicitly as Fourier-domain L^1 orthogonality of the \\widehat{IMF}_k (using Theorem 2 applied to the transforms), and provide the N-term induction relying on the no-unwanted-oscillation Theorem 3 condition Σ_k |\\widehat{φ}_k(ξ)| = |\\hat s(ξ)| pointwise; or (ii) provide a separate result establishing time-domain L^1 orthogonality. Ship a formal proof at src&#x2f;proofs&#x2f;IMFOrthogonalityL1.lean and a numerical sanity check at experiments&#x2f;imf_l1_orthogonality.py exercising both pairwise and aggregate orthogonality.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;Closed-form l^p circulant minimizer: For T_n(f_{α,β,γ}) the entries of the first column c^{(p)} of the optimal circulant in l^p norm satisfy c_0 = φ, c_1 = c_{n-1} = ψ(n-1)^{1&#x2f;(p-1)} &#x2f; (1 + (n-1)^{1&#x2f;(p-1)}), c_2 = c_{n-2} = γ &#x2f; (1 + (2&#x2f;(n-2))^{1&#x2f;(p-1)}) for p &gt; 1, and the obvious limits at p = 1.&quot;,
+      &quot;evidence&quot;: &quot;Each row of the residual T_n(f) − C_n has a fixed structure with (n − 1) copies of (ψ − c_1) and 1 copy of c_1 (etc.), so the l^p minimization decouples per diagonal into scalar problems min_c (n−k)|coeff − c|^p + k|c|^p, with k = 1 for c_1 and k = 2 for c_2. Differentiating yields (n−k)(coeff − c)^{p−1} = k c^{p−1} for the relevant sign regime, which solves to the stated rational expression. The p = 1 limit (c_1 = ψ, c_2 = γ) follows from convexity of |·|, the optimum sitting at the larger-mass endpoint.&quot;,
+      &quot;id&quot;: &quot;C6&quot;,
+      &quot;location&quot;: &quot;Examples &#x2f; Numerical Linear Algebra &#x2f; l^p circulant minimizers for Toeplitz matrices&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: &quot;Add one explicit derivation line showing the per-diagonal decoupling, and explicitly note the regime check (coeff and c same sign; (n−k) &gt; 0) so readers can verify the algebra without rediscovering it. A short reproducible numerical check at experiments&#x2f;circulant_minimizer_closed_form.py would make the closed form trivially verifiable.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;Eigenvalue formula for C_n^{(p)}(f) (eq:spett_C): λ_j(C_n^{(p)}(f)) = f_{α,β,γ}(θ_j) + 2(c_1^{(p)} − ψ) cos(θ_j) + 2(c_2^{(p)} − γ) cos(2 θ_j) with θ_j^{(n)} = 2π(j − 1)&#x2f;n.&quot;,
+      &quot;evidence&quot;: &quot;Using f_{α,β,γ}(θ) = φ + ψ(e^{iθ} + e^{-iθ}) + γ(e^{2iθ} + e^{-2iθ}) = φ + 2ψ cos(θ) + 2γ cos(2θ), and the standard circulant eigenvalue formula λ_j = c_0 + 2 c_1 cos(θ_j) + 2 c_2 cos(2 θ_j) (real symmetric circulant with only positions 0, 1, 2, n-2, n-1 nonzero), one immediately gets f(θ_j) + 2(c_1 − ψ) cos(θ_j) + 2(c_2 − γ) cos(2 θ_j) = c_0 + 2 c_1 cos(θ_j) + 2 c_2 cos(2 θ_j), which matches.&quot;,
+      &quot;id&quot;: &quot;C7&quot;,
+      &quot;location&quot;: &quot;Examples &#x2f; Numerical Linear Algebra &#x2f; Preconditioner section, eq:spett_C&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;Clustering to 1: under the standing assumption that C_n^{(p)}(f) is positive definite (up to a small&#x2f;low-norm correction), the spectrum {λ_j(C_n^{(p),-1}(f) T_n(f))} clusters to 1 as n → ∞, yielding fast PCG convergence.&quot;,
+      &quot;evidence&quot;: &quot;The argument leans on (i) standard Korovkin&#x2f;Strang&#x2f;Chan-style clustering results invoked by reference (CN-Sirev, Koro1, GLT-bookI) and (ii) the observation that c_1^{(p)} → ψ and c_2^{(p)} → γ as n → ∞, so C_n^{(p)} approaches the natural circulant interpolant whose spectrum approximates f(θ_j). The rate at which c_1^{(p)}, c_2^{(p)} converge is O(n^{-1&#x2f;(p-1)}) and is not analyzed; the small-rank-plus-low-norm decomposition is stated without explicit bounds or constants, and the dependence on p (acknowledged as &#x27;cannot be easily studied&#x27;) is left to numerics. The conclusion is consistent with the cited theory but is not derived rigorously in this paper.&quot;,
+      &quot;id&quot;: &quot;C8&quot;,
+      &quot;location&quot;: &quot;Examples &#x2f; Numerical Linear Algebra &#x2f; Preconditioner section (paragraph following eq:spett_C)&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Quantify ||C_n^{(p)} − C_n^{(natural)}||_2 (or its operator-norm proxy) as O(n^{-1&#x2f;(p-1)}) and feed that into the standard clustering theorem to obtain an explicit p-dependent clustering statement. Provide a reproducible spectrum plot at experiments&#x2f;preconditioned_spectrum.py confirming clustering for representative (p, n, α, β, γ).&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;Heuristic remark (Remark 5): the most effective p-norm circulant preconditioner is C_n^{(\\tilde p)} where \\tilde p is the smallest p ≥ 1 such that |Im(λ_j(C_n^{(p),-1} T_n))| &lt; ε for all j; equivalently, positive definiteness of C_n^{(p)} implies a purely real positive spectrum of the preconditioned matrix.&quot;,
+      &quot;evidence&quot;: &quot;For T_n real symmetric and C_n^{(p)} real symmetric positive definite, the products C_n^{(p),-1} T_n is similar to the symmetric matrix C_n^{(p),-1&#x2f;2} T_n C_n^{(p),-1&#x2f;2} and therefore has a real spectrum; that part follows from standard linear algebra. The &#x27;minimal p with all-real-positive spectrum is optimal&#x27; statement, however, is labelled &#x27;heuristic&#x27; and is supported only by Tables 1–2 with limited (α, β, γ, n) combinations and no theoretical justification. Whether \\tilde p minimizes PCG iterations across the parameter space is unproven.&quot;,
+      &quot;id&quot;: &quot;C9&quot;,
+      &quot;location&quot;: &quot;Examples &#x2f; Numerical Linear Algebra &#x2f; Remark 5&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Reclassify Remark 5 as a conjecture, add a broader experimental sweep over (α, β, γ, p, n) with reproducible code at experiments&#x2f;optimal_p_sweep.py, and report failure cases. If possible, prove monotonicity of iteration count in |Im(λ_j)| under PCG.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;unsupported&quot;,
+      &quot;claim&quot;: &quot;Empirical iteration counts (Tables 1 and 2) demonstrate that smaller p yields better PCG convergence on the well-conditioned (α,β,γ) = (1,2,3) case (best at p = 1, 3 iterations) and on the ill-conditioned (0,2,8) case (best at p = 1.6).&quot;,
+      &quot;evidence&quot;: &quot;The paper reports iteration counts for a single function family f_{α,β,γ} on two parameter triples and several n, but does not ship the code, the PCG stopping tolerance, the initial guess, the right-hand side, or how singular cases (&#x27;#&#x27;) were detected. The claim that &#x27;lower p is better&#x27; is drawn from a small grid (p ∈ {1, 1.4, 1.6, 1.8, 3, 5, 10}). The deeper experimentation is deferred to reference [@beyond], which the reader cannot inspect here. Field math.GM falls under the proof-as-code amenable list, so the absence of an executable artifact is itself a weakness for an empirical claim.&quot;,
+      &quot;id&quot;: &quot;C10&quot;,
+      &quot;location&quot;: &quot;Examples &#x2f; Numerical Linear Algebra &#x2f; Tables 1–2&quot;,
+      &quot;severity&quot;: &quot;major&quot;,
+      &quot;suggested_fix&quot;: &quot;Publish a reproducible script at experiments&#x2f;pcg_iterations&#x2f;run.py (with seeds, tolerance 1e-8 or stated value, MATLAB&#x2f;Python code, requirements.txt) that regenerates Tables 1 and 2, and link it explicitly from the paper. Expand the (α, β, γ) sweep so the &#x27;lower p is better&#x27; claim is supported beyond two anecdotal points.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;For p ∈ (0, 1) the functional in eq:lp-norm is not a norm (the unit ball is not convex), but the minimization can still be considered and may yield computationally effective preconditioners.&quot;,
+      &quot;evidence&quot;: &quot;It is correct that for 0 &lt; p &lt; 1 the functional fails the triangle inequality and the level sets are non-convex; this is standard. The hopeful tone about effectiveness is speculative — the per-diagonal scalar problem min_c (n − k) |coeff − c|^p + k |c|^p is non-convex for p &lt; 1 and may have multiple local minima, which the paper does not address.&quot;,
+      &quot;id&quot;: &quot;C11&quot;,
+      &quot;location&quot;: &quot;Examples &#x2f; Numerical Linear Algebra &#x2f; Remark 5 (final paragraph)&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: &quot;Acknowledge the non-convexity of the per-diagonal problem for p &lt; 1 and either provide a global-minimum closed form (it exists in the scalar case via comparison of endpoints and a single interior critical point) or flag the algorithmic challenge. A numerical experiment at experiments&#x2f;lp_subunit_minimizer.py would substantiate the conjecture.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;Conditioning behavior of T_n(f_{α,β,γ}): for α &gt; 0 the Euclidean condition number converges to (α + 4β + 16γ)&#x2f;α; for α = 0, β &gt; 0 it grows like Θ(n^2); for α = β = 0, γ &gt; 0 it grows like Θ(n^4).&quot;,
+      &quot;evidence&quot;: &quot;f_{α,β,γ}(θ) = α + β(2 − 2 cos θ) + γ(2 − 2 cos θ)^2 ≥ 0, vanishes only at θ = 0, and near θ = 0 satisfies f(θ) ~ β θ^2 + γ θ^4 &#x2f; 4 (the order of the zero is 2 if β &gt; 0, 4 if β = 0 &lt; γ). Standard spectral extremal results for Toeplitz matrices generated by nonnegative even trigonometric polynomials [@extreme1, @extreme2, GLT-bookI] then give λ_min(T_n(f)) → min f = α with rate Θ(n^{-2}) when the zero is order 2 and Θ(n^{-4}) when the zero is order 4, and λ_max → max f = α + 4β + 16γ. Dividing yields the claimed rates.&quot;,
+      &quot;id&quot;: &quot;C12&quot;,
+      &quot;location&quot;: &quot;Examples &#x2f; Numerical Linear Algebra &#x2f; Preconditioner section (paragraph after eq:def_f_1)&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    }
+  ],
+  &quot;confidence&quot;: 0.68,
+  &quot;overall_correctness&quot;: &quot;mostly_sound&quot;
+}</pre>
+      </details>
+      
+    </div>
+  </section>
+
+  <!-- corrections rendered from corrections table; empty on first publish -->
+  <section>
+    <h2>Corrections</h2>
+    <p class="muted">No corrections have been recorded.</p>
+  </section>
+
+  <section>
+    <h2>Bibliography</h2>
+    
+    <ol>
+      
+        <li>
+          Bhatia
+          
+          
+        </li>
+      
+        <li>
+          CN-Sirev
+          
+          
+        </li>
+      
+        <li>
+          GLT-bookI
+          
+          
+        </li>
+      
+        <li>
+          GLT-bookIV
+          
+          
+        </li>
+      
+        <li>
+          Koro1
+          
+          
+        </li>
+      
+        <li>
+          Longo2025AdaptiveSL
+          
+          
+        </li>
+      
+        <li>
+          Ng_book
+          
+          
+        </li>
+      
+        <li>
+          Van_Loan
+          
+          
+        </li>
+      
+        <li>
+          axler1997numerical
+          
+          
+        </li>
+      
+        <li>
+          beyond
+          
+          
+        </li>
+      
+        <li>
+          cicone2021numerical
+          
+          
+        </li>
+      
+        <li>
+          cicone2022multivariate
+          
+          
+        </li>
+      
+        <li>
+          cicone2024new
+          
+          
+        </li>
+      
+        <li>
+          extreme1
+          
+          
+        </li>
+      
+        <li>
+          extreme2
+          
+          
+        </li>
+      
+        <li>
+          gustafson1968angle
+          
+          
+        </li>
+      
+        <li>
+          huang1998empirical
+          
+          
+        </li>
+      
+        <li>
+          imag1
+          
+          
+        </li>
+      
+        <li>
+          imag2
+          
+          
+        </li>
+      
+        <li>
+          lin2009iterative
+          
+          
+        </li>
+      
+        <li>
+          lumer1961semi
+          
+          
+        </li>
+      
+        <li>
+          sparse_appr1
+          
+          
+        </li>
+      
+        <li>
+          sparse_appr2
+          
+          
+        </li>
+      
+        <li>
+          spogli2025investigating
+          
+          
+        </li>
+      
+    </ol>
+    
+  </section>
+
+  <footer class="footer-disclaimer">
+    <p class="muted">Rendered by <span class="brand">GrokRxiv</span>. Source: <a href="https://arxiv.org/abs/2605.00009">arXiv:2605.00009</a>.</p>
+  </footer>
+</body>
+</html>
