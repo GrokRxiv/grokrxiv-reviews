@@ -1,0 +1,299 @@
+{
+  "claims": [
+    {
+      "id": "claim_1",
+      "role": "citation",
+      "text": "The paper exhibits excellent citation hygiene, drawing appropriately from foundational Riemannian geometry (do Carmo, O'Neill), classical diffusion theory (Bakry-Émery, Villani), and very recent literature on manifold sampling (Li & Erdogdu 2023). The bibliography is comprehensive and accurately reflects the multidisciplinary nature of the work, spanning geometry, statistics, and machine learning. The use of specific lemmas and theorems from the cited works is precise and well-documented.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_2",
+      "role": "citation",
+      "text": "Standard textbook for Riemannian geometry foundations, used to support manifold definitions and basic geometric properties throughout the paper.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_3",
+      "role": "citation",
+      "text": "Primary technical reference for the Poincaré inequality proof strategy and analysis of Langevin diffusion on product manifolds; much of the current work generalizes these results.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_4",
+      "role": "citation",
+      "text": "Foundational text for Bakry-Émery theory and the relationship between Poincaré/log-Sobolev inequalities and Markov diffusion operators, cited extensively for theoretical grounding.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_5",
+      "role": "citation",
+      "text": "Cited for the HWI inequality and connections between entropy, Fisher information, and Wasserstein distance, essential for the log-Sobolev derivation.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_6",
+      "role": "citation",
+      "text": "Used to link manifold sampling to constrained optimization and for specific results on smooth functions and Hessian properties on manifolds.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_7",
+      "role": "citation",
+      "text": "Key reference for the trace quotient problem and its projected version on Grassmann manifolds, which serves as a major application example.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_8",
+      "role": "citation",
+      "text": "Provides the mathematical foundation for Riemannian submersions, which are central to the paper's argument for lifting inequalities between spaces.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_9",
+      "role": "citation",
+      "text": "Recent work cited in the context of lifting processes and the geometry of neural networks, showing the relevance of the paper's techniques to modern ML problems.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_10",
+      "role": "meta_reviewer",
+      "text": "The paper establishes rapid-mixing guarantees for Langevin dynamics on Riemannian manifolds, proving Poincaré and logarithmic Sobolev inequalities via a Riemannian submersion framework that factors out Lie-group symmetries. The five specialist reviews are broadly consistent: technical correctness rates the core proofs mostly_sound (Theorems 76, 77, 59, 68 all verified; confidence 0.68), novelty is significant at score 0.7 (extends Li–Erdogdu 2022 from sphere products to general quotient manifol…",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_11",
+      "role": "meta_reviewer",
+      "text": "major_revision",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_12",
+      "role": "meta_reviewer",
+      "text": "The Riemannian submersion framework for lifting Poincaré inequalities (Theorem 59) is technically elegant and handles the symmetry-orbit structure of energy functions in a principled, generalizable way.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_13",
+      "role": "meta_reviewer",
+      "text": "Theorems 76 and 77 provide explicit, self-contained LSI constants whose derivation chain (Theorem 34 → Theorem 59 → Theorem 68 → Corollary 77) is internally consistent and verifiable.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_14",
+      "role": "meta_reviewer",
+      "text": "The extension from products of spheres (Li–Erdogdu 2022) to general quotient manifolds with free isometric Lie-group actions represents a significant broadening of the class of tractable sampling problems.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_15",
+      "role": "meta_reviewer",
+      "text": "Citation hygiene is excellent: foundational works (do Carmo, O'Neill, Bakry–Gentil–Ledoux, Villani) are invoked at precise lemma and corollary level, and the bibliography accurately reflects the multidisciplinary scope.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_16",
+      "role": "meta_reviewer",
+      "text": "The polynomial-in-dimension mixing-time scaling (Remark 16, Corollary 77) is a direct algebraic consequence of the explicit LSI constants and not an additional assumption, which strengthens the main result.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_17",
+      "role": "meta_reviewer",
+      "text": "No code repository, simulation, or executable artifact is provided; the headline claim that polynomial mixing times are achievable on the named examples (trace-ratio on Stiefel/Grassmann, mean-field 2D Ising) is entirely empirically unchecked (technical_correctness C8, severity major).",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_18",
+      "role": "meta_reviewer",
+      "text": "No machine-checkable proof artifact (e.g., Lean formalization covering the main theorem and lifting argument) is supplied, leaving the proof chain unverifiable by automated means (reproducibility concern area: other, severity critical).",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_19",
+      "role": "meta_reviewer",
+      "text": "Sections 7 (trace-ratio and 2D Ising analysis) and 8 (Riemannian geometry background) are absent from the supplied manuscript, leaving all example-specific assumption verifications (free Lie-group action, λ* lower bound, no barren plateaus) unconfirmed (technical_correctness C9, severity minor).",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_20",
+      "role": "meta_reviewer",
+      "text": "The numerical constant 184 in Theorem 34 is not fully auditable: the contributions of the local PI factor, bump-function gradient cost, Lyapunov drift constants, and CIR escape exponent are not tabulated, making independent verification of this bookkeeping impossible (technical_correctness C6, severity minor).",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_21",
+      "role": "meta_reviewer",
+      "text": "A typo in the statement of Lemma 80 writes R = 2ε/A_2 where the proof requires R = √(2ε/A_2); as stated the lemma is dimensionally inconsistent with the constraint R ≤ i(M)/2 under ε ≤ ε_max (technical_correctness C3, severity minor).",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_22",
+      "role": "meta_reviewer",
+      "text": "Two directly relevant references are absent: Holley–Stroock 1987 on log-Sobolev inequalities and simulated annealing (relevant to Section 4 tightening) and Yau 1982 on eigenvalues on Riemannian manifolds (relevant to Poincaré constant and spectral gap bounds).",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_23",
+      "role": "meta_reviewer",
+      "text": "Can the authors supply a constant-budget table for Theorem 34 that shows explicitly how the factor 184 accumulates from each auxiliary result (local PI factor 1/8, bump-function gradient bound, Lyapunov drift constants, CIR escape exponent λ*/16)?",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_24",
+      "role": "meta_reviewer",
+      "text": "Are Sections 7 and 8 present in the submitted PDF? If so, why do they not appear in the review input, and do the forward references (sec:traceratio, SectionExamples, prop:projectedHessian, existenceRiemannianSubmersionMetrics, CurvaturaSubmersion) resolve correctly in the canonical submission?",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_25",
+      "role": "meta_reviewer",
+      "text": "Can the authors provide a minimal simulation—e.g., Langevin SDE on the Stiefel manifold for a concrete trace-ratio instance with varying dimension—reporting empirical TV-distance decay consistent with the predicted exponential rate and polynomial dimension scaling?",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_26",
+      "role": "meta_reviewer",
+      "text": "Lemma 80 states R = 2ε/A_2 but the proof uses A_2·R² = 2ε throughout; can the authors confirm this is a typographic error and supply the corrected statement?",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_27",
+      "role": "meta_reviewer",
+      "text": "Why are Holley–Stroock 1987 and Yau 1982 not cited given their direct relevance to the log-Sobolev tightening in Section 4 and to the spectral-gap / Poincaré-constant analysis?",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_28",
+      "role": "meta_reviewer",
+      "text": "The inverse-temperature threshold is stated asymptotically as β ∈ Ω(poly(geometric constants)) without an explicit threshold calculator; for the trace-ratio application, can the authors supply a worked numerical example computing A_2, A_3, λ*, diam(M), i(M) and deriving a concrete β lower bound?",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_29",
+      "role": "novelty",
+      "text": "significant",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_30",
+      "role": "novelty",
+      "text": "builds_on",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_31",
+      "role": "novelty",
+      "text": "Extends the analysis of Langevin diffusion from products of spheres to a much broader class of Riemannian manifolds, specifically focusing on quotient manifolds and utilizing the structure of Riemannian submersions to factor out symmetries.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_32",
+      "role": "novelty",
+      "text": "builds_on",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_33",
+      "role": "novelty",
+      "text": "Applies Bakry-Émery theory and the curvature-dimension condition to obtain log-Sobolev inequalities and polynomial mixing times on general Riemannian manifolds by lifting properties from a base space to the total space of a submersion.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_34",
+      "role": "novelty",
+      "text": "prior_art",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_35",
+      "role": "novelty",
+      "text": "While Menz and Schlichting focused on Euclidean space and the effects of multiple minima, this work identifies conditions (symmetry and unique minimum in the quotient space) to ensure rapid mixing on manifolds where local minima might otherwise be a bottleneck.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_36",
+      "role": "novelty",
+      "text": "orthogonal",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_37",
+      "role": "novelty",
+      "text": "Uses O'Neill's fundamental equations for Riemannian submersions as a geometric foundation to relate the curvature and Langevin dynamics between the domain and the image (quotient) manifold.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_38",
+      "role": "summary",
+      "text": "The paper proves that Langevin dynamics on Riemannian manifolds converges rapidly to the Gibbs distribution under conditions on manifold curvature, critical point structure, and temperature, with mixing times polynomial in dimension.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_39",
+      "role": "summary",
+      "text": "This paper studies how quickly a random process called Langevin dynamics can sample from probability distributions defined on curved geometric spaces (Riemannian manifolds). The authors establish conditions under which this process mixes rapidly—that is, converges quickly to the target distribution. These conditions involve the geometric properties of the manifold (its curvature), the temperature-like parameter of the distribution (inverse temperature), and the structure of critical points of t…",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_40",
+      "role": "summary",
+      "text": "Identifies necessary and sufficient conditions on Riemannian manifolds for rapid mixing of Langevin dynamics to Gibbs measures",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_41",
+      "role": "summary",
+      "text": "Proves Poincaré inequalities for Langevin processes on quotient manifolds with unique minima",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_42",
+      "role": "summary",
+      "text": "Establishes logarithmic Sobolev inequalities through curvature-dimension conditions, yielding exponentially fast convergence bounds",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_43",
+      "role": "summary",
+      "text": "Demonstrates that mixing times scale polynomially with manifold dimension under appropriate geometric conditions",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_44",
+      "role": "summary",
+      "text": "Develops a theory of lifting Poincaré inequalities from quotient manifolds to total spaces of Riemannian submersions",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_45",
+      "role": "summary",
+      "text": "Handles symmetric energy functions by factoring symmetries through Lie group actions and analyzing the quotient manifold",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_46",
+      "role": "summary",
+      "text": "Characterizes the interplay between manifold curvature, inverse temperature, critical point structure, and convergence rates",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_47",
+      "role": "summary",
+      "text": "Shows that saddle point escape directions and absence of barren plateaus are necessary for rapid mixing",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_48",
+      "role": "summary",
+      "text": "Applies the theory to concrete problems in lattice gauge theory, tensor networks, and constrained optimization",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_49",
+      "role": "technical_correctness",
+      "text": "mostly_sound",
+      "verifier_status": "pass"
+    }
+  ],
+  "review_id": "4f2bc3f9-37ce-4fb2-b274-9107dbbefc46"
+}
