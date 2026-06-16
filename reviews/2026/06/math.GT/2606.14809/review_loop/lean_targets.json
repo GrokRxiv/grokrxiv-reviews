@@ -1,0 +1,240 @@
+{
+  "schema_version": "1.0.0",
+  "source": "review_loop/proof_obligations.json",
+  "targets": [
+    {
+      "lean_declaration": "thm_1_5",
+      "lean_skeleton": "namespace GrokRxiv\n\ntheorem thm_1_5 : True := by\n  sorry\n\nend GrokRxiv\n",
+      "lean_statement": "theorem thm_1_5 : True := by",
+      "obligation_id": "formalize_theorem_thm_1_5",
+      "semantic_category": "plain_theorem",
+      "source_claim_id": "thm:1.5",
+      "source_span": {
+        "artifact": "theorem_graph.json",
+        "claim_id": "thm:1.5",
+        "paper_source_id": "thm:1.5",
+        "section_id": "sec-2-2",
+        "text_excerpt": "Theorem 1.7 (1.5). If $M$ is a manifold without boundary, then its $P$-category is at least one more than the $p$-length of $M$: $\\mathop{\\mathrm{P\\text{-}cat}}M \\geq \\mathrm{long}^{p} M + 1$. If $M$ is a manifold with boundary, then its $P$-category is at le..."
+      },
+      "statement": "Theorem 1.7 (1.5). If $M$ is a manifold without boundary, then its $P$-category is at least one more than the $p$-length of $M$: $\\mathop{\\mathrm{P\\text{-}cat}}M \\geq \\mathrm{long}^{p} M + 1$. If $M$ is a manifold with boundary, then its $P$-category is at least the $p$-length of $M$: $\\mathop{\\mathrm{P\\text{-}cat}}M \\geq \\mathrm{long}^{p} M$.",
+      "theorem_ir": {
+        "assumptions": [],
+        "binders": [],
+        "conclusion": {
+          "kind": "greater_equal",
+          "lhs": {
+            "kind": "unknown_term",
+            "text": "Theorem 1.7 (1.5). If $M$ is a manifold without boundary, then its $P$-category is at least one more than the $p$-length of $M$: $\\mathop{\\mathrm{P\\text{-}cat}}M"
+          },
+          "rhs": {
+            "kind": "add",
+            "lhs": {
+              "kind": "unknown_term",
+              "text": "\\mathrm{long}^{p} M"
+            },
+            "rhs": {
+              "kind": "unknown_term",
+              "text": "1$. If $M$ is a manifold with boundary, then its $P$-category is at least the $p$-length of $M$: $\\mathop{\\mathrm{P\\text{-}cat}}M \\geq \\mathrm{long}^{p} M$"
+            }
+          }
+        },
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "thm:1.5",
+          "paper_source_id": "thm:1.5",
+          "section_id": "sec-2-2",
+          "text_excerpt": "Theorem 1.7 (1.5). If $M$ is a manifold without boundary, then its $P$-category is at least one more than the $p$-length of $M$: $\\mathop{\\mathrm{P\\text{-}cat}}M \\geq \\mathrm{long}^{p} M + 1$. If $M$ is a manifold with boundary, then its $P$-category is at le..."
+        },
+        "theorem_name": "thm_1_5"
+      }
+    },
+    {
+      "lean_declaration": "prop_1_6",
+      "lean_skeleton": "namespace GrokRxiv\n\ntheorem prop_1_6 : 0 = 0 := by\n  sorry\n\nend GrokRxiv\n",
+      "lean_statement": "theorem prop_1_6 : 0 = 0 := by",
+      "obligation_id": "formalize_theorem_prop_1_6",
+      "semantic_category": "plain_theorem",
+      "source_claim_id": "prop:1.6",
+      "source_span": {
+        "artifact": "theorem_graph.json",
+        "claim_id": "prop:1.6",
+        "paper_source_id": "prop:1.6",
+        "section_id": "sec-2-2",
+        "text_excerpt": "Proposition 1.8 (1.6). Let $(N; \\partial N)$ be obtained from the sphere $S^2$ by removing a finite number $s$ of open discs: $(N; \\partial N) = (S^2 \\setminus \\bigcup_{i=1}^{s} D_i^2; \\bigcup_{i=1}^{s} S_i^1)$, and let $(L; \\partial L)$ be obtained from the ..."
+      },
+      "statement": "Proposition 1.8 (1.6). Let $(N; \\partial N)$ be obtained from the sphere $S^2$ by removing a finite number $s$ of open discs: $(N; \\partial N) = (S^2 \\setminus \\bigcup_{i=1}^{s} D_i^2; \\bigcup_{i=1}^{s} S_i^1)$, and let $(L; \\partial L)$ be obtained from the projective plane $\\mathbb{R}P^2$ by removing a finite number $k$ of open discs: $(L; \\partial L) = (\\mathbb{R}P^2 \\setminus \\bigcup_{i=1}^{k} D_i^2; \\bigcup_{i=1}^{k} S_i^1)$. For $p = 0$ the $p$-length of a two-dimensional compact connected manifold equals: 1. one, if the manifold is homeomorphic to $(N; \\partial N)$, to $(L; \\partial L)$, or to the sphere $S^2$; 2. two, on the other manifolds. For $p = 1$ the $p$-length of a two-dimensional compact connected manifold equals: 1. zero, if the manifold is homeomorphic to the sphere $S^2$ or to the disc $D^2$; 2. one, on the other manifolds.",
+      "theorem_ir": {
+        "assumptions": [],
+        "binders": [],
+        "conclusion": {
+          "kind": "equals",
+          "lhs": {
+            "kind": "unknown_term",
+            "text": "Proposition 1.8 (1.6). Let $(N; \\partial N)$ be obtained from the sphere $S^2$ by removing a finite number $s$ of open discs: $(N; \\partial N"
+          },
+          "rhs": {
+            "kind": "unknown_term",
+            "text": "S^2 \\setminus \\bigcup_{i=1}^{s} D_i^2; \\bigcup_{i=1}^{s} S_i^1)$, and let $(L; \\partial L)$ be obtained from the projective plane $\\mathbb{R}P^2$ by removing a finite number $k$ of open discs: $(L; \\partial L) = (\\mathbb{R}P^2 \\setminus \\bigcup_{i=1}^{k} D_i^2; \\bigcup_{i=1}^{k} S_i^1)$. For $p = 0$ the $p$-length of a two-dimensional compact connected manifold equals: 1. one, if the manifold is homeomorphic to $(N; \\partial N)$, to $(L; \\partial L)$, or to the sphere $S^2$; 2. two, on the other manifolds. For $p = 1$ the $p$-length of a two-dimensional compact connected manifold equals: 1. zero, if the manifold is homeomorphic to the sphere $S^2$ or to the disc $D^2$; 2. one, on the other manifolds"
+          }
+        },
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "prop:1.6",
+          "paper_source_id": "prop:1.6",
+          "section_id": "sec-2-2",
+          "text_excerpt": "Proposition 1.8 (1.6). Let $(N; \\partial N)$ be obtained from the sphere $S^2$ by removing a finite number $s$ of open discs: $(N; \\partial N) = (S^2 \\setminus \\bigcup_{i=1}^{s} D_i^2; \\bigcup_{i=1}^{s} S_i^1)$, and let $(L; \\partial L)$ be obtained from the ..."
+        },
+        "theorem_name": "prop_1_6"
+      }
+    },
+    {
+      "lean_declaration": "thm_1_7",
+      "lean_skeleton": "namespace GrokRxiv\n\ntheorem thm_1_7 : True := by\n  sorry\n\nend GrokRxiv\n",
+      "lean_statement": "theorem thm_1_7 : True := by",
+      "obligation_id": "formalize_theorem_thm_1_7",
+      "semantic_category": "plain_theorem",
+      "source_claim_id": "thm:1.7",
+      "source_span": {
+        "artifact": "theorem_graph.json",
+        "claim_id": "thm:1.7",
+        "paper_source_id": "thm:1.7",
+        "section_id": "sec-2-2",
+        "text_excerpt": "Theorem 1.9 (1.7). Let $M = S^{k_1} \\times S^{k_2} \\times \\ldots \\times S^{k_r}$ be a product of $k_i$-dimensional spheres, $i = 1, \\ldots, r$, and let $p$ be a non-negative integer. Then $\\mathrm{long}^{p} M \\geq r - \\min l(p)$, where the minimum is taken ov..."
+      },
+      "statement": "Theorem 1.9 (1.7). Let $M = S^{k_1} \\times S^{k_2} \\times \\ldots \\times S^{k_r}$ be a product of $k_i$-dimensional spheres, $i = 1, \\ldots, r$, and let $p$ be a non-negative integer. Then $\\mathrm{long}^{p} M \\geq r - \\min l(p)$, where the minimum is taken over all subsets $\\{(k_{i_1}, k_{i_2}, \\ldots, k_{i_l}) \\subset (k_1, k_2, \\ldots, k_r) : \\sum_{j=1}^{l} k_{i_j} \\geq p\\}$.",
+      "theorem_ir": {
+        "assumptions": [],
+        "binders": [],
+        "conclusion": {
+          "kind": "greater_equal",
+          "lhs": {
+            "kind": "unknown_term",
+            "text": "Theorem 1.9 (1.7). Let $M = S^{k_1} \\times S^{k_2} \\times \\ldots \\times S^{k_r}$ be a product of $k_i$-dimensional spheres, $i = 1, \\ldots, r$, and let $p$ be a non-negative integer. Then $\\mathrm{long}^{p} M"
+          },
+          "rhs": {
+            "kind": "unknown_term",
+            "text": "r - \\min l(p)$, where the minimum is taken over all subsets $\\{(k_{i_1}, k_{i_2}, \\ldots, k_{i_l}) \\subset (k_1, k_2, \\ldots, k_r) : \\sum_{j=1}^{l} k_{i_j} \\geq p\\}$"
+          }
+        },
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "thm:1.7",
+          "paper_source_id": "thm:1.7",
+          "section_id": "sec-2-2",
+          "text_excerpt": "Theorem 1.9 (1.7). Let $M = S^{k_1} \\times S^{k_2} \\times \\ldots \\times S^{k_r}$ be a product of $k_i$-dimensional spheres, $i = 1, \\ldots, r$, and let $p$ be a non-negative integer. Then $\\mathrm{long}^{p} M \\geq r - \\min l(p)$, where the minimum is taken ov..."
+        },
+        "theorem_name": "thm_1_7"
+      }
+    },
+    {
+      "lean_declaration": "cor_1_8",
+      "lean_skeleton": "namespace GrokRxiv\n\ntheorem cor_1_8 : 0 = 0 := by\n  sorry\n\nend GrokRxiv\n",
+      "lean_statement": "theorem cor_1_8 : 0 = 0 := by",
+      "obligation_id": "formalize_theorem_cor_1_8",
+      "semantic_category": "plain_theorem",
+      "source_claim_id": "cor:1.8",
+      "source_span": {
+        "artifact": "theorem_graph.json",
+        "claim_id": "cor:1.8",
+        "paper_source_id": "cor:1.8",
+        "section_id": "sec-2-2",
+        "text_excerpt": "Corollary 1.10 (1.8). Let $M = S^{k_1} \\times S^{k_2} \\times \\ldots \\times S^{k_r}$ be a product of $k_i$-dimensional spheres, $i = 1, \\ldots, r$. Then the (co)homological length of $M$ equals the number $r$ of factors: $\\mathrm{long}\\, M = r$."
+      },
+      "statement": "Corollary 1.10 (1.8). Let $M = S^{k_1} \\times S^{k_2} \\times \\ldots \\times S^{k_r}$ be a product of $k_i$-dimensional spheres, $i = 1, \\ldots, r$. Then the (co)homological length of $M$ equals the number $r$ of factors: $\\mathrm{long}\\, M = r$.",
+      "theorem_ir": {
+        "assumptions": [],
+        "binders": [],
+        "conclusion": {
+          "kind": "equals",
+          "lhs": {
+            "kind": "unknown_term",
+            "text": "Corollary 1.10 (1.8). Let $M"
+          },
+          "rhs": {
+            "kind": "unknown_term",
+            "text": "S^{k_1} \\times S^{k_2} \\times \\ldots \\times S^{k_r}$ be a product of $k_i$-dimensional spheres, $i = 1, \\ldots, r$. Then the (co)homological length of $M$ equals the number $r$ of factors: $\\mathrm{long}\\, M = r$"
+          }
+        },
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "cor:1.8",
+          "paper_source_id": "cor:1.8",
+          "section_id": "sec-2-2",
+          "text_excerpt": "Corollary 1.10 (1.8). Let $M = S^{k_1} \\times S^{k_2} \\times \\ldots \\times S^{k_r}$ be a product of $k_i$-dimensional spheres, $i = 1, \\ldots, r$. Then the (co)homological length of $M$ equals the number $r$ of factors: $\\mathrm{long}\\, M = r$."
+        },
+        "theorem_name": "cor_1_8"
+      }
+    },
+    {
+      "lean_declaration": "prop_1_9",
+      "lean_skeleton": "namespace GrokRxiv\n\ntheorem prop_1_9 : 0 = 0 := by\n  sorry\n\nend GrokRxiv\n",
+      "lean_statement": "theorem prop_1_9 : 0 = 0 := by",
+      "obligation_id": "formalize_theorem_prop_1_9",
+      "semantic_category": "plain_theorem",
+      "source_claim_id": "prop:1.9",
+      "source_span": {
+        "artifact": "theorem_graph.json",
+        "claim_id": "prop:1.9",
+        "paper_source_id": "prop:1.9",
+        "section_id": "sec-2-2",
+        "text_excerpt": "Proposition 1.11 (1.9). The $p$-length of the $n$-dimensional torus is $p$ less than its dimension: $\\mathrm{long}^{p} T^n = n - p$."
+      },
+      "statement": "Proposition 1.11 (1.9). The $p$-length of the $n$-dimensional torus is $p$ less than its dimension: $\\mathrm{long}^{p} T^n = n - p$.",
+      "theorem_ir": {
+        "assumptions": [],
+        "binders": [],
+        "conclusion": {
+          "kind": "equals",
+          "lhs": {
+            "kind": "unknown_term",
+            "text": "Proposition 1.11 (1.9). The $p$-length of the $n$-dimensional torus is $p$ less than its dimension: $\\mathrm{long}^{p} T^n"
+          },
+          "rhs": {
+            "kind": "unknown_term",
+            "text": "n - p$"
+          }
+        },
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "prop:1.9",
+          "paper_source_id": "prop:1.9",
+          "section_id": "sec-2-2",
+          "text_excerpt": "Proposition 1.11 (1.9). The $p$-length of the $n$-dimensional torus is $p$ less than its dimension: $\\mathrm{long}^{p} T^n = n - p$."
+        },
+        "theorem_name": "prop_1_9"
+      }
+    },
+    {
+      "lean_declaration": "prop_1_10",
+      "lean_skeleton": "namespace GrokRxiv\n\ntheorem prop_1_10 : True := by\n  sorry\n\nend GrokRxiv\n",
+      "lean_statement": "theorem prop_1_10 : True := by",
+      "obligation_id": "formalize_theorem_prop_1_10",
+      "semantic_category": "plain_theorem",
+      "source_claim_id": "prop:1.10",
+      "source_span": {
+        "artifact": "theorem_graph.json",
+        "claim_id": "prop:1.10",
+        "paper_source_id": "prop:1.10",
+        "section_id": "sec-2-3",
+        "text_excerpt": "Proposition 1.12 (1.10). The Lyusternik--Shnirelman category of a two-dimensional compact connected manifold with boundary, not homeomorphic to the disc $D^2$, equals two. Moreover, the categorical sets may be chosen so as to intersect only along their bounda..."
+      },
+      "statement": "Proposition 1.12 (1.10). The Lyusternik--Shnirelman category of a two-dimensional compact connected manifold with boundary, not homeomorphic to the disc $D^2$, equals two. Moreover, the categorical sets may be chosen so as to intersect only along their boundaries, and so that each is homeomorphic to the disc $D^2$.",
+      "theorem_ir": {
+        "assumptions": [],
+        "binders": [],
+        "conclusion": {
+          "kind": "unknown_prop",
+          "text": "Proposition 1.12 (1.10). The Lyusternik--Shnirelman category of a two-dimensional compact connected manifold with boundary, not homeomorphic to the disc $D^2$, equals two. Moreover, the categorical sets may be chosen so as to intersect only along their boundaries, and so that each is homeomorphic to the disc $D^2$"
+        },
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "prop:1.10",
+          "paper_source_id": "prop:1.10",
+          "section_id": "sec-2-3",
+          "text_excerpt": "Proposition 1.12 (1.10). The Lyusternik--Shnirelman category of a two-dimensional compact connected manifold with boundary, not homeomorphic to the disc $D^2$, equals two. Moreover, the categorical sets may be chosen so as to intersect only along their bounda..."
+        },
+        "theorem_name": "prop_1_10"
+      }
+    }
+  ]
+}

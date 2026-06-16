@@ -1,0 +1,1984 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>$P$-categories and functions with degenerate singular submanifolds — GrokRxiv Review</title>
+  <meta name="generator" content="grokrxiv-render">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- KaTeX is rendered client-side; math is kept as \( ... \) and \[ ... \] delimiters. -->
+  <style>
+    :root { color-scheme: light dark; --fg: #111; --muted: #555; --bg: #fff;
+            --accent: #1f6feb; --border: #d0d7de; --banner: #fff3cd; --banner-fg: #664d03; }
+    @media (prefers-color-scheme: dark) {
+      :root { --fg: #e6edf3; --muted: #8b949e; --bg: #0d1117; --accent: #58a6ff;
+              --border: #30363d; --banner: #3a2f0b; --banner-fg: #f1c453; }
+    }
+    body { font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+           color: var(--fg); background: var(--bg); max-width: 820px;
+           margin: 0 auto; padding: 24px; }
+    h1 { font-size: 1.7rem; line-height: 1.25; margin: 0 0 0.5rem; }
+    h2 { font-size: 1.2rem; margin-top: 2rem; border-bottom: 1px solid var(--border); padding-bottom: .25rem; }
+    .muted { color: var(--muted); }
+    .disclaimer { background: var(--banner); color: var(--banner-fg); border: 1px solid var(--border);
+                  padding: .75rem 1rem; border-radius: 6px; margin: 0 0 1.5rem; font-weight: 600; }
+    .footer-disclaimer { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--border);
+                         color: var(--muted); font-size: .9rem; }
+    .brand { font-weight: 700; color: var(--accent); }
+    details { border: 1px solid var(--border); border-radius: 6px; padding: .75rem 1rem; margin: .5rem 0; }
+    details > summary { cursor: pointer; font-weight: 600; }
+    .meta-link { font-size: .9rem; }
+    ul { padding-left: 1.25rem; }
+    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .agent-grid { display: grid; gap: .5rem; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 999px;
+             background: var(--border); color: var(--fg); font-size: .8rem; }
+    .badge.pass { background: #1f883d; color: #fff; }
+    .badge.warn { background: #bf8700; color: #fff; }
+    .badge.fail { background: #cf222e; color: #fff; }
+    .target-grid { display: grid; gap: .75rem; padding: 0; list-style: none; }
+    .revision-target { border: 1px solid var(--border); border-radius: 6px; padding: .9rem 1rem;
+                       background: rgba(127, 127, 127, .08); }
+    .target-title { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: 0 0 .75rem; }
+    .target-fields { display: grid; gap: .5rem; margin: 0; }
+    .target-field { display: grid; gap: .35rem; border: 1px solid var(--border);
+                    border-radius: 6px; padding: .65rem .75rem; }
+    .target-field.required { border-color: #bf8700; background: rgba(191, 135, 0, .12); }
+    .field-label { color: var(--muted); font-size: .75rem; font-weight: 700; text-transform: uppercase; }
+    .field-value { margin: 0; overflow-wrap: anywhere; }
+    .field-value.codeish { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>$P$-categories and functions with degenerate singular submanifolds</h1>
+    <p class="muted">
+      <span class="brand">GrokRxiv</span> review of
+      <a class="meta-link" href="https://arxiv.org/abs/2606.14809">arXiv:2606.14809</a>
+       · <span>math.GT</span>
+    </p>
+    <p class="muted">
+      Olha Bondar
+    </p>
+  </header>
+
+  <section>
+    <h2>TL;DR</h2>
+    <p>The paper introduces P-category and p-length as topological invariants generalizing the Lyusternik–Shnirelman (LS) category and manifold length to the setting of functions whose critical point sets are smooth submanifolds diffeomorphic to a fixed manifold P. All five specialists concur on the paper&#x27;s scope and contribution. The novelty specialist rates the work &#x27;significant&#x27; (score 0.70, confidence 0.90) and identifies no missing prior art. The citation specialist finds the bibliography well-curated and appropriately integrated (confidence 0.95). The technical-correctness specialist rates the paper &#x27;mostly_sound&#x27; (confidence 0.72) but flags one factually incorrect claim (Proposition 1.18: S^l-cat(S^n) stated as 0 instead of ∞ when l &gt; n, C8, minor), one unsupported claim about the absence of any formal proof artifact for the ten load-bearing theorems (C15, major), and eight partially-supported claims at minor severity covering a boundary-degree gap in Theorem 1.7 (C2), a potential circular dependency in Theorem 1.9 (C3), incomplete inductive proofs in Theorems 3.6 and 2.18 (C9, C10), a smoothing gap in Theorem 2.6 (C7), a coefficient-ring inconsistency in the p-length definition (C1), and proof-sketch reliance in Theorems 2.13, 3.4, and Proposition 2.2 (C6, C12, C14). The reproducibility specialist independently flags the absence of formal proof artifacts as a critical concern (score 0.24, confidence 0.86) and adds three major concerns: no executable construction for P-functions, no computational verification of p-length or P-category values, and informal &#x27;it is not difficult to see&#x27; arguments. This is a math.* submission in a code-amenable field; under the recommendation gate, the concurrent major finding (C15, technical_correctness) and critical finding (reproducibility concern 1) about missing proof-as-code artifacts default the recommendation to major_revision. The two missing citation entries (James 1978; Lusternik–Schnirelmann 1934 French edition) are minor omissions. The mathematical substance is sound and the contribution is genuine; the required revisions are confined to proof completeness, one definitional error, and the addition of a minimal computational verification artifact.</p>
+    <p class="muted">Recommendation: <strong>Major revision</strong> · Confidence: 78%</p>
+  </section>
+
+  <section>
+    <h2>Strengths</h2>
+    <ul>
+      <li>P-category provides a natural and coherent generalization of LS category parameterized by a fixed submanifold P, recovering the classical theory as the special case P = point and yielding exact closed-form computations for products of spheres (Theorem 1.14: P-cat(S^{k_1} × ... × S^{k_r}) = r − l + 1), which are independently verified by the technical-correctness specialist.</li><li>The complete classification of two-dimensional manifolds admitting round functions (Theorem 3.3) is rigorous, covers all surface types, achieves exact critical-circle counts, and is confirmed correct by the technical-correctness specialist.</li><li>The existence theorem for P-functions via filtrations (Theorem 2.6) provides a clean unifying construction that subsumes earlier ad hoc arguments for round and exact Morse functions under a single framework parameterized by the manifold P.</li><li>Citation coverage is comprehensive and well-integrated (citation specialist confidence 0.95), balancing Soviet foundational sources (Lyusternik, Shnirelman, Fomenko, Sharko) with Western classics (Morse, Milnor, Smale, Bott, Thurston) and contemporary results, providing solid historical grounding throughout.</li><li>The novelty specialist confirms &#x27;significant&#x27; novelty (score 0.70, confidence 0.90) with no missing prior art, validating that the P-category framework opens a genuinely new direction in critical-point theory beyond the classical LS setting.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Weaknesses</h2>
+    <ul>
+      <li>No formal or computational proof artifact accompanies any of the ten load-bearing theorems (1.5, 1.7, 1.13, 1.14, 2.5, 2.12, 2.15, 2.17, 3.4, 3.6); as a math.* paper in a code-amenable field, the absence of executable verification for results that are largely combinatorial over cohomology rings of products of spheres constitutes a critical reproducibility deficit (technical_correctness C15 major; reproducibility score 0.24, concern 1 critical).</li><li>Proposition 1.18 (Chapter I) incorrectly states S^l-cat(S^n) = 0 when l &gt; n; since Definition 1.1 sets P-cat = ∞ when no admissible covering exists and S^l cannot embed in S^n for l &gt; n, the correct value is ∞, not 0.</li><li>The proof of Theorem 1.7 (the central P-cat ≥ long^p + 1 inequality) has a gap at the boundary degree: the claimed isomorphism H_l(M) ≅ H_l(M, A_i) for l &gt; p requires i_* = 0 in two consecutive degrees (l and l−1), but the case l−1 = p, where H_p(P) can carry classes lifted to H_p(A_i), is not addressed.</li><li>Theorem 3.6 (existence of a round S^1-function on S^n with at most ⌊n&#x2f;2⌋ + 1 singularities) provides explicit constructions only for n = 3, 4, 5 and asserts the general case by analogy without a written inductive step; the introductory generalization to P = S^k for arbitrary k is not proved in the body.</li><li>The smoothing step in Theorem 2.6 uses the distance function ρ(x, ∂M_i), which is only Lipschitz near the boundary; no bump-function or partition-of-unity interpolation is supplied to establish smoothness of the glued function F across ∂M_i.</li><li>The coefficient ring for p-length is defined inconsistently: the Introduction allows A = Z or Z_p (prime p) while Chapter I Definition 1.4 allows A = Z or R; the discrepancy is load-bearing for &#x27;product non-zero&#x27; conditions in subsequent p-length counts, particularly for non-orientable manifolds.</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Revision Targets</h2>
+    <div class="target-grid">
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              corrections&#x2f;2606.14809&#x2f;paper.tex
+               at 
+              Whole paper; affects Theorems 1.5, 1.7, 1.13, 1.14, 2.5, 2.12, 2.15, 2.17, 3.4, 3.6.
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">This is a math.* paper (algebraic&#x2f;differential topology, Morse-theoretic). The headline results are amenable to mechanical verification: the P-category framework consists of finite combinatorial inequalities over cohomology rings of products of spheres and tori, the L-S-type lower bound 1.5 reduces to a long-exact-sequence + intersection-product argument, and the inequality cat M = r+1 (Theorem 1.13) is already formalised in part in mathlib (Lyusternik–Schnirelmann category of products). The paper ships no Lean&#x2f;Coq&#x2f;Agda development, nor any computational verification (e.g., a Lean witness that long^p T^n = n − p for specific small n, or a sage&#x2f;python script generating the explicit cycles in Theorem 1.7). Per the proof-as-code axiom for code-amenable fields, the absence of any executable artifact is a documented weakness even though the paper is a translation of a 1993 dissertation.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Ship at minimum a Lean 4 &#x2f; mathlib4 file formalising the main inequality of Theorem 1.5 in the special case P = point (recovering the classical Lyusternik–Schnirelmann bound), and one for Theorem 1.14 in low dimensions (e.g., S^k × S^l). Candidate paths: src&#x2f;proofs&#x2f;PCategory&#x2f;MainInequality.lean and src&#x2f;proofs&#x2f;PCategory&#x2f;ProductOfSpheres.lean. Alternatively, ship a small Python&#x2f;Sage notebook computing long^p, cat, and P-cat for the explicit manifolds discussed (T^n, S^{k_1}×…×S^{k_r}) and verifying the inequalities for n ≤ 5.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm `Whole paper; affects Theorems 1.5, 1.7, 1.13, 1.14, 2.5, 2.12, 2.15, 2.17, 3.4, 3.6.` is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              corrections&#x2f;2606.14809&#x2f;paper.tex
+               at 
+              Chapter I, Proposition 1.18 (1.16).
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">Definition 1.1 explicitly states &#x27;If no such number k exists we set P-cat = ∞&#x27;. When l &gt; n there is no embedding of P = S^l into M = S^n and no closed subset of S^n contracts inside S^n to a homeomorphic copy of S^l, so no admissible covering exists and the P-category must be ∞, not 0. The proof in the paper only treats the cases l &lt; n and l = n; the l &gt; n case is asserted without justification and contradicts the stated definition.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Replace &#x27;0&#x27; with &#x27;∞&#x27; in clause (3) and remove that clause from the proposition (or restrict the statement to l ≤ n), and note in a remark that the definition assigns ∞ when no admissible covering exists.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm `Chapter I, Proposition 1.18 (1.16).` is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              corrections&#x2f;2606.14809&#x2f;paper.tex
+               at 
+              Chapter I, Theorem 1.7 (1.5) and its proof.
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">The proof uses the long exact homology sequence of the pair (M, A_i) and asserts that &#x27;for l &gt; p, i_* = 0, that is, j_* is a monomorphism, which is equivalent to H_l(M) = H_l(M, A_i) for l &gt; p.&#x27; Monomorphism of j_* follows from i_* = 0 in degree l; the equality H_l(M) = H_l(M, A_i) is an isomorphism statement, which additionally requires i_* = 0 in degree l-1. The case l-1 = p (i.e., the boundary degree dim P = p) is not addressed and is precisely where H_p(P) can carry classes that lift to H_p(A_i). The &#x27;moving off&#x27; argument therefore needs an extra step to handle classes in dimension p. The headline conclusion is widely believed and consistent with the classical Lyusternik–Shnirelman bound (recovered when P is a point), but the proof as written has a gap at the boundary degree.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Either (i) restrict to cycles of dimension strictly greater than p (already implied by condition 3&#x27; once q ≥ 2) and spell out why the relevant moving-off classes live in degrees &gt; p where i_* = 0 in two consecutive ranks, or (ii) replace the isomorphism claim with the weaker monomorphism j_* and reformulate the displacement argument accordingly.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm `Chapter I, Theorem 1.7 (1.5) and its proof.` is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              corrections&#x2f;2606.14809&#x2f;paper.tex
+               at 
+              Chapter III, Theorem 3.6 (3.6) and its proof.
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">The proof gives explicit constructions only for n = 3, 4, 5 (using decompositions D^4&#x2f;S^3 and D^5&#x2f;S^4 with S^4 = M_1 ∪ M_2, etc.) and then states &#x27;It is not difficult to see that an analogous treatment of higher-dimensional spheres yields the statement of the theorem.&#x27; For general n the inductive construction is not written out, and the count ⌊n&#x2f;2⌋ + 1 is not verified to match what the iterated decomposition produces. The cases n = 4, 5 yield 3 singularities, consistent with ⌊n&#x2f;2⌋ + 1, but the pattern is asserted, not proved.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Provide an explicit inductive description (e.g., S^n = ∪ of subsets each almost-diffeomorphic to S^1 × D^{n−1}) with a count argument, or cite a specific result that the iteration yields exactly ⌊n&#x2f;2⌋ + 1 pieces. Also reconcile the introductory statement (Theorem 24 &#x2f; 3.6) which writes the bound as &#x27;[n&#x2f;2]+1 with n ≥ 2k+1&#x27; for P = S^k — the body proves only the k=1 case, but the introduction promises the general S^k bound.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm `Chapter III, Theorem 3.6 (3.6) and its proof.` is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              corrections&#x2f;2606.14809&#x2f;paper.tex
+               at 
+              Chapter II, Theorem 2.6 (2.5).
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">The construction glues the per-layer functions F_i (from Proposition 2.4) and then smooths them across the boundaries ∂M_i via the auxiliary metric-based functions f_i. The smoothing argument writes f_i piecewise as &#x27;i − ρ(x, ∂M_i)&#x27; near ∂M_i, which is only Lipschitz continuous (the distance function to a smooth hypersurface is smooth on a one-sided tubular neighbourhood but the piecewise definition needs an explicit smooth interpolation between the three cases). The paper asserts the resulting F is differentiable, but the standard fix (use a cutoff bump function rather than the distance function directly) is not spelled out.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Replace &#x27;ρ(x, ∂M_i)&#x27; with a smooth function of the signed distance constructed via a partition of unity or bump function on a tubular neighbourhood, and verify smooth matching of F across boundaries with explicit computations of derivatives.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm `Chapter II, Theorem 2.6 (2.5).` is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              corrections&#x2f;2606.14809&#x2f;paper.tex
+               at 
+              Section &#x27;P-length of a manifold&#x27;, Definition 1.4 (1.3) vs introductory Definition 2 (1.3).
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">Definition 2 (in the Introduction) lists coefficients as &#x27;A = Z or Z_p when M is orientable, and A = Z_2 when M is non-orientable&#x27; (clashing notation: the same letter p is used both for the length parameter and for the coefficient prime). Definition 1.4 in Chapter I instead lists &#x27;A = Z or R when M is orientable, and A = Z_2 when M is non-orientable&#x27;. The two definitions disagree on the admissible coefficient ring, which is load-bearing for what &#x27;product non-zero&#x27; means in subsequent theorems.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Unify the two definitions into a single statement, using a coefficient prime distinct from the length parameter p (e.g., Z_q) or restrict to field coefficients consistently. Add a remark on how the p-length depends on the chosen coefficient ring.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm `Section &#x27;P-length of a manifold&#x27;, Definition 1.4 (1.3) vs introductory Definition 2 (1.3).` is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+    </div>
+  </section>
+
+  <section>
+    <h2>Open Questions</h2>
+    <ul>
+      <li>Proposition 1.18, clause (3): is the intended value S^l-cat(S^n) = ∞ (per Definition 1.1) rather than 0 when l &gt; n, and does any downstream result in Chapter II or III depend on the clause as currently stated?</li><li>Theorem 1.7: can the boundary-degree case l−1 = p be addressed explicitly in the long exact sequence argument, specifically handling whether i_*(H_p(A_i)) = 0 when A_i deformation-retracts inside M to P with dim P = p?</li><li>Theorem 3.6: is there an explicit inductive construction for all n ≥ 3 that verifies the count ⌊n&#x2f;2⌋ + 1, and does the argument generalize to the bound stated in the Introduction for P = S^k with arbitrary k ≥ 1?</li><li>Definitions 1 and 1.4: which coefficient ring is canonical for p-length — Z, R, or a prime field Z_q — and is the value of long^p sensitive to this choice for non-orientable surfaces or odd-dimensional manifolds?</li><li>Could a Sage or Python notebook verifying the p-length and P-category formulas for small explicit cases (e.g., S^1 × S^2, T^3, RP^3) be added as a supplementary artifact, given the computational nature of the examples in Chapters I–III?</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Per-Agent Reviews</h2>
+    <div class="agent-grid">
+      
+      <details>
+        <summary>
+          citation — <span class="muted">gemini-3-flash-preview</span>
+          <span class="badge warn">warn</span>
+        </summary>
+        <pre>{
+  &quot;confidence&quot;: 0.95,
+  &quot;entries&quot;: [
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Арнольд, В. И.&quot;,
+          &quot;Варченко, А. Н.&quot;,
+          &quot;Гусейн-заде, С. М.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;arnold-varchenko-gusein-1982&quot;,
+        &quot;raw&quot;: &quot;arnold-varchenko-gusein-1982: author = Арнольд, В. И. and Варченко, А. Н. and Гусейн-заде, С. М., title = Особенности дифференцируемых отображений: в 2 т., publisher = Наука, address = М., year = 1982, volume = 1, langid = russian,&quot;,
+        &quot;title&quot;: &quot;Особенности дифференцируемых отображений: в 2 т.&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Наука&quot;,
+        &quot;year&quot;: 1982
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Provides general background on singularity theory for differentiable mappings.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Ganea, T.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;ganea-1961&quot;,
+        &quot;raw&quot;: &quot;ganea-1961: author = Ganea, T., title = Оценка сверху для категории Люстерника--Шнирельмана, journal = Докл.\\ АН СССР, year = 1961, volume = 136, number = 6, pages = 1273--1276, langid = russian,&quot;,
+        &quot;title&quot;: &quot;Оценка сверху для категории Люстерника--Шнирельмана&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Докл. АН СССР&quot;,
+        &quot;year&quot;: 1961
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Early research on upper bounds for the Lyusternik-Shnirelman category.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Голубицкий, М.&quot;,
+          &quot;Гийемин, В.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;golubitsky-guillemin-1977&quot;,
+        &quot;raw&quot;: &quot;golubitsky-guillemin-1977: author = Голубицкий, М. and Гийемин, В., title = Устойчивые отображения и их особенности, publisher = Мир, address = М., year = 1977, pagetotal = 290, langid = russian,&quot;,
+        &quot;title&quot;: &quot;Устойчивые отображения и их особенности&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Мир&quot;,
+        &quot;year&quot;: 1977
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Standard reference for stable mappings and their singularities.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Дубровин, Б. А.&quot;,
+          &quot;Новиков, С. П.&quot;,
+          &quot;Фоменко, А. Т.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;dubrovin-novikov-fomenko-1984&quot;,
+        &quot;raw&quot;: &quot;dubrovin-novikov-fomenko-1984: author = Дубровин, Б. А. and Новиков, С. П. and Фоменко, А. Т., title = Современная геометрия. Методы теории гомологий, publisher = Наука, address = М., year = 1984, pagetotal = 344, langid = russian,&quot;,
+        &quot;title&quot;: &quot;Современная геометрия. Методы теории гомологий&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Наука&quot;,
+        &quot;year&quot;: 1984
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Textbook on homology theory methods in modern geometry.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Люстерник, Л. А.&quot;,
+          &quot;Шнирельман, Л. Г.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;lyusternik-shnirelman-1935&quot;,
+        &quot;raw&quot;: &quot;lyusternik-shnirelman-1935: author = Люстерник, Л. А. and Шнирельман, Л. Г., title = Применение топологии к экстремальным задачам, booktitle = Труды Второго Всес.\\ мат.\\ съезда, year = 1935, pages = 224--237, langid = russian,&quot;,
+        &quot;title&quot;: &quot;Применение топологии к экстремальным задачам&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Труды Второго Всес. мат. съезда&quot;,
+        &quot;year&quot;: 1935
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Foundational work applying topology to extremal problems.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Люстерник, Л. А.&quot;,
+          &quot;Шнирельман, Л. Г.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;lyusternik-shnirelman-1930&quot;,
+        &quot;raw&quot;: &quot;lyusternik-shnirelman-1930: author = Люстерник, Л. А. and Шнирельман, Л. Г., title = Топологические методы в вариационных задачах, address = М., year = 1930, langid = russian,&quot;,
+        &quot;title&quot;: &quot;Топологические методы в вариационных задачах&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;М.&quot;,
+        &quot;year&quot;: 1930
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;The original monograph introducing topological methods in variational problems.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Матвеев, С. В.&quot;,
+          &quot;Фоменко, А. Т.&quot;,
+          &quot;Шарко, В. В.&quot;
+        ],
+        &quot;doi&quot;: &quot;10.1070&#x2f;SM1989v063n02ABEH003276&quot;,
+        &quot;key&quot;: &quot;matveev-fomenko-sharko-1988&quot;,
+        &quot;raw&quot;: &quot;matveev-fomenko-sharko-1988: author = Матвеев, С. В. and Фоменко, А. Т. and Шарко, В. В., title = Круглые функции Морса и изоэнергетические поверхности интегрируемых гамильтоновых систем, journal = Мат.\\ сб., year = 1988, volume = 135, number = 3, pages = 325--345, langid = russian, doi = 10.1070&#x2f;SM1989v063n02ABEH003276,&quot;,
+        &quot;title&quot;: &quot;Круглые функции Морса и изоэнергетические поверхности интегрируемых гамильтоновых систем&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Мат. сб.&quot;,
+        &quot;year&quot;: 1988
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited as a key reference for round Morse functions and integrable systems.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Милнор, Д.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;milnor-morse-1965&quot;,
+        &quot;raw&quot;: &quot;milnor-morse-1965: author = Милнор, Д., title = Теория Морса, publisher = Мир, address = М., year = 1965, pagetotal = 182, langid = russian,&quot;,
+        &quot;title&quot;: &quot;Теория Морса&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Мир&quot;,
+        &quot;year&quot;: 1965
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited for generalized Morse inequalities in the context of submanifolds.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Фоменко, А. Т.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;fomenko-1983&quot;,
+        &quot;raw&quot;: &quot;fomenko-1983: author = Фоменко, А. Т., title = Дифференциальная геометрия и топология. Дополнительные главы, publisher = Изд-во Моск.\\ ун-та, address = М., year = 1983, pagetotal = 217, langid = russian,&quot;,
+        &quot;title&quot;: &quot;Дифференциальная геометрия и топология. Дополнительные главы&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Изд-во Моск. ун-та&quot;,
+        &quot;year&quot;: 1983
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Supplementary material on differential geometry and topology.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Фоменко, А. Т.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;fomenko-1988&quot;,
+        &quot;raw&quot;: &quot;fomenko-1988: author = Фоменко, А. Т., title = Симплектическая геометрия. Методы и приложения, publisher = Изд-во Моск.\\ гос.\\ ун-та, address = М., year = 1988, pagetotal = 413, langid = russian,&quot;,
+        &quot;title&quot;: &quot;Симплектическая геометрия. Методы и приложения&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Изд-во Моск. гос. ун-та&quot;,
+        &quot;year&quot;: 1988
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Monograph on symplectic geometry methods.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Фоменко, А. Т.&quot;,
+          &quot;Шарко, В. В.&quot;
+        ],
+        &quot;doi&quot;: &quot;10.1007&#x2f;BF01060557&quot;,
+        &quot;key&quot;: &quot;fomenko-sharko-1989&quot;,
+        &quot;raw&quot;: &quot;fomenko-sharko-1989: author = Фоменко, А. Т. and Шарко, В. В., title = Точные круглые функции Морса, неравенства типа Морса и интегралы гамильтоновых систем, journal = Укр.\\ мат.\\ журн., year = 1989, volume = 41, number = 6, pages = 352--361, langid = ukrainian, doi = 10.1007&#x2f;BF01060557,&quot;,
+        &quot;title&quot;: &quot;Точные круглые функции Морса, неравенства типа Морса и интегралы гамильтоновых систем&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Укр. мат. журн.&quot;,
+        &quot;year&quot;: 1989
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Directly supports the discussion of exact round Morse functions.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Чогошвили, Г. С.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;chogoshvili-1939&quot;,
+        &quot;raw&quot;: &quot;chogoshvili-1939: author = Чогошвили, Г. С., title = О поверхностях уровня и областях меньших значений функции, заданной на ограниченном многообразии, journal = Докл.\\ АН СССР, year = 1939, volume = 24, number = 3, pages = 635--639, langid = russian,&quot;,
+        &quot;title&quot;: &quot;О поверхностях уровня и областях меньших значений функции, заданной на ограниченном многообразии&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Докл. АН СССР&quot;,
+        &quot;year&quot;: 1939
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Mentioned by name in Section 1 as a contributor to LS category theory.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Шарко, В. В.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;sharko-1990&quot;,
+        &quot;raw&quot;: &quot;sharko-1990: author = Шарко, В. В., title = Функции на многообразиях (алгебраические и топологические аспекты), publisher = Наук.\\ думка, address = Київ, year = 1990, pagetotal = 196, langid = ukrainian,&quot;,
+        &quot;title&quot;: &quot;Функции на многообразиях (алгебраические и топологические аспекты)&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Наук. думка&quot;,
+        &quot;year&quot;: 1990
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Fundamental reference for the author&#x27;s scientific advisor, covering functions on manifolds.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Шарко, В. В.&quot;
+        ],
+        &quot;doi&quot;: &quot;10.1070&#x2f;RM1981v036n05ABEH003053&quot;,
+        &quot;key&quot;: &quot;sharko-1981&quot;,
+        &quot;raw&quot;: &quot;sharko-1981: author = Шарко, В. В., title = Точные функции Морса на односвязных многообразиях с неодносвязным краем, journal = Успехи мат.\\ наук, year = 1981, volume = 36, number = 5, pages = 205--206, langid = russian, doi = 10.1070&#x2f;RM1981v036n05ABEH003053,&quot;,
+        &quot;title&quot;: &quot;Точные функции Морса на односвязных многообразиях с неодносвязным краем&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Успехи мат. наук&quot;,
+        &quot;year&quot;: 1981
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Early work by Sharko on exact Morse functions.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Asimov, D.&quot;
+        ],
+        &quot;doi&quot;: &quot;10.2307&#x2f;1970972&quot;,
+        &quot;key&quot;: &quot;asimov-1975&quot;,
+        &quot;raw&quot;: &quot;asimov-1975: author = Asimov, D., title = Round handles and non-singular Morse--Smale flows, journal = Ann. Math., year = 1975, volume = 102, number = 1, pages = 41--54, doi = 10.2307&#x2f;1970972,&quot;,
+        &quot;title&quot;: &quot;Round handles and non-singular Morse--Smale flows&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Ann. Math.&quot;,
+        &quot;year&quot;: 1975
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Classic paper on round handles, highly relevant to the study of round functions.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Borsuk, K.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;borsuk-1936&quot;,
+        &quot;raw&quot;: &quot;borsuk-1936: author = Borsuk, K., title = Über den Lusternik--Schnirelmannschen Begriff der Kategorie, journal = Fund. Math., year = 1936, volume = 26, pages = 123--136, langid = german, url = https:&#x2f;&#x2f;eudml.org&#x2f;doc&#x2f;212789,&quot;,
+        &quot;title&quot;: &quot;Über den Lusternik--Schnirelmannschen Begriff der Kategorie&quot;,
+        &quot;url&quot;: &quot;https:&#x2f;&#x2f;eudml.org&#x2f;doc&#x2f;212789&quot;,
+        &quot;venue&quot;: &quot;Fund. Math.&quot;,
+        &quot;year&quot;: 1936
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited for developments in the theory of LS category.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Bott, R.&quot;
+        ],
+        &quot;doi&quot;: &quot;10.1090&#x2f;S0273-0979-1982-15038-8&quot;,
+        &quot;key&quot;: &quot;bott-1982&quot;,
+        &quot;raw&quot;: &quot;bott-1982: author = Bott, R., title = Lectures on Morse theory, old and new, journal = Bull. Amer. Math. Soc., year = 1982, volume = 7, number = 2, pages = 331--358, doi = 10.1090&#x2f;S0273-0979-1982-15038-8,&quot;,
+        &quot;title&quot;: &quot;Lectures on Morse theory, old and new&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Bull. Amer. Math. Soc.&quot;,
+        &quot;year&quot;: 1982
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited in the introduction for modern perspectives on Morse theory.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Fox, R.&quot;
+        ],
+        &quot;doi&quot;: &quot;10.2307&#x2f;1969736&quot;,
+        &quot;key&quot;: &quot;fox-1953&quot;,
+        &quot;raw&quot;: &quot;fox-1953: author = Fox, R., title = Free differential calculus, I, journal = Ann. Math., year = 1953, volume = 57, number = 3, pages = 517--560, doi = 10.2307&#x2f;1969736,&quot;,
+        &quot;title&quot;: &quot;Free differential calculus, I&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Ann. Math.&quot;,
+        &quot;year&quot;: 1953
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Likely used for algebraic computations related to the fundamental group of manifolds.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Fox, R.&quot;
+        ],
+        &quot;doi&quot;: &quot;10.2307&#x2f;1968905&quot;,
+        &quot;key&quot;: &quot;fox-1941&quot;,
+        &quot;raw&quot;: &quot;fox-1941: author = Fox, R., title = On the Lusternik--Schnirelmann category, journal = Annals of Math., year = 1941, volume = 42, number = 2, doi = 10.2307&#x2f;1968905,&quot;,
+        &quot;title&quot;: &quot;On the Lusternik--Schnirelmann category&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Annals of Math.&quot;,
+        &quot;year&quot;: 1941
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited for foundational contributions to LS category theory.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Frank, G.&quot;
+        ],
+        &quot;doi&quot;: &quot;10.1090&#x2f;S0002-9947-1988-0951627-9&quot;,
+        &quot;key&quot;: &quot;frank-1988&quot;,
+        &quot;raw&quot;: &quot;frank-1988: author = Frank, G., title = Templates and train tracks, journal = Trans. Amer. Math. Soc., year = 1988, volume = 308, number = 2, pages = 765--784, doi = 10.1090&#x2f;S0002-9947-1988-0951627-9,&quot;,
+        &quot;title&quot;: &quot;Templates and train tracks&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Trans. Amer. Math. Soc.&quot;,
+        &quot;year&quot;: 1988
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited in Ch 3 for results related to round functions on 3-manifolds.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Franks, J.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;franks-1980&quot;,
+        &quot;raw&quot;: &quot;franks-1980: author = Franks, J., title = Homology and dynamical systems, journal = Regional conference series in math., year = 1980, volume = 49, pages = 3--120,&quot;,
+        &quot;title&quot;: &quot;Homology and dynamical systems&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Regional conference series in math.&quot;,
+        &quot;year&quot;: 1980
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited multiple times for the relationship between homology and dynamical systems.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Franks, J.&quot;
+        ],
+        &quot;doi&quot;: &quot;10.1007&#x2f;BF02566078&quot;,
+        &quot;key&quot;: &quot;franks-1978&quot;,
+        &quot;raw&quot;: &quot;franks-1978: author = Franks, J., title = The periodic behevior of non-singular Morse--Smale flows, journal = Comment. math. helv., year = 1978, volume = 53, number = 2, pages = 279--294, doi = 10.1007&#x2f;BF02566078,&quot;,
+        &quot;title&quot;: &quot;The periodic behevior of non-singular Morse--Smale flows&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Comment. math. helv.&quot;,
+        &quot;year&quot;: 1978
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited for research on non-singular Morse-Smale flows.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Froloff, S.&quot;,
+          &quot;Elsholz, L.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;froloff-elsholz-1935&quot;,
+        &quot;raw&quot;: &quot;froloff-elsholz-1935: author = Froloff, S. and Elsholz, L., title = Limite inférieure pour le nombre des valeurs critiques d&#x27;une fonction, donnée sur une variété, journal = Мат.\\ сб., year = 1935, volume = 42, number = 5, pages = 637--643, langid = french,&quot;,
+        &quot;title&quot;: &quot;Limite inférieure pour le nombre des valeurs critiques d&#x27;une fonction, donnée sur une variété&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Мат. сб.&quot;,
+        &quot;year&quot;: 1935
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Background work on lower bounds for critical values by the same authors as the tagged 1939 work.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Ganea, T.&quot;
+        ],
+        &quot;doi&quot;: &quot;10.1215&#x2f;ijm&#x2f;1256054563&quot;,
+        &quot;key&quot;: &quot;ganea-1967&quot;,
+        &quot;raw&quot;: &quot;ganea-1967: author = Ganea, T., title = Lusternik--Schnirelmann category and strong category, journal = Illinois journal of Math., year = 1967, volume = 11, number = 2, pages = 417--427, doi = 10.1215&#x2f;ijm&#x2f;1256054563,&quot;,
+        &quot;title&quot;: &quot;Lusternik--Schnirelmann category and strong category&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Illinois journal of Math.&quot;,
+        &quot;year&quot;: 1967
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited for distinguishing between standard and strong LS categories.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Miyoshi, S.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;miyoshi-1983&quot;,
+        &quot;raw&quot;: &quot;miyoshi-1983: author = Miyoshi, S., title = Foliated round surgery of codimension-one foliated manifolds, journal = Topology, year = 1983, volume = 21, number = 3, pages = 245--262,&quot;,
+        &quot;title&quot;: &quot;Foliated round surgery of codimension-one foliated manifolds&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Topology&quot;,
+        &quot;year&quot;: 1983
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited for work on foliated round surgery relevant to round Morse functions.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Morgan, J. W.&quot;
+        ],
+        &quot;doi&quot;: &quot;10.1016&#x2f;0040-9383(79)90013-2&quot;,
+        &quot;key&quot;: &quot;morgan-1979&quot;,
+        &quot;raw&quot;: &quot;morgan-1979: author = Morgan, J. W., title = Non-singular Morse--Smale flows on 3-dimensional manifolds, journal = Topology, year = 1979, volume = 18, number = 1, pages = 41--53, doi = 10.1016&#x2f;0040-9383(79)90013-2,&quot;,
+        &quot;title&quot;: &quot;Non-singular Morse--Smale flows on 3-dimensional manifolds&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Topology&quot;,
+        &quot;year&quot;: 1979
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Related study on non-singular Morse-Smale flows in three dimensions.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Morse, M.&quot;
+        ],
+        &quot;doi&quot;: &quot;10.2307&#x2f;1989110&quot;,
+        &quot;key&quot;: &quot;morse-1925&quot;,
+        &quot;raw&quot;: &quot;morse-1925: author = Morse, M., title = Relations between the critical points of a real function of $n$ variables, journal = Trans. Amer. Math. Soc., year = 1925, volume = 27, pages = 345--396, doi = 10.2307&#x2f;1989110,&quot;,
+        &quot;title&quot;: &quot;Relations between the critical points of a real function of $n$ variables&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Trans. Amer. Math. Soc.&quot;,
+        &quot;year&quot;: 1925
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Foundational paper laying the groundwork for Morse theory.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Morse, M.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;morse-1934&quot;,
+        &quot;raw&quot;: &quot;morse-1934: author = Morse, M., title = The calculus of variations in the large, address = New York, year = 1934, pagetotal = 352,&quot;,
+        &quot;title&quot;: &quot;The calculus of variations in the large&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;New York&quot;,
+        &quot;year&quot;: 1934
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Foundational monograph on global analysis and Morse theory.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Reeb, G.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;reeb-1947&quot;,
+        &quot;raw&quot;: &quot;reeb-1947: author = Reeb, G., title = Sur les variétés niveau d&#x27;une fonction numerique, journal = C. R. Acad. Sci. Paris, year = 1947, volume = 224, number = 46, pages = 1324--1325, langid = french,&quot;,
+        &quot;title&quot;: &quot;Sur les variétés niveau d&#x27;une fonction numerique&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;C. R. Acad. Sci. Paris&quot;,
+        &quot;year&quot;: 1947
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Classic result on level sets of numerical functions.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Sharko, V. V.&quot;
+        ],
+        &quot;doi&quot;: &quot;10.1007&#x2f;BFb0099560&quot;,
+        &quot;key&quot;: &quot;sharko-1984&quot;,
+        &quot;raw&quot;: &quot;sharko-1984: author = Sharko, V. V., title = Minimal Morse functions, journal = Lect. Notes Math., year = 1984, number = 108, pages = 218--234, doi = 10.1007&#x2f;BFb0099560,&quot;,
+        &quot;title&quot;: &quot;Minimal Morse functions&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Lect. Notes Math.&quot;,
+        &quot;year&quot;: 1984
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Related research on the minimality of Morse functions.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Singhof, W.&quot;
+        ],
+        &quot;doi&quot;: &quot;10.1007&#x2f;BF01303636&quot;,
+        &quot;key&quot;: &quot;singhof-1979&quot;,
+        &quot;raw&quot;: &quot;singhof-1979: author = Singhof, W., title = Minimal coverings of manifolds with balls, journal = Manuscr. Math., year = 1979, volume = 29, pages = 385--415, doi = 10.1007&#x2f;BF01303636,&quot;,
+        &quot;title&quot;: &quot;Minimal coverings of manifolds with balls&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Manuscr. Math.&quot;,
+        &quot;year&quot;: 1979
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited for work on minimal ball coverings, which is related to LS category.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Takens, F.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;takens-1970&quot;,
+        &quot;raw&quot;: &quot;takens-1970: author = Takens, F., title = The Lusternik--Schnirelman categories of a product space, journal = Compositio Math., year = 1970, volume = 22, number = 2, pages = 175--180, note = Fasc. 2, url = https:&#x2f;&#x2f;www.numdam.org&#x2f;item&#x2f;CM_1970__22_2_175_0&#x2f;,&quot;,
+        &quot;title&quot;: &quot;The Lusternik--Schnirelmann categories of a product space&quot;,
+        &quot;url&quot;: &quot;https:&#x2f;&#x2f;www.numdam.org&#x2f;item&#x2f;CM_1970__22_2_175_0&#x2f;&quot;,
+        &quot;venue&quot;: &quot;Compositio Math.&quot;,
+        &quot;year&quot;: 1970
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Background reference on the LS category of product spaces.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Takens, F.&quot;
+        ],
+        &quot;doi&quot;: &quot;10.1007&#x2f;BF01404825&quot;,
+        &quot;key&quot;: &quot;takens-1968&quot;,
+        &quot;raw&quot;: &quot;takens-1968: author = Takens, F., title = The minimal number of critical points of a function on a compact manifold and the Lusternik--Schnirelman category, journal = Inventiones math., year = 1968, volume = 6, pages = 197--244, doi = 10.1007&#x2f;BF01404825,&quot;,
+        &quot;title&quot;: &quot;The minimal number of critical points of a function on a compact manifold and the Lusternik--Schnirelman category&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Inventiones math.&quot;,
+        &quot;year&quot;: 1968
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited for relating the number of critical points to the LS category.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Thom, R.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;thom-1949&quot;,
+        &quot;raw&quot;: &quot;thom-1949: author = Thom, R., title = Sur une partition en cellules associee a une функция sur une variete, journal = C. R. Acad. Sci. Paris, year = 1949, volume = 228, pages = 973--975, series = A, langid = french,&quot;,
+        &quot;title&quot;: &quot;Sur une partition en cellules associee a une функция sur une variete&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;C. R. Acad. Sci. Paris&quot;,
+        &quot;year&quot;: 1949
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited for the discovery of cell structures associated with critical points.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Thurston, W.&quot;
+        ],
+        &quot;doi&quot;: &quot;10.2307&#x2f;1971047&quot;,
+        &quot;key&quot;: &quot;thurston-1976&quot;,
+        &quot;raw&quot;: &quot;thurston-1976: author = Thurston, W., title = Existence of codimension-one foliations, journal = Ann. Math., year = 1976, volume = 104, number = 2, pages = 249--268, doi = 10.2307&#x2f;1971047,&quot;,
+        &quot;title&quot;: &quot;Existence of codimension-one foliations&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Ann. Math.&quot;,
+        &quot;year&quot;: 1976
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited for existence results for codimension-one foliations and round functions.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Wilson, F.&quot;
+        ],
+        &quot;doi&quot;: &quot;10.2307&#x2f;1970458&quot;,
+        &quot;key&quot;: &quot;wilson-1966&quot;,
+        &quot;raw&quot;: &quot;wilson-1966: author = Wilson, F., title = On the minimal sets of non-singular vector fields, journal = Ann. of Math., year = 1966, volume = 84, pages = 529--536, doi = 10.2307&#x2f;1970458,&quot;,
+        &quot;title&quot;: &quot;On the minimal sets of non-singular vector fields&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Ann. of Math.&quot;,
+        &quot;year&quot;: 1966
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited for work on minimal sets of vector fields, relevant to round functions on 3-manifolds.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Birkhoff, G.&quot;
+        ],
+        &quot;doi&quot;: &quot;10.1090&#x2f;S0002-9947-1917-1501070-3&quot;,
+        &quot;key&quot;: &quot;birkhoff-1917&quot;,
+        &quot;raw&quot;: &quot;birkhoff-1917: author = Birkhoff, G., title = Dynamical systems with two degrees of freedom, journal = Trans. Amer. Math. Soc., year = 1917, volume = 18, number = 4, pages = 199--300, doi = 10.1090&#x2f;S0002-9947-1917-1501070-3,&quot;,
+        &quot;title&quot;: &quot;Dynamical systems with two degrees of freedom&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Trans. Amer. Math. Soc.&quot;,
+        &quot;year&quot;: 1917
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited as the original reference for the minimax principle in Morse theory.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Смейл, С.&quot;
+        ],
+        &quot;doi&quot;: &quot;10.2307&#x2f;2372978&quot;,
+        &quot;key&quot;: &quot;smale-1964&quot;,
+        &quot;raw&quot;: &quot;smale-1964: author = Смейл, С., title = О строении многообразий, journal = Математика, year = 1964, volume = 8, number = 4, pages = 95--108, langid = russian, doi = 10.2307&#x2f;2372978, note = Перевод с английского: Smale S. ``On the structure of manifolds&#x27;&#x27;, Amer.\\ J.\\ Math.\\ 84 (1962), 387--399.,&quot;,
+        &quot;title&quot;: &quot;О строении многообразий&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Математика&quot;,
+        &quot;year&quot;: 1964
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited for the foundational &#x27;handle decomposition&#x27; result.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Милнор, Д.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;milnor-difftop&quot;,
+        &quot;raw&quot;: &quot;milnor-difftop: author = Милнор, Д., title = Дифференциальная топология, journal = Успехи мат.\\ наук, volume = XX, number = 6(126), pages = 41--54, langid = russian,&quot;,
+        &quot;title&quot;: &quot;Дифференциальная топология&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Успехи мат. наук&quot;,
+        &quot;year&quot;: 1965
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Standard reference on differential topology.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Фоменко, А. Т.&quot;,
+          &quot;Браилов, А. В.&quot;
+        ],
+        &quot;doi&quot;: &quot;10.1070&#x2f;SM1989v062n02ABEH003244&quot;,
+        &quot;key&quot;: &quot;fomenko-brailov-1987&quot;,
+        &quot;raw&quot;: &quot;fomenko-brailov-1987: author = Фоменко, А. Т. and Браилов, А. В., title = Топология интегральных многообразий вполне интегрируемых гамильтоновых систем, journal = Мат.\\ сб., year = 1987, volume = 133, number = 3, pages = 375--385, langid = russian, doi = 10.1070&#x2f;SM1989v062n02ABEH003244,&quot;,
+        &quot;title&quot;: &quot;Топология интегральных многообразий вполне интегрируемых гамильтоновых систем&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Мат. сб.&quot;,
+        &quot;year&quot;: 1987
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Background reference for the topology of integrable systems.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Фоменко, А. Т.&quot;,
+          &quot;Цишанг, Х.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;fomenko-cishang-1987&quot;,
+        &quot;raw&quot;: &quot;fomenko-cishang-1987: author = Фоменко, А. Т. and Цишанг, Х., title = О топологии трехмерных многообразий, возникающих в гамильтоновой механике, journal = Докл.\\ АН СССР, year = 1987, volume = 294, number = 2, pages = 283--287, langid = russian,&quot;,
+        &quot;title&quot;: &quot;О топологии трехмерных многообразий, возникающих в гамильтоновой механике&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Докл. АН СССР&quot;,
+        &quot;year&quot;: 1987
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Background reference for the topology of three-dimensional Hamiltonian systems.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Фролов, С. В.&quot;,
+          &quot;Эльсгольц, Л. Э.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;frolov-elsgolts-1939&quot;,
+        &quot;raw&quot;: &quot;frolov-elsgolts-1939: author = Фролов, С. В. and Эльсгольц, Л. Э., title = Длина многообразия и её свойства, journal = Мат.\\ сб., year = 1939, volume = 5(47), number = 3, pages = 565--570, langid = russian, url = https:&#x2f;&#x2f;eudml.org&#x2f;doc&#x2f;65079,&quot;,
+        &quot;title&quot;: &quot;Длина многообразия и её свойства&quot;,
+        &quot;url&quot;: &quot;https:&#x2f;&#x2f;eudml.org&#x2f;doc&#x2f;65079&quot;,
+        &quot;venue&quot;: &quot;Мат. сб.&quot;,
+        &quot;year&quot;: 1939
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited for relating the LS category of a manifold to its homological length.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    }
+  ],
+  &quot;missing_references&quot;: [
+    {
+      &quot;reason&quot;: &quot;A highly influential survey and development of LS category theory that was central to the field in the years leading up to 1993.&quot;,
+      &quot;title&quot;: &quot;James, I. M. (1978). On category, in the sense of Lusternik-Schnirelmann. Topology.&quot;
+    },
+    {
+      &quot;reason&quot;: &quot;The standard French translation of the authors&#x27; foundational 1930 Russian work, which is the primary citation for the LS category in international literature.&quot;,
+      &quot;title&quot;: &quot;Lusternik, L. A., Schnirelmann, L. G. (1934). Méthodes topologiques dans les problèmes variationnels. Hermann.&quot;
+    }
+  ],
+  &quot;summary&quot;: &quot;The paper demonstrates excellent citation hygiene, drawing from a deep pool of foundational 20th-century topological literature. It effectively balances historical Russian&#x2f;Soviet contributions (Lyusternik, Shnirelman, Ganea) with Western classics (Morse, Smale, Bott), while also citing contemporary 1980s research from the Fomenko and Sharko schools. Most bibliography entries are appropriately integrated into the text via citation tags, providing a solid theoretical grounding for the study of P-categories and round functions.&quot;
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          meta_reviewer — <span class="muted">claude-sonnet-4-6</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <p>The paper introduces P-category and p-length as topological invariants generalizing the Lyusternik–Shnirelman (LS) category and manifold length to the setting of functions whose critical point sets are smooth submanifolds diffeomorphic to a fixed manifold P. All five specialists concur on the paper&#x27;s scope and contribution. The novelty specialist rates the work &#x27;significant&#x27; (score 0.70, confidence 0.90) and identifies no missing prior art. The citation specialist finds the bibliography well-curated and appropriately integrated (confidence 0.95). The technical-correctness specialist rates the paper &#x27;mostly_sound&#x27; (confidence 0.72) but flags one factually incorrect claim (Proposition 1.18: S^l-cat(S^n) stated as 0 instead of ∞ when l &gt; n, C8, minor), one unsupported claim about the absence of any formal proof artifact for the ten load-bearing theorems (C15, major), and eight partially-supported claims at minor severity covering a boundary-degree gap in Theorem 1.7 (C2), a potential circular dependency in Theorem 1.9 (C3), incomplete inductive proofs in Theorems 3.6 and 2.18 (C9, C10), a smoothing gap in Theorem 2.6 (C7), a coefficient-ring inconsistency in the p-length definition (C1), and proof-sketch reliance in Theorems 2.13, 3.4, and Proposition 2.2 (C6, C12, C14). The reproducibility specialist independently flags the absence of formal proof artifacts as a critical concern (score 0.24, confidence 0.86) and adds three major concerns: no executable construction for P-functions, no computational verification of p-length or P-category values, and informal &#x27;it is not difficult to see&#x27; arguments. This is a math.* submission in a code-amenable field; under the recommendation gate, the concurrent major finding (C15, technical_correctness) and critical finding (reproducibility concern 1) about missing proof-as-code artifacts default the recommendation to major_revision. The two missing citation entries (James 1978; Lusternik–Schnirelmann 1934 French edition) are minor omissions. The mathematical substance is sound and the contribution is genuine; the required revisions are confined to proof completeness, one definitional error, and the addition of a minimal computational verification artifact.</p>
+        <p class="muted">Recommendation: <strong>Major revision</strong> · Confidence: 78%</p>
+        <h3>Strengths</h3>
+        <ul>
+          <li>P-category provides a natural and coherent generalization of LS category parameterized by a fixed submanifold P, recovering the classical theory as the special case P = point and yielding exact closed-form computations for products of spheres (Theorem 1.14: P-cat(S^{k_1} × ... × S^{k_r}) = r − l + 1), which are independently verified by the technical-correctness specialist.</li><li>The complete classification of two-dimensional manifolds admitting round functions (Theorem 3.3) is rigorous, covers all surface types, achieves exact critical-circle counts, and is confirmed correct by the technical-correctness specialist.</li><li>The existence theorem for P-functions via filtrations (Theorem 2.6) provides a clean unifying construction that subsumes earlier ad hoc arguments for round and exact Morse functions under a single framework parameterized by the manifold P.</li><li>Citation coverage is comprehensive and well-integrated (citation specialist confidence 0.95), balancing Soviet foundational sources (Lyusternik, Shnirelman, Fomenko, Sharko) with Western classics (Morse, Milnor, Smale, Bott, Thurston) and contemporary results, providing solid historical grounding throughout.</li><li>The novelty specialist confirms &#x27;significant&#x27; novelty (score 0.70, confidence 0.90) with no missing prior art, validating that the P-category framework opens a genuinely new direction in critical-point theory beyond the classical LS setting.</li>
+        </ul>
+        <h3>Weaknesses</h3>
+        <ul>
+          <li>No formal or computational proof artifact accompanies any of the ten load-bearing theorems (1.5, 1.7, 1.13, 1.14, 2.5, 2.12, 2.15, 2.17, 3.4, 3.6); as a math.* paper in a code-amenable field, the absence of executable verification for results that are largely combinatorial over cohomology rings of products of spheres constitutes a critical reproducibility deficit (technical_correctness C15 major; reproducibility score 0.24, concern 1 critical).</li><li>Proposition 1.18 (Chapter I) incorrectly states S^l-cat(S^n) = 0 when l &gt; n; since Definition 1.1 sets P-cat = ∞ when no admissible covering exists and S^l cannot embed in S^n for l &gt; n, the correct value is ∞, not 0.</li><li>The proof of Theorem 1.7 (the central P-cat ≥ long^p + 1 inequality) has a gap at the boundary degree: the claimed isomorphism H_l(M) ≅ H_l(M, A_i) for l &gt; p requires i_* = 0 in two consecutive degrees (l and l−1), but the case l−1 = p, where H_p(P) can carry classes lifted to H_p(A_i), is not addressed.</li><li>Theorem 3.6 (existence of a round S^1-function on S^n with at most ⌊n&#x2f;2⌋ + 1 singularities) provides explicit constructions only for n = 3, 4, 5 and asserts the general case by analogy without a written inductive step; the introductory generalization to P = S^k for arbitrary k is not proved in the body.</li><li>The smoothing step in Theorem 2.6 uses the distance function ρ(x, ∂M_i), which is only Lipschitz near the boundary; no bump-function or partition-of-unity interpolation is supplied to establish smoothness of the glued function F across ∂M_i.</li><li>The coefficient ring for p-length is defined inconsistently: the Introduction allows A = Z or Z_p (prime p) while Chapter I Definition 1.4 allows A = Z or R; the discrepancy is load-bearing for &#x27;product non-zero&#x27; conditions in subsequent p-length counts, particularly for non-orientable manifolds.</li>
+        </ul>
+        <h3>Revision Targets</h3>
+        <div class="target-grid">
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  corrections&#x2f;2606.14809&#x2f;paper.tex
+                   at 
+                  Whole paper; affects Theorems 1.5, 1.7, 1.13, 1.14, 2.5, 2.12, 2.15, 2.17, 3.4, 3.6.
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">This is a math.* paper (algebraic&#x2f;differential topology, Morse-theoretic). The headline results are amenable to mechanical verification: the P-category framework consists of finite combinatorial inequalities over cohomology rings of products of spheres and tori, the L-S-type lower bound 1.5 reduces to a long-exact-sequence + intersection-product argument, and the inequality cat M = r+1 (Theorem 1.13) is already formalised in part in mathlib (Lyusternik–Schnirelmann category of products). The paper ships no Lean&#x2f;Coq&#x2f;Agda development, nor any computational verification (e.g., a Lean witness that long^p T^n = n − p for specific small n, or a sage&#x2f;python script generating the explicit cycles in Theorem 1.7). Per the proof-as-code axiom for code-amenable fields, the absence of any executable artifact is a documented weakness even though the paper is a translation of a 1993 dissertation.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Ship at minimum a Lean 4 &#x2f; mathlib4 file formalising the main inequality of Theorem 1.5 in the special case P = point (recovering the classical Lyusternik–Schnirelmann bound), and one for Theorem 1.14 in low dimensions (e.g., S^k × S^l). Candidate paths: src&#x2f;proofs&#x2f;PCategory&#x2f;MainInequality.lean and src&#x2f;proofs&#x2f;PCategory&#x2f;ProductOfSpheres.lean. Alternatively, ship a small Python&#x2f;Sage notebook computing long^p, cat, and P-cat for the explicit manifolds discussed (T^n, S^{k_1}×…×S^{k_r}) and verifying the inequalities for n ≤ 5.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm `Whole paper; affects Theorems 1.5, 1.7, 1.13, 1.14, 2.5, 2.12, 2.15, 2.17, 3.4, 3.6.` is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  corrections&#x2f;2606.14809&#x2f;paper.tex
+                   at 
+                  Chapter I, Proposition 1.18 (1.16).
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">Definition 1.1 explicitly states &#x27;If no such number k exists we set P-cat = ∞&#x27;. When l &gt; n there is no embedding of P = S^l into M = S^n and no closed subset of S^n contracts inside S^n to a homeomorphic copy of S^l, so no admissible covering exists and the P-category must be ∞, not 0. The proof in the paper only treats the cases l &lt; n and l = n; the l &gt; n case is asserted without justification and contradicts the stated definition.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Replace &#x27;0&#x27; with &#x27;∞&#x27; in clause (3) and remove that clause from the proposition (or restrict the statement to l ≤ n), and note in a remark that the definition assigns ∞ when no admissible covering exists.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm `Chapter I, Proposition 1.18 (1.16).` is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  corrections&#x2f;2606.14809&#x2f;paper.tex
+                   at 
+                  Chapter I, Theorem 1.7 (1.5) and its proof.
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">The proof uses the long exact homology sequence of the pair (M, A_i) and asserts that &#x27;for l &gt; p, i_* = 0, that is, j_* is a monomorphism, which is equivalent to H_l(M) = H_l(M, A_i) for l &gt; p.&#x27; Monomorphism of j_* follows from i_* = 0 in degree l; the equality H_l(M) = H_l(M, A_i) is an isomorphism statement, which additionally requires i_* = 0 in degree l-1. The case l-1 = p (i.e., the boundary degree dim P = p) is not addressed and is precisely where H_p(P) can carry classes that lift to H_p(A_i). The &#x27;moving off&#x27; argument therefore needs an extra step to handle classes in dimension p. The headline conclusion is widely believed and consistent with the classical Lyusternik–Shnirelman bound (recovered when P is a point), but the proof as written has a gap at the boundary degree.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Either (i) restrict to cycles of dimension strictly greater than p (already implied by condition 3&#x27; once q ≥ 2) and spell out why the relevant moving-off classes live in degrees &gt; p where i_* = 0 in two consecutive ranks, or (ii) replace the isomorphism claim with the weaker monomorphism j_* and reformulate the displacement argument accordingly.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm `Chapter I, Theorem 1.7 (1.5) and its proof.` is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  corrections&#x2f;2606.14809&#x2f;paper.tex
+                   at 
+                  Chapter III, Theorem 3.6 (3.6) and its proof.
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">The proof gives explicit constructions only for n = 3, 4, 5 (using decompositions D^4&#x2f;S^3 and D^5&#x2f;S^4 with S^4 = M_1 ∪ M_2, etc.) and then states &#x27;It is not difficult to see that an analogous treatment of higher-dimensional spheres yields the statement of the theorem.&#x27; For general n the inductive construction is not written out, and the count ⌊n&#x2f;2⌋ + 1 is not verified to match what the iterated decomposition produces. The cases n = 4, 5 yield 3 singularities, consistent with ⌊n&#x2f;2⌋ + 1, but the pattern is asserted, not proved.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Provide an explicit inductive description (e.g., S^n = ∪ of subsets each almost-diffeomorphic to S^1 × D^{n−1}) with a count argument, or cite a specific result that the iteration yields exactly ⌊n&#x2f;2⌋ + 1 pieces. Also reconcile the introductory statement (Theorem 24 &#x2f; 3.6) which writes the bound as &#x27;[n&#x2f;2]+1 with n ≥ 2k+1&#x27; for P = S^k — the body proves only the k=1 case, but the introduction promises the general S^k bound.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm `Chapter III, Theorem 3.6 (3.6) and its proof.` is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  corrections&#x2f;2606.14809&#x2f;paper.tex
+                   at 
+                  Chapter II, Theorem 2.6 (2.5).
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">The construction glues the per-layer functions F_i (from Proposition 2.4) and then smooths them across the boundaries ∂M_i via the auxiliary metric-based functions f_i. The smoothing argument writes f_i piecewise as &#x27;i − ρ(x, ∂M_i)&#x27; near ∂M_i, which is only Lipschitz continuous (the distance function to a smooth hypersurface is smooth on a one-sided tubular neighbourhood but the piecewise definition needs an explicit smooth interpolation between the three cases). The paper asserts the resulting F is differentiable, but the standard fix (use a cutoff bump function rather than the distance function directly) is not spelled out.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Replace &#x27;ρ(x, ∂M_i)&#x27; with a smooth function of the signed distance constructed via a partition of unity or bump function on a tubular neighbourhood, and verify smooth matching of F across boundaries with explicit computations of derivatives.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm `Chapter II, Theorem 2.6 (2.5).` is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  corrections&#x2f;2606.14809&#x2f;paper.tex
+                   at 
+                  Section &#x27;P-length of a manifold&#x27;, Definition 1.4 (1.3) vs introductory Definition 2 (1.3).
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">Definition 2 (in the Introduction) lists coefficients as &#x27;A = Z or Z_p when M is orientable, and A = Z_2 when M is non-orientable&#x27; (clashing notation: the same letter p is used both for the length parameter and for the coefficient prime). Definition 1.4 in Chapter I instead lists &#x27;A = Z or R when M is orientable, and A = Z_2 when M is non-orientable&#x27;. The two definitions disagree on the admissible coefficient ring, which is load-bearing for what &#x27;product non-zero&#x27; means in subsequent theorems.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Unify the two definitions into a single statement, using a coefficient prime distinct from the length parameter p (e.g., Z_q) or restrict to field coefficients consistently. Add a remark on how the p-length depends on the chosen coefficient ring.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm `Section &#x27;P-length of a manifold&#x27;, Definition 1.4 (1.3) vs introductory Definition 2 (1.3).` is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+        </div>
+        <h3>Questions</h3>
+        <ul>
+          <li>Proposition 1.18, clause (3): is the intended value S^l-cat(S^n) = ∞ (per Definition 1.1) rather than 0 when l &gt; n, and does any downstream result in Chapter II or III depend on the clause as currently stated?</li><li>Theorem 1.7: can the boundary-degree case l−1 = p be addressed explicitly in the long exact sequence argument, specifically handling whether i_*(H_p(A_i)) = 0 when A_i deformation-retracts inside M to P with dim P = p?</li><li>Theorem 3.6: is there an explicit inductive construction for all n ≥ 3 that verifies the count ⌊n&#x2f;2⌋ + 1, and does the argument generalize to the bound stated in the Introduction for P = S^k with arbitrary k ≥ 1?</li><li>Definitions 1 and 1.4: which coefficient ring is canonical for p-length — Z, R, or a prime field Z_q — and is the value of long^p sensitive to this choice for non-orientable surfaces or odd-dimensional manifolds?</li><li>Could a Sage or Python notebook verifying the p-length and P-category formulas for small explicit cases (e.g., S^1 × S^2, T^3, RP^3) be added as a supplementary artifact, given the computational nature of the examples in Chapters I–III?</li>
+        </ul>
+      </details>
+      
+      <details>
+        <summary>
+          novelty — <span class="muted">gemini-3-flash-preview</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;confidence&quot;: 0.9,
+  &quot;missing_prior_art&quot;: [],
+  &quot;novelty_score&quot;: 0.7,
+  &quot;related_work&quot;: [
+    {
+      &quot;citation_key&quot;: &quot;lyusternik-shnirelman-1935&quot;,
+      &quot;delta&quot;: &quot;Generalizes the Lyusternik–Shnirelman category (where categorical sets are contractible to a point) to the P-category (where sets are contractible to a fixed submanifold P).&quot;,
+      &quot;relation&quot;: &quot;builds_on&quot;,
+      &quot;title&quot;: &quot;Применение топологии к экстремальным задачам&quot;
+    },
+    {
+      &quot;citation_key&quot;: &quot;frolov-elsgolts-1939&quot;,
+      &quot;delta&quot;: &quot;Extends the concept of manifold length to &#x27;p-length&#x27;, which accounts for the dimension of the singular submanifold P, providing a sharper lower bound for the P-category.&quot;,
+      &quot;relation&quot;: &quot;builds_on&quot;,
+      &quot;title&quot;: &quot;Длина многообразия и её свойства&quot;
+    },
+    {
+      &quot;citation_key&quot;: &quot;bott-1982&quot;,
+      &quot;delta&quot;: &quot;While Bott focused on non-degenerate critical submanifolds (Morse-Bott theory), this work handles degenerate singular submanifolds and relates their minimal number to the P-category.&quot;,
+      &quot;relation&quot;: &quot;prior_art&quot;,
+      &quot;title&quot;: &quot;Lectures on Morse theory, old and new&quot;
+    },
+    {
+      &quot;citation_key&quot;: &quot;takens-1968&quot;,
+      &quot;delta&quot;: &quot;Builds on Takens&#x27; work on the minimal number of critical points by extending the existence theorems and category-theoretic bounds to functions with submanifolds as critical sets.&quot;,
+      &quot;relation&quot;: &quot;builds_on&quot;,
+      &quot;title&quot;: &quot;The minimal number of critical points of a function on a compact manifold and the Lusternik--Shnirelman category&quot;
+    },
+    {
+      &quot;citation_key&quot;: &quot;thurston-1976&quot;,
+      &quot;delta&quot;: &quot;Positions &#x27;round functions&#x27; (where critical sets are circles) as a special case of P-functions and provides a broader framework for their existence on 2D and 3D manifolds.&quot;,
+      &quot;relation&quot;: &quot;prior_art&quot;,
+      &quot;title&quot;: &quot;Existence of codimension-one foliations&quot;
+    }
+  ],
+  &quot;verdict&quot;: &quot;significant&quot;
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          reproducibility — <span class="muted">gpt-5.5</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;code_availability&quot;: &quot;unspecified&quot;,
+  &quot;code_url&quot;: null,
+  &quot;concerns&quot;: [
+    {
+      &quot;area&quot;: &quot;code&quot;,
+      &quot;description&quot;: &quot;No repository, license, commit, release, or formal proof artifact is provided for the headline results on P-category lower bounds and minimal numbers of critical submanifolds; a Lean&#x2f;Coq&#x2f;Isabelle development such as formal&#x2f;P_category_main_theorems.lean covering Theorem 1.5 and Theorem 2.12 would be needed for independent proof-as-code reproduction.&quot;,
+      &quot;severity&quot;: &quot;critical&quot;
+    },
+    {
+      &quot;area&quot;: &quot;code&quot;,
+      &quot;description&quot;: &quot;The constructive existence results for exact P-functions on products of spheres, tori, odd-dimensional spheres, and round functions on two- and three-dimensional manifolds are given only as prose constructions; a reproducible artifact such as formal&#x2f;P_function_constructions.lean or scripts&#x2f;check_constructions.sage would be needed to validate the constructions mechanically.&quot;,
+      &quot;severity&quot;: &quot;major&quot;
+    },
+    {
+      &quot;area&quot;: &quot;code&quot;,
+      &quot;description&quot;: &quot;Worked computations of p-length and P-category for products of spheres, tori, surfaces, and selected 3-manifolds are not accompanied by executable algebraic-topology calculations; a checker such as scripts&#x2f;recompute_p_length.py with encoded cohomology rings and expected outputs would help reproduce the stated examples.&quot;,
+      &quot;severity&quot;: &quot;major&quot;
+    },
+    {
+      &quot;area&quot;: &quot;evaluation&quot;,
+      &quot;description&quot;: &quot;Several proofs rely on informal phrases such as &#x27;it is not difficult to see&#x27; and visual level-line or figure-based constructions, so independent reproduction depends on expert manual reconstruction rather than a complete formal or algorithmic derivation.&quot;,
+      &quot;severity&quot;: &quot;major&quot;
+    },
+    {
+      &quot;area&quot;: &quot;other&quot;,
+      &quot;description&quot;: &quot;No computational environment, dependency versions, theorem-prover version, random seeds, or hardware&#x2f;software requirements are specified because no executable reproducibility artifact is supplied.&quot;,
+      &quot;severity&quot;: &quot;minor&quot;
+    }
+  ],
+  &quot;confidence&quot;: 0.86,
+  &quot;data_availability&quot;: &quot;unspecified&quot;,
+  &quot;data_url&quot;: null,
+  &quot;environment&quot;: null,
+  &quot;reproducibility_score&quot;: 0.24
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          summary — <span class="muted">claude-haiku-4-5-20251001</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;audience&quot;: &quot;Mathematicians in differential topology, differential geometry, and Morse theory. Particularly relevant to researchers studying critical point theory, topological invariants of manifolds, and differential functions on manifolds.&quot;,
+  &quot;key_contributions&quot;: [
+    &quot;Definition of P-category as a generalization of Lyusternik-Shnirelman category to degenerate critical submanifolds&quot;,
+    &quot;Introduction of p-length of manifolds as a topological invariant and proof of lower bounds on P-category in terms of p-length&quot;,
+    &quot;Definition of P-functions and sufficient conditions for their existence via manifold filtrations&quot;,
+    &quot;Proof that the number of critical submanifolds of a P-function is bounded below by the P-category of the manifold&quot;,
+    &quot;Complete classification of two-dimensional manifolds admitting round functions&quot;,
+    &quot;Construction of round functions on three-dimensional manifolds, with explicit examples on spheres, projective spaces, lens spaces, and tori&quot;,
+    &quot;Explicit formulas for P-category and p-length on products of spheres and tori&quot;
+  ],
+  &quot;plain_language_summary&quot;: &quot;This work extends classical Morse theory, which relates the critical points of smooth functions on manifolds to the topology of the underlying space. Rather than studying functions with isolated critical points, this dissertation develops the theory for functions whose critical point sets consist of smooth submanifolds all diffeomorphic to the same manifold P. The author introduces two key concepts: P-category, which generalizes the classical Lyusternik-Shnirelman category, and p-length, which extends the notion of manifold length. These invariants provide lower bounds on the minimum number of critical submanifolds a function on a given manifold must have.\n\nThe main theoretical results establish inequalities relating the number of critical submanifolds to the P-category and p-length of a manifold. The author then applies this framework to construct concrete examples of such functions on specific manifolds. A particularly important class consists of round functions whose critical submanifolds are circles. The dissertation provides a complete classification of which two-dimensional manifolds admit round functions and constructs explicit examples on three-dimensional manifolds. These results generalize and unify earlier work on functions with circular critical sets.&quot;,
+  &quot;tldr&quot;: &quot;This dissertation generalizes Morse theory by studying smooth functions whose critical point sets consist of degenerate submanifolds rather than isolated points, introducing P-category and P-length as topological invariants to bound the minimal number of such critical submanifolds.&quot;
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          technical_correctness — <span class="muted">claude-opus-4-7</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;claims&quot;: [
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;Definition 1.4 (cohomological p-length) is well-posed and consistent with Definition 1 in the introduction; in particular, the coefficient ring is well-specified for both orientable and non-orientable manifolds.&quot;,
+      &quot;evidence&quot;: &quot;Definition 2 (in the Introduction) lists coefficients as &#x27;A = Z or Z_p when M is orientable, and A = Z_2 when M is non-orientable&#x27; (clashing notation: the same letter p is used both for the length parameter and for the coefficient prime). Definition 1.4 in Chapter I instead lists &#x27;A = Z or R when M is orientable, and A = Z_2 when M is non-orientable&#x27;. The two definitions disagree on the admissible coefficient ring, which is load-bearing for what &#x27;product non-zero&#x27; means in subsequent theorems.&quot;,
+      &quot;id&quot;: &quot;C1&quot;,
+      &quot;location&quot;: &quot;Section &#x27;P-length of a manifold&#x27;, Definition 1.4 (1.3) vs introductory Definition 2 (1.3).&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Unify the two definitions into a single statement, using a coefficient prime distinct from the length parameter p (e.g., Z_q) or restrict to field coefficients consistently. Add a remark on how the p-length depends on the chosen coefficient ring.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;Theorem 1.7 (1.5): P-cat M ≥ long^p M + 1 (no boundary) and ≥ long^p M (with boundary).&quot;,
+      &quot;evidence&quot;: &quot;The proof uses the long exact homology sequence of the pair (M, A_i) and asserts that &#x27;for l &gt; p, i_* = 0, that is, j_* is a monomorphism, which is equivalent to H_l(M) = H_l(M, A_i) for l &gt; p.&#x27; Monomorphism of j_* follows from i_* = 0 in degree l; the equality H_l(M) = H_l(M, A_i) is an isomorphism statement, which additionally requires i_* = 0 in degree l-1. The case l-1 = p (i.e., the boundary degree dim P = p) is not addressed and is precisely where H_p(P) can carry classes that lift to H_p(A_i). The &#x27;moving off&#x27; argument therefore needs an extra step to handle classes in dimension p. The headline conclusion is widely believed and consistent with the classical Lyusternik–Shnirelman bound (recovered when P is a point), but the proof as written has a gap at the boundary degree.&quot;,
+      &quot;id&quot;: &quot;C2&quot;,
+      &quot;location&quot;: &quot;Chapter I, Theorem 1.7 (1.5) and its proof.&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Either (i) restrict to cycles of dimension strictly greater than p (already implied by condition 3&#x27; once q ≥ 2) and spell out why the relevant moving-off classes live in degrees &gt; p where i_* = 0 in two consecutive ranks, or (ii) replace the isomorphism claim with the weaker monomorphism j_* and reformulate the displacement argument accordingly.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;Theorem 1.9 (1.7): long^p (S^{k_1} × … × S^{k_r}) ≥ r − min l(p), with the minimum taken over subsets whose dimensions sum to at least p.&quot;,
+      &quot;evidence&quot;: &quot;The proof constructs r − l explicit cycles (each S^{k_j} factor multiplied by Q) and verifies the three p-length conditions; this directly establishes the stated ≥ inequality. However, the closing sentence invokes &#x27;Theorem 1.7 (1.5) together with the estimate from Theorem 1.16 (1.14) P-cat M ≤ r − l + 1&#x27;, which is unnecessary for the stated inequality and risks a circular dependency since the proof of Theorem 1.16 (1.14) explicitly cites Theorem 1.9 (1.7). The cycles also need to be in general position so that their intersection is exactly Q and not homologous to zero; the wave-of-the-hand to &#x27;general position&#x27; is acceptable but not fully justified for a product of spheres with mixed dimensions.&quot;,
+      &quot;id&quot;: &quot;C3&quot;,
+      &quot;location&quot;: &quot;Chapter I, Theorem 1.9 (1.7) and its proof.&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Remove the invocations of Theorems 1.5 and 1.14 from the proof (the explicit cycle construction is already sufficient for the ≥ direction), and add one sentence justifying that the constructed cycles are pairwise transverse with intersection Q (e.g., via the Künneth-style cup-product computation in H^*(M)).&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;Theorem 1.16 (1.14): For M = S^{k_1} × … × S^{k_r} and P = S^{k_{i_1}} × … × S^{k_{i_l}} a sub-product, P-cat M = r − l + 1.&quot;,
+      &quot;evidence&quot;: &quot;The lower bound P-cat M ≥ r − l + 1 follows by chaining Theorem 1.7 (1.5) with the long^p bound from Theorem 1.9 (1.7). The upper bound is constructed cleanly: writing M = P × L with L the complementary product of spheres, the L-S category of L equals (r − l) + 1 by Theorem 1.15 (1.13), giving a covering of L by (r − l + 1) point-contractible closed sets {A_i}, and {P × A_i} is a covering of M by sets contractible within M to P. The argument is standard and correct.&quot;,
+      &quot;id&quot;: &quot;C4&quot;,
+      &quot;location&quot;: &quot;Chapter I, Theorem 1.16 (1.14) and its proof.&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;Theorem 1.15 (1.13): cat M = r + 1 for a product of r spheres.&quot;,
+      &quot;evidence&quot;: &quot;The lower bound r + 1 follows from Corollary 1.10 (long M = r) plus Theorem 1.7. The upper bound is constructed explicitly via the height function f(x,y,…,z) = x_1 + y_1 + … + z_1 restricted to M, which on the product of spheres has 2^r critical points distributed among connected level surfaces {f = -r + 2k}; collapsing each level set to a single (degenerate) critical point yields r + 1. This is a standard exact-Morse argument and matches the long-established result.&quot;,
+      &quot;id&quot;: &quot;C5&quot;,
+      &quot;location&quot;: &quot;Chapter I, Theorem 1.15 (1.13) and its proof.&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;Theorem 2.13 (2.12) (main theorem): For a P-function on a compact connected manifold M (with the stated boundary conditions), the number of critical submanifolds is ≥ P-cat M.&quot;,
+      &quot;evidence&quot;: &quot;The proof proceeds by induction on the number of critical values, modelled on the classical L-S argument and using cylindrical neighbourhoods of critical submanifolds (constructed in Propositions 2.10–2.12). The base case (minimal value) is correctly handled. The inductive step rests on the assertion that the closure of M^{c+δ} minus the disjoint cylindrical neighbourhoods deformation-retracts onto M^{b+ε} &#x27;along integral trajectories of grad f&#x27;; this requires (i) that grad f has no critical points in the layer f^{-1}[b+ε, c−δ], which follows from the choice of intervals, and (ii) that the trajectories from points outside the cylindrical neighbourhoods reach M^{b+ε} (handled in Proposition 2.8). The argument is essentially correct, but the deformation-retract step is sketched at the level of the introduction rather than spelled out for the non-Morse setting where critical submanifolds may be highly degenerate; the proof relies implicitly on the cylindrical-neighbourhood theory developed earlier in §2.2.&quot;,
+      &quot;id&quot;: &quot;C6&quot;,
+      &quot;location&quot;: &quot;Chapter II, Section &#x27;Main theorem&#x27;, Theorem 2.13 (2.12) and its proof.&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Add one paragraph that explicitly cites Propositions 2.10–2.12 to justify the deformation onto M^{b+ε} and notes that &#x27;general position&#x27; in the moving-off step is not used here (unlike Theorem 1.5).&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;Theorem 2.6 (2.5) (existence of P-function with k critical submanifolds via filtration): correctly produces a smooth P-function from a filtration M_1 ⊂ … ⊂ M_k satisfying the four hypotheses.&quot;,
+      &quot;evidence&quot;: &quot;The construction glues the per-layer functions F_i (from Proposition 2.4) and then smooths them across the boundaries ∂M_i via the auxiliary metric-based functions f_i. The smoothing argument writes f_i piecewise as &#x27;i − ρ(x, ∂M_i)&#x27; near ∂M_i, which is only Lipschitz continuous (the distance function to a smooth hypersurface is smooth on a one-sided tubular neighbourhood but the piecewise definition needs an explicit smooth interpolation between the three cases). The paper asserts the resulting F is differentiable, but the standard fix (use a cutoff bump function rather than the distance function directly) is not spelled out.&quot;,
+      &quot;id&quot;: &quot;C7&quot;,
+      &quot;location&quot;: &quot;Chapter II, Theorem 2.6 (2.5).&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Replace &#x27;ρ(x, ∂M_i)&#x27; with a smooth function of the signed distance constructed via a partition of unity or bump function on a tubular neighbourhood, and verify smooth matching of F across boundaries with explicit computations of derivatives.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;incorrect&quot;,
+      &quot;claim&quot;: &quot;Proposition 1.18 (1.16): The S^l-category of S^n equals zero when l &gt; n.&quot;,
+      &quot;evidence&quot;: &quot;Definition 1.1 explicitly states &#x27;If no such number k exists we set P-cat = ∞&#x27;. When l &gt; n there is no embedding of P = S^l into M = S^n and no closed subset of S^n contracts inside S^n to a homeomorphic copy of S^l, so no admissible covering exists and the P-category must be ∞, not 0. The proof in the paper only treats the cases l &lt; n and l = n; the l &gt; n case is asserted without justification and contradicts the stated definition.&quot;,
+      &quot;id&quot;: &quot;C8&quot;,
+      &quot;location&quot;: &quot;Chapter I, Proposition 1.18 (1.16).&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Replace &#x27;0&#x27; with &#x27;∞&#x27; in clause (3) and remove that clause from the proposition (or restrict the statement to l ≤ n), and note in a remark that the definition assigns ∞ when no admissible covering exists.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;Theorem 3.6 (3.6): On S^n with P = S^1 there exists a P-function with at most ⌊n&#x2f;2⌋ + 1 singularities.&quot;,
+      &quot;evidence&quot;: &quot;The proof gives explicit constructions only for n = 3, 4, 5 (using decompositions D^4&#x2f;S^3 and D^5&#x2f;S^4 with S^4 = M_1 ∪ M_2, etc.) and then states &#x27;It is not difficult to see that an analogous treatment of higher-dimensional spheres yields the statement of the theorem.&#x27; For general n the inductive construction is not written out, and the count ⌊n&#x2f;2⌋ + 1 is not verified to match what the iterated decomposition produces. The cases n = 4, 5 yield 3 singularities, consistent with ⌊n&#x2f;2⌋ + 1, but the pattern is asserted, not proved.&quot;,
+      &quot;id&quot;: &quot;C9&quot;,
+      &quot;location&quot;: &quot;Chapter III, Theorem 3.6 (3.6) and its proof.&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Provide an explicit inductive description (e.g., S^n = ∪ of subsets each almost-diffeomorphic to S^1 × D^{n−1}) with a count argument, or cite a specific result that the iteration yields exactly ⌊n&#x2f;2⌋ + 1 pieces. Also reconcile the introductory statement (Theorem 24 &#x2f; 3.6) which writes the bound as &#x27;[n&#x2f;2]+1 with n ≥ 2k+1&#x27; for P = S^k — the body proves only the k=1 case, but the introduction promises the general S^k bound.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;Theorem 2.18 (2.17): On S^{2n+1} (n ≥ 1) with P = S^n there exists an exact P-function with two singularities.&quot;,
+      &quot;evidence&quot;: &quot;The decomposition D^{2n+1} = N_1 ∪ N_2 ∪ N_3 followed by the quotient S^{2n+1} = D^{2n+1}&#x2f;S^{2n} is asserted to give two subsets M_1, M_2 ⊂ S^{2n+1} each almost diffeomorphic to S^n × D^{n+1}. The cell-decomposition counts work out (the symmetry between x_i (i ≤ n) and x_j (n+1 ≤ j ≤ 2n+1) reflects the Hopf-type splitting), but the verification that the quotient identifies the boundary strata to give exactly S^n × D^{n+1} is not carried out in detail. Exactness then requires the lower bound P-cat S^{2n+1} = 2 (from Proposition 1.18), which is correctly established for l &lt; n.&quot;,
+      &quot;id&quot;: &quot;C10&quot;,
+      &quot;location&quot;: &quot;Chapter II, Theorem 2.18 (2.17) and its proof.&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Add a coordinate-level check that the quotient map identifies ∂(N_i) appropriately so that M_i is homeomorphic to S^n × D^{n+1}, and explicitly verify the hypotheses of Theorem 2.6 (2.5) for the two-piece filtration M_1 ⊂ M_1 ∪ M_2 = S^{2n+1}.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;Theorem 3.5 (3.5): On S^n there is no P-function with P = S^{n−1}.&quot;,
+      &quot;evidence&quot;: &quot;The proof uses Jordan–Brouwer separation to argue that removing a cylindrical neighbourhood of a critical (n−1)-sphere disconnects S^n into two components, each of which must by induction contain further critical (n−1)-spheres, leading by finiteness to a component without critical points, which must then be a product ∂ × I — contradicting the single-boundary topology. The argument is clean and standard.&quot;,
+      &quot;id&quot;: &quot;C11&quot;,
+      &quot;location&quot;: &quot;Chapter III, Theorem 3.5 (3.5) and its proof.&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;Theorem 3.4 (3.4) (round-function classification on 3-manifolds): every closed 3-manifold admits a round function; round category-2 exact functions exist on S^3, RP^3, S^1 × S^2, lens spaces; T^3 admits an exact round function with 3 critical circles; on all other closed 3-manifolds round functions exist with ≤ 4 singularities.&quot;,
+      &quot;evidence&quot;: &quot;The genus-1 Heegaard cases are handled cleanly by gluing two solid tori with f, −f + const. The T^3 case is correctly tied to Corollary 2.17 (2.16). For higher-genus Heegaard splittings the proof cuts each handlebody into two solid tori (Fig. 1.8) and constructs f on M_1 with two critical circles by &#x27;an appropriate filtration of M_1&#x27;, then extends by 2a − f on M_2. The four-circle count is plausible but the proof relies on figure 1.8 (not present in extracted text) for the cutting and on Theorem 2.6 (2.5) implicitly — the verification that the filtration of M_1 satisfies hypothesis (4) of Theorem 2.6 (covering by three subsets as in Proposition 2.4) is not spelled out for arbitrary genus.&quot;,
+      &quot;id&quot;: &quot;C12&quot;,
+      &quot;location&quot;: &quot;Chapter III, Theorem 3.4 (3.4) and its proof.&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Spell out the filtration of M_1 (a handlebody of genus g ≥ 2) into two pieces such that each layer admits the three-piece covering required by Proposition 2.4, and explicitly compute that the total number of critical circles is ≤ 4.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;Theorem 3.3 (3.3) (round-function classification on 2-manifolds, with exact counts).&quot;,
+      &quot;evidence&quot;: &quot;The torus and Klein bottle cases use the explicit function f = x_1 on the standard embedding, which clearly has two critical circles (max and min, both circles). The annulus and Möbius band case uses f = (x_3 − 0.5)^2 with a single critical circle. The remaining cases follow from Proposition 1.13 (1.11) (round category) plus Theorem 2.13 (2.12). Exactness matches the round-category lower bound. The argument is correct.&quot;,
+      &quot;id&quot;: &quot;C13&quot;,
+      &quot;location&quot;: &quot;Chapter III, Theorem 3.3 (3.3) and its proof.&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;Proposition 2.2 (2.2) (auxiliary function-modification result used in the existence proofs): given f on P × R^{n−p} with P in a level surface and f critical-point-free outside a compact set, there exists F differing from f only on a compact set with P its unique critical submanifold.&quot;,
+      &quot;evidence&quot;: &quot;The construction uses Takens&#x27; λ-function (cited verbatim) and an explicit H built from nested tubular neighbourhoods via the cutoff φ_{r_0 − r_i}. Properties (1)–(6) of λ and H are stated and the derivative ⟨dF, grad f⟩ is shown positive off P. The key gap is in the convergence of the series λ = Σ a_i λ_i and H = Σ b_i h_i to differentiable functions: the choice β_i = 2^{-i}&#x2f;(γ_i + 1) with γ_i the sup of all partial derivatives up to order i is presented as a Takens-style bound, but the differentiability claim for the series sum requires uniform convergence of all partial-derivative series, which is not explicitly verified here. The argument is plausible and follows Takens 1968 closely.&quot;,
+      &quot;id&quot;: &quot;C14&quot;,
+      &quot;location&quot;: &quot;Chapter II, Proposition 2.2 (2.2) and its proof.&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Either provide an explicit reference to the precise lemma in Takens 1968 (page&#x2f;section) justifying differentiability, or include a one-paragraph estimate showing uniform convergence of all derivative series by the chosen β_i.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;unsupported&quot;,
+      &quot;claim&quot;: &quot;Proof-as-code axiom: the load-bearing theorems (Theorems 1.5, 1.7, 1.13, 1.14, 2.5, 2.12, 2.15, 2.17, 3.4, 3.6) are entirely natural-language; no formal-proof artifact (Lean&#x2f;Coq&#x2f;Agda&#x2f;Isabelle) accompanies the paper.&quot;,
+      &quot;evidence&quot;: &quot;This is a math.* paper (algebraic&#x2f;differential topology, Morse-theoretic). The headline results are amenable to mechanical verification: the P-category framework consists of finite combinatorial inequalities over cohomology rings of products of spheres and tori, the L-S-type lower bound 1.5 reduces to a long-exact-sequence + intersection-product argument, and the inequality cat M = r+1 (Theorem 1.13) is already formalised in part in mathlib (Lyusternik–Schnirelmann category of products). The paper ships no Lean&#x2f;Coq&#x2f;Agda development, nor any computational verification (e.g., a Lean witness that long^p T^n = n − p for specific small n, or a sage&#x2f;python script generating the explicit cycles in Theorem 1.7). Per the proof-as-code axiom for code-amenable fields, the absence of any executable artifact is a documented weakness even though the paper is a translation of a 1993 dissertation.&quot;,
+      &quot;id&quot;: &quot;C15&quot;,
+      &quot;location&quot;: &quot;Whole paper; affects Theorems 1.5, 1.7, 1.13, 1.14, 2.5, 2.12, 2.15, 2.17, 3.4, 3.6.&quot;,
+      &quot;severity&quot;: &quot;major&quot;,
+      &quot;suggested_fix&quot;: &quot;Ship at minimum a Lean 4 &#x2f; mathlib4 file formalising the main inequality of Theorem 1.5 in the special case P = point (recovering the classical Lyusternik–Schnirelmann bound), and one for Theorem 1.14 in low dimensions (e.g., S^k × S^l). Candidate paths: src&#x2f;proofs&#x2f;PCategory&#x2f;MainInequality.lean and src&#x2f;proofs&#x2f;PCategory&#x2f;ProductOfSpheres.lean. Alternatively, ship a small Python&#x2f;Sage notebook computing long^p, cat, and P-cat for the explicit manifolds discussed (T^n, S^{k_1}×…×S^{k_r}) and verifying the inequalities for n ≤ 5.&quot;
+    }
+  ],
+  &quot;confidence&quot;: 0.72,
+  &quot;overall_correctness&quot;: &quot;mostly_sound&quot;
+}</pre>
+      </details>
+      
+    </div>
+  </section>
+
+  <!-- corrections rendered from corrections table; empty on first publish -->
+  <section>
+    <h2>Corrections</h2>
+    <p class="muted">No corrections have been recorded.</p>
+  </section>
+
+  <section>
+    <h2>Bibliography</h2>
+    
+    <ol>
+      
+        <li>
+          arnold-varchenko-gusein-1982: author = Арнольд, В. И. and Варченко, А. Н. and Гусейн-заде, С. М., title = Особенности дифференцируемых отображений: в 2 т., publisher = Наука, address = М., year = 1982, volume = 1, langid = russian,
+          
+          
+        </li>
+      
+        <li>
+          ganea-1961: author = Ganea, T., title = Оценка сверху для категории Люстерника--Шнирельмана, journal = Докл.\ АН СССР, year = 1961, volume = 136, number = 6, pages = 1273--1276, langid = russian,
+          
+          
+        </li>
+      
+        <li>
+          golubitsky-guillemin-1977: author = Голубицкий, М. and Гийемин, В., title = Устойчивые отображения и их особенности, publisher = Мир, address = М., year = 1977, pagetotal = 290, langid = russian,
+          
+          
+        </li>
+      
+        <li>
+          dubrovin-novikov-fomenko-1984: author = Дубровин, Б. А. and Новиков, С. П. and Фоменко, А. Т., title = Современная геометрия. Методы теории гомологий, publisher = Наука, address = М., year = 1984, pagetotal = 344, langid = russian,
+          
+          
+        </li>
+      
+        <li>
+          lyusternik-shnirelman-1935: author = Люстерник, Л. А. and Шнирельман, Л. Г., title = Применение топологии к экстремальным задачам, booktitle = Труды Второго Всес.\ мат.\ съезда, year = 1935, pages = 224--237, langid = russian,
+          
+          
+        </li>
+      
+        <li>
+          lyusternik-shnirelman-1930: author = Люстерник, Л. А. and Шнирельман, Л. Г., title = Топологические методы в вариационных задачах, address = М., year = 1930, langid = russian,
+          
+          
+        </li>
+      
+        <li>
+          matveev-fomenko-sharko-1988: author = Матвеев, С. В. and Фоменко, А. Т. and Шарко, В. В., title = Круглые функции Морса и изоэнергетические поверхности интегрируемых гамильтоновых систем, journal = Мат.\ сб., year = 1988, volume = 135, number = 3, pages = 325--345, langid = russian, doi = 10.1070&#x2f;SM1989v063n02ABEH003276,
+          <a href="https://doi.org/10.1070&#x2f;SM1989v063n02ABEH003276">doi:10.1070&#x2f;SM1989v063n02ABEH003276</a>
+          
+        </li>
+      
+        <li>
+          milnor-morse-1965: author = Милнор, Д., title = Теория Морса, publisher = Мир, address = М., year = 1965, pagetotal = 182, langid = russian,
+          
+          
+        </li>
+      
+        <li>
+          fomenko-1983: author = Фоменко, А. Т., title = Дифференциальная геометрия и топология. Дополнительные главы, publisher = Изд-во Моск.\ ун-та, address = М., year = 1983, pagetotal = 217, langid = russian,
+          
+          
+        </li>
+      
+        <li>
+          fomenko-1988: author = Фоменко, А. Т., title = Симплектическая геометрия. Методы и приложения, publisher = Изд-во Моск.\ гос.\ ун-та, address = М., year = 1988, pagetotal = 413, langid = russian,
+          
+          
+        </li>
+      
+        <li>
+          fomenko-sharko-1989: author = Фоменко, А. Т. and Шарко, В. В., title = Точные круглые функции Морса, неравенства типа Морса и интегралы гамильтоновых систем, journal = Укр.\ мат.\ журн., year = 1989, volume = 41, number = 6, pages = 352--361, langid = ukrainian, doi = 10.1007&#x2f;BF01060557,
+          <a href="https://doi.org/10.1007&#x2f;BF01060557">doi:10.1007&#x2f;BF01060557</a>
+          
+        </li>
+      
+        <li>
+          chogoshvili-1939: author = Чогошвили, Г. С., title = О поверхностях уровня и областях меньших значений функции, заданной на ограниченном многообразии, journal = Докл.\ АН СССР, year = 1939, volume = 24, number = 3, pages = 635--639, langid = russian,
+          
+          
+        </li>
+      
+        <li>
+          sharko-1990: author = Шарко, В. В., title = Функции на многообразиях (алгебраические и топологические аспекты), publisher = Наук.\ думка, address = Київ, year = 1990, pagetotal = 196, langid = ukrainian,
+          
+          
+        </li>
+      
+        <li>
+          sharko-1981: author = Шарко, В. В., title = Точные функции Морса на односвязных многообразиях с неодносвязным краем, journal = Успехи мат.\ наук, year = 1981, volume = 36, number = 5, pages = 205--206, langid = russian, doi = 10.1070&#x2f;RM1981v036n05ABEH003053,
+          <a href="https://doi.org/10.1070&#x2f;RM1981v036n05ABEH003053">doi:10.1070&#x2f;RM1981v036n05ABEH003053</a>
+          
+        </li>
+      
+        <li>
+          asimov-1975: author = Asimov, D., title = Round handles and non-singular Morse--Smale flows, journal = Ann. Math., year = 1975, volume = 102, number = 1, pages = 41--54, doi = 10.2307&#x2f;1970972,
+          <a href="https://doi.org/10.2307&#x2f;1970972">doi:10.2307&#x2f;1970972</a>
+          
+        </li>
+      
+        <li>
+          borsuk-1936: author = Borsuk, K., title = Über den Lusternik--Schnirelmannschen Begriff der Kategorie, journal = Fund. Math., year = 1936, volume = 26, pages = 123--136, langid = german, url = https:&#x2f;&#x2f;eudml.org&#x2f;doc&#x2f;212789,
+          
+          
+        </li>
+      
+        <li>
+          bott-1982: author = Bott, R., title = Lectures on Morse theory, old and new, journal = Bull. Amer. Math. Soc., year = 1982, volume = 7, number = 2, pages = 331--358, doi = 10.1090&#x2f;S0273-0979-1982-15038-8,
+          <a href="https://doi.org/10.1090&#x2f;S0273-0979-1982-15038-8">doi:10.1090&#x2f;S0273-0979-1982-15038-8</a>
+          
+        </li>
+      
+        <li>
+          fox-1953: author = Fox, R., title = Free differential calculus, I, journal = Ann. Math., year = 1953, volume = 57, number = 3, pages = 517--560, doi = 10.2307&#x2f;1969736,
+          <a href="https://doi.org/10.2307&#x2f;1969736">doi:10.2307&#x2f;1969736</a>
+          
+        </li>
+      
+        <li>
+          fox-1941: author = Fox, R., title = On the Lusternik--Schnirelmann category, journal = Annals of Math., year = 1941, volume = 42, number = 2, doi = 10.2307&#x2f;1968905,
+          <a href="https://doi.org/10.2307&#x2f;1968905">doi:10.2307&#x2f;1968905</a>
+          
+        </li>
+      
+        <li>
+          frank-1988: author = Frank, G., title = Templates and train tracks, journal = Trans. Amer. Math. Soc., year = 1988, volume = 308, number = 2, pages = 765--784, doi = 10.1090&#x2f;S0002-9947-1988-0951627-9,
+          <a href="https://doi.org/10.1090&#x2f;S0002-9947-1988-0951627-9">doi:10.1090&#x2f;S0002-9947-1988-0951627-9</a>
+          
+        </li>
+      
+        <li>
+          franks-1980: author = Franks, J., title = Homology and dynamical systems, journal = Regional conference series in math., year = 1980, volume = 49, pages = 3--120,
+          
+          
+        </li>
+      
+        <li>
+          franks-1978: author = Franks, J., title = The periodic behevior of non-singular Morse--Smale flows, journal = Comment. math. helv., year = 1978, volume = 53, number = 2, pages = 279--294, doi = 10.1007&#x2f;BF02566078,
+          <a href="https://doi.org/10.1007&#x2f;BF02566078">doi:10.1007&#x2f;BF02566078</a>
+          
+        </li>
+      
+        <li>
+          froloff-elsholz-1935: author = Froloff, S. and Elsholz, L., title = Limite inférieure pour le nombre des valeurs critiques d&#x27;une fonction, donnée sur une variété, journal = Мат.\ сб., year = 1935, volume = 42, number = 5, pages = 637--643, langid = french,
+          
+          
+        </li>
+      
+        <li>
+          ganea-1967: author = Ganea, T., title = Lusternik--Schnirelmann category and strong category, journal = Illinois journal of Math., year = 1967, volume = 11, number = 2, pages = 417--427, doi = 10.1215&#x2f;ijm&#x2f;1256054563,
+          <a href="https://doi.org/10.1215&#x2f;ijm&#x2f;1256054563">doi:10.1215&#x2f;ijm&#x2f;1256054563</a>
+          
+        </li>
+      
+        <li>
+          miyoshi-1983: author = Miyoshi, S., title = Foliated round surgery of codimension-one foliated manifolds, journal = Topology, year = 1983, volume = 21, number = 3, pages = 245--262,
+          
+          
+        </li>
+      
+        <li>
+          morgan-1979: author = Morgan, J. W., title = Non-singular Morse--Smale flows on 3-dimensional manifolds, journal = Topology, year = 1979, volume = 18, number = 1, pages = 41--53, doi = 10.1016&#x2f;0040-9383(79)90013-2,
+          <a href="https://doi.org/10.1016&#x2f;0040-9383(79)90013-2">doi:10.1016&#x2f;0040-9383(79)90013-2</a>
+          
+        </li>
+      
+        <li>
+          morse-1925: author = Morse, M., title = Relations between the critical points of a real function of $n$ variables, journal = Trans. Amer. Math. Soc., year = 1925, volume = 27, pages = 345--396, doi = 10.2307&#x2f;1989110,
+          <a href="https://doi.org/10.2307&#x2f;1989110">doi:10.2307&#x2f;1989110</a>
+          
+        </li>
+      
+        <li>
+          morse-1934: author = Morse, M., title = The calculus of variations in the large, address = New York, year = 1934, pagetotal = 352,
+          
+          
+        </li>
+      
+        <li>
+          reeb-1947: author = Reeb, G., title = Sur les variétés niveau d&#x27;une fonction numerique, journal = C. R. Acad. Sci. Paris, year = 1947, volume = 224, number = 46, pages = 1324--1325, langid = french,
+          
+          
+        </li>
+      
+        <li>
+          sharko-1984: author = Sharko, V. V., title = Minimal Morse functions, journal = Lect. Notes Math., year = 1984, number = 108, pages = 218--234, doi = 10.1007&#x2f;BFb0099560,
+          <a href="https://doi.org/10.1007&#x2f;BFb0099560">doi:10.1007&#x2f;BFb0099560</a>
+          
+        </li>
+      
+        <li>
+          singhof-1979: author = Singhof, W., title = Minimal coverings of manifolds with balls, journal = Manuscr. Math., year = 1979, volume = 29, pages = 385--415, doi = 10.1007&#x2f;BF01303636,
+          <a href="https://doi.org/10.1007&#x2f;BF01303636">doi:10.1007&#x2f;BF01303636</a>
+          
+        </li>
+      
+        <li>
+          takens-1970: author = Takens, F., title = The Lusternik--Schnirelman categories of a product space, journal = Compositio Math., year = 1970, volume = 22, number = 2, pages = 175--180, note = Fasc. 2, url = https:&#x2f;&#x2f;www.numdam.org&#x2f;item&#x2f;CM_1970__22_2_175_0&#x2f;,
+          
+          
+        </li>
+      
+        <li>
+          takens-1968: author = Takens, F., title = The minimal number of critical points of a function on a compact manifold and the Lusternik--Schnirelman category, journal = Inventiones math., year = 1968, volume = 6, pages = 197--244, doi = 10.1007&#x2f;BF01404825,
+          <a href="https://doi.org/10.1007&#x2f;BF01404825">doi:10.1007&#x2f;BF01404825</a>
+          
+        </li>
+      
+        <li>
+          thom-1949: author = Thom, R., title = Sur une partition en cellules associee a une fonction sur une variete, journal = C. R. Acad. Sci. Paris, year = 1949, volume = 228, pages = 973--975, series = A, langid = french,
+          
+          
+        </li>
+      
+        <li>
+          thurston-1976: author = Thurston, W., title = Existence of codimension-one foliations, journal = Ann. Math., year = 1976, volume = 104, number = 2, pages = 249--268, doi = 10.2307&#x2f;1971047,
+          <a href="https://doi.org/10.2307&#x2f;1971047">doi:10.2307&#x2f;1971047</a>
+          
+        </li>
+      
+        <li>
+          wilson-1966: author = Wilson, F., title = On the minimal sets of non-singular vector fields, journal = Ann. of Math., year = 1966, volume = 84, pages = 529--536, doi = 10.2307&#x2f;1970458,
+          <a href="https://doi.org/10.2307&#x2f;1970458">doi:10.2307&#x2f;1970458</a>
+          
+        </li>
+      
+        <li>
+          birkhoff-1917: author = Birkhoff, G., title = Dynamical systems with two degrees of freedom, journal = Trans. Amer. Math. Soc., year = 1917, volume = 18, number = 4, pages = 199--300, doi = 10.1090&#x2f;S0002-9947-1917-1501070-3,
+          <a href="https://doi.org/10.1090&#x2f;S0002-9947-1917-1501070-3">doi:10.1090&#x2f;S0002-9947-1917-1501070-3</a>
+          
+        </li>
+      
+        <li>
+          smale-1964: author = Смейл, С., title = О строении многообразий, journal = Математика, year = 1964, volume = 8, number = 4, pages = 95--108, langid = russian, doi = 10.2307&#x2f;2372978, note = Перевод с английского: Smale S. ``On the structure of manifolds&#x27;&#x27;, Amer.\ J.\ Math.\ 84 (1962), 387--399.,
+          <a href="https://doi.org/10.2307&#x2f;2372978">doi:10.2307&#x2f;2372978</a>
+          
+        </li>
+      
+        <li>
+          milnor-difftop: author = Милнор, Д., title = Дифференциальная топология, journal = Успехи мат.\ наук, volume = XX, number = 6(126), pages = 41--54, langid = russian,
+          
+          
+        </li>
+      
+        <li>
+          fomenko-brailov-1987: author = Фоменко, А. Т. and Браилов, А. В., title = Топология интегральных многообразий вполне интегрируемых гамильтоновых систем, journal = Мат.\ сб., year = 1987, volume = 133, number = 3, pages = 375--385, langid = russian, doi = 10.1070&#x2f;SM1989v062n02ABEH003244,
+          <a href="https://doi.org/10.1070&#x2f;SM1989v062n02ABEH003244">doi:10.1070&#x2f;SM1989v062n02ABEH003244</a>
+          
+        </li>
+      
+        <li>
+          fomenko-cishang-1987: author = Фоменко, А. Т. and Цишанг, Х., title = О топологии трехмерных многообразий, возникающих в гамильтоновой механике, journal = Докл.\ АН СССР, year = 1987, volume = 294, number = 2, pages = 283--287, langid = russian,
+          
+          
+        </li>
+      
+        <li>
+          frolov-elsgolts-1939: author = Фролов, С. В. and Эльсгольц, Л. Э., title = Длина многообразия и её свойства, journal = Мат.\ сб., year = 1939, volume = 5(47), number = 3, pages = 565--570, langid = russian, url = https:&#x2f;&#x2f;eudml.org&#x2f;doc&#x2f;65079,
+          
+          
+        </li>
+      
+    </ol>
+    
+  </section>
+
+  <footer class="footer-disclaimer">
+    <p class="muted">Rendered by <span class="brand">GrokRxiv</span>. Source: <a href="https://arxiv.org/abs/2606.14809">arXiv:2606.14809</a>.</p>
+  </footer>
+</body>
+</html>
