@@ -1,0 +1,825 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Categorical Hopf map — GrokRxiv Review</title>
+  <meta name="generator" content="grokrxiv-render">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- KaTeX is rendered client-side; math is kept as \( ... \) and \[ ... \] delimiters. -->
+  <style>
+    :root { color-scheme: light dark; --fg: #111; --muted: #555; --bg: #fff;
+            --accent: #1f6feb; --border: #d0d7de; --banner: #fff3cd; --banner-fg: #664d03; }
+    @media (prefers-color-scheme: dark) {
+      :root { --fg: #e6edf3; --muted: #8b949e; --bg: #0d1117; --accent: #58a6ff;
+              --border: #30363d; --banner: #3a2f0b; --banner-fg: #f1c453; }
+    }
+    body { font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+           color: var(--fg); background: var(--bg); max-width: 820px;
+           margin: 0 auto; padding: 24px; }
+    h1 { font-size: 1.7rem; line-height: 1.25; margin: 0 0 0.5rem; }
+    h2 { font-size: 1.2rem; margin-top: 2rem; border-bottom: 1px solid var(--border); padding-bottom: .25rem; }
+    .muted { color: var(--muted); }
+    .disclaimer { background: var(--banner); color: var(--banner-fg); border: 1px solid var(--border);
+                  padding: .75rem 1rem; border-radius: 6px; margin: 0 0 1.5rem; font-weight: 600; }
+    .footer-disclaimer { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--border);
+                         color: var(--muted); font-size: .9rem; }
+    .brand { font-weight: 700; color: var(--accent); }
+    details { border: 1px solid var(--border); border-radius: 6px; padding: .75rem 1rem; margin: .5rem 0; }
+    details > summary { cursor: pointer; font-weight: 600; }
+    .meta-link { font-size: .9rem; }
+    ul { padding-left: 1.25rem; }
+    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .agent-grid { display: grid; gap: .5rem; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 999px;
+             background: var(--border); color: var(--fg); font-size: .8rem; }
+    .badge.pass { background: #1f883d; color: #fff; }
+    .badge.warn { background: #bf8700; color: #fff; }
+    .badge.fail { background: #cf222e; color: #fff; }
+    .target-grid { display: grid; gap: .75rem; padding: 0; list-style: none; }
+    .revision-target { border: 1px solid var(--border); border-radius: 6px; padding: .9rem 1rem;
+                       background: rgba(127, 127, 127, .08); }
+    .target-title { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: 0 0 .75rem; }
+    .target-fields { display: grid; gap: .5rem; margin: 0; }
+    .target-field { display: grid; gap: .35rem; border: 1px solid var(--border);
+                    border-radius: 6px; padding: .65rem .75rem; }
+    .target-field.required { border-color: #bf8700; background: rgba(191, 135, 0, .12); }
+    .field-label { color: var(--muted); font-size: .75rem; font-weight: 700; text-transform: uppercase; }
+    .field-value { margin: 0; overflow-wrap: anywhere; }
+    .field-value.codeish { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Categorical Hopf map</h1>
+    <p class="muted">
+      <span class="brand">GrokRxiv</span> review of
+      <a class="meta-link" href="https://arxiv.org/abs/2606.12482">arXiv:2606.12482</a>
+       · <span>math.CT</span>
+    </p>
+    <p class="muted">
+      Ali Khalili Samani
+    </p>
+  </header>
+
+  <section>
+    <h2>TL;DR</h2>
+    <p>Automated meta-review synthesis failed before producing a normal recommendation.</p>
+    <p class="muted">Recommendation: <strong>Major revision</strong> · Confidence: 100%</p>
+  </section>
+
+  <section>
+    <h2>Strengths</h2>
+    <ul>
+      
+    </ul>
+  </section>
+
+  <section>
+    <h2>Weaknesses</h2>
+    <ul>
+      <li>Meta-reviewer failed: `claude` exited with Some(1) for role meta_reviewer: stdout={&quot;type&quot;:&quot;result&quot;,&quot;subtype&quot;:&quot;success&quot;,&quot;is_error&quot;:true,&quot;api_error_status&quot;:500,&quot;duration_ms&quot;:29067,&quot;duration_api_ms&quot;:0,&quot;num_turns&quot;:1,&quot;result&quot;:&quot;API Error: 500 Internal server error. This is a server-side issue, usually temporary — try again in a moment. If it persists, check https:&#x2f;&#x2f;status.claude.com.&quot;,&quot;stop_reason&quot;:&quot;stop_sequence&quot;,&quot;session_id&quot;:&quot;088d5be8-c2fa-4556-9f4b-a4e4053e1af6&quot;,&quot;total_cost_usd&quot;:0,&quot;usage&quot;:{&quot;input_tokens&quot;:0,&quot;cache_creation_input_tokens&quot;:0,&quot;cache_read_input_tokens&quot;:0,&quot;output_tokens&quot;:0,&quot;server_tool_use&quot;:{&quot;web_search_requests&quot;:0,&quot;web_fetch_requests&quot;:0},&quot;service_tier&quot;:&quot;standard&quot;,&quot;c</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Revision Targets</h2>
+    <div class="target-grid">
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              corrections&#x2f;2606.12482&#x2f;paper.tex
+              
+              
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">Failure: `claude` exited with Some(1) for role technical_correctness: stdout={&quot;type&quot;:&quot;result&quot;,&quot;subtype&quot;:&quot;success&quot;,&quot;is_error&quot;:true,&quot;api_error_status&quot;:500,&quot;duration_ms&quot;:43409,&quot;duration_api_ms&quot;:16119,&quot;num_turns&quot;:4,&quot;result&quot;:&quot;API Error: 500 Internal serv...</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Rerun automated review after the configured CLI&#x2f;model provider recovers.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm the affected claim is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+    </div>
+  </section>
+
+  <section>
+    <h2>Open Questions</h2>
+    <ul>
+      <li>Please inspect the specialist outputs and rerun automated review after the CLI provider recovers.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Per-Agent Reviews</h2>
+    <div class="agent-grid">
+      
+      <details>
+        <summary>
+          citation — <span class="muted">gemini-3-flash-preview</span>
+          <span class="badge warn">warn</span>
+        </summary>
+        <pre>{
+  &quot;confidence&quot;: 0.95,
+  &quot;entries&quot;: [
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Wockel, Christoph&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR2805195&quot;,
+        &quot;raw&quot;: &quot;MR2805195: AUTHOR = Wockel, Christoph, TITLE = Principal 2-bundles and their gauge 2-groups, JOURNAL = Forum Mathematicum, VOLUME = 23, YEAR = 2011, NUMBER = 3, PAGES = 565--610, ISSN = 0933-7741,1435-5337, MRCLASS = 55R65 (18D05 22A22), MRNUMBER = 2805195,&quot;,
+        &quot;title&quot;: &quot;Principal 2-bundles and their gauge 2-groups&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Forum Mathematicum&quot;,
+        &quot;year&quot;: 2011
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;This is a foundational reference for the formalism of principal 2-bundles (categorical principal bundles) used extensively throughout the paper to construct the categorical Hopf map.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Ganter, Nora&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR3764535&quot;,
+        &quot;raw&quot;: &quot;MR3764535: AUTHOR = Ganter, Nora, TITLE = Categorical tori, JOURNAL = SIGMA Symmetry Integrability Geom. Methods Appl., FJOURNAL = SIGMA. Symmetry, Integrability and Geometry. Methods and Applications, VOLUME = 14, YEAR = 2018, PAGES = Paper No. 014, 18, ISSN = 1815-0659, MRCLASS = 22E40 (18D99), MRNUMBER = 3764535,&quot;,
+        &quot;title&quot;: &quot;Categorical tori&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;SIGMA Symmetry Integrability Geom. Methods Appl.&quot;,
+        &quot;year&quot;: 2018
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Defines the categorical circle U(1), which serves as the fiber for the categorical Hopf map introduced in the paper.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Hopf, Heinz&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR1512691&quot;,
+        &quot;raw&quot;: &quot;MR1512691: AUTHOR = Hopf, Heinz, TITLE = \\\&quot;Uber die Abbildungen der dreidimensionalen Sph\\\&quot;are auf die Kugelfl\\\&quot;ache, JOURNAL = Math. Ann., FJOURNAL = Mathematische Annalen, VOLUME = 104, YEAR = 1931, NUMBER = 1, PAGES = 637--665, ISSN = 0025-5831,1432-1807, MRCLASS = 99-04, MRNUMBER = 1512691,&quot;,
+        &quot;title&quot;: &quot;\\\&quot;Uber die Abbildungen der dreidimensionalen Sph\\\&quot;are auf die Kugelfl\\\&quot;ache&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Math. Ann.&quot;,
+        &quot;year&quot;: 1931
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;The original paper introducing the Hopf map, which the author categorifies.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Murray, Michael K.&quot;
+        ],
+        &quot;doi&quot;: &quot;10.1112&#x2f;jlms&#x2f;54.2.403&quot;,
+        &quot;key&quot;: &quot;MR1669206&quot;,
+        &quot;raw&quot;: &quot;MR1669206: AUTHOR = Murray, Michael K., TITLE = Bundle gerbes, JOURNAL = J. London Math. Soc. (2), VOLUME = 54, YEAR = 1996, NUMBER = 2, PAGES = 403--416, DOI = 10.1112&#x2f;jlms&#x2f;54.2.403, URL = https:&#x2f;&#x2f;doi.org&#x2f;10.1112&#x2f;jlms&#x2f;54.2.403&quot;,
+        &quot;title&quot;: &quot;Bundle gerbes&quot;,
+        &quot;url&quot;: &quot;https:&#x2f;&#x2f;doi.org&#x2f;10.1112&#x2f;jlms&#x2f;54.2.403&quot;,
+        &quot;venue&quot;: &quot;J. London Math. Soc. (2)&quot;,
+        &quot;year&quot;: 1996
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Introduces bundle gerbes, which are essential for the paper&#x27;s discussion on higher categorical structures and the factorization of the categorical Hopf map.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: &quot;10.1112&#x2f;jlms&#x2f;54.2.403&quot;,
+      &quot;resolved_url&quot;: &quot;https:&#x2f;&#x2f;doi.org&#x2f;10.1112&#x2f;jlms&#x2f;54.2.403&quot;
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Stolz, Stephan&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR1380455&quot;,
+        &quot;raw&quot;: &quot;MR1380455: AUTHOR = Stolz, Stephan, TITLE = A conjecture concerning positive Ricci curvature and the Witten genus, JOURNAL = Mathematische Annalen, VOLUME = 304, YEAR = 1996, NUMBER = 4, PAGES = 785--800, ISSN = 0025-5831,1432-1807, MRCLASS = 58G10 (53C21 57R20 57R65), MRNUMBER = 1380455,&quot;,
+        &quot;title&quot;: &quot;A conjecture concerning positive Ricci curvature and the Witten genus&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Mathematische Annalen&quot;,
+        &quot;year&quot;: 1996
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Introduces the String group, which is central to the author&#x27;s final conjecture regarding symmetries of the categorical Hopf map.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Schommer-Pries, Christopher J.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR2800361&quot;,
+        &quot;raw&quot;: &quot;MR2800361: AUTHOR = Schommer-Pries, Christopher J., TITLE = Central extensions of smooth 2-groups and a finite-dimensional string 2-group, JOURNAL = Geom. Topol., FJOURNAL = Geometry \\&amp; Topology, VOLUME = 15, YEAR = 2011, NUMBER = 2, PAGES = 609--676, ISSN = 1465-3060,1364-0380, MRCLASS = 53C08 (18D10 22A22 57T10), MRNUMBER = 2800361,&quot;,
+        &quot;title&quot;: &quot;Central extensions of smooth 2-groups and a finite-dimensional string 2-group&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Geom. Topol.&quot;,
+        &quot;year&quot;: 2011
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Provides a finite-dimensional categorical model for the String group, used in the classification of the categorical Hopf map&#x27;s fiber and for cohomology calculations.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Nikolaus, Thomas&quot;,
+          &quot;Waldorf, Konrad&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR3089401&quot;,
+        &quot;raw&quot;: &quot;MR3089401: AUTHOR = Nikolaus, Thomas and Waldorf, Konrad, TITLE = Four equivalent versions of nonabelian gerbes, JOURNAL = Pacific Journal of Mathematics, VOLUME = 264, YEAR = 2013, NUMBER = 2, PAGES = 355--419, ISSN = 0030-8730,1945-5844, MRCLASS = 55R65 (53C08 55N05 58H05), MRNUMBER = 3089401,&quot;,
+        &quot;title&quot;: &quot;Four equivalent versions of nonabelian gerbes&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Pacific Journal of Mathematics&quot;,
+        &quot;year&quot;: 2013
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Used as a comparative framework for Waldorf&#x27;s approach to gerbes and principal 2-bundles versus Wockel&#x27;s.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Waldorf, Konrad&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR3894086&quot;,
+        &quot;raw&quot;: &quot;MR3894086: AUTHOR = Waldorf, Konrad, TITLE = A global perspective to connections on principal 2-bundles, JOURNAL = Forum Math., FJOURNAL = Forum Mathematicum, VOLUME = 30, YEAR = 2018, NUMBER = 4, PAGES = 809--843, ISSN = 0933-7741,1435-5337, MRCLASS = 53C08 (22A22 55R65), MRNUMBER = 3894086,&quot;,
+        &quot;title&quot;: &quot;A global perspective to connections on principal 2-bundles&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Forum Math.&quot;,
+        &quot;year&quot;: 2018
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;A key reference for the connection formalism on principal 2-bundles, specifically used in the context of the categorical Hopf map&#x27;s connection.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Pressley, Andrew&quot;,
+          &quot;Segal, Graeme&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR900587&quot;,
+        &quot;raw&quot;: &quot;MR900587: AUTHOR = Pressley, Andrew and Segal, Graeme, TITLE = Loop groups, SERIES = Oxford Mathematical Monographs, NOTE = Oxford Science Publications, PUBLISHER = The Clarendon Press, Oxford University Press, New York, YEAR = 1986, PAGES = viii+318, ISBN = 0-19-853535-X, MRCLASS = 22E65 (58D15 81D15), MRNUMBER = 900587,&quot;,
+        &quot;title&quot;: &quot;Loop groups&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Oxford Mathematical Monographs&quot;,
+        &quot;year&quot;: 1986
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Used for background on central extensions and loop groups, specifically in relating these to the String group symmetries.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    }
+  ],
+  &quot;missing_references&quot;: [
+    {
+      &quot;reason&quot;: &quot;The paper relies heavily on Wockel&#x27;s 2011 paper but misses some of the earlier development in categorical bundles on groupoids which would ground the Čech groupoid constructions better.&quot;,
+      &quot;title&quot;: &quot;Principal 2-bundles onto a 2-groupoid&quot;
+    }
+  ],
+  &quot;summary&quot;: &quot;The thesis exhibits excellent citation hygiene, drawing correctly on foundational works by Murray, Brylinski, and Wockel. Key modern developments by Waldorf and Ganter are well-integrated into the construction of the categorical Hopf map. The bibliography is comprehensive and accurately reflects the intersection of higher category theory and differential geometry required for this research.&quot;
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          meta_reviewer — <span class="muted">claude-sonnet-4-6</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <p>Automated meta-review synthesis failed before producing a normal recommendation.</p>
+        <p class="muted">Recommendation: <strong>Major revision</strong> · Confidence: 100%</p>
+        <h3>Strengths</h3>
+        <ul>
+          
+        </ul>
+        <h3>Weaknesses</h3>
+        <ul>
+          <li>Meta-reviewer failed: `claude` exited with Some(1) for role meta_reviewer: stdout={&quot;type&quot;:&quot;result&quot;,&quot;subtype&quot;:&quot;success&quot;,&quot;is_error&quot;:true,&quot;api_error_status&quot;:500,&quot;duration_ms&quot;:29067,&quot;duration_api_ms&quot;:0,&quot;num_turns&quot;:1,&quot;result&quot;:&quot;API Error: 500 Internal server error. This is a server-side issue, usually temporary — try again in a moment. If it persists, check https:&#x2f;&#x2f;status.claude.com.&quot;,&quot;stop_reason&quot;:&quot;stop_sequence&quot;,&quot;session_id&quot;:&quot;088d5be8-c2fa-4556-9f4b-a4e4053e1af6&quot;,&quot;total_cost_usd&quot;:0,&quot;usage&quot;:{&quot;input_tokens&quot;:0,&quot;cache_creation_input_tokens&quot;:0,&quot;cache_read_input_tokens&quot;:0,&quot;output_tokens&quot;:0,&quot;server_tool_use&quot;:{&quot;web_search_requests&quot;:0,&quot;web_fetch_requests&quot;:0},&quot;service_tier&quot;:&quot;standard&quot;,&quot;c</li>
+        </ul>
+        <h3>Revision Targets</h3>
+        <div class="target-grid">
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  corrections&#x2f;2606.12482&#x2f;paper.tex
+                  
+                  
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">Failure: `claude` exited with Some(1) for role technical_correctness: stdout={&quot;type&quot;:&quot;result&quot;,&quot;subtype&quot;:&quot;success&quot;,&quot;is_error&quot;:true,&quot;api_error_status&quot;:500,&quot;duration_ms&quot;:43409,&quot;duration_api_ms&quot;:16119,&quot;num_turns&quot;:4,&quot;result&quot;:&quot;API Error: 500 Internal serv...</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Rerun automated review after the configured CLI&#x2f;model provider recovers.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm the affected claim is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+        </div>
+        <h3>Questions</h3>
+        <ul>
+          <li>Please inspect the specialist outputs and rerun automated review after the CLI provider recovers.</li>
+        </ul>
+      </details>
+      
+      <details>
+        <summary>
+          novelty — <span class="muted">gemini-3-flash-preview</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;confidence&quot;: 0.9,
+  &quot;missing_prior_art&quot;: [],
+  &quot;novelty_score&quot;: 0.8,
+  &quot;related_work&quot;: [
+    {
+      &quot;citation_key&quot;: &quot;MR2709030&quot;,
+      &quot;delta&quot;: &quot;Provides the 2-categorical framework for principal 2-bundles; this paper applies and specializes this theory to construct the specific &#x27;categorical Hopf map&#x27; object.&quot;,
+      &quot;relation&quot;: &quot;builds_on&quot;,
+      &quot;title&quot;: &quot;Higher gauge theory: 2-bundles&quot;
+    },
+    {
+      &quot;citation_key&quot;: &quot;MR3764535&quot;,
+      &quot;delta&quot;: &quot;Introduces the categorical circle U(1); this paper uses it as the fibre in the categorification of the Hopf bundle.&quot;,
+      &quot;relation&quot;: &quot;builds_on&quot;,
+      &quot;title&quot;: &quot;Categorical tori&quot;
+    },
+    {
+      &quot;citation_key&quot;: &quot;MR2805195&quot;,
+      &quot;delta&quot;: &quot;Establishes the formalism for constructing total spaces of principal 2-bundles from cocycle data, which the author implements for the six-open cover of S^2.&quot;,
+      &quot;relation&quot;: &quot;builds_on&quot;,
+      &quot;title&quot;: &quot;Principal 2-bundles and their gauge 2-groups&quot;
+    },
+    {
+      &quot;citation_key&quot;: &quot;MR1512691&quot;,
+      &quot;delta&quot;: &quot;The classical Hopf map being categorified; the paper proves a factorization theorem relating the categorical version to this classical precedent.&quot;,
+      &quot;relation&quot;: &quot;prior_art&quot;,
+      &quot;title&quot;: &quot;Über die Abbildungen der dreidimensionalen Sphäre auf die Kugelfläche&quot;
+    },
+    {
+      &quot;citation_key&quot;: &quot;MR2800361&quot;,
+      &quot;delta&quot;: &quot;Develops a finite-dimensional model for the String(n) group; this paper conjectures an alternative, more explicit realization of String(3) as the symmetry group of the categorical Hopf map.&quot;,
+      &quot;relation&quot;: &quot;prior_art&quot;,
+      &quot;title&quot;: &quot;Central extensions of smooth 2-groups and a finite-dimensional string 2-group&quot;
+    },
+    {
+      &quot;citation_key&quot;: &quot;MR1669206&quot;,
+      &quot;delta&quot;: &quot;Introduces bundle gerbes; this paper demonstrates how the categorical Hopf map relates to the basic bundle gerbe over S^3 through factorization.&quot;,
+      &quot;relation&quot;: &quot;prior_art&quot;,
+      &quot;title&quot;: &quot;Bundle gerbes&quot;
+    }
+  ],
+  &quot;verdict&quot;: &quot;significant&quot;
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          reproducibility — <span class="muted">gpt-5.5</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;code_availability&quot;: &quot;unspecified&quot;,
+  &quot;code_url&quot;: null,
+  &quot;concerns&quot;: [
+    {
+      &quot;area&quot;: &quot;code&quot;,
+      &quot;description&quot;: &quot;No repository, license, commit, release, or executable proof&#x2f;checking artifact is provided for the central construction of the categorical Hopf map; a formal artifact such as proofs&#x2f;categorical_hopf_map.lean, proofs&#x2f;categorical_hopf_map.agda, or equivalent source files would be needed for independent machine-checked reproduction.&quot;,
+      &quot;severity&quot;: &quot;critical&quot;
+    },
+    {
+      &quot;area&quot;: &quot;code&quot;,
+      &quot;description&quot;: &quot;The factorisation through the classical Hopf map and the basic bundle gerbe over S^3 is presented textually, but no formal proof artifact or reproducible symbolic notebook accompanies the construction; an artifact such as proofs&#x2f;hopf_factorization.lean or notebooks&#x2f;hopf_factorization.ipynb would close this gap.&quot;,
+      &quot;severity&quot;: &quot;major&quot;
+    },
+    {
+      &quot;area&quot;: &quot;code&quot;,
+      &quot;description&quot;: &quot;The appendix contains explicit differential-form calculations, but the algebra is not backed by a reproducible computer algebra script; a file such as scripts&#x2f;verify_hopf_pullback.sage or scripts&#x2f;verify_hopf_pullback.sympy would allow independent checking of the computations.&quot;,
+      &quot;severity&quot;: &quot;major&quot;
+    },
+    {
+      &quot;area&quot;: &quot;other&quot;,
+      &quot;description&quot;: &quot;The String(3) symmetry interpretation is explicitly conjectural and relies on future assembly of anafunctors via parallel 2-transport, so the headline symmetry claim is not fully reproducible from completed proofs or artifacts in the submitted material.&quot;,
+      &quot;severity&quot;: &quot;major&quot;
+    },
+    {
+      &quot;area&quot;: &quot;data&quot;,
+      &quot;description&quot;: &quot;There is no empirical dataset, benchmark, or generated data package; this is mostly appropriate for a mathematical theory paper, but it means reproduction is limited to manual or formal verification of the written constructions.&quot;,
+      &quot;severity&quot;: &quot;info&quot;
+    },
+    {
+      &quot;area&quot;: &quot;compute&quot;,
+      &quot;description&quot;: &quot;No software environment, proof-assistant version, dependency list, or hardware requirements are specified because no computational artifact is supplied.&quot;,
+      &quot;severity&quot;: &quot;minor&quot;
+    }
+  ],
+  &quot;confidence&quot;: 0.86,
+  &quot;data_availability&quot;: &quot;unspecified&quot;,
+  &quot;data_url&quot;: null,
+  &quot;environment&quot;: null,
+  &quot;reproducibility_score&quot;: 0.32
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          summary — <span class="muted">claude-haiku-4-5-20251001</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;audience&quot;: &quot;Researchers in higher category theory, categorical geometry, and higher gauge theory; mathematicians and physicists investigating categorical generalizations of classical topology and higher structures in quantum field theory.&quot;,
+  &quot;key_contributions&quot;: [
+    &quot;Construction of the categorical Hopf map as a categorical principal U(1)-bundle over the 2-sphere with detailed local trivializations&quot;,
+    &quot;Development of techniques for categorifying the transition functions of classical principal bundles using groupoid homomorphisms&quot;,
+    &quot;Three explicitly worked equivalent constructions of the basic bundle gerbe over the 3-sphere&quot;,
+    &quot;Factorization of the categorical Hopf map through the classical Hopf map and the basic bundle gerbe over S³&quot;,
+    &quot;Conjecture that the categorical group String(3) is equivalent to the categorical group of symmetries of the categorical Hopf map&quot;,
+    &quot;Unified treatment connecting Waldorf&#x27;s and Wockel&#x27;s frameworks for constructing principal 2-bundles&quot;
+  ],
+  &quot;plain_language_summary&quot;: &quot;The Hopf map is a celebrated construction in topology that shows how to map a 3-sphere continuously to a 2-sphere in a non-trivial way, forming a principal bundle with circle symmetry. This thesis extends this classical object into categorical geometry—a higher-dimensional algebraic setting where geometric structures are enriched with categorical data. The author constructs a categorical Hopf map, which is a principal bundle over the 2-sphere whose symmetry group is a categorical circle rather than an ordinary one, and develops techniques to lift classical transition functions into the categorical setting.\n\nA significant contribution is presenting three equivalent constructions of the basic bundle gerbe over the 3-sphere, providing multiple perspectives on this important structure. The work bridges two major frameworks in higher bundle theory (Waldorf&#x27;s and Wockel&#x27;s formalisms), showing how to move between them while preserving the essential geometry. The central conjecture—that String(3), an infinite-dimensional topological group crucial in physics and representation theory, can be realized as the group of all symmetries of the categorical Hopf map—offers a promising new way to understand this fundamental structure.&quot;,
+  &quot;tldr&quot;: &quot;The author constructs a categorical lift of the classical Hopf map and conjectures it characterizes String(3), a fundamental higher structure in categorical representation theory and quantum topology.&quot;
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          technical_correctness — <span class="muted">claude-opus-4-7</span>
+          <span class="badge fail">fail</span>
+        </summary>
+        <pre>{
+  &quot;claims&quot;: [
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;Technical correctness reviewer failed before producing a normal review.&quot;,
+      &quot;evidence&quot;: &quot;Failure: `claude` exited with Some(1) for role technical_correctness: stdout={\&quot;type\&quot;:\&quot;result\&quot;,\&quot;subtype\&quot;:\&quot;success\&quot;,\&quot;is_error\&quot;:true,\&quot;api_error_status\&quot;:500,\&quot;duration_ms\&quot;:43409,\&quot;duration_api_ms\&quot;:16119,\&quot;num_turns\&quot;:4,\&quot;result\&quot;:\&quot;API Error: 500 Internal serv...&quot;,
+      &quot;id&quot;: &quot;technical_correctness_agent_failure&quot;,
+      &quot;location&quot;: null,
+      &quot;severity&quot;: &quot;major&quot;,
+      &quot;suggested_fix&quot;: &quot;Rerun automated review after the configured CLI&#x2f;model provider recovers.&quot;
+    }
+  ],
+  &quot;confidence&quot;: 0.0,
+  &quot;overall_correctness&quot;: &quot;questionable&quot;
+}</pre>
+      </details>
+      
+    </div>
+  </section>
+
+  <!-- corrections rendered from corrections table; empty on first publish -->
+  <section>
+    <h2>Corrections</h2>
+    <p class="muted">No corrections have been recorded.</p>
+  </section>
+
+  <section>
+    <h2>Bibliography</h2>
+    
+    <ol>
+      
+        <li>
+          MR2805195: AUTHOR = Wockel, Christoph, TITLE = Principal 2-bundles and their gauge 2-groups, JOURNAL = Forum Mathematicum, VOLUME = 23, YEAR = 2011, NUMBER = 3, PAGES = 565--610, ISSN = 0933-7741,1435-5337, MRCLASS = 55R65 (18D05 22A22), MRNUMBER = 2805195,
+          
+          
+        </li>
+      
+        <li>
+          MR1950948: AUTHOR = Moerdijk, Ieke, TITLE = Orbifolds as groupoids: an introduction, BOOKTITLE = Orbifolds in mathematics and physics, SERIES = Contemporary Mathematics, VOLUME = 310, PAGES = 205--222, PUBLISHER = American Mathematical Society, YEAR = 2002, ISBN = 0-8218-2990-4, MRCLASS = 22A22 (55N30 55P15 58H05), MRNUMBER = 1950948,
+          
+          
+        </li>
+      
+        <li>
+          MR3764535: AUTHOR = Ganter, Nora, TITLE = Categorical tori, JOURNAL = SIGMA Symmetry Integrability Geom. Methods Appl., FJOURNAL = SIGMA. Symmetry, Integrability and Geometry. Methods and Applications, VOLUME = 14, YEAR = 2018, PAGES = Paper No. 014, 18, ISSN = 1815-0659, MRCLASS = 22E40 (18D99), MRNUMBER = 3764535,
+          
+          
+        </li>
+      
+        <li>
+          MR2068521: AUTHOR = Baez, John C. and Lauda, Aaron D., TITLE = Higher-dimensional algebra. V. 2-groups, JOURNAL = Theory and Applications of Categories, VOLUME = 12, YEAR = 2004, PAGES = 423--491, ISSN = 1201-561X, MRCLASS = 18D05 (18D10 20J06), MRNUMBER = 2068521,
+          
+          
+        </li>
+      
+        <li>
+          MR2681698: AUTHOR = Murray, Michael K., TITLE = An introduction to bundle gerbes, BOOKTITLE = The many facets of geometry, PAGES = 237--260, PUBLISHER = Oxford University Press, YEAR = 2010, ISBN = 978-0-19-953492-0, MRCLASS = 53C08 (53C29 55R65), MRNUMBER = 2681698,
+          
+          
+        </li>
+      
+        <li>
+          MR1197353: AUTHOR = Brylinski, Jean-Luc, TITLE = Loop spaces, characteristic classes and geometric quantization, SERIES = Progress in Mathematics, VOLUME = 107, PUBLISHER = Birkh\&quot;auser Boston, Inc., Boston, MA, YEAR = 1993, PAGES = xvi+300, ISBN = 0-8176-3644-7, MRCLASS = 57Rxx (18G50 55P35 58F06), MRNUMBER = 1197353,
+          
+          
+        </li>
+      
+        <li>
+          Wal2007phd: title=Algebraic structures for bundle gerbes and the Wess-Zumino term in conformal field theory, author=Waldorf, Konrad, year=2007, school=Staats-und Universit\&quot;atsbibliothek Hamburg Carl von Ossietzky
+          
+          
+        </li>
+      
+        <li>
+          MR2709030: AUTHOR = Bartels, Tobias Keith, TITLE = Higher gauge theory: 2-bundles, NOTE = Thesis (Ph.D.)--University of California, Riverside, PUBLISHER = ProQuest LLC, Ann Arbor, MI, YEAR = 2006, PAGES = 142, ISBN = 978-0542-80050-4, MRCLASS = 99-05, MRNUMBER = 2709030,
+          
+          
+        </li>
+      
+        <li>
+          MR2800361: AUTHOR = Schommer-Pries, Christopher J., TITLE = Central extensions of smooth 2-groups and a finite-dimensional string 2-group, JOURNAL = Geom. Topol., FJOURNAL = Geometry \&amp; Topology, VOLUME = 15, YEAR = 2011, NUMBER = 2, PAGES = 609--676, ISSN = 1465-3060,1364-0380, MRCLASS = 53C08 (18D10 22A22 57T10), MRNUMBER = 2800361,
+          
+          
+        </li>
+      
+        <li>
+          MR658304: AUTHOR = Bott, Raoul and Tu, Loring W., TITLE = Differential forms in algebraic topology, SERIES = Graduate Texts in Mathematics, VOLUME = 82, PUBLISHER = Springer-Verlag, New York-Berlin, YEAR = 1982, PAGES = xiv+331, ISBN = 0-387-90613-4, MRCLASS = 57R19 (55-02 58-01 58A12), MRNUMBER = 658304,
+          
+          
+        </li>
+      
+        <li>
+          MR900587: AUTHOR = Pressley, Andrew and Segal, Graeme, TITLE = Loop groups, SERIES = Oxford Mathematical Monographs, NOTE = Oxford Science Publications, PUBLISHER = The Clarendon Press, Oxford University Press, New York, YEAR = 1986, PAGES = viii+318, ISBN = 0-19-853535-X, MRCLASS = 22E65 (58D15 81D15), MRNUMBER = 900587,
+          
+          
+        </li>
+      
+        <li>
+          MR3894086: AUTHOR = Waldorf, Konrad, TITLE = A global perspective to connections on principal 2-bundles, JOURNAL = Forum Math., FJOURNAL = Forum Mathematicum, VOLUME = 30, YEAR = 2018, NUMBER = 4, PAGES = 809--843, ISSN = 0933-7741,1435-5337, MRCLASS = 53C08 (22A22 55R65), MRNUMBER = 3894086,
+          
+          
+        </li>
+      
+        <li>
+          MR1698234: AUTHOR = Isham, Chris J., TITLE = Modern differential geometry for physicists, SERIES = World Scientific Lecture Notes in Physics, VOLUME = 61, EDITION = Second, PUBLISHER = World Scientific Publishing Co., Inc., River Edge, NJ, YEAR = 1999, PAGES = xiv+289, ISBN = 981-02-3555-0, MRCLASS = 53-01 (53C80), MRNUMBER = 1698234,
+          
+          
+        </li>
+      
+        <li>
+          MR2318847: AUTHOR = Schreiber, Urs and Schweigert, Christoph and Waldorf, Konrad, TITLE = Unoriented WZW models and holonomy of bundle gerbes, JOURNAL = Comm. Math. Phys., FJOURNAL = Communications in Mathematical Physics, VOLUME = 274, YEAR = 2007, NUMBER = 1, PAGES = 31--64, ISSN = 0010-3616,1432-0916, MRCLASS = 53C29 (53C80 55R65 81T40 81T45), MRNUMBER = 2318847,
+          
+          
+        </li>
+      
+        <li>
+          MR1269324: AUTHOR = Weibel, Charles A., TITLE = An introduction to homological algebra, SERIES = Cambridge Studies in Advanced Mathematics, VOLUME = 38, PUBLISHER = Cambridge University Press, Cambridge, YEAR = 1994, PAGES = xiv+450, ISBN = 0-521-43500-5; 0-521-55987-1, MRCLASS = 18-01 (16-01 17-01 20-01 55Uxx), MRNUMBER = 1269324,
+          
+          
+        </li>
+      
+        <li>
+          MR672956: AUTHOR = Brown, Kenneth S., TITLE = Cohomology of groups, SERIES = Graduate Texts in Mathematics, VOLUME = 87, PUBLISHER = Springer-Verlag, New York-Berlin, YEAR = 1982, PAGES = x+306, ISBN = 0-387-90688-6, MRCLASS = 20-02 (18-01 20F32 20J05 55-01), MRNUMBER = 672956,
+          
+          
+        </li>
+      
+        <li>
+          MR198828: AUTHOR = Tinkham, Michael, TITLE = Group theory and quantum mechanics, PUBLISHER = McGraw-Hill Book Co., New York-Toronto-London, YEAR = 1964, PAGES = xii+340, MRCLASS = 81.22, MRNUMBER = 198828,
+          
+          
+        </li>
+      
+        <li>
+          MR2588823: AUTHOR = Sati, Hisham and Schreiber, Urs and Stasheff, Jim, TITLE = Fivebrane structures, JOURNAL = Rev. Math. Phys., FJOURNAL = Reviews in Mathematical Physics. A Journal for Both Review and Original Research Papers in the Field of Mathematical Physics, VOLUME = 21, YEAR = 2009, NUMBER = 10, PAGES = 1197--1240, ISSN = 0129-055X,1793-6659, MRCLASS = 53C08 (55R40 55R65 55S35 81T30 81T50), MRNUMBER = 2588823,
+          
+          
+        </li>
+      
+        <li>
+          MR1380455: AUTHOR = Stolz, Stephan, TITLE = A conjecture concerning positive Ricci curvature and the Witten genus, JOURNAL = Mathematische Annalen, VOLUME = 304, YEAR = 1996, NUMBER = 4, PAGES = 785--800, ISSN = 0025-5831,1432-1807, MRCLASS = 58G10 (53C21 57R20 57R65), MRNUMBER = 1380455,
+          
+          
+        </li>
+      
+        <li>
+          MR2597732: AUTHOR = Baez, John C. and Stevenson, Danny, TITLE = The classifying space of a topological 2-group, BOOKTITLE = Algebraic topology, SERIES = Abel Symposium, VOLUME = 4, PAGES = 1--31, PUBLISHER = Springer, Berlin, YEAR = 2009, ISBN = 978-3-642-01199-3, MRCLASS = 55R35 (18G50), MRNUMBER = 2597732,
+          
+          
+        </li>
+      
+        <li>
+          MR3089401: AUTHOR = Nikolaus, Thomas and Waldorf, Konrad, TITLE = Four equivalent versions of nonabelian gerbes, JOURNAL = Pacific Journal of Mathematics, VOLUME = 264, YEAR = 2013, NUMBER = 2, PAGES = 355--419, ISSN = 0030-8730,1945-5844, MRCLASS = 55R65 (53C08 55N05 58H05), MRNUMBER = 3089401,
+          
+          
+        </li>
+      
+        <li>
+          MR1481706: AUTHOR = Bredon, Glen E., TITLE = Sheaf theory, SERIES = Graduate Texts in Mathematics, VOLUME = 170, EDITION = Second, PUBLISHER = Springer-Verlag, New York, YEAR = 1997, PAGES = xii+502, ISBN = 0-387-94905-4, MRCLASS = 55N30 (18F20 54B40 55-02), MRNUMBER = 1481706,
+          
+          
+        </li>
+      
+        <li>
+          MR3012377: AUTHOR = Naber, Gregory L., TITLE = Topology, geometry and gauge fields, SERIES = Applied Mathematical Sciences, VOLUME = 141, EDITION = Second, PUBLISHER = Springer, New York, YEAR = 2011, PAGES = xii+419, ISBN = 978-1-4419-7894-3; 978-1-4419-7895-0, MRCLASS = 53-01 (53C05 53C07 57-02 58-02 70S15 81-02), MRNUMBER = 3012377,
+          
+          
+        </li>
+      
+        <li>
+          MR209411: AUTHOR = Spivak, Michael, TITLE = Calculus on manifolds. A modern approach to classical theorems of advanced calculus, PUBLISHER = W. A. Benjamin, Inc., New York-Amsterdam, YEAR = 1965, PAGES = xii+144, MRCLASS = 26.20 (57.00), MRNUMBER = 209411,
+          
+          
+        </li>
+      
+        <li>
+          MR1512691: AUTHOR = Hopf, Heinz, TITLE = \&quot;Uber die Abbildungen der dreidimensionalen Sph\&quot;are auf die Kugelfl\&quot;ache, JOURNAL = Math. Ann., FJOURNAL = Mathematische Annalen, VOLUME = 104, YEAR = 1931, NUMBER = 1, PAGES = 637--665, ISSN = 0025-5831,1432-1807, MRCLASS = 99-04, MRNUMBER = 1512691,
+          
+          
+        </li>
+      
+        <li>
+          MR1669206: AUTHOR = Murray, Michael K., TITLE = Bundle gerbes, JOURNAL = J. London Math. Soc. (2), VOLUME = 54, YEAR = 1996, NUMBER = 2, PAGES = 403--416, DOI = 10.1112&#x2f;jlms&#x2f;54.2.403, URL = https:&#x2f;&#x2f;doi.org&#x2f;10.1112&#x2f;jlms&#x2f;54.2.403
+          <a href="https://doi.org/10.1112&#x2f;jlms&#x2f;54.2.403">doi:10.1112&#x2f;jlms&#x2f;54.2.403</a>
+          
+        </li>
+      
+        <li>
+          MR3535115: AUTHOR = Fiorenza, Domenico and Rogers, Christopher L. and Schreiber, Urs, TITLE = Higher $U(1)$-gerbe connections in geometric prequantization, JOURNAL = Rev. Math. Phys., FJOURNAL = Reviews in Mathematical Physics. A Journal for Both Review and Original Research Papers in the Field of Mathematical Physics, VOLUME = 28, YEAR = 2016, NUMBER = 6, PAGES = 1650012, 72, ISSN = 0129-055X,1793-6659, MRCLASS = 53D50 (18G55 53C08), MRNUMBER = 3535115,
+          
+          
+        </li>
+      
+        <li>
+          MR1863996: AUTHOR = Toth, Gabor, TITLE = Finite M\&quot;obius groups, minimal immersions of spheres, and moduli, SERIES = Universitext, PUBLISHER = Springer-Verlag, New York, YEAR = 2002, PAGES = xvi+317, ISBN = 0-387-95323-X, MRCLASS = 53C42 (53C43 58E20), MRNUMBER = 1863996,
+          
+          
+        </li>
+      
+        <li>
+          MR3912053: AUTHOR = Epa, Narthana and Ganter, Nora, TITLE = Platonic and alternating 2-groups, JOURNAL = High. Struct., FJOURNAL = Higher Structures, VOLUME = 1, YEAR = 2017, NUMBER = 1, PAGES = 122--146, ISSN = 2209-0606, MRCLASS = 20J06 (18N10 20D99 20J15), MRNUMBER = 3912053,
+          
+          
+        </li>
+      
+        <li>
+          MR2610397: AUTHOR = Waldorf, Konrad, TITLE = Multiplicative bundle gerbes with connection, JOURNAL = Differential Geom. Appl., FJOURNAL = Differential Geometry and its Applications, VOLUME = 28, YEAR = 2010, NUMBER = 3, PAGES = 313--340, ISSN = 0926-2245,1872-6984, MRCLASS = 53C08 (22E67 57R56), MRNUMBER = 2610397,
+          
+          
+        </li>
+      
+        <li>
+          MR2174418: AUTHOR = Carey, Alan L. and Johnson, Stuart and Murray, Michael K. and Stevenson, Danny and Wang, Bai-Ling, TITLE = Bundle gerbes for Chern-Simons and Wess-Zumino-Witten theories, JOURNAL = Comm. Math. Phys., FJOURNAL = Communications in Mathematical Physics, VOLUME = 259, YEAR = 2005, NUMBER = 3, PAGES = 577--613, ISSN = 0010-3616,1432-0916, MRCLASS = 58J28 (53C07 55R65 58J90 81T13), MRNUMBER = 2174418,
+          
+          
+        </li>
+      
+        <li>
+          MR3013040: AUTHOR = Waldorf, Konrad, TITLE = A construction of string 2-group models using a transgression-regression technique, BOOKTITLE = Analysis, geometry and quantum field theory, SERIES = Contemp. Math., VOLUME = 584, PAGES = 99--115, PUBLISHER = Amer. Math. Soc., Providence, RI, YEAR = 2012, ISBN = 978-0-8218-9144-5, MRCLASS = 53C08 (58H05 81T30), MRNUMBER = 3013040,
+          
+          
+        </li>
+      
+        <li>
+          MR2318389: AUTHOR = Waldorf, Konrad, TITLE = More morphisms between bundle gerbes, JOURNAL = Theory Appl. Categ., FJOURNAL = Theory and Applications of Categories, VOLUME = 18, YEAR = 2007, PAGES = No. 9, 240--273, ISSN = 1201-561X, MRCLASS = 53C29 (18B40 18D05 55R65), MRNUMBER = 2318389,
+          
+          
+        </li>
+      
+        <li>
+          MR3917427: AUTHOR = Waldorf, Konrad, TITLE = Parallel transport in principal 2-bundles, JOURNAL = High. Struct., FJOURNAL = Higher Structures, VOLUME = 2, YEAR = 2018, NUMBER = 1, PAGES = 57--115, ISSN = 2209-0606, MRCLASS = 53C08 (22A22 55R65 58H05), MRNUMBER = 3917427,
+          
+          
+        </li>
+      
+        <li>
+          MR2366945: AUTHOR = Baez, John C. and Stevenson, Danny and Crans, Alissa S. and Schreiber, Urs, TITLE = From loop groups to 2-groups, JOURNAL = Homology Homotopy Appl., FJOURNAL = Homology, Homotopy and Applications, VOLUME = 9, YEAR = 2007, NUMBER = 2, PAGES = 101--135, ISSN = 1532-0073,1532-0081, MRCLASS = 22E67 (17B99 18D05), MRNUMBER = 2366945,
+          
+          
+        </li>
+      
+        <li>
+          MR3084724: AUTHOR = Schreiber, Urs and Waldorf, Konrad, TITLE = Connections on non-abelian gerbes and their holonomy, JOURNAL = Theory Appl. Categ., FJOURNAL = Theory and Applications of Categories, VOLUME = 28, YEAR = 2013, PAGES = 476--540, ISSN = 1201-561X, MRCLASS = 53C08 (18D05 55R65), MRNUMBER = 3084724,
+          
+          
+        </li>
+      
+        <li>
+          MR42768: AUTHOR = Ehresmann, Charles, TITLE = Les connexions infinit\&#x27;esimales dans un espace fibr\&#x27;e diff\&#x27;erentiable, BOOKTITLE = Colloque de topologie (espaces fibr\&#x27;es), Bruxelles, 1950, PAGES = 29--55, PUBLISHER = Georges Thone, Li\`ege, YEAR = 1951, MRCLASS = 53.0X, MRNUMBER = 42768,
+          
+          
+        </li>
+      
+        <li>
+          MR116360: AUTHOR = Ehresmann, Charles, TITLE = Cat\&#x27;egories topologiques et cat\&#x27;egories diff\&#x27;erentiables, BOOKTITLE = Colloque G\&#x27;eom. Diff. Globale (Bruxelles, 1958), PAGES = 137--150, PUBLISHER = Librairie Universitaire, Louvain, YEAR = 1959, MRCLASS = 57.00, MRNUMBER = 116360,
+          
+          
+        </li>
+      
+        <li>
+          MR217087: AUTHOR = Grothendieck, Alexander, TITLE = Rev\^etements \&#x27;etales et groupe fondamental. Fasc. I: Expos\&#x27;es 1 \`a 5, NOTE = Troisi\`eme \&#x27;edition, corrig\&#x27;ee, S\&#x27;eminaire de G\&#x27;eom\&#x27;etrie Alg\&#x27;ebrique, 1960&#x2f;61, PUBLISHER = Institut des Hautes \&#x27;Etudes Scientifiques, Paris, YEAR = 1963, PAGES = iv+143 pp. (not consecutively paged) (loose errata), MRCLASS = 14.55, MRNUMBER = 217087,
+          
+          
+        </li>
+      
+        <li>
+          MR30760: AUTHOR = Whitehead, J. H. C., TITLE = Combinatorial homotopy. II, JOURNAL = Bull. Amer. Math. Soc., FJOURNAL = Bulletin of the American Mathematical Society, VOLUME = 55, YEAR = 1949, PAGES = 453--496, ISSN = 0002-9904, MRCLASS = 56.0X, MRNUMBER = 30760,
+          
+          
+        </li>
+      
+        <li>
+          MR419643: AUTHOR = Brown, Ronald and Spencer, Christopher B., TITLE = $G$-groupoids, crossed modules and the fundamental groupoid of a topological group, NOTE = Nederl. Akad. Wetensch. Proc. Ser. A \bf 79, JOURNAL = Indag. Math., FJOURNAL = , VOLUME = 38, YEAR = 1976, NUMBER = 4, PAGES = 296--302, MRCLASS = 20L10 (22A05), MRNUMBER = 419643,
+          
+          
+        </li>
+      
+        <li>
+          MR2342821: AUTHOR = Baez, John C. and Schreiber, Urs, TITLE = Higher gauge theory, BOOKTITLE = Categories in algebra, geometry and mathematical physics, SERIES = Contemp. Math., VOLUME = 431, PAGES = 7--30, PUBLISHER = Amer. Math. Soc., Providence, RI, YEAR = 2007, ISBN = 978-0-8218-3970-6; 0-8218-3970-5, MRCLASS = 53C29 (18D99 22A22 53C07 55R65), MRNUMBER = 2342821,
+          
+          
+        </li>
+      
+        <li>
+          MR4268834: AUTHOR = Bunk, Severin and M\&quot;uller, Lukas and Szabo, Richard J., TITLE = Smooth 2-group extensions and symmetries of bundle gerbes, JOURNAL = Comm. Math. Phys., FJOURNAL = Communications in Mathematical Physics, VOLUME = 384, YEAR = 2021, NUMBER = 3, PAGES = 1829--1911, ISSN = 0010-3616,1432-0916, MRCLASS = 53C08 (22E30), MRNUMBER = 4268834,
+          
+          
+        </li>
+      
+    </ol>
+    
+  </section>
+
+  <footer class="footer-disclaimer">
+    <p class="muted">Rendered by <span class="brand">GrokRxiv</span>. Source: <a href="https://arxiv.org/abs/2606.12482">arXiv:2606.12482</a>.</p>
+  </footer>
+</body>
+</html>
