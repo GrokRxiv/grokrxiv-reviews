@@ -1,0 +1,1984 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>The End of Code Review: Coding Agents Supersede Human Inspection — GrokRxiv Review</title>
+  <meta name="generator" content="grokrxiv-render">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- KaTeX is rendered client-side; math is kept as \( ... \) and \[ ... \] delimiters. -->
+  <style>
+    :root { color-scheme: light dark; --fg: #111; --muted: #555; --bg: #fff;
+            --accent: #1f6feb; --border: #d0d7de; --banner: #fff3cd; --banner-fg: #664d03; }
+    @media (prefers-color-scheme: dark) {
+      :root { --fg: #e6edf3; --muted: #8b949e; --bg: #0d1117; --accent: #58a6ff;
+              --border: #30363d; --banner: #3a2f0b; --banner-fg: #f1c453; }
+    }
+    body { font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+           color: var(--fg); background: var(--bg); max-width: 820px;
+           margin: 0 auto; padding: 24px; }
+    h1 { font-size: 1.7rem; line-height: 1.25; margin: 0 0 0.5rem; }
+    h2 { font-size: 1.2rem; margin-top: 2rem; border-bottom: 1px solid var(--border); padding-bottom: .25rem; }
+    .muted { color: var(--muted); }
+    .disclaimer { background: var(--banner); color: var(--banner-fg); border: 1px solid var(--border);
+                  padding: .75rem 1rem; border-radius: 6px; margin: 0 0 1.5rem; font-weight: 600; }
+    .footer-disclaimer { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--border);
+                         color: var(--muted); font-size: .9rem; }
+    .brand { font-weight: 700; color: var(--accent); }
+    details { border: 1px solid var(--border); border-radius: 6px; padding: .75rem 1rem; margin: .5rem 0; }
+    details > summary { cursor: pointer; font-weight: 600; }
+    .meta-link { font-size: .9rem; }
+    ul { padding-left: 1.25rem; }
+    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .agent-grid { display: grid; gap: .5rem; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 999px;
+             background: var(--border); color: var(--fg); font-size: .8rem; }
+    .badge.pass { background: #1f883d; color: #fff; }
+    .badge.warn { background: #bf8700; color: #fff; }
+    .badge.fail { background: #cf222e; color: #fff; }
+    .target-grid { display: grid; gap: .75rem; padding: 0; list-style: none; }
+    .revision-target { border: 1px solid var(--border); border-radius: 6px; padding: .9rem 1rem;
+                       background: rgba(127, 127, 127, .08); }
+    .target-title { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: 0 0 .75rem; }
+    .target-fields { display: grid; gap: .5rem; margin: 0; }
+    .target-field { display: grid; gap: .35rem; border: 1px solid var(--border);
+                    border-radius: 6px; padding: .65rem .75rem; }
+    .target-field.required { border-color: #bf8700; background: rgba(191, 135, 0, .12); }
+    .field-label { color: var(--muted); font-size: .75rem; font-weight: 700; text-transform: uppercase; }
+    .field-value { margin: 0; overflow-wrap: anywhere; }
+    .field-value.codeish { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>The End of Code Review: Coding Agents Supersede Human Inspection</h1>
+    <p class="muted">
+      <span class="brand">GrokRxiv</span> review of
+      <a class="meta-link" href="https://arxiv.org/abs/2606.13175">arXiv:2606.13175</a>
+       · <span>cs.SE</span>
+    </p>
+    <p class="muted">
+      Martin Monperrus
+    </p>
+  </header>
+
+  <section>
+    <h2>TL;DR</h2>
+    <p>All five specialists converge on a picture of an intellectually significant but empirically under-supported position paper. The novelty specialist rates the contribution &#x27;significant&#x27; (0.65): no prior work directly argues for wholesale replacement of the human merge gate rather than augmenting it, and the identification of the structural instability in hybrid human-AI review workflows is a genuine analytical contribution. The citation specialist (confidence 0.95) finds the bibliography comprehensive and well-integrated across foundational, empirical, and contemporary literatures. However, the technical correctness specialist (confidence 0.78, overall &#x27;questionable&#x27;) flags one critical and six major unsupported or overstated claims, including the central load-bearing claim (C5) that the cost-benefit crossover has already occurred — which is asserted without any quantitative cost-benefit model, escape-defect comparison, or threshold specification. The reproducibility specialist (score 0.18, confidence 0.88) raises two independent critical concerns: no companion code or proof artifact exists to support the cost-benefit argument, and no replication protocol allows an independent researcher to verify the crossover claim. The headline SWE-bench figure (&#x27;&gt;80%&#x27; abstract vs. &#x27;70%&#x27; body) is internally inconsistent and untethered to a benchmark variant or dated snapshot. The paper is in a code-amenable field (cs.SE) and its central claim is exactly the kind of empirical proposition that a benchmark or simulation would validate; neither is provided. The recommendation gate therefore applies: the missing quantitative analysis blocks the headline claim, triggering major_revision. Revision can be achieved either by reframing all crossover claims as argued forecasts rather than accomplished facts, or by adding a controlled escape-defect analysis. The paper&#x27;s core insight is timely and publishable in revised form; the current version conflates a strong argument with established empirical finding.</p>
+    <p class="muted">Recommendation: <strong>Major revision</strong> · Confidence: 82%</p>
+  </section>
+
+  <section>
+    <h2>Strengths</h2>
+    <ul>
+      <li>The paper identifies a genuine and under-studied structural problem: as AI-assisted coding throughput rises, a fixed human reviewer pool becomes the new bottleneck, and the queuing-theoretic framing of this problem is novel relative to prior work on automated code review.</li><li>The bibliography is comprehensive and well-calibrated, spanning Fagan 1976 through 2025-era agent benchmarks, with citations serving substantive argumentative roles rather than decorative ones.</li><li>The paper correctly distinguishes two qualitatively different risks in autonomous agent review — hallucination&#x2f;false negatives and adversarial prompt injection — and proposes distinct mitigations for each, showing analytical care about the threat model.</li><li>The security-vulnerability dimension of the argument is well-grounded: the acknowledgment that AI agents both introduce vulnerabilities (Pearce et al., ~40% CWE rate) and can detect them better than static analyzers is presented with appropriate nuance rather than as a one-sided claim.</li><li>The paper is the first, per the novelty specialist, to argue for displacement of the human merge gate as a governance structure rather than merely augmenting human reviewers, which is a conceptually distinct and significant contribution to the automated software engineering literature.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Weaknesses</h2>
+    <ul>
+      <li>The central claim — that the cost-benefit crossover at which human review is no longer justified has already occurred — is unsupported: no defect-detection-rate comparison, no dollar-cost-per-defect accounting, and no escape-defect measurement against a controlled PR corpus are provided (C5, critical severity).</li><li>The headline SWE-bench figure of &#x27;&gt;80%&#x27; in the abstract is internally inconsistent with the paper body&#x27;s own &#x27;70%&#x27; figure and is not tied to a named benchmark variant (Verified, Lite, or full) or a dated leaderboard snapshot (C1, major severity).</li><li>The claim that LLM review systems produce comments &#x27;at quality comparable to trained human reviewers&#x27; overstates what the cited literature establishes: CodeReviewer and Pornprasit &amp; Tantithamthavorn use automatic metrics and limited human studies, not blind head-to-head evaluations against expert reviewers (C3, major severity).</li><li>The &#x27;rubber-stamp&#x27; reviewer behavior claim — that humans cannot genuinely scrutinize AI-generated code under cognitive load — is a strong empirical premise for which no direct citation or study is provided; all supporting citations predate LLM coding agents and concern human-written code (C6, major severity).</li><li>The proposed ensemble-review mitigation for hallucination is asserted without empirical support: no evaluation of N-agent consensus false-negative rate versus a human-reviewer baseline is provided, and correlated errors across same-family LLMs are not analyzed (C12, major severity).</li><li>Reproducibility is critically low (score 0.18): no companion code, versioned evidence dataset, benchmark snapshot, or replication protocol exists for the cost-benefit argument, and the referenced argument_map.pdf is not provided as a verifiable artifact.</li><li>Agent review is described as &#x27;deterministic,&#x27; which is technically incorrect for stochastic LLM samplers under realistic deployment conditions, undermining the assurance argument the paper relies on (C13).</li><li>SWRBench (arXiv:2509.01494), the most directly relevant 2025 benchmark for pull-request-centric automated review, is absent from the related-work discussion despite being identified by the novelty specialist as providing the empirical basis for the paper&#x27;s central &#x27;structural failure&#x27; claim.</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Revision Targets</h2>
+    <div class="target-grid">
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              corrections&#x2f;2606.13175&#x2f;paper.tex
+               at 
+              Section &#x27;Claim 3: The cost-benefit calculation has flipped.&#x27;
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">This is the central, load-bearing claim of the paper. It is asserted without any quantitative cost-benefit model: no defect-detection-rate comparison between agent and human reviewers on a controlled corpus, no dollar-cost accounting per reviewed change, no escape-defect rate measurement. The supporting citations (sadowski2018modern for 10–15% time spent, hilton2016usage for latency) establish only the cost side; the benefit side (marginal defects caught by humans that agents miss) is asserted, not measured. The claim is in a code-amenable field (cs.SE) and is exactly the kind of empirical proposition that a benchmark or simulation would validate.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Either restate as a forecast&#x2f;argument (&#x27;we argue the crossover is imminent&#x27;) rather than an accomplished fact, OR ship a quantitative analysis: experiments&#x2f;crossover&#x2f;agent_vs_human_defect_detection.py running both an agent reviewer and a human-reviewer baseline on a held-out PR corpus (e.g., DevReview-Bench or CodeReviewer&#x27;s test split), reporting precision&#x2f;recall&#x2f;escape-defect rate and cost per defect.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm `Section &#x27;Claim 3: The cost-benefit calculation has flipped.&#x27;` is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              corrections&#x2f;2606.13175&#x2f;paper.tex
+               at 
+              Abstract &#x2f; Introduction (paragraph citing jimenez2024swebench)
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">The abstract asserts &#x27;&gt;80%&#x27; resolution on SWE-bench, but Section &#x27;Benchmark Performance&#x27; states that &#x27;top agents on the public leaderboard resolved more than 70 % of tasks&#x27; by late 2025, and that SWE-bench Verified exceeded 50% in late 2024. The cited reference (jimenez2024swebench) is the original benchmark paper which did not establish 80%; the only support for the figure is swebench2025leaderboard, an undated webpage. The 80% number is also internally inconsistent with the paper&#x27;s own 70% figure later in the same paper.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Reconcile the abstract with the body (use 70% or specify the leaderboard snapshot date and benchmark variant — SWE-bench Verified vs. SWE-bench Lite vs. full). Cite a frozen snapshot or include a CSV of leaderboard scores at experiments&#x2f;swebench&#x2f;leaderboard_snapshot_2025-XX-XX.csv.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm `Abstract &#x2f; Introduction (paragraph citing jimenez2024swebench)` is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              corrections&#x2f;2606.13175&#x2f;paper.tex
+               at 
+              Introduction and Section &#x27;Review-Specific Capabilities&#x27;
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">The cited works (li2022codereviewer, pornprasit2023automated) demonstrate that LLM review systems generate plausible comments and detect some defect categories, but neither paper establishes parity with human reviewers in a head-to-head, blind, statistically powered evaluation. CodeReviewer&#x27;s evaluation uses automatic metrics (BLEU, exact match) and a limited human study; Pornprasit and Tantithamthavorn document &#x27;meaningful coverage&#x27; but also significant gaps. The paper&#x27;s phrasing (&#x27;at quality that is at least comparable&#x27;) overstates what the cited literature establishes.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Soften the claim to &#x27;comparable on specific comment-generation benchmarks&#x27; or add a head-to-head agent-vs-human evaluation. Ship the evaluation harness at experiments&#x2f;review_quality&#x2f;agent_vs_human_eval.py with the held-out PR corpus used.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm `Introduction and Section &#x27;Review-Specific Capabilities&#x27;` is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              corrections&#x2f;2606.13175&#x2f;paper.tex
+               at 
+              Section &#x27;Claim 2&#x27;, subsection &#x27;Human review provides no genuine assurance&#x27;
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">This is a strong empirical claim about reviewer behavior under AI-assisted workflows, but no citation is provided that measures it. czerwonka2015code is cited but predates LLM coding agents and concerns human-written code. There are emerging studies on review of AI-generated PRs that could support or refute this (e.g., on Copilot-suggested code in industry settings), but none are cited.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Cite an empirical study of human review behavior on agent-generated PRs (e.g., observational study at a company that deployed Copilot or Cursor) or run one. Without that, soften to &#x27;we hypothesize&#x27; or &#x27;anecdotally observed&#x27;.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm `Section &#x27;Claim 2&#x27;, subsection &#x27;Human review provides no genuine assurance&#x27;` is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              corrections&#x2f;2606.13175&#x2f;paper.tex
+               at 
+              Discussion, &#x27;Counter-argument: Hallucination and false negatives&#x27;
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">This mitigation is proposed without empirical support. It is asserted that ensembles + calibrated uncertainty will work, but no measurement is given that ensembling LLM reviewers reduces false-negative rate to a level competitive with human reviewers, and no citation is provided. Correlated errors across LLMs from the same family (a known issue) could undermine ensemble gains; this is not analyzed.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Cite an ensemble-of-reviewers evaluation, or run one: experiments&#x2f;ensemble_review&#x2f;agreement_vs_escape_rate.py measuring how N-agent consensus changes false-negative rate against a held-out defect corpus.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm `Discussion, &#x27;Counter-argument: Hallucination and false negatives&#x27;` is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>code</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              
+              
+              code release and execution entrypoints
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">No companion code, notebook, formal proof artifact, or machine-checkable argument file is provided to reproduce the literature synthesis, argument map, or cost-benefit analysis supporting the headline conclusion.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Release the source code, scripts, model configuration, and execution entrypoints needed to regenerate the reported tables, or document why those artifacts cannot be released.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm runnable code or a documented non-release justification is present.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              corrections&#x2f;2606.13175&#x2f;paper.tex
+               at 
+              Section &#x27;Claim 3: The cost-benefit calculation has flipped.&#x27;
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">This is the central, load-bearing claim of the paper. It is asserted without any quantitative cost-benefit model: no defect-detection-rate comparison between agent and human reviewers on a controlled corpus, no dollar-cost accounting per reviewed change, no escape-defect rate measurement. The supporting citations (sadowski2018modern for 10–15% time spent, hilton2016usage for latency) establish only the cost side; the benefit side (marginal defects caught by humans that agents miss) is asserted, not measured. The claim is in a code-amenable field (cs.SE) and is exactly the kind of empirical proposition that a benchmark or simulation would validate.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Either restate as a forecast&#x2f;argument (&#x27;we argue the crossover is imminent&#x27;) rather than an accomplished fact, OR ship a quantitative analysis: experiments&#x2f;crossover&#x2f;agent_vs_human_defect_detection.py running both an agent reviewer and a human-reviewer baseline on a held-out PR corpus (e.g., DevReview-Bench or CodeReviewer&#x27;s test split), reporting precision&#x2f;recall&#x2f;escape-defect rate and cost per defect.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm `Section &#x27;Claim 3: The cost-benefit calculation has flipped.&#x27;` is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>bibliography</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              
+              
+              SWRBench: A Benchmark for Pull Request-Centric Automated Code Review (arXiv:2509.01494)
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">This 2025 benchmark specifically addresses the transition from AI-assisted to autonomous pull-request review and provides the empirical basis for the &#x27;structural&#x27; failure of human review at agentic scales, which is a core claim of this paper.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Add or discuss missing prior art `SWRBench: A Benchmark for Pull Request-Centric Automated Code Review (arXiv:2509.01494)`. This 2025 benchmark specifically addresses the transition from AI-assisted to autonomous pull-request review and provides the empirical basis for the &#x27;structural&#x27; failure of human review at agentic scales, which is a core claim of this paper.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm the related-work discussion addresses this prior art.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+    </div>
+  </section>
+
+  <section>
+    <h2>Open Questions</h2>
+    <ul>
+      <li>Can the authors provide a quantitative cost-benefit analysis specifying escape-defect rates for agent reviewers versus human reviewers on a controlled PR corpus, along with cost-per-defect accounting, that grounds the crossover claim empirically rather than asserting it?</li><li>Do the SWE-bench figures of &#x27;&gt;80%&#x27; (abstract) and &#x27;&gt;70%&#x27; (body) refer to different benchmark variants (e.g., Verified versus full) or different leaderboard snapshot dates, and can the authors supply a frozen leaderboard CSV with variant, date, and agent name for each cited figure?</li><li>What empirical evidence supports the claim that human review of agent-generated PRs degrades to rubber-stamping in practice — is there an observational study, a planned study, or would the authors reframe this as a hypothesis?</li><li>Has the proposed ensemble-review mitigation been evaluated on a held-out defect corpus comparing N-agent consensus false-negative rate to a human-reviewer baseline, and if not, how do the authors account for correlated errors across LLMs from the same model family?</li><li>How should the paper&#x27;s claims be interpreted if agent SWE-bench performance plateaus or regresses on future benchmark revisions — is there an operationalized capability threshold that does not depend on a specific leaderboard snapshot?</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Per-Agent Reviews</h2>
+    <div class="agent-grid">
+      
+      <details>
+        <summary>
+          citation — <span class="muted">gemini-3-flash-preview</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;confidence&quot;: 0.95,
+  &quot;entries&quot;: [
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;A. Bacchelli&quot;,
+          &quot;C. Bird&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;bacchelli2013expectations&quot;,
+        &quot;raw&quot;: &quot;bacchelli2013expectations: A. Bacchelli and C. Bird, ``Expectations, outcomes, and challenges of modern code review,&#x27;&#x27; in Proceedings of the 35th International Conference on Software Engineering (ICSE).\\hskip 1em plus 0.5em minus 0.4em\\relax IEEE, 2013, pp. 712--721.&quot;,
+        &quot;title&quot;: &quot;Expectations, outcomes, and challenges of modern code review&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Proceedings of the 35th International Conference on Software Engineering (ICSE)&quot;,
+        &quot;year&quot;: 2013
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Fundamental study on modern code review practices, establishing the core goals of review (defect detection, style, knowledge transfer).&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;C. Sadowski&quot;,
+          &quot;E. Söderberg&quot;,
+          &quot;L. Church&quot;,
+          &quot;M. Sipko&quot;,
+          &quot;A. Bacchelli&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;sadowski2018modern&quot;,
+        &quot;raw&quot;: &quot;sadowski2018modern: C. Sadowski, E. Söderberg, L. Church, M. Sipko, and A. Bacchelli, ``Modern code review: a case study at {Google},&#x27;&#x27; in Proceedings of the 40th International Conference on Software Engineering: Software Engineering in Practice (ICSE-SEIP).\\hskip 1em plus 0.5em minus 0.4em\\relax ACM, 2018, pp. 181--190. | title: Modern code review: a case study at Google&quot;,
+        &quot;title&quot;: &quot;Modern code review: a case study at Google&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Proceedings of the 40th International Conference on Software Engineering: Software Engineering in Practice (ICSE-SEIP)&quot;,
+        &quot;year&quot;: 2018
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Empirical case study providing data on time spent and developer sentiment regarding code review at Google.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;M. Hilton&quot;,
+          &quot;T. Tunnell&quot;,
+          &quot;K. Huang&quot;,
+          &quot;D. Marinov&quot;,
+          &quot;D. Dig&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;hilton2016usage&quot;,
+        &quot;raw&quot;: &quot;hilton2016usage: M. Hilton, T. Tunnell, K. Huang, D. Marinov, and D. Dig, ``Usage, costs, and benefits of continuous integration in open-source projects,&#x27;&#x27; in Proceedings of the 31st IEEE&#x2f;ACM International Conference on Automated Software Engineering (ASE).\\hskip 1em plus 0.5em minus 0.4em\\relax ACM, 2016, pp. 426--437.&quot;,
+        &quot;title&quot;: &quot;Usage, costs, and benefits of continuous integration in open-source projects&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Proceedings of the 31st IEEE&#x2f;ACM International Conference on Automated Software Engineering (ASE)&quot;,
+        &quot;year&quot;: 2016
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Supports the argument that review latency imposes a structural drag on continuous delivery pipelines.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;A. Bosu&quot;,
+          &quot;M. Greiler&quot;,
+          &quot;C. Bird&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;bosu2016process&quot;,
+        &quot;raw&quot;: &quot;bosu2016process: A. Bosu, M. Greiler, and C. Bird, ``Process aspects and social dynamics of contemporary code review,&#x27;&#x27; in IEEE Transactions on Software Engineering, vol. 43, no. 1.\\hskip 1em plus 0.5em minus 0.4em\\relax IEEE, 2016, pp. 56--75.&quot;,
+        &quot;title&quot;: &quot;Process aspects and social dynamics of contemporary code review&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;IEEE Transactions on Software Engineering&quot;,
+        &quot;year&quot;: 2016
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Analyzes social dynamics and friction in code review, including tone and project abandonment.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;A. Murgia&quot;,
+          &quot;P. Tourani&quot;,
+          &quot;B. Adams&quot;,
+          &quot;M. Ortu&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;murgia2014developers&quot;,
+        &quot;raw&quot;: &quot;murgia2014developers: A. Murgia, P. Tourani, B. Adams, and M. Ortu, ``Do developers feel emotions? an exploratory analysis of emotions in software artifacts,&#x27;&#x27; in Proceedings of the 11th Working Conference on Mining Software Repositories (MSR).\\hskip 1em plus 0.5em minus 0.4em\\relax ACM, 2014, pp. 262--271.&quot;,
+        &quot;title&quot;: &quot;Do developers feel emotions? an exploratory analysis of emotions in software artifacts&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Proceedings of the 11th Working Conference on Mining Software Repositories (MSR)&quot;,
+        &quot;year&quot;: 2014
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Supports the claim that manual code review can generate social friction and negative emotional outcomes.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: &quot;2405.15793&quot;,
+        &quot;authors&quot;: [
+          &quot;J. Yang&quot;,
+          &quot;C. E. Jimenez&quot;,
+          &quot;A. Wettig&quot;,
+          &quot;K. Lieret&quot;,
+          &quot;S. Yao&quot;,
+          &quot;K. Narasimhan&quot;,
+          &quot;O. Press&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;yang2024sweagent&quot;,
+        &quot;raw&quot;: &quot;yang2024sweagent: J. Yang, C. E. Jimenez, A. Wettig, K. Lieret, S. Yao, K. Narasimhan, and O. Press, ``{SWE}-agent: Agent-computer interfaces enable automated software engineering,&#x27;&#x27; arXiv preprint arXiv:2405.15793, 2024. | title: SWE-agent: Agent-computer interfaces enable automated software engineering | arxiv: 2405.15793&quot;,
+        &quot;title&quot;: &quot;SWE-agent: Agent-computer interfaces enable automated software engineering&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;arXiv preprint arXiv:2405.15793&quot;,
+        &quot;year&quot;: 2024
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Introduces SWE-agent, demonstrating significant performance gains on repository-scale tasks via optimized agent-computer interfaces.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Cognition AI&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;cognition2024devin&quot;,
+        &quot;raw&quot;: &quot;cognition2024devin: {Cognition AI}, ``Introducing {Devin}, the first {AI} software engineer,&#x27;&#x27; Cognition AI Blog, 2024, \\url{https:&#x2f;&#x2f;www.cognition.ai&#x2f;blog&#x2f;introducing-devin}. | title: Introducing Devin, the first AI software engineer&quot;,
+        &quot;title&quot;: &quot;Introducing Devin, the first AI software engineer&quot;,
+        &quot;url&quot;: &quot;https:&#x2f;&#x2f;www.cognition.ai&#x2f;blog&#x2f;introducing-devin&quot;,
+        &quot;venue&quot;: &quot;Cognition AI Blog&quot;,
+        &quot;year&quot;: 2024
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Evidence of early commercial autonomous agents capable of navigating codebases and deploying fixes.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: &quot;2407.16741&quot;,
+        &quot;authors&quot;: [
+          &quot;X. Wang&quot;,
+          &quot;B. Chen&quot;,
+          &quot;Y. Yuan&quot;,
+          &quot;Y. Zhang&quot;,
+          &quot;B. Li&quot;,
+          &quot;C. Qian&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;wang2024opendevin&quot;,
+        &quot;raw&quot;: &quot;wang2024opendevin: X. Wang, B. Chen, Y. Yuan, Y. Zhang, B. Li, C. Qian et al., ``{OpenDevin}: An open platform for {AI} software developers as generalist agents,&#x27;&#x27; in arXiv preprint arXiv:2407.16741, 2024. | title: OpenDevin: An open platform for AI software developers as generalist agents | arxiv: 2407.16741&quot;,
+        &quot;title&quot;: &quot;OpenDevin: An open platform for AI software developers as generalist agents&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;arXiv preprint arXiv:2407.16741&quot;,
+        &quot;year&quot;: 2024
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Open-source agent framework, demonstrating the rapid growth and availability of agentic coding tools.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;GitHub&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;github2024copilotworkspace&quot;,
+        &quot;raw&quot;: &quot;github2024copilotworkspace: {GitHub}, ``{GitHub Copilot Workspace}: Welcome to the {Copilot-native} developer environment,&#x27;&#x27; GitHub Blog, 2024, \\url{https:&#x2f;&#x2f;github.blog&#x2f;2024-04-29-github-copilot-workspace&#x2f;}. | title: GitHub Copilot Workspace: Welcome to the Copilot-native developer environment&quot;,
+        &quot;title&quot;: &quot;GitHub Copilot Workspace: Welcome to the Copilot-native developer environment&quot;,
+        &quot;url&quot;: &quot;https:&#x2f;&#x2f;github.blog&#x2f;2024-04-29-github-copilot-workspace&#x2f;&quot;,
+        &quot;venue&quot;: &quot;GitHub Blog&quot;,
+        &quot;year&quot;: 2024
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Shows the integration of agentic capabilities into mainstream pull-request and development workflows.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: &quot;2310.06770&quot;,
+        &quot;authors&quot;: [
+          &quot;C. E. Jimenez&quot;,
+          &quot;J. Yang&quot;,
+          &quot;A. Wettig&quot;,
+          &quot;S. Yao&quot;,
+          &quot;K. Pei&quot;,
+          &quot;O. Press&quot;,
+          &quot;K. Narasimhan&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;jimenez2024swebench&quot;,
+        &quot;raw&quot;: &quot;jimenez2024swebench: C. E. Jimenez, J. Yang, A. Wettig, S. Yao, K. Pei, O. Press, and K. Narasimhan, ``{SWE}-bench: Can language models resolve real-{GitHub} issues?&#x27;&#x27; arXiv preprint arXiv:2310.06770, 2023. | title: SWE-bench: Can language models resolve real-GitHub issues? | arxiv: 2310.06770&quot;,
+        &quot;title&quot;: &quot;SWE-bench: Can language models resolve real-GitHub issues?&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;arXiv preprint arXiv:2310.06770&quot;,
+        &quot;year&quot;: 2023
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;The defining benchmark for evaluating agent capability on real-world software issues.&quot;,
+      &quot;notes&quot;: &quot;The paper cites this for 80% resolution in the Intro, but the original 2023 results were &lt;2%. The 80% claim refers to the 2026 state of the benchmark.&quot;,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Z. Li&quot;,
+          &quot;S. Lu&quot;,
+          &quot;D. Guo&quot;,
+          &quot;N. Duan&quot;,
+          &quot;S. Jannu&quot;,
+          &quot;G. Jenks&quot;,
+          &quot;D. Majumder&quot;,
+          &quot;J. Green&quot;,
+          &quot;N. Sundaresan&quot;,
+          &quot;M. Fu&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;li2022codereviewer&quot;,
+        &quot;raw&quot;: &quot;li2022codereviewer: Z. Li, S. Lu, D. Guo, N. Duan, S. Jannu, G. Jenks, D. Majumder, J. Green, N. Sundaresan, M. Fu et al., ``{CodeReviewer}: Pre-training for automating code review activities,&#x27;&#x27; in Proceedings of the 30th ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering (ESEC&#x2f;FSE).\\hskip 1em plus 0.5em minus 0.4em\\relax ACM, 2022, pp. 1536--1546. | title: CodeReviewer: Pre-training for automating code review activities&quot;,
+        &quot;title&quot;: &quot;CodeReviewer: Pre-training for automating code review activities&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Proceedings of the 30th ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering (ESEC&#x2f;FSE)&quot;,
+        &quot;year&quot;: 2022
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Pre-trained model specialized for code review tasks, showing human-comparable inline comment generation.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;C. Pornprasit&quot;,
+          &quot;C. Tantithamthavorn&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;pornprasit2023automated&quot;,
+        &quot;raw&quot;: &quot;pornprasit2023automated: C. Pornprasit and C. Tantithamthavorn, ``Automated code review in practice,&#x27;&#x27; in Proceedings of the 38th IEEE&#x2f;ACM International Conference on Automated Software Engineering (ASE).\\hskip 1em plus 0.5em minus 0.4em\\relax IEEE, 2023, pp. 394--405.&quot;,
+        &quot;title&quot;: &quot;Automated code review in practice&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Proceedings of the 38th IEEE&#x2f;ACM International Conference on Automated Software Engineering (ASE)&quot;,
+        &quot;year&quot;: 2023
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Industrial evaluation demonstrating that agents can detect defect categories targeted by human reviewers.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;M. E. Fagan&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;fagan1976design&quot;,
+        &quot;raw&quot;: &quot;fagan1976design: M. E. Fagan, ``Design and code inspections to reduce errors in program development,&#x27;&#x27; IBM Systems Journal, vol. 15, no. 3, pp. 182--211, 1976.&quot;,
+        &quot;title&quot;: &quot;Design and code inspections to reduce errors in program development&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;IBM Systems Journal&quot;,
+        &quot;year&quot;: 1976
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Seminal paper originating formal code inspection, providing historical context for the 50-year practice.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;J. Czerwonka&quot;,
+          &quot;M. Greiler&quot;,
+          &quot;J. Tilford&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;czerwonka2015code&quot;,
+        &quot;raw&quot;: &quot;czerwonka2015code: J. Czerwonka, M. Greiler, and J. Tilford, ``Code reviews do not find bugs: How the current code review best practice slows us down,&#x27;&#x27; pp. 27--28, 2015.&quot;,
+        &quot;title&quot;: &quot;Code reviews do not find bugs: How the current code review best practice slows us down&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Unknown&quot;,
+        &quot;year&quot;: 2015
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Supports the claim that human code review often misses deep logic bugs and focuses on maintainability.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;J. Lu&quot;,
+          &quot;L. Yu&quot;,
+          &quot;X. Li&quot;,
+          &quot;L. Yang&quot;,
+          &quot;C. Zuo&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;lu2023llama&quot;,
+        &quot;raw&quot;: &quot;lu2023llama: J. Lu, L. Yu, X. Li, L. Yang, and C. Zuo, ``Llama-reviewer: Advancing code review automation with large language models through parameter-efficient fine-tuning,&#x27;&#x27; in Proceedings of the 34th IEEE International Symposium on Software Reliability Engineering (ISSRE).\\hskip 1em plus 0.5em minus 0.4em\\relax IEEE, 2023, pp. 647--658.&quot;,
+        &quot;title&quot;: &quot;Llama-reviewer: Advancing code review automation with large language models through parameter-efficient fine-tuning&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Proceedings of the 34th IEEE International Symposium on Software Reliability Engineering (ISSRE)&quot;,
+        &quot;year&quot;: 2023
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Demonstrates the effectiveness of parameter-efficient fine-tuning for adapting general LLMs to review tasks.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;R. Tufano&quot;,
+          &quot;S. Masiero&quot;,
+          &quot;A. Mastropaolo&quot;,
+          &quot;L. Pascarella&quot;,
+          &quot;D. Poshyvanyk&quot;,
+          &quot;G. Bavota&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;tufano2021using&quot;,
+        &quot;raw&quot;: &quot;tufano2021using: R. Tufano, S. Masiero, A. Mastropaolo, L. Pascarella, D. Poshyvanyk, and G. Bavota, ``Using pre-trained models to boost code review automation.&#x27;&#x27;\\hskip 1em plus 0.5em minus 0.4em\\relax ACM, 2022, pp. 1--12.&quot;,
+        &quot;title&quot;: &quot;Using pre-trained models to boost code review automation&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;ACM&quot;,
+        &quot;year&quot;: 2022
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Shows an end-to-end pipeline that generates both comments and patches, reducing review-revise cycles.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: &quot;2402.02172&quot;,
+        &quot;authors&quot;: [
+          &quot;X. Tang&quot;,
+          &quot;K. Kim&quot;,
+          &quot;Y. Song&quot;,
+          &quot;C. Lothritz&quot;,
+          &quot;B. Li&quot;,
+          &quot;S. Ezzini&quot;,
+          &quot;H. Tian&quot;,
+          &quot;J. Klein&quot;,
+          &quot;T. F. Bissyande&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;tang2024codeagent&quot;,
+        &quot;raw&quot;: &quot;tang2024codeagent: X. Tang, K. Kim, Y. Song, C. Lothritz, B. Li, S. Ezzini, H. Tian, J. Klein, and T. F. Bissyande, ``{CodeAgent}: Autonomous communicative agents for code review,&#x27;&#x27; arXiv preprint arXiv:2402.02172, 2024. | title: CodeAgent: Autonomous communicative agents for code review | arxiv: 2402.02172&quot;,
+        &quot;title&quot;: &quot;CodeAgent: Autonomous communicative agents for code review&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;arXiv preprint arXiv:2402.02172&quot;,
+        &quot;year&quot;: 2024
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Introduces multi-agent collaboration for code review, pushing automation toward coordinated workflows.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: &quot;2107.03374&quot;,
+        &quot;authors&quot;: [
+          &quot;M. Chen&quot;,
+          &quot;J. Tworek&quot;,
+          &quot;H. Jun&quot;,
+          &quot;Q. Yuan&quot;,
+          &quot;H. P. d. O. Pinto&quot;,
+          &quot;J. Kaplan&quot;,
+          &quot;H. Edwards&quot;,
+          &quot;Y. Burda&quot;,
+          &quot;N. Joseph&quot;,
+          &quot;G. Brockman&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;chen2021evaluating&quot;,
+        &quot;raw&quot;: &quot;chen2021evaluating: M. Chen, J. Tworek, H. Jun, Q. Yuan, H. P. d. O. Pinto, J. Kaplan, H. Edwards, Y. Burda, N. Joseph, G. Brockman et al., ``Evaluating large language models trained on code,&#x27;&#x27; arXiv preprint arXiv:2107.03374, 2021. | arxiv: 2107.03374&quot;,
+        &quot;title&quot;: &quot;Evaluating large language models trained on code&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;arXiv preprint arXiv:2107.03374&quot;,
+        &quot;year&quot;: 2021
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Foundational paper on OpenAI Codex, identifying the potential of LLMs specialized for software tasks.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Anthropic&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;anthropic2024claude&quot;,
+        &quot;raw&quot;: &quot;anthropic2024claude: {Anthropic}, ``The {Claude} 3 model family: {Opus, Sonnet, Haiku},&#x27;&#x27; Anthropic Technical Report, 2024. | title: The Claude 3 model family: Opus, Sonnet, Haiku&quot;,
+        &quot;title&quot;: &quot;The Claude 3 model family: Opus, Sonnet, Haiku&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Anthropic Technical Report&quot;,
+        &quot;year&quot;: 2024
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Details the Claude 3 family, which powers Claude Code and other agentic coding assistants.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;SWE-bench Team&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;swebench2025leaderboard&quot;,
+        &quot;raw&quot;: &quot;swebench2025leaderboard: S. bench Team, ``{SWE}-bench leaderboard,&#x27;&#x27; \\url{https:&#x2f;&#x2f;www.swebench.com}, 2025. | title: SWE-bench leaderboard&quot;,
+        &quot;title&quot;: &quot;SWE-bench leaderboard&quot;,
+        &quot;url&quot;: &quot;https:&#x2f;&#x2f;www.swebench.com&quot;,
+        &quot;venue&quot;: &quot;Online&quot;,
+        &quot;year&quot;: 2025
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Provides live performance tracking for agents, showing the jump to &gt;70% resolution by late 2025.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;C. Le Goues&quot;,
+          &quot;T. Nguyen&quot;,
+          &quot;S. Forrest&quot;,
+          &quot;W. Weimer&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;le2012genprog&quot;,
+        &quot;raw&quot;: &quot;le2012genprog: C. Le Goues, T. Nguyen, S. Forrest, and W. Weimer, ``A systematic study of automated program repair: Fixing 55 out of 105 bugs for \\$8 each,&#x27;&#x27; pp. 3--13, 2012.&quot;,
+        &quot;title&quot;: &quot;A systematic study of automated program repair: Fixing 55 out of 105 bugs for $8 each&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Unknown&quot;,
+        &quot;year&quot;: 2012
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Historical baseline for automated program repair (APR), illustrating the limitations of pre-LLM techniques.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;C. S. Xia&quot;,
+          &quot;Y. Wei&quot;,
+          &quot;L. Zhang&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;xia2023automated&quot;,
+        &quot;raw&quot;: &quot;xia2023automated: C. S. Xia, Y. Wei, and L. Zhang, ``Automated program repair in the era of large pre-trained language models,&#x27;&#x27; pp. 1482--1494, 2023.&quot;,
+        &quot;title&quot;: &quot;Automated program repair in the era of large pre-trained language models&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Unknown&quot;,
+        &quot;year&quot;: 2023
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Shows that LLM-based repair substantially outperforms earlier systems like GenProg.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Y. Li&quot;,
+          &quot;D. Choi&quot;,
+          &quot;J. Chung&quot;,
+          &quot;N. Kushman&quot;,
+          &quot;J. Schrittwieser&quot;,
+          &quot;R. Leblond&quot;,
+          &quot;T. Eccles&quot;,
+          &quot;J. Keeling&quot;,
+          &quot;F. Gimeno&quot;,
+          &quot;A. Dal Lago&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;li2022competition&quot;,
+        &quot;raw&quot;: &quot;li2022competition: Y. Li, D. Choi, J. Chung, N. Kushman, J. Schrittwieser, R. Leblond, T. Eccles, J. Keeling, F. Gimeno, A. Dal Lago et al., ``Competition-level code generation with {AlphaCode},&#x27;&#x27; Science, vol. 378, no. 6624, pp. 1092--1097, 2022. | title: Competition-level code generation with AlphaCode&quot;,
+        &quot;title&quot;: &quot;Competition-level code generation with AlphaCode&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Science&quot;,
+        &quot;year&quot;: 2022
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Evidence of high-level coding logic and competitive performance in human programming contests.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;H. Pearce&quot;,
+          &quot;B. Ahmad&quot;,
+          &quot;B. Tan&quot;,
+          &quot;B. Dolan-Gavitt&quot;,
+          &quot;R. Karri&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;pearce2022asleep&quot;,
+        &quot;raw&quot;: &quot;pearce2022asleep: H. Pearce, B. Ahmad, B. Tan, B. Dolan-Gavitt, and R. Karri, ``Asleep at the keyboard? assessing the security of {GitHub Copilot}&#x27;s code contributions,&#x27;&#x27; in Proceedings of the 43rd IEEE Symposium on Security and Privacy (SP).\\hskip 1em plus 0.5em minus 0.4em\\relax IEEE, 2022, pp. 754--768. | title: Asleep at the keyboard? assessing the security of GitHub Copilot&#x27;s code contributions&quot;,
+        &quot;title&quot;: &quot;Asleep at the keyboard? assessing the security of GitHub Copilot&#x27;s code contributions&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Proceedings of the 43rd IEEE Symposium on Security and Privacy (SP)&quot;,
+        &quot;year&quot;: 2022
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Critical security analysis identifying that agents can introduce vulnerabilities (CWEs) if not properly monitored.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;R. Khoury&quot;,
+          &quot;A. R. Avci&quot;,
+          &quot;J. Brunelle&quot;,
+          &quot;B. Marc Camara&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;khoury2023secure&quot;,
+        &quot;raw&quot;: &quot;khoury2023secure: R. Khoury, A. R. Avci, J. Brunelle, and B. Marc Camara, ``How secure is code generated by {ChatGPT}?&#x27;&#x27; 2023. | title: How secure is code generated by ChatGPT?&quot;,
+        &quot;title&quot;: &quot;How secure is code generated by ChatGPT?&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Unknown&quot;,
+        &quot;year&quot;: 2023
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Investigates the security risks of LLM-generated code, supporting the need for specialized reviewer agents.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: &quot;2512.09882&quot;,
+        &quot;authors&quot;: [
+          &quot;J. W. Lin&quot;,
+          &quot;E. K. Jones&quot;,
+          &quot;D. J. Jasper&quot;,
+          &quot;E. J.-s. Ho&quot;,
+          &quot;A. Wu&quot;,
+          &quot;A. T. Yang&quot;,
+          &quot;N. Perry&quot;,
+          &quot;A. Zou&quot;,
+          &quot;M. Fredrikson&quot;,
+          &quot;J. Z. Kolter&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;lin2025comparing&quot;,
+        &quot;raw&quot;: &quot;lin2025comparing: J. W. Lin, E. K. Jones, D. J. Jasper, E. J.-s. Ho, A. Wu, A. T. Yang, N. Perry, A. Zou, M. Fredrikson, J. Z. Kolter et al., ``Comparing ai agents to cybersecurity professionals in real-world penetration testing,&#x27;&#x27; arXiv preprint arXiv:2512.09882, 2025.&quot;,
+        &quot;title&quot;: &quot;Comparing ai agents to cybersecurity professionals in real-world penetration testing&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;arXiv preprint arXiv:2512.09882&quot;,
+        &quot;year&quot;: 2025
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Supports the claim that AI security scanners can outperform manual human reviewers in vulnerability detection.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: &quot;2302.06590&quot;,
+        &quot;authors&quot;: [
+          &quot;S. Peng&quot;,
+          &quot;E. Kalliamvakou&quot;,
+          &quot;P. Cihon&quot;,
+          &quot;M. Demirer&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;peng2023impact&quot;,
+        &quot;raw&quot;: &quot;peng2023impact: S. Peng, E. Kalliamvakou, P. Cihon, and M. Demirer, ``The impact of {AI} on developer productivity: Evidence from {GitHub Copilot},&#x27;&#x27; arXiv preprint arXiv:2302.06590, 2023. | title: The impact of AI on developer productivity: Evidence from GitHub Copilot&quot;,
+        &quot;title&quot;: &quot;The impact of AI on developer productivity: Evidence from GitHub Copilot&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;arXiv preprint arXiv:2302.06590&quot;,
+        &quot;year&quot;: 2023
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Supports the throughput argument, showing that AI assistance significantly increases commit and PR frequency.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;M. Shahin&quot;,
+          &quot;M. A. Babar&quot;,
+          &quot;L. Zhu&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;shahin2017continuous&quot;,
+        &quot;raw&quot;: &quot;shahin2017continuous: M. Shahin, M. A. Babar, and L. Zhu, ``Continuous integration, delivery and deployment: A systematic review on approaches, tools, challenges and practices,&#x27;&#x27; IEEE Access, vol. 5, pp. 3909--3943, 2017.&quot;,
+        &quot;title&quot;: &quot;Continuous integration, delivery and deployment: A systematic review on approaches, tools, challenges and practices&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;IEEE Access&quot;,
+        &quot;year&quot;: 2017
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Contextualizes review as an engineering check that can be treated like compilation in modern CI&#x2f;CD pipelines.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: &quot;2207.05221&quot;,
+        &quot;authors&quot;: [
+          &quot;S. Kadavath&quot;,
+          &quot;T. Conerly&quot;,
+          &quot;A. Askell&quot;,
+          &quot;T. Henighan&quot;,
+          &quot;D. Drain&quot;,
+          &quot;E. Perez&quot;,
+          &quot;N. Schiefer&quot;,
+          &quot;Z. Dodds&quot;,
+          &quot;N. DasSarma&quot;,
+          &quot;E. Tran-Johnson&quot;,
+          &quot;S. Johnston&quot;,
+          &quot;S. El-Showk&quot;,
+          &quot;A. Jones&quot;,
+          &quot;N. Elhage&quot;,
+          &quot;T. Hume&quot;,
+          &quot;A. Chen&quot;,
+          &quot;Y. Bai&quot;,
+          &quot;S. Bowman&quot;,
+          &quot;S. Fort&quot;,
+          &quot;D. Ganguli&quot;,
+          &quot;D. Hernandez&quot;,
+          &quot;J. Jacobson&quot;,
+          &quot;J. Kernion&quot;,
+          &quot;S. Kravec&quot;,
+          &quot;L. Lovitt&quot;,
+          &quot;K. Ndousse&quot;,
+          &quot;C. Olsson&quot;,
+          &quot;S. Ringer&quot;,
+          &quot;D. Amodei&quot;,
+          &quot;T. B. Brown&quot;,
+          &quot;J. Clark&quot;,
+          &quot;N. Joseph&quot;,
+          &quot;B. Mann&quot;,
+          &quot;S. McCandlish&quot;,
+          &quot;C. Olah&quot;,
+          &quot;J. Kaplan&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;kadavath2022know&quot;,
+        &quot;raw&quot;: &quot;kadavath2022know: S. Kadavath, T. Conerly, A. Askell, T. Henighan, D. Drain, E. Perez, N. Schiefer, Z. Dodds, N. DasSarma, E. Tran-Johnson, S. Johnston, S. El-Showk, A. Jones, N. Elhage, T. Hume, A. Chen, Y. Bai, S. Bowman, S. Fort, D. Ganguli, D. Hernandez, J. Jacobson, J. Kernion, S. Kravec, L. Lovitt, K. Ndousse, C. Olsson, S. Ringer, D. Amodei, T. B. Brown, J. Clark, N. Joseph, B. Mann, S. McCandlish, C. Olah, and J. Kaplan, ``Language models (mostly) know what they know,&#x27;&#x27; arXiv preprint arXiv:2207.05221, 2022.&quot;,
+        &quot;title&quot;: &quot;Language models (mostly) know what they know&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;arXiv preprint arXiv:2207.05221&quot;,
+        &quot;year&quot;: 2022
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Supports the discussion on calibrated uncertainty as a mitigation for model hallucinations in review.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: &quot;2503.03586&quot;,
+        &quot;authors&quot;: [
+          &quot;A. Yildiz&quot;,
+          &quot;S. G. Teo&quot;,
+          &quot;Y. Lou&quot;,
+          &quot;Y. Feng&quot;,
+          &quot;C. Wang&quot;,
+          &quot;D. M. Divakaran&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;yildiz2025jitvul&quot;,
+        &quot;raw&quot;: &quot;yildiz2025jitvul: A. Yildiz, S. G. Teo, Y. Lou, Y. Feng, C. Wang, and D. M. Divakaran, ``Benchmarking llms and llm-based agents in practical vulnerability detection for code repositories,&#x27;&#x27; arXiv preprint arXiv:2503.03586, 2025.&quot;,
+        &quot;title&quot;: &quot;Benchmarking llms and llm-based agents in practical vulnerability detection for code repositories&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;arXiv preprint arXiv:2503.03586&quot;,
+        &quot;year&quot;: 2025
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Provides recent evidence that frontier models outperform traditional static analyzers in vulnerability identification.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Berkeley Risk and Decisions Initiative&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;berkeley2025frontiercyberblog&quot;,
+        &quot;raw&quot;: &quot;berkeley2025frontiercyberblog: {Berkeley Risk and Decisions Initiative}, ``Frontier ai&#x27;s impact on the cybersecurity landscape (paper summary and blog),&#x27;&#x27; \\url{https:&#x2f;&#x2f;rdi.berkeley.edu&#x2f;frontier-ai-impact-on-cybersecurity&#x2f;}, 2025. | title: Frontier ai&#x27;s impact on the cybersecurity landscape (paper summary and blog)&quot;,
+        &quot;title&quot;: &quot;Frontier ai&#x27;s impact on the cybersecurity landscape (paper summary and blog)&quot;,
+        &quot;url&quot;: &quot;https:&#x2f;&#x2f;rdi.berkeley.edu&#x2f;frontier-ai-impact-on-cybersecurity&#x2f;&quot;,
+        &quot;venue&quot;: &quot;Berkeley RDI&quot;,
+        &quot;year&quot;: 2025
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Discusses high-level frontier AI impacts on cybersecurity, supporting the use of specialized scanners.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: &quot;2302.12173&quot;,
+        &quot;authors&quot;: [
+          &quot;K. Greshake&quot;,
+          &quot;S. Abdelnabi&quot;,
+          &quot;S. Mishra&quot;,
+          &quot;C. Endres&quot;,
+          &quot;T. Holz&quot;,
+          &quot;M. Fritz&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;greshake2023indirect&quot;,
+        &quot;raw&quot;: &quot;greshake2023indirect: K. Greshake, S. Abdelnabi, S. Mishra, C. Endres, T. Holz, and M. Fritz, ``Not what you&#x27;ve signed up for: Compromising real-world {LLM}-integrated applications with indirect prompt injection,&#x27;&#x27; arXiv preprint arXiv:2302.12173, 2023.&quot;,
+        &quot;title&quot;: &quot;Not what you&#x27;ve signed up for: Compromising real-world LLM-integrated applications with indirect prompt injection&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;arXiv preprint arXiv:2302.12173&quot;,
+        &quot;year&quot;: 2023
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Critical for discussing adversarial risks like indirect prompt injection in automated review systems.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    }
+  ],
+  &quot;missing_references&quot;: [
+    {
+      &quot;reason&quot;: &quot;A comprehensive survey on the evolution of LLMs for Software Engineering would provide a stronger bridge between traditional APR and the &#x27;LLM era&#x27; discussed in Background.&quot;,
+      &quot;title&quot;: &quot;A Survey on Large Language Models for Software Engineering&quot;
+    },
+    {
+      &quot;reason&quot;: &quot;Specific studies on the psychological and workload aspects of human review (&#x27;Reviewer&#x27;s Dilemma&#x27;) would bolster the social friction and cognitive cost arguments.&quot;,
+      &quot;title&quot;: &quot;The Reviewer&#x27;s Dilemma: Cognitive Load and Defect Detection&quot;
+    }
+  ],
+  &quot;summary&quot;: &quot;The paper demonstrates excellent citation hygiene, effectively integrating foundational software engineering studies with cutting-edge results from 2024-2026. Claims regarding agent performance on SWE-bench and the inherent limitations of human inspection are robustly supported by highly relevant empirical evidence. The bibliography is comprehensive, covering historical context, developer productivity, and sophisticated adversarial risks.&quot;
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          meta_reviewer — <span class="muted">claude-sonnet-4-6</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <p>All five specialists converge on a picture of an intellectually significant but empirically under-supported position paper. The novelty specialist rates the contribution &#x27;significant&#x27; (0.65): no prior work directly argues for wholesale replacement of the human merge gate rather than augmenting it, and the identification of the structural instability in hybrid human-AI review workflows is a genuine analytical contribution. The citation specialist (confidence 0.95) finds the bibliography comprehensive and well-integrated across foundational, empirical, and contemporary literatures. However, the technical correctness specialist (confidence 0.78, overall &#x27;questionable&#x27;) flags one critical and six major unsupported or overstated claims, including the central load-bearing claim (C5) that the cost-benefit crossover has already occurred — which is asserted without any quantitative cost-benefit model, escape-defect comparison, or threshold specification. The reproducibility specialist (score 0.18, confidence 0.88) raises two independent critical concerns: no companion code or proof artifact exists to support the cost-benefit argument, and no replication protocol allows an independent researcher to verify the crossover claim. The headline SWE-bench figure (&#x27;&gt;80%&#x27; abstract vs. &#x27;70%&#x27; body) is internally inconsistent and untethered to a benchmark variant or dated snapshot. The paper is in a code-amenable field (cs.SE) and its central claim is exactly the kind of empirical proposition that a benchmark or simulation would validate; neither is provided. The recommendation gate therefore applies: the missing quantitative analysis blocks the headline claim, triggering major_revision. Revision can be achieved either by reframing all crossover claims as argued forecasts rather than accomplished facts, or by adding a controlled escape-defect analysis. The paper&#x27;s core insight is timely and publishable in revised form; the current version conflates a strong argument with established empirical finding.</p>
+        <p class="muted">Recommendation: <strong>Major revision</strong> · Confidence: 82%</p>
+        <h3>Strengths</h3>
+        <ul>
+          <li>The paper identifies a genuine and under-studied structural problem: as AI-assisted coding throughput rises, a fixed human reviewer pool becomes the new bottleneck, and the queuing-theoretic framing of this problem is novel relative to prior work on automated code review.</li><li>The bibliography is comprehensive and well-calibrated, spanning Fagan 1976 through 2025-era agent benchmarks, with citations serving substantive argumentative roles rather than decorative ones.</li><li>The paper correctly distinguishes two qualitatively different risks in autonomous agent review — hallucination&#x2f;false negatives and adversarial prompt injection — and proposes distinct mitigations for each, showing analytical care about the threat model.</li><li>The security-vulnerability dimension of the argument is well-grounded: the acknowledgment that AI agents both introduce vulnerabilities (Pearce et al., ~40% CWE rate) and can detect them better than static analyzers is presented with appropriate nuance rather than as a one-sided claim.</li><li>The paper is the first, per the novelty specialist, to argue for displacement of the human merge gate as a governance structure rather than merely augmenting human reviewers, which is a conceptually distinct and significant contribution to the automated software engineering literature.</li>
+        </ul>
+        <h3>Weaknesses</h3>
+        <ul>
+          <li>The central claim — that the cost-benefit crossover at which human review is no longer justified has already occurred — is unsupported: no defect-detection-rate comparison, no dollar-cost-per-defect accounting, and no escape-defect measurement against a controlled PR corpus are provided (C5, critical severity).</li><li>The headline SWE-bench figure of &#x27;&gt;80%&#x27; in the abstract is internally inconsistent with the paper body&#x27;s own &#x27;70%&#x27; figure and is not tied to a named benchmark variant (Verified, Lite, or full) or a dated leaderboard snapshot (C1, major severity).</li><li>The claim that LLM review systems produce comments &#x27;at quality comparable to trained human reviewers&#x27; overstates what the cited literature establishes: CodeReviewer and Pornprasit &amp; Tantithamthavorn use automatic metrics and limited human studies, not blind head-to-head evaluations against expert reviewers (C3, major severity).</li><li>The &#x27;rubber-stamp&#x27; reviewer behavior claim — that humans cannot genuinely scrutinize AI-generated code under cognitive load — is a strong empirical premise for which no direct citation or study is provided; all supporting citations predate LLM coding agents and concern human-written code (C6, major severity).</li><li>The proposed ensemble-review mitigation for hallucination is asserted without empirical support: no evaluation of N-agent consensus false-negative rate versus a human-reviewer baseline is provided, and correlated errors across same-family LLMs are not analyzed (C12, major severity).</li><li>Reproducibility is critically low (score 0.18): no companion code, versioned evidence dataset, benchmark snapshot, or replication protocol exists for the cost-benefit argument, and the referenced argument_map.pdf is not provided as a verifiable artifact.</li><li>Agent review is described as &#x27;deterministic,&#x27; which is technically incorrect for stochastic LLM samplers under realistic deployment conditions, undermining the assurance argument the paper relies on (C13).</li><li>SWRBench (arXiv:2509.01494), the most directly relevant 2025 benchmark for pull-request-centric automated review, is absent from the related-work discussion despite being identified by the novelty specialist as providing the empirical basis for the paper&#x27;s central &#x27;structural failure&#x27; claim.</li>
+        </ul>
+        <h3>Revision Targets</h3>
+        <div class="target-grid">
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  corrections&#x2f;2606.13175&#x2f;paper.tex
+                   at 
+                  Section &#x27;Claim 3: The cost-benefit calculation has flipped.&#x27;
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">This is the central, load-bearing claim of the paper. It is asserted without any quantitative cost-benefit model: no defect-detection-rate comparison between agent and human reviewers on a controlled corpus, no dollar-cost accounting per reviewed change, no escape-defect rate measurement. The supporting citations (sadowski2018modern for 10–15% time spent, hilton2016usage for latency) establish only the cost side; the benefit side (marginal defects caught by humans that agents miss) is asserted, not measured. The claim is in a code-amenable field (cs.SE) and is exactly the kind of empirical proposition that a benchmark or simulation would validate.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Either restate as a forecast&#x2f;argument (&#x27;we argue the crossover is imminent&#x27;) rather than an accomplished fact, OR ship a quantitative analysis: experiments&#x2f;crossover&#x2f;agent_vs_human_defect_detection.py running both an agent reviewer and a human-reviewer baseline on a held-out PR corpus (e.g., DevReview-Bench or CodeReviewer&#x27;s test split), reporting precision&#x2f;recall&#x2f;escape-defect rate and cost per defect.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm `Section &#x27;Claim 3: The cost-benefit calculation has flipped.&#x27;` is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  corrections&#x2f;2606.13175&#x2f;paper.tex
+                   at 
+                  Abstract &#x2f; Introduction (paragraph citing jimenez2024swebench)
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">The abstract asserts &#x27;&gt;80%&#x27; resolution on SWE-bench, but Section &#x27;Benchmark Performance&#x27; states that &#x27;top agents on the public leaderboard resolved more than 70 % of tasks&#x27; by late 2025, and that SWE-bench Verified exceeded 50% in late 2024. The cited reference (jimenez2024swebench) is the original benchmark paper which did not establish 80%; the only support for the figure is swebench2025leaderboard, an undated webpage. The 80% number is also internally inconsistent with the paper&#x27;s own 70% figure later in the same paper.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Reconcile the abstract with the body (use 70% or specify the leaderboard snapshot date and benchmark variant — SWE-bench Verified vs. SWE-bench Lite vs. full). Cite a frozen snapshot or include a CSV of leaderboard scores at experiments&#x2f;swebench&#x2f;leaderboard_snapshot_2025-XX-XX.csv.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm `Abstract &#x2f; Introduction (paragraph citing jimenez2024swebench)` is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  corrections&#x2f;2606.13175&#x2f;paper.tex
+                   at 
+                  Introduction and Section &#x27;Review-Specific Capabilities&#x27;
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">The cited works (li2022codereviewer, pornprasit2023automated) demonstrate that LLM review systems generate plausible comments and detect some defect categories, but neither paper establishes parity with human reviewers in a head-to-head, blind, statistically powered evaluation. CodeReviewer&#x27;s evaluation uses automatic metrics (BLEU, exact match) and a limited human study; Pornprasit and Tantithamthavorn document &#x27;meaningful coverage&#x27; but also significant gaps. The paper&#x27;s phrasing (&#x27;at quality that is at least comparable&#x27;) overstates what the cited literature establishes.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Soften the claim to &#x27;comparable on specific comment-generation benchmarks&#x27; or add a head-to-head agent-vs-human evaluation. Ship the evaluation harness at experiments&#x2f;review_quality&#x2f;agent_vs_human_eval.py with the held-out PR corpus used.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm `Introduction and Section &#x27;Review-Specific Capabilities&#x27;` is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  corrections&#x2f;2606.13175&#x2f;paper.tex
+                   at 
+                  Section &#x27;Claim 2&#x27;, subsection &#x27;Human review provides no genuine assurance&#x27;
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">This is a strong empirical claim about reviewer behavior under AI-assisted workflows, but no citation is provided that measures it. czerwonka2015code is cited but predates LLM coding agents and concerns human-written code. There are emerging studies on review of AI-generated PRs that could support or refute this (e.g., on Copilot-suggested code in industry settings), but none are cited.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Cite an empirical study of human review behavior on agent-generated PRs (e.g., observational study at a company that deployed Copilot or Cursor) or run one. Without that, soften to &#x27;we hypothesize&#x27; or &#x27;anecdotally observed&#x27;.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm `Section &#x27;Claim 2&#x27;, subsection &#x27;Human review provides no genuine assurance&#x27;` is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  corrections&#x2f;2606.13175&#x2f;paper.tex
+                   at 
+                  Discussion, &#x27;Counter-argument: Hallucination and false negatives&#x27;
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">This mitigation is proposed without empirical support. It is asserted that ensembles + calibrated uncertainty will work, but no measurement is given that ensembling LLM reviewers reduces false-negative rate to a level competitive with human reviewers, and no citation is provided. Correlated errors across LLMs from the same family (a known issue) could undermine ensemble gains; this is not analyzed.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Cite an ensemble-of-reviewers evaluation, or run one: experiments&#x2f;ensemble_review&#x2f;agreement_vs_escape_rate.py measuring how N-agent consensus changes false-negative rate against a held-out defect corpus.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm `Discussion, &#x27;Counter-argument: Hallucination and false negatives&#x27;` is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>code</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  
+                  
+                  code release and execution entrypoints
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">No companion code, notebook, formal proof artifact, or machine-checkable argument file is provided to reproduce the literature synthesis, argument map, or cost-benefit analysis supporting the headline conclusion.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Release the source code, scripts, model configuration, and execution entrypoints needed to regenerate the reported tables, or document why those artifacts cannot be released.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm runnable code or a documented non-release justification is present.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  corrections&#x2f;2606.13175&#x2f;paper.tex
+                   at 
+                  Section &#x27;Claim 3: The cost-benefit calculation has flipped.&#x27;
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">This is the central, load-bearing claim of the paper. It is asserted without any quantitative cost-benefit model: no defect-detection-rate comparison between agent and human reviewers on a controlled corpus, no dollar-cost accounting per reviewed change, no escape-defect rate measurement. The supporting citations (sadowski2018modern for 10–15% time spent, hilton2016usage for latency) establish only the cost side; the benefit side (marginal defects caught by humans that agents miss) is asserted, not measured. The claim is in a code-amenable field (cs.SE) and is exactly the kind of empirical proposition that a benchmark or simulation would validate.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Either restate as a forecast&#x2f;argument (&#x27;we argue the crossover is imminent&#x27;) rather than an accomplished fact, OR ship a quantitative analysis: experiments&#x2f;crossover&#x2f;agent_vs_human_defect_detection.py running both an agent reviewer and a human-reviewer baseline on a held-out PR corpus (e.g., DevReview-Bench or CodeReviewer&#x27;s test split), reporting precision&#x2f;recall&#x2f;escape-defect rate and cost per defect.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm `Section &#x27;Claim 3: The cost-benefit calculation has flipped.&#x27;` is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>bibliography</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  
+                  
+                  SWRBench: A Benchmark for Pull Request-Centric Automated Code Review (arXiv:2509.01494)
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">This 2025 benchmark specifically addresses the transition from AI-assisted to autonomous pull-request review and provides the empirical basis for the &#x27;structural&#x27; failure of human review at agentic scales, which is a core claim of this paper.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Add or discuss missing prior art `SWRBench: A Benchmark for Pull Request-Centric Automated Code Review (arXiv:2509.01494)`. This 2025 benchmark specifically addresses the transition from AI-assisted to autonomous pull-request review and provides the empirical basis for the &#x27;structural&#x27; failure of human review at agentic scales, which is a core claim of this paper.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm the related-work discussion addresses this prior art.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+        </div>
+        <h3>Questions</h3>
+        <ul>
+          <li>Can the authors provide a quantitative cost-benefit analysis specifying escape-defect rates for agent reviewers versus human reviewers on a controlled PR corpus, along with cost-per-defect accounting, that grounds the crossover claim empirically rather than asserting it?</li><li>Do the SWE-bench figures of &#x27;&gt;80%&#x27; (abstract) and &#x27;&gt;70%&#x27; (body) refer to different benchmark variants (e.g., Verified versus full) or different leaderboard snapshot dates, and can the authors supply a frozen leaderboard CSV with variant, date, and agent name for each cited figure?</li><li>What empirical evidence supports the claim that human review of agent-generated PRs degrades to rubber-stamping in practice — is there an observational study, a planned study, or would the authors reframe this as a hypothesis?</li><li>Has the proposed ensemble-review mitigation been evaluated on a held-out defect corpus comparing N-agent consensus false-negative rate to a human-reviewer baseline, and if not, how do the authors account for correlated errors across LLMs from the same model family?</li><li>How should the paper&#x27;s claims be interpreted if agent SWE-bench performance plateaus or regresses on future benchmark revisions — is there an operationalized capability threshold that does not depend on a specific leaderboard snapshot?</li>
+        </ul>
+      </details>
+      
+      <details>
+        <summary>
+          novelty — <span class="muted">gemini-3-flash-preview</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;confidence&quot;: 0.85,
+  &quot;missing_prior_art&quot;: [
+    {
+      &quot;reason&quot;: &quot;This 2025 benchmark specifically addresses the transition from AI-assisted to autonomous pull-request review and provides the empirical basis for the &#x27;structural&#x27; failure of human review at agentic scales, which is a core claim of this paper.&quot;,
+      &quot;title&quot;: &quot;SWRBench: A Benchmark for Pull Request-Centric Automated Code Review (arXiv:2509.01494)&quot;
+    }
+  ],
+  &quot;novelty_score&quot;: 0.65,
+  &quot;related_work&quot;: [
+    {
+      &quot;citation_key&quot;: &quot;li2022codereviewer&quot;,
+      &quot;delta&quot;: &quot;Automates specific review tasks like comment generation but retains the human-governed PR model; this paper argues for the total displacement of that model.&quot;,
+      &quot;relation&quot;: &quot;builds_on&quot;,
+      &quot;title&quot;: &quot;CodeReviewer: Pre-training for automating code review activities&quot;
+    },
+    {
+      &quot;citation_key&quot;: &quot;tang2024codeagent&quot;,
+      &quot;delta&quot;: &quot;Proposes multi-agent coordination for review activities but assumes a human-in-the-loop governance structure; this paper advocates for a loop closed by independent agents.&quot;,
+      &quot;relation&quot;: &quot;prior_art&quot;,
+      &quot;title&quot;: &quot;CodeAgent: Autonomous communicative agents for code review&quot;
+    },
+    {
+      &quot;citation_key&quot;: &quot;pornprasit2023automated&quot;,
+      &quot;delta&quot;: &quot;Evaluates the industrial efficacy of automated review for defect detection without questioning the necessity of the human merge gate.&quot;,
+      &quot;relation&quot;: &quot;prior_art&quot;,
+      &quot;title&quot;: &quot;Automated code review in practice&quot;
+    },
+    {
+      &quot;citation_key&quot;: &quot;czerwonka2015code&quot;,
+      &quot;delta&quot;: &quot;Provides the foundational empirical critique of human review&#x27;s defect-detection efficacy, which this paper extends into an argument for machine-driven replacement.&quot;,
+      &quot;relation&quot;: &quot;prior_art&quot;,
+      &quot;title&quot;: &quot;Code reviews do not find bugs: How the current code review best practice slows us down&quot;
+    }
+  ],
+  &quot;verdict&quot;: &quot;significant&quot;
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          reproducibility — <span class="muted">gpt-5.5</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;code_availability&quot;: &quot;unspecified&quot;,
+  &quot;code_url&quot;: null,
+  &quot;concerns&quot;: [
+    {
+      &quot;area&quot;: &quot;code&quot;,
+      &quot;description&quot;: &quot;No companion code, notebook, formal proof artifact, or machine-checkable argument file is provided to reproduce the literature synthesis, argument map, or cost-benefit analysis supporting the headline conclusion.&quot;,
+      &quot;severity&quot;: &quot;critical&quot;
+    },
+    {
+      &quot;area&quot;: &quot;data&quot;,
+      &quot;description&quot;: &quot;The paper cites public sources and a public SWE-bench leaderboard, but it does not provide a curated extraction table, benchmark snapshot, inclusion criteria, or versioned evidence dataset for the cited performance and cost claims.&quot;,
+      &quot;severity&quot;: &quot;major&quot;
+    },
+    {
+      &quot;area&quot;: &quot;evaluation&quot;,
+      &quot;description&quot;: &quot;The headline claim that mandatory human code review is now redundant is not tied to operational metrics, thresholds, statistical tests, or a replication protocol that would let an independent researcher verify the crossover claim.&quot;,
+      &quot;severity&quot;: &quot;critical&quot;
+    },
+    {
+      &quot;area&quot;: &quot;other&quot;,
+      &quot;description&quot;: &quot;The referenced argument_map.pdf is not represented as a reproducible artifact in the provided review input, leaving the structure of the central argument non-verifiable beyond the prose.&quot;,
+      &quot;severity&quot;: &quot;major&quot;
+    },
+    {
+      &quot;area&quot;: &quot;compute&quot;,
+      &quot;description&quot;: &quot;No hardware, software environment, dependencies, seeds, or model versions are specified; this is consistent with the lack of a computational experiment but blocks any agent-based replication of the claims.&quot;,
+      &quot;severity&quot;: &quot;minor&quot;
+    }
+  ],
+  &quot;confidence&quot;: 0.88,
+  &quot;data_availability&quot;: &quot;public&quot;,
+  &quot;data_url&quot;: &quot;https:&#x2f;&#x2f;www.swebench.com&quot;,
+  &quot;environment&quot;: {
+    &quot;dependencies&quot;: [],
+    &quot;hardware&quot;: null,
+    &quot;software&quot;: null
+  },
+  &quot;reproducibility_score&quot;: 0.18
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          summary — <span class="muted">claude-haiku-4-5-20251001</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;audience&quot;: &quot;Software engineering practitioners and decision-makers evaluating code review processes; researchers in automated software engineering and AI-assisted development; CI&#x2f;CD platform designers and tool builders; organizational leadership making quality assurance policy decisions&quot;,
+  &quot;key_contributions&quot;: [
+    &quot;Demonstration that every stated goal of code review—defect detection, style enforcement, knowledge transfer, and team awareness—can be met by coding agents at lower cost and higher throughput than human reviewers&quot;,
+    &quot;Argument that the arrangement in which agents write code and humans retain mandatory review is unstable: it neither provides meaningful assurance nor scales, and creates the illusion of quality while turning review capacity into the next delivery bottleneck&quot;,
+    &quot;Cost-benefit analysis showing that the crossover point at which the marginal benefit of human review no longer justifies its marginal cost has already been reached&quot;
+  ],
+  &quot;plain_language_summary&quot;: &quot;This paper argues that large language model-based coding agents—systems capable of reading code, running tests, and iteratively fixing issues—have become capable enough to completely replace human code review as a software quality gate. The argument rests on three main claims: first, agents can now perform all the functions that code reviews historically serve (finding bugs, enforcing style, transferring knowledge, maintaining team awareness), but faster and more consistently; second, the common compromise approach of having agents write code while humans review it creates a false sense of safety because humans cannot realistically catch subtle AI-generated bugs; and third, the economics have shifted decisively in favour of agents—they review instantly and deterministically while human review is slow, expensive, and creates delays in continuous-delivery pipelines.\n\nThe paper surveys existing evidence that agents can resolve 70% of real-world GitHub issues end-to-end and produce review comments of comparable quality to trained human reviewers. It acknowledges practical concerns (hallucinations, security vulnerabilities, adversarial code injection, architectural judgment, ethical accountability) but argues these are either overstated or addressable through ensemble review, specialized security models, and institutional governance rather than mandatory human approval. The core insight is that as agent capability grows, the marginal value of having a human read a diff on a screen falls below the cost of review latency, scheduling overhead, and social friction.&quot;,
+  &quot;tldr&quot;: &quot;Coding agents have reached a capability threshold sufficient to replace mandatory human code review, making continued human inspection economically unjustifiable and technologically obsolete.&quot;
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          technical_correctness — <span class="muted">claude-opus-4-7</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;claims&quot;: [
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;State-of-the-art coding agents resolve more than 80% of SWE-bench tasks end-to-end.&quot;,
+      &quot;evidence&quot;: &quot;The abstract asserts &#x27;&gt;80%&#x27; resolution on SWE-bench, but Section &#x27;Benchmark Performance&#x27; states that &#x27;top agents on the public leaderboard resolved more than 70 % of tasks&#x27; by late 2025, and that SWE-bench Verified exceeded 50% in late 2024. The cited reference (jimenez2024swebench) is the original benchmark paper which did not establish 80%; the only support for the figure is swebench2025leaderboard, an undated webpage. The 80% number is also internally inconsistent with the paper&#x27;s own 70% figure later in the same paper.&quot;,
+      &quot;id&quot;: &quot;C1&quot;,
+      &quot;location&quot;: &quot;Abstract &#x2f; Introduction (paragraph citing jimenez2024swebench)&quot;,
+      &quot;severity&quot;: &quot;major&quot;,
+      &quot;suggested_fix&quot;: &quot;Reconcile the abstract with the body (use 70% or specify the leaderboard snapshot date and benchmark variant — SWE-bench Verified vs. SWE-bench Lite vs. full). Cite a frozen snapshot or include a CSV of leaderboard scores at experiments&#x2f;swebench&#x2f;leaderboard_snapshot_2025-XX-XX.csv.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;GPT-4 with retrieval-based context selection resolved approximately 1.7% of SWE-bench tasks; SWE-agent raised this to approximately 12.5%.&quot;,
+      &quot;evidence&quot;: &quot;These figures roughly match the originally reported numbers from jimenez2024swebench and yang2024sweagent, but the exact SWE-bench variant (full vs. Lite vs. Verified) and the retrieval configuration are not specified. The original paper reported GPT-4 + BM25 retrieval at 1.31% on full SWE-bench; the 1.7% number is closer to the Oracle-retrieval setting. Without disambiguation the comparison risks being misleading.&quot;,
+      &quot;id&quot;: &quot;C2&quot;,
+      &quot;location&quot;: &quot;Section &#x27;Benchmark Performance&#x27;&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Disambiguate the benchmark variant and retrieval setting for each cited number (e.g., &#x27;GPT-4 + Oracle retrieval, full SWE-bench, jimenez2024swebench, Table 5&#x27;). Provide a reproducibility script at experiments&#x2f;swebench&#x2f;replicate_baselines.py that re-runs the cited baselines.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;LLM-based review systems produce inline defect comments at quality comparable to trained human reviewers.&quot;,
+      &quot;evidence&quot;: &quot;The cited works (li2022codereviewer, pornprasit2023automated) demonstrate that LLM review systems generate plausible comments and detect some defect categories, but neither paper establishes parity with human reviewers in a head-to-head, blind, statistically powered evaluation. CodeReviewer&#x27;s evaluation uses automatic metrics (BLEU, exact match) and a limited human study; Pornprasit and Tantithamthavorn document &#x27;meaningful coverage&#x27; but also significant gaps. The paper&#x27;s phrasing (&#x27;at quality that is at least comparable&#x27;) overstates what the cited literature establishes.&quot;,
+      &quot;id&quot;: &quot;C3&quot;,
+      &quot;location&quot;: &quot;Introduction and Section &#x27;Review-Specific Capabilities&#x27;&quot;,
+      &quot;severity&quot;: &quot;major&quot;,
+      &quot;suggested_fix&quot;: &quot;Soften the claim to &#x27;comparable on specific comment-generation benchmarks&#x27; or add a head-to-head agent-vs-human evaluation. Ship the evaluation harness at experiments&#x2f;review_quality&#x2f;agent_vs_human_eval.py with the held-out PR corpus used.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;AI-based security scanners already outperform many manual reviewers on standard vulnerability benchmarks.&quot;,
+      &quot;evidence&quot;: &quot;The only support is lin2025comparing (arXiv 2512.09882) and yildiz2025jitvul. The phrase &#x27;outperform many manual reviewers&#x27; is vague — neither cited work demonstrates that AI scanners outperform human reviewers across the full distribution of security review tasks; results are typically benchmark-specific (JITVul, CWE-Bench) and sensitive to choice of comparator. The Berkeley blog reference (berkeley2025frontiercyberblog) is a non-peer-reviewed summary.&quot;,
+      &quot;id&quot;: &quot;C4&quot;,
+      &quot;location&quot;: &quot;Section &#x27;Claim 1&#x27;, security paragraph&quot;,
+      &quot;severity&quot;: &quot;major&quot;,
+      &quot;suggested_fix&quot;: &quot;Quote the specific benchmark and the specific comparator class (e.g., &#x27;on JITVul, frontier LLM agents achieve F1=X vs. static analyzer F1=Y&#x27;). Provide an evaluation script at experiments&#x2f;security_review&#x2f;benchmark_comparison.py with the LLM and static-analyzer baselines.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;unsupported&quot;,
+      &quot;claim&quot;: &quot;The crossover point, at which the marginal benefit of human review no longer justifies its marginal cost, has already been reached.&quot;,
+      &quot;evidence&quot;: &quot;This is the central, load-bearing claim of the paper. It is asserted without any quantitative cost-benefit model: no defect-detection-rate comparison between agent and human reviewers on a controlled corpus, no dollar-cost accounting per reviewed change, no escape-defect rate measurement. The supporting citations (sadowski2018modern for 10–15% time spent, hilton2016usage for latency) establish only the cost side; the benefit side (marginal defects caught by humans that agents miss) is asserted, not measured. The claim is in a code-amenable field (cs.SE) and is exactly the kind of empirical proposition that a benchmark or simulation would validate.&quot;,
+      &quot;id&quot;: &quot;C5&quot;,
+      &quot;location&quot;: &quot;Section &#x27;Claim 3: The cost-benefit calculation has flipped.&#x27;&quot;,
+      &quot;severity&quot;: &quot;critical&quot;,
+      &quot;suggested_fix&quot;: &quot;Either restate as a forecast&#x2f;argument (&#x27;we argue the crossover is imminent&#x27;) rather than an accomplished fact, OR ship a quantitative analysis: experiments&#x2f;crossover&#x2f;agent_vs_human_defect_detection.py running both an agent reviewer and a human-reviewer baseline on a held-out PR corpus (e.g., DevReview-Bench or CodeReviewer&#x27;s test split), reporting precision&#x2f;recall&#x2f;escape-defect rate and cost per defect.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;unsupported&quot;,
+      &quot;claim&quot;: &quot;Reviews of agent-generated code &#x27;become rubber-stamps&#x27; in practice; the human approves because the code looks correct and the cognitive cost of genuine scrutiny is prohibitive.&quot;,
+      &quot;evidence&quot;: &quot;This is a strong empirical claim about reviewer behavior under AI-assisted workflows, but no citation is provided that measures it. czerwonka2015code is cited but predates LLM coding agents and concerns human-written code. There are emerging studies on review of AI-generated PRs that could support or refute this (e.g., on Copilot-suggested code in industry settings), but none are cited.&quot;,
+      &quot;id&quot;: &quot;C6&quot;,
+      &quot;location&quot;: &quot;Section &#x27;Claim 2&#x27;, subsection &#x27;Human review provides no genuine assurance&#x27;&quot;,
+      &quot;severity&quot;: &quot;major&quot;,
+      &quot;suggested_fix&quot;: &quot;Cite an empirical study of human review behavior on agent-generated PRs (e.g., observational study at a company that deployed Copilot or Cursor) or run one. Without that, soften to &#x27;we hypothesize&#x27; or &#x27;anecdotally observed&#x27;.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;Czerwonka et al. concluded that code reviews at Microsoft &#x27;do not find bugs&#x27; in the sense of catching deep, logic-level defects.&quot;,
+      &quot;evidence&quot;: &quot;czerwonka2015code is a short opinion&#x2f;experience report (pp. 27–28), not a controlled empirical study. The paraphrase is broadly faithful to its argument but the framing &#x27;do not find bugs&#x27; is stronger than what the original brief paper supports; the original is more nuanced about modern review&#x27;s tradeoffs.&quot;,
+      &quot;id&quot;: &quot;C7&quot;,
+      &quot;location&quot;: &quot;Background section, paragraph on Czerwonka et al.&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Quote Czerwonka et al. directly with a more careful paraphrase, and cross-reference with the broader empirical literature on code-review defect-detection rates (e.g., Mantyla &amp; Lassenius 2008, Beller et al. 2014).&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;Developers at large organisations spend between ten and fifteen percent of their working hours reviewing code.&quot;,
+      &quot;evidence&quot;: &quot;This range is consistent with what sadowski2018modern reports for Google. The figure is a standard reference point in the modern-code-review literature.&quot;,
+      &quot;id&quot;: &quot;C8&quot;,
+      &quot;location&quot;: &quot;Introduction and Section &#x27;Claim 3&#x27;&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;AlphaCode ranked within the top 54% of human participants on Codeforces contests.&quot;,
+      &quot;evidence&quot;: &quot;This matches the headline result of li2022competition (Science 378:1092–1097) — an estimated rank within the top 54% averaged across 10 recent contests.&quot;,
+      &quot;id&quot;: &quot;C9&quot;,
+      &quot;location&quot;: &quot;Section &#x27;Benchmark Performance&#x27;&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;A developer assisted by an agent produces more commits, more pull requests, and more lines of changed code per day than an unassisted developer.&quot;,
+      &quot;evidence&quot;: &quot;peng2023impact reports a ~55.8% task-completion speedup for Copilot users on a constrained programming task, not a measurement of PR&#x2f;commit&#x2f;LOC throughput in field conditions. Recent field studies (e.g., METR 2025) have produced more mixed results. The general direction is plausibly supported but the specific framing (&#x27;more commits, more PRs&#x27;) is not what the cited study measured.&quot;,
+      &quot;id&quot;: &quot;C10&quot;,
+      &quot;location&quot;: &quot;Section &#x27;Claim 2&#x27;, subsection &#x27;Human review does not scale&#x27;&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Cite a field-throughput study (e.g., GitHub-internal Copilot rollout data or a controlled longitudinal study) or weaken to &#x27;completes tasks faster in controlled settings (peng2023impact)&#x27;.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;Pearce et al. demonstrate that GitHub Copilot introduces CWE violations at non-trivial rates.&quot;,
+      &quot;evidence&quot;: &quot;pearce2022asleep (IEEE S&amp;P 2022) reports that ~40% of generated programs across 89 CWE scenarios contained vulnerabilities. The paraphrase is accurate.&quot;,
+      &quot;id&quot;: &quot;C11&quot;,
+      &quot;location&quot;: &quot;Section &#x27;Claim 1&#x27; and Discussion&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;unsupported&quot;,
+      &quot;claim&quot;: &quot;Ensemble review across multiple independent agents&#x2f;models with consensus is an effective mitigation for hallucination and false negatives in agent review.&quot;,
+      &quot;evidence&quot;: &quot;This mitigation is proposed without empirical support. It is asserted that ensembles + calibrated uncertainty will work, but no measurement is given that ensembling LLM reviewers reduces false-negative rate to a level competitive with human reviewers, and no citation is provided. Correlated errors across LLMs from the same family (a known issue) could undermine ensemble gains; this is not analyzed.&quot;,
+      &quot;id&quot;: &quot;C12&quot;,
+      &quot;location&quot;: &quot;Discussion, &#x27;Counter-argument: Hallucination and false negatives&#x27;&quot;,
+      &quot;severity&quot;: &quot;major&quot;,
+      &quot;suggested_fix&quot;: &quot;Cite an ensemble-of-reviewers evaluation, or run one: experiments&#x2f;ensemble_review&#x2f;agreement_vs_escape_rate.py measuring how N-agent consensus changes false-negative rate against a held-out defect corpus.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;incorrect&quot;,
+      &quot;claim&quot;: &quot;Agent reviews are &#x27;deterministic&#x27;.&quot;,
+      &quot;evidence&quot;: &quot;LLM-based reviewers are not deterministic by default: they sample tokens stochastically, and even at temperature 0 they exhibit non-determinism in practice due to floating-point&#x2f;batching effects, KV-cache routing, and model-version drift. Calling agent reviews &#x27;deterministic&#x27; is technically incorrect and undermines the very assurance argument being made.&quot;,
+      &quot;id&quot;: &quot;C13&quot;,
+      &quot;location&quot;: &quot;Section &#x27;Claim 3&#x27;, final paragraph&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Replace &#x27;deterministic&#x27; with &#x27;reproducible under fixed seed and model version&#x27; or &#x27;auditable&#x27;. If determinism is intended as a goal, describe the configuration that achieves it (temperature, top_p, seed pinning, model snapshot).&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;The naive integration of AI coding with mandatory human review is a &#x27;dead end&#x27; because the bottleneck grows proportionally with AI-assisted developer productivity.&quot;,
+      &quot;evidence&quot;: &quot;The queuing-theoretic intuition is plausible — if upstream throughput rises and reviewer capacity is fixed, queues grow — but it is asserted without a model. The argument also ignores reviewer-side AI assistance (LLM-augmented humans), which the paper itself later advocates for; this confounds the &#x27;dead end&#x27; framing. No simulation, no historical analog, no measurement of queue growth in AI-deploying organisations is offered.&quot;,
+      &quot;id&quot;: &quot;C14&quot;,
+      &quot;location&quot;: &quot;Section &#x27;Claim 2&#x27;&quot;,
+      &quot;severity&quot;: &quot;major&quot;,
+      &quot;suggested_fix&quot;: &quot;Provide a queuing-model analysis: experiments&#x2f;throughput&#x2f;reviewer_queue_simulation.py with parameters for code-author throughput multiplier (k), reviewer capacity, and review depth, showing how mean review latency and rubber-stamp rate vary with k. Or cite a longitudinal study of review latency in an organisation that adopted Copilot at scale.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;Adversarial prompt injection via PR contents is a qualitatively new attack surface that does not exist for human reviewers.&quot;,
+      &quot;evidence&quot;: &quot;This is well-supported by greshake2023indirect and the broader prompt-injection literature. The acknowledgement is appropriately framed as an open problem.&quot;,
+      &quot;id&quot;: &quot;C15&quot;,
+      &quot;location&quot;: &quot;Discussion, &#x27;Counter-argument: Adversarial inputs and prompt injection&#x27;&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    }
+  ],
+  &quot;confidence&quot;: 0.78,
+  &quot;overall_correctness&quot;: &quot;questionable&quot;
+}</pre>
+      </details>
+      
+    </div>
+  </section>
+
+  <!-- corrections rendered from corrections table; empty on first publish -->
+  <section>
+    <h2>Corrections</h2>
+    <p class="muted">No corrections have been recorded.</p>
+  </section>
+
+  <section>
+    <h2>Bibliography</h2>
+    
+    <ol>
+      
+        <li>
+          bacchelli2013expectations: A. Bacchelli and C. Bird, ``Expectations, outcomes, and challenges of modern code review,&#x27;&#x27; in Proceedings of the 35th International Conference on Software Engineering (ICSE).\hskip 1em plus 0.5em minus 0.4em\relax IEEE, 2013, pp. 712--721.
+          
+          
+        </li>
+      
+        <li>
+          sadowski2018modern: C. Sadowski, E. Söderberg, L. Church, M. Sipko, and A. Bacchelli, ``Modern code review: a case study at {Google},&#x27;&#x27; in Proceedings of the 40th International Conference on Software Engineering: Software Engineering in Practice (ICSE-SEIP).\hskip 1em plus 0.5em minus 0.4em\relax ACM, 2018, pp. 181--190.
+          
+          
+        </li>
+      
+        <li>
+          hilton2016usage: M. Hilton, T. Tunnell, K. Huang, D. Marinov, and D. Dig, ``Usage, costs, and benefits of continuous integration in open-source projects,&#x27;&#x27; in Proceedings of the 31st IEEE&#x2f;ACM International Conference on Automated Software Engineering (ASE).\hskip 1em plus 0.5em minus 0.4em\relax ACM, 2016, pp. 426--437.
+          
+          
+        </li>
+      
+        <li>
+          bosu2016process: A. Bosu, M. Greiler, and C. Bird, ``Process aspects and social dynamics of contemporary code review,&#x27;&#x27; in IEEE Transactions on Software Engineering, vol. 43, no. 1.\hskip 1em plus 0.5em minus 0.4em\relax IEEE, 2016, pp. 56--75.
+          
+          
+        </li>
+      
+        <li>
+          murgia2014developers: A. Murgia, P. Tourani, B. Adams, and M. Ortu, ``Do developers feel emotions? an exploratory analysis of emotions in software artifacts,&#x27;&#x27; in Proceedings of the 11th Working Conference on Mining Software Repositories (MSR).\hskip 1em plus 0.5em minus 0.4em\relax ACM, 2014, pp. 262--271.
+          
+          
+        </li>
+      
+        <li>
+          yang2024sweagent: J. Yang, C. E. Jimenez, A. Wettig, K. Lieret, S. Yao, K. Narasimhan, and O. Press, ``{SWE}-agent: Agent-computer interfaces enable automated software engineering,&#x27;&#x27; arXiv preprint arXiv:2405.15793, 2024.
+          
+          <a href="https://arxiv.org/abs/2405.15793">arXiv:2405.15793</a>
+        </li>
+      
+        <li>
+          cognition2024devin: {Cognition AI}, ``Introducing {Devin}, the first {AI} software engineer,&#x27;&#x27; Cognition AI Blog, 2024, \url{https:&#x2f;&#x2f;www.cognition.ai&#x2f;blog&#x2f;introducing-devin}.
+          
+          
+        </li>
+      
+        <li>
+          wang2024opendevin: X. Wang, B. Chen, Y. Yuan, Y. Zhang, B. Li, C. Qian et al., ``{OpenDevin}: An open platform for {AI} software developers as generalist agents,&#x27;&#x27; in arXiv preprint arXiv:2407.16741, 2024.
+          
+          <a href="https://arxiv.org/abs/2407.16741">arXiv:2407.16741</a>
+        </li>
+      
+        <li>
+          github2024copilotworkspace: {GitHub}, ``{GitHub Copilot Workspace}: Welcome to the {Copilot-native} developer environment,&#x27;&#x27; GitHub Blog, 2024, \url{https:&#x2f;&#x2f;github.blog&#x2f;2024-04-29-github-copilot-workspace&#x2f;}.
+          
+          
+        </li>
+      
+        <li>
+          jimenez2024swebench: C. E. Jimenez, J. Yang, A. Wettig, S. Yao, K. Pei, O. Press, and K. Narasimhan, ``{SWE}-bench: Can language models resolve real-{GitHub} issues?&#x27;&#x27; arXiv preprint arXiv:2310.06770, 2023.
+          
+          <a href="https://arxiv.org/abs/2310.06770">arXiv:2310.06770</a>
+        </li>
+      
+        <li>
+          li2022codereviewer: Z. Li, S. Lu, D. Guo, N. Duan, S. Jannu, G. Jenks, D. Majumder, J. Green, N. Sundaresan, M. Fu et al., ``{CodeReviewer}: Pre-training for automating code review activities,&#x27;&#x27; in Proceedings of the 30th ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering (ESEC&#x2f;FSE).\hskip 1em plus 0.5em minus 0.4em\relax ACM, 2022, pp. 1536--1546.
+          
+          
+        </li>
+      
+        <li>
+          pornprasit2023automated: C. Pornprasit and C. Tantithamthavorn, ``Automated code review in practice,&#x27;&#x27; in Proceedings of the 38th IEEE&#x2f;ACM International Conference on Automated Software Engineering (ASE).\hskip 1em plus 0.5em minus 0.4em\relax IEEE, 2023, pp. 394--405.
+          
+          
+        </li>
+      
+        <li>
+          fagan1976design: M. E. Fagan, ``Design and code inspections to reduce errors in program development,&#x27;&#x27; IBM Systems Journal, vol. 15, no. 3, pp. 182--211, 1976.
+          
+          
+        </li>
+      
+        <li>
+          czerwonka2015code: J. Czerwonka, M. Greiler, and J. Tilford, ``Code reviews do not find bugs: How the current code review best practice slows us down,&#x27;&#x27; pp. 27--28, 2015.
+          
+          
+        </li>
+      
+        <li>
+          lu2023llama: J. Lu, L. Yu, X. Li, L. Yang, and C. Zuo, ``Llama-reviewer: Advancing code review automation with large language models through parameter-efficient fine-tuning,&#x27;&#x27; in Proceedings of the 34th IEEE International Symposium on Software Reliability Engineering (ISSRE).\hskip 1em plus 0.5em minus 0.4em\relax IEEE, 2023, pp. 647--658.
+          
+          
+        </li>
+      
+        <li>
+          tufano2021using: R. Tufano, S. Masiero, A. Mastropaolo, L. Pascarella, D. Poshyvanyk, and G. Bavota, ``Using pre-trained models to boost code review automation.&#x27;&#x27;\hskip 1em plus 0.5em minus 0.4em\relax ACM, 2022, pp. 1--12.
+          
+          
+        </li>
+      
+        <li>
+          tang2024codeagent: X. Tang, K. Kim, Y. Song, C. Lothritz, B. Li, S. Ezzini, H. Tian, J. Klein, and T. F. Bissyande, ``{CodeAgent}: Autonomous communicative agents for code review,&#x27;&#x27; arXiv preprint arXiv:2402.02172, 2024.
+          
+          <a href="https://arxiv.org/abs/2402.02172">arXiv:2402.02172</a>
+        </li>
+      
+        <li>
+          chen2021evaluating: M. Chen, J. Tworek, H. Jun, Q. Yuan, H. P. d. O. Pinto, J. Kaplan, H. Edwards, Y. Burda, N. Joseph, G. Brockman et al., ``Evaluating large language models trained on code,&#x27;&#x27; arXiv preprint arXiv:2107.03374, 2021.
+          
+          <a href="https://arxiv.org/abs/2107.03374">arXiv:2107.03374</a>
+        </li>
+      
+        <li>
+          anthropic2024claude: {Anthropic}, ``The {Claude} 3 model family: {Opus, Sonnet, Haiku},&#x27;&#x27; Anthropic Technical Report, 2024.
+          
+          
+        </li>
+      
+        <li>
+          swebench2025leaderboard: S. bench Team, ``{SWE}-bench leaderboard,&#x27;&#x27; \url{https:&#x2f;&#x2f;www.swebench.com}, 2025.
+          
+          
+        </li>
+      
+        <li>
+          le2012genprog: C. Le Goues, T. Nguyen, S. Forrest, and W. Weimer, ``A systematic study of automated program repair: Fixing 55 out of 105 bugs for \$8 each,&#x27;&#x27; pp. 3--13, 2012.
+          
+          
+        </li>
+      
+        <li>
+          xia2023automated: C. S. Xia, Y. Wei, and L. Zhang, ``Automated program repair in the era of large pre-trained language models,&#x27;&#x27; pp. 1482--1494, 2023.
+          
+          
+        </li>
+      
+        <li>
+          li2022competition: Y. Li, D. Choi, J. Chung, N. Kushman, J. Schrittwieser, R. Leblond, T. Eccles, J. Keeling, F. Gimeno, A. Dal Lago et al., ``Competition-level code generation with {AlphaCode},&#x27;&#x27; Science, vol. 378, no. 6624, pp. 1092--1097, 2022.
+          
+          
+        </li>
+      
+        <li>
+          pearce2022asleep: H. Pearce, B. Ahmad, B. Tan, B. Dolan-Gavitt, and R. Karri, ``Asleep at the keyboard? assessing the security of {GitHub Copilot}&#x27;s code contributions,&#x27;&#x27; in Proceedings of the 43rd IEEE Symposium on Security and Privacy (SP).\hskip 1em plus 0.5em minus 0.4em\relax IEEE, 2022, pp. 754--768.
+          
+          
+        </li>
+      
+        <li>
+          khoury2023secure: R. Khoury, A. R. Avci, J. Brunelle, and B. Marc Camara, ``How secure is code generated by {ChatGPT}?&#x27;&#x27; 2023.
+          
+          
+        </li>
+      
+        <li>
+          lin2025comparing: J. W. Lin, E. K. Jones, D. J. Jasper, E. J.-s. Ho, A. Wu, A. T. Yang, N. Perry, A. Zou, M. Fredrikson, J. Z. Kolter et al., ``Comparing ai agents to cybersecurity professionals in real-world penetration testing,&#x27;&#x27; arXiv preprint arXiv:2512.09882, 2025.
+          
+          <a href="https://arxiv.org/abs/2512.09882">arXiv:2512.09882</a>
+        </li>
+      
+        <li>
+          peng2023impact: S. Peng, E. Kalliamvakou, P. Cihon, and M. Demirer, ``The impact of {AI} on developer productivity: Evidence from {GitHub Copilot},&#x27;&#x27; arXiv preprint arXiv:2302.06590, 2023.
+          
+          <a href="https://arxiv.org/abs/2302.06590">arXiv:2302.06590</a>
+        </li>
+      
+        <li>
+          shahin2017continuous: M. Shahin, M. A. Babar, and L. Zhu, ``Continuous integration, delivery and deployment: A systematic review on approaches, tools, challenges and practices,&#x27;&#x27; IEEE Access, vol. 5, pp. 3909--3943, 2017.
+          
+          
+        </li>
+      
+        <li>
+          kadavath2022know: S. Kadavath, T. Conerly, A. Askell, T. Henighan, D. Drain, E. Perez, N. Schiefer, Z. Dodds, N. DasSarma, E. Tran-Johnson, S. Johnston, S. El-Showk, A. Jones, N. Elhage, T. Hume, A. Chen, Y. Bai, S. Bowman, S. Fort, D. Ganguli, D. Hernandez, J. Jacobson, J. Kernion, S. Kravec, L. Lovitt, K. Ndousse, C. Olsson, S. Ringer, D. Amodei, T. B. Brown, J. Clark, N. Joseph, B. Mann, S. McCandlish, C. Olah, and J. Kaplan, ``Language models (mostly) know what they know,&#x27;&#x27; arXiv preprint arXiv:2207.05221, 2022.
+          
+          <a href="https://arxiv.org/abs/2207.05221">arXiv:2207.05221</a>
+        </li>
+      
+        <li>
+          yildiz2025jitvul: A. Yildiz, S. G. Teo, Y. Lou, Y. Feng, C. Wang, and D. M. Divakaran, ``Benchmarking llms and llm-based agents in practical vulnerability detection for code repositories,&#x27;&#x27; arXiv preprint arXiv:2503.03586, 2025.
+          
+          <a href="https://arxiv.org/abs/2503.03586">arXiv:2503.03586</a>
+        </li>
+      
+        <li>
+          berkeley2025frontiercyberblog: {Berkeley Risk and Decisions Initiative}, ``Frontier ai&#x27;s impact on the cybersecurity landscape (paper summary and blog),&#x27;&#x27; \url{https:&#x2f;&#x2f;rdi.berkeley.edu&#x2f;frontier-ai-impact-on-cybersecurity&#x2f;}, 2025.
+          
+          
+        </li>
+      
+        <li>
+          greshake2023indirect: K. Greshake, S. Abdelnabi, S. Mishra, C. Endres, T. Holz, and M. Fritz, ``Not what you&#x27;ve signed up for: Compromising real-world {LLM}-integrated applications with indirect prompt injection,&#x27;&#x27; arXiv preprint arXiv:2302.12173, 2023.
+          
+          <a href="https://arxiv.org/abs/2302.12173">arXiv:2302.12173</a>
+        </li>
+      
+    </ol>
+    
+  </section>
+
+  <footer class="footer-disclaimer">
+    <p class="muted">Rendered by <span class="brand">GrokRxiv</span>. Source: <a href="https://arxiv.org/abs/2606.13175">arXiv:2606.13175</a>.</p>
+  </footer>
+</body>
+</html>
