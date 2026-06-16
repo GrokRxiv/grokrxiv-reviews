@@ -1,0 +1,1949 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Categorical Hopf map — GrokRxiv Review</title>
+  <meta name="generator" content="grokrxiv-render">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- KaTeX is rendered client-side; math is kept as \( ... \) and \[ ... \] delimiters. -->
+  <style>
+    :root { color-scheme: light dark; --fg: #111; --muted: #555; --bg: #fff;
+            --accent: #1f6feb; --border: #d0d7de; --banner: #fff3cd; --banner-fg: #664d03; }
+    @media (prefers-color-scheme: dark) {
+      :root { --fg: #e6edf3; --muted: #8b949e; --bg: #0d1117; --accent: #58a6ff;
+              --border: #30363d; --banner: #3a2f0b; --banner-fg: #f1c453; }
+    }
+    body { font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+           color: var(--fg); background: var(--bg); max-width: 820px;
+           margin: 0 auto; padding: 24px; }
+    h1 { font-size: 1.7rem; line-height: 1.25; margin: 0 0 0.5rem; }
+    h2 { font-size: 1.2rem; margin-top: 2rem; border-bottom: 1px solid var(--border); padding-bottom: .25rem; }
+    .muted { color: var(--muted); }
+    .disclaimer { background: var(--banner); color: var(--banner-fg); border: 1px solid var(--border);
+                  padding: .75rem 1rem; border-radius: 6px; margin: 0 0 1.5rem; font-weight: 600; }
+    .footer-disclaimer { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--border);
+                         color: var(--muted); font-size: .9rem; }
+    .brand { font-weight: 700; color: var(--accent); }
+    details { border: 1px solid var(--border); border-radius: 6px; padding: .75rem 1rem; margin: .5rem 0; }
+    details > summary { cursor: pointer; font-weight: 600; }
+    .meta-link { font-size: .9rem; }
+    ul { padding-left: 1.25rem; }
+    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .agent-grid { display: grid; gap: .5rem; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 999px;
+             background: var(--border); color: var(--fg); font-size: .8rem; }
+    .badge.pass { background: #1f883d; color: #fff; }
+    .badge.warn { background: #bf8700; color: #fff; }
+    .badge.fail { background: #cf222e; color: #fff; }
+    .target-grid { display: grid; gap: .75rem; padding: 0; list-style: none; }
+    .revision-target { border: 1px solid var(--border); border-radius: 6px; padding: .9rem 1rem;
+                       background: rgba(127, 127, 127, .08); }
+    .target-title { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: 0 0 .75rem; }
+    .target-fields { display: grid; gap: .5rem; margin: 0; }
+    .target-field { display: grid; gap: .35rem; border: 1px solid var(--border);
+                    border-radius: 6px; padding: .65rem .75rem; }
+    .target-field.required { border-color: #bf8700; background: rgba(191, 135, 0, .12); }
+    .field-label { color: var(--muted); font-size: .75rem; font-weight: 700; text-transform: uppercase; }
+    .field-value { margin: 0; overflow-wrap: anywhere; }
+    .field-value.codeish { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Categorical Hopf map</h1>
+    <p class="muted">
+      <span class="brand">GrokRxiv</span> review of
+      <a class="meta-link" href="https://arxiv.org/abs/2606.12482">arXiv:2606.12482</a>
+       · <span>math.CT</span>
+    </p>
+    <p class="muted">
+      Ali Khalili Samani
+    </p>
+  </header>
+
+  <section>
+    <h2>TL;DR</h2>
+    <p>This thesis constructs the categorical Hopf map as a categorical principal 2-bundle over S² with fiber Ganter&#x27;s categorical circle U(1), synthesising the 2-bundle formalism of Bartels and Wockel with the higher categorical framework of Murray and Waldorf. The novelty specialist rates the contribution significant (score 0.8, confidence 0.95): no prior work produced this explicit object, and the factorisation linking the categorical Hopf map to the basic bundle gerbe over S³ via the classical Hopf map is a genuinely new bridge between higher gauge theory and gerbe theory. The citation specialist (confidence 1.0) found exemplary hygiene across 37 entries with no missing references. The technical correctness specialist (confidence 0.55, overall mostly_sound) verified all standard claims (C5–C9, C11–C15); the partially-supported claims are C1 (categorical Hopf cocycle identities for Construction 39, major), C2 (factorisation diagram with 2-cells, major), and C14 (necessity of six-open cover, minor). The headline String(3) symmetry conjecture (C4) is explicitly labelled as conjectural and no partial homotopy-group evidence is supplied. The reproducibility specialist (confidence 0.86, score 0.22) flagged two critical-severity gaps: no machine-checkable proof artifact for the cocycle laws of the headline construction, and no formal proof of the factorisation through the basic bundle gerbe; these are compounded by the absence of any companion repository. The paper belongs to a code-amenable field (math.CT&#x2f;math.AT) where the equational reasoning — crossed-module identities, cocycle conditions, stable-isomorphism chains — is mechanisable in Lean 4&#x2f;mathlib or Coq. The missing proof-as-code artifacts are the primary driver of the major_revision recommendation. No specialist disagreements were detected; technical correctness and reproducibility reinforce each other on the formalisation gap, while novelty and citation findings are uncontested.</p>
+    <p class="muted">Recommendation: <strong>Major revision</strong> · Confidence: 82%</p>
+  </section>
+
+  <section>
+    <h2>Strengths</h2>
+    <ul>
+      <li>The first explicit construction of a categorical analogue of the Hopf map as a principal 2-bundle over S² with fiber the categorical circle U(1), representing a novel synthesis of Ganter&#x27;s categorical tori and the Bartels–Wockel 2-bundle formalism.</li><li>The factorisation theorem linking the categorical Hopf map to Murray&#x27;s basic bundle gerbe over S³ via the classical Hopf fibration provides a concrete conceptual bridge between higher gauge theory and degree-three cohomology.</li><li>All standard and foundational claims — Hopf map coordinates (C5), transition cocycle (C6), Dixmier–Douady classification (C8), Brown–Spencer crossed-module correspondence (C9), and cocycle-to-bundle construction (C11) — are correctly stated and well-cited.</li><li>The bibliography is precise and comprehensive, covering the definitive literature from Hopf (1931) and Ehresmann (1951) through Ganter (2018) and Waldorf (2018), with no significant omissions identified by the citation specialist.</li><li>Three equivalent geometric constructions of the basic bundle gerbe over S³ are presented, offering flexibility for future applications across mathematical physics and higher representation theory.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Weaknesses</h2>
+    <ul>
+      <li>The cocycle identities for the transition data (g_ij, h_ijk) in the headline Construction 39 over the six-open cover of S² are not independently verified in the accessible text, and no machine-checkable proof artifact is supplied; the reproducibility specialist rated this concern critical.</li><li>The factorisation of the categorical Hopf map through the classical Hopf fibration and the basic bundle gerbe lacks an explicit 2-cell commutativity diagram with all natural transformations named, and no accompanying formal proof is provided; this is also rated critical severity by the reproducibility specialist.</li><li>The central String(3) symmetry conjecture (Section 6, Construction 55) is unsupported by any partial evidence — no computation of π₀ or π₁ of the categorical symmetry 2-group is supplied and no k-invariant comparison with Schommer-Pries&#x27; model [MR2800361] is attempted.</li><li>No companion repository, commit-pinned artifact, or any machine-checkable verification of any main construction is provided, despite the paper being in a code-amenable field (math.CT&#x2f;math.AT) where crossed-module and cocycle identities are mechanisable; the reproducibility score is 0.22.</li><li>The equivalences among the three bundle gerbe constructions over S³ (Observations 32 and 47) do not state whether equivalence means stable isomorphism or 2-isomorphism, and the intermediate isomorphism data is not written out.</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Revision Targets</h2>
+    <div class="target-grid">
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>code</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              
+              
+              code release and execution entrypoints
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">The headline construction of the categorical Hopf map is supported by hand-defined cocycle data, but no machine-checkable proof artifact is supplied for the cocycle laws, total 2-space construction, action, and local trivializations. A file such as formalization&#x2f;CategoricalHopfMap.lean would close this proof-as-code gap.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Release the source code, scripts, model configuration, and execution entrypoints needed to regenerate the reported tables, or document why those artifacts cannot be released.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm runnable code or a documented non-release justification is present.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              
+              
+              Abstract; Section 5
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">The paper sets up the categorical group BU(1) and the correspondence between bundle gerbes and principal BU(1)-bundles (Remark 28) correctly, and asserts a factorisation through eta:S^3 -&gt; S^2 and the basic gerbe. The detailed factorisation diagram and the verification that the composite of categorified transition data agrees (up to coherent natural isomorphism) with the categorical Hopf cocycle are in Section 5, which is not visible in the inspected text. The claim is plausible by the Dixmier-Douady classification (Remark 31) but not verified here.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Add an explicit commutativity&#x2f;equivalence diagram in Section 5 with all 2-cells named, and supply an accompanying formal proof artifact (e.g. src&#x2f;proofs&#x2f;HopfGerbeFactorisation.lean) that the two compositions of categorical transition data are weakly equivalent.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm `Abstract; Section 5` is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              
+              
+              Abstract; Section 6 (Construction 55 &quot;symmofhopf&quot;)
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">The paper explicitly labels this as a conjecture (&quot;we conjecture that the categorical group String(3) is equivalent to...&quot;). The intermediate identification of the symmetry group of the classical Hopf map with Spin^c(3), referenced at the end of Section 2, is plausible but uses Ehresmann connection data only &quot;implicitly&quot;. No proof, no partial obstruction-theoretic argument, and no executable artifact are supplied, despite this being the headline conjecture motivating the construction.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Either (a) prove the conjecture, identifying the categorical automorphism 2-group of the categorical Hopf map and exhibiting an equivalence to Schommer-Pries&#x27; String(3) [MR2800361]; or (b) supply concrete partial evidence (compute pi_0 and pi_1 of the symmetry 2-group, match them to Spin(3) and BU(1) respectively, and check the k-invariant). A formal sketch in src&#x2f;proofs&#x2f;String3Symmetries.lean would substantially strengthen the claim.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm `Abstract; Section 6 (Construction 55 &quot;symmofhopf&quot;)` is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              
+              
+              Whole paper; no supplementary code or repository is referenced
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">The paper is in a code-amenable field (math.CT &#x2f; math.AT). The Proof-as-Code axiom applies: cocycle identities, semidirect-product and crossed-module manipulations, and stable-isomorphism chains between bundle-gerbe constructions are precisely the kind of finite, equational reasoning that current formal-mathematics libraries (mathlib&#x27;s CategoryTheory, Iversen&#x2f;Murfet&#x27;s bundle-gerbe formalisations, HoTT&#x2f;Coq) can certify. None is provided.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Ship a companion repository with (a) the cocycle verification for the categorical Hopf bundle in src&#x2f;proofs&#x2f;CategoricalHopfCocycle.lean, (b) the factorisation equivalence in src&#x2f;proofs&#x2f;HopfGerbeFactorisation.lean, and (c) the three-way equivalence of basic gerbes over S^3 in src&#x2f;proofs&#x2f;BasicGerbeS3Equivalences.lean. Even a minimal Agda&#x2f;Lean checker for the crossed-module Peiffer and equivariance identities used in Example 10 and Remark 18 would substantially raise confidence.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm `Whole paper; no supplementary code or repository is referenced` is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              
+              
+              Section 3 (Example 27, Observation 32 &quot;equiofbungerbes&quot;); Section 5 (Observation 47 &quot;mapH&quot;)
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">The bundle gerbe &#x2f; principal BU(1)-bundle correspondence (Remark 28) and classification by H^3(M;Z) (Remark 31) are standard and correctly cited [MR1669206, MR3089401]. Stable-isomorphism equivalence of three concrete models for the generator of H^3(S^3;Z)=Z is a well-defined claim, and the framework supports it, but the explicit chain of stable isomorphisms (Observations 32 and 47) is not visible in the inspected text and is not formalised.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">State precisely whether equivalence is asserted as isomorphism, stable isomorphism, or 2-isomorphism, and include the chain of intermediate isomorphisms. Optionally provide a Lean&#x2f;Coq witness in src&#x2f;proofs&#x2f;BasicGerbeS3Equivalences.lean.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm `Section 3 (Example 27, Observation 32 &quot;equiofbungerbes&quot;); Section 5 (Observation 47 &quot;mapH&quot;)` is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+    </div>
+  </section>
+
+  <section>
+    <h2>Open Questions</h2>
+    <ul>
+      <li>Can the authors supply an explicit term-by-term verification — even in an appendix — of the four cocycle identities (g_ii=e, β(h_ijk)g_ij g_jk = g_ik, h_ijj=h_jji=e, h_ijk h_ikl = h_ijl α(g_ij,h_jkl)) for the transition data used in Construction 39 over the six-open cover of S²?</li><li>What is the precise notion of equivalence claimed for the three constructions of the basic bundle gerbe over S³ — stable isomorphism, 2-isomorphism, or weak equivalence of bundle gerbes — and can the chain of intermediate isomorphisms be written out explicitly?</li><li>For the String(3) conjecture, can the authors compute π₀ and π₁ of the categorical symmetry 2-group of the categorical Hopf map and verify that they are Spin(3) and U(1) respectively, as a minimal first check before the full conjecture is addressed?</li><li>What forces the use of a six-open cover rather than the minimal two-open cover sufficient for the classical Hopf bundle, and can the authors state which categorical cocycle identity fails on fewer opens?</li><li>Will a companion formalisation repository be provided to discharge at least the crossed-module Peiffer identities (Example 10), the cocycle conditions for Construction 39, and the factorisation equivalence (C2)?</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Per-Agent Reviews</h2>
+    <div class="agent-grid">
+      
+      <details>
+        <summary>
+          citation — <span class="muted">gemini-3-flash-preview</span>
+          <span class="badge warn">warn</span>
+        </summary>
+        <pre>{
+  &quot;confidence&quot;: 1.0,
+  &quot;entries&quot;: [
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Ehresmann, Charles&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR116360&quot;,
+        &quot;raw&quot;: &quot;MR116360: AUTHOR = Ehresmann, Charles, TITLE = Cat\\&#x27;egories topologiques et cat\\&#x27;egories diff\\&#x27;erentiables, BOOKTITLE = Colloque G\\&#x27;eom. Diff. Globale (Bruxelles, 1958), PAGES = 137--150, PUBLISHER = Librairie Universitaire, Louvain, YEAR = 1959, MRCLASS = 57.00, MRNUMBER = 116360,&quot;,
+        &quot;title&quot;: &quot;Cat\\&#x27;egories topologiques et cat\\&#x27;egories diff\\&#x27;erentiables&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Colloque G\\&#x27;eom. Diff. Globale (Bruxelles, 1958)&quot;,
+        &quot;year&quot;: 1959
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Foundational reference for topological and differentiable categories, providing historical and mathematical context for the categorification of bundles.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Brylinski, Jean-Luc&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR1197353&quot;,
+        &quot;raw&quot;: &quot;MR1197353: AUTHOR = Brylinski, Jean-Luc, TITLE = Loop spaces, characteristic classes and geometric quantization, SERIES = Progress in Mathematics, VOLUME = 107, PUBLISHER = Birkh\\\&quot;auser Boston, Inc., Boston, MA, YEAR = 1993, PAGES = xvi+300, ISBN = 0-8176-3644-7, MRCLASS = 57Rxx (18G50 55P35 58F06), MRNUMBER = 1197353,&quot;,
+        &quot;title&quot;: &quot;Loop spaces, characteristic classes and geometric quantization&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Progress in Mathematics&quot;,
+        &quot;year&quot;: 1993
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Key reference for the development of gerbes in the context of Deligne cohomology and their correspondence to principal U(1)-bundles.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Weibel, Charles A.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR1269324&quot;,
+        &quot;raw&quot;: &quot;MR1269324: AUTHOR = Weibel, Charles A., TITLE = An introduction to homological algebra, SERIES = Cambridge Studies in Advanced Mathematics, VOLUME = 38, PUBLISHER = Cambridge University Press, Cambridge, YEAR = 1994, PAGES = xiv+450, ISBN = 0-521-43500-5; 0-521-55987-1, MRCLASS = 18-01 (16-01 17-01 20-01 55Uxx), MRNUMBER = 1269324,&quot;,
+        &quot;title&quot;: &quot;An introduction to homological algebra&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Cambridge Studies in Advanced Mathematics&quot;,
+        &quot;year&quot;: 1994
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Standard reference for homological algebra, cited for specific results regarding group homology and examples.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Stolz, Stephan&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR1380455&quot;,
+        &quot;raw&quot;: &quot;MR1380455: AUTHOR = Stolz, Stephan, TITLE = A conjecture concerning positive Ricci curvature and the Witten genus, JOURNAL = Mathematische Annalen, VOLUME = 304, YEAR = 1996, NUMBER = 4, PAGES = 785--800, ISSN = 0025-5831,1432-1807, MRCLASS = 58G10 (53C21 57R20 57R65), MRNUMBER = 1380455,&quot;,
+        &quot;title&quot;: &quot;A conjecture concerning positive Ricci curvature and the Witten genus&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Mathematische Annalen&quot;,
+        &quot;year&quot;: 1996
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Fundamental paper that introduced the String(n) group, a central object of investigation in this work.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Bredon, Glen E.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR1481706&quot;,
+        &quot;raw&quot;: &quot;MR1481706: AUTHOR = Bredon, Glen E., TITLE = Sheaf theory, SERIES = Graduate Texts in Mathematics, VOLUME = 170, EDITION = Second, PUBLISHER = Springer-Verlag, New York, YEAR = 1997, PAGES = xii+502, ISBN = 0-387-94905-4, MRCLASS = 55N30 (18F20 54B40 55-02), MRNUMBER = 1481706,&quot;,
+        &quot;title&quot;: &quot;Sheaf theory&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Graduate Texts in Mathematics&quot;,
+        &quot;year&quot;: 1997
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Standard reference for sheaf theory, used to justify isomorphisms in cohomology calculations.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Hopf, Heinz&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR1512691&quot;,
+        &quot;raw&quot;: &quot;MR1512691: AUTHOR = Hopf, Heinz, TITLE = \\\&quot;Uber die Abbildungen der dreidimensionalen Sph\\\&quot;are auf die Kugelfl\\\&quot;ache, JOURNAL = Math. Ann., FJOURNAL = Mathematische Annalen, VOLUME = 104, YEAR = 1931, NUMBER = 1, PAGES = 637--665, ISSN = 0025-5831,1432-1807, MRCLASS = 99-04, MRNUMBER = 1512691,&quot;,
+        &quot;title&quot;: &quot;\\\&quot;Uber die Abbildungen der dreidimensionalen Sph\\\&quot;are auf die Kugelfl\\\&quot;ache&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Mathematische Annalen&quot;,
+        &quot;year&quot;: 1931
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;The original paper introducing the Hopf map, which is the primary classical object being categorified in this thesis.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Murray, Michael K.&quot;
+        ],
+        &quot;doi&quot;: &quot;10.1112&#x2f;jlms&#x2f;54.2.403&quot;,
+        &quot;key&quot;: &quot;MR1669206&quot;,
+        &quot;raw&quot;: &quot;MR1669206: AUTHOR = Murray, Michael K., TITLE = Bundle gerbes, JOURNAL = J. London Math. Soc. (2), VOLUME = 54, YEAR = 1996, NUMBER = 2, PAGES = 403--416, DOI = 10.1112&#x2f;jlms&#x2f;54.2.403, URL = https:&#x2f;&#x2f;doi.org&#x2f;10.1112&#x2f;jlms&#x2f;54.2.403&quot;,
+        &quot;title&quot;: &quot;Bundle gerbes&quot;,
+        &quot;url&quot;: &quot;https:&#x2f;&#x2f;doi.org&#x2f;10.1112&#x2f;jlms&#x2f;54.2.403&quot;,
+        &quot;venue&quot;: &quot;J. London Math. Soc. (2)&quot;,
+        &quot;year&quot;: 1996
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Foundational paper introducing bundle gerbes as a geometric model for degree-three cohomology, essential to the paper&#x27;s framework.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Isham, Chris J.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR1698234&quot;,
+        &quot;raw&quot;: &quot;MR1698234: AUTHOR = Isham, Chris J., TITLE = Modern differential geometry for physicists, SERIES = World Scientific Lecture Notes in Physics, VOLUME = 61, EDITION = Second, PUBLISHER = World Scientific Publishing Co., Inc., River Edge, NJ, YEAR = 1999, PAGES = xiv+289, ISBN = 981-02-3555-0, MRCLASS = 53-01 (53C80), MRNUMBER = 1698234,&quot;,
+        &quot;title&quot;: &quot;Modern differential geometry for physicists&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;World Scientific Lecture Notes in Physics&quot;,
+        &quot;year&quot;: 1999
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Reference for standard definitions and concepts in differential geometry, specifically concerning connections and principal bundles.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Toth, Gabor&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR1863996&quot;,
+        &quot;raw&quot;: &quot;MR1863996: AUTHOR = Toth, Gabor, TITLE = Finite M\\\&quot;obius groups, minimal immersions of spheres, and moduli, SERIES = Universitext, PUBLISHER = Springer-Verlag, New York, YEAR = 2002, PAGES = xvi+317, ISBN = 0-387-95323-X, MRCLASS = 53C42 (53C43 58E20), MRNUMBER = 1863996,&quot;,
+        &quot;title&quot;: &quot;Finite M\\\&quot;obius groups, minimal immersions of spheres, and moduli&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Universitext&quot;,
+        &quot;year&quot;: 2002
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Peripheral reference likely related to the geometry of spheres, though not a central technical reference in the provided snippets.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;low&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Moerdijk, Ieke&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR1950948&quot;,
+        &quot;raw&quot;: &quot;MR1950948: AUTHOR = Moerdijk, Ieke, TITLE = Orbifolds as groupoids: an introduction, BOOKTITLE = Orbifolds in mathematics and physics, SERIES = Contemporary Mathematics, VOLUME = 310, PAGES = 205--222, PUBLISHER = American Mathematical Society, YEAR = 2002, ISBN = 0-8218-2990-4, MRCLASS = 22A22 (55N30 55P15 58H05), MRNUMBER = 1950948,&quot;,
+        &quot;title&quot;: &quot;Orbifolds as groupoids: an introduction&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Orbifolds in mathematics and physics&quot;,
+        &quot;year&quot;: 2002
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Significant reference for the groupoid-theoretic perspective on manifolds and orbifolds, used in the construction of categorical bundles.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Tinkham, Michael&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR198828&quot;,
+        &quot;raw&quot;: &quot;MR198828: AUTHOR = Tinkham, Michael, TITLE = Group theory and quantum mechanics, PUBLISHER = McGraw-Hill Book Co., New York-Toronto-London, YEAR = 1964, PAGES = xii+340, MRCLASS = 81.22, MRNUMBER = 198828,&quot;,
+        &quot;title&quot;: &quot;Group theory and quantum mechanics&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;McGraw-Hill Book Co.&quot;,
+        &quot;year&quot;: 1964
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;General background reference for applications of group theory and representations in quantum mechanics.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;low&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Baez, John C.&quot;,
+          &quot;Lauda, Aaron D.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR2068521&quot;,
+        &quot;raw&quot;: &quot;MR2068521: AUTHOR = Baez, John C. and Lauda, Aaron D., TITLE = Higher-dimensional algebra. V. 2-groups, JOURNAL = Theory and Applications of Categories, VOLUME = 12, YEAR = 2004, PAGES = 423--491, ISSN = 1201-561X, MRCLASS = 18D05 (18D10 20J06), MRNUMBER = 2068521,&quot;,
+        &quot;title&quot;: &quot;Higher-dimensional algebra. V. 2-groups&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Theory and Applications of Categories&quot;,
+        &quot;year&quot;: 2004
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Foundational reference for the theory of 2-groups, which form the base of the categorical group structures used in the paper.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Spivak, Michael&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR209411&quot;,
+        &quot;raw&quot;: &quot;MR209411: AUTHOR = Spivak, Michael, TITLE = Calculus on manifolds. A modern approach to classical theorems of advanced calculus, PUBLISHER = W. A. Benjamin, Inc., New York-Amsterdam, YEAR = 1965, PAGES = xii+144, MRCLASS = 26.20 (57.00), MRNUMBER = 209411,&quot;,
+        &quot;title&quot;: &quot;Calculus on manifolds. A modern approach to classical theorems of advanced calculus&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;W. A. Benjamin, Inc.&quot;,
+        &quot;year&quot;: 1965
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Classic textbook for calculus on manifolds, likely used for standard background definitions.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;low&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Grothendieck, Alexander&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR217087&quot;,
+        &quot;raw&quot;: &quot;MR217087: AUTHOR = Grothendieck, Alexander, TITLE = Rev\\^etements \\&#x27;etales et groupe fondamental. Fasc. I: Expos\\&#x27;es 1 \\`a 5, NOTE = Troisi\\`eme \\&#x27;edition, corrig\\&#x27;ee, S\\&#x27;eminaire de G\\&#x27;eom\\&#x27;etrie Alg\\&#x27;ebrique, 1960&#x2f;61, PUBLISHER = Institut des Hautes \\&#x27;Etudes Scientifiques, Paris, YEAR = 1963, PAGES = iv+143 pp. (not consecutively paged) (loose errata), MRCLASS = 14.55, MRNUMBER = 217087,&quot;,
+        &quot;title&quot;: &quot;Rev\\^etements \\&#x27;etales et groupe fondamental. Fasc. I: Expos\\&#x27;es 1 \\`a 5&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;S\\&#x27;eminaire de G\\&#x27;eom\\&#x27;etrie Alg\\&#x27;ebrique&quot;,
+        &quot;year&quot;: 1963
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Classic reference for fundamental groups and covering spaces, providing theoretical background.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Carey, Alan L.&quot;,
+          &quot;Johnson, Stuart&quot;,
+          &quot;Murray, Michael K.&quot;,
+          &quot;Stevenson, Danny&quot;,
+          &quot;Wang, Bai-Ling&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR2174418&quot;,
+        &quot;raw&quot;: &quot;MR2174418: AUTHOR = Carey, Alan L. and Johnson, Stuart and Murray, Michael K. and Stevenson, Danny and Wang, Bai-Ling, TITLE = Bundle gerbes for Chern-Simons and Wess-Zumino-Witten theories, JOURNAL = Comm. Math. Phys., FJOURNAL = Communications in Mathematical Physics, VOLUME = 259, YEAR = 2005, NUMBER = 3, PAGES = 577--613, ISSN = 0010-3616,1432-0916, MRCLASS = 58J28 (53C07 55R65 58J90 81T13), MRNUMBER = 2174418,&quot;,
+        &quot;title&quot;: &quot;Bundle gerbes for Chern-Simons and Wess-Zumino-Witten theories&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Communications in Mathematical Physics&quot;,
+        &quot;year&quot;: 2005
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Reference for the application of bundle gerbes in mathematical physics, providing context for the significance of the objects studied.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Waldorf, Konrad&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR2318389&quot;,
+        &quot;raw&quot;: &quot;MR2318389: AUTHOR = Waldorf, Konrad, TITLE = More morphisms between bundle gerbes, JOURNAL = Theory Appl. Categ., FJOURNAL = Theory and Applications of Categories, VOLUME = 18, YEAR = 2007, PAGES = No. 9, 240--273, ISSN = 1201-561X, MRCLASS = 53C29 (18B40 18D05 55R65), MRNUMBER = 2318389,&quot;,
+        &quot;title&quot;: &quot;More morphisms between bundle gerbes&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Theory and Applications of Categories&quot;,
+        &quot;year&quot;: 2007
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Reference for morphisms in the 2-category of bundle gerbes, supporting the higher categorical framework.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Schreiber, Urs&quot;,
+          &quot;Schweigert, Christoph&quot;,
+          &quot;Waldorf, Konrad&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR2318847&quot;,
+        &quot;raw&quot;: &quot;MR2318847: AUTHOR = Schreiber, Urs and Schweigert, Christoph and Waldorf, Konrad, TITLE = Unoriented WZW models and holonomy of bundle gerbes, JOURNAL = Comm. Math. Phys., FJOURNAL = Communications in Mathematical Physics, VOLUME = 274, YEAR = 2007, NUMBER = 1, PAGES = 31--64, ISSN = 0010-3616,1432-0916, MRCLASS = 53C29 (53C80 55R65 81T40 81T45), MRNUMBER = 2318847,&quot;,
+        &quot;title&quot;: &quot;Unoriented WZW models and holonomy of bundle gerbes&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Communications in Mathematical Physics&quot;,
+        &quot;year&quot;: 2007
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited for definitions of bundle gerbes and their holonomy, particularly in the section on equivalent constructions.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Baez, John C.&quot;,
+          &quot;Schreiber, Urs&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR2342821&quot;,
+        &quot;raw&quot;: &quot;MR2342821: AUTHOR = Baez, John C. and Schreiber, Urs, TITLE = Higher gauge theory, BOOKTITLE = Categories in algebra, geometry and mathematical physics, SERIES = Contemp. Math., VOLUME = 431, PAGES = 7--30, PUBLISHER = Amer. Math. Soc., Providence, RI, YEAR = 2007, ISBN = 978-0-8218-3970-6; 0-8218-3970-5, MRCLASS = 53C29 (18D99 22A22 53C07 55R65), MRNUMBER = 2342821,&quot;,
+        &quot;title&quot;: &quot;Higher gauge theory&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Categories in algebra, geometry and mathematical physics&quot;,
+        &quot;year&quot;: 2007
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Major reference for the higher gauge theory framework, which underpins the paper&#x27;s approach to categorical bundles.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Baez, John C.&quot;,
+          &quot;Stevenson, Danny&quot;,
+          &quot;Crans, Alissa S.&quot;,
+          &quot;Schreiber, Urs&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR2366945&quot;,
+        &quot;raw&quot;: &quot;MR2366945: AUTHOR = Baez, John C. and Stevenson, Danny and Crans, Alissa S. and Schreiber, Urs, TITLE = From loop groups to 2-groups, JOURNAL = Homology Homotopy Appl., FJOURNAL = Homology, Homotopy and Applications, VOLUME = 9, YEAR = 2007, NUMBER = 2, PAGES = 101--135, ISSN = 1532-0073,1532-0081, MRCLASS = 22E67 (17B99 18D05), MRNUMBER = 2366945,&quot;,
+        &quot;title&quot;: &quot;From loop groups to 2-groups&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Homology, Homotopy and Applications&quot;,
+        &quot;year&quot;: 2007
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Technical reference for the relationship between loop groups and 2-groups, relevant to the String group discussion.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Sati, Hisham&quot;,
+          &quot;Schreiber, Urs&quot;,
+          &quot;Stasheff, Jim&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR2588823&quot;,
+        &quot;raw&quot;: &quot;MR2588823: AUTHOR = Sati, Hisham and Schreiber, Urs and Stasheff, Jim, TITLE = Fivebrane structures, JOURNAL = Rev. Math. Phys., FJOURNAL = Reviews in Mathematical Physics. A Journal for Both Review and Original Research Papers in the Field of Mathematical Physics, VOLUME = 21, YEAR = 2009, NUMBER = 10, PAGES = 1197--1240, ISSN = 0129-055X,1793-6659, MRCLASS = 53C08 (55R40 55R65 55S35 81T30 81T50), MRNUMBER = 2588823,&quot;,
+        &quot;title&quot;: &quot;Fivebrane structures&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Reviews in Mathematical Physics&quot;,
+        &quot;year&quot;: 2009
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited for a comprehensive historical overview of the field and related higher structures like Fivebrane structures.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Baez, John C.&quot;,
+          &quot;Stevenson, Danny&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR2597732&quot;,
+        &quot;raw&quot;: &quot;MR2597732: AUTHOR = Baez, John C. and Stevenson, Danny, TITLE = The classifying space of a topological 2-group, BOOKTITLE = Algebraic topology, SERIES = Abel Symposium, VOLUME = 4, PAGES = 1--31, PUBLISHER = Springer, Berlin, YEAR = 2009, ISBN = 978-3-642-01199-3, MRCLASS = 55R35 (18G50), MRNUMBER = 2597732,&quot;,
+        &quot;title&quot;: &quot;The classifying space of a topological 2-group&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Abel Symposium&quot;,
+        &quot;year&quot;: 2009
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Critical reference providing technical lemmas on the classifying spaces of topological 2-groups and exact sequences used in the classification of the categorical Hopf map.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Waldorf, Konrad&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR2610397&quot;,
+        &quot;raw&quot;: &quot;MR2610397: AUTHOR = Waldorf, Konrad, TITLE = Multiplicative bundle gerbes with connection, JOURNAL = Differential Geom. Appl., FJOURNAL = Differential Geometry and its Applications, VOLUME = 28, YEAR = 2010, NUMBER = 3, PAGES = 313--340, ISSN = 0926-2245,1872-6984, MRCLASS = 53C08 (22E67 57R56), MRNUMBER = 2610397,&quot;,
+        &quot;title&quot;: &quot;Multiplicative bundle gerbes with connection&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Differential Geometry and its Applications&quot;,
+        &quot;year&quot;: 2010
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Reference for multiplicative structures on bundle gerbes, providing depth to the categorical framework.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Murray, Michael K.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR2681698&quot;,
+        &quot;raw&quot;: &quot;MR2681698: AUTHOR = Murray, Michael K., TITLE = An introduction to bundle gerbes, BOOKTITLE = The many facets of geometry, PAGES = 237--260, PUBLISHER = Oxford University Press, YEAR = 2010, ISBN = 978-0-19-953492-0, MRCLASS = 53C08 (53C29 55R65), MRNUMBER = 2681698,&quot;,
+        &quot;title&quot;: &quot;An introduction to bundle gerbes&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;The many facets of geometry&quot;,
+        &quot;year&quot;: 2010
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;A comprehensive introductory reference to bundle gerbes, cited multiple times for definitions, examples, and equivalent constructions.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Bartels, Tobias Keith&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR2709030&quot;,
+        &quot;raw&quot;: &quot;MR2709030: AUTHOR = Bartels, Tobias Keith, TITLE = Higher gauge theory: 2-bundles, NOTE = Thesis (Ph.D.)--University of California, Riverside, PUBLISHER = ProQuest LLC, Ann Arbor, MI, YEAR = 2006, PAGES = 142, ISBN = 978-0542-80050-4, MRCLASS = 99-05, MRNUMBER = 2709030,&quot;,
+        &quot;title&quot;: &quot;Higher gauge theory: 2-bundles&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Thesis (Ph.D.)--University of California, Riverside&quot;,
+        &quot;year&quot;: 2006
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Primary motivating work for the thesis, introducing the concept of categorical principal bundles (2-bundles) used as the main framework.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Schommer-Pries, Christopher J.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR2800361&quot;,
+        &quot;raw&quot;: &quot;MR2800361: AUTHOR = Schommer-Pries, Christopher J., TITLE = Central extensions of smooth 2-groups and a finite-dimensional string 2-group, JOURNAL = Geom. Topol., FJOURNAL = Geometry \\&amp; Topology, VOLUME = 15, YEAR = 2011, NUMBER = 2, PAGES = 609--676, ISSN = 1465-3060,1364-0380, MRCLASS = 53C08 (18D10 22A22 57T10), MRNUMBER = 2800361,&quot;,
+        &quot;title&quot;: &quot;Central extensions of smooth 2-groups and a finite-dimensional string 2-group&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Geometry &amp; Topology&quot;,
+        &quot;year&quot;: 2011
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Key reference for the categorical model of the String group as a central extension of Spin(n) by the categorical group BU(1).&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Wockel, Christoph&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR2805195&quot;,
+        &quot;raw&quot;: &quot;MR2805195: AUTHOR = Wockel, Christoph, TITLE = Principal 2-bundles and their gauge 2-groups, JOURNAL = Forum Mathematicum, VOLUME = 23, YEAR = 2011, NUMBER = 3, PAGES = 565--610, ISSN = 0933-7741,1435-5337, MRCLASS = 55R65 (18D05 22A22), MRNUMBER = 2805195,&quot;,
+        &quot;title&quot;: &quot;Principal 2-bundles and their gauge 2-groups&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Forum Mathematicum&quot;,
+        &quot;year&quot;: 2011
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Primary reference for the formalism of principal 2-bundles and their local trivialisation data, used extensively for the construction of the categorical Hopf map.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Naber, Gregory L.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR3012377&quot;,
+        &quot;raw&quot;: &quot;MR3012377: AUTHOR = Naber, Gregory L., TITLE = Topology, geometry and gauge fields, SERIES = Applied Mathematical Sciences, VOLUME = 141, EDITION = Second, PUBLISHER = Springer, New York, YEAR = 2011, PAGES = xii+419, ISBN = 978-1-4419-7894-3; 978-1-4419-7895-0, MRCLASS = 53-01 (53C05 53C07 57-02 58-02 70S15 81-02), MRNUMBER = 3012377,&quot;,
+        &quot;title&quot;: &quot;Topology, geometry and gauge fields&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Applied Mathematical Sciences&quot;,
+        &quot;year&quot;: 2011
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Reference for the classical geometry of the Hopf map and its associated principal bundle structures.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Waldorf, Konrad&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR3013040&quot;,
+        &quot;raw&quot;: &quot;MR3013040: AUTHOR = Waldorf, Konrad, TITLE = A construction of string 2-group models using a transgression-regression technique, BOOKTITLE = Analysis, geometry and quantum field theory, SERIES = Contemp. Math., VOLUME = 584, PAGES = 99--115, PUBLISHER = Amer. Math. Soc., Providence, RI, YEAR = 2012, ISBN = 978-0-8218-9144-5, MRCLASS = 53C08 (58H05 81T30), MRNUMBER = 3013040,&quot;,
+        &quot;title&quot;: &quot;A construction of string 2-group models using a transgression-regression technique&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Analysis, geometry and quantum field theory&quot;,
+        &quot;year&quot;: 2012
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Reference for specific models of the String 2-group, providing alternative perspectives to the Schommer-Pries model.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Whitehead, J. H. C.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR30760&quot;,
+        &quot;raw&quot;: &quot;MR30760: AUTHOR = Whitehead, J. H. C., TITLE = Combinatorial homotopy. II, JOURNAL = Bull. Amer. Math. Soc., FJOURNAL = Bulletin of the American Mathematical Society, VOLUME = 55, YEAR = 1949, PAGES = 453--496, ISSN = 0002-9904, MRCLASS = 56.0X, MRNUMBER = 30760,&quot;,
+        &quot;title&quot;: &quot;Combinatorial homotopy. II&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Bulletin of the American Mathematical Society&quot;,
+        &quot;year&quot;: 1949
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Classic foundational reference for combinatorial homotopy and the introduction of crossed modules.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Schreiber, Urs&quot;,
+          &quot;Waldorf, Konrad&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR3084724&quot;,
+        &quot;raw&quot;: &quot;MR3084724: AUTHOR = Schreiber, Urs and Waldorf, Konrad, TITLE = Connections on non-abelian gerbes and their holonomy, JOURNAL = Theory Appl. Categ., FJOURNAL = Theory and Applications of Categories, VOLUME = 28, YEAR = 2013, PAGES = 476--540, ISSN = 1201-561X, MRCLASS = 53C08 (18D05 55R65), MRNUMBER = 3084724,&quot;,
+        &quot;title&quot;: &quot;Connections on non-abelian gerbes and their holonomy&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Theory and Applications of Categories&quot;,
+        &quot;year&quot;: 2013
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Reference for the theory of connections and holonomy for higher categorical objects like non-abelian gerbes.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Nikolaus, Thomas&quot;,
+          &quot;Waldorf, Konrad&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR3089401&quot;,
+        &quot;raw&quot;: &quot;MR3089401: AUTHOR = Nikolaus, Thomas and Waldorf, Konrad, TITLE = Four equivalent versions of nonabelian gerbes, JOURNAL = Pacific Journal of Mathematics, VOLUME = 264, YEAR = 2013, NUMBER = 2, PAGES = 355--419, ISSN = 0030-8730,1945-5844, MRCLASS = 55R65 (53C08 55N05 58H05), MRNUMBER = 3089401,&quot;,
+        &quot;title&quot;: &quot;Four equivalent versions of nonabelian gerbes&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Pacific Journal of Mathematics&quot;,
+        &quot;year&quot;: 2013
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Highly important reference providing different equivalent viewpoints on non-abelian gerbes and their classification, used for cross-framework verification.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Fiorenza, Domenico&quot;,
+          &quot;Rogers, Christopher L.&quot;,
+          &quot;Schreiber, Urs&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR3535115&quot;,
+        &quot;raw&quot;: &quot;MR3535115: AUTHOR = Fiorenza, Domenico and Rogers, Christopher L. and Schreiber, Urs, TITLE = Higher $U(1)$-gerbe connections in geometric prequantization, JOURNAL = Rev. Math. Phys., FJOURNAL = Reviews in Mathematical Physics. A Journal for Both Review and Original Research Papers in the Field of Mathematical Physics, VOLUME = 28, YEAR = 2016, NUMBER = 6, PAGES = 1650012, 72, ISSN = 0129-055X,1793-6659, MRCLASS = 53D50 (18G55 53C08), MRNUMBER = 3535115,&quot;,
+        &quot;title&quot;: &quot;Higher $U(1)$-gerbe connections in geometric prequantization&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Reviews in Mathematical Physics&quot;,
+        &quot;year&quot;: 2016
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Reference for the application of higher gerbe connections in geometric prequantization, providing motivation for the categorified Hopf map connection.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Ganter, Nora&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR3764535&quot;,
+        &quot;raw&quot;: &quot;MR3764535: AUTHOR = Ganter, Nora, TITLE = Categorical tori, JOURNAL = SIGMA Symmetry Integrability Geom. Methods Appl., FJOURNAL = SIGMA. Symmetry, Integrability and Geometry. Methods and Applications, VOLUME = 14, YEAR = 2018, PAGES = Paper No. 014, 18, ISSN = 1815-0659, MRCLASS = 22E40 (18D99), MRNUMBER = 3764535,&quot;,
+        &quot;title&quot;: &quot;Categorical tori&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;SIGMA. Symmetry, Integrability and Geometry. Methods and Applications&quot;,
+        &quot;year&quot;: 2018
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Introduces the categorical circle U(1) which serves as the fibre for the categorical Hopf map constructed in this thesis.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Waldorf, Konrad&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR3894086&quot;,
+        &quot;raw&quot;: &quot;MR3894086: AUTHOR = Waldorf, Konrad, TITLE = A global perspective to connections on principal 2-bundles, JOURNAL = Forum Math., FJOURNAL = Forum Mathematicum, VOLUME = 30, YEAR = 2018, NUMBER = 4, PAGES = 809--843, ISSN = 0933-7741,1435-5337, MRCLASS = 53C08 (22A22 55R65), MRNUMBER = 3894086,&quot;,
+        &quot;title&quot;: &quot;A global perspective to connections on principal 2-bundles&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Forum Mathematicum&quot;,
+        &quot;year&quot;: 2018
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Key reference for the global theory of connections on principal 2-bundles, used for the definitions of categorical curvature and connection forms.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Epa, Narthana&quot;,
+          &quot;Ganter, Nora&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR3912053&quot;,
+        &quot;raw&quot;: &quot;MR3912053: AUTHOR = Epa, Narthana and Ganter, Nora, TITLE = Platonic and alternating 2-groups, JOURNAL = High. Struct., FJOURNAL = Higher Structures, VOLUME = 1, YEAR = 2017, NUMBER = 1, PAGES = 122--146, ISSN = 2209-0606, MRCLASS = 20J06 (18N10 20D99 20J15), MRNUMBER = 3912053,&quot;,
+        &quot;title&quot;: &quot;Platonic and alternating 2-groups&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Higher Structures&quot;,
+        &quot;year&quot;: 2017
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Reference for finite categorical subgroups (Platonic 2-groups), cited as a direction for future work regarding categorical McKay correspondence.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Waldorf, Konrad&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR3917427&quot;,
+        &quot;raw&quot;: &quot;MR3917427: AUTHOR = Waldorf, Konrad, TITLE = Parallel transport in principal 2-bundles, JOURNAL = High. Struct., FJOURNAL = Higher Structures, VOLUME = 2, YEAR = 2018, NUMBER = 1, PAGES = 57--115, ISSN = 2209-0606, MRCLASS = 53C08 (22A22 55R65 58H05), MRNUMBER = 3917427,&quot;,
+        &quot;title&quot;: &quot;Parallel transport in principal 2-bundles&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Higher Structures&quot;,
+        &quot;year&quot;: 2018
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Reference for the theory of parallel transport in the context of principal 2-bundles.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Brown, Ronald&quot;,
+          &quot;Spencer, Christopher B.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR419643&quot;,
+        &quot;raw&quot;: &quot;MR419643: AUTHOR = Brown, Ronald and Spencer, Christopher B., TITLE = $G$-groupoids, crossed modules and the fundamental groupoid of a topological group, NOTE = Nederl. Akad. Wetensch. Proc. Ser. A \\bf 79, JOURNAL = Indag. Math., FJOURNAL = , VOLUME = 38, YEAR = 1976, NUMBER = 4, PAGES = 296--302, MRCLASS = 20L10 (22A05), MRNUMBER = 419643,&quot;,
+        &quot;title&quot;: &quot;$G$-groupoids, crossed modules and the fundamental groupoid of a topological group&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Indag. Math.&quot;,
+        &quot;year&quot;: 1976
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Foundational work linking G-groupoids and crossed modules, providing the algebraic basis for the paper&#x27;s categorical groups.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Bunk, Severin&quot;,
+          &quot;M\\\&quot;uller, Lukas&quot;,
+          &quot;Szabo, Richard J.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR4268834&quot;,
+        &quot;raw&quot;: &quot;MR4268834: AUTHOR = Bunk, Severin and M\\\&quot;uller, Lukas and Szabo, Richard J., TITLE = Smooth 2-group extensions and symmetries of bundle gerbes, JOURNAL = Comm. Math. Phys., FJOURNAL = Communications in Mathematical Physics, VOLUME = 384, YEAR = 2021, NUMBER = 3, PAGES = 1829--1911, ISSN = 0010-3616,1432-0916, MRCLASS = 53C08 (22E30), MRNUMBER = 4268834,&quot;,
+        &quot;title&quot;: &quot;Smooth 2-group extensions and symmetries of bundle gerbes&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Communications in Mathematical Physics&quot;,
+        &quot;year&quot;: 2021
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Recent work on the symmetries of bundle gerbes and their relation to smooth 2-group extensions.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Ehresmann, Charles&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR42768&quot;,
+        &quot;raw&quot;: &quot;MR42768: AUTHOR = Ehresmann, Charles, TITLE = Les connexions infinit\\&#x27;esimales dans un espace fibr\\&#x27;e diff\\&#x27;erentiable, BOOKTITLE = Colloque de topologie (espaces fibr\\&#x27;es), Bruxelles, 1950, PAGES = 29--55, PUBLISHER = Georges Thone, Li\\`ege, YEAR = 1951, MRCLASS = 53.0X, MRNUMBER = 42768,&quot;,
+        &quot;title&quot;: &quot;Les connexions infinit\\&#x27;esimales dans un espace fibr\\&#x27;e diff\\&#x27;erentiable&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Colloque de topologie (espaces fibr\\&#x27;es)&quot;,
+        &quot;year&quot;: 1951
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;The original paper introducing Ehresmann connections, which are categorified in the latter parts of the thesis.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Bott, Raoul&quot;,
+          &quot;Tu, Loring W.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR658304&quot;,
+        &quot;raw&quot;: &quot;MR658304: AUTHOR = Bott, Raoul and Tu, Loring W., TITLE = Differential forms in algebraic topology, SERIES = Graduate Texts in Mathematics, VOLUME = 82, PUBLISHER = Springer-Verlag, New York-Berlin, YEAR = 1982, PAGES = xiv+331, ISBN = 0-387-90613-4, MRCLASS = 57R19 (55-02 58-01 58A12), MRNUMBER = 658304,&quot;,
+        &quot;title&quot;: &quot;Differential forms in algebraic topology&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Graduate Texts in Mathematics&quot;,
+        &quot;year&quot;: 1982
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Standard reference for algebraic topology and differential forms, used for Gysin and spectral sequence results.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Brown, Kenneth S.&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR672956&quot;,
+        &quot;raw&quot;: &quot;MR672956: AUTHOR = Brown, Kenneth S., TITLE = Cohomology of groups, SERIES = Graduate Texts in Mathematics, VOLUME = 87, PUBLISHER = Springer-Verlag, New York-Berlin, YEAR = 1982, PAGES = x+306, ISBN = 0-387-90688-6, MRCLASS = 20-02 (18-01 20F32 20J05 55-01), MRNUMBER = 672956,&quot;,
+        &quot;title&quot;: &quot;Cohomology of groups&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Graduate Texts in Mathematics&quot;,
+        &quot;year&quot;: 1982
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Standard reference for group cohomology, providing background for the algebraic classifications.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Pressley, Andrew&quot;,
+          &quot;Segal, Graeme&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;MR900587&quot;,
+        &quot;raw&quot;: &quot;MR900587: AUTHOR = Pressley, Andrew and Segal, Graeme, TITLE = Loop groups, SERIES = Oxford Mathematical Monographs, NOTE = Oxford Science Publications, PUBLISHER = The Clarendon Press, Oxford University Press, New York, YEAR = 1986, PAGES = viii+318, ISBN = 0-19-853535-X, MRCLASS = 22E65 (58D15 81D15), MRNUMBER = 900587,&quot;,
+        &quot;title&quot;: &quot;Loop groups&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Oxford Mathematical Monographs&quot;,
+        &quot;year&quot;: 1986
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Key reference for loop groups and their central extensions, which are essential to the construction and symmetry of the String group models discussed.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Waldorf, Konrad&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;Wal2007phd&quot;,
+        &quot;raw&quot;: &quot;Wal2007phd: title=Algebraic structures for bundle gerbes and the Wess-Zumino term in conformal field theory, author=Waldorf, Konrad, year=2007, school=Staats-und Universit\\\&quot;atsbibliothek Hamburg Carl von Ossietzky&quot;,
+        &quot;title&quot;: &quot;Algebraic structures for bundle gerbes and the Wess-Zumino term in conformal field theory&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;PhD Thesis&quot;,
+        &quot;year&quot;: 2007
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Waldorf&#x27;s PhD thesis, providing detailed and fundamental constructions for bundle gerbes used as a primary technical reference.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    }
+  ],
+  &quot;missing_references&quot;: [],
+  &quot;summary&quot;: &quot;The paper demonstrates exemplary citation hygiene, referencing both foundational 20th-century works (Hopf, Ehresmann) and the definitive modern literature on higher categorical structures (Murray, Waldorf, Wockel, Bartels, Ganter). The citations are precisely targeted, supporting specific definitions of 2-groups, bundle gerbe constructions, and the classification of String group models. No significant omissions or bibliographic errors were found.&quot;
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          meta_reviewer — <span class="muted">claude-sonnet-4-6</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <p>This thesis constructs the categorical Hopf map as a categorical principal 2-bundle over S² with fiber Ganter&#x27;s categorical circle U(1), synthesising the 2-bundle formalism of Bartels and Wockel with the higher categorical framework of Murray and Waldorf. The novelty specialist rates the contribution significant (score 0.8, confidence 0.95): no prior work produced this explicit object, and the factorisation linking the categorical Hopf map to the basic bundle gerbe over S³ via the classical Hopf map is a genuinely new bridge between higher gauge theory and gerbe theory. The citation specialist (confidence 1.0) found exemplary hygiene across 37 entries with no missing references. The technical correctness specialist (confidence 0.55, overall mostly_sound) verified all standard claims (C5–C9, C11–C15); the partially-supported claims are C1 (categorical Hopf cocycle identities for Construction 39, major), C2 (factorisation diagram with 2-cells, major), and C14 (necessity of six-open cover, minor). The headline String(3) symmetry conjecture (C4) is explicitly labelled as conjectural and no partial homotopy-group evidence is supplied. The reproducibility specialist (confidence 0.86, score 0.22) flagged two critical-severity gaps: no machine-checkable proof artifact for the cocycle laws of the headline construction, and no formal proof of the factorisation through the basic bundle gerbe; these are compounded by the absence of any companion repository. The paper belongs to a code-amenable field (math.CT&#x2f;math.AT) where the equational reasoning — crossed-module identities, cocycle conditions, stable-isomorphism chains — is mechanisable in Lean 4&#x2f;mathlib or Coq. The missing proof-as-code artifacts are the primary driver of the major_revision recommendation. No specialist disagreements were detected; technical correctness and reproducibility reinforce each other on the formalisation gap, while novelty and citation findings are uncontested.</p>
+        <p class="muted">Recommendation: <strong>Major revision</strong> · Confidence: 82%</p>
+        <h3>Strengths</h3>
+        <ul>
+          <li>The first explicit construction of a categorical analogue of the Hopf map as a principal 2-bundle over S² with fiber the categorical circle U(1), representing a novel synthesis of Ganter&#x27;s categorical tori and the Bartels–Wockel 2-bundle formalism.</li><li>The factorisation theorem linking the categorical Hopf map to Murray&#x27;s basic bundle gerbe over S³ via the classical Hopf fibration provides a concrete conceptual bridge between higher gauge theory and degree-three cohomology.</li><li>All standard and foundational claims — Hopf map coordinates (C5), transition cocycle (C6), Dixmier–Douady classification (C8), Brown–Spencer crossed-module correspondence (C9), and cocycle-to-bundle construction (C11) — are correctly stated and well-cited.</li><li>The bibliography is precise and comprehensive, covering the definitive literature from Hopf (1931) and Ehresmann (1951) through Ganter (2018) and Waldorf (2018), with no significant omissions identified by the citation specialist.</li><li>Three equivalent geometric constructions of the basic bundle gerbe over S³ are presented, offering flexibility for future applications across mathematical physics and higher representation theory.</li>
+        </ul>
+        <h3>Weaknesses</h3>
+        <ul>
+          <li>The cocycle identities for the transition data (g_ij, h_ijk) in the headline Construction 39 over the six-open cover of S² are not independently verified in the accessible text, and no machine-checkable proof artifact is supplied; the reproducibility specialist rated this concern critical.</li><li>The factorisation of the categorical Hopf map through the classical Hopf fibration and the basic bundle gerbe lacks an explicit 2-cell commutativity diagram with all natural transformations named, and no accompanying formal proof is provided; this is also rated critical severity by the reproducibility specialist.</li><li>The central String(3) symmetry conjecture (Section 6, Construction 55) is unsupported by any partial evidence — no computation of π₀ or π₁ of the categorical symmetry 2-group is supplied and no k-invariant comparison with Schommer-Pries&#x27; model [MR2800361] is attempted.</li><li>No companion repository, commit-pinned artifact, or any machine-checkable verification of any main construction is provided, despite the paper being in a code-amenable field (math.CT&#x2f;math.AT) where crossed-module and cocycle identities are mechanisable; the reproducibility score is 0.22.</li><li>The equivalences among the three bundle gerbe constructions over S³ (Observations 32 and 47) do not state whether equivalence means stable isomorphism or 2-isomorphism, and the intermediate isomorphism data is not written out.</li>
+        </ul>
+        <h3>Revision Targets</h3>
+        <div class="target-grid">
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>code</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  
+                  
+                  code release and execution entrypoints
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">The headline construction of the categorical Hopf map is supported by hand-defined cocycle data, but no machine-checkable proof artifact is supplied for the cocycle laws, total 2-space construction, action, and local trivializations. A file such as formalization&#x2f;CategoricalHopfMap.lean would close this proof-as-code gap.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Release the source code, scripts, model configuration, and execution entrypoints needed to regenerate the reported tables, or document why those artifacts cannot be released.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm runnable code or a documented non-release justification is present.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  
+                  
+                  Abstract; Section 5
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">The paper sets up the categorical group BU(1) and the correspondence between bundle gerbes and principal BU(1)-bundles (Remark 28) correctly, and asserts a factorisation through eta:S^3 -&gt; S^2 and the basic gerbe. The detailed factorisation diagram and the verification that the composite of categorified transition data agrees (up to coherent natural isomorphism) with the categorical Hopf cocycle are in Section 5, which is not visible in the inspected text. The claim is plausible by the Dixmier-Douady classification (Remark 31) but not verified here.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Add an explicit commutativity&#x2f;equivalence diagram in Section 5 with all 2-cells named, and supply an accompanying formal proof artifact (e.g. src&#x2f;proofs&#x2f;HopfGerbeFactorisation.lean) that the two compositions of categorical transition data are weakly equivalent.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm `Abstract; Section 5` is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  
+                  
+                  Abstract; Section 6 (Construction 55 &quot;symmofhopf&quot;)
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">The paper explicitly labels this as a conjecture (&quot;we conjecture that the categorical group String(3) is equivalent to...&quot;). The intermediate identification of the symmetry group of the classical Hopf map with Spin^c(3), referenced at the end of Section 2, is plausible but uses Ehresmann connection data only &quot;implicitly&quot;. No proof, no partial obstruction-theoretic argument, and no executable artifact are supplied, despite this being the headline conjecture motivating the construction.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Either (a) prove the conjecture, identifying the categorical automorphism 2-group of the categorical Hopf map and exhibiting an equivalence to Schommer-Pries&#x27; String(3) [MR2800361]; or (b) supply concrete partial evidence (compute pi_0 and pi_1 of the symmetry 2-group, match them to Spin(3) and BU(1) respectively, and check the k-invariant). A formal sketch in src&#x2f;proofs&#x2f;String3Symmetries.lean would substantially strengthen the claim.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm `Abstract; Section 6 (Construction 55 &quot;symmofhopf&quot;)` is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  
+                  
+                  Whole paper; no supplementary code or repository is referenced
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">The paper is in a code-amenable field (math.CT &#x2f; math.AT). The Proof-as-Code axiom applies: cocycle identities, semidirect-product and crossed-module manipulations, and stable-isomorphism chains between bundle-gerbe constructions are precisely the kind of finite, equational reasoning that current formal-mathematics libraries (mathlib&#x27;s CategoryTheory, Iversen&#x2f;Murfet&#x27;s bundle-gerbe formalisations, HoTT&#x2f;Coq) can certify. None is provided.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Ship a companion repository with (a) the cocycle verification for the categorical Hopf bundle in src&#x2f;proofs&#x2f;CategoricalHopfCocycle.lean, (b) the factorisation equivalence in src&#x2f;proofs&#x2f;HopfGerbeFactorisation.lean, and (c) the three-way equivalence of basic gerbes over S^3 in src&#x2f;proofs&#x2f;BasicGerbeS3Equivalences.lean. Even a minimal Agda&#x2f;Lean checker for the crossed-module Peiffer and equivariance identities used in Example 10 and Remark 18 would substantially raise confidence.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm `Whole paper; no supplementary code or repository is referenced` is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  
+                  
+                  Section 3 (Example 27, Observation 32 &quot;equiofbungerbes&quot;); Section 5 (Observation 47 &quot;mapH&quot;)
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">The bundle gerbe &#x2f; principal BU(1)-bundle correspondence (Remark 28) and classification by H^3(M;Z) (Remark 31) are standard and correctly cited [MR1669206, MR3089401]. Stable-isomorphism equivalence of three concrete models for the generator of H^3(S^3;Z)=Z is a well-defined claim, and the framework supports it, but the explicit chain of stable isomorphisms (Observations 32 and 47) is not visible in the inspected text and is not formalised.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">State precisely whether equivalence is asserted as isomorphism, stable isomorphism, or 2-isomorphism, and include the chain of intermediate isomorphisms. Optionally provide a Lean&#x2f;Coq witness in src&#x2f;proofs&#x2f;BasicGerbeS3Equivalences.lean.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm `Section 3 (Example 27, Observation 32 &quot;equiofbungerbes&quot;); Section 5 (Observation 47 &quot;mapH&quot;)` is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+        </div>
+        <h3>Questions</h3>
+        <ul>
+          <li>Can the authors supply an explicit term-by-term verification — even in an appendix — of the four cocycle identities (g_ii=e, β(h_ijk)g_ij g_jk = g_ik, h_ijj=h_jji=e, h_ijk h_ikl = h_ijl α(g_ij,h_jkl)) for the transition data used in Construction 39 over the six-open cover of S²?</li><li>What is the precise notion of equivalence claimed for the three constructions of the basic bundle gerbe over S³ — stable isomorphism, 2-isomorphism, or weak equivalence of bundle gerbes — and can the chain of intermediate isomorphisms be written out explicitly?</li><li>For the String(3) conjecture, can the authors compute π₀ and π₁ of the categorical symmetry 2-group of the categorical Hopf map and verify that they are Spin(3) and U(1) respectively, as a minimal first check before the full conjecture is addressed?</li><li>What forces the use of a six-open cover rather than the minimal two-open cover sufficient for the classical Hopf bundle, and can the authors state which categorical cocycle identity fails on fewer opens?</li><li>Will a companion formalisation repository be provided to discharge at least the crossed-module Peiffer identities (Example 10), the cocycle conditions for Construction 39, and the factorisation equivalence (C2)?</li>
+        </ul>
+      </details>
+      
+      <details>
+        <summary>
+          novelty — <span class="muted">gemini-3-flash-preview</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;confidence&quot;: 0.95,
+  &quot;missing_prior_art&quot;: [],
+  &quot;novelty_score&quot;: 0.8,
+  &quot;related_work&quot;: [
+    {
+      &quot;citation_key&quot;: &quot;MR3764535&quot;,
+      &quot;delta&quot;: &quot;Applies Ganter&#x27;s definition of the categorical circle U(1) to construct the first explicit higher-categorical analogue of the Hopf map.&quot;,
+      &quot;relation&quot;: &quot;builds_on&quot;,
+      &quot;title&quot;: &quot;Categorical tori&quot;
+    },
+    {
+      &quot;citation_key&quot;: &quot;MR2805195&quot;,
+      &quot;delta&quot;: &quot;Uses Wockel&#x27;s 2-bundle formalism to provide a concrete construction of a non-trivial categorical principal bundle over the 2-sphere.&quot;,
+      &quot;relation&quot;: &quot;builds_on&quot;,
+      &quot;title&quot;: &quot;Principal 2-bundles and their gauge 2-groups&quot;
+    },
+    {
+      &quot;citation_key&quot;: &quot;MR1669206&quot;,
+      &quot;delta&quot;: &quot;Establishes a factorization theorem that links categorical principal bundles to Murray&#x27;s bundle gerbes via the basic bundle gerbe over the 3-sphere.&quot;,
+      &quot;relation&quot;: &quot;prior_art&quot;,
+      &quot;title&quot;: &quot;Bundle gerbes&quot;
+    },
+    {
+      &quot;citation_key&quot;: &quot;MR2800361&quot;,
+      &quot;delta&quot;: &quot;Conjectures a geometric realization of String(3) as the categorical group of symmetries of the categorical Hopf map, adding to the existing model-theoretic descriptions.&quot;,
+      &quot;relation&quot;: &quot;prior_art&quot;,
+      &quot;title&quot;: &quot;Central extensions of smooth 2-groups and a finite-dimensional string 2-group&quot;
+    }
+  ],
+  &quot;verdict&quot;: &quot;significant&quot;
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          reproducibility — <span class="muted">gpt-5.5</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;code_availability&quot;: &quot;unspecified&quot;,
+  &quot;code_url&quot;: null,
+  &quot;concerns&quot;: [
+    {
+      &quot;area&quot;: &quot;code&quot;,
+      &quot;description&quot;: &quot;No code repository, release, license, or commit-pinned artifact is provided. A reproducibility package such as formalization&#x2f;README.md plus pinned proof or check scripts would be needed to rerun any independent verification.&quot;,
+      &quot;severity&quot;: &quot;major&quot;
+    },
+    {
+      &quot;area&quot;: &quot;code&quot;,
+      &quot;description&quot;: &quot;The headline construction of the categorical Hopf map is supported by hand-defined cocycle data, but no machine-checkable proof artifact is supplied for the cocycle laws, total 2-space construction, action, and local trivializations. A file such as formalization&#x2f;CategoricalHopfMap.lean would close this proof-as-code gap.&quot;,
+      &quot;severity&quot;: &quot;critical&quot;
+    },
+    {
+      &quot;area&quot;: &quot;code&quot;,
+      &quot;description&quot;: &quot;The claimed factorisation through the classical Hopf map and the basic bundle gerbe, including the equivalence of gerbe constructions and Dixmier-Douady generator calculation, is not backed by a formal proof or independently runnable symbolic check. A file such as formalization&#x2f;BasicBundleGerbe.lean or scripts&#x2f;check_dd_class.sage would be needed.&quot;,
+      &quot;severity&quot;: &quot;critical&quot;
+    },
+    {
+      &quot;area&quot;: &quot;code&quot;,
+      &quot;description&quot;: &quot;Several algebraic and differential-form calculations, including curvature pullbacks, cocycle tables, and finite subgroup cocycles, are presented only as manuscript derivations. A reproducible artifact such as scripts&#x2f;verify_forms_and_cocycles.sage would make these checks independently repeatable.&quot;,
+      &quot;severity&quot;: &quot;major&quot;
+    },
+    {
+      &quot;area&quot;: &quot;other&quot;,
+      &quot;description&quot;: &quot;The String(3) symmetry interpretation is explicitly conjectural and the paper states that assembling local parallel-2-transport data into a single anafunctor remains to be determined. This limits reproducibility of that part of the claimed program; an artifact such as formalization&#x2f;String3Symmetries.lean or a complete construction note would be needed.&quot;,
+      &quot;severity&quot;: &quot;major&quot;
+    }
+  ],
+  &quot;confidence&quot;: 0.86,
+  &quot;data_availability&quot;: &quot;unspecified&quot;,
+  &quot;data_url&quot;: null,
+  &quot;environment&quot;: {
+    &quot;dependencies&quot;: [],
+    &quot;hardware&quot;: null,
+    &quot;software&quot;: null
+  },
+  &quot;reproducibility_score&quot;: 0.22
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          summary — <span class="muted">claude-haiku-4-5-20251001</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;audience&quot;: &quot;Mathematicians and graduate students specializing in higher category theory, categorical topology, principal bundles, and gauge theory; researchers investigating categorical models of infinite-dimensional groups and their geometric realizations&quot;,
+  &quot;key_contributions&quot;: [
+    &quot;Construction of the categorical Hopf map as a categorical principal bundle over S² with fiber the categorical circle U(1)&quot;,
+    &quot;Detailed investigation of the relationship between the categorical Hopf map and the classical Hopf map&quot;,
+    &quot;Factorization showing how the categorical Hopf map decomposes through the classical Hopf map and the basic bundle gerbe over S³&quot;,
+    &quot;Three equivalent geometric constructions of the basic bundle gerbe over S³&quot;,
+    &quot;Conjecture that String(3) is equivalent to the categorical group of symmetries of the categorical Hopf map, offering an explicit and elementary model for this important categorical group&quot;
+  ],
+  &quot;plain_language_summary&quot;: &quot;The Hopf map is a classical example in topology: a nontrivial mapping from the three-dimensional sphere to the two-dimensional sphere that defines a principal bundle. This thesis studies a categorical version of this fundamental object, working in a higher-dimensional algebraic framework where structures like bundles are generalized through the tools of category theory.\n\nThe author constructs the categorical Hopf map explicitly as a categorical principal bundle whose fiber is the categorical circle, a notion introduced by Ganter. The work establishes connections between this categorical version and the classical Hopf map, showing how the categorical construction factors through the original map and the basic bundle gerbe over the three-sphere. The thesis provides three equivalent ways to build the basic bundle gerbe, offering flexibility for different applications and perspectives.\n\nThe central conjecture proposes that String(3), a categorical group built from finite-dimensional categorical data (rather than the infinite-dimensional classical construction), can be realized as the group of symmetries acting on the categorical Hopf map. This would provide an explicit geometric interpretation of String(3) and potentially serve as a foundation for higher categorical representation theory, analogous to how Spin(3) underpins classical representation theory.&quot;,
+  &quot;tldr&quot;: &quot;This work constructs the categorical Hopf map as a categorical principal bundle with fiber the categorical circle and conjectures that String(3) arises as its automorphism group.&quot;
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          technical_correctness — <span class="muted">claude-opus-4-7</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;claims&quot;: [
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;The categorical Hopf map is constructed as a categorical principal bundle over S^2 with fibre the categorical circle U(1) of Ganter [MR3764535].&quot;,
+      &quot;evidence&quot;: &quot;The framework for building a principal G-bundle from a G-valued cocycle (Definition 17, Remark 18) is correctly cited from Bartels&#x2f;Waldorf [MR2709030, MR2805195], and the crossed module presentation of U(1) (Example 10) matches Ganter&#x27;s definition [MR3764535]. However, the construction itself in Section 5 is not visible in the inspected portion, so the cocycle conditions (g_ii=e, beta(h_ijk)g_ij g_jk = g_ik, h_ijj=h_jji=e, h_ijk h_ikl = h_ijl alpha(g_ij,h_jkl)) cannot be independently checked for the proposed transition data over a six-open cover of S^2 compatible with the octahedral action. No machine-checked formalisation is shipped.&quot;,
+      &quot;id&quot;: &quot;C1&quot;,
+      &quot;location&quot;: &quot;Abstract; Section 5 (Construction 39, \&quot;cathopf\&quot;)&quot;,
+      &quot;severity&quot;: &quot;major&quot;,
+      &quot;suggested_fix&quot;: &quot;Provide a formal verification of the cocycle identities for the categorical Hopf map (Lean 4 &#x2f; mathlib or Coq), e.g. src&#x2f;proofs&#x2f;CategoricalHopfCocycle.lean, that discharges Equations (gii), (cocycleg), (hijj), (cocycleh) of Definition 17 for the explicit (g_ij, h_ijk) used in Construction 39.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;The categorical Hopf map factorises through the classical Hopf map S^3 -&gt; S^2 and the basic bundle gerbe over S^3.&quot;,
+      &quot;evidence&quot;: &quot;The paper sets up the categorical group BU(1) and the correspondence between bundle gerbes and principal BU(1)-bundles (Remark 28) correctly, and asserts a factorisation through eta:S^3 -&gt; S^2 and the basic gerbe. The detailed factorisation diagram and the verification that the composite of categorified transition data agrees (up to coherent natural isomorphism) with the categorical Hopf cocycle are in Section 5, which is not visible in the inspected text. The claim is plausible by the Dixmier-Douady classification (Remark 31) but not verified here.&quot;,
+      &quot;id&quot;: &quot;C2&quot;,
+      &quot;location&quot;: &quot;Abstract; Section 5&quot;,
+      &quot;severity&quot;: &quot;major&quot;,
+      &quot;suggested_fix&quot;: &quot;Add an explicit commutativity&#x2f;equivalence diagram in Section 5 with all 2-cells named, and supply an accompanying formal proof artifact (e.g. src&#x2f;proofs&#x2f;HopfGerbeFactorisation.lean) that the two compositions of categorical transition data are weakly equivalent.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;Three constructions of the basic bundle gerbe over S^3 are equivalent (Murray&#x27;s, the construction in Example 27, and the construction in Observation 47).&quot;,
+      &quot;evidence&quot;: &quot;The bundle gerbe &#x2f; principal BU(1)-bundle correspondence (Remark 28) and classification by H^3(M;Z) (Remark 31) are standard and correctly cited [MR1669206, MR3089401]. Stable-isomorphism equivalence of three concrete models for the generator of H^3(S^3;Z)=Z is a well-defined claim, and the framework supports it, but the explicit chain of stable isomorphisms (Observations 32 and 47) is not visible in the inspected text and is not formalised.&quot;,
+      &quot;id&quot;: &quot;C3&quot;,
+      &quot;location&quot;: &quot;Section 3 (Example 27, Observation 32 \&quot;equiofbungerbes\&quot;); Section 5 (Observation 47 \&quot;mapH\&quot;)&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;State precisely whether equivalence is asserted as isomorphism, stable isomorphism, or 2-isomorphism, and include the chain of intermediate isomorphisms. Optionally provide a Lean&#x2f;Coq witness in src&#x2f;proofs&#x2f;BasicGerbeS3Equivalences.lean.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;unsupported&quot;,
+      &quot;claim&quot;: &quot;The categorical Lie group String(3) is equivalent to the categorical group of symmetries of the categorical Hopf map.&quot;,
+      &quot;evidence&quot;: &quot;The paper explicitly labels this as a conjecture (\&quot;we conjecture that the categorical group String(3) is equivalent to...\&quot;). The intermediate identification of the symmetry group of the classical Hopf map with Spin^c(3), referenced at the end of Section 2, is plausible but uses Ehresmann connection data only \&quot;implicitly\&quot;. No proof, no partial obstruction-theoretic argument, and no executable artifact are supplied, despite this being the headline conjecture motivating the construction.&quot;,
+      &quot;id&quot;: &quot;C4&quot;,
+      &quot;location&quot;: &quot;Abstract; Section 6 (Construction 55 \&quot;symmofhopf\&quot;)&quot;,
+      &quot;severity&quot;: &quot;major&quot;,
+      &quot;suggested_fix&quot;: &quot;Either (a) prove the conjecture, identifying the categorical automorphism 2-group of the categorical Hopf map and exhibiting an equivalence to Schommer-Pries&#x27; String(3) [MR2800361]; or (b) supply concrete partial evidence (compute pi_0 and pi_1 of the symmetry 2-group, match them to Spin(3) and BU(1) respectively, and check the k-invariant). A formal sketch in src&#x2f;proofs&#x2f;String3Symmetries.lean would substantially strengthen the claim.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;In real coordinates, the Hopf map is eta(x,y,z,w) = (2(xz+yw), 2(yz-xw), -x^2-y^2+z^2+w^2).&quot;,
+      &quot;evidence&quot;: &quot;This matches one of the standard real-coordinate presentations of the Hopf map derived from the quaternionic&#x2f;complex description eta(z1,z2) = [z1:z2] under the convention (x,y,z,w) &lt;-&gt; z1=xi+y, z2=zi+w (with the paper&#x27;s quaternionic convention xi+yj+zk+w). Norm preservation: |eta|^2 = 4(xz+yw)^2 + 4(yz-xw)^2 + (x^2+y^2-z^2-w^2)^2 = (x^2+y^2+z^2+w^2)^2 = 1 on S^3.&quot;,
+      &quot;id&quot;: &quot;C5&quot;,
+      &quot;location&quot;: &quot;Section 2, formula above Definition 2&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;The transition function for the Hopf map V_N \\cap V_S -&gt; U(1) is [z1:z2] |-&gt; (z1&#x2f;z2)|z2&#x2f;z1|.&quot;,
+      &quot;evidence&quot;: &quot;The composition C* -&gt; U(1), w |-&gt; w&#x2f;|w|, is the standard retraction; applied to z1&#x2f;z2 it yields (z1&#x2f;z2)&#x2f;|z1&#x2f;z2| = (z1&#x2f;z2)|z2&#x2f;z1|, which is the standard U(1)-valued transition cocycle for the Hopf bundle, classifying the generator of H^2(S^2;Z) as stated.&quot;,
+      &quot;id&quot;: &quot;C6&quot;,
+      &quot;location&quot;: &quot;Section 2, paragraph after definition of V_N, V_S&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;The Hopf map corresponds to the positive generator 1 of H^2(S^2;Z) = Z.&quot;,
+      &quot;evidence&quot;: &quot;Standard result: the first Chern class of the Hopf line bundle generates H^2(S^2;Z). The choice of sign convention is a convention, declared as such by the author.&quot;,
+      &quot;id&quot;: &quot;C7&quot;,
+      &quot;location&quot;: &quot;Section 2&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;Bundle gerbes over a manifold M are classified up to stable isomorphism by H^3(M;Z), via the Dixmier-Douady class.&quot;,
+      &quot;evidence&quot;: &quot;This is Murray&#x27;s classical theorem [MR1669206]; the reference is correctly given and the basic gerbe over S^3 generating H^3(S^3;Z)=Z is the canonical worked example.&quot;,
+      &quot;id&quot;: &quot;C8&quot;,
+      &quot;location&quot;: &quot;Section 3, paragraph preceding Example 26&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;There is a bijection (in fact equivalence of 2-categories) between strict categorical groups and crossed modules of groups (Remark 9), giving the explicit dictionary Obj=G, Mor=H x| G with source g, target beta(h)g, composition (h&#x27;,beta(h)g)o(h,g)=(h&#x27;h,g), and tensor (h,g)(h&#x27;,g&#x27;) = (h alpha(g,h&#x27;), gg&#x27;).&quot;,
+      &quot;evidence&quot;: &quot;This is the classical Brown--Spencer correspondence [MR419643], cited correctly via [MR2805195 Remark 2.4]. The formulas reproduce the standard semidirect-product presentation and the Peiffer&#x2f;equivariance identities of Definition 7 are exactly what is needed to make tensor functorial and composition associative.&quot;,
+      &quot;id&quot;: &quot;C9&quot;,
+      &quot;location&quot;: &quot;Remark 9, \&quot;2grpcross\&quot;&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;The categorical circle U(1) of Ganter is the strict categorical group associated to the crossed module (R, Z x R&#x2f;Z, alpha, beta) with alpha(r,(m,[a]))=(m,[a+rm]) and beta(m,[a])=m.&quot;,
+      &quot;evidence&quot;: &quot;The data match Ganter [MR3764535, Section 3]. The Peiffer identity alpha(beta(h),h&#x27;)=h h&#x27; h^{-1} requires checking in Z x R&#x2f;Z, which is abelian, so h h&#x27; h^{-1}=h&#x27;; and alpha(beta(m,[a]),(m&#x27;,[a&#x27;])) = alpha(m,(m&#x27;,[a&#x27;])) = (m&#x27;,[a&#x27;+m m&#x27;]). These are equal only if [m m&#x27;] = 0 in R&#x2f;Z for all m,m&#x27; in Z, which holds since m m&#x27; is an integer. The equivariance identity beta(alpha(g,h)) = g beta(h) g^{-1} reduces, in this abelian case, to beta(alpha(r,(m,[a]))) = beta(m,[a+rm]) = m = beta(h), consistent. The verification is straightforward but not written out; a reader has to redo it.&quot;,
+      &quot;id&quot;: &quot;C10&quot;,
+      &quot;location&quot;: &quot;Example 10&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Add a one-line verification of the Peiffer and equivariance identities for this crossed module in Example 10, or reference the verification in [MR3764535].&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;From a G-valued cocycle (W_i, g_ij, h_ijk) one obtains a principal G-bundle P with Obj(P) = \\sqcup_i (W_i x G), Mor(P) = \\sqcup_{i,j} ((W_i \\cap W_j) x H x G), with s,t and composition as stated in Remark 18, satisfying g&#x27;&#x27; = g_ik^{-1} beta(h_ijk alpha(g_ij,h&#x27;) h) g.&quot;,
+      &quot;evidence&quot;: &quot;The composition formula follows from the cocycle identity beta(h_ijk) g_ij g_jk = g_ik (Equation cocycleg) and the crossed-module identity beta(alpha(g,h)) = g beta(h) g^{-1}. The construction is the standard one from [MR2342821; MR2805195 Remark 2.16].&quot;,
+      &quot;id&quot;: &quot;C11&quot;,
+      &quot;location&quot;: &quot;Remark 18, \&quot;objandmorcatbun\&quot;&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;The two extreme cases of a connection on a categorical bundle are recovered: Gamma=G ordinary group gives an ordinary connection, Gamma=BU(1) gives a connection on a bundle gerbe.&quot;,
+      &quot;evidence&quot;: &quot;Direct specialisation of Definition 21 (citing Soncini--Zucchini [MR3894086]). For Gamma a 0-truncated group, the components Omega^b, Omega^c vanish and Omega^a is an ordinary connection 1-form. For Gamma=BU(1) (Obj trivial, Mor=U(1)), Omega^a vanishes and the structure reduces to a gerbe connection, matching the standard story.&quot;,
+      &quot;id&quot;: &quot;C12&quot;,
+      &quot;location&quot;: &quot;Remark 22&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;There is an equivalence between the 2-category of G-valued cocycles and the 2-category of G-bundles ([MR2709030 Sections 2.5.2 and 2.5.3]).&quot;,
+      &quot;evidence&quot;: &quot;Cited correctly to Bartels [MR2709030]; the paper relies only on the object-level direction (cocycle -&gt; bundle), which is spelled out, and references [MR2805195 Remark 2.14] for the converse. No new claim is made.&quot;,
+      &quot;id&quot;: &quot;C13&quot;,
+      &quot;location&quot;: &quot;Paragraph following Definition 17&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;The categorical Hopf map can be constructed using a six-open cover of S^2 compatible with the action of the octahedral group, with an analogous tetrahedral four-open cover presented in the appendix.&quot;,
+      &quot;evidence&quot;: &quot;The existence of such covers is geometrically standard (e.g. orbit-of-faces covers compatible with finite subgroups of SO(3)). However, the crucial point — that the chosen cover and transition data satisfy the categorical cocycle identities globally and reproduce the correct Dixmier-Douady-style class — is asserted to be done in Section 5 &#x2f; Appendix and not visible in the inspected text. The choice of cardinality (six) is not justified beyond compatibility with the octahedral action.&quot;,
+      &quot;id&quot;: &quot;C14&quot;,
+      &quot;location&quot;: &quot;Introduction (bullet on Appendix); Section 5&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;State explicitly why six opens (rather than the minimum two used in the classical Hopf transition data) are necessary at the categorical level, and verify that all triple-overlap cocycle conditions hold. Computer-algebra verification in src&#x2f;checks&#x2f;CategoricalHopfCover.py or a Lean proof would close the gap.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;The Hopf map is a principal U(1)-bundle over S^2 corresponding to the generator of H^2(S^2;Z) (foundational claim used throughout the paper).&quot;,
+      &quot;evidence&quot;: &quot;Combination of C5, C6, C7; classical and uncontested.&quot;,
+      &quot;id&quot;: &quot;C15&quot;,
+      &quot;location&quot;: &quot;Section 2&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;unsupported&quot;,
+      &quot;claim&quot;: &quot;The paper&#x27;s load-bearing categorical and algebraic-topological constructions (categorical cocycle identities, factorisation through the basic gerbe, equivalence of three constructions of the basic bundle gerbe over S^3) are amenable to machine-checked formalisation (Lean&#x2f;mathlib, Coq, Agda, Isabelle) but no such formal artifact is shipped.&quot;,
+      &quot;evidence&quot;: &quot;The paper is in a code-amenable field (math.CT &#x2f; math.AT). The Proof-as-Code axiom applies: cocycle identities, semidirect-product and crossed-module manipulations, and stable-isomorphism chains between bundle-gerbe constructions are precisely the kind of finite, equational reasoning that current formal-mathematics libraries (mathlib&#x27;s CategoryTheory, Iversen&#x2f;Murfet&#x27;s bundle-gerbe formalisations, HoTT&#x2f;Coq) can certify. None is provided.&quot;,
+      &quot;id&quot;: &quot;PAC1&quot;,
+      &quot;location&quot;: &quot;Whole paper; no supplementary code or repository is referenced&quot;,
+      &quot;severity&quot;: &quot;major&quot;,
+      &quot;suggested_fix&quot;: &quot;Ship a companion repository with (a) the cocycle verification for the categorical Hopf bundle in src&#x2f;proofs&#x2f;CategoricalHopfCocycle.lean, (b) the factorisation equivalence in src&#x2f;proofs&#x2f;HopfGerbeFactorisation.lean, and (c) the three-way equivalence of basic gerbes over S^3 in src&#x2f;proofs&#x2f;BasicGerbeS3Equivalences.lean. Even a minimal Agda&#x2f;Lean checker for the crossed-module Peiffer and equivariance identities used in Example 10 and Remark 18 would substantially raise confidence.&quot;
+    }
+  ],
+  &quot;confidence&quot;: 0.55,
+  &quot;overall_correctness&quot;: &quot;mostly_sound&quot;
+}</pre>
+      </details>
+      
+    </div>
+  </section>
+
+  <!-- corrections rendered from corrections table; empty on first publish -->
+  <section>
+    <h2>Corrections</h2>
+    <p class="muted">No corrections have been recorded.</p>
+  </section>
+
+  <section>
+    <h2>Bibliography</h2>
+    
+    <ol>
+      
+        <li>
+          MR116360: AUTHOR = Ehresmann, Charles, TITLE = Cat\&#x27;egories topologiques et cat\&#x27;egories diff\&#x27;erentiables, BOOKTITLE = Colloque G\&#x27;eom. Diff. Globale (Bruxelles, 1958), PAGES = 137--150, PUBLISHER = Librairie Universitaire, Louvain, YEAR = 1959, MRCLASS = 57.00, MRNUMBER = 116360,
+          
+          
+        </li>
+      
+        <li>
+          MR1197353: AUTHOR = Brylinski, Jean-Luc, TITLE = Loop spaces, characteristic classes and geometric quantization, SERIES = Progress in Mathematics, VOLUME = 107, PUBLISHER = Birkh\&quot;auser Boston, Inc., Boston, MA, YEAR = 1993, PAGES = xvi+300, ISBN = 0-8176-3644-7, MRCLASS = 57Rxx (18G50 55P35 58F06), MRNUMBER = 1197353,
+          
+          
+        </li>
+      
+        <li>
+          MR1269324: AUTHOR = Weibel, Charles A., TITLE = An introduction to homological algebra, SERIES = Cambridge Studies in Advanced Mathematics, VOLUME = 38, PUBLISHER = Cambridge University Press, Cambridge, YEAR = 1994, PAGES = xiv+450, ISBN = 0-521-43500-5; 0-521-55987-1, MRCLASS = 18-01 (16-01 17-01 20-01 55Uxx), MRNUMBER = 1269324,
+          
+          
+        </li>
+      
+        <li>
+          MR1380455: AUTHOR = Stolz, Stephan, TITLE = A conjecture concerning positive Ricci curvature and the Witten genus, JOURNAL = Mathematische Annalen, VOLUME = 304, YEAR = 1996, NUMBER = 4, PAGES = 785--800, ISSN = 0025-5831,1432-1807, MRCLASS = 58G10 (53C21 57R20 57R65), MRNUMBER = 1380455,
+          
+          
+        </li>
+      
+        <li>
+          MR1481706: AUTHOR = Bredon, Glen E., TITLE = Sheaf theory, SERIES = Graduate Texts in Mathematics, VOLUME = 170, EDITION = Second, PUBLISHER = Springer-Verlag, New York, YEAR = 1997, PAGES = xii+502, ISBN = 0-387-94905-4, MRCLASS = 55N30 (18F20 54B40 55-02), MRNUMBER = 1481706,
+          
+          
+        </li>
+      
+        <li>
+          MR1512691: AUTHOR = Hopf, Heinz, TITLE = \&quot;Uber die Abbildungen der dreidimensionalen Sph\&quot;are auf die Kugelfl\&quot;ache, JOURNAL = Math. Ann., FJOURNAL = Mathematische Annalen, VOLUME = 104, YEAR = 1931, NUMBER = 1, PAGES = 637--665, ISSN = 0025-5831,1432-1807, MRCLASS = 99-04, MRNUMBER = 1512691,
+          
+          
+        </li>
+      
+        <li>
+          MR1669206: AUTHOR = Murray, Michael K., TITLE = Bundle gerbes, JOURNAL = J. London Math. Soc. (2), VOLUME = 54, YEAR = 1996, NUMBER = 2, PAGES = 403--416, DOI = 10.1112&#x2f;jlms&#x2f;54.2.403, URL = https:&#x2f;&#x2f;doi.org&#x2f;10.1112&#x2f;jlms&#x2f;54.2.403
+          <a href="https://doi.org/10.1112&#x2f;jlms&#x2f;54.2.403">doi:10.1112&#x2f;jlms&#x2f;54.2.403</a>
+          
+        </li>
+      
+        <li>
+          MR1698234: AUTHOR = Isham, Chris J., TITLE = Modern differential geometry for physicists, SERIES = World Scientific Lecture Notes in Physics, VOLUME = 61, EDITION = Second, PUBLISHER = World Scientific Publishing Co., Inc., River Edge, NJ, YEAR = 1999, PAGES = xiv+289, ISBN = 981-02-3555-0, MRCLASS = 53-01 (53C80), MRNUMBER = 1698234,
+          
+          
+        </li>
+      
+        <li>
+          MR1863996: AUTHOR = Toth, Gabor, TITLE = Finite M\&quot;obius groups, minimal immersions of spheres, and moduli, SERIES = Universitext, PUBLISHER = Springer-Verlag, New York, YEAR = 2002, PAGES = xvi+317, ISBN = 0-387-95323-X, MRCLASS = 53C42 (53C43 58E20), MRNUMBER = 1863996,
+          
+          
+        </li>
+      
+        <li>
+          MR1950948: AUTHOR = Moerdijk, Ieke, TITLE = Orbifolds as groupoids: an introduction, BOOKTITLE = Orbifolds in mathematics and physics, SERIES = Contemporary Mathematics, VOLUME = 310, PAGES = 205--222, PUBLISHER = American Mathematical Society, YEAR = 2002, ISBN = 0-8218-2990-4, MRCLASS = 22A22 (55N30 55P15 58H05), MRNUMBER = 1950948,
+          
+          
+        </li>
+      
+        <li>
+          MR198828: AUTHOR = Tinkham, Michael, TITLE = Group theory and quantum mechanics, PUBLISHER = McGraw-Hill Book Co., New York-Toronto-London, YEAR = 1964, PAGES = xii+340, MRCLASS = 81.22, MRNUMBER = 198828,
+          
+          
+        </li>
+      
+        <li>
+          MR2068521: AUTHOR = Baez, John C. and Lauda, Aaron D., TITLE = Higher-dimensional algebra. V. 2-groups, JOURNAL = Theory and Applications of Categories, VOLUME = 12, YEAR = 2004, PAGES = 423--491, ISSN = 1201-561X, MRCLASS = 18D05 (18D10 20J06), MRNUMBER = 2068521,
+          
+          
+        </li>
+      
+        <li>
+          MR209411: AUTHOR = Spivak, Michael, TITLE = Calculus on manifolds. A modern approach to classical theorems of advanced calculus, PUBLISHER = W. A. Benjamin, Inc., New York-Amsterdam, YEAR = 1965, PAGES = xii+144, MRCLASS = 26.20 (57.00), MRNUMBER = 209411,
+          
+          
+        </li>
+      
+        <li>
+          MR217087: AUTHOR = Grothendieck, Alexander, TITLE = Rev\^etements \&#x27;etales et groupe fondamental. Fasc. I: Expos\&#x27;es 1 \`a 5, NOTE = Troisi\`eme \&#x27;edition, corrig\&#x27;ee, S\&#x27;eminaire de G\&#x27;eom\&#x27;etrie Alg\&#x27;ebrique, 1960&#x2f;61, PUBLISHER = Institut des Hautes \&#x27;Etudes Scientifiques, Paris, YEAR = 1963, PAGES = iv+143 pp. (not consecutively paged) (loose errata), MRCLASS = 14.55, MRNUMBER = 217087,
+          
+          
+        </li>
+      
+        <li>
+          MR2174418: AUTHOR = Carey, Alan L. and Johnson, Stuart and Murray, Michael K. and Stevenson, Danny and Wang, Bai-Ling, TITLE = Bundle gerbes for Chern-Simons and Wess-Zumino-Witten theories, JOURNAL = Comm. Math. Phys., FJOURNAL = Communications in Mathematical Physics, VOLUME = 259, YEAR = 2005, NUMBER = 3, PAGES = 577--613, ISSN = 0010-3616,1432-0916, MRCLASS = 58J28 (53C07 55R65 58J90 81T13), MRNUMBER = 2174418,
+          
+          
+        </li>
+      
+        <li>
+          MR2318389: AUTHOR = Waldorf, Konrad, TITLE = More morphisms between bundle gerbes, JOURNAL = Theory Appl. Categ., FJOURNAL = Theory and Applications of Categories, VOLUME = 18, YEAR = 2007, PAGES = No. 9, 240--273, ISSN = 1201-561X, MRCLASS = 53C29 (18B40 18D05 55R65), MRNUMBER = 2318389,
+          
+          
+        </li>
+      
+        <li>
+          MR2318847: AUTHOR = Schreiber, Urs and Schweigert, Christoph and Waldorf, Konrad, TITLE = Unoriented WZW models and holonomy of bundle gerbes, JOURNAL = Comm. Math. Phys., FJOURNAL = Communications in Mathematical Physics, VOLUME = 274, YEAR = 2007, NUMBER = 1, PAGES = 31--64, ISSN = 0010-3616,1432-0916, MRCLASS = 53C29 (53C80 55R65 81T40 81T45), MRNUMBER = 2318847,
+          
+          
+        </li>
+      
+        <li>
+          MR2342821: AUTHOR = Baez, John C. and Schreiber, Urs, TITLE = Higher gauge theory, BOOKTITLE = Categories in algebra, geometry and mathematical physics, SERIES = Contemp. Math., VOLUME = 431, PAGES = 7--30, PUBLISHER = Amer. Math. Soc., Providence, RI, YEAR = 2007, ISBN = 978-0-8218-3970-6; 0-8218-3970-5, MRCLASS = 53C29 (18D99 22A22 53C07 55R65), MRNUMBER = 2342821,
+          
+          
+        </li>
+      
+        <li>
+          MR2366945: AUTHOR = Baez, John C. and Stevenson, Danny and Crans, Alissa S. and Schreiber, Urs, TITLE = From loop groups to 2-groups, JOURNAL = Homology Homotopy Appl., FJOURNAL = Homology, Homotopy and Applications, VOLUME = 9, YEAR = 2007, NUMBER = 2, PAGES = 101--135, ISSN = 1532-0073,1532-0081, MRCLASS = 22E67 (17B99 18D05), MRNUMBER = 2366945,
+          
+          
+        </li>
+      
+        <li>
+          MR2588823: AUTHOR = Sati, Hisham and Schreiber, Urs and Stasheff, Jim, TITLE = Fivebrane structures, JOURNAL = Rev. Math. Phys., FJOURNAL = Reviews in Mathematical Physics. A Journal for Both Review and Original Research Papers in the Field of Mathematical Physics, VOLUME = 21, YEAR = 2009, NUMBER = 10, PAGES = 1197--1240, ISSN = 0129-055X,1793-6659, MRCLASS = 53C08 (55R40 55R65 55S35 81T30 81T50), MRNUMBER = 2588823,
+          
+          
+        </li>
+      
+        <li>
+          MR2597732: AUTHOR = Baez, John C. and Stevenson, Danny, TITLE = The classifying space of a topological 2-group, BOOKTITLE = Algebraic topology, SERIES = Abel Symposium, VOLUME = 4, PAGES = 1--31, PUBLISHER = Springer, Berlin, YEAR = 2009, ISBN = 978-3-642-01199-3, MRCLASS = 55R35 (18G50), MRNUMBER = 2597732,
+          
+          
+        </li>
+      
+        <li>
+          MR2610397: AUTHOR = Waldorf, Konrad, TITLE = Multiplicative bundle gerbes with connection, JOURNAL = Differential Geom. Appl., FJOURNAL = Differential Geometry and its Applications, VOLUME = 28, YEAR = 2010, NUMBER = 3, PAGES = 313--340, ISSN = 0926-2245,1872-6984, MRCLASS = 53C08 (22E67 57R56), MRNUMBER = 2610397,
+          
+          
+        </li>
+      
+        <li>
+          MR2681698: AUTHOR = Murray, Michael K., TITLE = An introduction to bundle gerbes, BOOKTITLE = The many facets of geometry, PAGES = 237--260, PUBLISHER = Oxford University Press, YEAR = 2010, ISBN = 978-0-19-953492-0, MRCLASS = 53C08 (53C29 55R65), MRNUMBER = 2681698,
+          
+          
+        </li>
+      
+        <li>
+          MR2709030: AUTHOR = Bartels, Tobias Keith, TITLE = Higher gauge theory: 2-bundles, NOTE = Thesis (Ph.D.)--University of California, Riverside, PUBLISHER = ProQuest LLC, Ann Arbor, MI, YEAR = 2006, PAGES = 142, ISBN = 978-0542-80050-4, MRCLASS = 99-05, MRNUMBER = 2709030,
+          
+          
+        </li>
+      
+        <li>
+          MR2800361: AUTHOR = Schommer-Pries, Christopher J., TITLE = Central extensions of smooth 2-groups and a finite-dimensional string 2-group, JOURNAL = Geom. Topol., FJOURNAL = Geometry \&amp; Topology, VOLUME = 15, YEAR = 2011, NUMBER = 2, PAGES = 609--676, ISSN = 1465-3060,1364-0380, MRCLASS = 53C08 (18D10 22A22 57T10), MRNUMBER = 2800361,
+          
+          
+        </li>
+      
+        <li>
+          MR2805195: AUTHOR = Wockel, Christoph, TITLE = Principal 2-bundles and their gauge 2-groups, JOURNAL = Forum Mathematicum, VOLUME = 23, YEAR = 2011, NUMBER = 3, PAGES = 565--610, ISSN = 0933-7741,1435-5337, MRCLASS = 55R65 (18D05 22A22), MRNUMBER = 2805195,
+          
+          
+        </li>
+      
+        <li>
+          MR3012377: AUTHOR = Naber, Gregory L., TITLE = Topology, geometry and gauge fields, SERIES = Applied Mathematical Sciences, VOLUME = 141, EDITION = Second, PUBLISHER = Springer, New York, YEAR = 2011, PAGES = xii+419, ISBN = 978-1-4419-7894-3; 978-1-4419-7895-0, MRCLASS = 53-01 (53C05 53C07 57-02 58-02 70S15 81-02), MRNUMBER = 3012377,
+          
+          
+        </li>
+      
+        <li>
+          MR3013040: AUTHOR = Waldorf, Konrad, TITLE = A construction of string 2-group models using a transgression-regression technique, BOOKTITLE = Analysis, geometry and quantum field theory, SERIES = Contemp. Math., VOLUME = 584, PAGES = 99--115, PUBLISHER = Amer. Math. Soc., Providence, RI, YEAR = 2012, ISBN = 978-0-8218-9144-5, MRCLASS = 53C08 (58H05 81T30), MRNUMBER = 3013040,
+          
+          
+        </li>
+      
+        <li>
+          MR30760: AUTHOR = Whitehead, J. H. C., TITLE = Combinatorial homotopy. II, JOURNAL = Bull. Amer. Math. Soc., FJOURNAL = Bulletin of the American Mathematical Society, VOLUME = 55, YEAR = 1949, PAGES = 453--496, ISSN = 0002-9904, MRCLASS = 56.0X, MRNUMBER = 30760,
+          
+          
+        </li>
+      
+        <li>
+          MR3084724: AUTHOR = Schreiber, Urs and Waldorf, Konrad, TITLE = Connections on non-abelian gerbes and their holonomy, JOURNAL = Theory Appl. Categ., FJOURNAL = Theory and Applications of Categories, VOLUME = 28, YEAR = 2013, PAGES = 476--540, ISSN = 1201-561X, MRCLASS = 53C08 (18D05 55R65), MRNUMBER = 3084724,
+          
+          
+        </li>
+      
+        <li>
+          MR3089401: AUTHOR = Nikolaus, Thomas and Waldorf, Konrad, TITLE = Four equivalent versions of nonabelian gerbes, JOURNAL = Pacific Journal of Mathematics, VOLUME = 264, YEAR = 2013, NUMBER = 2, PAGES = 355--419, ISSN = 0030-8730,1945-5844, MRCLASS = 55R65 (53C08 55N05 58H05), MRNUMBER = 3089401,
+          
+          
+        </li>
+      
+        <li>
+          MR3535115: AUTHOR = Fiorenza, Domenico and Rogers, Christopher L. and Schreiber, Urs, TITLE = Higher $U(1)$-gerbe connections in geometric prequantization, JOURNAL = Rev. Math. Phys., FJOURNAL = Reviews in Mathematical Physics. A Journal for Both Review and Original Research Papers in the Field of Mathematical Physics, VOLUME = 28, YEAR = 2016, NUMBER = 6, PAGES = 1650012, 72, ISSN = 0129-055X,1793-6659, MRCLASS = 53D50 (18G55 53C08), MRNUMBER = 3535115,
+          
+          
+        </li>
+      
+        <li>
+          MR3764535: AUTHOR = Ganter, Nora, TITLE = Categorical tori, JOURNAL = SIGMA Symmetry Integrability Geom. Methods Appl., FJOURNAL = SIGMA. Symmetry, Integrability and Geometry. Methods and Applications, VOLUME = 14, YEAR = 2018, PAGES = Paper No. 014, 18, ISSN = 1815-0659, MRCLASS = 22E40 (18D99), MRNUMBER = 3764535,
+          
+          
+        </li>
+      
+        <li>
+          MR3894086: AUTHOR = Waldorf, Konrad, TITLE = A global perspective to connections on principal 2-bundles, JOURNAL = Forum Math., FJOURNAL = Forum Mathematicum, VOLUME = 30, YEAR = 2018, NUMBER = 4, PAGES = 809--843, ISSN = 0933-7741,1435-5337, MRCLASS = 53C08 (22A22 55R65), MRNUMBER = 3894086,
+          
+          
+        </li>
+      
+        <li>
+          MR3912053: AUTHOR = Epa, Narthana and Ganter, Nora, TITLE = Platonic and alternating 2-groups, JOURNAL = High. Struct., FJOURNAL = Higher Structures, VOLUME = 1, YEAR = 2017, NUMBER = 1, PAGES = 122--146, ISSN = 2209-0606, MRCLASS = 20J06 (18N10 20D99 20J15), MRNUMBER = 3912053,
+          
+          
+        </li>
+      
+        <li>
+          MR3917427: AUTHOR = Waldorf, Konrad, TITLE = Parallel transport in principal 2-bundles, JOURNAL = High. Struct., FJOURNAL = Higher Structures, VOLUME = 2, YEAR = 2018, NUMBER = 1, PAGES = 57--115, ISSN = 2209-0606, MRCLASS = 53C08 (22A22 55R65 58H05), MRNUMBER = 3917427,
+          
+          
+        </li>
+      
+        <li>
+          MR419643: AUTHOR = Brown, Ronald and Spencer, Christopher B., TITLE = $G$-groupoids, crossed modules and the fundamental groupoid of a topological group, NOTE = Nederl. Akad. Wetensch. Proc. Ser. A \bf 79, JOURNAL = Indag. Math., FJOURNAL = , VOLUME = 38, YEAR = 1976, NUMBER = 4, PAGES = 296--302, MRCLASS = 20L10 (22A05), MRNUMBER = 419643,
+          
+          
+        </li>
+      
+        <li>
+          MR4268834: AUTHOR = Bunk, Severin and M\&quot;uller, Lukas and Szabo, Richard J., TITLE = Smooth 2-group extensions and symmetries of bundle gerbes, JOURNAL = Comm. Math. Phys., FJOURNAL = Communications in Mathematical Physics, VOLUME = 384, YEAR = 2021, NUMBER = 3, PAGES = 1829--1911, ISSN = 0010-3616,1432-0916, MRCLASS = 53C08 (22E30), MRNUMBER = 4268834,
+          
+          
+        </li>
+      
+        <li>
+          MR42768: AUTHOR = Ehresmann, Charles, TITLE = Les connexions infinit\&#x27;esimales dans un espace fibr\&#x27;e diff\&#x27;erentiable, BOOKTITLE = Colloque de topologie (espaces fibr\&#x27;es), Bruxelles, 1950, PAGES = 29--55, PUBLISHER = Georges Thone, Li\`ege, YEAR = 1951, MRCLASS = 53.0X, MRNUMBER = 42768,
+          
+          
+        </li>
+      
+        <li>
+          MR658304: AUTHOR = Bott, Raoul and Tu, Loring W., TITLE = Differential forms in algebraic topology, SERIES = Graduate Texts in Mathematics, VOLUME = 82, PUBLISHER = Springer-Verlag, New York-Berlin, YEAR = 1982, PAGES = xiv+331, ISBN = 0-387-90613-4, MRCLASS = 57R19 (55-02 58-01 58A12), MRNUMBER = 658304,
+          
+          
+        </li>
+      
+        <li>
+          MR672956: AUTHOR = Brown, Kenneth S., TITLE = Cohomology of groups, SERIES = Graduate Texts in Mathematics, VOLUME = 87, PUBLISHER = Springer-Verlag, New York-Berlin, YEAR = 1982, PAGES = x+306, ISBN = 0-387-90688-6, MRCLASS = 20-02 (18-01 20F32 20J05 55-01), MRNUMBER = 672956,
+          
+          
+        </li>
+      
+        <li>
+          MR900587: AUTHOR = Pressley, Andrew and Segal, Graeme, TITLE = Loop groups, SERIES = Oxford Mathematical Monographs, NOTE = Oxford Science Publications, PUBLISHER = The Clarendon Press, Oxford University Press, New York, YEAR = 1986, PAGES = viii+318, ISBN = 0-19-853535-X, MRCLASS = 22E65 (58D15 81D15), MRNUMBER = 900587,
+          
+          
+        </li>
+      
+        <li>
+          Wal2007phd: title=Algebraic structures for bundle gerbes and the Wess-Zumino term in conformal field theory, author=Waldorf, Konrad, year=2007, school=Staats-und Universit\&quot;atsbibliothek Hamburg Carl von Ossietzky
+          
+          
+        </li>
+      
+    </ol>
+    
+  </section>
+
+  <footer class="footer-disclaimer">
+    <p class="muted">Rendered by <span class="brand">GrokRxiv</span>. Source: <a href="https://arxiv.org/abs/2606.12482">arXiv:2606.12482</a>.</p>
+  </footer>
+</body>
+</html>
