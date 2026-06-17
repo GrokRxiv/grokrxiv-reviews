@@ -1,0 +1,13 @@
+{
+  "command": [
+    "lake",
+    "env",
+    "lean",
+    "GrokRxiv/Proofs.lean"
+  ],
+  "duration_ms": 3887,
+  "exit_code": 1,
+  "status": "fail",
+  "stderr": "",
+  "stdout": "GrokRxiv/Proofs.lean:73:57: error: unsolved goals\nr : ℕ\nk : Fin r → ℕ\nhk : ∀ (i : Fin r), 1 ≤ k i\np : ℕ\nH : GradedCohRing\ngen : Fin r → H.Carrier\nhdeg : ∀ (i : Fin r), H.deg (gen i) = k i\nhne : ∀ (s : Finset (Fin r)), H.listProd (List.map gen s.toList) ≠ H.zero\nhdegprod : ∀ (s : Finset (Fin r)), H.deg (H.listProd (List.map gen s.toList)) = ∑ i ∈ s, k i\n⊢ r - minSubsetCard k p ≤ H.cohPLength (∑ i, k i) p\n"
+}

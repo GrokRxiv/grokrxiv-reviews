@@ -1,0 +1,13 @@
+{
+  "command": [
+    "lake",
+    "env",
+    "lean",
+    "GrokRxiv/Proofs.lean"
+  ],
+  "duration_ms": 3410,
+  "exit_code": 1,
+  "status": "fail",
+  "stderr": "",
+  "stdout": "GrokRxiv/Proofs.lean:40:4: error: omega could not prove the goal:\na possible counterexample may satisfy the constraints\n  b ≥ 0\n  a ≥ 0\n  a - b ≥ 0\nwhere\n a := ↑(M.longp p)\n b := ↑M.Pcat\nGrokRxiv/Proofs.lean:43:4: error: omega could not prove the goal:\na possible counterexample may satisfy the constraints\n  b ≥ 0\n  a ≥ 0\n  a - b ≥ 1\nwhere\n a := ↑(M.longp p)\n b := ↑M.Pcat\n"
+}

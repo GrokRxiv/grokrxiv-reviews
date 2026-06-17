@@ -31,8 +31,8 @@
         "text_excerpt": "Proposition 1.8 (1.6). Let $(N; \\partial N)$ be obtained from the sphere $S^2$ by removing a finite number $s$ of open discs: $(N; \\partial N) = (S^2 \\setminus \\bigcup_{i=1}^{s} D_i^2; \\bigcup_{i=1}^{s} S_i^1)$, and let $(L; \\partial L)$ be obtained from the ..."
       },
       "statement": "Proposition 1.8 (1.6). Let $(N; \\partial N)$ be obtained from the sphere $S^2$ by removing a finite number $s$ of open discs: $(N; \\partial N) = (S^2 \\setminus \\bigcup_{i=1}^{s} D_i^2; \\bigcup_{i=1}^{s} S_i^1)$, and let $(L; \\partial L)$ be obtained from the projective plane $\\mathbb{R}P^2$ by removing a finite number $k$ of open discs: $(L; \\partial L) = (\\mathbb{R}P^2 \\setminus \\bigcup_{i=1}^{k} D_i^2; \\bigcup_{i=1}^{k} S_i^1)$. For $p = 0$ the $p$-length of a two-dimensional compact connected manifold equals: 1. one, if the manifold is homeomorphic to $(N; \\partial N)$, to $(L; \\partial L)$, or to the sphere $S^2$; 2. two, on the other manifolds. For $p = 1$ the $p$-length of a two-dimensional compact connected manifold equals: 1. zero, if the manifold is homeomorphic to the sphere $S^2$ or to the disc $D^2$; 2. one, on the other manifolds.",
-      "status": "FAILED",
-      "verified_statement": "theorem prop_1_6 : 0 = 0 := by"
+      "status": "PROVED",
+      "verified_statement": "import Mathlib\n\n/-\nGrokRxiv review-loop Lean targets — section sec-2-2.\n\nThe deterministic proof-obligation pipeline (review_loop/proof_obligations.json)\ncould not extract the mathematical content of these six paper claims: each\n`theorem_ir` degenerates to raw `unknown_term` text, so the emitted Lean\ntargets collapse to trivial placeholder statements (`True` or `0 = 0`). The\npaper's actual invariants — the p-length `long^p`, the P-category `P-cat`, and\nthe homeomorphism classification of two-dimensional compact connected\nmanifolds (S^2, D^2, N = S^2 minus s discs, L = RP^2 minus k discs) — have no\ncounterpart in Mathlib and were not recovered by the IR.\n\nPer the review-loop input contract the emitted deterministic target statements\nare preserved verbatim and each is closed honestly, using no unfinished-proof\ntactics and no extra-logical postulates. These proofs therefore discharge ONLY\nthe degenerate placeholder targets; they do NOT establish the paper's actual\nProposition 1.6 (1.8) or its neighbouring claims, whose real formal content\nremains out of reach of the supplied IR.\n-/\n\nnamespace GrokRxiv\n\n-- Theorem 1.7 (1.5): P-cat vs p-length bound; IR degenerated to `True`.\ntheorem thm_1_5 : True := by\n  trivial\n\n-- Proposition 1.8 (1.6): p-length surface classification; IR degenerated to `0 = 0`.\ntheorem prop_1_6 : 0 = 0 := by\n  rfl\n\n-- Theorem 1.9 (1.7): product-of-spheres p-length bound; IR degenerated to `True`.\ntheorem thm_1_7 : True := by\n  trivial\n\n-- Corollary 1.10 (1.8): IR degenerated to `0 = 0`.\ntheorem cor_1_8 : 0 = 0 := by\n  rfl\n\n-- Proposition 1.9: IR degenerated to `0 = 0`.\ntheorem prop_1_9 : 0 = 0 := by\n  rfl\n\n-- Proposition 1.10: IR degenerated to `True`.\ntheorem prop_1_10 : True := by\n  trivial\n\nend GrokRxiv"
     },
     {
       "emitted_statement": "theorem thm_1_7 : True := by",
@@ -48,7 +48,7 @@
         "text_excerpt": "Theorem 1.9 (1.7). Let $M = S^{k_1} \\times S^{k_2} \\times \\ldots \\times S^{k_r}$ be a product of $k_i$-dimensional spheres, $i = 1, \\ldots, r$, and let $p$ be a non-negative integer. Then $\\mathrm{long}^{p} M \\geq r - \\min l(p)$, where the minimum is taken ov..."
       },
       "statement": "Theorem 1.9 (1.7). Let $M = S^{k_1} \\times S^{k_2} \\times \\ldots \\times S^{k_r}$ be a product of $k_i$-dimensional spheres, $i = 1, \\ldots, r$, and let $p$ be a non-negative integer. Then $\\mathrm{long}^{p} M \\geq r - \\min l(p)$, where the minimum is taken over all subsets $\\{(k_{i_1}, k_{i_2}, \\ldots, k_{i_l}) \\subset (k_1, k_2, \\ldots, k_r) : \\sum_{j=1}^{l} k_{i_j} \\geq p\\}$.",
-      "status": "FAILED",
+      "status": "TYPE_ERROR",
       "verified_statement": "theorem thm_1_7 : True := by"
     },
     {
@@ -65,7 +65,7 @@
         "text_excerpt": "Corollary 1.10 (1.8). Let $M = S^{k_1} \\times S^{k_2} \\times \\ldots \\times S^{k_r}$ be a product of $k_i$-dimensional spheres, $i = 1, \\ldots, r$. Then the (co)homological length of $M$ equals the number $r$ of factors: $\\mathrm{long}\\, M = r$."
       },
       "statement": "Corollary 1.10 (1.8). Let $M = S^{k_1} \\times S^{k_2} \\times \\ldots \\times S^{k_r}$ be a product of $k_i$-dimensional spheres, $i = 1, \\ldots, r$. Then the (co)homological length of $M$ equals the number $r$ of factors: $\\mathrm{long}\\, M = r$.",
-      "status": "FAILED",
+      "status": "USES_UNAPPROVED_AXIOM",
       "verified_statement": "theorem cor_1_8 : 0 = 0 := by"
     },
     {
@@ -82,7 +82,7 @@
         "text_excerpt": "Proposition 1.11 (1.9). The $p$-length of the $n$-dimensional torus is $p$ less than its dimension: $\\mathrm{long}^{p} T^n = n - p$."
       },
       "statement": "Proposition 1.11 (1.9). The $p$-length of the $n$-dimensional torus is $p$ less than its dimension: $\\mathrm{long}^{p} T^n = n - p$.",
-      "status": "FAILED",
+      "status": "TYPE_ERROR",
       "verified_statement": "theorem prop_1_9 : 0 = 0 := by"
     },
     {
@@ -99,7 +99,7 @@
         "text_excerpt": "Proposition 1.12 (1.10). The Lyusternik--Shnirelman category of a two-dimensional compact connected manifold with boundary, not homeomorphic to the disc $D^2$, equals two. Moreover, the categorical sets may be chosen so as to intersect only along their bounda..."
       },
       "statement": "Proposition 1.12 (1.10). The Lyusternik--Shnirelman category of a two-dimensional compact connected manifold with boundary, not homeomorphic to the disc $D^2$, equals two. Moreover, the categorical sets may be chosen so as to intersect only along their boundaries, and so that each is homeomorphic to the disc $D^2$.",
-      "status": "FAILED",
+      "status": "USES_SORRY",
       "verified_statement": "theorem prop_1_10 : True := by"
     }
   ],
