@@ -1,0 +1,1325 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Configuration spaces and braid groups — GrokRxiv Review</title>
+  <meta name="generator" content="grokrxiv-render">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- KaTeX is rendered client-side; math is kept as \( ... \) and \[ ... \] delimiters. -->
+  <style>
+    :root { color-scheme: light dark; --fg: #111; --muted: #555; --bg: #fff;
+            --accent: #1f6feb; --border: #d0d7de; --banner: #fff3cd; --banner-fg: #664d03; }
+    @media (prefers-color-scheme: dark) {
+      :root { --fg: #e6edf3; --muted: #8b949e; --bg: #0d1117; --accent: #58a6ff;
+              --border: #30363d; --banner: #3a2f0b; --banner-fg: #f1c453; }
+    }
+    body { font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+           color: var(--fg); background: var(--bg); max-width: 820px;
+           margin: 0 auto; padding: 24px; }
+    h1 { font-size: 1.7rem; line-height: 1.25; margin: 0 0 0.5rem; }
+    h2 { font-size: 1.2rem; margin-top: 2rem; border-bottom: 1px solid var(--border); padding-bottom: .25rem; }
+    .muted { color: var(--muted); }
+    .disclaimer { background: var(--banner); color: var(--banner-fg); border: 1px solid var(--border);
+                  padding: .75rem 1rem; border-radius: 6px; margin: 0 0 1.5rem; font-weight: 600; }
+    .footer-disclaimer { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--border);
+                         color: var(--muted); font-size: .9rem; }
+    .brand { font-weight: 700; color: var(--accent); }
+    details { border: 1px solid var(--border); border-radius: 6px; padding: .75rem 1rem; margin: .5rem 0; }
+    details > summary { cursor: pointer; font-weight: 600; }
+    .meta-link { font-size: .9rem; }
+    ul { padding-left: 1.25rem; }
+    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .agent-grid { display: grid; gap: .5rem; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 999px;
+             background: var(--border); color: var(--fg); font-size: .8rem; }
+    .badge.pass { background: #1f883d; color: #fff; }
+    .badge.warn { background: #bf8700; color: #fff; }
+    .badge.fail { background: #cf222e; color: #fff; }
+    .target-grid { display: grid; gap: .75rem; padding: 0; list-style: none; }
+    .revision-target { border: 1px solid var(--border); border-radius: 6px; padding: .9rem 1rem;
+                       background: rgba(127, 127, 127, .08); }
+    .target-title { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: 0 0 .75rem; }
+    .target-fields { display: grid; gap: .5rem; margin: 0; }
+    .target-field { display: grid; gap: .35rem; border: 1px solid var(--border);
+                    border-radius: 6px; padding: .65rem .75rem; }
+    .target-field.required { border-color: #bf8700; background: rgba(191, 135, 0, .12); }
+    .field-label { color: var(--muted); font-size: .75rem; font-weight: 700; text-transform: uppercase; }
+    .field-value { margin: 0; overflow-wrap: anywhere; }
+    .field-value.codeish { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Configuration spaces and braid groups</h1>
+    <p class="muted">
+      <span class="brand">GrokRxiv</span> review of
+      <a class="meta-link" href="https://arxiv.org/abs/2606.17193">arXiv:2606.17193</a>
+       · <span>math.AT</span>
+    </p>
+    <p class="muted">
+      Fred Cohen, Jonathan Pakianathan
+    </p>
+  </header>
+
+  <section>
+    <h2>TL;DR</h2>
+    <p>This paper makes significant contributions (novelty score 0.7, verdict &#x27;significant&#x27;; technical correctness &#x27;mostly_sound&#x27;) to the theory of configuration spaces, braid groups, and mapping class groups on surfaces, establishing K(π,1) properties via Borel constructions, polyfree structure of pure braid groups, and explicit Euler-characteristic product formulas. The novelty specialist (confidence 0.95) and technical correctness specialist (confidence 0.72) broadly agree that the core mathematical arguments are sound and advance the field beyond classical Fadell-Neuwirth results. However, under the recommendation gate for math.AT papers, the technical correctness specialist (C12, major: load-bearing claims in Theorems 7, 40, Propositions 43, 48, and Lemma 47 ship no formal proof artifacts) and the reproducibility specialist (two critical-severity concerns: no repository or machine-checkable proofs; reproducibility score 0.22) together flag the absence of proof-as-code artifacts for a code-amenable field, triggering a major_revision default. Secondary issues include an orientable&#x2f;non-orientable ambiguity in Theorem 40&#x27;s rank formula (C5, minor), multiple incomplete or placeholder bibliography entries (BM, BH, Smale, Xia; C13, minor), load-bearing citations to unpublished &#x27;in preparation&#x27; works (CS, CG; reproducibility major), and a missing cross-reference to FL hypotheses in Lemma 47 (C8, minor). No specialist disagreement exists on the fundamental correctness of the mathematical content.</p>
+    <p class="muted">Recommendation: <strong>Major revision</strong> · Confidence: 80%</p>
+  </section>
+
+  <section>
+    <h2>Strengths</h2>
+    <ul>
+      <li>Configuration spaces of surfaces that are not K(π,1) spaces (S² and RP²) are handled by a Borel construction that recovers Eilenberg-MacLane spaces, closing a gap left by the classical Fadell-Neuwirth fibration theorem.</li><li>The polyfree structure theorem for pure braid groups on surfaces provides an explicit, inductive group-theoretic characterization with computable ranks, enabling direct cohomological calculation via the Euler-characteristic product formula χ(G) = ∏(1 − d_k).</li><li>The unified treatment of configuration spaces, braid groups, and mapping class groups for surfaces of genus 0, 1, and 2 gives a concrete and self-contained reference for downstream algebraic topology and geometric group theory.</li><li>The novelty specialist assigns significance (score 0.7) with high confidence (0.95), finding that the work genuinely extends Fadell-Neuwirth, Xicoténcatl, Earle-Eells, and Falk-Randell in a coordinated framework rather than in isolated increments.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Weaknesses</h2>
+    <ul>
+      <li>No formal proof artifacts (Lean, Coq, Agda, or executable scripts) are provided for load-bearing claims in a math.AT paper; Theorems 7 and 40, Propositions 43 and 48, and Lemma 47 rely on prose inductions with &#x27;routine exercise&#x27; steps that are not independently machine-checkable (C12, major; reproducibility critical).</li><li>Theorem 40&#x27;s rank formula uses the orientable Euler-characteristic convention (χ = 2 − 2g) but the statement does not restrict to orientable surfaces, giving incorrect exponents for non-orientable surfaces of genus g where χ = 2 − g (C5, minor).</li><li>Multiple bibliography entries are incomplete placeholders—BM (Bergau-Mennicke), BH (Birman-Hilden), Smale (only &#x27;P.A.M.S.&#x27;), and Xia (only author name)—preventing verification of claims attributed to these references (C13, minor; citation review).</li><li>Key referenced works CS (Cohen-Sato, &#x27;in preparation&#x27;) and CG (Cohen-Gitler, &#x27;submitted&#x27;) remain unpublished at the time of writing, creating unresolvable dependencies for load-bearing results on Lie algebra relations and loop-space homology (reproducibility, major).</li><li>Lemma 47&#x27;s spectral-sequence Euler-characteristic argument implicitly requires the FL finiteness property established in Proposition 43(b) but does not cross-reference it at the point of use, leaving the reader to supply a non-obvious logical step (C8, minor).</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Revision Targets</h2>
+    <div class="target-grid">
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>code</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              
+              
+              code release and execution entrypoints
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">No open repository, commit, release, license, or formal proof artifact is provided for the main mathematical results; a reproducibility package such as proofs&#x2f;configuration_spaces_and_braid_groups&#x2f;README.md plus machine-checkable Lean or Coq files would be needed to independently check the claimed K(pi,1), braid group, and mapping class group statements.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Release the source code, scripts, model configuration, and execution entrypoints needed to regenerate the reported tables, or document why those artifacts cannot be released.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm runnable code or a documented non-release justification is present.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              corrections&#x2f;2606.17193&#x2f;paper.tex
+               at 
+              Section &#x27;Polyfree groups&#x27;, Theorem 40 (thm: motpoly)
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">The induction is correct in form: the Fadell-Neuwirth fibration F(M − Q_{m+k−1},1) → F(M − Q_m, k) → F(M − Q_m, k−1) gives the short exact sequence 1 → F_{2g+m−2+k} → PB_k(M − Q_m) → PB_{k−1}(M − Q_m) → 1, and the rank of the fiber free group matches 1 − χ(M − Q_{m+k−1}) for an orientable closed surface of genus g, namely 2g + m + k − 2. However, the statement says &#x27;genus g ≥ 1&#x27; without specifying orientability, while Theorem 7 explicitly says &#x27;not necessarily orientable&#x27;. The rank formula 2g + m − 1 uses the orientable Euler-characteristic convention χ = 2 − 2g; for non-orientable surfaces of genus g (Euler characteristic 2 − g), the correct rank is g + m − 1, so the stated exponents are wrong unless &#x27;genus&#x27; here means orientable genus only.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Either restrict the statement to orientable surfaces (i.e., say &#x27;closed orientable 2-manifold of genus g ≥ 1&#x27;), or split into orientable&#x2f;non-orientable cases with corresponding rank formulas g + m − 1 versus 2g + m − 1. Also explicitly state the convention g = 1&#x2f;2 for R^2 is a formal device rather than a genus.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm `Section &#x27;Polyfree groups&#x27;, Theorem 40 (thm: motpoly)` is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              corrections&#x2f;2606.17193&#x2f;paper.tex
+               at 
+              Bibliography
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">Inspecting the bibliography reveals several entries with only an author list and no work cited; this is a meta-issue but it directly impacts the ability of a reader to verify load-bearing claims attributed to these references.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Complete each truncated bibliography entry with full title, journal&#x2f;series, volume, year, and page numbers; or remove the citation key if no longer used.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm `Bibliography` is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              corrections&#x2f;2606.17193&#x2f;paper.tex
+               at 
+              reproducibility appendix
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">Several referenced results are cited to unpublished, submitted, thesis, or in-preparation works, making independent reconstruction of dependencies difficult without additional source documents or formal dependency files.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Add a reproducibility note that resolves this concern: Several referenced results are cited to unpublished, submitted, thesis, or in-preparation works, making independent reconstruction of dependencies difficult without additional source documents or formal dependency files.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm the reproducibility concern is addressed with a concrete artifact or manuscript update.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              corrections&#x2f;2606.17193&#x2f;paper.tex
+               at 
+              Across Sections &#x27;Configuration spaces&#x27;, &#x27;Polyfree groups&#x27;
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">Per the Proof-as-Code axiom for math.* fields, load-bearing claims that could be discharged by a formal proof artifact (Lean &#x2f; Coq &#x2f; Agda &#x2f; Isabelle) but are not shipped count as unsupported. Theorem 40&#x27;s rank formula, Proposition 43&#x27;s induction over polyfree length, Lemma 47&#x27;s spectral sequence collapse, and Proposition 48&#x27;s Euler-characteristic product are all small enough and self-contained enough to formalize. No such artifact is provided in the paper or its references; the proofs rely on &#x27;easy exercise&#x27; and &#x27;routine check&#x27; language at several inductive steps (e.g., the rank-of-factors computation in Theorem 40&#x27;s proof is left to the reader).</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Provide a formal-proof companion repository, e.g., src&#x2f;proofs&#x2f;Polyfree.lean containing the inductive definition of polyfree groups together with mechanized proofs of (i) the rank formula in Theorem 40 (parameterized by orientable&#x2f;non-orientable surface type to resolve the ambiguity flagged in C5), (ii) Proposition 43(a) via an explicit LHS spectral-sequence collapse argument, and (iii) Proposition 48&#x27;s χ(G) = ∏(1 − d_k) identity. At minimum, supply experiments&#x2f;euler_char&#x2f;check.py that numerically verifies the Euler-characteristic formula for PB_k(M − Q_m) against direct CW-complex computation for small (g, m, k).</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm `Across Sections &#x27;Configuration spaces&#x27;, &#x27;Polyfree groups&#x27;` is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+    </div>
+  </section>
+
+  <section>
+    <h2>Open Questions</h2>
+    <ul>
+      <li>Does Theorem 40&#x27;s rank formula apply to non-orientable surfaces? If so, what is the correct rank for a non-orientable closed surface of genus g (where χ = 2 − g), and should the statement split into orientable and non-orientable cases?</li><li>What is the current publication status of [CS] (Cohen-Sato, &#x27;in preparation&#x27;) and [CG] (Cohen-Gitler, &#x27;submitted to Memoirs of the AMS&#x27;)? Can the relevant results be attributed to published or otherwise publicly accessible versions?</li><li>Can complete bibliographic data (title, journal, volume, year, pages) be provided for BM (Bergau-Mennicke), BH (Birman-Hilden), Smale, and Xia, or should these citation keys be removed if the associated works are no longer cited?</li><li>Would the authors consider providing a formal proof companion (e.g., a Lean or Coq file verifying the polyfree induction and Euler-characteristic product) or at minimum a numerical check script validating χ(PB_k(M − Q_m)) = ∏(1 − d_i) against direct CW-complex computation for small (g, m, k)?</li><li>Could a theorem dependency graph or explicit proof-sketch map be added to help readers trace which lemmas are load-bearing for the K(π,1) result (Theorem 7), the polyfree theorem (Theorem 40), and the Euler-characteristic formula (Proposition 48)?</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Per-Agent Reviews</h2>
+    <div class="agent-grid">
+      
+      <details>
+        <summary>
+          citation — <span class="muted">gemini-3-flash-preview</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;confidence&quot;: 0.9,
+  &quot;entries&quot;: [
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Bredon&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;Bred&quot;,
+        &quot;raw&quot;: &quot;Bred: {Bredon,} Topology and Geometry, Springer Verlag GTM 139, New York-Heidelberg-Berlin, 1993.&quot;,
+        &quot;title&quot;: &quot;Topology and Geometry&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Springer Verlag GTM 139&quot;,
+        &quot;year&quot;: 1993
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Fundamental textbook for topology and geometry, used for definitions of pullbacks, Borel constructions, and Kunneth theorems.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;K. S. Brown&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;Brown&quot;,
+        &quot;raw&quot;: &quot;Brown: {K. S. Brown,} Cohomology of Groups, Springer Verlag GTM 87, New York-Heidelberg-Berlin, 1994.&quot;,
+        &quot;title&quot;: &quot;Cohomology of Groups&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Springer Verlag GTM 87&quot;,
+        &quot;year&quot;: 1994
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Standard reference for group cohomology, providing the topological and algebraic definitions used in the paper.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Bergau&quot;,
+          &quot;Mennicke&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;BM&quot;,
+        &quot;raw&quot;: &quot;BM: {Bergau, and Mennicke}&quot;,
+        &quot;title&quot;: &quot;BM&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: null,
+        &quot;year&quot;: null
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited in the context of mapping class groups or braid groups.&quot;,
+      &quot;notes&quot;: &quot;Bibliography entry is incomplete; lacks title, venue, and year.&quot;,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Birman&quot;,
+          &quot;H. Hilden&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;BH&quot;,
+        &quot;raw&quot;: &quot;BH: {Birman, and H. Hilden,}&quot;,
+        &quot;title&quot;: &quot;BH&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: null,
+        &quot;year&quot;: null
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited for classical methods in cohomological analysis of mapping class groups.&quot;,
+      &quot;notes&quot;: &quot;Bibliography entry is incomplete; lacks title, venue, and year.&quot;,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;F.R. Cohen&quot;,
+          &quot;S. Gitler&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;CG&quot;,
+        &quot;raw&quot;: &quot;CG: {F.R. Cohen, S. Gitler,} (i) {On loop spaces of configuration spaces}, submitted to the Memoirs of the AMS, and (ii) {Loop spaces of configuration spaces, braid-like groups, and knots}, to appear in the Proceedings of the 1998 Barcelona Conference on Algebraic Topology.&quot;,
+        &quot;title&quot;: &quot;On loop spaces of configuration spaces&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Memoirs of the AMS &#x2f; Proceedings of the 1998 Barcelona Conference&quot;,
+        &quot;year&quot;: 1998
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Primary reference for the main theorems regarding loop spaces of configuration spaces and Lie algebras.&quot;,
+      &quot;notes&quot;: &quot;Entry combines two works; one submitted and one to appear.&quot;,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;F.R. Cohen&quot;,
+          &quot;T. Sato&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;CS&quot;,
+        &quot;raw&quot;: &quot;CS: {F.R. Cohen, T. Sato,} in preparation.&quot;,
+        &quot;title&quot;: &quot;CS&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: null,
+        &quot;year&quot;: null
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Technical reference for details on fundamental cycles and Lie algebra relations.&quot;,
+      &quot;notes&quot;: &quot;Listed as &#x27;in preparation&#x27;.&quot;,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;D. C. Cohen&quot;,
+          &quot;Alexander I. Suciu&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;Dan&quot;,
+        &quot;raw&quot;: &quot;Dan: {D. C. Cohen, Alexander I. Suciu,} Homology of iterated semidirect products of free groups, J. Pure Appl. Algebra {\\bf 126} (1998), pg 87-120.&quot;,
+        &quot;title&quot;: &quot;Homology of iterated semidirect products of free groups&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;J. Pure Appl. Algebra&quot;,
+        &quot;year&quot;: 1998
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Provides a resolution for polyfree groups using Fox free derivatives, used to analyze braid group homology.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;C. Earle&quot;,
+          &quot;J. Eells&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;EE&quot;,
+        &quot;raw&quot;: &quot;EE: {C. Earle, and J. Eells,} A fibre bundle description of Teichm\\\&quot;uller theory, J. Differential Geometry {\\bf 3}(1969), 19-43.&quot;,
+        &quot;title&quot;: &quot;A fibre bundle description of Teichmüller theory&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;J. Differential Geometry&quot;,
+        &quot;year&quot;: 1969
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Key results for mapping class groups of surfaces, particularly regarding the homotopy type of Diff+(M).&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;E. Fadell&quot;,
+          &quot;L. Neuwirth&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;FN&quot;,
+        &quot;raw&quot;: &quot;FN: {E. Fadell and L. Neuwirth,} Configuration spaces, Math. Scand. {\\bf 10} (1962), 119-126.&quot;,
+        &quot;title&quot;: &quot;Configuration spaces&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Math. Scand.&quot;,
+        &quot;year&quot;: 1962
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Foundational paper for the study of configuration spaces and their fibration properties.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;M. Falk&quot;,
+          &quot;R. Randell&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;FR&quot;,
+        &quot;raw&quot;: &quot;FR: {M. Falk, and R. Randell,} The lower central series of a fiber-type arrangement, Invent. Math. {\\bf 82} (1985), 77-88.&quot;,
+        &quot;title&quot;: &quot;The lower central series of a fiber-type arrangement&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Invent. Math.&quot;,
+        &quot;year&quot;: 1985
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Core reference for the Lie algebra associated to the lower central series of pure braid groups.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;V. Guillemin&quot;,
+          &quot;A. Pollack&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;GP&quot;,
+        &quot;raw&quot;: &quot;GP: {V. Guillemin, and A. Pollack,} Differential Topology, Prentice-Hall, 1974.&quot;,
+        &quot;title&quot;: &quot;Differential Topology&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Prentice-Hall&quot;,
+        &quot;year&quot;: 1974
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Used as the standard reference for the isotopy lemma in the section on mapping class groups.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;T. Kohno&quot;,
+          &quot;T. Oda&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;KO&quot;,
+        &quot;raw&quot;: &quot;KO: {T. Kohno, and T. Oda,} The lower central series of the pure braid group of an algebraic curve, Advanced Studies in Pure Mathematics, Galois Represntations and Arithmetic Algebraic Geometry {\\bf 12} (1987), 201-219.&quot;,
+        &quot;title&quot;: &quot;The lower central series of the pure braid group of an algebraic curve&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Advanced Studies in Pure Mathematics&quot;,
+        &quot;year&quot;: 1987
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Key reference for the descending central series of pure braid groups and associated Lie algebras.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Derek J.S. Robinson&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;Robin&quot;,
+        &quot;raw&quot;: &quot;Robin: {Derek J.S. Robinson,} A Course in the Theory of Groups, Springer Verlag GTM 80, New York-Heidelberg-Berlin, 1995.&quot;,
+        &quot;title&quot;: &quot;A Course in the Theory of Groups&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Springer Verlag GTM 80&quot;,
+        &quot;year&quot;: 1995
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Standard reference for group theory, specifically the Nielsen-Schreier theorem mentioned in the polyfree groups section.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;N. E. Steenrod&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;S&quot;,
+        &quot;raw&quot;: &quot;S: {N. E. Steenrod,} The Topology of Fibre Bundles, Princeton University Press.&quot;,
+        &quot;title&quot;: &quot;The Topology of Fibre Bundles&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Princeton University Press&quot;,
+        &quot;year&quot;: null
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Classic reference for the theory of fibre bundles.&quot;,
+      &quot;notes&quot;: &quot;Missing year of publication.&quot;,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;S. Smale&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;Smale&quot;,
+        &quot;raw&quot;: &quot;Smale: {S. Smale,} P.A.M.S.&quot;,
+        &quot;title&quot;: &quot;Smale&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;P.A.M.S.&quot;,
+        &quot;year&quot;: null
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited for the result that SO(3) -&gt; Diff+(S^2) is a homotopy equivalence.&quot;,
+      &quot;notes&quot;: &quot;Extremely incomplete bibliography entry; lacks title, year, volume, and page numbers.&quot;,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Edwin H. Spanier&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;Span&quot;,
+        &quot;raw&quot;: &quot;Span: {Edwin H. Spanier,} Algebraic Topology, Springer Verlag, New York-Heidelberg-Berlin, 1966.&quot;,
+        &quot;title&quot;: &quot;Algebraic Topology&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Springer Verlag&quot;,
+        &quot;year&quot;: 1966
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Fundamental textbook in algebraic topology used for various proofs and properties.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;M. Xicotencatl&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;X&quot;,
+        &quot;raw&quot;: &quot;X: {M. Xicot\\&#x27;encatl,} Orbit configuration spaces, infinitesimal braid relations, and equivariant function spaces, Ph.D. thesis, University of Rochester, Spring 1997.&quot;,
+        &quot;title&quot;: &quot;Orbit configuration spaces, infinitesimal braid relations, and equivariant function spaces&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Ph.D. thesis, University of Rochester&quot;,
+        &quot;year&quot;: 1997
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Primary source for the theory of orbit configuration spaces and related Lie algebra presentations.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Yining Xia&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;Xia&quot;,
+        &quot;raw&quot;: &quot;Xia: {Yining Xia,}&quot;,
+        &quot;title&quot;: &quot;Xia&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: null,
+        &quot;year&quot;: null
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Presumably a relevant reference in algebraic topology or configuration spaces.&quot;,
+      &quot;notes&quot;: &quot;Incomplete entry; only the author&#x27;s name is provided.&quot;,
+      &quot;relevance&quot;: &quot;low&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    }
+  ],
+  &quot;missing_references&quot;: [
+    {
+      &quot;reason&quot;: &quot;Vassiliev invariants and their connection to loop spaces of configuration spaces are discussed, but foundational works by Bar-Natan or Kontsevich on this topic are not cited.&quot;,
+      &quot;title&quot;: &quot;Bar-Natan, D. (1995). On the Vassiliev knot invariants. Topology.&quot;
+    }
+  ],
+  &quot;summary&quot;: &quot;The bibliography is comprehensive in its coverage of both classical topological foundations and current research into braid groups and configuration spaces. However, the citation hygiene is marred by several incomplete or placeholder entries (e.g., Smale, Xia, BM, BH) and a reliance on &#x27;in preparation&#x27; or &#x27;submitted&#x27; manuscripts. Key results are well-supported by standard textbooks and the authors&#x27; own extensive body of work in the field.&quot;
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          meta_reviewer — <span class="muted">claude-sonnet-4-6</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <p>This paper makes significant contributions (novelty score 0.7, verdict &#x27;significant&#x27;; technical correctness &#x27;mostly_sound&#x27;) to the theory of configuration spaces, braid groups, and mapping class groups on surfaces, establishing K(π,1) properties via Borel constructions, polyfree structure of pure braid groups, and explicit Euler-characteristic product formulas. The novelty specialist (confidence 0.95) and technical correctness specialist (confidence 0.72) broadly agree that the core mathematical arguments are sound and advance the field beyond classical Fadell-Neuwirth results. However, under the recommendation gate for math.AT papers, the technical correctness specialist (C12, major: load-bearing claims in Theorems 7, 40, Propositions 43, 48, and Lemma 47 ship no formal proof artifacts) and the reproducibility specialist (two critical-severity concerns: no repository or machine-checkable proofs; reproducibility score 0.22) together flag the absence of proof-as-code artifacts for a code-amenable field, triggering a major_revision default. Secondary issues include an orientable&#x2f;non-orientable ambiguity in Theorem 40&#x27;s rank formula (C5, minor), multiple incomplete or placeholder bibliography entries (BM, BH, Smale, Xia; C13, minor), load-bearing citations to unpublished &#x27;in preparation&#x27; works (CS, CG; reproducibility major), and a missing cross-reference to FL hypotheses in Lemma 47 (C8, minor). No specialist disagreement exists on the fundamental correctness of the mathematical content.</p>
+        <p class="muted">Recommendation: <strong>Major revision</strong> · Confidence: 80%</p>
+        <h3>Strengths</h3>
+        <ul>
+          <li>Configuration spaces of surfaces that are not K(π,1) spaces (S² and RP²) are handled by a Borel construction that recovers Eilenberg-MacLane spaces, closing a gap left by the classical Fadell-Neuwirth fibration theorem.</li><li>The polyfree structure theorem for pure braid groups on surfaces provides an explicit, inductive group-theoretic characterization with computable ranks, enabling direct cohomological calculation via the Euler-characteristic product formula χ(G) = ∏(1 − d_k).</li><li>The unified treatment of configuration spaces, braid groups, and mapping class groups for surfaces of genus 0, 1, and 2 gives a concrete and self-contained reference for downstream algebraic topology and geometric group theory.</li><li>The novelty specialist assigns significance (score 0.7) with high confidence (0.95), finding that the work genuinely extends Fadell-Neuwirth, Xicoténcatl, Earle-Eells, and Falk-Randell in a coordinated framework rather than in isolated increments.</li>
+        </ul>
+        <h3>Weaknesses</h3>
+        <ul>
+          <li>No formal proof artifacts (Lean, Coq, Agda, or executable scripts) are provided for load-bearing claims in a math.AT paper; Theorems 7 and 40, Propositions 43 and 48, and Lemma 47 rely on prose inductions with &#x27;routine exercise&#x27; steps that are not independently machine-checkable (C12, major; reproducibility critical).</li><li>Theorem 40&#x27;s rank formula uses the orientable Euler-characteristic convention (χ = 2 − 2g) but the statement does not restrict to orientable surfaces, giving incorrect exponents for non-orientable surfaces of genus g where χ = 2 − g (C5, minor).</li><li>Multiple bibliography entries are incomplete placeholders—BM (Bergau-Mennicke), BH (Birman-Hilden), Smale (only &#x27;P.A.M.S.&#x27;), and Xia (only author name)—preventing verification of claims attributed to these references (C13, minor; citation review).</li><li>Key referenced works CS (Cohen-Sato, &#x27;in preparation&#x27;) and CG (Cohen-Gitler, &#x27;submitted&#x27;) remain unpublished at the time of writing, creating unresolvable dependencies for load-bearing results on Lie algebra relations and loop-space homology (reproducibility, major).</li><li>Lemma 47&#x27;s spectral-sequence Euler-characteristic argument implicitly requires the FL finiteness property established in Proposition 43(b) but does not cross-reference it at the point of use, leaving the reader to supply a non-obvious logical step (C8, minor).</li>
+        </ul>
+        <h3>Revision Targets</h3>
+        <div class="target-grid">
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>code</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  
+                  
+                  code release and execution entrypoints
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">No open repository, commit, release, license, or formal proof artifact is provided for the main mathematical results; a reproducibility package such as proofs&#x2f;configuration_spaces_and_braid_groups&#x2f;README.md plus machine-checkable Lean or Coq files would be needed to independently check the claimed K(pi,1), braid group, and mapping class group statements.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Release the source code, scripts, model configuration, and execution entrypoints needed to regenerate the reported tables, or document why those artifacts cannot be released.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm runnable code or a documented non-release justification is present.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  corrections&#x2f;2606.17193&#x2f;paper.tex
+                   at 
+                  Section &#x27;Polyfree groups&#x27;, Theorem 40 (thm: motpoly)
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">The induction is correct in form: the Fadell-Neuwirth fibration F(M − Q_{m+k−1},1) → F(M − Q_m, k) → F(M − Q_m, k−1) gives the short exact sequence 1 → F_{2g+m−2+k} → PB_k(M − Q_m) → PB_{k−1}(M − Q_m) → 1, and the rank of the fiber free group matches 1 − χ(M − Q_{m+k−1}) for an orientable closed surface of genus g, namely 2g + m + k − 2. However, the statement says &#x27;genus g ≥ 1&#x27; without specifying orientability, while Theorem 7 explicitly says &#x27;not necessarily orientable&#x27;. The rank formula 2g + m − 1 uses the orientable Euler-characteristic convention χ = 2 − 2g; for non-orientable surfaces of genus g (Euler characteristic 2 − g), the correct rank is g + m − 1, so the stated exponents are wrong unless &#x27;genus&#x27; here means orientable genus only.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Either restrict the statement to orientable surfaces (i.e., say &#x27;closed orientable 2-manifold of genus g ≥ 1&#x27;), or split into orientable&#x2f;non-orientable cases with corresponding rank formulas g + m − 1 versus 2g + m − 1. Also explicitly state the convention g = 1&#x2f;2 for R^2 is a formal device rather than a genus.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm `Section &#x27;Polyfree groups&#x27;, Theorem 40 (thm: motpoly)` is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  corrections&#x2f;2606.17193&#x2f;paper.tex
+                   at 
+                  Bibliography
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">Inspecting the bibliography reveals several entries with only an author list and no work cited; this is a meta-issue but it directly impacts the ability of a reader to verify load-bearing claims attributed to these references.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Complete each truncated bibliography entry with full title, journal&#x2f;series, volume, year, and page numbers; or remove the citation key if no longer used.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm `Bibliography` is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  corrections&#x2f;2606.17193&#x2f;paper.tex
+                   at 
+                  reproducibility appendix
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">Several referenced results are cited to unpublished, submitted, thesis, or in-preparation works, making independent reconstruction of dependencies difficult without additional source documents or formal dependency files.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Add a reproducibility note that resolves this concern: Several referenced results are cited to unpublished, submitted, thesis, or in-preparation works, making independent reconstruction of dependencies difficult without additional source documents or formal dependency files.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm the reproducibility concern is addressed with a concrete artifact or manuscript update.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  corrections&#x2f;2606.17193&#x2f;paper.tex
+                   at 
+                  Across Sections &#x27;Configuration spaces&#x27;, &#x27;Polyfree groups&#x27;
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">Per the Proof-as-Code axiom for math.* fields, load-bearing claims that could be discharged by a formal proof artifact (Lean &#x2f; Coq &#x2f; Agda &#x2f; Isabelle) but are not shipped count as unsupported. Theorem 40&#x27;s rank formula, Proposition 43&#x27;s induction over polyfree length, Lemma 47&#x27;s spectral sequence collapse, and Proposition 48&#x27;s Euler-characteristic product are all small enough and self-contained enough to formalize. No such artifact is provided in the paper or its references; the proofs rely on &#x27;easy exercise&#x27; and &#x27;routine check&#x27; language at several inductive steps (e.g., the rank-of-factors computation in Theorem 40&#x27;s proof is left to the reader).</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Provide a formal-proof companion repository, e.g., src&#x2f;proofs&#x2f;Polyfree.lean containing the inductive definition of polyfree groups together with mechanized proofs of (i) the rank formula in Theorem 40 (parameterized by orientable&#x2f;non-orientable surface type to resolve the ambiguity flagged in C5), (ii) Proposition 43(a) via an explicit LHS spectral-sequence collapse argument, and (iii) Proposition 48&#x27;s χ(G) = ∏(1 − d_k) identity. At minimum, supply experiments&#x2f;euler_char&#x2f;check.py that numerically verifies the Euler-characteristic formula for PB_k(M − Q_m) against direct CW-complex computation for small (g, m, k).</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm `Across Sections &#x27;Configuration spaces&#x27;, &#x27;Polyfree groups&#x27;` is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+        </div>
+        <h3>Questions</h3>
+        <ul>
+          <li>Does Theorem 40&#x27;s rank formula apply to non-orientable surfaces? If so, what is the correct rank for a non-orientable closed surface of genus g (where χ = 2 − g), and should the statement split into orientable and non-orientable cases?</li><li>What is the current publication status of [CS] (Cohen-Sato, &#x27;in preparation&#x27;) and [CG] (Cohen-Gitler, &#x27;submitted to Memoirs of the AMS&#x27;)? Can the relevant results be attributed to published or otherwise publicly accessible versions?</li><li>Can complete bibliographic data (title, journal, volume, year, pages) be provided for BM (Bergau-Mennicke), BH (Birman-Hilden), Smale, and Xia, or should these citation keys be removed if the associated works are no longer cited?</li><li>Would the authors consider providing a formal proof companion (e.g., a Lean or Coq file verifying the polyfree induction and Euler-characteristic product) or at minimum a numerical check script validating χ(PB_k(M − Q_m)) = ∏(1 − d_i) against direct CW-complex computation for small (g, m, k)?</li><li>Could a theorem dependency graph or explicit proof-sketch map be added to help readers trace which lemmas are load-bearing for the K(π,1) result (Theorem 7), the polyfree theorem (Theorem 40), and the Euler-characteristic formula (Proposition 48)?</li>
+        </ul>
+      </details>
+      
+      <details>
+        <summary>
+          novelty — <span class="muted">gemini-3-flash-preview</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;confidence&quot;: 0.95,
+  &quot;missing_prior_art&quot;: [],
+  &quot;novelty_score&quot;: 0.7,
+  &quot;related_work&quot;: [
+    {
+      &quot;citation_key&quot;: &quot;FN&quot;,
+      &quot;delta&quot;: &quot;While Fadell and Neuwirth established the fundamental fibrations for configuration spaces of manifolds, this work extends the analysis to surfaces like the 2-sphere and real projective plane using Borel constructions to recover Eilenberg-MacLane spaces where the standard configuration spaces fail to be K(pi,1)s.&quot;,
+      &quot;relation&quot;: &quot;builds_on&quot;,
+      &quot;title&quot;: &quot;Configuration spaces&quot;
+    },
+    {
+      &quot;citation_key&quot;: &quot;X&quot;,
+      &quot;delta&quot;: &quot;The authors utilize and extend Xicoténcatl&#x27;s orbit configuration spaces to analyze the configuration space of the real projective plane, providing a K(pi,1) model via the Borel construction of the orbit configuration space of the sphere under the antipodal action.&quot;,
+      &quot;relation&quot;: &quot;builds_on&quot;,
+      &quot;title&quot;: &quot;Orbit configuration spaces, infinitesimal braid relations, and equivariant function spaces&quot;
+    },
+    {
+      &quot;citation_key&quot;: &quot;EE&quot;,
+      &quot;delta&quot;: &quot;Building on the Earle-Eells fiber bundle description of Teichmüller theory for surfaces, this paper provides explicit Borel construction models for the mapping class groups of genus 1 and 2 surfaces, linking them directly to configuration spaces.&quot;,
+      &quot;relation&quot;: &quot;builds_on&quot;,
+      &quot;title&quot;: &quot;A fibre bundle description of Teichmüller theory&quot;
+    },
+    {
+      &quot;citation_key&quot;: &quot;FR&quot;,
+      &quot;delta&quot;: &quot;Extends the Falk-Randell analysis of the descending central series of fiber-type arrangements to the Lie algebras associated with pure braid groups and orbit configuration spaces of surfaces.&quot;,
+      &quot;relation&quot;: &quot;builds_on&quot;,
+      &quot;title&quot;: &quot;The lower central series of a fiber-type arrangement&quot;
+    }
+  ],
+  &quot;verdict&quot;: &quot;significant&quot;
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          reproducibility — <span class="muted">gpt-5.5</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;code_availability&quot;: &quot;unspecified&quot;,
+  &quot;code_url&quot;: null,
+  &quot;concerns&quot;: [
+    {
+      &quot;area&quot;: &quot;code&quot;,
+      &quot;description&quot;: &quot;No open repository, commit, release, license, or formal proof artifact is provided for the main mathematical results; a reproducibility package such as proofs&#x2f;configuration_spaces_and_braid_groups&#x2f;README.md plus machine-checkable Lean or Coq files would be needed to independently check the claimed K(pi,1), braid group, and mapping class group statements.&quot;,
+      &quot;severity&quot;: &quot;critical&quot;
+    },
+    {
+      &quot;area&quot;: &quot;other&quot;,
+      &quot;description&quot;: &quot;The load-bearing K(pi,1) results for configuration spaces and Borel constructions are presented as conventional prose proofs rather than machine-checkable artifacts; files such as proofs&#x2f;configuration_spaces&#x2f;kpi1.lean and proofs&#x2f;configuration_spaces&#x2f;borel_kpi1.lean would close this gap.&quot;,
+      &quot;severity&quot;: &quot;critical&quot;
+    },
+    {
+      &quot;area&quot;: &quot;other&quot;,
+      &quot;description&quot;: &quot;The homological and Lie-algebra calculations, including loop-space homology, primitives, and Euler-Poincare series claims, are not accompanied by executable algebraic verification or formalized derivations; artifacts such as proofs&#x2f;homology&#x2f;loop_space_lie_algebra.lean or scripts&#x2f;check_lie_relations.sage would be needed for reproducible checking.&quot;,
+      &quot;severity&quot;: &quot;major&quot;
+    },
+    {
+      &quot;area&quot;: &quot;other&quot;,
+      &quot;description&quot;: &quot;Several referenced results are cited to unpublished, submitted, thesis, or in-preparation works, making independent reconstruction of dependencies difficult without additional source documents or formal dependency files.&quot;,
+      &quot;severity&quot;: &quot;major&quot;
+    },
+    {
+      &quot;area&quot;: &quot;evaluation&quot;,
+      &quot;description&quot;: &quot;The paper does not provide a checklist, theorem dependency graph, or explicit mapping from headline claims to proof artifacts, so a reproducer cannot systematically verify which lemmas support each main result.&quot;,
+      &quot;severity&quot;: &quot;minor&quot;
+    }
+  ],
+  &quot;confidence&quot;: 0.86,
+  &quot;data_availability&quot;: &quot;unspecified&quot;,
+  &quot;data_url&quot;: null,
+  &quot;environment&quot;: null,
+  &quot;reproducibility_score&quot;: 0.22
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          summary — <span class="muted">claude-haiku-4-5-20251001</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;audience&quot;: &quot;Algebraic topologists, geometric group theorists, and graduate students studying configuration spaces, braid groups, mapping class groups, or discrete group cohomology&quot;,
+  &quot;key_contributions&quot;: [
+    &quot;Establishes that configuration spaces on surfaces (except the 2-sphere and real projective plane) are K(π,1) spaces whose homotopy type is determined by their fundamental group&quot;,
+    &quot;Develops function space interpretation of configuration spaces and their loop spaces using the Dold-Thom theorem&quot;,
+    &quot;Proves that pure braid groups on surfaces are polyfree, meaning they have a hierarchical structure as extensions of free groups&quot;,
+    &quot;Derives explicit formulas for the Euler characteristic of braid groups in terms of the ranks of free groups in their composition series&quot;,
+    &quot;Computes detailed cohomological invariants for configuration spaces on surfaces of genus 0, 1, and 2 with various marked points&quot;,
+    &quot;Connects configuration space theory to mapping class group cohomology and provides computational methods for determining torsion in cohomology groups&quot;
+  ],
+  &quot;plain_language_summary&quot;: &quot;This work studies configuration spaces—spaces consisting of k distinct points on a surface—and their fundamental groups, called braid groups. The main result is that for most surfaces, these configuration spaces have a special property: their entire topological shape is determined by their fundamental group. The notes systematically compute the algebraic invariants (cohomology) of configuration spaces and related braid and mapping class groups for surfaces of different topological types. A concrete example is analyzing how k particles can move on a punctured torus while remaining distinct, and describing the symmetries of these motions using group theory. The work uses function space methods (relating configuration spaces to loop spaces) to make these calculations tractable and provides explicit formulas for the Euler characteristic of braid groups.&quot;,
+  &quot;tldr&quot;: &quot;These notes develop the theory of configuration spaces and braid groups, establishing their topological structure through K(π,1) spaces and computing their cohomology.&quot;
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          technical_correctness — <span class="muted">claude-opus-4-7</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;claims&quot;: [
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;Theorem 5 (Fadell-Neuwirth): For a boundaryless manifold M and k ≥ m ≥ 1, the projection π_{k,m}: F(M,k) → F(M,m) is a fibration with fiber F(M − Q_m, k − m).&quot;,
+      &quot;evidence&quot;: &quot;This is the classical Fadell-Neuwirth fibration theorem. The paper states the result and cites it as a tool for downstream proofs (Theorems 7, 40 and Lemma 8). It is well-established in the algebraic topology literature.&quot;,
+      &quot;id&quot;: &quot;C1&quot;,
+      &quot;location&quot;: &quot;Section &#x27;Configuration spaces&#x27;, Theorem 5 (thm: fib)&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: &quot;Add an explicit bibliographic citation to Fadell and Neuwirth (1962), &#x27;Configuration spaces&#x27;, Math. Scand. 10, at the statement of Theorem 5 instead of relying on the attribution alone.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;Theorem 7: For M equal to R^2 or a closed 2-manifold of genus ≥ 1 (not necessarily orientable), F(M − Q_m, k) is a K(π,1)-space for all k ≥ 1, m ≥ 0.&quot;,
+      &quot;evidence&quot;: &quot;Induction on k is clean: base case uses that M − Q_m is either a K(π,1) surface (m=0, genus ≥ 1, or M=R^2 which is contractible) or homotopy equivalent to a wedge of circles (m ≥ 1). Inductive step applies the Fadell-Neuwirth fibration and the long exact sequence of homotopy groups, which forces π_i(total) = 0 for i ≥ 2 when both base and fiber are K(π,1). The argument is standard and correct.&quot;,
+      &quot;id&quot;: &quot;C2&quot;,
+      &quot;location&quot;: &quot;Section &#x27;Configuration spaces&#x27;, Theorem 7 (thm: Kpi1)&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;Lemma 8: If M is a connected boundaryless manifold that remains connected after puncturing at k−1 points, then F(M,k) is path connected; in particular every configuration space of a connected manifold of dimension ≥ 2 is path connected.&quot;,
+      &quot;evidence&quot;: &quot;Induction via Fadell-Neuwirth fibration: base k=1 is hypothesis; inductive step uses that base F(M,1)=M and fiber F(M − Q_1, k−1) are path connected, so total space is also path connected from the fibration. Standard topology argument; the connectedness-after-puncturing hypothesis is exactly what is needed to keep the induction going.&quot;,
+      &quot;id&quot;: &quot;C3&quot;,
+      &quot;location&quot;: &quot;Section &#x27;Configuration spaces&#x27;, Lemma 8&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;Correspondence between elements of π_1(F(X,k)) and equivalence classes of pure k-stranded braids in X, and between π_1(SF(X,k)) and k-stranded braids modulo permutation, fitting into the short exact sequence 1 → PB_k(X) → B_k(X) → Σ_k → 1.&quot;,
+      &quot;evidence&quot;: &quot;The graphical construction of f_i(t)=(θ_i(t),t) from a loop θ in F(X,k) gives an explicit bijection with pure braids, and the homotopy classes biject with π_1. The short exact sequence is the standard covering-space exact sequence for the free Σ_k-action on F(X,k). The argument is correct but the proofs of bijectivity and group-isomorphism are left as &#x27;routine exercise&#x27;.&quot;,
+      &quot;id&quot;: &quot;C4&quot;,
+      &quot;location&quot;: &quot;Section &#x27;Braid groups&#x27;, Definitions 9-13 and surrounding text&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: &quot;For self-containedness, spell out (or cite) the verification that the loop-to-braid map respects composition and inversion; e.g., reference Birman, &#x27;Braids, Links, and Mapping Class Groups&#x27;, §1.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;Theorem 40: For M = R^2 or a closed 2-manifold of genus g ≥ 1, the pure braid group PB_k(M − Q_m) is polyfree with a polyfree series of length k whose i-th factor has rank 2g + m − 1 − i + k (using the convention g = 1&#x2f;2 for M = R^2).&quot;,
+      &quot;evidence&quot;: &quot;The induction is correct in form: the Fadell-Neuwirth fibration F(M − Q_{m+k−1},1) → F(M − Q_m, k) → F(M − Q_m, k−1) gives the short exact sequence 1 → F_{2g+m−2+k} → PB_k(M − Q_m) → PB_{k−1}(M − Q_m) → 1, and the rank of the fiber free group matches 1 − χ(M − Q_{m+k−1}) for an orientable closed surface of genus g, namely 2g + m + k − 2. However, the statement says &#x27;genus g ≥ 1&#x27; without specifying orientability, while Theorem 7 explicitly says &#x27;not necessarily orientable&#x27;. The rank formula 2g + m − 1 uses the orientable Euler-characteristic convention χ = 2 − 2g; for non-orientable surfaces of genus g (Euler characteristic 2 − g), the correct rank is g + m − 1, so the stated exponents are wrong unless &#x27;genus&#x27; here means orientable genus only.&quot;,
+      &quot;id&quot;: &quot;C5&quot;,
+      &quot;location&quot;: &quot;Section &#x27;Polyfree groups&#x27;, Theorem 40 (thm: motpoly)&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Either restrict the statement to orientable surfaces (i.e., say &#x27;closed orientable 2-manifold of genus g ≥ 1&#x27;), or split into orientable&#x2f;non-orientable cases with corresponding rank formulas g + m − 1 versus 2g + m − 1. Also explicitly state the convention g = 1&#x2f;2 for R^2 is a formal device rather than a genus.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;Remark 41: For k ≥ 2, F(R^2, k) ≅ R^2 × F(R^2 − Q_1, k − 1), and consequently PB_k(R^2) ≅ PB_{k−1}(R^2 − Q_1), so the pure Artin braid group is polyfree with a polyfree series of length k − 1.&quot;,
+      &quot;evidence&quot;: &quot;Follows because the Fadell-Neuwirth fibration F(R^2−Q_1, k−1) → F(R^2, k) → F(R^2, 1) = R^2 has contractible base and admits an explicit section (e.g., translate so that the first point lies at the origin), giving a homeomorphism F(R^2, k) ≅ R^2 × F(R^2 − Q_1, k − 1). The fundamental-group identity follows immediately. Classical result (Fadell-Neuwirth 1962).&quot;,
+      &quot;id&quot;: &quot;C6&quot;,
+      &quot;location&quot;: &quot;Section &#x27;Polyfree groups&#x27;, Remark 41&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;Proposition 43: A polyfree group G with polyfree series of length n has (a) cd(G) ≤ n and is torsion-free, (b) is of type FL, (c) is finitely presented, and (d) has trivial center if every exponent d_k ≥ 2.&quot;,
+      &quot;evidence&quot;: &quot;(a) follows from the LHS spectral sequence E_2^{p,q} = H^p(F_{d_n}; H^q(G_{n−1}; M)) being concentrated in p ≤ 1, q ≤ n − 1 by the inductive hypothesis cd(G_{n−1}) ≤ n − 1 and cd(F_{d_n}) ≤ 1, with no possible nontrivial differentials. Torsion-freeness then follows from Proposition 23. (b) and (c) follow from the closure of FL and finitely presented under extensions (P. Hall&#x27;s theorem 42 plus Proposition 33). (d) is a straightforward push-pull argument using triviality of centers of nonabelian free groups. All steps are correct.&quot;,
+      &quot;id&quot;: &quot;C7&quot;,
+      &quot;location&quot;: &quot;Section &#x27;Polyfree groups&#x27;, Proposition 43 (prop: baspoly)&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;Lemma 47: For a polyfree group G with series of length n, there exists a finite-index subgroup T containing G_1 with H^n(T; F_2) ≠ 0, and χ(T) = χ(G_1) χ(T&#x2f;G_1); consequently χ(G) = χ(G_1) χ(G&#x2f;G_1).&quot;,
+      &quot;evidence&quot;: &quot;The construction of T as the preimage in G of a finite-index T&#x2f;G_1 of K&#x2f;G_1 (where K kills the conjugation action on H^1(G_1; F_2)) is correct, and on T the LHS-spectral sequence E_2 page tensor-splits into H^*(T&#x2f;G_1; F_2) ⊗ H^*(G_1; F_2) because the F_2 coefficients are trivialized. The E_2^{n-1,1} entry survives because there is no room for differentials (cd(T&#x2f;G_1) ≤ n−1 and cd(G_1)=1), so it equals E_∞^{n-1,1} and contributes nontrivially to H^n(T; F_2). The Euler characteristic claim χ(T) = χ(G_1) χ(T&#x2f;G_1) is invoked as &#x27;the Euler characteristic remains constant on each page of the LHS-spectral sequence&#x27;; this is valid PROVIDED H^*(T; F_2) is finitely generated in each degree and vanishes above degree n, which follows from G being FL (Proposition 43(b)), but the reader has to supply this connection. Mild concern: the lemma is stated for general polyfree G but the FL&#x2f;FP_∞ hypotheses needed for finiteness of Euler characteristics are not re-cited at the point of use.&quot;,
+      &quot;id&quot;: &quot;C8&quot;,
+      &quot;location&quot;: &quot;Section &#x27;Polyfree groups&#x27;, Lemma 47 (lem: lowbound)&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Insert a parenthetical citation to Proposition 43 at the Euler-characteristic step of the proof, noting that χ(T) is well-defined because T ≤ G is finite-index in a polyfree (hence FL) group; and explicitly state that the F_2-coefficient cohomology vanishing for *&gt;n is needed for the spectral sequence Euler characteristic argument to terminate.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;Proposition 48: For a polyfree group G with polyfree series of length n and exponents d_k, cd(G) = n, every polyfree series of G has length n, and χ(G) = ∏_{k=1}^n (1 − d_k).&quot;,
+      &quot;evidence&quot;: &quot;The upper bound cd(G) ≤ n is Proposition 43(a). The lower bound cd(G) ≥ n follows from Lemma 47 (existence of finite-index T with H^n(T; F_2) ≠ 0, plus Theorem 26 which says cd is invariant under finite-index for torsion-free groups). Together these give cd(G) = n, and since the upper bound depends only on the existence of some polyfree series of length n, every polyfree series for G has length n. The Euler-characteristic product formula follows from iterating the multiplicativity statement of Lemma 47 and χ(F_{d_k}) = 1 − d_k. Standard, correct.&quot;,
+      &quot;id&quot;: &quot;C9&quot;,
+      &quot;location&quot;: &quot;Section &#x27;Polyfree groups&#x27;, Proposition 48&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;Cohomology calculation: H^k(Z&#x2f;n; Z) is Z&#x2f;n for k &gt; 0 and even, Z for k = 0, and 0 otherwise.&quot;,
+      &quot;evidence&quot;: &quot;Classical result, derivable from the periodic resolution of Z over Z[Z&#x2f;n] or the topological model BZ&#x2f;n = S^∞&#x2f;(Z&#x2f;n) (an infinite Lens space) presented in the paper. Standard.&quot;,
+      &quot;id&quot;: &quot;C10&quot;,
+      &quot;location&quot;: &quot;Section &#x27;Cohomology of groups: Examples&#x27;, part (a)&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;Stallings-Swan theorem: cd(G) ≤ 1 iff G is a free group, invoked as the converse to &#x27;free groups have cd = 1&#x27;.&quot;,
+      &quot;evidence&quot;: &quot;Stated without proof but attributed; this is the classical Stallings (1968) - Swan (1969) theorem and is correct. Used only for motivation in this survey.&quot;,
+      &quot;id&quot;: &quot;C11&quot;,
+      &quot;location&quot;: &quot;Section &#x27;Cohomology of groups: Cohomological dimension&#x27;&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: &quot;Add explicit citations: Stallings, &#x27;On torsion-free groups with infinitely many ends&#x27;, Ann. Math. 88 (1968); Swan, &#x27;Groups of cohomological dimension one&#x27;, J. Algebra 12 (1969).&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;unsupported&quot;,
+      &quot;claim&quot;: &quot;Implicit Proof-as-Code obligation: the paper lies in a code-amenable field (math.AT) and makes several load-bearing inductive&#x2f;cohomological claims (Theorems 7, 40, Propositions 43, 48, Lemma 47) whose proofs are sketched but ship no formalized verification artifact.&quot;,
+      &quot;evidence&quot;: &quot;Per the Proof-as-Code axiom for math.* fields, load-bearing claims that could be discharged by a formal proof artifact (Lean &#x2f; Coq &#x2f; Agda &#x2f; Isabelle) but are not shipped count as unsupported. Theorem 40&#x27;s rank formula, Proposition 43&#x27;s induction over polyfree length, Lemma 47&#x27;s spectral sequence collapse, and Proposition 48&#x27;s Euler-characteristic product are all small enough and self-contained enough to formalize. No such artifact is provided in the paper or its references; the proofs rely on &#x27;easy exercise&#x27; and &#x27;routine check&#x27; language at several inductive steps (e.g., the rank-of-factors computation in Theorem 40&#x27;s proof is left to the reader).&quot;,
+      &quot;id&quot;: &quot;C12&quot;,
+      &quot;location&quot;: &quot;Across Sections &#x27;Configuration spaces&#x27;, &#x27;Polyfree groups&#x27;&quot;,
+      &quot;severity&quot;: &quot;major&quot;,
+      &quot;suggested_fix&quot;: &quot;Provide a formal-proof companion repository, e.g., src&#x2f;proofs&#x2f;Polyfree.lean containing the inductive definition of polyfree groups together with mechanized proofs of (i) the rank formula in Theorem 40 (parameterized by orientable&#x2f;non-orientable surface type to resolve the ambiguity flagged in C5), (ii) Proposition 43(a) via an explicit LHS spectral-sequence collapse argument, and (iii) Proposition 48&#x27;s χ(G) = ∏(1 − d_k) identity. At minimum, supply experiments&#x2f;euler_char&#x2f;check.py that numerically verifies the Euler-characteristic formula for PB_k(M − Q_m) against direct CW-complex computation for small (g, m, k).&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;Bibliography contains placeholder &#x2f; incomplete entries (e.g., &#x27;BM: Bergau, and Mennicke&#x27;, &#x27;BH: Birman, and H. Hilden,&#x27; with no title, journal, or year), affecting verifiability of any claim that depends on these references.&quot;,
+      &quot;evidence&quot;: &quot;Inspecting the bibliography reveals several entries with only an author list and no work cited; this is a meta-issue but it directly impacts the ability of a reader to verify load-bearing claims attributed to these references.&quot;,
+      &quot;id&quot;: &quot;C13&quot;,
+      &quot;location&quot;: &quot;Bibliography&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Complete each truncated bibliography entry with full title, journal&#x2f;series, volume, year, and page numbers; or remove the citation key if no longer used.&quot;
+    }
+  ],
+  &quot;confidence&quot;: 0.72,
+  &quot;overall_correctness&quot;: &quot;mostly_sound&quot;
+}</pre>
+      </details>
+      
+    </div>
+  </section>
+
+  <!-- corrections rendered from corrections table; empty on first publish -->
+  <section>
+    <h2>Corrections</h2>
+    <p class="muted">No corrections have been recorded.</p>
+  </section>
+
+  <section>
+    <h2>Bibliography</h2>
+    
+    <ol>
+      
+        <li>
+          Bred: {Bredon,} Topology and Geometry, Springer Verlag GTM 139, New York-Heidelberg-Berlin, 1993.
+          
+          
+        </li>
+      
+        <li>
+          Brown: {K. S. Brown,} Cohomology of Groups, Springer Verlag GTM 87, New York-Heidelberg-Berlin, 1994.
+          
+          
+        </li>
+      
+        <li>
+          BM: {Bergau, and Mennicke}
+          
+          
+        </li>
+      
+        <li>
+          BH: {Birman, and H. Hilden,}
+          
+          
+        </li>
+      
+        <li>
+          C1: {F. R. Cohen,} On the hyperelliptic mapping class groups, $SO(3)$, and Spin$^c(3)$, American J. Math., {\bf 115} (1993), 389--434.
+          
+          
+        </li>
+      
+        <li>
+          C2: {F.R. Cohen,} On configuration spaces, their homology, and Lie Algebras, Journal of Pure and Applied Algebra {\bf 100} (1995), 19-42.
+          
+          
+        </li>
+      
+        <li>
+          CG: {F.R. Cohen, S. Gitler,} (i) {On loop spaces of configuration spaces}, submitted to the Memoirs of the AMS, and (ii) {Loop spaces of configuration spaces, braid-like groups, and knots}, to appear in the Proceedings of the 1998 Barcelona Conference on Algebraic Topology.
+          
+          
+        </li>
+      
+        <li>
+          CLM: {F.R. Cohen, T.J. Lada and J.P. May,} The homology of iterated loop spaces, Lecture Notes in Math., vol. {\bf 533}, Springer-Verlag (1976).
+          
+          
+        </li>
+      
+        <li>
+          CS: {F.R. Cohen, T. Sato,} in preparation.
+          
+          
+        </li>
+      
+        <li>
+          CX: {F.R. Cohen, M. Xicot\&#x27;encatl,} submitted.
+          
+          
+        </li>
+      
+        <li>
+          DC: {D. C. Cohen,} Monodromy of fibre-type arrangements and orbit configuration spaces, to appear in Forum Mathematicum.
+          
+          
+        </li>
+      
+        <li>
+          Dan: {D. C. Cohen, Alexander I. Suciu,} Homology of iterated semidirect products of free groups, J. Pure Appl. Algebra $\bf{126}$ (1998), pg 87-120.
+          
+          
+        </li>
+      
+        <li>
+          EE: {C. Earle, and J. Eells,} A fibre bundle description of Teichm\&quot;uller theory, J. Differential Geometry {\bf 3}(1969), 19-43.
+          
+          
+        </li>
+      
+        <li>
+          FH1: {E. Fadell and S. Husseini,} The space of loops on configuration spaces and the Majer-Terracini index, Topol. Methods in Nonlinear Anal., Journal of the Julius Schauder Center, {\bf 11} (1998), 249--271.
+          
+          
+        </li>
+      
+        <li>
+          FH2: {E. Fadell and S. Husseini,} Geometry and Topology of Configuration Spaces, in preparation.
+          
+          
+        </li>
+      
+        <li>
+          FN: {E. Fadell and L. Neuwirth,} Configuration spaces, Math. Scand. {\bf 10} (1962), 119-126.
+          
+          
+        </li>
+      
+        <li>
+          FR: {M. Falk, and R. Randell,} The lower central series of a fiber-type arrangement, Invent. Math. {\bf 82} (1985), 77-88.
+          
+          
+        </li>
+      
+        <li>
+          GP: {V. Guillemin, and A. Pollack,} Differential Topology, Prentice-Hall, 1974.
+          
+          
+        </li>
+      
+        <li>
+          H: {R. Hain,} Infinitesimal presentations of the Torelli group, J. Amer. Math. Soc. {\bf 10} (1997),597-691.
+          
+          
+        </li>
+      
+        <li>
+          K1: {T. Kohno,} Linear represenations of braid groups and classical Yang-Baxter equations, Cont. Math. {\bf 78} (1988), 339-363.
+          
+          
+        </li>
+      
+        <li>
+          K2: {T. Kohno,} Vassiliev invariants and de Rham complex on the space of knots, Cont. Math. {\bf 179} (1994), 123-138.
+          
+          
+        </li>
+      
+        <li>
+          K3: {T. Kohno,} Elliptic KZ system, braid groups of the torus and Vassiliev invariants, Topology and its Applications, {\bf 78} (1997), 79-94.
+          
+          
+        </li>
+      
+        <li>
+          KO: {T. Kohno, and T. Oda,} The lower central series of the pure braid group of an algebraic curve, Advanced Studies in Pure Mathematics, Galois Represntations and Arithmetic Algebraic Geometry {\bf 12} (1987), 201-219.
+          
+          
+        </li>
+      
+        <li>
+          MM: {J. W. Milnor, and J.C. Moore,} On the structure of Hopf algebras, Ann. of Math. {\bf 81} (1965), 211-264.
+          
+          
+        </li>
+      
+        <li>
+          Robin: {Derek J.S. Robinson,} A Course in the Theory of Groups, Springer Verlag GTM 80, New York-Heidelberg-Berlin, 1995.
+          
+          
+        </li>
+      
+        <li>
+          S: {N. E. Steenrod,} The Topology of Fibre Bundles, Princeton University Press.
+          
+          
+        </li>
+      
+        <li>
+          Sa: {T. Sato,} On free groups and morphisms of coalgebras, student topology seminar, Univ. of Roch., Spring 1998, preprint.
+          
+          
+        </li>
+      
+        <li>
+          Smale: {S. Smale,} P.A.M.S.
+          
+          
+        </li>
+      
+        <li>
+          Span: {Edwin H. Spanier,} Algebraic Topology, Springer Verlag, New York-Heidelberg-Berlin, 1966.
+          
+          
+        </li>
+      
+        <li>
+          White: {Whitehead,} Elements of Homotopy Theory, Springer Verlag GTM 61, New York-Heidelberg-Berlin, .
+          
+          
+        </li>
+      
+        <li>
+          W: {S. Willerton,} thesis.
+          
+          
+        </li>
+      
+        <li>
+          X: {M. Xicot\&#x27;encatl,} Orbit configuration spaces, infinitesimal braid relations, and equivariant function spaces, Ph.D. thesis, University of Rochester, Spring 1997.
+          
+          
+        </li>
+      
+        <li>
+          Xia: {Yining Xia,}
+          
+          
+        </li>
+      
+    </ol>
+    
+  </section>
+
+  <footer class="footer-disclaimer">
+    <p class="muted">Rendered by <span class="brand">GrokRxiv</span>. Source: <a href="https://arxiv.org/abs/2606.17193">arXiv:2606.17193</a>.</p>
+  </footer>
+</body>
+</html>
