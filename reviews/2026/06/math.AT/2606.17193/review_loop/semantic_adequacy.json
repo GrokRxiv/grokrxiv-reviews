@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0.0",
+  "source": "review_loop/semantic_ir.json",
+  "status": "fail",
+  "theorem_map": "review_loop/lean/theorem_map.json",
+  "verdicts": [
+    {
+      "claim_id": "thm: fib",
+      "emitted_statement": "",
+      "lean_declaration": null,
+      "proof_status": "FAILED",
+      "statement": "Fadell–Neuwirth fibration theorem: if M is a manifold without boundary (not necessarily compact) and k >= m >= 1, then the projection map pi_{k,m} (from the configuration space of k points in M to the configuration space of m points in M) is a fibration with fiber F(M - Q_m, k-m).",
+      "theorem_id": "theorem_thm_fib",
+      "verdict": "OVERCLAIMED",
+      "verified_statement": ""
+    },
+    {
+      "claim_id": "thm: cdfinindex",
+      "emitted_statement": "",
+      "lean_declaration": null,
+      "proof_status": "FAILED",
+      "statement": "If G is a torsion-free group and H is a subgroup of finite index, then the cohomological dimension of G equals the cohomological dimension of H, i.e. cd(G) = cd(H).",
+      "theorem_id": "theorem_thm_cdfinindex",
+      "verdict": "OVERCLAIMED",
+      "verified_statement": ""
+    },
+    {
+      "claim_id": "thm: Hall",
+      "emitted_statement": "theorem thm_Hall (N : Group) (G : Group) (Q : Group) : FinitelyPresented G := by",
+      "lean_declaration": "thm_Hall",
+      "proof_status": "TYPE_ERROR",
+      "statement": "P. Hall's theorem: if 1 -> N -> G -> Q -> 1 is a short exact sequence of groups with N and Q finitely presented, then G is finitely presented.",
+      "theorem_id": "theorem_thm_Hall",
+      "verdict": "OVERCLAIMED",
+      "verified_statement": "theorem thm_Hall (N : Group) (G : Group) (Q : Group) : FinitelyPresented G := by"
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "schema_version": "1.0.0",
+  "source": "review_loop/proof_obligations.json",
+  "targets": [
+    {
+      "lean_declaration": "thm_Hall",
+      "lean_skeleton": "namespace GrokRxiv\n\ntheorem thm_Hall (N : Group) (G : Group) (Q : Group) : FinitelyPresented G := by\n  sorry\n\nend GrokRxiv\n",
+      "lean_statement": "theorem thm_Hall (N : Group) (G : Group) (Q : Group) : FinitelyPresented G := by",
+      "obligation_id": "formalize_theorem_thm_Hall",
+      "semantic_category": "plain_theorem",
+      "source_claim_id": "thm: Hall",
+      "source_span": {
+        "artifact": "theorem_graph.json",
+        "claim_id": "thm: Hall",
+        "paper_source_id": "thm: Hall",
+        "section_id": "Finite presentability of groups",
+        "text_excerpt": "P. Hall's theorem: if 1 -> N -> G -> Q -> 1 is a short exact sequence of groups with N and Q finitely presented, then G is finitely presented."
+      },
+      "statement": "P. Hall's theorem: if 1 -> N -> G -> Q -> 1 is a short exact sequence of groups with N and Q finitely presented, then G is finitely presented.",
+      "theorem_ir": {
+        "assumptions": [
+          {
+            "args": [
+              {
+                "kind": "var",
+                "name": "N"
+              },
+              {
+                "kind": "var",
+                "name": "G"
+              },
+              {
+                "kind": "var",
+                "name": "Q"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "ShortExactSequence"
+          },
+          {
+            "args": [
+              {
+                "kind": "var",
+                "name": "N"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "FinitelyPresented"
+          },
+          {
+            "args": [
+              {
+                "kind": "var",
+                "name": "Q"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "FinitelyPresented"
+          }
+        ],
+        "binders": [
+          {
+            "name": "N",
+            "type": {
+              "kind": "custom",
+              "name": "Group"
+            }
+          },
+          {
+            "name": "G",
+            "type": {
+              "kind": "custom",
+              "name": "Group"
+            }
+          },
+          {
+            "name": "Q",
+            "type": {
+              "kind": "custom",
+              "name": "Group"
+            }
+          }
+        ],
+        "conclusion": {
+          "args": [
+            {
+              "kind": "var",
+              "name": "G"
+            }
+          ],
+          "kind": "uninterpreted_predicate",
+          "name": "FinitelyPresented"
+        },
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "thm: Hall",
+          "paper_source_id": "thm: Hall",
+          "section_id": "Finite presentability of groups",
+          "text_excerpt": "P. Hall's theorem: if 1 -> N -> G -> Q -> 1 is a short exact sequence of groups with N and Q finitely presented, then G is finitely presented."
+        },
+        "theorem_name": "hall_finitely_presented_extension"
+      }
+    }
+  ]
+}

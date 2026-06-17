@@ -1,0 +1,840 @@
+{
+  "agent_output_audits": {
+    "lean": {
+      "accepted": 2,
+      "by_role": {
+        "lean_code_fixer": {
+          "accepted": 0,
+          "rejected": 1,
+          "total": 1
+        },
+        "lean_code_reviewer": {
+          "accepted": 2,
+          "rejected": 0,
+          "total": 2
+        },
+        "lean_proof_author": {
+          "accepted": 0,
+          "rejected": 1,
+          "total": 1
+        }
+      },
+      "rejected": 2,
+      "total": 4
+    },
+    "pr": {
+      "accepted": 0,
+      "by_role": {},
+      "rejected": 0,
+      "total": 0
+    },
+    "pr_review": {
+      "accepted": 0,
+      "by_role": {},
+      "rejected": 0,
+      "total": 0
+    }
+  },
+  "artifact_paths": {
+    "agent_outputs": "review_loop/agent_outputs",
+    "bundle_completeness": "review_loop/bundle_completeness.json",
+    "citation_adjudication": "review_loop/citation_validation_adjudication.json",
+    "citation_validation": "review_loop/citation_validation_report.json",
+    "claims": "review_loop/claims.json",
+    "knowledge_graph": "review_loop/knowledge_graph.json",
+    "lean": "review_loop/lean/results.json",
+    "lean_harness": "review_loop/lean/harness.json",
+    "lean_targets": "review_loop/lean_targets.json",
+    "lean_theorem_map": "review_loop/lean/theorem_map.json",
+    "lean_verification_report": "review_loop/lean/verification_report.json",
+    "paper_math_sources": "review_loop/paper_math_sources.json",
+    "policy_gate": "review_loop/policy_gate.json",
+    "pr_fixes": "review_loop/pr_fixes.json",
+    "pr_harness": "review_loop/fixed/harness.json",
+    "proof_obligations": "review_loop/proof_obligations.json",
+    "semantic_adequacy": "review_loop/semantic_adequacy.json",
+    "semantic_ir": "review_loop/semantic_ir.json",
+    "semantic_model": "review_loop/semantic_model.json"
+  },
+  "blocking_issues": [],
+  "bundle_completeness": {
+    "artifacts": [
+      {
+        "artifact_path": "review_loop/claims.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/claims.json",
+        "manifest_output": "review_loop/claims.json",
+        "skip_reason": null,
+        "stage_id": "claim_extractor",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/paper_math_sources.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/paper_math_sources.json",
+        "manifest_output": "review_loop/paper_math_sources.json",
+        "skip_reason": null,
+        "stage_id": "paper_math_source_collector",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/knowledge_graph.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/knowledge_graph.json",
+        "manifest_output": "review_loop/knowledge_graph.json",
+        "skip_reason": null,
+        "stage_id": "knowledge_graph_builder",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/semantic_ir.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/semantic_ir.json",
+        "manifest_output": "review_loop/semantic_ir.json",
+        "skip_reason": null,
+        "stage_id": "semantic_category_mapper",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/semantic_model.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/semantic_model.json",
+        "manifest_output": "review_loop/semantic_model.json",
+        "skip_reason": null,
+        "stage_id": "semantic_category_mapper",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/proof_obligations.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/proof_obligations.json",
+        "manifest_output": "review_loop/proof_obligations.json",
+        "skip_reason": null,
+        "stage_id": "proof_obligation_generator",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean_targets.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/lean_targets.json",
+        "manifest_output": "review_loop/lean_targets.json",
+        "skip_reason": null,
+        "stage_id": "proof_obligation_generator",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean/GrokRxiv/Proofs.lean",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/lean/GrokRxiv/Proofs.lean",
+        "manifest_output": "review_loop/lean/GrokRxiv/Proofs.lean",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean/results.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/lean/results.json",
+        "manifest_output": "review_loop/lean/results.json",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean/fix_rounds.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/lean/fix_rounds.json",
+        "manifest_output": "review_loop/lean/fix_rounds.json",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean/theorem_map.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/lean/theorem_map.json",
+        "manifest_output": "review_loop/lean/theorem_map.json",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean/verification_report.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/lean/verification_report.json",
+        "manifest_output": "review_loop/lean/verification_report.json",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/faithfulness.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/faithfulness.json",
+        "manifest_output": "review_loop/faithfulness.json",
+        "skip_reason": null,
+        "stage_id": "lean_faithfulness_check",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/semantic_adequacy.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/semantic_adequacy.json",
+        "manifest_output": "review_loop/semantic_adequacy.json",
+        "skip_reason": null,
+        "stage_id": "semantic_adequacy_checker",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/citation_validation_report.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/citation_validation_report.json",
+        "manifest_output": "citation_validation_report.json",
+        "skip_reason": null,
+        "stage_id": "citation_validation",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/citation_validation_adjudication.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/citation_validation_adjudication.json",
+        "manifest_output": "citation_validation_adjudication.json",
+        "skip_reason": "citation-validation adjudication is not materialized separately by the current review-loop runtime; citation_validation_report.json carries the deterministic citation evidence.",
+        "stage_id": "citation_validation",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/pr_fixes.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/pr_fixes.json",
+        "manifest_output": "review_loop/pr_fixes.json",
+        "skip_reason": null,
+        "stage_id": "pr_fixer",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/fixed/review.md",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/fixed/review.md",
+        "manifest_output": "review_loop/fixed/review.md",
+        "skip_reason": null,
+        "stage_id": "pr_fixer",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/pr_review/results.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/pr_review/results.json",
+        "manifest_output": "review_loop/pr_review/results.json",
+        "skip_reason": null,
+        "stage_id": "pr_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/pr_review/fix_rounds.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/pr_review/fix_rounds.json",
+        "manifest_output": "review_loop/pr_review/fix_rounds.json",
+        "skip_reason": null,
+        "stage_id": "pr_review_fix_code",
+        "status": "present"
+      }
+    ],
+    "declared_artifact_count": 20,
+    "failures": [],
+    "missing_count": 0,
+    "present_count": 20,
+    "skipped_count": 0,
+    "status": "pass"
+  },
+  "dag_type": "review-loop",
+  "deterministic_status": "pass",
+  "fix_attempts": {
+    "lean": [
+      {
+        "agent_output_audits": [
+          {
+            "artifact_dir": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author",
+            "artifacts": {
+              "decision": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/decision.json",
+              "input": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/input.json",
+              "output": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/output.json",
+              "raw_stderr": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/raw_stderr.txt",
+              "raw_stdout": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/raw_stdout.txt",
+              "schema": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/schema.json",
+              "schema_validation": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/schema_validation.json",
+              "semantic_validation": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/semantic_validation.json",
+              "tool_validation": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/tool_validation.json"
+            },
+            "attempt": 1,
+            "decision": {
+              "reason": "Lean proof uses forbidden term sorry.",
+              "status": "rejected"
+            },
+            "latency_ms": 201785,
+            "model": "claude-opus-4-8",
+            "phase": "generate",
+            "role": "lean_proof_author",
+            "runner": "cli",
+            "schema_path": "schemas/review_loop_code_artifact.schema.json",
+            "schema_validation": {
+              "reason": "runner returned JSON already validated against role output schema",
+              "schema_path": "schemas/review_loop_code_artifact.schema.json",
+              "status": "pass"
+            },
+            "semantic_validation": {
+              "issues": [
+                "Lean proof uses forbidden term sorry.",
+                "Lean proof uses forbidden term admit.",
+                "Lean proof uses forbidden term axiom."
+              ],
+              "status": "fail"
+            },
+            "tokens_in": null,
+            "tokens_out": null,
+            "tool_validation": {
+              "command": [
+                "lake",
+                "env",
+                "lean",
+                "GrokRxiv/Proofs.lean"
+              ],
+              "duration_ms": 0,
+              "exit_code": null,
+              "status": "fail",
+              "stderr": "generated code contains forbidden terms: sorry, admit, axiom",
+              "stdout": ""
+            }
+          },
+          {
+            "artifact_dir": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_code_reviewer",
+            "artifacts": {
+              "decision": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_code_reviewer/decision.json",
+              "input": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_code_reviewer/input.json",
+              "output": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_code_reviewer/output.json",
+              "raw_stderr": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_code_reviewer/raw_stderr.txt",
+              "raw_stdout": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_code_reviewer/raw_stdout.txt",
+              "schema": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_code_reviewer/schema.json",
+              "schema_validation": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_code_reviewer/schema_validation.json",
+              "semantic_validation": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_code_reviewer/semantic_validation.json",
+              "tool_validation": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_code_reviewer/tool_validation.json"
+            },
+            "attempt": 1,
+            "decision": {
+              "reason": "reviewer output schema-valid with status=fail",
+              "status": "accepted"
+            },
+            "latency_ms": 47832,
+            "model": "gpt-5.5",
+            "phase": "review",
+            "role": "lean_code_reviewer",
+            "runner": "cli",
+            "schema_path": "schemas/review_loop_code_review.schema.json",
+            "schema_validation": {
+              "reason": "runner returned JSON already validated against role output schema",
+              "schema_path": "schemas/review_loop_code_review.schema.json",
+              "status": "pass"
+            },
+            "semantic_validation": {
+              "issues": [
+                "Lean proof uses forbidden term sorry.",
+                "Lean proof uses forbidden term admit.",
+                "Lean proof uses forbidden term axiom."
+              ],
+              "status": "fail"
+            },
+            "tokens_in": null,
+            "tokens_out": null,
+            "tool_validation": {
+              "command": [
+                "lake",
+                "env",
+                "lean",
+                "GrokRxiv/Proofs.lean"
+              ],
+              "duration_ms": 0,
+              "exit_code": null,
+              "status": "fail",
+              "stderr": "generated code contains forbidden terms: sorry, admit, axiom",
+              "stdout": ""
+            }
+          }
+        ],
+        "attempt": 1,
+        "author_role": "lean_proof_author",
+        "codex_review": {
+          "confidence": 0.98,
+          "issues": [
+            {
+              "line": 44,
+              "message": "The generated Lean artifact fails deterministic semantic validation because it contains forbidden tokens `sorry`, `admit`, and `axiom` in the theorem body comments; the compile stage reports: generated code contains forbidden terms: sorry, admit, axiom.",
+              "severity": "blocking"
+            },
+            {
+              "line": 49,
+              "message": "The theorem is not proved: after destructuring the finite-presentation hypotheses, the goal `FinitelyPresented G` is left open, so the artifact does not provide the required closed Lean proof.",
+              "severity": "blocking"
+            }
+          ],
+          "status": "fail",
+          "summary": "Fails review: the canonical compile result and semantic validation are failures, and the generated theorem body leaves Hall's theorem unproved."
+        },
+        "compile": {
+          "command": [
+            "lake",
+            "env",
+            "lean",
+            "GrokRxiv/Proofs.lean"
+          ],
+          "duration_ms": 0,
+          "exit_code": null,
+          "status": "fail",
+          "stderr": "generated code contains forbidden terms: sorry, admit, axiom",
+          "stdout": ""
+        },
+        "compile_timeout_secs": 1800,
+        "final_path": "/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/lean/targets/00_thm_Hall/GrokRxiv/Proofs.lean",
+        "generation": {
+          "code": "import Mathlib\n\nnamespace GrokRxiv\n\n/-- A group `G` is *finitely presented* when it is isomorphic to a group given by\nfinitely many generators (modelled by `Fin n`) subject to a finite set of relators.\nThe generated-and-related group is `PresentedGroup rels`, i.e. `FreeGroup (Fin n)`\nmodulo the normal closure of `rels`. -/\ndef FinitelyPresented (G : Type*) [Group G] : Prop :=\n  ∃ (n : ℕ) (rels : Set (FreeGroup (Fin n))),\n    rels.Finite ∧ Nonempty (G ≃* PresentedGroup rels)\n\n/-- A *short exact sequence of groups* `1 → N → G → Q → 1`: an injective homomorphism\n`N →* G`, a surjective homomorphism `G →* Q`, and exactness at the middle term, namely\nthe image of `N` equals the kernel of the projection to `Q`. -/\nstructure ShortExactSequence (N G Q : Type*) [Group N] [Group G] [Group Q] where\n  /-- inclusion of the kernel term `N` into `G` -/\n  inl : N →* G\n  /-- projection of `G` onto the quotient term `Q` -/\n  proj : G →* Q\n  /-- exactness at `N`: the inclusion is injective -/\n  inl_injective : Function.Injective inl\n  /-- exactness at `Q`: the projection is surjective -/\n  proj_surjective : Function.Surjective proj\n  /-- exactness at `G`: image of `N` equals kernel of the projection -/\n  exact_middle : inl.range = proj.ker\n\n/-- **P. Hall's theorem.** If `1 → N → G → Q → 1` is a short exact sequence of groups\nwith `N` and `Q` finitely presented, then `G` is finitely presented. -/\ntheorem thm_Hall {N G Q : Type*} [Group N] [Group G] [Group Q]\n    (seq : ShortExactSequence N G Q)\n    (hN : FinitelyPresented N) (hQ : FinitelyPresented Q) :\n    FinitelyPresented G := by\n  -- Standard proof (Reidemeister–Schreier / extension-presentation argument):\n  --   * take finite presentations ⟨Y | S⟩ of N and ⟨X | R⟩ of Q;\n  --   * lift each generator of X to G through a set-theoretic section of `seq.proj`;\n  --   * generate G by {lifted X} ∪ {seq.inl '' Y};\n  --   * relators: the relators S of N, each relator of R rewritten as a word in Y\n  --     (valid because R maps into N = ker proj), and conjugation relations\n  --     encoding the normality of N in G.\n  -- This yields a finite presentation of G. Formalizing the rewriting and the\n  -- normal-form argument is well beyond the machinery available here (Mathlib has no\n  -- finite-presentation-of-extensions result), so the goal is left GENUINELY OPEN.\n  -- Per the role instructions it is NOT discharged by `sorry`, `admit`, an `axiom`,\n  -- or a trivial strawman; consequently this file fails to compile (`unsolved goals`),\n  -- which honestly reflects the unmet proof obligation.\n  obtain ⟨nN, relsN, hN_fin, ⟨eN⟩⟩ := hN\n  obtain ⟨nQ, relsQ, hQ_fin, ⟨eQ⟩⟩ := hQ\n  -- Remaining goal: `FinitelyPresented G` — honestly unproven.\n\nend GrokRxiv\n",
+          "confidence": 0.1,
+          "filename": "GrokRxiv/Proofs.lean",
+          "language": "lean",
+          "notes": [
+            "The statement faithfully formalizes P. Hall's theorem with no hypothesis dropped: `ShortExactSequence N G Q` carries the injective inclusion `N →* G`, the surjective projection `G →* Q`, and exactness at the middle (`inl.range = proj.ker`); `FinitelyPresented` is defined genuinely via `PresentedGroup` over finitely many generators (`Fin n`) and a finite relator set; the conclusion `FinitelyPresented G` matches the paper.",
+            "The deterministic skeleton was incorrect Mathlib (it treated `Group` as a term `N : Group` and used the opaque predicate `FinitelyPresented G` while dropping the short-exact-sequence and finitely-presented-of-N/Q hypotheses). It was corrected to real `Type*`+`[Group _]` typeclasses with all three hypotheses present, as the role instructions require.",
+            "The proof is left genuinely open. Hall's extension theorem needs a Reidemeister–Schreier-style construction of a finite presentation of a group extension, which is not available in Mathlib and cannot be honestly discharged here. The gap is NOT masked with `sorry`, `admit`, an `axiom`, or a trivially-true strawman, so `lake env lean GrokRxiv/Proofs.lean` will fail with `unsolved goals`.",
+            "Confidence reflects that the file will not compile because the proof obligation is honestly unmet — not a defect in the formal statement, which is faithful."
+          ]
+        },
+        "generation_recovery": null,
+        "git": {
+          "branch": "review-loop/lean/8d09c716eb75",
+          "commit": {
+            "add": {
+              "command": [
+                "git",
+                "add",
+                "."
+              ],
+              "duration_ms": 15,
+              "exit_code": 0,
+              "status": "pass",
+              "stderr": "",
+              "stdout": ""
+            },
+            "cached_diff_stat": {
+              "command": [
+                "git",
+                "diff",
+                "--cached",
+                "--stat"
+              ],
+              "duration_ms": 14,
+              "exit_code": 0,
+              "status": "pass",
+              "stderr": "",
+              "stdout": " GrokRxiv/Proofs.lean             |    51 +\n harness.json                     |    20 +-\n prompt.md                        |     2 +-\n review_input.json                | 58555 +------------------------------------\n round_1/GrokRxiv/Proofs.lean     |    51 +\n round_1/codex_review.json        |    17 +\n round_1/compile.json             |    13 +\n round_1/generation.json          |    12 +\n round_1/semantic_validation.json |     8 +\n schema.json                      |    62 +-\n system.md                        |     2 +-\n 11 files changed, 557 insertions(+), 58236 deletions(-)\n"
+            },
+            "commit": {
+              "command": [
+                "git",
+                "commit",
+                "-m",
+                "review-loop lean attempt 1"
+              ],
+              "duration_ms": 23,
+              "exit_code": 0,
+              "status": "pass",
+              "stderr": "",
+              "stdout": "[review-loop/lean/8d09c716eb75 1004cea] review-loop lean attempt 1\n 11 files changed, 557 insertions(+), 58236 deletions(-)\n create mode 100644 GrokRxiv/Proofs.lean\n create mode 100644 round_1/GrokRxiv/Proofs.lean\n create mode 100644 round_1/codex_review.json\n create mode 100644 round_1/compile.json\n create mode 100644 round_1/generation.json\n create mode 100644 round_1/semantic_validation.json\n"
+            },
+            "head": {
+              "command": [
+                "git",
+                "rev-parse",
+                "--short",
+                "HEAD"
+              ],
+              "duration_ms": 7,
+              "exit_code": 0,
+              "status": "pass",
+              "stderr": "",
+              "stdout": "1004cea\n"
+            }
+          },
+          "path": "/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/lean/targets/00_thm_Hall",
+          "status_after": {
+            "command": [
+              "git",
+              "status",
+              "--short"
+            ],
+            "duration_ms": 8,
+            "exit_code": 0,
+            "status": "pass",
+            "stderr": "",
+            "stdout": ""
+          },
+          "status_before": {
+            "command": [
+              "git",
+              "status",
+              "--short"
+            ],
+            "duration_ms": 13,
+            "exit_code": 0,
+            "status": "pass",
+            "stderr": "",
+            "stdout": " M harness.json\n M prompt.md\n M review_input.json\n M schema.json\n M system.md\n?? GrokRxiv/\n?? round_1/\n"
+          }
+        },
+        "harness": {
+          "branch": "review-loop/lean/8d09c716eb75",
+          "path": "/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/lean/targets/00_thm_Hall"
+        },
+        "lean_declaration": "thm_Hall",
+        "reviewer_role": "lean_code_reviewer",
+        "semantic_validation": {
+          "issues": [
+            "Lean proof uses forbidden term sorry.",
+            "Lean proof uses forbidden term admit.",
+            "Lean proof uses forbidden term axiom."
+          ],
+          "status": "fail"
+        },
+        "source_path": "/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/lean/targets/00_thm_Hall/round_1/GrokRxiv/Proofs.lean",
+        "status": "fail"
+      },
+      {
+        "agent_output_audits": [
+          {
+            "artifact_dir": "review_loop/agent_outputs/lean_review_fix_code/round_2/lean_code_fixer",
+            "artifacts": {
+              "decision": "review_loop/agent_outputs/lean_review_fix_code/round_2/lean_code_fixer/decision.json",
+              "input": "review_loop/agent_outputs/lean_review_fix_code/round_2/lean_code_fixer/input.json",
+              "output": "review_loop/agent_outputs/lean_review_fix_code/round_2/lean_code_fixer/output.json",
+              "raw_stderr": "review_loop/agent_outputs/lean_review_fix_code/round_2/lean_code_fixer/raw_stderr.txt",
+              "raw_stdout": "review_loop/agent_outputs/lean_review_fix_code/round_2/lean_code_fixer/raw_stdout.txt",
+              "schema": "review_loop/agent_outputs/lean_review_fix_code/round_2/lean_code_fixer/schema.json",
+              "schema_validation": "review_loop/agent_outputs/lean_review_fix_code/round_2/lean_code_fixer/schema_validation.json",
+              "semantic_validation": "review_loop/agent_outputs/lean_review_fix_code/round_2/lean_code_fixer/semantic_validation.json",
+              "tool_validation": "review_loop/agent_outputs/lean_review_fix_code/round_2/lean_code_fixer/tool_validation.json"
+            },
+            "attempt": 2,
+            "decision": {
+              "reason": "info: grokrxiv_review_loop: no previous manifest, creating one from scratch info: toolchain not updated; already up-to-date info: plausible: cloning https://github.com/leanprover-community/plausible info: plausible: checking out revision 'a456461b368b71d2accd…",
+              "status": "rejected"
+            },
+            "latency_ms": 117282,
+            "model": "claude-opus-4-8",
+            "phase": "generate",
+            "role": "lean_code_fixer",
+            "runner": "cli",
+            "schema_path": "schemas/review_loop_code_artifact.schema.json",
+            "schema_validation": {
+              "reason": "runner returned JSON already validated against role output schema",
+              "schema_path": "schemas/review_loop_code_artifact.schema.json",
+              "status": "pass"
+            },
+            "semantic_validation": {
+              "issues": [],
+              "status": "pass"
+            },
+            "tokens_in": null,
+            "tokens_out": null,
+            "tool_validation": {
+              "command": [
+                "lake",
+                "env",
+                "lean",
+                "GrokRxiv/Proofs.lean"
+              ],
+              "duration_ms": 50145,
+              "exit_code": 1,
+              "status": "fail",
+              "stderr": "info: grokrxiv_review_loop: no previous manifest, creating one from scratch\ninfo: toolchain not updated; already up-to-date\ninfo: plausible: cloning https://github.com/leanprover-community/plausible\ninfo: plausible: checking out revision 'a456461b368b71d2accd95234832cd9c174b5437'\ninfo: LeanSearchClient: cloning https://github.com/leanprover-community/LeanSearchClient\ninfo: LeanSearchClient: checking out revision 'c5d5b8fe6e5158def25cd28eb94e4141ad97c843'\ninfo: importGraph: cloning https://github.com/leanprover-community/import-graph\ninfo: importGraph: checking out revision '515cf9d0c00ece5e661f6de4326a53dedc1e8ea1'\ninfo: proofwidgets: cloning https://github.com/leanprover-community/ProofWidgets4\ninfo: proofwidgets: checking out revision 'a84b3e2475d5c5ab979567b1ad8aea21b764bcf8'\ninfo: aesop: cloning https://github.com/leanprover-community/aesop\ninfo: aesop: checking out revision '558915ae105bfd8074e22d597613d1961822adc2'\ninfo: Qq: cloning https://github.com/leanprover-community/quote4\ninfo: Qq: checking out revision 'a6e6c34c4ef182f83b219a3a5a385f51f44bdc4c'\ninfo: batteries: cloning https://github.com/leanprover-community/batteries\ninfo: batteries: checking out revision '32dc18cde3684679f3c003de608743b57498c56f'\ninfo: Cli: cloning https://github.com/leanprover/lean4-cli\ninfo: Cli: checking out revision '6b907cf12b2e445ccb7c24bc208ef04a1f39e84c'\ninfo: mathlib: running post-update hooks\n✔ [20/24] Built Batteries.Data.Array.Match:c.o (217ms)\n✔ [21/24] Built Batteries.Data.String.Basic:c.o (204ms)\n✔ [22/24] Built Batteries.Data.String.Matcher:c.o (212ms)\n✔ [23/24] Built Batteries.Tactic.OpenPrivate:c.o (466ms)\n",
+              "stdout": "Decompressing 188 already-cached file(s) (8271 already decompressed)\nCurrent branch: HEAD\nUsing cache (Azure) from origin: (some leanprover-community/mathlib4)\nNo files to download\nDecompressed 188 already-cached file(s)\nCompleted successfully in 3055 ms!\nGrokRxiv/Proofs.lean:33:27: error: unsolved goals\nN : Type u_1\nG : Type u_2\nQ : Type u_3\ninst✝² : Group N\ninst✝¹ : Group G\ninst✝ : Group Q\nseq : ShortExactSequence N G Q\nnN : ℕ\nrelsN : Set (FreeGroup (Fin nN))\nhN_fin : relsN.Finite\neN : N ≃* PresentedGroup relsN\nnQ : ℕ\nrelsQ : Set (FreeGroup (Fin nQ))\nhQ_fin : relsQ.Finite\neQ : Q ≃* PresentedGroup relsQ\n⊢ FinitelyPresented G\n"
+            }
+          },
+          {
+            "artifact_dir": "review_loop/agent_outputs/lean_review_fix_code/round_2/lean_code_reviewer",
+            "artifacts": {
+              "decision": "review_loop/agent_outputs/lean_review_fix_code/round_2/lean_code_reviewer/decision.json",
+              "input": "review_loop/agent_outputs/lean_review_fix_code/round_2/lean_code_reviewer/input.json",
+              "output": "review_loop/agent_outputs/lean_review_fix_code/round_2/lean_code_reviewer/output.json",
+              "raw_stderr": "review_loop/agent_outputs/lean_review_fix_code/round_2/lean_code_reviewer/raw_stderr.txt",
+              "raw_stdout": "review_loop/agent_outputs/lean_review_fix_code/round_2/lean_code_reviewer/raw_stdout.txt",
+              "schema": "review_loop/agent_outputs/lean_review_fix_code/round_2/lean_code_reviewer/schema.json",
+              "schema_validation": "review_loop/agent_outputs/lean_review_fix_code/round_2/lean_code_reviewer/schema_validation.json",
+              "semantic_validation": "review_loop/agent_outputs/lean_review_fix_code/round_2/lean_code_reviewer/semantic_validation.json",
+              "tool_validation": "review_loop/agent_outputs/lean_review_fix_code/round_2/lean_code_reviewer/tool_validation.json"
+            },
+            "attempt": 2,
+            "decision": {
+              "reason": "reviewer output schema-valid with status=fail",
+              "status": "accepted"
+            },
+            "latency_ms": 25833,
+            "model": "gpt-5.5",
+            "phase": "review",
+            "role": "lean_code_reviewer",
+            "runner": "cli",
+            "schema_path": "schemas/review_loop_code_review.schema.json",
+            "schema_validation": {
+              "reason": "runner returned JSON already validated against role output schema",
+              "schema_path": "schemas/review_loop_code_review.schema.json",
+              "status": "pass"
+            },
+            "semantic_validation": {
+              "issues": [],
+              "status": "pass"
+            },
+            "tokens_in": null,
+            "tokens_out": null,
+            "tool_validation": {
+              "command": [
+                "lake",
+                "env",
+                "lean",
+                "GrokRxiv/Proofs.lean"
+              ],
+              "duration_ms": 50145,
+              "exit_code": 1,
+              "status": "fail",
+              "stderr": "info: grokrxiv_review_loop: no previous manifest, creating one from scratch\ninfo: toolchain not updated; already up-to-date\ninfo: plausible: cloning https://github.com/leanprover-community/plausible\ninfo: plausible: checking out revision 'a456461b368b71d2accd95234832cd9c174b5437'\ninfo: LeanSearchClient: cloning https://github.com/leanprover-community/LeanSearchClient\ninfo: LeanSearchClient: checking out revision 'c5d5b8fe6e5158def25cd28eb94e4141ad97c843'\ninfo: importGraph: cloning https://github.com/leanprover-community/import-graph\ninfo: importGraph: checking out revision '515cf9d0c00ece5e661f6de4326a53dedc1e8ea1'\ninfo: proofwidgets: cloning https://github.com/leanprover-community/ProofWidgets4\ninfo: proofwidgets: checking out revision 'a84b3e2475d5c5ab979567b1ad8aea21b764bcf8'\ninfo: aesop: cloning https://github.com/leanprover-community/aesop\ninfo: aesop: checking out revision '558915ae105bfd8074e22d597613d1961822adc2'\ninfo: Qq: cloning https://github.com/leanprover-community/quote4\ninfo: Qq: checking out revision 'a6e6c34c4ef182f83b219a3a5a385f51f44bdc4c'\ninfo: batteries: cloning https://github.com/leanprover-community/batteries\ninfo: batteries: checking out revision '32dc18cde3684679f3c003de608743b57498c56f'\ninfo: Cli: cloning https://github.com/leanprover/lean4-cli\ninfo: Cli: checking out revision '6b907cf12b2e445ccb7c24bc208ef04a1f39e84c'\ninfo: mathlib: running post-update hooks\n✔ [20/24] Built Batteries.Data.Array.Match:c.o (217ms)\n✔ [21/24] Built Batteries.Data.String.Basic:c.o (204ms)\n✔ [22/24] Built Batteries.Data.String.Matcher:c.o (212ms)\n✔ [23/24] Built Batteries.Tactic.OpenPrivate:c.o (466ms)\n",
+              "stdout": "Decompressing 188 already-cached file(s) (8271 already decompressed)\nCurrent branch: HEAD\nUsing cache (Azure) from origin: (some leanprover-community/mathlib4)\nNo files to download\nDecompressed 188 already-cached file(s)\nCompleted successfully in 3055 ms!\nGrokRxiv/Proofs.lean:33:27: error: unsolved goals\nN : Type u_1\nG : Type u_2\nQ : Type u_3\ninst✝² : Group N\ninst✝¹ : Group G\ninst✝ : Group Q\nseq : ShortExactSequence N G Q\nnN : ℕ\nrelsN : Set (FreeGroup (Fin nN))\nhN_fin : relsN.Finite\neN : N ≃* PresentedGroup relsN\nnQ : ℕ\nrelsQ : Set (FreeGroup (Fin nQ))\nhQ_fin : relsQ.Finite\neQ : Q ≃* PresentedGroup relsQ\n⊢ FinitelyPresented G\n"
+            }
+          }
+        ],
+        "attempt": 2,
+        "author_role": "lean_code_fixer",
+        "codex_review": {
+          "confidence": 0.99,
+          "issues": [
+            {
+              "line": 33,
+              "message": "The Lean file does not compile: `lake env lean GrokRxiv/Proofs.lean` exits with code 1 because the theorem body leaves the real goal `FinitelyPresented G` unsolved. The target requires a closed kernel-checked proof with no open goals.",
+              "severity": "blocking"
+            }
+          ],
+          "status": "fail",
+          "summary": "The statement preserves the short exact sequence and finite-presentability hypotheses, but the proof is intentionally incomplete and the compiler reports an unsolved goal for `FinitelyPresented G`."
+        },
+        "compile": {
+          "command": [
+            "lake",
+            "env",
+            "lean",
+            "GrokRxiv/Proofs.lean"
+          ],
+          "duration_ms": 50145,
+          "exit_code": 1,
+          "status": "fail",
+          "stderr": "info: grokrxiv_review_loop: no previous manifest, creating one from scratch\ninfo: toolchain not updated; already up-to-date\ninfo: plausible: cloning https://github.com/leanprover-community/plausible\ninfo: plausible: checking out revision 'a456461b368b71d2accd95234832cd9c174b5437'\ninfo: LeanSearchClient: cloning https://github.com/leanprover-community/LeanSearchClient\ninfo: LeanSearchClient: checking out revision 'c5d5b8fe6e5158def25cd28eb94e4141ad97c843'\ninfo: importGraph: cloning https://github.com/leanprover-community/import-graph\ninfo: importGraph: checking out revision '515cf9d0c00ece5e661f6de4326a53dedc1e8ea1'\ninfo: proofwidgets: cloning https://github.com/leanprover-community/ProofWidgets4\ninfo: proofwidgets: checking out revision 'a84b3e2475d5c5ab979567b1ad8aea21b764bcf8'\ninfo: aesop: cloning https://github.com/leanprover-community/aesop\ninfo: aesop: checking out revision '558915ae105bfd8074e22d597613d1961822adc2'\ninfo: Qq: cloning https://github.com/leanprover-community/quote4\ninfo: Qq: checking out revision 'a6e6c34c4ef182f83b219a3a5a385f51f44bdc4c'\ninfo: batteries: cloning https://github.com/leanprover-community/batteries\ninfo: batteries: checking out revision '32dc18cde3684679f3c003de608743b57498c56f'\ninfo: Cli: cloning https://github.com/leanprover/lean4-cli\ninfo: Cli: checking out revision '6b907cf12b2e445ccb7c24bc208ef04a1f39e84c'\ninfo: mathlib: running post-update hooks\n✔ [20/24] Built Batteries.Data.Array.Match:c.o (217ms)\n✔ [21/24] Built Batteries.Data.String.Basic:c.o (204ms)\n✔ [22/24] Built Batteries.Data.String.Matcher:c.o (212ms)\n✔ [23/24] Built Batteries.Tactic.OpenPrivate:c.o (466ms)\n",
+          "stdout": "Decompressing 188 already-cached file(s) (8271 already decompressed)\nCurrent branch: HEAD\nUsing cache (Azure) from origin: (some leanprover-community/mathlib4)\nNo files to download\nDecompressed 188 already-cached file(s)\nCompleted successfully in 3055 ms!\nGrokRxiv/Proofs.lean:33:27: error: unsolved goals\nN : Type u_1\nG : Type u_2\nQ : Type u_3\ninst✝² : Group N\ninst✝¹ : Group G\ninst✝ : Group Q\nseq : ShortExactSequence N G Q\nnN : ℕ\nrelsN : Set (FreeGroup (Fin nN))\nhN_fin : relsN.Finite\neN : N ≃* PresentedGroup relsN\nnQ : ℕ\nrelsQ : Set (FreeGroup (Fin nQ))\nhQ_fin : relsQ.Finite\neQ : Q ≃* PresentedGroup relsQ\n⊢ FinitelyPresented G\n"
+        },
+        "compile_timeout_secs": 1800,
+        "final_path": "/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/lean/targets/00_thm_Hall/GrokRxiv/Proofs.lean",
+        "generation": {
+          "code": "import Mathlib\n\nnamespace GrokRxiv\n\n/-- A group `G` is *finitely presented* when it is isomorphic to a group presented by\nfinitely many generators (modelled by `Fin n`) subject to a finite set of relators.\nThe generated-and-related group is `PresentedGroup rels`, that is `FreeGroup (Fin n)`\nmodulo the normal closure of `rels`. -/\ndef FinitelyPresented (G : Type*) [Group G] : Prop :=\n  ∃ (n : ℕ) (rels : Set (FreeGroup (Fin n))),\n    rels.Finite ∧ Nonempty (G ≃* PresentedGroup rels)\n\n/-- A *short exact sequence of groups* `1 → N → G → Q → 1`: an injective homomorphism\n`N →* G`, a surjective homomorphism `G →* Q`, and exactness at the middle term, namely\nthe image of `N` equals the kernel of the projection onto `Q`. -/\nstructure ShortExactSequence (N G Q : Type*) [Group N] [Group G] [Group Q] where\n  /-- inclusion of the kernel term `N` into `G` -/\n  inl : N →* G\n  /-- projection of `G` onto the quotient term `Q` -/\n  proj : G →* Q\n  /-- the inclusion is injective (exactness at `N`) -/\n  inl_injective : Function.Injective inl\n  /-- the projection is surjective (exactness at `Q`) -/\n  proj_surjective : Function.Surjective proj\n  /-- image of `N` equals kernel of the projection (exactness at `G`) -/\n  exact_middle : inl.range = proj.ker\n\n/-- **P. Hall's theorem.** If `1 → N → G → Q → 1` is a short exact sequence of groups\nwith `N` and `Q` finitely presented, then `G` is finitely presented. -/\ntheorem thm_Hall {N G Q : Type*} [Group N] [Group G] [Group Q]\n    (seq : ShortExactSequence N G Q)\n    (hN : FinitelyPresented N) (hQ : FinitelyPresented Q) :\n    FinitelyPresented G := by\n  -- Standard argument (Reidemeister–Schreier / extension presentation):\n  --   * take finite presentations ⟨Y | S⟩ of N and ⟨X | R⟩ of Q;\n  --   * lift each generator of X to G through a set-theoretic section of `seq.proj`;\n  --   * generate G by the lifted copies of X together with `seq.inl '' Y`;\n  --   * relators: the relators S of N, each relator of R rewritten as a word in Y\n  --     (possible because every relator of R lands in N = ker proj), and the\n  --     conjugation relations expressing normality of N in G.\n  -- The construction yields a finite presentation of G, but the rewriting and the\n  -- normal-form steps require an extension result for finite presentability that\n  -- Mathlib does not currently provide, so the construction is not carried out here.\n  obtain ⟨nN, relsN, hN_fin, ⟨eN⟩⟩ := hN\n  obtain ⟨nQ, relsQ, hQ_fin, ⟨eQ⟩⟩ := hQ\n  -- The remaining goal `FinitelyPresented G` is the genuine content of Hall's theorem\n  -- and is deliberately left open: this file does not supply a complete kernel-checked\n  -- proof, and therefore fails to compile with `unsolved goals`.\n\nend GrokRxiv\n",
+          "confidence": 0.2,
+          "filename": "GrokRxiv/Proofs.lean",
+          "language": "lean",
+          "notes": [
+            "Faithful Lean 4 statement of P. Hall's theorem: a ShortExactSequence N G Q together with FinitelyPresented N and FinitelyPresented Q implies FinitelyPresented G. All three hypotheses and the exact conclusion from the paper are captured; no hypothesis is dropped or collapsed to an opaque predicate.",
+            "Definitions are genuine, not strawmen: FinitelyPresented G is isomorphism (≃*) to a PresentedGroup over a finite relator set, and ShortExactSequence encodes injectivity of the inclusion, surjectivity of the projection, and exactness at the middle (inl.range = proj.ker).",
+            "Fixed the prior round's deterministic semantic-scan failure by removing the flagged forbidden tokens from every comment, so any remaining failure reflects the actual mathematical gap rather than a token-hygiene violation.",
+            "The proof is honestly incomplete: Hall's extension theorem (the Reidemeister–Schreier finite-presentation-of-extensions construction) is not available in Mathlib and is not reconstructed here. Per the role contract, the goal is left open rather than discharged by a fabricated proof or a trivially-true strawman.",
+            "Expected compile behaviour: `lake env lean GrokRxiv/Proofs.lean` fails with `unsolved goals` at thm_Hall after the two destructuring steps. This is the intended, faithful outcome that surfaces the unmet proof obligation instead of masking it."
+          ]
+        },
+        "generation_recovery": null,
+        "git": {
+          "branch": "review-loop/lean/8d09c716eb75",
+          "commit": {
+            "add": {
+              "command": [
+                "git",
+                "add",
+                "."
+              ],
+              "duration_ms": 40,
+              "exit_code": 0,
+              "status": "pass",
+              "stderr": "warning: adding embedded git repository: .lake/packages/Cli\nhint: You've added another git repository inside your current repository.\nhint: Clones of the outer repository will not contain the contents of\nhint: the embedded repository and will not know how to obtain it.\nhint: If you meant to add a submodule, use:\nhint:\nhint: \tgit submodule add <url> .lake/packages/Cli\nhint:\nhint: If you added this path by mistake, you can remove it from the\nhint: index with:\nhint:\nhint: \tgit rm --cached .lake/packages/Cli\nhint:\nhint: See \"git help submodule\" for more information.\nhint: Disable this message with \"git config set advice.addEmbeddedRepo false\"\nwarning: adding embedded git repository: .lake/packages/LeanSearchClient\nwarning: adding embedded git repository: .lake/packages/Qq\nwarning: adding embedded git repository: .lake/packages/aesop\nwarning: adding embedded git repository: .lake/packages/batteries\nwarning: adding embedded git repository: .lake/packages/importGraph\nwarning: adding embedded git repository: .lake/packages/plausible\nwarning: adding embedded git repository: .lake/packages/proofwidgets\n",
+              "stdout": ""
+            },
+            "cached_diff_stat": {
+              "command": [
+                "git",
+                "diff",
+                "--cached",
+                "--stat"
+              ],
+              "duration_ms": 10,
+              "exit_code": 0,
+              "status": "pass",
+              "stderr": "",
+              "stdout": " .lake/config/0/lakefile.olean       | Bin 0 -> 108672 bytes\n .lake/config/0/lakefile.olean.trace |   6 +++\n .lake/config/1/lakefile.olean       | Bin 0 -> 643928 bytes\n .lake/config/1/lakefile.olean.trace |   6 +++\n .lake/config/5/lakefile.olean       | Bin 0 -> 757552 bytes\n .lake/config/5/lakefile.olean.trace |   8 +++\n .lake/packages/Cli                  |   1 +\n .lake/packages/LeanSearchClient     |   1 +\n .lake/packages/Qq                   |   1 +\n .lake/packages/aesop                |   1 +\n .lake/packages/batteries            |   1 +\n .lake/packages/importGraph          |   1 +\n .lake/packages/plausible            |   1 +\n .lake/packages/proofwidgets         |   1 +\n GrokRxiv/Proofs.lean                |  33 ++++++-------\n lake-manifest.json                  |  94 ++++++++++++++++++++++++++++++++++++\n review_input.json                   |  26 ++++------\n round_2/GrokRxiv/Proofs.lean        |  50 +++++++++++++++++++\n round_2/codex_review.json           |  12 +++++\n round_2/compile.json                |  13 +++++\n round_2/generation.json             |  13 +++++\n round_2/semantic_validation.json    |   4 ++\n system.md                           |   2 +-\n 23 files changed, 240 insertions(+), 35 deletions(-)\n"
+            },
+            "commit": {
+              "command": [
+                "git",
+                "commit",
+                "-m",
+                "review-loop lean attempt 2"
+              ],
+              "duration_ms": 25,
+              "exit_code": 0,
+              "status": "pass",
+              "stderr": "",
+              "stdout": "[review-loop/lean/8d09c716eb75 562075e] review-loop lean attempt 2\n 23 files changed, 240 insertions(+), 35 deletions(-)\n create mode 100644 .lake/config/0/lakefile.olean\n create mode 100644 .lake/config/0/lakefile.olean.trace\n create mode 100644 .lake/config/1/lakefile.olean\n create mode 100644 .lake/config/1/lakefile.olean.trace\n create mode 100644 .lake/config/5/lakefile.olean\n create mode 100644 .lake/config/5/lakefile.olean.trace\n create mode 160000 .lake/packages/Cli\n create mode 160000 .lake/packages/LeanSearchClient\n create mode 160000 .lake/packages/Qq\n create mode 160000 .lake/packages/aesop\n create mode 160000 .lake/packages/batteries\n create mode 160000 .lake/packages/importGraph\n create mode 160000 .lake/packages/plausible\n create mode 160000 .lake/packages/proofwidgets\n create mode 100644 lake-manifest.json\n create mode 100644 round_2/GrokRxiv/Proofs.lean\n create mode 100644 round_2/codex_review.json\n create mode 100644 round_2/compile.json\n create mode 100644 round_2/generation.json\n create mode 100644 round_2/semantic_validation.json\n"
+            },
+            "head": {
+              "command": [
+                "git",
+                "rev-parse",
+                "--short",
+                "HEAD"
+              ],
+              "duration_ms": 7,
+              "exit_code": 0,
+              "status": "pass",
+              "stderr": "",
+              "stdout": "562075e\n"
+            }
+          },
+          "path": "/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/lean/targets/00_thm_Hall",
+          "status_after": {
+            "command": [
+              "git",
+              "status",
+              "--short"
+            ],
+            "duration_ms": 142,
+            "exit_code": 0,
+            "status": "pass",
+            "stderr": "",
+            "stdout": ""
+          },
+          "status_before": {
+            "command": [
+              "git",
+              "status",
+              "--short"
+            ],
+            "duration_ms": 23,
+            "exit_code": 0,
+            "status": "pass",
+            "stderr": "",
+            "stdout": " M GrokRxiv/Proofs.lean\n M review_input.json\n M system.md\n?? .lake/\n?? lake-manifest.json\n?? round_2/\n"
+          }
+        },
+        "harness": {
+          "branch": "review-loop/lean/8d09c716eb75",
+          "path": "/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/lean/targets/00_thm_Hall"
+        },
+        "lean_declaration": "thm_Hall",
+        "reviewer_role": "lean_code_reviewer",
+        "semantic_validation": {
+          "issues": [],
+          "status": "pass"
+        },
+        "source_path": "/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/lean/targets/00_thm_Hall/round_2/GrokRxiv/Proofs.lean",
+        "status": "fail"
+      }
+    ],
+    "pr_review": []
+  },
+  "pr_evidence": {
+    "artifact_worktree": ".agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/fixed",
+    "compile_review_loop": {
+      "agent_output_audit_summary": {
+        "accepted": 0,
+        "by_role": {},
+        "rejected": 0,
+        "total": 0
+      },
+      "attempts": [],
+      "filename": "review.md",
+      "final_path": ".agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/fixed/review.md",
+      "harness": {
+        "branch": null,
+        "path": ".agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/fixed"
+      },
+      "language": "markdown",
+      "skip_reason": "Markdown is the canonical PR review artifact; TeX/PDF exports are optional and outside the default review-loop gate.",
+      "stage": "pr_review_fix_code",
+      "status": "skipped",
+      "target": "pr"
+    },
+    "fixed_markdown": "review_loop/fixed/review.md",
+    "fixed_pdf": null,
+    "fixed_tex": null,
+    "issues": [],
+    "stage": "pr_fixer",
+    "status": "pass"
+  },
+  "publish_decision": {
+    "action": "revision_needed_pr",
+    "auto_publish": false,
+    "publisher_ready": false
+  },
+  "publishability_vector": {
+    "citation": "pass",
+    "formal": "not_proved",
+    "integrity": "pass",
+    "reproducibility": "not_run",
+    "safety": "pass",
+    "semantic_adequacy": "fail"
+  },
+  "publisher_ready": false,
+  "release_tier": {
+    "lifecycle_state": "needs_update",
+    "tier": "in_review"
+  },
+  "review_id": "8d09c716-eb75-462d-84d3-65d075d3211d",
+  "semantic_adequacy": {
+    "schema_version": "1.0.0",
+    "source": "review_loop/semantic_ir.json",
+    "status": "fail",
+    "theorem_map": "review_loop/lean/theorem_map.json",
+    "verdicts": [
+      {
+        "claim_id": "thm: fib",
+        "emitted_statement": "",
+        "lean_declaration": null,
+        "proof_status": "FAILED",
+        "statement": "Fadell–Neuwirth fibration theorem: if M is a manifold without boundary (not necessarily compact) and k >= m >= 1, then the projection map pi_{k,m} (from the configuration space of k points in M to the configuration space of m points in M) is a fibration with fiber F(M - Q_m, k-m).",
+        "theorem_id": "theorem_thm_fib",
+        "verdict": "OVERCLAIMED",
+        "verified_statement": ""
+      },
+      {
+        "claim_id": "thm: cdfinindex",
+        "emitted_statement": "",
+        "lean_declaration": null,
+        "proof_status": "FAILED",
+        "statement": "If G is a torsion-free group and H is a subgroup of finite index, then the cohomological dimension of G equals the cohomological dimension of H, i.e. cd(G) = cd(H).",
+        "theorem_id": "theorem_thm_cdfinindex",
+        "verdict": "OVERCLAIMED",
+        "verified_statement": ""
+      },
+      {
+        "claim_id": "thm: Hall",
+        "emitted_statement": "theorem thm_Hall (N : Group) (G : Group) (Q : Group) : FinitelyPresented G := by",
+        "lean_declaration": "thm_Hall",
+        "proof_status": "TYPE_ERROR",
+        "statement": "P. Hall's theorem: if 1 -> N -> G -> Q -> 1 is a short exact sequence of groups with N and Q finitely presented, then G is finitely presented.",
+        "theorem_id": "theorem_thm_Hall",
+        "verdict": "OVERCLAIMED",
+        "verified_statement": "theorem thm_Hall (N : Group) (G : Group) (Q : Group) : FinitelyPresented G := by"
+      }
+    ]
+  },
+  "theorem_formalization": {
+    "entries": [
+      {
+        "emitted_statement": "theorem thm_Hall (N : Group) (G : Group) (Q : Group) : FinitelyPresented G := by",
+        "kind": "theorem_formalization",
+        "lean_declaration": "thm_Hall",
+        "obligation_id": "formalize_theorem_thm_Hall",
+        "source_claim_id": "thm: Hall",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "thm: Hall",
+          "paper_source_id": "thm: Hall",
+          "section_id": "Finite presentability of groups",
+          "text_excerpt": "P. Hall's theorem: if 1 -> N -> G -> Q -> 1 is a short exact sequence of groups with N and Q finitely presented, then G is finitely presented."
+        },
+        "statement": "P. Hall's theorem: if 1 -> N -> G -> Q -> 1 is a short exact sequence of groups with N and Q finitely presented, then G is finitely presented.",
+        "status": "TYPE_ERROR",
+        "verified_statement": "theorem thm_Hall (N : Group) (G : Group) (Q : Group) : FinitelyPresented G := by"
+      }
+    ],
+    "lean_results": "review_loop/lean/results.json",
+    "schema_version": "1.0.0",
+    "source": "review_loop/proof_obligations.json",
+    "status": "TYPE_ERROR"
+  }
+}
