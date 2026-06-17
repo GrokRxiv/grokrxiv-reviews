@@ -8,6 +8,8 @@
     "theorem_graph.json",
     "formalize:theorem_graph_extractor_typed_ir",
     "formalize:theorem_graph_extractor_typed_ir",
+    "formalize:theorem_graph_extractor_typed_ir",
+    "formalize:theorem_graph_extractor_typed_ir",
     "formalize:theorem_graph_extractor_typed_ir"
   ],
   "body": {
@@ -19727,34 +19729,529 @@
     "nodes": [
       {
         "depends_on": [],
-        "id": "thm-5",
-        "section": "lemma thm-5",
-        "source_tex": null,
-        "statement": "We state a refined form of the five lemma here as a convenient quick reference. The reader can supply the usual diagram chasing proof if they feel inclined!",
+        "id": "thm: fib",
+        "section": "newbraid.tex",
+        "source_tex": "\\begin{thm}[Fadell and Neuwirth]\n\\label{thm: fib}\nIf $M$ is a manifold without boundary (not necessarily compact) and $k \\geq\nm \\geq 1$, then the map $\\pikm$ is a fibration with fiber $F(M - Q_m, k-m)$.\n\\end{thm}",
+        "statement": "(Fadell and Neuwirth) If M is a manifold without boundary (not necessarily compact) and k ≥ m ≥ 1, then the projection map π_{k,m} from F(M,k) to F(M,m) is a fibration with fiber F(M − Q_m, k−m).",
         "theorem_ir": {
-          "assumptions": [],
-          "binders": [],
+          "assumptions": [
+            {
+              "args": [
+                {
+                  "kind": "var",
+                  "name": "M"
+                }
+              ],
+              "kind": "uninterpreted_predicate",
+              "name": "manifold_without_boundary"
+            },
+            {
+              "kind": "greater_equal",
+              "lhs": {
+                "kind": "var",
+                "name": "k"
+              },
+              "rhs": {
+                "kind": "var",
+                "name": "m"
+              }
+            },
+            {
+              "kind": "greater_equal",
+              "lhs": {
+                "kind": "var",
+                "name": "m"
+              },
+              "rhs": {
+                "kind": "nat_lit",
+                "value": 1
+              }
+            }
+          ],
+          "binders": [
+            {
+              "name": "M",
+              "type": {
+                "kind": "custom",
+                "name": "manifold without boundary"
+              }
+            },
+            {
+              "name": "k",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "m",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
           "conclusion": {
-            "kind": "unknown_prop",
-            "reason": "The lemma is stated entirely in prose; no explicit mathematical statement is present in the source to type."
+            "args": [
+              {
+                "kind": "raw_term",
+                "text": "\\pi_{k,m}"
+              },
+              {
+                "kind": "raw_term",
+                "text": "F(M - Q_m, k-m)"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "is_fibration_with_fiber"
           },
-          "theorem_name": "thm-5"
+          "theorem_name": "fadell_neuwirth_fibration"
         },
-        "type": "lemma",
+        "type": "theorem",
         "typed_transcription": {
-          "assumptions": [],
-          "binders": [],
+          "assumptions": [
+            {
+              "args": [
+                {
+                  "kind": "var",
+                  "name": "M"
+                }
+              ],
+              "kind": "uninterpreted_predicate",
+              "name": "manifold_without_boundary"
+            },
+            {
+              "kind": "greater_equal",
+              "lhs": {
+                "kind": "var",
+                "name": "k"
+              },
+              "rhs": {
+                "kind": "var",
+                "name": "m"
+              }
+            },
+            {
+              "kind": "greater_equal",
+              "lhs": {
+                "kind": "var",
+                "name": "m"
+              },
+              "rhs": {
+                "kind": "nat_lit",
+                "value": 1
+              }
+            }
+          ],
+          "binders": [
+            {
+              "name": "M",
+              "type": {
+                "kind": "custom",
+                "name": "manifold without boundary"
+              }
+            },
+            {
+              "name": "k",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "m",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
           "conclusion": {
-            "kind": "unknown_prop",
-            "reason": "The lemma is stated entirely in prose (a refined form of the five lemma); the source contains no mathematical formula or symbols to transcribe into a typed conclusion."
+            "args": [
+              {
+                "kind": "raw_term",
+                "text": "\\pi_{k,m}"
+              },
+              {
+                "kind": "raw_term",
+                "text": "F(M - Q_m, k-m)"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "is_fibration_with_fiber"
           },
-          "math_objects": [],
-          "source_text": "We state a refined form of the five lemma here as a convenient quick reference. The reader can supply the usual diagram chasing proof if they feel inclined!",
-          "status": "untranscribed"
+          "math_objects": [
+            {
+              "name": "M",
+              "type": {
+                "kind": "custom",
+                "name": "manifold without boundary"
+              }
+            },
+            {
+              "name": "k",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "m",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "\\pi_{k,m}",
+              "type": {
+                "kind": "custom",
+                "name": "projection map of configuration spaces"
+              }
+            },
+            {
+              "name": "F(M - Q_m, k-m)",
+              "type": {
+                "kind": "custom",
+                "name": "configuration space"
+              }
+            }
+          ],
+          "source_text": "\\begin{thm}[Fadell and Neuwirth]\n\\label{thm: fib}\nIf $M$ is a manifold without boundary (not necessarily compact) and $k \\geq\nm \\geq 1$, then the map $\\pikm$ is a fibration with fiber $F(M - Q_m, k-m)$.\n\\end{thm}",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [],
+        "id": "thm: cdfinindex",
+        "section": "newbraid.tex",
+        "source_tex": "\\begin{thm}\n\\label{thm: cdfinindex}\nLet $G$ be a torsion-free group and $H$ a subgroup of finite index.\nThen $cd(G)=cd(H)$.\n\\end{thm}",
+        "statement": "Let G be a torsion-free group and H a subgroup of finite index. Then the cohomological dimension of G equals the cohomological dimension of H, i.e. cd(G) = cd(H).",
+        "theorem_ir": {
+          "assumptions": [
+            {
+              "args": [
+                {
+                  "kind": "var",
+                  "name": "G"
+                }
+              ],
+              "kind": "uninterpreted_predicate",
+              "name": "torsion_free"
+            },
+            {
+              "args": [
+                {
+                  "kind": "var",
+                  "name": "H"
+                },
+                {
+                  "kind": "var",
+                  "name": "G"
+                }
+              ],
+              "kind": "uninterpreted_predicate",
+              "name": "finite_index_subgroup"
+            }
+          ],
+          "binders": [
+            {
+              "name": "G",
+              "type": {
+                "kind": "custom",
+                "name": "group"
+              }
+            },
+            {
+              "name": "H",
+              "type": {
+                "kind": "custom",
+                "name": "group"
+              }
+            }
+          ],
+          "conclusion": {
+            "kind": "equals",
+            "lhs": {
+              "kind": "raw_term",
+              "text": "cd(G)"
+            },
+            "rhs": {
+              "kind": "raw_term",
+              "text": "cd(H)"
+            }
+          },
+          "theorem_name": "cd_finite_index"
+        },
+        "type": "theorem",
+        "typed_transcription": {
+          "assumptions": [
+            {
+              "args": [
+                {
+                  "kind": "var",
+                  "name": "G"
+                }
+              ],
+              "kind": "uninterpreted_predicate",
+              "name": "torsion_free"
+            },
+            {
+              "args": [
+                {
+                  "kind": "var",
+                  "name": "H"
+                },
+                {
+                  "kind": "var",
+                  "name": "G"
+                }
+              ],
+              "kind": "uninterpreted_predicate",
+              "name": "finite_index_subgroup"
+            }
+          ],
+          "binders": [
+            {
+              "name": "G",
+              "type": {
+                "kind": "custom",
+                "name": "group"
+              }
+            },
+            {
+              "name": "H",
+              "type": {
+                "kind": "custom",
+                "name": "group"
+              }
+            }
+          ],
+          "conclusion": {
+            "kind": "equals",
+            "lhs": {
+              "kind": "raw_term",
+              "text": "cd(G)"
+            },
+            "rhs": {
+              "kind": "raw_term",
+              "text": "cd(H)"
+            }
+          },
+          "math_objects": [
+            {
+              "name": "G",
+              "type": {
+                "kind": "custom",
+                "name": "torsion-free group"
+              }
+            },
+            {
+              "name": "H",
+              "type": {
+                "kind": "custom",
+                "name": "finite-index subgroup of G"
+              }
+            },
+            {
+              "name": "cd(G)",
+              "type": {
+                "kind": "nat",
+                "reason": "cohomological dimension is a non-negative integer (or infinity)"
+              }
+            },
+            {
+              "name": "cd(H)",
+              "type": {
+                "kind": "nat",
+                "reason": "cohomological dimension is a non-negative integer (or infinity)"
+              }
+            }
+          ],
+          "source_text": "\\begin{thm}\n\\label{thm: cdfinindex}\nLet $G$ be a torsion-free group and $H$ a subgroup of finite index.\nThen $cd(G)=cd(H)$.\n\\end{thm}",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [],
+        "id": "thm: Hall",
+        "section": "newbraid.tex",
+        "source_tex": "\\begin{thm}[P. Hall]\n\\label{thm: Hall}\nIf \n$$\n1 \\rightarrow N \\rightarrow G \\rightarrow Q \\rightarrow 1 \n$$\nis a short exact sequence of groups, with $N$ and $Q$ finitely presented,\nthen $G$ is finitely presented.\n\\end{thm}",
+        "statement": "(P. Hall) If 1 → N → G → Q → 1 is a short exact sequence of groups with N and Q finitely presented, then G is finitely presented.",
+        "theorem_ir": {
+          "assumptions": [
+            {
+              "args": [
+                {
+                  "kind": "var",
+                  "name": "N"
+                },
+                {
+                  "kind": "var",
+                  "name": "G"
+                },
+                {
+                  "kind": "var",
+                  "name": "Q"
+                }
+              ],
+              "kind": "uninterpreted_predicate",
+              "name": "short_exact_sequence"
+            },
+            {
+              "args": [
+                {
+                  "kind": "var",
+                  "name": "N"
+                }
+              ],
+              "kind": "uninterpreted_predicate",
+              "name": "finitely_presented"
+            },
+            {
+              "args": [
+                {
+                  "kind": "var",
+                  "name": "Q"
+                }
+              ],
+              "kind": "uninterpreted_predicate",
+              "name": "finitely_presented"
+            }
+          ],
+          "binders": [
+            {
+              "name": "N",
+              "type": {
+                "kind": "custom",
+                "name": "group"
+              }
+            },
+            {
+              "name": "G",
+              "type": {
+                "kind": "custom",
+                "name": "group"
+              }
+            },
+            {
+              "name": "Q",
+              "type": {
+                "kind": "custom",
+                "name": "group"
+              }
+            }
+          ],
+          "conclusion": {
+            "args": [
+              {
+                "kind": "var",
+                "name": "G"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "finitely_presented"
+          },
+          "theorem_name": "hall_finite_presentation"
+        },
+        "type": "theorem",
+        "typed_transcription": {
+          "assumptions": [
+            {
+              "args": [
+                {
+                  "kind": "var",
+                  "name": "N"
+                },
+                {
+                  "kind": "var",
+                  "name": "G"
+                },
+                {
+                  "kind": "var",
+                  "name": "Q"
+                }
+              ],
+              "kind": "uninterpreted_predicate",
+              "name": "short_exact_sequence"
+            },
+            {
+              "args": [
+                {
+                  "kind": "var",
+                  "name": "N"
+                }
+              ],
+              "kind": "uninterpreted_predicate",
+              "name": "finitely_presented"
+            },
+            {
+              "args": [
+                {
+                  "kind": "var",
+                  "name": "Q"
+                }
+              ],
+              "kind": "uninterpreted_predicate",
+              "name": "finitely_presented"
+            }
+          ],
+          "binders": [
+            {
+              "name": "N",
+              "type": {
+                "kind": "custom",
+                "name": "group"
+              }
+            },
+            {
+              "name": "G",
+              "type": {
+                "kind": "custom",
+                "name": "group"
+              }
+            },
+            {
+              "name": "Q",
+              "type": {
+                "kind": "custom",
+                "name": "group"
+              }
+            }
+          ],
+          "conclusion": {
+            "args": [
+              {
+                "kind": "var",
+                "name": "G"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "finitely_presented"
+          },
+          "math_objects": [
+            {
+              "name": "N",
+              "type": {
+                "kind": "custom",
+                "name": "group"
+              }
+            },
+            {
+              "name": "G",
+              "type": {
+                "kind": "custom",
+                "name": "group"
+              }
+            },
+            {
+              "name": "Q",
+              "type": {
+                "kind": "custom",
+                "name": "group"
+              }
+            }
+          ],
+          "source_text": "\\begin{thm}[P. Hall]\n\\label{thm: Hall}\nIf \n$$\n1 \\rightarrow N \\rightarrow G \\rightarrow Q \\rightarrow 1 \n$$\nis a short exact sequence of groups, with $N$ and $Q$ finitely presented,\nthen $G$ is finitely presented.\n\\end{thm}",
+          "status": "transcribed"
         }
       }
     ],
-    "source": "formalize_typed_ir_theorem_extractor"
+    "source": "formalize_source_first_theorem_graph_extractor"
   },
   "warnings": [
     "formalize typed-IR theorem extraction failed: `claude` exited with Some(1) for role theorems: stdout={\"type\":\"result\",\"subtype\":\"success\",\"is_error\":true,\"api_error_status\":null,\"duration_ms\":416701,\"duration_api_ms\":416678,\"num_turns\":1,\"result\":\"API Error: Connection closed while thinking, before producing a response. Try again.\",\"stop_reason\":\"stop_sequence\",\"session_id\":\"2a48a571-1569-467d-9a9f-ab9d633bf9f9\",\"total_cost_usd\":1.040895,\"usage\":{\"input_tokens\":0,\"cache_creation_input_tokens\":0,\"cache_read_input_tokens\":0,\"output_tokens\":0,\"server_tool_use\":{\"web_search_requests\":0,\"web_fetch_requests\":0},\"service_tier\":\"standard\",\"cache_creation\":{\"ephemeral_1h_input_tokens\":0,\"ephemeral_5m_"

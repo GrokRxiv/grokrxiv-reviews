@@ -1,9 +1,38 @@
 {
-  "operator_status": "NOT_CONDUCIVE_TO_LEAN_PROOF",
   "schema_version": "1.0.0",
-  "skip_reason": "no_proof_ready_math_targets",
   "source": "review_loop/semantic_ir.json",
-  "status": "skipped",
+  "status": "fail",
   "theorem_map": "review_loop/lean/theorem_map.json",
-  "verdicts": []
+  "verdicts": [
+    {
+      "claim_id": "thm: fib",
+      "emitted_statement": "",
+      "lean_declaration": null,
+      "proof_status": "FAILED",
+      "statement": "(Fadell and Neuwirth) If M is a manifold without boundary (not necessarily compact) and k ≥ m ≥ 1, then the projection map π_{k,m} from F(M,k) to F(M,m) is a fibration with fiber F(M − Q_m, k−m).",
+      "theorem_id": "theorem_thm_fib",
+      "verdict": "OVERCLAIMED",
+      "verified_statement": ""
+    },
+    {
+      "claim_id": "thm: cdfinindex",
+      "emitted_statement": "",
+      "lean_declaration": null,
+      "proof_status": "FAILED",
+      "statement": "Let G be a torsion-free group and H a subgroup of finite index. Then the cohomological dimension of G equals the cohomological dimension of H, i.e. cd(G) = cd(H).",
+      "theorem_id": "theorem_thm_cdfinindex",
+      "verdict": "OVERCLAIMED",
+      "verified_statement": ""
+    },
+    {
+      "claim_id": "thm: Hall",
+      "emitted_statement": "theorem thm_Hall (N : group) (G : group) (Q : group) : finitely_presented G := by",
+      "lean_declaration": "thm_Hall",
+      "proof_status": "FAILED",
+      "statement": "(P. Hall) If 1 → N → G → Q → 1 is a short exact sequence of groups with N and Q finitely presented, then G is finitely presented.",
+      "theorem_id": "theorem_thm_Hall",
+      "verdict": "OVERCLAIMED",
+      "verified_statement": "theorem thm_Hall (N : group) (G : group) (Q : group) : finitely_presented G := by"
+    }
+  ]
 }

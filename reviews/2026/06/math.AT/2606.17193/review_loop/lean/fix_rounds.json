@@ -1,37 +1,287 @@
 {
   "agent_output_audit_summary": {
     "accepted": 0,
-    "by_role": {},
-    "rejected": 0,
-    "total": 0
+    "by_role": {
+      "lean_proof_author": {
+        "accepted": 0,
+        "rejected": 1,
+        "total": 1
+      }
+    },
+    "rejected": 1,
+    "total": 1
   },
   "attempts": [
     {
-      "attempt": 0,
-      "semantic_validation": {
-        "issues": [
-          "Paper-derived mathematical statements were extracted, but none were reliable theorem-level targets for Lean verification."
-        ],
-        "status": "skipped"
+      "agent_output_audits": [
+        {
+          "artifact_dir": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author",
+          "artifacts": {
+            "decision": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/decision.json",
+            "input": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/input.json",
+            "output": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/output.json",
+            "raw_stderr": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/raw_stderr.txt",
+            "raw_stdout": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/raw_stdout.txt",
+            "schema": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/schema.json",
+            "schema_validation": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/schema_validation.json",
+            "semantic_validation": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/semantic_validation.json",
+            "tool_validation": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/tool_validation.json"
+          },
+          "attempt": 1,
+          "decision": {
+            "reason": "review-loop input contract failed before LLM call: stage=lean_review_fix_code role=lean_proof_author phase=generate target=lean missing_artifact=review_loop/proof_obligations.json json_pointer=/base/proof_obligations reason=Lean proof completion must consume deterministic proof obligations expected_remediation=rerun proof_obligation_generator or emit skip_reason=no_math_targets before lean_review_fix_code",
+            "status": "rejected"
+          },
+          "latency_ms": null,
+          "model": null,
+          "phase": "generate",
+          "role": "lean_proof_author",
+          "runner": null,
+          "schema_path": "schemas/review_loop_code_artifact.schema.json",
+          "schema_validation": {
+            "reason": "review-loop input contract failed before LLM call: stage=lean_review_fix_code role=lean_proof_author phase=generate target=lean missing_artifact=review_loop/proof_obligations.json json_pointer=/base/proof_obligations reason=Lean proof completion must consume deterministic proof obligations expected_remediation=rerun proof_obligation_generator or emit skip_reason=no_math_targets before lean_review_fix_code",
+            "schema_path": "schemas/review_loop_code_artifact.schema.json",
+            "status": "fail"
+          },
+          "semantic_validation": {
+            "status": "not_applicable"
+          },
+          "tokens_in": null,
+          "tokens_out": null,
+          "tool_validation": {
+            "expected_remediation": "rerun proof_obligation_generator or emit skip_reason=no_math_targets before lean_review_fix_code",
+            "json_pointer": "/base/proof_obligations",
+            "missing_artifact": "review_loop/proof_obligations.json",
+            "phase": "generate",
+            "reason": "Lean proof completion must consume deterministic proof obligations",
+            "role": "lean_proof_author",
+            "stage": "lean_review_fix_code",
+            "target": "lean"
+          }
+        }
+      ],
+      "attempt": 1,
+      "author_error": "review-loop input contract failed before LLM call: stage=lean_review_fix_code role=lean_proof_author phase=generate target=lean missing_artifact=review_loop/proof_obligations.json json_pointer=/base/proof_obligations reason=Lean proof completion must consume deterministic proof obligations expected_remediation=rerun proof_obligation_generator or emit skip_reason=no_math_targets before lean_review_fix_code",
+      "author_role": "lean_proof_author",
+      "input_contract": {
+        "expected_remediation": "rerun proof_obligation_generator or emit skip_reason=no_math_targets before lean_review_fix_code",
+        "json_pointer": "/base/proof_obligations",
+        "missing_artifact": "review_loop/proof_obligations.json",
+        "phase": "generate",
+        "reason": "Lean proof completion must consume deterministic proof obligations",
+        "role": "lean_proof_author",
+        "stage": "lean_review_fix_code",
+        "target": "lean"
       },
-      "skipped": true,
-      "status": "skipped"
+      "lean_declaration": "thm_Hall",
+      "status": "fail"
     }
   ],
   "author_role": "lean_proof_author",
-  "entries": [],
+  "compile_timeout_secs": 1800,
+  "declarations": {
+    "thm_Hall": {
+      "attempts": [
+        {
+          "agent_output_audits": [
+            {
+              "artifact_dir": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author",
+              "artifacts": {
+                "decision": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/decision.json",
+                "input": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/input.json",
+                "output": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/output.json",
+                "raw_stderr": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/raw_stderr.txt",
+                "raw_stdout": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/raw_stdout.txt",
+                "schema": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/schema.json",
+                "schema_validation": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/schema_validation.json",
+                "semantic_validation": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/semantic_validation.json",
+                "tool_validation": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/tool_validation.json"
+              },
+              "attempt": 1,
+              "decision": {
+                "reason": "review-loop input contract failed before LLM call: stage=lean_review_fix_code role=lean_proof_author phase=generate target=lean missing_artifact=review_loop/proof_obligations.json json_pointer=/base/proof_obligations reason=Lean proof completion must consume deterministic proof obligations expected_remediation=rerun proof_obligation_generator or emit skip_reason=no_math_targets before lean_review_fix_code",
+                "status": "rejected"
+              },
+              "latency_ms": null,
+              "model": null,
+              "phase": "generate",
+              "role": "lean_proof_author",
+              "runner": null,
+              "schema_path": "schemas/review_loop_code_artifact.schema.json",
+              "schema_validation": {
+                "reason": "review-loop input contract failed before LLM call: stage=lean_review_fix_code role=lean_proof_author phase=generate target=lean missing_artifact=review_loop/proof_obligations.json json_pointer=/base/proof_obligations reason=Lean proof completion must consume deterministic proof obligations expected_remediation=rerun proof_obligation_generator or emit skip_reason=no_math_targets before lean_review_fix_code",
+                "schema_path": "schemas/review_loop_code_artifact.schema.json",
+                "status": "fail"
+              },
+              "semantic_validation": {
+                "status": "not_applicable"
+              },
+              "tokens_in": null,
+              "tokens_out": null,
+              "tool_validation": {
+                "expected_remediation": "rerun proof_obligation_generator or emit skip_reason=no_math_targets before lean_review_fix_code",
+                "json_pointer": "/base/proof_obligations",
+                "missing_artifact": "review_loop/proof_obligations.json",
+                "phase": "generate",
+                "reason": "Lean proof completion must consume deterministic proof obligations",
+                "role": "lean_proof_author",
+                "stage": "lean_review_fix_code",
+                "target": "lean"
+              }
+            }
+          ],
+          "attempt": 1,
+          "author_error": "review-loop input contract failed before LLM call: stage=lean_review_fix_code role=lean_proof_author phase=generate target=lean missing_artifact=review_loop/proof_obligations.json json_pointer=/base/proof_obligations reason=Lean proof completion must consume deterministic proof obligations expected_remediation=rerun proof_obligation_generator or emit skip_reason=no_math_targets before lean_review_fix_code",
+          "author_role": "lean_proof_author",
+          "input_contract": {
+            "expected_remediation": "rerun proof_obligation_generator or emit skip_reason=no_math_targets before lean_review_fix_code",
+            "json_pointer": "/base/proof_obligations",
+            "missing_artifact": "review_loop/proof_obligations.json",
+            "phase": "generate",
+            "reason": "Lean proof completion must consume deterministic proof obligations",
+            "role": "lean_proof_author",
+            "stage": "lean_review_fix_code",
+            "target": "lean"
+          },
+          "status": "fail"
+        }
+      ],
+      "final_path": "/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/lean/targets/00_thm_Hall/GrokRxiv/Proofs.lean",
+      "lean_declaration": "thm_Hall",
+      "obligation_id": "formalize_theorem_thm_Hall",
+      "paper_theorem": "(P. Hall) If 1 → N → G → Q → 1 is a short exact sequence of groups with N and Q finitely presented, then G is finitely presented.",
+      "status": "fail",
+      "verified_statement": null
+    }
+  },
+  "entries": [
+    {
+      "emitted_statement": "theorem thm_Hall (N : group) (G : group) (Q : group) : finitely_presented G := by",
+      "kind": "theorem_formalization",
+      "lean_declaration": "thm_Hall",
+      "obligation_id": "formalize_theorem_thm_Hall",
+      "source_claim_id": "thm: Hall",
+      "source_span": {
+        "artifact": "theorem_graph.json",
+        "claim_id": "thm: Hall",
+        "paper_source_id": "thm: Hall",
+        "section_id": "newbraid.tex",
+        "text_excerpt": "(P. Hall) If 1 → N → G → Q → 1 is a short exact sequence of groups with N and Q finitely presented, then G is finitely presented."
+      },
+      "statement": "(P. Hall) If 1 → N → G → Q → 1 is a short exact sequence of groups with N and Q finitely presented, then G is finitely presented.",
+      "status": "FAILED",
+      "verified_statement": "theorem thm_Hall (N : group) (G : group) (Q : group) : finitely_presented G := by"
+    }
+  ],
   "filename": "GrokRxiv/Proofs.lean",
-  "final_path": ".agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/lean/GrokRxiv/Proofs.lean",
+  "final_path": "/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/lean/GrokRxiv/Proofs.lean",
   "fixer_role": "lean_code_fixer",
   "language": "lean",
   "max_attempts": 2,
-  "operator_status": "NOT_CONDUCIVE_TO_LEAN_PROOF",
-  "proof_status": "SKIPPED",
+  "mode": "per_theorem",
+  "per_obligation_runs": [
+    {
+      "agent_output_audit_summary": {
+        "accepted": 0,
+        "by_role": {
+          "lean_proof_author": {
+            "accepted": 0,
+            "rejected": 1,
+            "total": 1
+          }
+        },
+        "rejected": 1,
+        "total": 1
+      },
+      "attempts": [
+        {
+          "agent_output_audits": [
+            {
+              "artifact_dir": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author",
+              "artifacts": {
+                "decision": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/decision.json",
+                "input": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/input.json",
+                "output": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/output.json",
+                "raw_stderr": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/raw_stderr.txt",
+                "raw_stdout": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/raw_stdout.txt",
+                "schema": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/schema.json",
+                "schema_validation": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/schema_validation.json",
+                "semantic_validation": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/semantic_validation.json",
+                "tool_validation": "review_loop/agent_outputs/lean_review_fix_code/round_1/lean_proof_author/tool_validation.json"
+              },
+              "attempt": 1,
+              "decision": {
+                "reason": "review-loop input contract failed before LLM call: stage=lean_review_fix_code role=lean_proof_author phase=generate target=lean missing_artifact=review_loop/proof_obligations.json json_pointer=/base/proof_obligations reason=Lean proof completion must consume deterministic proof obligations expected_remediation=rerun proof_obligation_generator or emit skip_reason=no_math_targets before lean_review_fix_code",
+                "status": "rejected"
+              },
+              "latency_ms": null,
+              "model": null,
+              "phase": "generate",
+              "role": "lean_proof_author",
+              "runner": null,
+              "schema_path": "schemas/review_loop_code_artifact.schema.json",
+              "schema_validation": {
+                "reason": "review-loop input contract failed before LLM call: stage=lean_review_fix_code role=lean_proof_author phase=generate target=lean missing_artifact=review_loop/proof_obligations.json json_pointer=/base/proof_obligations reason=Lean proof completion must consume deterministic proof obligations expected_remediation=rerun proof_obligation_generator or emit skip_reason=no_math_targets before lean_review_fix_code",
+                "schema_path": "schemas/review_loop_code_artifact.schema.json",
+                "status": "fail"
+              },
+              "semantic_validation": {
+                "status": "not_applicable"
+              },
+              "tokens_in": null,
+              "tokens_out": null,
+              "tool_validation": {
+                "expected_remediation": "rerun proof_obligation_generator or emit skip_reason=no_math_targets before lean_review_fix_code",
+                "json_pointer": "/base/proof_obligations",
+                "missing_artifact": "review_loop/proof_obligations.json",
+                "phase": "generate",
+                "reason": "Lean proof completion must consume deterministic proof obligations",
+                "role": "lean_proof_author",
+                "stage": "lean_review_fix_code",
+                "target": "lean"
+              }
+            }
+          ],
+          "attempt": 1,
+          "author_error": "review-loop input contract failed before LLM call: stage=lean_review_fix_code role=lean_proof_author phase=generate target=lean missing_artifact=review_loop/proof_obligations.json json_pointer=/base/proof_obligations reason=Lean proof completion must consume deterministic proof obligations expected_remediation=rerun proof_obligation_generator or emit skip_reason=no_math_targets before lean_review_fix_code",
+          "author_role": "lean_proof_author",
+          "input_contract": {
+            "expected_remediation": "rerun proof_obligation_generator or emit skip_reason=no_math_targets before lean_review_fix_code",
+            "json_pointer": "/base/proof_obligations",
+            "missing_artifact": "review_loop/proof_obligations.json",
+            "phase": "generate",
+            "reason": "Lean proof completion must consume deterministic proof obligations",
+            "role": "lean_proof_author",
+            "stage": "lean_review_fix_code",
+            "target": "lean"
+          },
+          "status": "fail"
+        }
+      ],
+      "author_role": "lean_proof_author",
+      "compile_timeout_secs": 1800,
+      "filename": "GrokRxiv/Proofs.lean",
+      "final_path": "/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/lean/targets/00_thm_Hall/GrokRxiv/Proofs.lean",
+      "fixer_role": "lean_code_fixer",
+      "harness": {
+        "branch": "review-loop/lean/8d09c716eb75",
+        "path": "/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/8d09c716-eb75-462d-84d3-65d075d3211d/review_loop/lean/targets/00_thm_Hall"
+      },
+      "language": "lean",
+      "max_attempts": 2,
+      "reviewer_role": "lean_code_reviewer",
+      "stage": "lean_review_fix_code",
+      "status": "fail",
+      "target": "lean"
+    }
+  ],
+  "proof_status": "FAILED",
   "reviewer_role": "lean_code_reviewer",
-  "skip_reason": "no_proof_ready_math_targets",
-  "skipped": true,
   "stage": "lean_review_fix_code",
-  "status": "skipped",
+  "status": "fail",
   "target": "lean",
-  "verdict": "NOT_PROVED"
+  "theorem_proved": 0,
+  "theorem_total": 1,
+  "verdict": "NOT_PROVED",
+  "verified_statements": {}
 }

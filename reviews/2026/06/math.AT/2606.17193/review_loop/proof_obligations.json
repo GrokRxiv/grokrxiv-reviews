@@ -1,26 +1,140 @@
 {
   "haskell_status": "retired",
-  "message": "Paper-derived mathematical statements were extracted, but none were reliable theorem-level targets for Lean verification.",
-  "obligations": [],
-  "operator_status": "NOT_CONDUCIVE_TO_LEAN_PROOF",
-  "review_id": "8d09c716-eb75-462d-84d3-65d075d3211d",
-  "schema_version": "1.0.0",
-  "skip_reason": "no_proof_ready_math_targets",
-  "skipped_targets": [
+  "obligations": [
     {
-      "id": "theorem_thm_5",
-      "reason": "typed_transcription_not_transcribed",
-      "source_claim_id": "thm-5",
+      "deterministic_ready": true,
+      "expected_proof": "closed Lean theorem proof with no sorry, admit, or unapproved axiom",
+      "id": "formalize_theorem_thm_Hall",
+      "kind": "theorem_formalization",
+      "lean_declaration": "thm_Hall",
+      "lean_skeleton": "namespace GrokRxiv\n\ntheorem thm_Hall (N : group) (G : group) (Q : group) : finitely_presented G := by\n  sorry\n\nend GrokRxiv\n",
+      "lean_statement": "theorem thm_Hall (N : group) (G : group) (Q : group) : finitely_presented G := by",
+      "semantic_category": "plain_theorem",
+      "severity": "blocking",
+      "source_claim_id": "thm: Hall",
       "source_span": {
         "artifact": "theorem_graph.json",
-        "claim_id": "thm-5",
-        "paper_source_id": "thm-5",
-        "section_id": "lemma thm-5",
-        "text_excerpt": "We state a refined form of the five lemma here as a convenient quick reference. The reader can supply the usual diagram chasing proof if they feel inclined!"
+        "claim_id": "thm: Hall",
+        "paper_source_id": "thm: Hall",
+        "section_id": "newbraid.tex",
+        "text_excerpt": "(P. Hall) If 1 → N → G → Q → 1 is a short exact sequence of groups with N and Q finitely presented, then G is finitely presented."
       },
-      "statement": "We state a refined form of the five lemma here as a convenient quick reference. The reader can supply the usual diagram chasing proof if they feel inclined!"
+      "statement": "(P. Hall) If 1 → N → G → Q → 1 is a short exact sequence of groups with N and Q finitely presented, then G is finitely presented.",
+      "theorem_ir": {
+        "assumptions": [
+          {
+            "args": [
+              {
+                "kind": "var",
+                "name": "N"
+              },
+              {
+                "kind": "var",
+                "name": "G"
+              },
+              {
+                "kind": "var",
+                "name": "Q"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "short_exact_sequence"
+          },
+          {
+            "args": [
+              {
+                "kind": "var",
+                "name": "N"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "finitely_presented"
+          },
+          {
+            "args": [
+              {
+                "kind": "var",
+                "name": "Q"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "finitely_presented"
+          }
+        ],
+        "binders": [
+          {
+            "name": "N",
+            "type": {
+              "kind": "custom",
+              "name": "group"
+            }
+          },
+          {
+            "name": "G",
+            "type": {
+              "kind": "custom",
+              "name": "group"
+            }
+          },
+          {
+            "name": "Q",
+            "type": {
+              "kind": "custom",
+              "name": "group"
+            }
+          }
+        ],
+        "conclusion": {
+          "args": [
+            {
+              "kind": "var",
+              "name": "G"
+            }
+          ],
+          "kind": "uninterpreted_predicate",
+          "name": "finitely_presented"
+        },
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "thm: Hall",
+          "paper_source_id": "thm: Hall",
+          "section_id": "newbraid.tex",
+          "text_excerpt": "(P. Hall) If 1 → N → G → Q → 1 is a short exact sequence of groups with N and Q finitely presented, then G is finitely presented."
+        },
+        "theorem_name": "hall_finite_presentation"
+      }
+    }
+  ],
+  "review_id": "8d09c716-eb75-462d-84d3-65d075d3211d",
+  "schema_version": "1.0.0",
+  "skipped_targets": [
+    {
+      "id": "theorem_thm_fib",
+      "reason": "typed_transcription_not_transcribed",
+      "source_claim_id": "thm: fib",
+      "source_span": {
+        "artifact": "theorem_graph.json",
+        "claim_id": "thm: fib",
+        "paper_source_id": "thm: fib",
+        "section_id": "newbraid.tex",
+        "text_excerpt": "(Fadell and Neuwirth) If M is a manifold without boundary (not necessarily compact) and k ≥ m ≥ 1, then the projection map π_{k,m} from F(M,k) to F(M,m) is a fibration with fiber F(M − Q_m, k−m)."
+      },
+      "statement": "(Fadell and Neuwirth) If M is a manifold without boundary (not necessarily compact) and k ≥ m ≥ 1, then the projection map π_{k,m} from F(M,k) to F(M,m) is a fibration with fiber F(M − Q_m, k−m)."
+    },
+    {
+      "id": "theorem_thm_cdfinindex",
+      "reason": "typed_transcription_not_transcribed",
+      "source_claim_id": "thm: cdfinindex",
+      "source_span": {
+        "artifact": "theorem_graph.json",
+        "claim_id": "thm: cdfinindex",
+        "paper_source_id": "thm: cdfinindex",
+        "section_id": "newbraid.tex",
+        "text_excerpt": "Let G be a torsion-free group and H a subgroup of finite index. Then the cohomological dimension of G equals the cohomological dimension of H, i.e. cd(G) = cd(H)."
+      },
+      "statement": "Let G be a torsion-free group and H a subgroup of finite index. Then the cohomological dimension of G equals the cohomological dimension of H, i.e. cd(G) = cd(H)."
     }
   ],
   "source": "review_loop/semantic_ir.json",
-  "status": "skipped"
+  "status": "ready"
 }
