@@ -1,0 +1,79 @@
+{
+  "advisory": true,
+  "checked": 1,
+  "proved_targets": 1,
+  "schema_version": "1.0.0",
+  "status": "completed",
+  "verdicts": [
+    {
+      "back_translation": "The Lean declaration `prop_1_6` states only that `0 = 0`. It has no parameters, no hypotheses, and no mathematical objects beyond the numeral equality.",
+      "checker_output": {
+        "back_translation": "The Lean declaration `prop_1_6` states only that `0 = 0`. It has no parameters, no hypotheses, and no mathematical objects beyond the numeral equality.",
+        "conclusion_matches": {
+          "matches": false,
+          "note": "The paper concludes a classification of p-length values for compact connected two-dimensional manifolds for p = 0 and p = 1, depending on homeomorphism type. The Lean conclusion is only the tautological arithmetic equality `0 = 0`."
+        },
+        "confidence": 1,
+        "hypothesis_completeness": {
+          "complete": false,
+          "missing_hypotheses": [
+            {
+              "paper_hypothesis": "`N` is obtained from `S^2` by removing a finite number `s` of open discs, with boundary the corresponding union of circles.",
+              "reason": "The Lean statement has no binders or assumptions for `N`, `s`, discs, boundaries, or surface construction."
+            },
+            {
+              "paper_hypothesis": "`L` is obtained from `RP^2` by removing a finite number `k` of open discs, with boundary the corresponding union of circles.",
+              "reason": "The Lean statement has no binders or assumptions for `L`, `k`, projective plane, discs, boundaries, or surface construction."
+            },
+            {
+              "paper_hypothesis": "The theorem concerns two-dimensional compact connected manifolds and their homeomorphism types.",
+              "reason": "The Lean statement contains no manifold, compactness, connectedness, dimension, or homeomorphism assumptions."
+            },
+            {
+              "paper_hypothesis": "The invariant being classified is p-length for p = 0 and p = 1.",
+              "reason": "The Lean statement contains no definition or occurrence of p-length or the parameter `p`."
+            }
+          ],
+          "note": "All substantive paper hypotheses are absent; the Lean declaration is closed and hypothesis-free."
+        },
+        "issues": [
+          {
+            "message": "The Lean statement collapses the proposition to `0 = 0`, so it does not encode any p-length classification.",
+            "severity": "critical"
+          },
+          {
+            "message": "No surface objects, boundary constructions, finite disc removals, compact connected manifold assumptions, or homeomorphism cases appear in Lean.",
+            "severity": "critical"
+          },
+          {
+            "message": "The theorem is a tautology and can be proved independently of the paper's mathematical content.",
+            "severity": "critical"
+          }
+        ],
+        "lean_declaration": "prop_1_6",
+        "triviality_risk": {
+          "note": "`0 = 0` is a trivially true placeholder with no connection to the classified invariant or manifold cases.",
+          "trivial": true
+        },
+        "verdict": "unfaithful"
+      },
+      "issues": [
+        {
+          "message": "The Lean statement collapses the proposition to `0 = 0`, so it does not encode any p-length classification.",
+          "severity": "critical"
+        },
+        {
+          "message": "No surface objects, boundary constructions, finite disc removals, compact connected manifold assumptions, or homeomorphism cases appear in Lean.",
+          "severity": "critical"
+        },
+        {
+          "message": "The theorem is a tautology and can be proved independently of the paper's mathematical content.",
+          "severity": "critical"
+        }
+      ],
+      "paper_text": "Proposition 1.8 (1.6). Let $(N; \\partial N)$ be obtained from the sphere $S^2$ by removing a finite number $s$ of open discs: $(N; \\partial N) = (S^2 \\setminus \\bigcup_{i=1}^{s} D_i^2; \\bigcup_{i=1}^{s} S_i^1)$, and let $(L; \\partial L)$ be obtained from the projective plane $\\mathbb{R}P^2$ by removing a finite number $k$ of open discs: $(L; \\partial L) = (\\mathbb{R}P^2 \\setminus \\bigcup_{i=1}^{k} D_i^2; \\bigcup_{i=1}^{k} S_i^1)$. For $p = 0$ the $p$-length of a two-dimensional compact connected manifold equals: 1. one, if the manifold is homeomorphic to $(N; \\partial N)$, to $(L; \\partial L)$, or to the sphere $S^2$; 2. two, on the other manifolds. For $p = 1$ the $p$-length of a two-dimensional compact connected manifold equals: 1. zero, if the manifold is homeomorphic to the sphere $S^2$ or to the disc $D^2$; 2. one, on the other manifolds.",
+      "target": "prop_1_6",
+      "verdict": "unfaithful"
+    }
+  ]
+}

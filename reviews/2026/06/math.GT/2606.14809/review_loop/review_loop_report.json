@@ -1,0 +1,678 @@
+{
+  "agent_output_audits": {
+    "lean": {
+      "accepted": 0,
+      "by_role": {},
+      "rejected": 0,
+      "total": 0
+    },
+    "pr": {
+      "accepted": 0,
+      "by_role": {},
+      "rejected": 0,
+      "total": 0
+    },
+    "pr_review": {
+      "accepted": 0,
+      "by_role": {},
+      "rejected": 0,
+      "total": 0
+    }
+  },
+  "artifact_paths": {
+    "agent_outputs": "review_loop/agent_outputs",
+    "bundle_completeness": "review_loop/bundle_completeness.json",
+    "citation_adjudication": "review_loop/citation_validation_adjudication.json",
+    "citation_validation": "review_loop/citation_validation_report.json",
+    "claims": "review_loop/claims.json",
+    "knowledge_graph": "review_loop/knowledge_graph.json",
+    "lean": "review_loop/lean/results.json",
+    "lean_harness": "review_loop/lean/harness.json",
+    "lean_targets": "review_loop/lean_targets.json",
+    "lean_theorem_map": "review_loop/lean/theorem_map.json",
+    "lean_verification_report": "review_loop/lean/verification_report.json",
+    "paper_math_sources": "review_loop/paper_math_sources.json",
+    "policy_gate": "review_loop/policy_gate.json",
+    "pr_fixes": "review_loop/pr_fixes.json",
+    "pr_harness": "review_loop/fixed/harness.json",
+    "proof_obligations": "review_loop/proof_obligations.json",
+    "semantic_adequacy": "review_loop/semantic_adequacy.json",
+    "semantic_ir": "review_loop/semantic_ir.json",
+    "semantic_model": "review_loop/semantic_model.json"
+  },
+  "blocking_issues": [],
+  "bundle_completeness": {
+    "artifacts": [
+      {
+        "artifact_path": "review_loop/claims.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/49d76469-91d4-4df0-b1eb-ebcbb9c1eef0/review_loop/claims.json",
+        "manifest_output": "review_loop/claims.json",
+        "skip_reason": null,
+        "stage_id": "claim_extractor",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/paper_math_sources.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/49d76469-91d4-4df0-b1eb-ebcbb9c1eef0/review_loop/paper_math_sources.json",
+        "manifest_output": "review_loop/paper_math_sources.json",
+        "skip_reason": null,
+        "stage_id": "paper_math_source_collector",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/knowledge_graph.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/49d76469-91d4-4df0-b1eb-ebcbb9c1eef0/review_loop/knowledge_graph.json",
+        "manifest_output": "review_loop/knowledge_graph.json",
+        "skip_reason": null,
+        "stage_id": "knowledge_graph_builder",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/semantic_ir.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/49d76469-91d4-4df0-b1eb-ebcbb9c1eef0/review_loop/semantic_ir.json",
+        "manifest_output": "review_loop/semantic_ir.json",
+        "skip_reason": null,
+        "stage_id": "semantic_category_mapper",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/semantic_model.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/49d76469-91d4-4df0-b1eb-ebcbb9c1eef0/review_loop/semantic_model.json",
+        "manifest_output": "review_loop/semantic_model.json",
+        "skip_reason": null,
+        "stage_id": "semantic_category_mapper",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/proof_obligations.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/49d76469-91d4-4df0-b1eb-ebcbb9c1eef0/review_loop/proof_obligations.json",
+        "manifest_output": "review_loop/proof_obligations.json",
+        "skip_reason": null,
+        "stage_id": "proof_obligation_generator",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean_targets.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/49d76469-91d4-4df0-b1eb-ebcbb9c1eef0/review_loop/lean_targets.json",
+        "manifest_output": "review_loop/lean_targets.json",
+        "skip_reason": null,
+        "stage_id": "proof_obligation_generator",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean/GrokRxiv/Proofs.lean",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/49d76469-91d4-4df0-b1eb-ebcbb9c1eef0/review_loop/lean/GrokRxiv/Proofs.lean",
+        "manifest_output": "review_loop/lean/GrokRxiv/Proofs.lean",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean/results.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/49d76469-91d4-4df0-b1eb-ebcbb9c1eef0/review_loop/lean/results.json",
+        "manifest_output": "review_loop/lean/results.json",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean/fix_rounds.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/49d76469-91d4-4df0-b1eb-ebcbb9c1eef0/review_loop/lean/fix_rounds.json",
+        "manifest_output": "review_loop/lean/fix_rounds.json",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean/theorem_map.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/49d76469-91d4-4df0-b1eb-ebcbb9c1eef0/review_loop/lean/theorem_map.json",
+        "manifest_output": "review_loop/lean/theorem_map.json",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean/verification_report.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/49d76469-91d4-4df0-b1eb-ebcbb9c1eef0/review_loop/lean/verification_report.json",
+        "manifest_output": "review_loop/lean/verification_report.json",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/faithfulness.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/49d76469-91d4-4df0-b1eb-ebcbb9c1eef0/review_loop/faithfulness.json",
+        "manifest_output": "review_loop/faithfulness.json",
+        "skip_reason": null,
+        "stage_id": "lean_faithfulness_check",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/semantic_adequacy.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/49d76469-91d4-4df0-b1eb-ebcbb9c1eef0/review_loop/semantic_adequacy.json",
+        "manifest_output": "review_loop/semantic_adequacy.json",
+        "skip_reason": null,
+        "stage_id": "semantic_adequacy_checker",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/citation_validation_report.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/49d76469-91d4-4df0-b1eb-ebcbb9c1eef0/review_loop/citation_validation_report.json",
+        "manifest_output": "citation_validation_report.json",
+        "skip_reason": null,
+        "stage_id": "citation_validation",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/citation_validation_adjudication.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/49d76469-91d4-4df0-b1eb-ebcbb9c1eef0/review_loop/citation_validation_adjudication.json",
+        "manifest_output": "citation_validation_adjudication.json",
+        "skip_reason": "citation-validation adjudication is not materialized separately by the current review-loop runtime; citation_validation_report.json carries the deterministic citation evidence.",
+        "stage_id": "citation_validation",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/pr_fixes.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/49d76469-91d4-4df0-b1eb-ebcbb9c1eef0/review_loop/pr_fixes.json",
+        "manifest_output": "review_loop/pr_fixes.json",
+        "skip_reason": null,
+        "stage_id": "pr_fixer",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/fixed/review.md",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/49d76469-91d4-4df0-b1eb-ebcbb9c1eef0/review_loop/fixed/review.md",
+        "manifest_output": "review_loop/fixed/review.md",
+        "skip_reason": null,
+        "stage_id": "pr_fixer",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/pr_review/results.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/49d76469-91d4-4df0-b1eb-ebcbb9c1eef0/review_loop/pr_review/results.json",
+        "manifest_output": "review_loop/pr_review/results.json",
+        "skip_reason": null,
+        "stage_id": "pr_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/pr_review/fix_rounds.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/49d76469-91d4-4df0-b1eb-ebcbb9c1eef0/review_loop/pr_review/fix_rounds.json",
+        "manifest_output": "review_loop/pr_review/fix_rounds.json",
+        "skip_reason": null,
+        "stage_id": "pr_review_fix_code",
+        "status": "present"
+      }
+    ],
+    "declared_artifact_count": 20,
+    "failures": [],
+    "missing_count": 0,
+    "present_count": 20,
+    "skipped_count": 0,
+    "status": "pass"
+  },
+  "dag_type": "review-loop",
+  "deterministic_status": "pass",
+  "fix_attempts": {
+    "lean": [
+      {
+        "attempt": 0,
+        "semantic_validation": {
+          "issues": [
+            "Lean formalization runs asynchronously via the `formalize` job; queue with --with-lean."
+          ],
+          "status": "skipped"
+        },
+        "skipped": true,
+        "status": "skipped"
+      }
+    ],
+    "pr_review": []
+  },
+  "pr_evidence": {
+    "artifact_worktree": ".agenthero/artifacts/grokrxiv/reviews/49d76469-91d4-4df0-b1eb-ebcbb9c1eef0/review_loop/fixed",
+    "compile_review_loop": {
+      "agent_output_audit_summary": {
+        "accepted": 0,
+        "by_role": {},
+        "rejected": 0,
+        "total": 0
+      },
+      "attempts": [],
+      "filename": "review.md",
+      "final_path": ".agenthero/artifacts/grokrxiv/reviews/49d76469-91d4-4df0-b1eb-ebcbb9c1eef0/review_loop/fixed/review.md",
+      "harness": {
+        "branch": null,
+        "path": ".agenthero/artifacts/grokrxiv/reviews/49d76469-91d4-4df0-b1eb-ebcbb9c1eef0/review_loop/fixed"
+      },
+      "language": "markdown",
+      "skip_reason": "Markdown is the canonical PR review artifact; TeX/PDF exports are optional and outside the default review-loop gate.",
+      "stage": "pr_review_fix_code",
+      "status": "skipped",
+      "target": "pr"
+    },
+    "fixed_markdown": "review_loop/fixed/review.md",
+    "fixed_pdf": null,
+    "fixed_tex": null,
+    "issues": [],
+    "stage": "pr_fixer",
+    "status": "pass"
+  },
+  "publish_decision": {
+    "action": "revision_needed_pr",
+    "auto_publish": false,
+    "publisher_ready": false
+  },
+  "publishability_vector": {
+    "citation": "warn",
+    "formal": "failed",
+    "integrity": "pass",
+    "reproducibility": "not_run",
+    "safety": "pass",
+    "semantic_adequacy": "fail"
+  },
+  "publisher_ready": false,
+  "release_tier": {
+    "lifecycle_state": "needs_update",
+    "tier": "in_review"
+  },
+  "review_id": "49d76469-91d4-4df0-b1eb-ebcbb9c1eef0",
+  "semantic_adequacy": {
+    "schema_version": "1.0.0",
+    "source": "review_loop/semantic_ir.json",
+    "status": "fail",
+    "theorem_map": "review_loop/lean/theorem_map.json",
+    "verdicts": [
+      {
+        "claim_id": "thm:1.5",
+        "emitted_statement": "theorem thm_1_5 : True := by",
+        "lean_declaration": "thm_1_5",
+        "proof_status": "FAILED",
+        "statement": "Theorem 1.7 (1.5). If $M$ is a manifold without boundary, then its $P$-category is at least one more than the $p$-length of $M$: $\\mathop{\\mathrm{P\\text{-}cat}}M \\geq \\mathrm{long}^{p} M + 1$. If $M$ is a manifold with boundary, then its $P$-category is at least the $p$-length of $M$: $\\mathop{\\mathrm{P\\text{-}cat}}M \\geq \\mathrm{long}^{p} M$.",
+        "theorem_id": "theorem_thm_1_5",
+        "verdict": "OVERCLAIMED",
+        "verified_statement": "theorem thm_1_5 : True := by"
+      },
+      {
+        "claim_id": "prop:1.6",
+        "emitted_statement": "theorem prop_1_6 : 0 = 0 := by",
+        "lean_declaration": "prop_1_6",
+        "proof_status": "FAILED",
+        "statement": "Proposition 1.8 (1.6). Let $(N; \\partial N)$ be obtained from the sphere $S^2$ by removing a finite number $s$ of open discs: $(N; \\partial N) = (S^2 \\setminus \\bigcup_{i=1}^{s} D_i^2; \\bigcup_{i=1}^{s} S_i^1)$, and let $(L; \\partial L)$ be obtained from the projective plane $\\mathbb{R}P^2$ by removing a finite number $k$ of open discs: $(L; \\partial L) = (\\mathbb{R}P^2 \\setminus \\bigcup_{i=1}^{k} D_i^2; \\bigcup_{i=1}^{k} S_i^1)$. For $p = 0$ the $p$-length of a two-dimensional compact connected manifold equals: 1. one, if the manifold is homeomorphic to $(N; \\partial N)$, to $(L; \\partial L)$, or to the sphere $S^2$; 2. two, on the other manifolds. For $p = 1$ the $p$-length of a two-dimensional compact connected manifold equals: 1. zero, if the manifold is homeomorphic to the sphere $S^2$ or to the disc $D^2$; 2. one, on the other manifolds.",
+        "theorem_id": "theorem_prop_1_6",
+        "verdict": "OVERCLAIMED",
+        "verified_statement": "theorem prop_1_6 : 0 = 0 := by"
+      },
+      {
+        "claim_id": "thm:1.7",
+        "emitted_statement": "theorem thm_1_7 : True := by",
+        "lean_declaration": "thm_1_7",
+        "proof_status": "FAILED",
+        "statement": "Theorem 1.9 (1.7). Let $M = S^{k_1} \\times S^{k_2} \\times \\ldots \\times S^{k_r}$ be a product of $k_i$-dimensional spheres, $i = 1, \\ldots, r$, and let $p$ be a non-negative integer. Then $\\mathrm{long}^{p} M \\geq r - \\min l(p)$, where the minimum is taken over all subsets $\\{(k_{i_1}, k_{i_2}, \\ldots, k_{i_l}) \\subset (k_1, k_2, \\ldots, k_r) : \\sum_{j=1}^{l} k_{i_j} \\geq p\\}$.",
+        "theorem_id": "theorem_thm_1_7",
+        "verdict": "OVERCLAIMED",
+        "verified_statement": "theorem thm_1_7 : True := by"
+      },
+      {
+        "claim_id": "cor:1.8",
+        "emitted_statement": "theorem cor_1_8 : 0 = 0 := by",
+        "lean_declaration": "cor_1_8",
+        "proof_status": "FAILED",
+        "statement": "Corollary 1.10 (1.8). Let $M = S^{k_1} \\times S^{k_2} \\times \\ldots \\times S^{k_r}$ be a product of $k_i$-dimensional spheres, $i = 1, \\ldots, r$. Then the (co)homological length of $M$ equals the number $r$ of factors: $\\mathrm{long}\\, M = r$.",
+        "theorem_id": "theorem_cor_1_8",
+        "verdict": "OVERCLAIMED",
+        "verified_statement": "theorem cor_1_8 : 0 = 0 := by"
+      },
+      {
+        "claim_id": "prop:1.9",
+        "emitted_statement": "theorem prop_1_9 : 0 = 0 := by",
+        "lean_declaration": "prop_1_9",
+        "proof_status": "FAILED",
+        "statement": "Proposition 1.11 (1.9). The $p$-length of the $n$-dimensional torus is $p$ less than its dimension: $\\mathrm{long}^{p} T^n = n - p$.",
+        "theorem_id": "theorem_prop_1_9",
+        "verdict": "OVERCLAIMED",
+        "verified_statement": "theorem prop_1_9 : 0 = 0 := by"
+      },
+      {
+        "claim_id": "prop:1.10",
+        "emitted_statement": "theorem prop_1_10 : True := by",
+        "lean_declaration": "prop_1_10",
+        "proof_status": "FAILED",
+        "statement": "Proposition 1.12 (1.10). The Lyusternik--Shnirelman category of a two-dimensional compact connected manifold with boundary, not homeomorphic to the disc $D^2$, equals two. Moreover, the categorical sets may be chosen so as to intersect only along their boundaries, and so that each is homeomorphic to the disc $D^2$.",
+        "theorem_id": "theorem_prop_1_10",
+        "verdict": "OVERCLAIMED",
+        "verified_statement": "theorem prop_1_10 : True := by"
+      },
+      {
+        "claim_id": "prop:1.11",
+        "emitted_statement": "",
+        "lean_declaration": null,
+        "proof_status": "FAILED",
+        "statement": "Proposition 1.13 (1.11). The round category of a two-dimensional compact connected manifold equals: 1. one, if the manifold is homeomorphic to $S^1 \\times I$ or to the Möbius band; 2. two, on the remaining manifolds with boundary; 3. two, if the manifold is homeomorphic to the sphere $S^2$, the projective plane $\\mathbb{R}P^2$, the torus $T^2$ or the Klein bottle; 4. three, on the remaining manifolds without boundary.",
+        "theorem_id": "theorem_prop_1_11",
+        "verdict": "OVERCLAIMED",
+        "verified_statement": ""
+      },
+      {
+        "claim_id": "prop:1.12",
+        "emitted_statement": "",
+        "lean_declaration": null,
+        "proof_status": "FAILED",
+        "statement": "Proposition 1.14 (1.12). The round category of a three-dimensional compact connected manifold without boundary 1. equals two if the manifold is homeomorphic to one of the following: the sphere $S^3$; $S^1 \\times S^2$; the projective space $\\mathbb{R}P^3$; a lens space obtainable as a quotient of $S^3$ by a differentiable action of the group $\\mathbb{Z}_p$; 2. equals three on the torus $T^3$; 3. does not exceed four on the remaining manifolds.",
+        "theorem_id": "theorem_prop_1_12",
+        "verdict": "OVERCLAIMED",
+        "verified_statement": ""
+      },
+      {
+        "claim_id": "thm:1.13",
+        "emitted_statement": "",
+        "lean_declaration": null,
+        "proof_status": "FAILED",
+        "statement": "Theorem 1.15 (1.13). Let $M = S^{k_1} \\times S^{k_2} \\times \\ldots \\times S^{k_r}$ be a product of $k_i$-dimensional spheres, $i = 1, \\ldots, r$. Then the Lyusternik--Shnirelman category of $M$ is one more than the number $r$ of factors: $\\mathop{\\mathrm{cat}}M = r + 1$.",
+        "theorem_id": "theorem_thm_1_13",
+        "verdict": "OVERCLAIMED",
+        "verified_statement": ""
+      },
+      {
+        "claim_id": "thm:1.14",
+        "emitted_statement": "",
+        "lean_declaration": null,
+        "proof_status": "FAILED",
+        "statement": "Theorem 1.16 (1.14). Let $M = S^{k_1} \\times S^{k_2} \\times \\ldots \\times S^{k_r}$ be a product of $k_i$-dimensional spheres, $k_i \\geq 1$, $i = 1, \\ldots, r$, and let $P = S^{k_{i_1}} \\times S^{k_{i_2}} \\times \\ldots \\times S^{k_{i_l}}$ be a submanifold of $M$, where $\\{k_{i_1}, k_{i_2}, \\ldots, k_{i_l}\\} \\subset \\{k_1, k_2, \\ldots, k_r\\}$. Then the $P$-category of $M$ equals $\\mathop{\\mathrm{P\\text{-}cat}}M = r - l + 1$.",
+        "theorem_id": "theorem_thm_1_14",
+        "verdict": "OVERCLAIMED",
+        "verified_statement": ""
+      },
+      {
+        "claim_id": "cor:1.15",
+        "emitted_statement": "",
+        "lean_declaration": null,
+        "proof_status": "FAILED",
+        "statement": "Corollary 1.17 (1.15). Let $P$ be the $k$-dimensional torus. Then the $P$-category of the $n$-dimensional torus equals $T^k\\text{-}\\mathop{\\mathrm{cat}}T^n = n - k + 1$, $n \\geq k$.",
+        "theorem_id": "theorem_cor_1_15",
+        "verdict": "OVERCLAIMED",
+        "verified_statement": ""
+      },
+      {
+        "claim_id": "prop:1.16",
+        "emitted_statement": "",
+        "lean_declaration": null,
+        "proof_status": "FAILED",
+        "statement": "Proposition 1.18 (1.16). Let $P$ be the $l$-dimensional sphere. Then the $P$-category of the $n$-dimensional sphere equals: 1. two, if $l < n$; 2. one, if $l = n$; 3. zero, if $l > n$.",
+        "theorem_id": "theorem_prop_1_16",
+        "verdict": "OVERCLAIMED",
+        "verified_statement": ""
+      },
+      {
+        "claim_id": "prop:2.2",
+        "emitted_statement": "",
+        "lean_declaration": null,
+        "proof_status": "FAILED",
+        "statement": "Proposition 2.2 (2.2). Let $P$ be a smooth submanifold of dimension $p$ in $\\mathbb{R}^n$, and let $f\\colon P \\times \\mathbb{R}^{n-p} \\to \\mathbb{R}$ be a function with the properties: $f$ is continuous; the submanifold $P$ lies in a level surface; $f|_{P \\times \\mathbb{R}^{n-p}\\setminus C}$ is differentiable and has no critical points. Then on $P \\times \\mathbb{R}^{n-p}$ there exists a function $F\\colon P \\times \\mathbb{R}^{n-p} \\to \\mathbb{R}$, having the properties: $F$ has a unique critical submanifold $P$; $F|_{P \\times \\mathbb{R}^{n-p}\\setminus C} = f|_{P \\times \\mathbb{R}^{n-p}\\setminus C}$ for some compact set $C \\subset P \\times \\mathbb{R}^{n-p}$.",
+        "theorem_id": "theorem_prop_2_2",
+        "verdict": "OVERCLAIMED",
+        "verified_statement": ""
+      },
+      {
+        "claim_id": "prop:2.4",
+        "emitted_statement": "",
+        "lean_declaration": null,
+        "proof_status": "FAILED",
+        "statement": "Proposition 2.4 (2.4). Let $M^m$ be a smooth compact manifold with boundary $\\partial M^m$, which is a disjoint union of closed subsets $M_1$ and $M_2$, and let $(M^m; M_1, M_2)$ admit a covering $\\{Q_i\\}_{i=1}^{3}$ by three closed submanifolds satisfying: $\\mathop{\\mathrm{Int}}(Q_i) \\cap \\mathop{\\mathrm{Int}}(Q_j) = \\emptyset$, $i \\neq j$; $(Q_i, M_i)$ is almost diffeomorphic to $(M_i \\times [0,1], M_i \\times \\{0\\})$ for $i = 1, 2$; $Q_3$ is almost diffeomorphic to $P \\times D^{m-p}$, where $P$ is a smooth submanifold of $M^m$ of dimension $p$; $Q_1 \\cap Q_2$ is a smooth submanifold of $M^m \\setminus \\mathop{\\mathrm{Int}}Q_3$. Then on $M^m$ there exists a $P$-function $F\\colon M^m \\to \\mathbb{R}$ with the following properties: $F$ takes a constant minimal value on $M_1$; $F$ takes a constant maximal value on $M_2$; $F$ has no critical points on $M_1$ or $M_2$; $F$ has a unique critical submanifold $P$ lying in $\\mathop{\\mathrm{Int}}M^m$.",
+        "theorem_id": "theorem_prop_2_4",
+        "verdict": "OVERCLAIMED",
+        "verified_statement": ""
+      },
+      {
+        "claim_id": "thm:2.5",
+        "emitted_statement": "",
+        "lean_declaration": null,
+        "proof_status": "FAILED",
+        "statement": "Theorem 2.6 (2.5). Let $M^m$ be a smooth compact manifold (with or without boundary), and let $M_1 \\subset M_2 \\subset \\ldots \\subset M_k = M^m$ be a filtration of $M^m$ by compact manifolds with boundary, satisfying: 1. $M_i$ are manifolds with boundary, $i = 1, \\ldots, k-1$; 2. $M_i \\subset \\mathop{\\mathrm{Int}}(M_{i+1})$, $i = 1, \\ldots, k-1$; 3. $\\partial M^m \\subset M_k \\setminus M_{k-1}$; 4. for each $i = 1, \\ldots, k$, the manifold $(M_i \\setminus \\mathop{\\mathrm{Int}}M_{i-1}; \\partial M_{i-1}, \\partial M_i)$ admits a covering by three closed subsets as in Proposition 2.4. Then on $M^m$ there exists a $P$-function with $k$ critical submanifolds.",
+        "theorem_id": "theorem_thm_2_5",
+        "verdict": "OVERCLAIMED",
+        "verified_statement": ""
+      },
+      {
+        "claim_id": "prop:2.7",
+        "emitted_statement": "",
+        "lean_declaration": null,
+        "proof_status": "FAILED",
+        "statement": "Proposition 2.8 (2.7). An integral trajectory of $\\mathrm{grad}\\, f$ passing through an arbitrary point of $U$ either enters $P$, or leaves $P$, or reaches the boundary $\\partial \\overline{U}$ at some point.",
+        "theorem_id": "theorem_prop_2_7",
+        "verdict": "OVERCLAIMED",
+        "verified_statement": ""
+      },
+      {
+        "claim_id": "cor:2.10",
+        "emitted_statement": "",
+        "lean_declaration": null,
+        "proof_status": "FAILED",
+        "statement": "Corollary 2.11 (2.10). The tubular neighbourhood of a critical submanifold $P$ in $M$ contains arbitrarily small cylindrical neighbourhoods of $P$.",
+        "theorem_id": "theorem_cor_2_10",
+        "verdict": "OVERCLAIMED",
+        "verified_statement": ""
+      },
+      {
+        "claim_id": "prop:2.11",
+        "emitted_statement": "",
+        "lean_declaration": null,
+        "proof_status": "FAILED",
+        "statement": "Proposition 2.12 (2.11). The set $C_\\varepsilon(P)$ is a neighbourhood of $P$ in $M$, that is, a subset of $M$ containing arbitrarily small tubular neighbourhoods of $P$ in $M$.",
+        "theorem_id": "theorem_prop_2_11",
+        "verdict": "OVERCLAIMED",
+        "verified_statement": ""
+      },
+      {
+        "claim_id": "thm:2.12",
+        "emitted_statement": "",
+        "lean_declaration": null,
+        "proof_status": "FAILED",
+        "statement": "Theorem 2.13 (2.12). Let $M$ be a smooth compact connected manifold (with or without boundary), and let $f$ be a $P$-function on it which, in the case of a manifold with boundary, takes a constant maximal value on the boundary and has no critical points on the boundary. Then the number of critical submanifolds of $f$ is at least the $P$-category of $M$.",
+        "theorem_id": "theorem_thm_2_12",
+        "verdict": "OVERCLAIMED",
+        "verified_statement": ""
+      },
+      {
+        "claim_id": "thm:2.15",
+        "emitted_statement": "",
+        "lean_declaration": null,
+        "proof_status": "FAILED",
+        "statement": "Theorem 2.16 (2.15). Let $\\{k_{i_1}, \\ldots, k_{i_l}\\}$ be a subset of $\\{k_1, \\ldots, k_n\\}$ positive integers. Let $P = S^{k_{i_1}} \\times \\ldots \\times S^{k_{i_l}}$ be a product of $k_{i_j}$-dimensional spheres, $j = 1, \\ldots, l$. Then on the manifold $M = S^{k_1} \\times \\ldots \\times S^{k_n}$ there exists an exact $P$-function with $n - l + 1$ singularities.",
+        "theorem_id": "theorem_thm_2_15",
+        "verdict": "OVERCLAIMED",
+        "verified_statement": ""
+      },
+      {
+        "claim_id": "cor:2.16",
+        "emitted_statement": "",
+        "lean_declaration": null,
+        "proof_status": "FAILED",
+        "statement": "Corollary 2.17 (2.16). Let $P$ be the $k$-dimensional torus, $k \\leq n$. Then on the $n$-dimensional torus there exists an exact $P$-function with $n - k + 1$ singularities. In particular, an exact round function on the $n$-dimensional torus has $n$ singularities.",
+        "theorem_id": "theorem_cor_2_16",
+        "verdict": "OVERCLAIMED",
+        "verified_statement": ""
+      },
+      {
+        "claim_id": "thm:2.17",
+        "emitted_statement": "",
+        "lean_declaration": null,
+        "proof_status": "FAILED",
+        "statement": "Theorem 2.18 (2.17). Let $P = S^n$ be the $n$-dimensional sphere. Then on the odd-dimensional sphere $S^{2n+1}$, $n \\geq 1$, there exists an exact $P$-function with two singularities.",
+        "theorem_id": "theorem_thm_2_17",
+        "verdict": "OVERCLAIMED",
+        "verified_statement": ""
+      },
+      {
+        "claim_id": "prop:3.1",
+        "emitted_statement": "",
+        "lean_declaration": null,
+        "proof_status": "FAILED",
+        "statement": "Proposition 3.1 (3.1). On a two-dimensional smooth compact connected manifold with boundary, not homeomorphic to the disc $D^2$, there exists an exact function with two critical points.",
+        "theorem_id": "theorem_prop_3_1",
+        "verdict": "OVERCLAIMED",
+        "verified_statement": ""
+      },
+      {
+        "claim_id": "thm:3.2",
+        "emitted_statement": "",
+        "lean_declaration": null,
+        "proof_status": "FAILED",
+        "statement": "Theorem 3.2 (3.2). On a manifold homeomorphic to the sphere $S^2$, to the projective plane $\\mathbb{R}P^2$, or to the disc $D^2$, there exist no round functions. On every other two-dimensional smooth compact connected manifold round functions exist.",
+        "theorem_id": "theorem_thm_3_2",
+        "verdict": "OVERCLAIMED",
+        "verified_statement": ""
+      },
+      {
+        "claim_id": "thm:3.3",
+        "emitted_statement": "",
+        "lean_declaration": null,
+        "proof_status": "FAILED",
+        "statement": "Theorem 3.3 (3.3). On every two-dimensional smooth compact connected manifold not homeomorphic to the disc $D^2$, the sphere $S^2$ or the projective plane $\\mathbb{R}P^2$, there exists an exact round function whose number of singularities equals: 1. two on the torus and the Klein bottle; 2. three on the remaining manifolds without boundary; 3. one on the annulus $S^1 \\times I$ and on the Möbius band; 4. two on the remaining manifolds with boundary.",
+        "theorem_id": "theorem_thm_3_3",
+        "verdict": "OVERCLAIMED",
+        "verified_statement": ""
+      },
+      {
+        "claim_id": "thm:3.4",
+        "emitted_statement": "",
+        "lean_declaration": null,
+        "proof_status": "FAILED",
+        "statement": "Theorem 3.4 (3.4). On every three-dimensional smooth compact connected manifold without boundary a round function exists. If the manifold is homeomorphic to one of the sphere $S^3$, the projective space $\\mathbb{R}P^3$, the manifold $S^1 \\times S^2$, a lens space, then it admits an exact round function with two critical circles. If the manifold is homeomorphic to the torus $T^3$, then it admits an exact round function with three critical circles. On every other three-dimensional smooth compact connected manifold there exists a round function whose number of singularities does not exceed four.",
+        "theorem_id": "theorem_thm_3_4",
+        "verdict": "OVERCLAIMED",
+        "verified_statement": ""
+      },
+      {
+        "claim_id": "thm:3.5",
+        "emitted_statement": "",
+        "lean_declaration": null,
+        "proof_status": "FAILED",
+        "statement": "Theorem 3.5 (3.5). Let $P = S^{n-1}$ be the $(n-1)$-dimensional sphere. Then on the $n$-dimensional sphere there are no $P$-functions.",
+        "theorem_id": "theorem_thm_3_5",
+        "verdict": "OVERCLAIMED",
+        "verified_statement": ""
+      },
+      {
+        "claim_id": "thm:3.6",
+        "emitted_statement": "",
+        "lean_declaration": null,
+        "proof_status": "FAILED",
+        "statement": "Theorem 3.6 (3.6). Let $P = S^1$ be the one-dimensional sphere, and let $n \\geq 3$. Then on the $n$-dimensional sphere there exists a $P$-function whose number of singularities does not exceed $[n/2] + 1$.",
+        "theorem_id": "theorem_thm_3_6",
+        "verdict": "OVERCLAIMED",
+        "verified_statement": ""
+      }
+    ]
+  },
+  "theorem_formalization": {
+    "entries": [
+      {
+        "emitted_statement": "theorem thm_1_5 : True := by",
+        "kind": "theorem_formalization",
+        "lean_declaration": "thm_1_5",
+        "obligation_id": "formalize_theorem_thm_1_5",
+        "source_claim_id": "thm:1.5",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "thm:1.5",
+          "paper_source_id": "thm:1.5",
+          "section_id": "sec-2-2",
+          "text_excerpt": "Theorem 1.7 (1.5). If $M$ is a manifold without boundary, then its $P$-category is at least one more than the $p$-length of $M$: $\\mathop{\\mathrm{P\\text{-}cat}}M \\geq \\mathrm{long}^{p} M + 1$. If $M$ is a manifold with boundary, then its $P$-category is at le..."
+        },
+        "statement": "Theorem 1.7 (1.5). If $M$ is a manifold without boundary, then its $P$-category is at least one more than the $p$-length of $M$: $\\mathop{\\mathrm{P\\text{-}cat}}M \\geq \\mathrm{long}^{p} M + 1$. If $M$ is a manifold with boundary, then its $P$-category is at least the $p$-length of $M$: $\\mathop{\\mathrm{P\\text{-}cat}}M \\geq \\mathrm{long}^{p} M$.",
+        "status": "FAILED",
+        "verified_statement": "theorem thm_1_5 : True := by"
+      },
+      {
+        "emitted_statement": "theorem prop_1_6 : 0 = 0 := by",
+        "kind": "theorem_formalization",
+        "lean_declaration": "prop_1_6",
+        "obligation_id": "formalize_theorem_prop_1_6",
+        "source_claim_id": "prop:1.6",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "prop:1.6",
+          "paper_source_id": "prop:1.6",
+          "section_id": "sec-2-2",
+          "text_excerpt": "Proposition 1.8 (1.6). Let $(N; \\partial N)$ be obtained from the sphere $S^2$ by removing a finite number $s$ of open discs: $(N; \\partial N) = (S^2 \\setminus \\bigcup_{i=1}^{s} D_i^2; \\bigcup_{i=1}^{s} S_i^1)$, and let $(L; \\partial L)$ be obtained from the ..."
+        },
+        "statement": "Proposition 1.8 (1.6). Let $(N; \\partial N)$ be obtained from the sphere $S^2$ by removing a finite number $s$ of open discs: $(N; \\partial N) = (S^2 \\setminus \\bigcup_{i=1}^{s} D_i^2; \\bigcup_{i=1}^{s} S_i^1)$, and let $(L; \\partial L)$ be obtained from the projective plane $\\mathbb{R}P^2$ by removing a finite number $k$ of open discs: $(L; \\partial L) = (\\mathbb{R}P^2 \\setminus \\bigcup_{i=1}^{k} D_i^2; \\bigcup_{i=1}^{k} S_i^1)$. For $p = 0$ the $p$-length of a two-dimensional compact connected manifold equals: 1. one, if the manifold is homeomorphic to $(N; \\partial N)$, to $(L; \\partial L)$, or to the sphere $S^2$; 2. two, on the other manifolds. For $p = 1$ the $p$-length of a two-dimensional compact connected manifold equals: 1. zero, if the manifold is homeomorphic to the sphere $S^2$ or to the disc $D^2$; 2. one, on the other manifolds.",
+        "status": "FAILED",
+        "verified_statement": "theorem prop_1_6 : 0 = 0 := by"
+      },
+      {
+        "emitted_statement": "theorem thm_1_7 : True := by",
+        "kind": "theorem_formalization",
+        "lean_declaration": "thm_1_7",
+        "obligation_id": "formalize_theorem_thm_1_7",
+        "source_claim_id": "thm:1.7",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "thm:1.7",
+          "paper_source_id": "thm:1.7",
+          "section_id": "sec-2-2",
+          "text_excerpt": "Theorem 1.9 (1.7). Let $M = S^{k_1} \\times S^{k_2} \\times \\ldots \\times S^{k_r}$ be a product of $k_i$-dimensional spheres, $i = 1, \\ldots, r$, and let $p$ be a non-negative integer. Then $\\mathrm{long}^{p} M \\geq r - \\min l(p)$, where the minimum is taken ov..."
+        },
+        "statement": "Theorem 1.9 (1.7). Let $M = S^{k_1} \\times S^{k_2} \\times \\ldots \\times S^{k_r}$ be a product of $k_i$-dimensional spheres, $i = 1, \\ldots, r$, and let $p$ be a non-negative integer. Then $\\mathrm{long}^{p} M \\geq r - \\min l(p)$, where the minimum is taken over all subsets $\\{(k_{i_1}, k_{i_2}, \\ldots, k_{i_l}) \\subset (k_1, k_2, \\ldots, k_r) : \\sum_{j=1}^{l} k_{i_j} \\geq p\\}$.",
+        "status": "FAILED",
+        "verified_statement": "theorem thm_1_7 : True := by"
+      },
+      {
+        "emitted_statement": "theorem cor_1_8 : 0 = 0 := by",
+        "kind": "theorem_formalization",
+        "lean_declaration": "cor_1_8",
+        "obligation_id": "formalize_theorem_cor_1_8",
+        "source_claim_id": "cor:1.8",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "cor:1.8",
+          "paper_source_id": "cor:1.8",
+          "section_id": "sec-2-2",
+          "text_excerpt": "Corollary 1.10 (1.8). Let $M = S^{k_1} \\times S^{k_2} \\times \\ldots \\times S^{k_r}$ be a product of $k_i$-dimensional spheres, $i = 1, \\ldots, r$. Then the (co)homological length of $M$ equals the number $r$ of factors: $\\mathrm{long}\\, M = r$."
+        },
+        "statement": "Corollary 1.10 (1.8). Let $M = S^{k_1} \\times S^{k_2} \\times \\ldots \\times S^{k_r}$ be a product of $k_i$-dimensional spheres, $i = 1, \\ldots, r$. Then the (co)homological length of $M$ equals the number $r$ of factors: $\\mathrm{long}\\, M = r$.",
+        "status": "FAILED",
+        "verified_statement": "theorem cor_1_8 : 0 = 0 := by"
+      },
+      {
+        "emitted_statement": "theorem prop_1_9 : 0 = 0 := by",
+        "kind": "theorem_formalization",
+        "lean_declaration": "prop_1_9",
+        "obligation_id": "formalize_theorem_prop_1_9",
+        "source_claim_id": "prop:1.9",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "prop:1.9",
+          "paper_source_id": "prop:1.9",
+          "section_id": "sec-2-2",
+          "text_excerpt": "Proposition 1.11 (1.9). The $p$-length of the $n$-dimensional torus is $p$ less than its dimension: $\\mathrm{long}^{p} T^n = n - p$."
+        },
+        "statement": "Proposition 1.11 (1.9). The $p$-length of the $n$-dimensional torus is $p$ less than its dimension: $\\mathrm{long}^{p} T^n = n - p$.",
+        "status": "FAILED",
+        "verified_statement": "theorem prop_1_9 : 0 = 0 := by"
+      },
+      {
+        "emitted_statement": "theorem prop_1_10 : True := by",
+        "kind": "theorem_formalization",
+        "lean_declaration": "prop_1_10",
+        "obligation_id": "formalize_theorem_prop_1_10",
+        "source_claim_id": "prop:1.10",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "prop:1.10",
+          "paper_source_id": "prop:1.10",
+          "section_id": "sec-2-3",
+          "text_excerpt": "Proposition 1.12 (1.10). The Lyusternik--Shnirelman category of a two-dimensional compact connected manifold with boundary, not homeomorphic to the disc $D^2$, equals two. Moreover, the categorical sets may be chosen so as to intersect only along their bounda..."
+        },
+        "statement": "Proposition 1.12 (1.10). The Lyusternik--Shnirelman category of a two-dimensional compact connected manifold with boundary, not homeomorphic to the disc $D^2$, equals two. Moreover, the categorical sets may be chosen so as to intersect only along their boundaries, and so that each is homeomorphic to the disc $D^2$.",
+        "status": "FAILED",
+        "verified_statement": "theorem prop_1_10 : True := by"
+      }
+    ],
+    "lean_results": "review_loop/lean/results.json",
+    "schema_version": "1.0.0",
+    "source": "review_loop/proof_obligations.json",
+    "status": "FAILED"
+  }
+}
