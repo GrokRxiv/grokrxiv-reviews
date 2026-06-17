@@ -1,0 +1,1227 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Computing stable homology representations of graph configuration spaces — GrokRxiv Review</title>
+  <meta name="generator" content="grokrxiv-render">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- KaTeX is rendered client-side; math is kept as \( ... \) and \[ ... \] delimiters. -->
+  <style>
+    :root { color-scheme: light dark; --fg: #111; --muted: #555; --bg: #fff;
+            --accent: #1f6feb; --border: #d0d7de; --banner: #fff3cd; --banner-fg: #664d03; }
+    @media (prefers-color-scheme: dark) {
+      :root { --fg: #e6edf3; --muted: #8b949e; --bg: #0d1117; --accent: #58a6ff;
+              --border: #30363d; --banner: #3a2f0b; --banner-fg: #f1c453; }
+    }
+    body { font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+           color: var(--fg); background: var(--bg); max-width: 820px;
+           margin: 0 auto; padding: 24px; }
+    h1 { font-size: 1.7rem; line-height: 1.25; margin: 0 0 0.5rem; }
+    h2 { font-size: 1.2rem; margin-top: 2rem; border-bottom: 1px solid var(--border); padding-bottom: .25rem; }
+    .muted { color: var(--muted); }
+    .disclaimer { background: var(--banner); color: var(--banner-fg); border: 1px solid var(--border);
+                  padding: .75rem 1rem; border-radius: 6px; margin: 0 0 1.5rem; font-weight: 600; }
+    .footer-disclaimer { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--border);
+                         color: var(--muted); font-size: .9rem; }
+    .brand { font-weight: 700; color: var(--accent); }
+    details { border: 1px solid var(--border); border-radius: 6px; padding: .75rem 1rem; margin: .5rem 0; }
+    details > summary { cursor: pointer; font-weight: 600; }
+    .meta-link { font-size: .9rem; }
+    ul { padding-left: 1.25rem; }
+    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .agent-grid { display: grid; gap: .5rem; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 999px;
+             background: var(--border); color: var(--fg); font-size: .8rem; }
+    .badge.pass { background: #1f883d; color: #fff; }
+    .badge.warn { background: #bf8700; color: #fff; }
+    .badge.fail { background: #cf222e; color: #fff; }
+    .target-grid { display: grid; gap: .75rem; padding: 0; list-style: none; }
+    .revision-target { border: 1px solid var(--border); border-radius: 6px; padding: .9rem 1rem;
+                       background: rgba(127, 127, 127, .08); }
+    .target-title { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: 0 0 .75rem; }
+    .target-fields { display: grid; gap: .5rem; margin: 0; }
+    .target-field { display: grid; gap: .35rem; border: 1px solid var(--border);
+                    border-radius: 6px; padding: .65rem .75rem; }
+    .target-field.required { border-color: #bf8700; background: rgba(191, 135, 0, .12); }
+    .field-label { color: var(--muted); font-size: .75rem; font-weight: 700; text-transform: uppercase; }
+    .field-value { margin: 0; overflow-wrap: anywhere; }
+    .field-value.codeish { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Computing stable homology representations of graph configuration spaces</h1>
+    <p class="muted">
+      <span class="brand">GrokRxiv</span> review of
+      <a class="meta-link" href="https://arxiv.org/abs/2606.13813">arXiv:2606.13813</a>
+       · <span>math.AT</span>
+    </p>
+    <p class="muted">
+      Eric Ramos, Claudia He Yun
+    </p>
+  </header>
+
+  <section>
+    <h2>TL;DR</h2>
+    <p>The paper makes a significant computational contribution to algebraic topology by deriving explicit stable Sn-representation decompositions for the rational homology of graph configuration spaces across several infinite graph families. The novelty specialist assessed the contribution as significant (score 0.8, confidence 0.95), confirming genuine advances beyond the existential stability results of Ramos–White. Technical correctness is rated mostly_sound (confidence 0.7): all stability-bound claims (C1–C5, C7–C10, C12–C16) are well-supported; two minor gaps arise in Theorem 39 (where the claimed stable range n≥6 is tighter than the theoretically guaranteed n≥8 and is supported only empirically, C6) and Proposition 29 (an implicit rather than explicit polynomial chain count, C11). Citation hygiene is exemplary (confidence 0.95). The critical finding is from reproducibility: the GitHub repository https:&#x2f;&#x2f;github.com&#x2f;ClaudiaHeYun&#x2f;GraphConf&#x2f;, cited as the sole location of the SageMath code underlying Tables 1–8, returns HTTP 404 per the verified availability check—meaning the headline computational results are currently unverifiable by any independent reader. This is treated as authoritative ground truth. Because this is a code-amenable mathematics paper (math.*) and the reproducibility specialist flagged three major concerns including the inaccessible repository, the recommendation gate mandates major_revision. All specialists converge on a picture of a technically sound, novel, and well-cited paper whose reproducibility infrastructure must be restored before acceptance; there are no inter-specialist disagreements requiring resolution.</p>
+    <p class="muted">Recommendation: <strong>Major revision</strong> · Confidence: 85%</p>
+  </section>
+
+  <section>
+    <h2>Strengths</h2>
+    <ul>
+      <li>Combining FI-module theory with SageMath computer algebra yields the first explicit Sn-representation decompositions—not merely Betti numbers—for the rational homology of two- and three-particle configuration spaces on complete, complete-bipartite, crown, complete-tripartite, and Kneser graph families.</li><li>Theoretical stability bounds (Theorems 33, 35, 44, 65, 66) are rigorously derived from established FI-module machinery (Nagpal shift theorem, Church–Ellenberg–Farb Lemma 6.3.2) and are internally consistent across all 17 reviewed claims.</li><li>Coverage of multiple graph families and multiple homological degrees within a unified computational framework demonstrates broad applicability and scalability of the method.</li><li>The conjecture linking H2 of configuration spaces to intrinsic linkage properties of graphs is a compelling new research direction, grounded in explicit computational evidence across K5, K_{3,3}, and K_{3,3,1}.</li><li>Citation hygiene is exemplary, properly attributing foundational references (Abrams 2000, CEF 2015, Ramos–White 2019) alongside highly current literature (González–González AGT 2024, Wawrykow TAMS 2025).</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Weaknesses</h2>
+    <ul>
+      <li>The GitHub repository https:&#x2f;&#x2f;github.com&#x2f;ClaudiaHeYun&#x2f;GraphConf&#x2f; cited as the sole source of all SageMath code returns HTTP 404 per the verified reproducibility check, rendering Tables 1–8 currently unverifiable by any independent reader.</li><li>Theorem 39 (Section 3.2) claims H2(Conf_2(K_n)) is stable for n≥6, but Theorem 35 only guarantees stability by n≤8; the tighter n=6 claim rests on empirical agreement in Table 1 rather than a rigorous argument.</li><li>Proposition 29 (Section 2.2) asserts a polynomial stable-degree bound without providing an explicit per-type combinatorial count of i-chains, leaving the foundational general bound technically incomplete.</li><li>No independently runnable proof artifacts—formal proof scripts, SageMath verification notebooks, or CI smoke tests—accompany the paper, so all representation-theoretic claims in Tables 1–8 depend entirely on the currently inaccessible repository.</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Revision Targets</h2>
+    <div class="target-grid">
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>code</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              https:&#x2f;&#x2f;github.com&#x2f;ClaudiaHeYun&#x2f;GraphConf&#x2f;
+               at 
+              code release and execution entrypoints
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">The paper states that all code is available at https:&#x2f;&#x2f;github.com&#x2f;ClaudiaHeYun&#x2f;GraphConf&#x2f;, but the verified availability check reports this GitHub URL as unreachable with status 404, so the implementation cannot be retrieved to regenerate the homology representation tables.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Release the source code, scripts, model configuration, and execution entrypoints needed to regenerate the reported tables, or document why those artifacts cannot be released.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm runnable code or a documented non-release justification is present.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              corrections&#x2f;2606.13813&#x2f;paper.tex
+               at 
+              Theorem 39 (thm: ordered complete), Section 3.2
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">The H_2 stable range n ≥ 6 reported here is strictly tighter than the n ≤ 8 bound established theoretically in Theorem 35; Remark 40 explicitly acknowledges this gap and frames n = 6 as the &#x27;true&#x27; stable range based on Table 1. The stronger lower bound is therefore inferred from empirical agreement of the tabulated representations at n = 6, 7, 8 rather than from a rigorous argument. Validity depends on the correctness of the n = 8 computation (reported wall time 72s), which is in principle verifiable from the supplied GitHub code.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Either prove an improved bound on l(V) and s(V) for these specific FI-modules that yields n=6 directly, or state the n≥6 claim as &#x27;computational stability observed at n=6, theoretically guaranteed at n=8&#x27;.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm `Theorem 39 (thm: ordered complete), Section 3.2` is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              corrections&#x2f;2606.13813&#x2f;paper.tex
+               at 
+              Proposition 29, Section 2.2
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">The proof asserts that cubical i-chains grow no faster than a polynomial of the stated degree without spelling out the count. The (d_V + d_E) factor in non-edge slots is justified only implicitly via the Abrams subdivision (which adds Θ(d_E) new vertices per edge), and the improvement for k = 2 (no subdivision needed) is stated rather than computed.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Expand the proof to explicitly count i-chains as a polynomial in n: for each combinatorial type, give the number of choices for the i edge-slots and the (k−i) vertex-slots (post-subdivision), and show this yields the claimed polynomial degree.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm `Proposition 29, Section 2.2` is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              corrections&#x2f;2606.13813&#x2f;paper.tex
+               at 
+              reproducibility appendix
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">For this code-amenable mathematics paper, the stable range and homology representation theorems are not accompanied by formal proof artifacts or independently checkable proof scripts; files such as proofs&#x2f;stable_ranges.lean or proofs&#x2f;representation_decompositions.sage would materially improve reproducibility.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Add a reproducibility note that resolves this concern: For this code-amenable mathematics paper, the stable range and homology representation theorems are not accompanied by formal proof artifacts or independently checkable proof scripts; files such as proofs&#x2f;stable_ranges.lean or proofs&#x2f;representation_decompositions.sage would materially improve reproducibility.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm the reproducibility concern is addressed with a concrete artifact or manuscript update.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+    </div>
+  </section>
+
+  <section>
+    <h2>Open Questions</h2>
+    <ul>
+      <li>Can the SageMath scripts be deposited in a persistent public archive (e.g., Zenodo or Figshare) with a permanent DOI, or can the GitHub repository be restored to public visibility, so that Tables 1–8 can be independently regenerated?</li><li>For Theorem 39, does a refined bound on l(V) and s(V) specific to the FI-modules arising from Conf_2(K_n) exist that would yield the empirically observed stable range n=6 rigorously, rather than relying on the weaker general bound of n=8?</li><li>For Proposition 29, can an explicit per-type chain count be provided—specifying the number of choices for the i edge-slots and the (k−i) vertex-slots post-Abrams subdivision—so that the claimed polynomial degree is derived rather than asserted?</li><li>Has the intrinsic linkage conjecture been tested on graphs that are intrinsically linked but whose properties would distinguish them from K5 or K_{3,3} minors alone, to more sharply isolate the proposed H2 obstruction?</li><li>For three particles on K_n (Section 4), are the multiplicities of Sp_n(λ) for |λ|≥2 in H2(Conf_3(K_n)) also stable and computed, or does Theorem 69 cover only the trivial and standard representations?</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Per-Agent Reviews</h2>
+    <div class="agent-grid">
+      
+      <details>
+        <summary>
+          citation — <span class="muted">gemini-3-flash-preview</span>
+          <span class="badge warn">warn</span>
+        </summary>
+        <pre>{
+  &quot;confidence&quot;: 0.95,
+  &quot;entries&quot;: [
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Aaron David Abrams&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;Abr&quot;,
+        &quot;raw&quot;: &quot;Abr: Aaron David Abrams. \\newblock {\\em Configuration spaces and braid groups of graphs}. \\newblock University of California, Berkeley, 2000.&quot;,
+        &quot;title&quot;: &quot;Configuration spaces and braid groups of graphs&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;University of California, Berkeley&quot;,
+        &quot;year&quot;: 2000
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Foundational PhD thesis that established the discretized (cubical) model for graph configuration spaces, which is central to the methodology of this paper.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Thomas Church&quot;,
+          &quot;Jordan S Ellenberg&quot;,
+          &quot;Benson Farb&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;CEF&quot;,
+        &quot;raw&quot;: &quot;CEF: Thomas Church, Jordan S Ellenberg, and Benson Farb. \\newblock {FI}-modules and stability for representations of symmetric groups. \\newblock {\\em Duke Mathematical Journal}, 164(9), 2015.&quot;,
+        &quot;title&quot;: &quot;FI-modules and stability for representations of symmetric groups&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Duke Mathematical Journal&quot;,
+        &quot;year&quot;: 2015
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;The seminal paper on FI-modules and representation stability, providing the algebraic framework for the &#x27;multiplicity stability&#x27; analyzed in this work.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Eric Ramos&quot;,
+          &quot;Graham White&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;RW&quot;,
+        &quot;raw&quot;: &quot;RW: Eric Ramos and Graham White. \\newblock Families of nested graphs with compatible symmetric-group actions. \\newblock {\\em Selecta Mathematica}, 25(5):70, 2019.&quot;,
+        &quot;title&quot;: &quot;Families of nested graphs with compatible symmetric-group actions&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Selecta Mathematica&quot;,
+        &quot;year&quot;: 2019
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;A direct predecessor to this work by the first author, proving the existence of stability; the current paper builds on this by computing explicit stable representations.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Emilio J González&quot;,
+          &quot;Jesús González&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;GG&quot;,
+        &quot;raw&quot;: &quot;GG: Emilio J Gonz{\\&#x27;a}lez and Jes{\\&#x27;u}s Gonz{\\&#x27;a}lez. \\newblock An algorithmic discrete gradient field and the cohomology algebra of configuration spaces of two points on complete graphs. \\newblock {\\em Algebraic \\&amp; Geometric Topology}, 24(7):3719--3758, 2024.&quot;,
+        &quot;title&quot;: &quot;An algorithmic discrete gradient field and the cohomology algebra of configuration spaces of two points on complete graphs&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Algebraic &amp; Geometric Topology&quot;,
+        &quot;year&quot;: 2024
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Highly relevant recent work that computes the cohomology ring for the k=2 case on complete graphs, which the authors compare against their own homology stability results.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Byung Hee An&quot;,
+          &quot;Ben Knudsen&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;AK&quot;,
+        &quot;raw&quot;: &quot;AK: Byung Hee An and Ben Knudsen. \\newblock On the second homology of planar graph braid groups. \\newblock {\\em Journal of Topology}, 15(2):666--691, 2022.&quot;,
+        &quot;title&quot;: &quot;On the second homology of planar graph braid groups&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Journal of Topology&quot;,
+        &quot;year&quot;: 2022
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Provides the computation for H2 of unordered configuration spaces of planar graphs, serving as a key reference for the homological data used in this paper.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: &quot;2503.11061&quot;,
+        &quot;authors&quot;: [
+          &quot;Jordan S Ellenberg&quot;,
+          &quot;Cristofero S Fraser-Taliente&quot;,
+          &quot;Thomas R Harvey&quot;,
+          &quot;Karan Srivastava&quot;,
+          &quot;Andrew V Sutherland&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;funsearch2&quot;,
+        &quot;raw&quot;: &quot;funsearch2: Jordan S Ellenberg, Cristofero S Fraser-Taliente, Thomas R Harvey, Karan Srivastava, and Andrew V Sutherland. \\newblock Generative modeling for mathematical discovery. \\newblock {\\em arXiv preprint arXiv:2503.11061}, 2025.&quot;,
+        &quot;title&quot;: &quot;Generative modeling for mathematical discovery&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;arXiv preprint&quot;,
+        &quot;year&quot;: 2025
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Extremely recent reference providing context for the use of machine learning and generative modeling in experimental mathematics, aligning with the authors&#x27; computational approach.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Thomas Church&quot;,
+          &quot;Jeremy Miller&quot;,
+          &quot;Rohit Nagpal&quot;,
+          &quot;Jens Reinhold&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;CMNR&quot;,
+        &quot;raw&quot;: &quot;CMNR: Thomas Church, Jeremy Miller, Rohit Nagpal, and Jens Reinhold. \\newblock Linear and quadratic ranges in representation stability. \\newblock {\\em Advances in Mathematics}, 333:1--40, 2018.&quot;,
+        &quot;title&quot;: &quot;Linear and quadratic ranges in representation stability&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Advances in Mathematics&quot;,
+        &quot;year&quot;: 2018
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Used by the authors to derive stability ranges; the technical homological work here is essential for determining when the multiplicities become constant.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Kathryn Barnett&quot;,
+          &quot;Michael Farber&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;BF&quot;,
+        &quot;raw&quot;: &quot;BF: Kathryn Barnett and Michael Farber. \\newblock Topology of configuration space of two particles on a graph, {I}. \\newblock {\\em Algebraic \\&amp; Geometric Topology}, 9(1):593--624, 2009.&quot;,
+        &quot;title&quot;: &quot;Topology of configuration space of two particles on a graph, I&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Algebraic &amp; Geometric Topology&quot;,
+        &quot;year&quot;: 2009
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Pioneering work in the explicit calculation of Betti numbers for the k=2 configuration space, which this paper extends to stable representations for specific graph families.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Vladimir I Arnold&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;Arn&quot;,
+        &quot;raw&quot;: &quot;Arn: Vladimir I Arnold. \\newblock The cohomology ring of the colored braid group. \\newblock {\\em Vladimir I. Arnold-Collected Works...}, pages 183--186, 2014.&quot;,
+        &quot;title&quot;: &quot;The cohomology ring of the colored braid group&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Collected Works&quot;,
+        &quot;year&quot;: 2014
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Cited for the historical context of configuration spaces in manifolds, contrasting the classical stable behavior with the factorial growth in the graph setting.&quot;,
+      &quot;notes&quot;: &quot;While the citation year is 2014 (reprint in Collected Works), the paper refers to foundational work from 1969.&quot;,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Nicholas Wawrykow&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;wawrykow2025homology&quot;,
+        &quot;raw&quot;: &quot;wawrykow2025homology: Nicholas Wawrykow. \\newblock Homology generators and relations for the ordered configuration space of a star graph. \\newblock {\\em Transactions of the American Mathematical Society, Series B}, 12(31):1188--1222, 2025.&quot;,
+        &quot;title&quot;: &quot;Homology generators and relations for the ordered configuration space of a star graph&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Transactions of the American Mathematical Society&quot;,
+        &quot;year&quot;: 2025
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;An extremely current reference (2025) that treats configuration spaces of star graphs, which the authors use as a contrasting example of stability.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    }
+  ],
+  &quot;missing_references&quot;: [
+    {
+      &quot;reason&quot;: &quot;An early foundational paper that provided some of the first explicit cohomology calculations for configuration spaces of graphs, predating much of the modern stability literature and often cited alongside Abrams and Ghrist.&quot;,
+      &quot;title&quot;: &quot;The cohomology of configuration spaces of graphs (H. Tsutsumi, 2004)&quot;
+    },
+    {
+      &quot;reason&quot;: &quot;While the paper cites foundational FI-module literature, it lacks a reference to Casto&#x27;s work on the homology of configuration spaces of graphs from a representation stability perspective, which bridges the combinatorial and algebraic approaches.&quot;,
+      &quot;title&quot;: &quot;FI-modules and configuration spaces of graphs (K. Casto, 2016)&quot;
+    }
+  ],
+  &quot;summary&quot;: &quot;The paper demonstrates exemplary citation hygiene, meticulously referencing foundational results from the turn of the century while remaining exceptionally current with multiple 2024 and 2025 citations. The authors provide thorough attribution for both the topological constructions and the algebraic FI-module theory, including recent developments in AI-assisted mathematical discovery. The few omissions are minor and do not detract from the comprehensive nature of the bibliography.&quot;
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          meta_reviewer — <span class="muted">claude-sonnet-4-6</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <p>The paper makes a significant computational contribution to algebraic topology by deriving explicit stable Sn-representation decompositions for the rational homology of graph configuration spaces across several infinite graph families. The novelty specialist assessed the contribution as significant (score 0.8, confidence 0.95), confirming genuine advances beyond the existential stability results of Ramos–White. Technical correctness is rated mostly_sound (confidence 0.7): all stability-bound claims (C1–C5, C7–C10, C12–C16) are well-supported; two minor gaps arise in Theorem 39 (where the claimed stable range n≥6 is tighter than the theoretically guaranteed n≥8 and is supported only empirically, C6) and Proposition 29 (an implicit rather than explicit polynomial chain count, C11). Citation hygiene is exemplary (confidence 0.95). The critical finding is from reproducibility: the GitHub repository https:&#x2f;&#x2f;github.com&#x2f;ClaudiaHeYun&#x2f;GraphConf&#x2f;, cited as the sole location of the SageMath code underlying Tables 1–8, returns HTTP 404 per the verified availability check—meaning the headline computational results are currently unverifiable by any independent reader. This is treated as authoritative ground truth. Because this is a code-amenable mathematics paper (math.*) and the reproducibility specialist flagged three major concerns including the inaccessible repository, the recommendation gate mandates major_revision. All specialists converge on a picture of a technically sound, novel, and well-cited paper whose reproducibility infrastructure must be restored before acceptance; there are no inter-specialist disagreements requiring resolution.</p>
+        <p class="muted">Recommendation: <strong>Major revision</strong> · Confidence: 85%</p>
+        <h3>Strengths</h3>
+        <ul>
+          <li>Combining FI-module theory with SageMath computer algebra yields the first explicit Sn-representation decompositions—not merely Betti numbers—for the rational homology of two- and three-particle configuration spaces on complete, complete-bipartite, crown, complete-tripartite, and Kneser graph families.</li><li>Theoretical stability bounds (Theorems 33, 35, 44, 65, 66) are rigorously derived from established FI-module machinery (Nagpal shift theorem, Church–Ellenberg–Farb Lemma 6.3.2) and are internally consistent across all 17 reviewed claims.</li><li>Coverage of multiple graph families and multiple homological degrees within a unified computational framework demonstrates broad applicability and scalability of the method.</li><li>The conjecture linking H2 of configuration spaces to intrinsic linkage properties of graphs is a compelling new research direction, grounded in explicit computational evidence across K5, K_{3,3}, and K_{3,3,1}.</li><li>Citation hygiene is exemplary, properly attributing foundational references (Abrams 2000, CEF 2015, Ramos–White 2019) alongside highly current literature (González–González AGT 2024, Wawrykow TAMS 2025).</li>
+        </ul>
+        <h3>Weaknesses</h3>
+        <ul>
+          <li>The GitHub repository https:&#x2f;&#x2f;github.com&#x2f;ClaudiaHeYun&#x2f;GraphConf&#x2f; cited as the sole source of all SageMath code returns HTTP 404 per the verified reproducibility check, rendering Tables 1–8 currently unverifiable by any independent reader.</li><li>Theorem 39 (Section 3.2) claims H2(Conf_2(K_n)) is stable for n≥6, but Theorem 35 only guarantees stability by n≤8; the tighter n=6 claim rests on empirical agreement in Table 1 rather than a rigorous argument.</li><li>Proposition 29 (Section 2.2) asserts a polynomial stable-degree bound without providing an explicit per-type combinatorial count of i-chains, leaving the foundational general bound technically incomplete.</li><li>No independently runnable proof artifacts—formal proof scripts, SageMath verification notebooks, or CI smoke tests—accompany the paper, so all representation-theoretic claims in Tables 1–8 depend entirely on the currently inaccessible repository.</li>
+        </ul>
+        <h3>Revision Targets</h3>
+        <div class="target-grid">
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>code</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  https:&#x2f;&#x2f;github.com&#x2f;ClaudiaHeYun&#x2f;GraphConf&#x2f;
+                   at 
+                  code release and execution entrypoints
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">The paper states that all code is available at https:&#x2f;&#x2f;github.com&#x2f;ClaudiaHeYun&#x2f;GraphConf&#x2f;, but the verified availability check reports this GitHub URL as unreachable with status 404, so the implementation cannot be retrieved to regenerate the homology representation tables.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Release the source code, scripts, model configuration, and execution entrypoints needed to regenerate the reported tables, or document why those artifacts cannot be released.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm runnable code or a documented non-release justification is present.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  corrections&#x2f;2606.13813&#x2f;paper.tex
+                   at 
+                  Theorem 39 (thm: ordered complete), Section 3.2
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">The H_2 stable range n ≥ 6 reported here is strictly tighter than the n ≤ 8 bound established theoretically in Theorem 35; Remark 40 explicitly acknowledges this gap and frames n = 6 as the &#x27;true&#x27; stable range based on Table 1. The stronger lower bound is therefore inferred from empirical agreement of the tabulated representations at n = 6, 7, 8 rather than from a rigorous argument. Validity depends on the correctness of the n = 8 computation (reported wall time 72s), which is in principle verifiable from the supplied GitHub code.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Either prove an improved bound on l(V) and s(V) for these specific FI-modules that yields n=6 directly, or state the n≥6 claim as &#x27;computational stability observed at n=6, theoretically guaranteed at n=8&#x27;.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm `Theorem 39 (thm: ordered complete), Section 3.2` is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  corrections&#x2f;2606.13813&#x2f;paper.tex
+                   at 
+                  Proposition 29, Section 2.2
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">The proof asserts that cubical i-chains grow no faster than a polynomial of the stated degree without spelling out the count. The (d_V + d_E) factor in non-edge slots is justified only implicitly via the Abrams subdivision (which adds Θ(d_E) new vertices per edge), and the improvement for k = 2 (no subdivision needed) is stated rather than computed.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Expand the proof to explicitly count i-chains as a polynomial in n: for each combinatorial type, give the number of choices for the i edge-slots and the (k−i) vertex-slots (post-subdivision), and show this yields the claimed polynomial degree.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm `Proposition 29, Section 2.2` is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  corrections&#x2f;2606.13813&#x2f;paper.tex
+                   at 
+                  reproducibility appendix
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">For this code-amenable mathematics paper, the stable range and homology representation theorems are not accompanied by formal proof artifacts or independently checkable proof scripts; files such as proofs&#x2f;stable_ranges.lean or proofs&#x2f;representation_decompositions.sage would materially improve reproducibility.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Add a reproducibility note that resolves this concern: For this code-amenable mathematics paper, the stable range and homology representation theorems are not accompanied by formal proof artifacts or independently checkable proof scripts; files such as proofs&#x2f;stable_ranges.lean or proofs&#x2f;representation_decompositions.sage would materially improve reproducibility.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm the reproducibility concern is addressed with a concrete artifact or manuscript update.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+        </div>
+        <h3>Questions</h3>
+        <ul>
+          <li>Can the SageMath scripts be deposited in a persistent public archive (e.g., Zenodo or Figshare) with a permanent DOI, or can the GitHub repository be restored to public visibility, so that Tables 1–8 can be independently regenerated?</li><li>For Theorem 39, does a refined bound on l(V) and s(V) specific to the FI-modules arising from Conf_2(K_n) exist that would yield the empirically observed stable range n=6 rigorously, rather than relying on the weaker general bound of n=8?</li><li>For Proposition 29, can an explicit per-type chain count be provided—specifying the number of choices for the i edge-slots and the (k−i) vertex-slots post-Abrams subdivision—so that the claimed polynomial degree is derived rather than asserted?</li><li>Has the intrinsic linkage conjecture been tested on graphs that are intrinsically linked but whose properties would distinguish them from K5 or K_{3,3} minors alone, to more sharply isolate the proposed H2 obstruction?</li><li>For three particles on K_n (Section 4), are the multiplicities of Sp_n(λ) for |λ|≥2 in H2(Conf_3(K_n)) also stable and computed, or does Theorem 69 cover only the trivial and standard representations?</li>
+        </ul>
+      </details>
+      
+      <details>
+        <summary>
+          novelty — <span class="muted">gemini-3-flash-preview</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;confidence&quot;: 0.95,
+  &quot;missing_prior_art&quot;: [],
+  &quot;novelty_score&quot;: 0.8,
+  &quot;related_work&quot;: [
+    {
+      &quot;citation_key&quot;: &quot;RW&quot;,
+      &quot;delta&quot;: &quot;This paper specializes the general existence theorem (Theorem G) in Ramos and White to perform explicit, computer-aided calculations of stable representations for specific graph families, whereas the original work was primarily existential and theoretical.&quot;,
+      &quot;relation&quot;: &quot;builds_on&quot;,
+      &quot;title&quot;: &quot;Families of nested graphs with compatible symmetric-group actions&quot;
+    },
+    {
+      &quot;citation_key&quot;: &quot;BF&quot;,
+      &quot;delta&quot;: &quot;While Barnett and Farber computed Betti numbers for the two-particle case on complete graphs, this work provides the full underlying representation theoretic structure (as Sn-modules) and extends the analysis to more graph families.&quot;,
+      &quot;relation&quot;: &quot;prior_art&quot;,
+      &quot;title&quot;: &quot;Topology of configuration space of two particles on a graph, I&quot;
+    },
+    {
+      &quot;citation_key&quot;: &quot;FH&quot;,
+      &quot;delta&quot;: &quot;Similar to BF, this work extends the Betti number calculations of Farber and Hanbury for bipartite graphs by describing the equivariant structure and providing combinatorial interpretations of the stable representations.&quot;,
+      &quot;relation&quot;: &quot;prior_art&quot;,
+      &quot;title&quot;: &quot;Topology of configuration space of two particles on a graph, II&quot;
+    },
+    {
+      &quot;citation_key&quot;: &quot;GG&quot;,
+      &quot;delta&quot;: &quot;González and González determined the cohomology ring structure for two points on complete graphs; this paper complements that by describing the Sn-representation structure, which their Morse-theoretic model could not easily do due to non-equivariance.&quot;,
+      &quot;relation&quot;: &quot;prior_art&quot;,
+      &quot;title&quot;: &quot;An algorithmic discrete gradient field and the cohomology algebra of configuration spaces of two points on complete graphs&quot;
+    },
+    {
+      &quot;citation_key&quot;: &quot;Lut&quot;,
+      &quot;delta&quot;: &quot;Lütgehetmann proved representation stability for graph configuration spaces and computed stable ranges for specific &#x27;wedged&#x27; families; this paper derives stable ranges and representations for broader families like K_{n,n} and crown graphs.&quot;,
+      &quot;relation&quot;: &quot;prior_art&quot;,
+      &quot;title&quot;: &quot;Representation stability for configuration spaces of graphs&quot;
+    },
+    {
+      &quot;citation_key&quot;: &quot;KP&quot;,
+      &quot;delta&quot;: &quot;Ko and Park linked H1 torsion to non-planarity; this work investigates whether H2 can detect higher-order graph properties like intrinsic linkage, providing experimental data across several families.&quot;,
+      &quot;relation&quot;: &quot;builds_on&quot;,
+      &quot;title&quot;: &quot;Characteristics of graph braid groups&quot;
+    }
+  ],
+  &quot;verdict&quot;: &quot;significant&quot;
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          reproducibility — <span class="muted">gpt-5.5</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;code_availability&quot;: &quot;unspecified&quot;,
+  &quot;code_url&quot;: null,
+  &quot;concerns&quot;: [
+    {
+      &quot;area&quot;: &quot;code&quot;,
+      &quot;description&quot;: &quot;The paper states that all code is available at https:&#x2f;&#x2f;github.com&#x2f;ClaudiaHeYun&#x2f;GraphConf&#x2f;, but the verified availability check reports this GitHub URL as unreachable with status 404, so the implementation cannot be retrieved to regenerate the homology representation tables.&quot;,
+      &quot;severity&quot;: &quot;major&quot;
+    },
+    {
+      &quot;area&quot;: &quot;code&quot;,
+      &quot;description&quot;: &quot;No reachable commit, release tag, license, install instructions, or run commands are provided for the SageMath computations, preventing exact reconstruction of the computational pipeline even apart from the 404 repository.&quot;,
+      &quot;severity&quot;: &quot;major&quot;
+    },
+    {
+      &quot;area&quot;: &quot;evaluation&quot;,
+      &quot;description&quot;: &quot;Several load-bearing computations rely on combinatorial type enumerations and representation decompositions whose full lists are omitted from the paper and said to be available only in the code; a reproducibility artifact such as code&#x2f;combinatorial_types.sage with expected table outputs would be needed.&quot;,
+      &quot;severity&quot;: &quot;major&quot;
+    },
+    {
+      &quot;area&quot;: &quot;compute&quot;,
+      &quot;description&quot;: &quot;Some reported runs are large, with table entries taking tens to hundreds of thousands of seconds, but the paper gives only broad hardware descriptions and no memory requirements, parallelization settings, or batch scripts for reproducing the long computations.&quot;,
+      &quot;severity&quot;: &quot;minor&quot;
+    },
+    {
+      &quot;area&quot;: &quot;other&quot;,
+      &quot;description&quot;: &quot;For this code-amenable mathematics paper, the stable range and homology representation theorems are not accompanied by formal proof artifacts or independently checkable proof scripts; files such as proofs&#x2f;stable_ranges.lean or proofs&#x2f;representation_decompositions.sage would materially improve reproducibility.&quot;,
+      &quot;severity&quot;: &quot;major&quot;
+    }
+  ],
+  &quot;confidence&quot;: 0.88,
+  &quot;data_availability&quot;: &quot;synthetic&quot;,
+  &quot;data_url&quot;: null,
+  &quot;environment&quot;: {
+    &quot;dependencies&quot;: [
+      &quot;SageMath 10.4&quot;
+    ],
+    &quot;hardware&quot;: &quot;8-core Apple M3 CPU personal laptop; 2x24-core Intel Xeon Platinum 8168 CPU 2.70 GHz server at UiT Department of Mathematics and Statistics&quot;,
+    &quot;software&quot;: &quot;Darwin 25.4.0 arm64; Ubuntu GNU&#x2f;Linux 6.8.0-101-generic x86_64&quot;
+  },
+  &quot;reproducibility_score&quot;: 0.28
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          summary — <span class="muted">claude-haiku-4-5-20251001</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;audience&quot;: &quot;Algebraic topologists working on configuration spaces and graph braid groups; researchers in representation stability and FI-modules; mathematicians interested in computational topology and homological properties of graph-based spaces&quot;,
+  &quot;key_contributions&quot;: [
+    &quot;Explicit computations of rational homology groups for configuration spaces with fixed particle counts on infinite graph families, including complete graphs, complete bipartite graphs, crown graphs, and complete tripartite graphs, accounting for representation-theoretic structure&quot;,
+    &quot;Derivation of explicit stable ranges and determination of stable representations on homology for two-particle configuration spaces on several graph families&quot;,
+    &quot;Determination of stable multiplicities for certain irreducible components in three-particle configuration spaces on complete graphs&quot;,
+    &quot;Illustration of a proof of concept for using representation stability and FI-module theory for explicit computational methods in topology&quot;,
+    &quot;Conjecture and experimental observations suggesting a connection between second homology of configuration spaces and intrinsic linkage properties of graphs&quot;
+  ],
+  &quot;plain_language_summary&quot;: &quot;Configuration spaces model arrangements of multiple particles moving on a network (graph). Mathematicians study their topological properties using homology groups—algebraic structures capturing intrinsic features. For graphs, these spaces grow explosively in complexity as particles increase, making direct computation infeasible. The authors exploit representation stability: when graph families have compatible symmetries, the homological structure eventually stops changing, allowing finite computations to reveal the complete structure for infinitely many graphs.\n\nThe authors compute rational homology for configuration spaces of particles on various graph families (complete graphs, complete bipartite, crown, complete tripartite graphs), focusing on cases with two particles and some cases with three particles. Crucially, they determine the full representation-theoretic decomposition—not just dimensions but the symmetric group representation structure. Their technique combines FI-module theory (which formalizes how these families stabilize) with computer algebra, making previously inaccessible explicit calculations possible. They also identify a potential connection between second homology and intrinsic linkage properties of graphs.&quot;,
+  &quot;tldr&quot;: &quot;For families of graphs with symmetric group actions, configuration spaces stabilize in their homological structure, enabling computation of infinitely many spaces through finite calculations.&quot;
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          technical_correctness — <span class="muted">claude-opus-4-7</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;claims&quot;: [
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;For a finitely generated FI-module V, multiplicity stability begins no later than n = l(V) + 2s(V) + 1.&quot;,
+      &quot;evidence&quot;: &quot;Derived from cited Theorem 15 (Nagpal) on eventual freeness of shifts, plus the standard observation that free FI-modules M(W) generated in degree m become multiplicity stable by n = 2m (via the Pieri rule on Ind_{S_m × S_{n-m}}^{S_n} W). Both ingredients are referenced to [N] and [CEF].&quot;,
+      &quot;id&quot;: &quot;C1&quot;,
+      &quot;location&quot;: &quot;Theorem 18, Section 2.1&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;For a chain complex of free FI-modules over a characteristic-0 field, ker(g)&#x2f;im(f) achieves multiplicity stability no later than n = max{s(M^2), s(M^1)} + s(M^1); for a fixed partition λ of m the multiplicity of Sp(λ[n]) is constant for n ≥ max{s(M^2), s(M^1)} + m.&quot;,
+      &quot;evidence&quot;: &quot;Quoted directly from [CEF Proposition 3.3.3 and Lemma 6.3.2]. The paper uses this as the main bound-producing engine.&quot;,
+      &quot;id&quot;: &quot;C2&quot;,
+      &quot;location&quot;: &quot;Theorem 21 (relationBound), Section 2.1&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;For star graphs X_n, the FI-modules H_1(Conf_2(X_n)) and H_1(UConf_2(X_n)) are multiplicity stable no later than n = 4.&quot;,
+      &quot;evidence&quot;: &quot;D_2(X_n) is 1-dimensional, so the relevant chain complex is C_1 → C_0. The chain modules are shown to be free FI-modules (via FI♯-structure, Theorem 13) with s(C_0) = s(C_1) = 2. Applying Theorem 21 with M^2 = 0, M^1 = C_1, M^0 = C_0 gives max{0,2} + 2 = 4. The arithmetic is correct.&quot;,
+      &quot;id&quot;: &quot;C3&quot;,
+      &quot;location&quot;: &quot;Theorem 33 (starBound), Section 3.1&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;H_1(Conf_2(X_n)) ≅ Sp_n(1,1) ⊕ Sp_n(2) and H_1(UConf_2(X_n)) ≅ Sp_n(1,1) for n ≥ 4.&quot;,
+      &quot;evidence&quot;: &quot;Once stability at n = 4 (C3) is granted, the result reduces to a finite Euler-characteristic computation in S_4-representations. The C_0, C_1 decompositions stated are consistent with standard induction-product calculations. Code at https:&#x2f;&#x2f;github.com&#x2f;ClaudiaHeYun&#x2f;GraphConf&#x2f; is cited as an executable artifact.&quot;,
+      &quot;id&quot;: &quot;C4&quot;,
+      &quot;location&quot;: &quot;Theorem 34 (thm: star), Section 3.1&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;H_1(Conf_2(K_n)) and H_2(Conf_2(K_n)) are multiplicity stable no later than n = 7 and n = 8, respectively.&quot;,
+      &quot;evidence&quot;: &quot;The stable degrees s(C_0)=2, s(C_1)=3, s(C_2)=4 follow from the number of distinct indices in each cell type. Applying Theorem 21: H_1 stable at max{s(C_2),s(C_1)} + s(C_1) = max{4,3}+3 = 7; H_2 stable at max{s(C_3)=0, s(C_2)=4}+s(C_2) = 8. The derivation is internally consistent.&quot;,
+      &quot;id&quot;: &quot;C5&quot;,
+      &quot;location&quot;: &quot;Theorem 35 (completeBound_2pts), Section 3.2&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;H_2(Conf_2(K_n)) ≅ Sp_n(1,1,1,1) ⊕ Sp_n(2,1,1) ⊕ Sp_n(2,2) for n ≥ 6; H_1(Conf_2(K_n)) ≅ 2·Sp_n(1,1) for n ≥ 5.&quot;,
+      &quot;evidence&quot;: &quot;The H_2 stable range n ≥ 6 reported here is strictly tighter than the n ≤ 8 bound established theoretically in Theorem 35; Remark 40 explicitly acknowledges this gap and frames n = 6 as the &#x27;true&#x27; stable range based on Table 1. The stronger lower bound is therefore inferred from empirical agreement of the tabulated representations at n = 6, 7, 8 rather than from a rigorous argument. Validity depends on the correctness of the n = 8 computation (reported wall time 72s), which is in principle verifiable from the supplied GitHub code.&quot;,
+      &quot;id&quot;: &quot;C6&quot;,
+      &quot;location&quot;: &quot;Theorem 39 (thm: ordered complete), Section 3.2&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Either prove an improved bound on l(V) and s(V) for these specific FI-modules that yields n=6 directly, or state the n≥6 claim as &#x27;computational stability observed at n=6, theoretically guaranteed at n=8&#x27;.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;H_1(Conf_2(K_{n,n})) and H_2(Conf_2(K_{n,n})) are multiplicity stable no later than n = 7 and n = 8.&quot;,
+      &quot;evidence&quot;: &quot;Same derivation as Theorem 35: s(C_0)=2, s(C_1)=3, s(C_2)=4, applied via Theorem 21. Decompositions of C_0, C_1, C_2 into free FI-modules are catalogued in Lemma 45 by enumerating combinatorial cell types; index-count bound matches the stated stable degrees.&quot;,
+      &quot;id&quot;: &quot;C7&quot;,
+      &quot;location&quot;: &quot;Theorem 44 (completebipartiteBound), Section 3.3&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;For Kneser graphs K(n,2), H_2(Conf_2(K(n,2))) and H_1(Conf_2(K(n,2))) are multiplicity stable no later than n = 16 and n = 14.&quot;,
+      &quot;evidence&quot;: &quot;A 2-cell uses up to 8 indices (two disjoint subsets of size 2 paired with two more), giving s(C_2)=8; analogously s(C_1)=6, s(C_0)=4. Theorem 21 then gives H_2 stable at max{0,8}+8 = 16, H_1 stable at max{8,6}+6 = 14. Arithmetic is correct.&quot;,
+      &quot;id&quot;: &quot;C8&quot;,
+      &quot;location&quot;: &quot;Theorem 65, Section 3.6&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;For K_n with three particles, H_i(Conf_3(K_n)) is multiplicity stable no later than n = 12 for i = 0,1,2,3.&quot;,
+      &quot;evidence&quot;: &quot;With s(C_0)=s(C_1)=s(C_2)=s(C_3)=6 (from the 6-index ceiling on cells in D_3(K_n), enumerated in Lemma 67 and the appendix), Theorem 21 gives stability at max{6,6}+6 = 12 in every degree. Internally consistent.&quot;,
+      &quot;id&quot;: &quot;C9&quot;,
+      &quot;location&quot;: &quot;Theorem 66 (completeBound), Section 4&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;For n ≥ 6, the multiplicity of the trivial representation Sp_n(∅) in H_2(Conf_3(K_n)) is 2 and is 0 in H_i for i = 3,1,0; for n ≥ 7, the multiplicity of Sp_n(1) in H_2 is 6 and 0 in the other degrees.&quot;,
+      &quot;evidence&quot;: &quot;Uses the fixed-partition refinement of Theorem 21: for partition λ of m, multiplicity stabilizes at max{s(M^2),s(M^1)} + m. With s = 6 throughout, λ = ∅ stabilizes at 6 + 0 = 6 and λ = (1) at 6 + 1 = 7. Specific multiplicities (2 and 6) are read from Table 8 entries at n = 6 and n = 7 respectively. Computational data is reproducible from the supplied code.&quot;,
+      &quot;id&quot;: &quot;C10&quot;,
+      &quot;location&quot;: &quot;Theorem 69 (thm: three particles on complete), Section 4&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;For k ≥ 2 and i ≤ k, the stable degree of H_i(Conf_k(G_•)) and H_i(UConf_k(G_•)) is at most i·d_E + (k-i)(d_V + d_E); if k = 2 the bound improves to i·d_E + (k-i)·d_V.&quot;,
+      &quot;evidence&quot;: &quot;The proof asserts that cubical i-chains grow no faster than a polynomial of the stated degree without spelling out the count. The (d_V + d_E) factor in non-edge slots is justified only implicitly via the Abrams subdivision (which adds Θ(d_E) new vertices per edge), and the improvement for k = 2 (no subdivision needed) is stated rather than computed.&quot;,
+      &quot;id&quot;: &quot;C11&quot;,
+      &quot;location&quot;: &quot;Proposition 29, Section 2.2&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Expand the proof to explicitly count i-chains as a polynomial in n: for each combinatorial type, give the number of choices for the i edge-slots and the (k−i) vertex-slots (post-subdivision), and show this yields the claimed polynomial degree.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;In H_2(Conf_2(K_n)), Sp_n(1,1,1,1) is induced by K_5 ↪ K_n, Sp_n(2,1,1) is generated by toric classes from C_3 ⊔ C_3 ↪ K_6, and Sp_n(2,2) is induced by C_3 ⊔ C_3 ⊔ K_{3,3} ↪ K_6.&quot;,
+      &quot;evidence&quot;: &quot;Proof reduces to explicit computation at n = 6 (justified by Theorem 35) and projects an explicit basis onto each irreducible isotypical component using the Serre [Serre1977 §2.7] formula; canonical when the multiplicity is 1. The class generators are written out explicitly. Verifiable against the GitHub computation.&quot;,
+      &quot;id&quot;: &quot;C12&quot;,
+      &quot;location&quot;: &quot;Proposition 43, Section 3.2&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;In K_{n,n}, the two toric submodules M_1^n, M_2^n ≅ M((2,2) ⊕ (3,1) ⊕ (4)) for n ≥ 4 and intersect trivially for n ≤ 7 while M_1^n ∩ M_2^n ≅ Sp_n(4) for n ≥ 8.&quot;,
+      &quot;evidence&quot;: &quot;Both modules are direct images of an S_4-representation under M(−); their multiplicity stability at n = 2·4 = 8 follows from the Pieri rule. The intersection structure is then determined by finite enumeration up to and including n = 8, which the paper says was checked computationally.&quot;,
+      &quot;id&quot;: &quot;C13&quot;,
+      &quot;location&quot;: &quot;Proposition 50 (prop: triv in Knn), Section 3.3&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;Conjecture: For n ≥ 5, H_1(Conf_k(K_n)) ≅ k · Sp_n(1,1).&quot;,
+      &quot;evidence&quot;: &quot;Stated explicitly as a conjecture motivated by k = 1, 2, 3 data. It is not a load-bearing factual claim of the paper; consistent with the verified data for k ≤ 3.&quot;,
+      &quot;id&quot;: &quot;C14&quot;,
+      &quot;location&quot;: &quot;Conjecture 70, Section 4&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;Proposition 63: At least two of the three trivial subrepresentations in H_2(Conf_2(K_{3,3,1})) are generated by toric classes, and the non-toric class induced by K_{3,3} ↪ K_{3,3,1} equals (1&#x2f;2)b_1 − b_2.&quot;,
+      &quot;evidence&quot;: &quot;The proof identifies two explicit disjoint cycle pairs in K_{3,3,1} and asserts the linear combination by direct computation; Remark 64 honestly flags the third trivial-rep generator as conjectural rather than overclaiming it as toric.&quot;,
+      &quot;id&quot;: &quot;C15&quot;,
+      &quot;location&quot;: &quot;Proposition 63 and Remark 64, Section 3.5&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;The discretized configuration space D_n(G) is homotopy equivalent to Conf_n(G), equivariantly under S_n, when every path between vertices of degree ≠ 2 has ≥ n−1 edges and every cycle has ≥ n+1 edges.&quot;,
+      &quot;evidence&quot;: &quot;Quoted from [Abr]; the stated subdivision conditions match Abrams&#x27; theorem in the standard form used throughout the configuration-space literature.&quot;,
+      &quot;id&quot;: &quot;C16&quot;,
+      &quot;location&quot;: &quot;Theorem 28 (AbramsModel), Section 2.2&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;Computational results (Tables 1–8) accurately report the S_n-representations afforded by the rational homology of the configuration spaces in question.&quot;,
+      &quot;evidence&quot;: &quot;The paper releases an implementation at https:&#x2f;&#x2f;github.com&#x2f;ClaudiaHeYun&#x2f;GraphConf&#x2f; and reports specific wall times (e.g., ~738573s ≈ 8.5 days for K_{8,8}, ~206791s for K_{7,7,1}). Without independent re-execution, only internal cross-checks (Euler characteristic consistency, agreement with the lower-bound theorems, and prior Betti-number computations for K_n and K_{n,n} from [BF, FH]) attest to correctness. Two of the K_{n,n} entries are derived using H_1 rather than a direct H_2 computation, which is a sound but indirect route.&quot;,
+      &quot;id&quot;: &quot;C17&quot;,
+      &quot;location&quot;: &quot;Tables 1–8, Sections 3–4&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Add a CI-runnable smoke test in the repo that regenerates a small subset (e.g., n ≤ 5 for each family) and validates the printed decompositions against the values in Tables 1–7; cite the test path (e.g., experiments&#x2f;smoke_test.py) in the paper.&quot;
+    }
+  ],
+  &quot;confidence&quot;: 0.7,
+  &quot;overall_correctness&quot;: &quot;mostly_sound&quot;
+}</pre>
+      </details>
+      
+    </div>
+  </section>
+
+  <!-- corrections rendered from corrections table; empty on first publish -->
+  <section>
+    <h2>Corrections</h2>
+    <p class="muted">No corrections have been recorded.</p>
+  </section>
+
+  <section>
+    <h2>Bibliography</h2>
+    
+    <ol>
+      
+        <li>
+          Abr: Aaron David Abrams. \newblock {\em Configuration spaces and braid groups of graphs}. \newblock University of California, Berkeley, 2000.
+          
+          
+        </li>
+      
+        <li>
+          ADCK: Byung Hee An, Gabriel C. Drummond-Cole, and Ben Knudsen. \newblock Subdivisional spaces and graph braid groups. \newblock {\em Doc. Math.}, 24:1513--1583, 2019.
+          
+          
+        </li>
+      
+        <li>
+          ADCK2: Byung Hee An, Gabriel C Drummond-Cole, and Ben Knudsen. \newblock Asymptotic homology of graph braid groups. \newblock {\em Geom. Topol}, 26(4):1745--1771, 2022.
+          
+          
+        </li>
+      
+        <li>
+          abrams-ghrist: Aaron Abrams and Robert Ghrist. \newblock Finding topology in a factory: Configuration spaces. \newblock {\em The American Mathematical Monthly}, 109(2):140--150, 2002.
+          
+          
+        </li>
+      
+        <li>
+          AK: Byung Hee An and Ben Knudsen. \newblock On the second homology of planar graph braid groups. \newblock {\em Journal of Topology}, 15(2):666--691, 2022.
+          
+          
+        </li>
+      
+        <li>
+          Arn: Vladimir I Arnold. \newblock The cohomology ring of the colored braid group. \newblock {\em Vladimir I. Arnold-Collected Works: Hydrodynamics, Bifurcation Theory, and Algebraic Geometry 1965-1972}, pages 183--186, 2014.
+          
+          
+        </li>
+      
+        <li>
+          BF: Kathryn Barnett and Michael Farber. \newblock Topology of configuration space of two particles on a graph, {I}. \newblock {\em Algebraic \&amp; Geometric Topology}, 9(1):593--624, 2009.
+          
+          
+        </li>
+      
+        <li>
+          CE: Thomas Church and Jordan Ellenberg. \newblock Homology of {FI}-modules. \newblock {\em Geometry \&amp; Topology}, 21(4):2373--2418, 2017.
+          
+          
+        </li>
+      
+        <li>
+          CEF: Thomas Church, Jordan S Ellenberg, and Benson Farb. \newblock {FI}-modules and stability for representations of symmetric groups. \newblock {\em Duke Mathematical Journal}, 164(9), 2015.
+          
+          
+        </li>
+      
+        <li>
+          CEFN: Thomas Church, Jordan S Ellenberg, Benson Farb, and Rohit Nagpal. \newblock {FI}-modules over noetherian rings. \newblock {\em Geometry \&amp; Topology}, 18(5):2951--2984, 2014.
+          
+          
+        </li>
+      
+        <li>
+          CEWW: Fran{\c{c}}ois Charton, Jordan S Ellenberg, Adam Zsolt Wagner, and Geordie Williamson. \newblock Patternboost: Constructions in mathematics with a little help from {ai}. \newblock {\em arXiv preprint arXiv:2411.00566}, 2024.
+          
+          <a href="https://arxiv.org/abs/2411.00566">arXiv:2411.00566</a>
+        </li>
+      
+        <li>
+          CL: Safia Chettih and Daniel L{\&quot;u}tgehetmann. \newblock The homology of configuration spaces of trees with loops. \newblock {\em Algebraic \&amp; Geometric Topology}, 18(4):2443--2469, 2018.
+          
+          
+        </li>
+      
+        <li>
+          CMNR: Thomas Church, Jeremy Miller, Rohit Nagpal, and Jens Reinhold. \newblock Linear and quadratic ranges in representation stability. \newblock {\em Advances in Mathematics}, 333:1--40, 2018.
+          
+          
+        </li>
+      
+        <li>
+          Drum: Gabriel C Drummond-Cole. \newblock Betti numbers of unordered configuration spaces of small graphs. \newblock {\em arXiv preprint arXiv:1906.00692}, 2019.
+          
+          <a href="https://arxiv.org/abs/1906.00692">arXiv:1906.00692</a>
+        </li>
+      
+        <li>
+          AIDiscover: Alex Davies, Petar Veli{\v{c}}kovi{\&#x27;c}, Lars Buesing, Sam Blackwell, Daniel Zheng, Nenad Toma{\v{s}}ev, Richard Tanburn, Peter Battaglia, Charles Blundell, Andr{\&#x27;a}s Juh{\&#x27;a}sz, et al. \newblock Advancing mathematics by guiding human intuition with {AI}. \newblock {\em Nature}, 600(7887):70--74, 2021.
+          
+          
+        </li>
+      
+        <li>
+          funsearch2: Jordan S Ellenberg, Cristofero S Fraser-Taliente, Thomas R Harvey, Karan Srivastava, and Andrew V Sutherland. \newblock Generative modeling for mathematical discovery. \newblock {\em arXiv preprint arXiv:2503.11061}, 2025.
+          
+          <a href="https://arxiv.org/abs/2503.11061">arXiv:2503.11061</a>
+        </li>
+      
+        <li>
+          Farl: Daniel Farley. \newblock Homology of tree braid groups. \newblock {\em Contemporary Mathematics}, 394:101--112, 2006.
+          
+          
+        </li>
+      
+        <li>
+          FarBook: Michael Farber. \newblock {\em Invitation to topological robotics}, volume 8. \newblock European Mathematical Society, 2008.
+          
+          
+        </li>
+      
+        <li>
+          FH: Michael Farber and Elizabeth Hanbury. \newblock Topology of configuration space of two particles on a graph, {II}. \newblock {\em Algebraic \&amp; Geometric Topology}, 10(4):2203--2227, 2010.
+          
+          
+        </li>
+      
+        <li>
+          FS: Daniel Farley and Lucas Sabalka. \newblock Discrete {M}orse theory and graph braid groups. \newblock {\em Algebraic \&amp; Geometric Topology}, 5(3):1075--1109, 2005.
+          
+          
+        </li>
+      
+        <li>
+          Gal: {\&#x27;S}wiatos{\l}aw Gal. \newblock Euler characteristic of the configuration space of a complex. \newblock In {\em Colloquium Mathematicum}, volume 89, pages 61--67. Institute of Mathematics Polish Academy of Sciences, 2001.
+          
+          
+        </li>
+      
+        <li>
+          GG: Emilio J Gonz{\&#x27;a}lez and Jes{\&#x27;u}s Gonz{\&#x27;a}lez. \newblock An algorithmic discrete gradient field and the cohomology algebra of configuration spaces of two points on complete graphs. \newblock {\em Algebraic \&amp; Geometric Topology}, 24(7):3719--3758, 2024.
+          
+          
+        </li>
+      
+        <li>
+          Ghr: Robert Ghrist. \newblock Configuration spaces, braids, and robotics. \newblock In {\em Braids: Introductory Lectures on Braids, Configurations and Their Applications}, pages 263--304. World Scientific, 2010.
+          
+          
+        </li>
+      
+        <li>
+          GR: David Guan and Eric Ramos. \newblock Independence numbers in certain families of highly symmetric graphs. \newblock {\em arXiv preprint arXiv:2401.16739}, 2024.
+          
+          <a href="https://arxiv.org/abs/2401.16739">arXiv:2401.16739</a>
+        </li>
+      
+        <li>
+          KP: Ki Hyoung Ko and Hyo Won Park. \newblock Characteristics of graph braid groups. \newblock {\em Discrete \&amp; Computational Geometry}, 48:915--963, 2012.
+          
+          
+        </li>
+      
+        <li>
+          KR: Ben Knudsen and Eric Ramos. \newblock Robertson&#x27;s conjecture and universal finite generation in the homology of graph braid groups. \newblock {\em arXiv preprint arXiv:2305.19363}, 2023.
+          
+          <a href="https://arxiv.org/abs/2305.19363">arXiv:2305.19363</a>
+        </li>
+      
+        <li>
+          LR: Liping Li and Eric Ramos. \newblock Depth and the local cohomology of {FIG}-modules. \newblock {\em Advances in Mathematics}, 329:704--741, 2018.
+          
+          
+        </li>
+      
+        <li>
+          Lut: Daniel L{\&quot;u}tgehetmann. \newblock Representation stability for configuration spaces of graphs. \newblock {\em arXiv preprint arXiv:1701.03490}, 2017.
+          
+          <a href="https://arxiv.org/abs/1701.03490">arXiv:1701.03490</a>
+        </li>
+      
+        <li>
+          Mac: Tomasz Maci{\k{a}}{\.z}ek. \newblock Non-abelian anyons on graphs from presentations of graph braid groups. \newblock {\em arXiv preprint arXiv:1909.02098}, 2019.
+          
+          <a href="https://arxiv.org/abs/1909.02098">arXiv:1909.02098</a>
+        </li>
+      
+        <li>
+          MMPR: Jacob P Matherne, Dane Miyata, Nicholas Proudfoot, and Eric Ramos. \newblock Equivariant log concavity and representation stability. \newblock {\em International Mathematics Research Notices}, 2023(5):3885--3906, 2023.
+          
+          
+        </li>
+      
+        <li>
+          MR: Dane Miyata and Eric Ramos. \newblock The graph minor theorem in topological combinatorics. \newblock {\em Advances in Mathematics}, 430:109203, 2023.
+          
+          
+        </li>
+      
+        <li>
+          MS: Tomasz Maci{\k{a}}{\.z}ek and Adam Sawicki. \newblock Non-abelian quantum statistics on graphs. \newblock {\em Communications in Mathematical Physics}, 371(3):921--973, 2019.
+          
+          
+        </li>
+      
+        <li>
+          N: Rohit Nagpal. \newblock {\em FI-modules and the cohomology of modular representations of symmetric groups}. \newblock PhD thesis, The University of Wisconsin-Madison, 2015.
+          
+          
+        </li>
+      
+        <li>
+          R: Eric Ramos. \newblock Homological invariants of {FI}-modules and {FIG}-modules. \newblock {\em Journal of Algebra}, 502:163--195, 2018.
+          
+          
+        </li>
+      
+        <li>
+          R2: Eric Ramos. \newblock Stability phenomena in the homology of tree braid groups. \newblock {\em Algebraic \&amp; Geometric Topology}, 18(4):2305--2337, 2018.
+          
+          
+        </li>
+      
+        <li>
+          R3: Eric Ramos. \newblock An application of the theory of {FI}-algebras to graph configuration spaces. \newblock {\em Mathematische Zeitschrift}, 294(1-2):1--15, 2020.
+          
+          
+        </li>
+      
+        <li>
+          funsearch: Bernardino Romera-Paredes, Mohammadamin Barekatain, Alexander Novikov, Matej Balog, M Pawan Kumar, Emilien Dupont, Francisco JR Ruiz, Jordan S Ellenberg, Pengming Wang, Omar Fawzi, et al. \newblock Mathematical discoveries from program search with large language models. \newblock {\em Nature}, 625(7995):468--475, 2024.
+          
+          
+        </li>
+      
+        <li>
+          robertson1993linkless: Neil Robertson, PD Seymour, and Robin Thomas. \newblock Linkless embeddings of graphs in 3-space. \newblock {\em Bulletin of the American Mathematical Society}, 28(1):84--89, 1993.
+          
+          
+        </li>
+      
+        <li>
+          RW: Eric Ramos and Graham White. \newblock Families of nested graphs with compatible symmetric-group actions. \newblock {\em Selecta Mathematica}, 25(5):70, 2019.
+          
+          
+        </li>
+      
+        <li>
+          RW2: Eric G Ramos and Graham White. \newblock Families of markov chains with compatible symmetric-group actions. \newblock {\em SIAM Journal on Applied Algebra and Geometry}, 9(3):603--639, 2025.
+          
+          
+        </li>
+      
+        <li>
+          Serre1977: Jean-Pierre Serre. \newblock {\em Linear Representations of Finite Groups}, volume 42 of {\em Graduate Texts in Mathematics}. \newblock Springer-Verlag, New York, 1977.
+          
+          
+        </li>
+      
+        <li>
+          SS: Steven Sam and Andrew Snowden. \newblock {GL}-equivariant modules over polynomial rings in infinitely many variables. \newblock {\em Transactions of the American Mathematical Society}, 368(2):1097--1158, 2016.
+          
+          
+        </li>
+      
+        <li>
+          Swia: Jacek {\&#x27;S}wi{\k{a}}tkowski. \newblock Estimates for homological dimension of configuration spaces of graphs. \newblock In {\em Colloquium Mathematicum}, volume 89, pages 69--79. Instytut Matematyczny Polskiej Akademii Nauk, 2001.
+          
+          
+        </li>
+      
+        <li>
+          sagemath: {The Sage Developers}. \newblock {\em {S}ageMath, the {S}age {M}athematics {S}oftware {S}ystem (Version 10.4)}, 2026. \newblock \url{https:&#x2f;&#x2f;www.sagemath.org}.
+          
+          
+        </li>
+      
+        <li>
+          wawrykow2025homology: Nicholas Wawrykow. \newblock Homology generators and relations for the ordered configuration space of a star graph. \newblock {\em Transactions of the American Mathematical Society, Series B}, 12(31):1188--1222, 2025.
+          
+          
+        </li>
+      
+        <li>
+          Y: Claudia He Yun. \newblock Discrete {M}orse theory for symmetric delta-complexes. \newblock {\em arXiv preprint arXiv:2209.01070}, 2022.
+          
+          <a href="https://arxiv.org/abs/2209.01070">arXiv:2209.01070</a>
+        </li>
+      
+    </ol>
+    
+  </section>
+
+  <footer class="footer-disclaimer">
+    <p class="muted">Rendered by <span class="brand">GrokRxiv</span>. Source: <a href="https://arxiv.org/abs/2606.13813">arXiv:2606.13813</a>.</p>
+  </footer>
+</body>
+</html>
