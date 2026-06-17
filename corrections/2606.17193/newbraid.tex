@@ -1,0 +1,2922 @@
+\documentclass{amsart}
+\usepackage{amsmath,amsfonts,amsthm,amscd, amssymb, latexsym}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{claim}[thm]{Claim}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{quot}[]{Theorem}
+\newcommand{\dime}{\operatorname{dim}}
+\newcommand{\Obj}{\operatorname{Obj}}
+\newcommand{\Mor}{\operatorname{Mor}}
+\newcommand{\chan}{\operatorname{char}}
+\newcommand{\degr}{\operatorname{deg}}
+\newcommand{\expo}{\operatorname{exp}}
+\newcommand{\spant}{\operatorname{span}}
+\newcommand{\pikm}{\pi_{k,m}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\Ztwo}{\mathbb{Z}/2\mathbb{Z}}
+\newcommand{\Zp}{\mathbb{Z}/p\mathbb{Z}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\MsigX}{ M \times_{\Sigma_k} X^{(k)}}
+\newcommand{\MtsigX}{ M \rtimes_{\Sigma_k} X^{(k)}}
+\newcommand{\MsigSd}{ M \times_{\Sigma_k} (S^d)^{(k)}}
+\newcommand{\MtsigSd}{ M \rtimes_{\Sigma_k} (S^d)^{(k)}}
+
+\begin{document}
+\title{Configuration spaces and braid groups}
+
+\author{Fred Cohen and Jonathan Pakianathan}
+
+\begin{abstract}
+The main thrust of these notes is 3-fold:
+(1) An analysis of certain $K(\pi,1)$'s that arise from the connections
+between
+configuration spaces, braid groups, and mapping class groups,
+(2) a function space interpretation of these results, and
+(3) a homological analysis of the
+cohomology of some of these groups for genus zero, one, and two
+surfaces possibly with marked points, 
+as well as the cohomology of certain associated function
+spaces.
+
+An example of the type of results given here is an analysis of
+the space k particles moving on a punctured torus up to
+equivalence by the natural $SL(2,\mathbb{Z})$ action.
+
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+The main thrust of these notes is 3-fold: \\
+\noindent
+(1) An analysis of certain $K(\pi,1)$-spaces that arise from the connections
+between
+configuration spaces, braid groups, and mapping class groups. \\
+\noindent
+(2) A function space interpretation of these results, and \\
+\noindent
+(3) A homological analysis of the
+cohomology of some of these groups for genus zero, one, and two
+surfaces (possibly with marked points).
+\vskip .2in
+
+These notes address certain properties of configuration spaces of
+surfaces, such as their connections to mapping class groups, as well as
+their connections to classical homotopy theory that emerged over 15 years
+ago. These constructions have various useful properties. For
+example, they give easy ways to compute the cohomology of certain
+related discrete groups, as well as give interpretations of this cohomology 
+in terms of related mathematics.
+
+\vskip .2in
+
+In  particular certain explicit models for Eilenberg-MacLane
+spaces of type $K(\pi,1)$ are given for certain kinds of 
+braid groups and mapping class groups. For example,
+we recall the classical result that 
+configuration spaces of surfaces that are neither the 2-sphere nor
+the real projective plane are $K(\pi,1)$ spaces. The
+analogous configuration spaces for the the 2-sphere and
+the real projective plane are not $K(\pi,1)$'s, but this is remedied
+by considering natural actions of certain groups on these
+surfaces and forming the associated Borel constructions.
+\vskip .2in
+
+For example, the group $SO(3)$ acts on the 2-sphere by rotations. Hence,
+this group acts on the configuration space. 
+Thus, there is an induced action of $S^3$, the non-trivial
+double cover of $SO(3)$, on these configuration spaces. A common theme
+throughout these notes is the structure of the Borel construction
+for these types of actions. For example, the case of the  
+$S^3$ Borel construction for the natural
+action of $S^3$ on points in the 2-sphere or the projective plane
+ give  $K(\pi,1)$ spaces whose fundamental group is the braid group of the
+2-sphere or real projective plane respectively.  The resulting spaces are
+elementary flavors of moduli spaces and may be described in
+elementary terms as spaces of polynomials. These were investigated in
+[].
+\vskip .2in
+One feature of the view here is that when calculations ``work'',
+they do so easily, and give global descriptions of certain
+cohomology groups. For example, the cohomology of the genus zero
+mapping class group with marked points gives a (sometimes)
+computable version of cyclic homology. Some concrete calculations
+are given.
+
+\vskip .2in
+Also, in genus one, there is a version of a based
+mapping class group. In this case the cohomology of these groups
+with all possible marked points admits an accessible and simple
+description. In additon, the genus 2 mapping class group
+has a very simple ``configuration-like'' description from which the
+torsion in the cohomology follows at once. Some of this has found
+application
+to the integral cohomology of $Sp(4,\mathbb{Z})$, the $4 \times 4$ 
+integral matrices that
+preserve the symplectic form of $\RR^4$.
+Most of the work here is directed at calculating torsion
+in the integral cohomology.
+\vskip .2in
+
+ TABLE OF CONTENTS
+\begin{itemize}
+
+\item Section   [1]:  Introduction
+\item Section   [2]:  Definitions of configuration spaces and related
+spaces
+\item Section   [3]:  Braid groups and mapping class groups/ Smale's
+theorem, Earle-Eells/ configuration spaces as homogeneous spaces
+\item Section   [4]:  $K(\pi,1)$'s obtained from configuration spaces
+\item Section   [5]:  Orbit configuration spaces ala'  Xicotencatl
+\item Section   [6]:  Function spaces and configuration spaces/Dold-Thom
+\item Section   [7]:  Labeled configuration spaces
+\item Section   [8]:  Homological and topological splitings of function
+spaces
+\item Section   [9]:  Homological consequences
+\item Section   [10]:  Homology of function spaces from a surface to the
+2-sphere,
+and the ``generalized Heisenberg group''
+\item Section  [11]:  Based mapping class groups, particles on a punctured
+torus, and automorphic forms
+\item Section  [12]:  Homological calculations for braid groups
+\item Section  [13]:  Central extensions
+\item Section  [14]:  Geometric analogues of central extensions and
+applications to
+mapping class groups
+\item Section  [15]:  The genus two mapping class group and the unitary
+group
+\item Section  [16]:  Lie algebras, and central extensions/
+automorphisms of free groups and Artin's theorem, Falk-Randell theory
+\item Section  [17]:  Samelson products, and Vassiliev invariants
+of braids.
+\end{itemize}
+
+\section{Configuration spaces}
+\label{sec: conf}
+
+
+Throughout these notes, we will assume $X$ is a Hausdorff space
+and furthermore if $X$ has a basepoint, we will assume it is
+non-degenerate. (This means that the inclusion of the basepoint into
+the space is a cofibration. We will discuss this more when we need it.) 
+We will frequently also assume that $X$ is of the homotopy type of a
+CW-complex.
+
+	We will use $X^k$ to denote the Cartesian product of $k$ copies
+of $X$. We will be interested in studying certain
+``configuration spaces''
+associated to $X$, so let us define these next.
+
+\begin{defn}
+\label{defn: configuration}
+Given a topological space $X$, and a positive integer $k$, let 
+$$
+F(X,k) = \{ (x_1,\dots,x_k) \in X^k : x_i \neq x_j \text{ for } i \neq j \}.
+$$
+This is the $k$-configuration space of $X$.
+\end{defn}
+
+So we see that elements in the $k$-configuration space of $X$, correspond
+to $k$ distinct, ordered points from $X$.
+
+Now, it is easy to see that $\Sigma_k$, the symmetric group on $k$ letters,
+acts on $X^k$ by permuting the coordinates. If we restrict this action
+to $F(X,k)$, it is easy to check that it is free (no nonidentity element
+fixes a point). Thus we can form the quotient space 
+\begin{align}
+\label{symconfig}
+SF(X,k) = F(X,k)/\Sigma_k
+\end{align}
+and the quotient map $\pi : F(X,k) \rightarrow SF(X,k)$ is a covering map.
+An element of $SF(X,k)$ is a set of $k$ distinct (unordered) points from $X$.
+
+\begin{rem}
+We have of course that $F(X,1)=SF(X,1)=X$.
+(In these notes, $=$ will mean homeomorphic and we will use $\simeq$ to
+stand for homotopy equivalent).
+\end{rem}
+
+\begin{rem}
+It is easy to see that $F(-,k)$ defines a covariant
+functor from the category of topological spaces and continuous
+injective maps, to itself. This is not a homotopy functor. For example
+the unit interval, $[0,1]$, is homotopy equivalent to a point. However
+$F([0,1],2)$ is a nonempty space while $F(point,2)$ is an
+empty set.
+\end{rem}
+
+\begin{defn}
+Given a space $X$, we will find it convenient to let $Q_m$ denote a set
+of $m$ distinct points in $X$.
+\end{defn}
+
+Notice that for $k \geq m \geq 1$ there is a natural map 
+$$
+\pikm : F(X,k) \rightarrow F(X,m)
+$$
+obtained by projecting to the first $m$ factors. 
+
+This map is very useful in studying the nature of $F(X,k)$ especially
+when $X$ is a manifold without boundary. This is due to the following
+fundamental theorem:
+
+\begin{thm}[Fadell and Neuwirth]
+\label{thm: fib}
+If $M$ is a manifold without boundary (not necessarily compact) and $k \geq
+m \geq 1$, then the map $\pikm$ is a fibration with fiber $F(M - Q_m, k-m)$.
+\end{thm}
+
+We will use this theorem, to get our first insight into the nature of
+these configuration spaces. 
+
+\begin{defn}
+A $K(\pi,1)$-space $X$ is a path connected space 
+where $\pi_i(X)=0$ for $i \geq 2$ and 
+$\pi_1(X)=\pi$. It is well known, that the homotopy type of such a space
+is completely determined by its fundamental group (recall all our
+spaces are of the homotopy type of a CW complex).
+\end{defn}
+
+Let us first look at configuration spaces
+for 2-dimensional manifolds. 
+Our first result, will be to show that most of these are
+$K(\pi,1)$-spaces. 
+
+\begin{thm}
+\label{thm: Kpi1}
+Let $M$ be either $\mathbb{R}^2$ or a closed 2-manifold of genus $\geq 1$
+(not necessarily orientable).
+$F(M - Q_m,k)$ has no higher homotopy for all $k \geq 1, m \geq 0$.
+In other words $F(M - Q_m,k)$ is a $K(\pi,1)$-space.
+\end{thm}
+\begin{proof}
+We will prove it by induction on $k$. First the case $k=1$. If $m=0$,
+we just have to note 
+that $M=F(M,1)$ is a $K(\pi,1)$-space and for 
+$m \geq 1$, $M - Q_m \simeq \text{ bouquet of circles }$,
+and so is a $K(F, 1)$-space where $F$ is a free group of finite rank.
+
+So we can assume $k > 1$ and that the theorem holds for all smaller values. 
+By theorem~\ref{thm: fib}, the map $\pi_{(k,1)} : F(M - Q_m, k)
+\rightarrow F(M - Q_m, 1)$ is a fibration with fiber
+$F(M - Q_{m+1}, k-1)$. However, by induction both the base
+and the fiber of this fibration are $K(\pi,1)$-spaces, and so by the homotopy
+long exact sequence of the fibration, we can conclude the total space
+is also a $K(\pi,1)$-space and so we are done.
+
+\end{proof}
+
+It follows, from theorem~\ref{thm: Kpi1}, that for any closed 2-dimensional
+manifold $M$ besides the sphere $S^2$ and the projective plane $\mathbb{R}P^2$,
+the homotopy type of $F(M,k)$ is completely determined by its fundamental 
+group. So our next goal should be to understand that. It turns out there
+is quite a beautiful picture for the fundamental group of a configuration
+space in terms of braids and we shall explore this in the next section. 
+
+For now, let us state a lemma that can be used to ensure that a configuration
+space is path connected so that one does not have to worry about base
+points when talking about the fundamental group.
+
+\begin{lem}
+Let $M$ be a connected manifold (without boundary) such that $M$ remains
+connected when punctured at $k-1 \geq 0$ points. Then $F(M,k)$ is
+path connected. So in particular, if $M$ is a connected manifold
+of dimension at least 2, all of its configuration spaces are path connected.
+\end{lem}
+\begin{proof}
+The proof is by induction on $k$. When $k=1$, it follows easily from the
+hypothesis. So we can assume $k>1$ and that we have proved it for smaller
+values. Then by theorem~\ref{thm: fib}, 
+$\pi_{k,1} : F(M,k) \rightarrow F(M,1)$ is a fibration with fiber
+$F(M - Q_1, k-1)$. Thus by induction, both the base and the fiber are
+path connected and hence so is the total space. 
+\end{proof}
+
+
+
+\section{Braid groups}
+
+Let $I$ denote the unit interval $[0,1] \subset \mathbb{R}$.
+If $X$ is a space, 
+we can view $X \times \{0\}$ as the bottom of the ``cylinder'' $X \times I$,
+and similarly $X \times \{1\}$ as the top.
+
+Let $I_k$ be the space which consists of $k$ disjoint copies of $I$ where
+the copies are labeled
+from $1$ to $k$. Then 
+let $0_i \in I_i$ be the point in the $i$th copy 
+of $I$ corresponding to $0$ and similarly let $1_i \in I_i$ be the point in the
+$i$th copy of $I$ corresponding to $1$.
+
+Let $E=(e_1, \dots, e_k)$ be an element in $F(X,k)$, 
+and let $\pi_I : X \times I
+\rightarrow I$ be the projection map to the second factor. We are
+now ready to define what we mean by a pure braid in $X$.
+
+\begin{defn}
+A pure $k$-stranded braid in $X$ (based at $E$) is a continuous, one to one
+map $f: I_k \rightarrow X \times I$ which satisfies: \\
+\noindent
+(a) $\pi_I \circ f : I_k \rightarrow I$ is the identity map on each component
+of $I_k$ and \\
+\noindent
+(b) $f(0_i)=(e_i,0)$, $f(1_i)=(e_i,1)$ for all $1 \leq i \leq k$.
+\end{defn}
+
+Let us look at an example to make the formal definition above intuitively clear.
+Let us take $X=\mathbb{R}^2$ and $k=3$. We can picture $X \times I$ as
+the subspace of $\mathbb{R}^3$ where
+the $z$-coordinate satisfies $0 \leq z \leq 1$.
+The following is a typical picture of a pure $3$-stranded braid of 
+$\mathbb{R}^2$.
+
+\setlength{\unitlength}{1.0 cm}
+\begin{picture}(9,8)
+\multiput(2,2)(2,0){3}{\circle*{0.1}}
+\multiput(2,6)(2,0){3}{\circle*{0.1}}
+\put(1.7,2){\line(1,0){4.6}}
+\put(1.7,6){\line(1,0){4.6}}
+\put(7,2){z=0}
+\put(7,6){z=1}
+\linethickness{0.4mm}
+\qbezier(6,2)(6.3,3)(6,4)
+\qbezier(6,4)(5.7,5)(6,6)
+\qbezier(2,2.1)(3,3)(3.8,3.5)
+\qbezier(2,2)(1.95,2.05)(2,2.1)
+\qbezier(4.2,3.8)(5,4)(2,6)
+\qbezier(4,2)(5.2,3.4)(4,3.7)
+\qbezier(4,3.7)(2,4)(3,5)
+\qbezier(3.35,5.25)(4,5.5)(4,6)
+\end{picture}
+
+%\begin{picture}(9,8)
+%\multiput(2,2)(2,0){3}{\circle*{0.1}}
+%\multiput(2,6)(2,0){3}{\circle*{0.1}}
+%\put(1.7,2){\line(1,0){4.6}}
+%\put(1.7,6){\line(1,0){4.6}}
+%\put(7,2){z=0}
+%\put(7,6){z=1}
+%\linethickness{0.4mm}
+%\qbezier(2,2)(1.7,3)(2,4)
+%\qbezier(2,4)(2.3,4.8)(1.8,5.5)
+%\qbezier(1.8,5.5)(1.9,5.9)(2,6)
+%\qbezier(6,2)(5,3)(4.2,3.5)
+%\qbezier(3.8,3.8)(3,4)(6,5.9)
+%\qbezier(6,5.9)(6.05,5.95)(6,6)
+%\qbezier(4,2)(2.8,3.4)(4,3.7)
+%\qbezier(4,3.7)(6,4)(5,5)
+%\qbezier(4.65,5.25)(4,5.5)(4,5.9)
+%\qbezier(4,5.9)(4.05,5.95)(4,6)
+%\end{picture}
+
+It is obvious from the picture, that we would like to say two braids
+are equivalent if we can ``deform'' one to the other. Thus we define:
+
+\begin{defn}
+Let $f_0$ and $f_1$ be two pure $k$-stranded braids based at $E$. Then
+we say $f_0$ is equivalent to $f_1$ if there exists a homotopy 
+$F: I_k \times I \rightarrow X \times I$ between them, such that $F$
+restricted to $I_k \times \{t\}$ is a pure $k$-stranded braid for all $t \in I$. 
+\end{defn}
+
+It is easy to see that the equivalence above, indeed gives an equivalence
+relation on the set of all pure $k$-stranded braids of $X$.
+
+Now let us explore the natural correspondence between pure $k$-stranded
+braids based at $E$ and loops in $F(X,k)$ based at $E$.
+
+One can view such a loop as a map $\theta : I \rightarrow F(X,k)$ with 
+$\theta(0)=\theta(1)=E$. However, $F(X,k) \subseteq X^k$ so we can take the 
+components
+of the map $\theta$ to get maps $\theta_i: I \rightarrow X$ for $1 \leq i
+\leq k$. We can then define $f_i : I \rightarrow X \times I$ by
+$$
+f_i(t) = (\theta_i(t),t).
+$$
+Finally we can take these maps and put them together to get
+a map $f: I_k \rightarrow X \times I$. 
+
+It is a routine exercise to check
+that the map $f$ obtained is indeed a pure $k$-stranded braid based at $E$
+and that this establishes a one to one correspondence between loops
+in $F(X,k)$ based at $E$ and pure $k$-stranded braids of $X$ based at $E$. 
+
+Similarly, it is easy to check that two such loops are (base point preserving)
+ homotopic if and only if the corresponding pure braids are equivalent.
+Thus we see a one to one corespondence between $\pi_1(F(X,k) ; E)$ and
+$PB_k(X ;E)$, the set of equivalence classes of pure $k$-stranded braids in $X$,
+based at $E$. 
+
+Of course this implies that $PB_k(X ; E)$ inherits the structure of a group 
+from $\pi_1(F(X,k) ; E)$, but of course,
+we can also describe this multiplication naturally on the level of the braids.  
+
+Given two braids $f_0$ and $f_1$, we can  
+think of $f_0$ as a braid between $X \times \{0\}$ and $X \times \{\frac{1}{2}
+\}$ and
+$f_1$ as a braid between $X \times \{\frac{1}{2}\}$ and $X \times \{1\}$, and then
+$f_0 * f_1$ is the braid obtained by stacking the braid $f_1$ on top of the
+braid $f_0$ as illustrated in the diagram below for the case 
+$X=\mathbb{R}^2$ and $k=3$. It also follows from the earlier correspondence,
+that the inverse of a pure braid
+is just obtained by turning the braid upside down. 
+
+\setlength{\unitlength}{0.6cm}
+\begin{picture}(18,13)
+\put(0,4){$f_0$}
+\multiput(2,2)(2,0){3}{\circle*{0.1}}
+\multiput(2,6)(2,0){3}{\circle*{0.1}}
+\multiput(2,8)(2,0){3}{\circle*{0.1}}
+\multiput(2,12)(2,0){3}{\circle*{0.1}}
+\multiput(12,3)(2,0){3}{\circle*{0.1}}
+\multiput(12,7)(2,0){3}{\circle*{0.1}}
+\multiput(12,11)(2,0){3}{\circle*{0.1}}
+\put(9.5,7){$f_0 * f_1$}
+
+\put(7,4){\vector(2,1){2.5}}
+\put(7,10){\vector(2,-1){2.5}}
+
+\put(11.7,11){\line(1,0){4.6}}
+\put(17,11){z=1}
+\put(1.7,8){\line(1,0){4.6}}
+\put(1.7,12){\line(1,0){4.6}}
+\put(7,8){z=0}
+\put(7,12){z=1}
+\put(11.7,3){\line(1,0){4.6}}
+\put(11.7,7){\line(1,0){4.6}}
+\put(1.7,2){\line(1,0){4.6}}
+\put(1.7,6){\line(1,0){4.6}}
+\put(7,2){z=0}
+\put(7,6){z=1}
+\linethickness{0.4mm}
+\qbezier(6,2)(6.3,3)(6,4)
+\qbezier(6,4)(5.7,5)(6,6)
+\qbezier(2,2.1)(3,3)(3.8,3.5)
+\qbezier(2,2)(1.95,2.05)(2,2.1)
+\qbezier(4.2,3.8)(5,4)(2,6)
+\qbezier(4,2)(5.2,3.4)(4,3.7)
+\qbezier(4,3.7)(2,4)(3,5)
+\qbezier(3.35,5.25)(4,5.5)(4,6)
+
+\put(0,10){$f_1$}
+
+\qbezier(2,8)(1.7,9)(2,10)
+\qbezier(2,10)(2.3,10.8)(1.8,11.5)
+\qbezier(1.8,11.5)(1.9,11.9)(2,12)
+\qbezier(6,8)(5,9)(4.2,9.5)
+\qbezier(3.8,9.8)(3,10)(6,11.9)
+\qbezier(6,11.9)(6.05,11.95)(6,12)
+\qbezier(4,8)(2.8,9.4)(4,9.7)
+\qbezier(4,9.7)(6,10)(5,11)
+\qbezier(4.65,11.25)(4,11.5)(4,11.9)
+\qbezier(4,11.9)(4.05,11.95)(4,12)
+
+
+\put(17,3){z=0}
+\put(17,7){$z=\frac{1}{2}$}
+\qbezier(16,3)(16.3,4)(16,5)
+\qbezier(16,5)(15.7,6)(16,7)
+\qbezier(12,3.1)(13,4)(13.8,4.5)
+\qbezier(12,3)(11.95,3.05)(12,3.1)
+\qbezier(14.2,4.8)(15,5)(12,7)
+\qbezier(14,3)(15.2,4.4)(14,4.7)
+\qbezier(14,4.7)(12,5)(13,6)
+\qbezier(13.35,6.25)(14,6.5)(14,7)
+
+\qbezier(12,7)(11.7,8)(12,9)
+\qbezier(12,9)(12.3,9.8)(11.8,10.5)
+\qbezier(11.8,10.5)(11.9,10.9)(12,11)
+\qbezier(16,7)(15,8)(14.2,8.5)
+\qbezier(13.8,8.8)(13,9)(16,10.9)
+\qbezier(16,10.9)(16.05,10.95)(16,11)
+\qbezier(14,7)(12.8,8.4)(14,8.7)
+\qbezier(14,8.7)(16,9)(15,10)
+\qbezier(14.65,10.25)(14,10.5)(14,10.9)
+\qbezier(14,10.9)(14.05,10.95)(14,11)
+
+\end{picture}
+
+
+\begin{defn}
+We will call $PB_k(X ; E)$, the pure $k$-stranded braid group of $X$.
+We will usually surpress the basepoint $E$ when it is obvious and write
+$PB_k(X)$.
+\end{defn}
+
+\begin{rem}
+Notice of course that $PB_1(X)=\pi_1(X)$ for any path connected space $X$.
+\end{rem}
+
+So we see that in general $\pi_1(F(X,k))$
+can be interpreted as the pure $k$-stranded braid group $PB_k(X)$, and
+this will allow us to picture many relations among the elements of this
+group.
+
+We saw, in section~\ref{sec: conf} that there are many examples where
+configuration spaces are $K(\pi, 1)$-spaces. This means that
+in these cases, there will be a very strong connection between the 
+configuration space
+and the corresponding pure braid group. We will begin to exploit this
+correspondence in the next section.
+
+\begin{defn}
+$\pi_1(SF(X,k))$ is called the $k$-stranded braid group of $X$ and
+is denoted $B_k(X)$.
+\end{defn}
+
+Recall that we have a covering map $\pi : F(X,k) \rightarrow SF(X,k)$,
+obtained by forming the quotient space under the free action of $\Sigma_k$
+on $F(X,k)$. Assuming that $F(X,k)$ is path connected, from covering space 
+theory, 
+this implies that we have the
+following short exact sequence of groups:
+
+$$
+1 \rightarrow PB_k(X) \rightarrow B_k(X) 
+\overset{\lambda}{\rightarrow}
+ \Sigma_k 
+\rightarrow 1
+$$
+
+Fixing $E=(e_1,\dots,e_k) \in F(X,k)$, from covering space theory we can 
+identify
+elements of $\pi_1(SF(X,k) ; \pi(E))$ with homotopy classes of 
+paths in $F(X,k)$ starting at
+$E$ and ending at a point of $F(X,k)$ in the same $\Sigma_k$-orbit of $E$.
+Using the same correspondence that associated loops in $F(X,k)$ with
+pure braids, we see that these paths are naturally associated to $k$-stranded
+braids of $X$ which start at the points $\{e_1, \dots, e_k \}$ at the bottom
+of $X \times I$ and end at the same set of points on the top, but where
+it is possible that the points get permuted. 
+
+It is easy to check that there is a well defined multiplication on the 
+equivalence classes of these braids, just as before, which corresponds
+to the group structure of $\pi_1(SF(X,k))$. Thus $B_k(X)$ is just the
+group of $k$-stranded braids in $X$ (based at some set of $k$ distinct points) 
+which are allowed to induce a permutation of the points. The map $\lambda$
+in the short exact sequence above is just the map that assigns to every
+braid, the permutation it induces on the $k$ points. The pure braids
+are hence exactly the elements in the kernel of this map. 
+
+\begin{defn}
+$B_k(\mathbb{R}^2)$ is called Artin's $k$-stranded braid group
+and correspondingly, $PB_k(\mathbb{R}^2)$ is called Artin's $k$-stranded
+pure braid group.
+It follows from theorem~\ref{thm: Kpi1} that
+$$
+F(\mathbb{R}^2,k) = K(PB_k(\mathbb{R}^2),1)
+$$
+and
+$$
+SF(\mathbb{R}^2,k) = K(B_k(\mathbb{R}^2),1).
+$$
+\end{defn}
+
+\section{Cohomology of groups}
+\subsection{Basic concepts}
+
+This section is provided to recall the relevant basic facts about the cohomology
+of groups that we will need for the sequel. The reader is encouraged to read
+when these results are needed and used.
+
+Recall for every ``nice'' topological group G (Lie groups and all groups 
+equipped with the
+discrete topology are ``nice''), we have a universal principal $G$-bundle,
+$$
+EG \overset{\pi}{\rightarrow} BG
+$$
+where $EG$ is contractible and $G$ acts freely on it. 
+The isomorphism classes of principal $G$-bundles over 
+any 
+paracompact space $X$, are then in bijective correspondence to $[X,BG]$,
+the free homotopy classes of maps from $X$ into $BG$. Furthermore, it is
+well known that $BG$ is unique up to homotopy equivalence.
+
+Furthermore the correspondence $G \rightarrow BG$ can be made functorial,
+so for every homomorphism of (topological) 
+groups, $\lambda: G \rightarrow H$ we get a map
+$B(\lambda): BG \rightarrow BH$. This map is always well defined up to 
+free homotopy. 
+
+If $G$ is discrete, then $\pi$ is a covering map and $BG$ is a $K(G,1)$-space.
+Since $BG$ is unique up to homotopy equivalence, 
+we may speak of the cohomology of a (discrete) group by defining
+$$
+H^*(G;M) = H^*((K(G,1);M).
+$$
+In general, we will also want to consider
+``twisted'' coefficients in some $G$-module $M$.
+
+One can also define the cohomology of a group, purely in the language of
+homological algebra. 
+
+\begin{defn}
+Given a group $G$, and a $G$-module $M$, we define 
+$$
+H^*(G;M) = Ext^*_{\mathbb{Z}G}(\mathbb{Z}, M) 
+$$
+and
+$$
+H_*(G;M) = Tor_*^{\mathbb{Z}G}(\mathbb{Z}, M)
+$$
+where $\mathbb{Z}G$ is the integral group ring of $G$, and $\mathbb{Z}$
+is given the structure of a $G$-module where every element of $G$ acts 
+trivially.
+\end{defn}
+
+In other words, to calculate the cohomology of a group $G$, take any
+ projective resolution of $\mathbb{Z}$ over the ring $\mathbb{Z}G$, 
+apply $Hom_{\mathbb{Z}G}(-,M)$ to it, and calculate the cohomology of the resulting complex.
+
+This definition, is equivalent to the topological one, see for 
+example~\cite{Brown}.
+
+\begin{rem}
+It is an elementary fact that for any $G$-module $M$, one has
+$$
+H^0(G;M)=M^G=\{m \in M \, | \, gm=m \text{ for all } g \in G \}.
+$$
+$M^G$ is called the group of invariants of the $G$-module $M$.
+\end{rem}
+
+\begin{rem}
+It is also easy to see that one has
+$$
+H_0(G;\mathbb{Z})=\mathbb{Z}$$
+and
+$$
+H_1(G;\mathbb{Z})=G_{ab}
+$$
+where $G_{ab}$ is the abelianization of $G$.
+\end{rem}
+
+\subsection{Examples}
+Here are some basic calculations:
+
+\noindent
+(a) Let $G=\mathbb{Z}/n$ be the cyclic group of order $n$. 
+We can view $\mathbb{Z}/n$ as the $n$th
+roots of unity in $\mathbb{C}$ and have it act on $\mathbb{C}^\infty$ by
+coordinatewise multiplication. This action restricts to a free action on
+ $S^\infty$, the
+subspace of unit vectors whose coordinates are eventually zero and the
+quotient space under this action is an infinite Lens space which is a
+$K(\mathbb{Z}/n,1)$.
+ 
+One calculates:
+$$
+H^k(\mathbb{Z}/n;\mathbb{Z}) = 
+\begin{cases}
+\mathbb{Z}/n &\text{ if } k > 0 , k \text{ even } \\
+\mathbb{Z}   &\text{ if } k=0 \\
+0 &\text{ otherwise }.
+\end{cases}
+$$ 
+
+\noindent
+(b) let $G=F_n$ be a free group of rank $n$.
+In this case, a bouquet of $n$ circles is a $K(F_n,1)$. Since this is 
+1-dimensional, it is easy
+to see that $H^*(F_n;M)=0$ for all $* > 1$ and any coefficient $M$.
+Furthermore, $H^1(F_n;\mathbb{Z})$ is a free abelian group of rank $n$.
+
+\subsection{Cohomological dimension}
+As we saw before, the free groups have the property
+that $H^*(G;M)=0$ when $*>1$, so we might say they have cohomological dimension
+$1$. In general we define:
+
+\begin{defn}
+The cohomological dimension of $G$ is denoted $cd(G)$. 
+It is the maximum dimension $n$ such
+that $H^*(G;M) \neq 0$ for some $G$-module $M$. Of course, if there is
+no such maximum $n$, we say $cd(G)=\infty$. 
+\end{defn}
+
+Thus we see the cohomological dimension of a nontrivial free group is
+one while $cd(\mathbb{Z}/n)=\infty$ for any 
+$n \geq 2$.
+
+Again, there is also a more direct description of cohomological dimension
+using homological algebra.
+
+\begin{defn}
+Given a ring $R$, a projective resolution of a $R$-module $M$ is a 
+exact sequence of $R$-modules
+$$
+\dots \rightarrow P_n \rightarrow \dots \rightarrow P_1 \rightarrow P_0
+\rightarrow M \rightarrow 0
+$$
+where the $P_i$ are projective $R$-modules.
+If $P_n \neq 0$ and $P_k=0$ for $k>n$ we say the resolution has length $n$.
+\end{defn}
+
+\begin{defn}
+Given a ring $R$ and an $R$-module $M$, we define $proj_R(M)$, the projective
+dimension of $M$, as the mimimum length of a projective resolution
+of $M$. Of course, it is possible $proj_R(M)=\infty$.
+\end{defn}
+
+\begin{prop}
+For any group $G$, 
+$$
+cd(G) = proj_{\mathbb{Z}G}(\mathbb{Z})
+$$
+\end{prop}
+\begin{proof}
+See \cite{Brown}.
+\end{proof}
+
+\begin{rem}
+Given a $G$-module $M$, and a subgroup $H \le G$, we can regard
+$M$ as a $H$-module in the obvious way. It is easy to check that
+if $M$ is a free (projective) $\mathbb{Z}G$-module, then 
+$M$ is also a free (projective) $\mathbb{Z}H$-module.
+\end{rem}
+
+\begin{prop}
+For any group $G$, and subgroup $H \le G$ we have $cd(H) \leq cd(G)$.
+Thus if $cd(G) < \infty$, $G$ is torsion-free.
+\end{prop}
+\begin{proof}
+It is easy to check that a projective resolution of $\mathbb{Z}$ over
+$\mathbb{Z}G$ restricts to a projective resolution of $\mathbb{Z}$ over
+ $\mathbb{Z}H$. So the first statement
+follows. If $G$ has nontrivial torsion it contains $\mathbb{Z}/n$ for some
+$n \geq 2$ and the second statement follows from the first as 
+$cd(\mathbb{Z}/n)=\infty$. 
+\end{proof}
+
+It is an elementary result that the only group that has cohomological 
+dimension equal to zero 
+is the trivial group. On the other hand we have seen that any nontrivial
+free group has cohomological dimension 1. It is a deep result of Stallings
+and Swan that the converse is also true, i.e.,
+$$
+cd(G) \leq 1 \iff G \text{ is a free group. }
+$$
+Thus we can think of $cd(G)$ as measuring how far a group $G$ is from being
+free. If $cd(G) < \infty$, at least it is torsion-free, as we have seen.
+
+We also have the following topological picture of cohomological dimension,
+given by the following proposition, whose proof can be found in~\cite{Brown}.
+
+\begin{prop}
+Let the geometric dimension of $G$, denoted by $geod(G)$,
+ be the minimum dimension of a $K(G,1)$-CW-complex. 
+Then we have $geod(G)=cd(G)$ except possibly for the case
+where $cd(G)=2$ and $geod(G)=3$.
+\end{prop}
+
+\begin{rem} Whether the exceptional case $cd(G)=2$ and $geod(G)=3$ can
+occur is unknown. The conjecture that $cd(G)=geod(G)$ in general is known
+as the Eilenberg-Ganea conjecture.
+\end{rem}
+
+We will also need the following basic theorem on subgroups of finite
+index whose proof can be found in ~\cite{Brown}.
+
+\begin{thm}
+\label{thm: cdfinindex}
+Let $G$ be a torsion-free group and $H$ a subgroup of finite index.
+Then $cd(G)=cd(H)$.
+\end{thm}
+
+\subsection{$FP_\infty$ groups}
+
+\begin{defn}
+A group $G$ is of type $FP_n$ if there is a projective resolution
+$\{ P_i \}_{i=0}^\infty$ of $\mathbb{Z}$ over $\mathbb{Z}G$ such that 
+$P_j$ is finitely
+generated for $j=0,\dots,n$. A group $G$ is of type $FP_\infty$ if it is
+of type $FP_n$ for all $n$.
+\end{defn}
+
+It is elementary to show that every group is $FP_0$ and that a group
+is of type $FP_1$ if and only if it is finitely generated.
+So we can think of $FP_n$ for higher $n$ as strengthenings 
+of the condition that $G$ be finitely generated. 
+
+It is also true that if $G$ is finitely presented,
+then $G$ is of type $FP_2$. For a long time, it was conjectured the converse
+was true but Bestvina and Brady provided a counterexample - a group that
+is $FP_2$ but not finitely presented.
+
+\begin{rem}
+It follows immediately, that if $G$ is of type $FP_n$ then for any
+$G$-module $M$, which is finitely generated as an abelian group, we have
+$H_i(G;M)$ and $H^i(G;M)$ finitely generated for all $i \leq n$.
+\end{rem}
+
+One has the following topological picture: 
+
+\begin{prop}
+A finitely presented group $G$ is of type $FP_n$ if and only if
+there exists a $K(G,1)$-CW-complex such that the $n$-skeleton is finite. 
+If $G$ is finitely presented, then it is of type $FP_\infty$ if and only if
+there exists a $K(G,1)$-CW-complex such that the $n$-skeleton is finite
+for all $n$.
+\end{prop}
+
+\begin{defn}
+A group is of type $FP$ if it is of type $FP_\infty$ and has finite
+cohomological dimension. This happens exactly when there is a projective
+resolution $\{ P_i \}_{i=0}^\infty$ of $\mathbb{Z}$ over $\mathbb{Z}G$
+which has finite length and such that each $P_i$ is finitely generated.
+\end{defn}
+
+If we are given such a finite projective resolution, it does not necessarily
+mean that we can find a finite length resolution using free modules of finite
+rank. Thus we define:
+
+\begin{defn}
+A group is of type $FL$ if there is a resolution of finite length for
+$\mathbb{Z}$ over
+$\mathbb{Z}G$ using finitely generated free modules.
+\end{defn}
+
+Again, we have a more concrete topological picture.
+
+\begin{prop}
+Let $G$ be a finitely presented group. Then $G$ is of type $FP$ if and only
+if there exists a finitely dominated $K(G,1)$-CW-complex. Similarly,
+$G$ is of type $FL$ if and only if there exists a finite $K(G,1)$-CW complex.
+\end{prop} 
+
+Thus for example $F_n$ is $FL$ as we can take $K(F_n,1)$
+to be the bouquet of $n$ circles.
+
+We will also find the following proposition useful:
+
+\begin{prop}
+\label{prop: seqFP}
+If we have a short exact sequence of groups
+$$
+1 \rightarrow \Gamma_0 \rightarrow \Gamma \rightarrow \Gamma_1 \rightarrow 1
+$$
+then if $\Gamma_0$ and $\Gamma_1$ are of type $FP$ (respectively $FL$) then
+so is $\Gamma$.
+\end{prop}
+
+\begin{defn}
+If a group $G$ is of type $FP$, we define $\chi(G)$, the Euler characteristic 
+of $G$ to be the Euler characteristic of a $K(G,1)$. This makes sense
+since $H^*(G;\mathbb{Z})$ is finitely generated in each dimension, and
+is zero for $* > cd(G)$.
+\end{defn}
+
+The following proposition recalls well-known facts about subgroups of finite
+index.
+
+\begin{prop}
+\label{prop: Eulerfinindex}
+If $G$ is a torsion-free group, and $H$ is a subgroup of finite 
+index. Then 
+$G$ is of type $FP$ if and only if $H$ is. Furthermore in this case, 
+$$
+\chi(H) = |G:H|\chi(G).
+$$ 
+\end{prop}
+
+\subsection{The five lemma}
+We state a refined form of the five lemma here as a 
+convenient quick reference. The reader can supply the usual
+diagram chasing proof if they feel inclined!
+
+\begin{lem}
+\label{lem: 5lem}
+Given a commutative diagram of (not neccessarily abelian) groups
+and homomorphisms:
+
+$$
+\begin{CD}
+H_1 @>>> H_2 @>>> H_3 @>>> H_4 @>>> H_5 \\
+@VV \mu_1 V @VV \mu_2 V @VV \mu_3 V @VV \mu_4 V @VV \mu_5 V \\
+G_1 @>>> G_2 @>>> G_3 @>>> G_4 @>>> G_5
+\end{CD}
+$$
+where the rows are exact, the following is true: \\
+
+\noindent
+(a) If $\mu_2,\mu_4$ are monomorphisms and $\mu_1$ is an
+epimorphism then $\mu_3$ is a monomorphism. \\
+
+\noindent
+(b) If $\mu_2,\mu_4$ are epimorphisms and $\mu_5$ is a
+monomorphism then $\mu_3$ is an epimorphism. \\
+
+\noindent
+(c) If $\mu_1,\mu_2,\mu_4$ and $\mu_5$ are isomorphisms,
+then so is $\mu_3$.
+\end{lem}
+
+
+
+\subsection{The Lyndon-Hochschild-Serre (LHS) spectral sequence}
+For any short exact sequence of groups
+$$
+1 \rightarrow N \overset{i}{\rightarrow} G \overset{\pi}{\rightarrow}
+ Q \rightarrow 1
+$$
+and $G$-module $M$, we have a $E_2$-spectral sequence abutting to 
+$H^*(G;M)$ and whose $E_2$ term is given by
+$$
+E_2^{p,q} = H^p(Q;H^q(N;M)).
+$$
+Of course, there is also a similar spectral sequence in homology.
+(Here, recall that in general, $H^q(N;M)$ is a nontrivial
+$Q$-module where the $Q$ action is induced by the conjugation
+action of $G$ on $N$.)
+
+This spectral sequence has a topological origin, for if you have
+such an exact sequence of groups, then 
+$$
+BN \overset{Bi}{\rightarrow} BG \overset{B\pi}{\rightarrow} BQ
+$$
+is a fibration, and the LHS-spectral sequence is nothing more than the
+Serre spectral sequence for this fibration, possibly using twisted coefficients.
+
+\section{Polyfree groups}
+
+\begin{defn}
+\label{defn: normalseries}
+A normal series for a group $G$ is a sequence of subgroups 
+$$
+1=G_0 \le G_1 \le \dots \le G_n=G
+$$
+where each $G_i$ is normal in $G$. $\Gamma_i=G_i/G_{i-1}$ 
+is referred to as the $i$th factor for $1 \leq i \leq n$. 
+The length of a normal series is 
+the number of nontrivial factors.
+\end{defn}
+
+\begin{defn}
+A polyfree group is a group which has a normal series where all the factors
+are finitely generated free groups. Such a normal series will be refered to
+as a polyfree series and the rank of the $k$th factor will be called $d_k$,
+the $k$th exponent.
+\end{defn}
+
+\begin{rem}
+Apriori, we do not know whether every polyfree series of a given polyfree group
+will have the same length, nor do we know if the exponents may vary with
+the polyfree series chosen.
+We will return to this point shortly.
+\end{rem}
+
+Our interest in polyfree groups stems from the fact that many of the pure
+braid groups we have considered up to now, are polyfree.
+
+\begin{thm}
+\label{thm: motpoly}
+Let $M$ be equal to $\mathbb{R}^2$ or a closed 2-manifold of genus $g \geq 1$. 
+Then $PB_k(M-Q_m)$ is polyfree for any $m,k \geq 1$. (Notice that
+we do have to puncture the manifold at least once in general). Furthermore
+there is a polyfree series of length $k$ where the rank of the $i$th factor
+is equal to 
+$2g+m-1 -i + k$ for $1 \leq i \leq k$. (These formulas also work for 
+$M=\mathbb{R}^2$ if we set $g=\frac{1}{2}$).
+\end{thm}
+\begin{proof}
+As usual, we will induct on $k$. For $k=1$, $F(M-Q_m,k)=M-Q_m$ is a
+$K(F_{2g+m-1},1)$ where $F_{2g + m - 1}$ is a free group of rank $2g+m-1$. 
+Thus the theorem
+follows easily in this case. So we may assume $k>1$ and that the theorem
+is proven for smaller values of $k$. Then by theorem~\ref{thm: fib}, we
+have
+$$
+\pi_{k,k-1} : F(M-Q_m,k) \rightarrow F(M-Q_m,k-1)
+$$
+is a fibration with fiber $F(M-Q_{m+k-1},1)$. Since these spaces have
+trivial $\pi_2$ by theorem~\ref{thm: Kpi1}, we get a short exact sequence
+of groups
+$$
+1 \rightarrow F_{2g + m - 2 + k} \rightarrow PB_k(M-Q_m) \rightarrow
+PB_{k-1}(M-Q_m) \rightarrow 1.
+$$
+By induction $PB_{k-1}(M-Q_m)$ has a polyfree series of length $k-1$
+with the claimed exponents and so it follows from the short exact sequence of 
+groups above, that
+$PB_k(M-Q_m)$ has a polyfree series of length $k$. It is an easy exercise
+which will be left to the reader, to check that the factors have the ranks 
+claimed.
+\end{proof}
+
+\begin{rem}
+For $k \geq 2$, by considering the map 
+$\pi_{k,1} : F(\mathbb{R}^2,k) \rightarrow 
+F(\mathbb{R}^2,1)=\mathbb{R}^2$ we see that 
+$$
+F(\mathbb{R}^2,k) = \mathbb{R}^2 \times F(\mathbb{R}^2-Q_1,k-1)
+$$
+so it follows that $PB_k(\mathbb{R}^2)=PB_{k-1}(\mathbb{R}^2-Q_1)$
+and so the pure $k$-stranded Artin braid group is polyfree with a polyfree 
+series
+of length $k-1$ given by the theorem above.
+\end{rem}
+
+So now we have a lot of motivation to study the class of polyfree groups.
+Let us begin with some elementary results.
+First recall the following classical theorem of P. Hall:
+
+\begin{thm}[P. Hall]
+\label{thm: Hall}
+If 
+$$
+1 \rightarrow N \rightarrow G \rightarrow Q \rightarrow 1 
+$$
+is a short exact sequence of groups, with $N$ and $Q$ finitely presented,
+then $G$ is finitely presented.
+\end{thm}
+\begin{proof}
+See e.g.~\cite{Robin}
+\end{proof}
+
+\begin{prop}
+\label{prop: baspoly}
+Suppose $G$ is a polyfree group with a polyfree series of length $n$.
+Then: \\
+(a) $cd(G) \leq n$ and in particular $G$ is torsion-free. \\
+(b) $G$ is of type $FL$. \\
+(c) $G$ is finitely presented. \\
+(d) If the exponents for the polyfree series satisfy $d_k \geq 2$ for
+all $1 \leq k \leq n$ then $G$ has trivial center.
+\end{prop} 
+\begin{proof}
+We will induct on $n$, the length of the polyfree series. If $n=1$, then
+$G$ is free of rank $d_1$. The theorem then follows readily once we note
+that a free group of rank $d_1 \geq 2$ has trivial center. (Since for
+example it is a nontrivial free product.)
+
+So we can assume $n>1$ and that we have proved the proposition for all smaller
+$n$. Let $1=G_0 \le G_1 \le \dots \le G_n=G$ be the given polyfree series.
+Notice we have a short exact sequence
+$$
+1 \rightarrow G_{n-1} \rightarrow G \overset{\pi}{\rightarrow} 
+F_{d_n} \rightarrow 1
+$$
+and that $G_{n-1}$ is polyfree with a series of length $n-1$.
+Thus by induction $G_{n-1}$ is $FL$ and finitely presented and hence
+so is $G$ by theorem~\ref{thm: Hall} and proposition~\ref{prop: seqFP}.
+So we have proven (b) and (c). 
+
+For (d), if we assume $d_k \geq 2$ for all
+$k$ then by induction $G_{n-1}$ has trivial center and of course so
+does $F_{d_n}$. Now if $c \in G$ is a central element, then it is easy
+to see that $\pi(c)$ will be central in $F_{d_n}$ and hence trivial.
+Thus $c \in G_{n-1}$ and so $c$ is a central element in $G_{n-1}$ which
+finally lets us conclude $c=1$. Thus we have proven (d).
+
+So it remains only to prove (a). By induction, $cd(G_{n-1}) \leq n-1$.
+Now suppose $M$ is any $G$-module. Then we can apply the LHS-spectral
+sequence to the short exact sequence above. 
+Now $E_2^{p,q} = H^p(F_{d_n};H^q(G_{n-1};M))$ is zero if either $p > 1$
+or $q >n-1$, as $cd(G_{n-1}) \leq n-1$. Thus we see there can be
+no nontrivial differentials in this spectral sequence and so $E_2=E_\infty$.
+
+However this spectral sequence converges to $H^*(G;M)$ and so we can conclude
+easily that $H^*(G;M)=0$ for $* > n$. Since this holds for any $G$-module
+$M$, we can conclude $cd(G) \leq n$.
+\end{proof}
+
+\begin{rem}
+Given a polyfree group $G$ with a polyfree series of length $n$, 
+proposition~\ref{prop: baspoly} guarantees the existance of a resolution of
+$\mathbb{Z}$ over $\mathbb{Z}G$ of length less than or equal to $n$,
+using finitely generated, free $\mathbb{Z}G$-modules.
+
+A nice resolution of this sort 
+was constructed in ~\cite{Dan} using Fox free derivatives
+in the case where the polyfree group satisfies an extra splitting condition
+which we will consider later. The naturality of this resolution was also
+exploited to recover many interesting representations which we will
+also look at later.
+\end{rem}
+
+Next we consider subgroups of finite index in a polyfree group.
+
+\begin{prop}
+\label{prop: polyfin}
+Let $G$ be a polyfree group with a polyfree series of length $n$ and
+let $H$ be a subgroup of finite index in $G$. Then $H$ is polyfree
+with a polyfree series of length $n$.
+\end{prop}
+\begin{proof}
+We proceed by induction on $n$. If $n=1$ then $G$ is a nontrivial free group
+of finite rank. It follows then from the Nielsen-Schreier theorem 
+(see \cite{Robin}) that
+$H$ is also free of finite rank and so this case follows.
+
+So we may assume $n > 1$ and that we have proved the proposition for smaller
+values. Let $1 = G_0 < G_1 < \dots < G_n =G$ be the polyfree series for $G$.
+Then if we set $H_i=G_i \cap H$ for $0 \leq i \leq n$, it is easy to check
+$1=H_0 < H_1 < \dots <H_n=H$ is a normal series for $H$. Furthermore,
+if $H_i/H_{i-1} \rightarrow G_i/G_{i-1}$ is the map induced by inclusion
+of $H$ in $G$, it is easy to check this map is a well defined monomorphism
+(injection) of groups. On the other hand the image of this map has finite index
+in $G_i/G_{i-1}$ as $G_i/H_i$ injects (as sets) into the finite set $G/H$ 
+via the map induced by inclusion. Thus we see each $H_i/H_{i-1}$ can be
+viewed as a subgroup of finite index in the nontrivial finitely generated 
+free group
+$G_i/G_{i-1}$ and hence is itself a nontrivial free group of finite rank,
+again by the Nielsen-Schreier theorem. 
+Thus $1=H_0 < H_1 < \dots <H_n=H$ is a polyfree series for
+$H$ of length $n$.
+\end{proof}
+
+\begin{rem}
+An arbitrary subgroup of a free group of finite rank need not have finite rank
+and so we see that arbitrary subgroups of a polyfree group need not be
+polyfree.
+\end{rem}
+
+Now let us show that for any given polyfree group $G$, all polyfree series
+for $G$ have the same length. First we will need a technical lemma.
+Let $\mathbb{F}_2$ be the field with two elements.
+
+\begin{lem}
+\label{lem: lowbound}
+Let $G$ be a polyfree group with a polyfree series 
+$1=G_0 < G_1 <\dots<G_n=G$ of length $n$.
+Then there exists a subgroup $T$ of finite index such that 
+$H^n(T;\mathbb{F}_2) \neq 0$. Furthermore, $T$ contains $G_1$ and
+$\chi(T) = \chi(G_1)\chi(T/G_1)$. Thus $\chi(G)=\chi(G_1)\chi(G/G_1)$.
+\end{lem} 
+\begin{proof}
+As usual we will proceed by induction on $n$. If $n=1$, $G$ is a nontrivial 
+free group of finite
+rank. Thus we can take $T=G=G_1$ as $H^1(G;\mathbb{F}_2)=Hom(G;\mathbb{F}_2)$
+is nonzero. (The statement about Euler characteristics follows as
+$\chi(1)=1$.) 
+
+So we can assume $n>1$ and that we have proved the lemma for smaller $n$.
+Then notice that $G/G_1$
+has a polyfree series of length $n-1$.
+
+Now $G$ acts by conjugation on $G_1$ and hence on the finite vector space
+$$
+H^1(G_1;\mathbb{F}_2)=Hom(G_1,\mathbb{F}_2).
+$$ 
+If we let $K$ be the kernel of this action on
+$H^1(G_1;\mathbb{F}_2)$, then $K$ is normal and of finite index in $G$
+and furthermore $G_1 \subseteq K$.
+
+Now $K/G_1 \subseteq G/G_1$ is a subgroup of finite index and so by 
+proposition~\ref{prop: polyfin}, $K/G_1$ is polyfree with
+a polyfree series of length $n-1$. So, by hypothesis, we may find $T/G_1$ with 
+$H^{n-1}(T/G_1;\mathbb{F}_2) \neq 0$ and $T$ a subgroup of $K$ of finite index.
+However $T/G_1 \subseteq G/G_1$ and so $cd(T/G_1) \leq n-1$ by 
+proposition~\ref{prop: baspoly}. So if we look at the LHS-spectral sequence
+for the short exact sequence
+$$
+1 \rightarrow G_1 \rightarrow T \rightarrow T/G_1 \rightarrow 1
+$$
+we see that $E_2^{p,q}=H^p(T/G_1;H^q(G_1;\mathbb{F}_2))$ is zero if
+$p>n-1$ or $q>1$ and $E_2^{n-1,1}$ is nonzero. (Here we use that 
+$T \subseteq K$ so that 
+$E_2^{*,*}=H^*(T/G_1;\mathbb{F}_2) \otimes H^*(G_1;\mathbb{F}_2)$.)
+It is easy to see that
+we must have $E_2^{n-1,1}=E_{\infty}^{n-1,1}$ and so we can conclude
+$H^n(T;\mathbb{F}_2)$ is nonzero.
+$T$ is obviously of finite index in $G$ so it only remains to prove the
+statement about $\chi(T)$.
+
+In the spectral sequence above, the $E_2$ term has Euler characteristic
+$$
+\chi(G_1)\chi(T/G_1).
+$$
+On the other hand the $E_{\infty}$ term abuts
+to $H^*(T;\mathbb{F}_2)$ which has Euler characteristic
+$\chi(T)$ and so the equality $\chi(T)=\chi(G_1)\chi(T/G_1)$ follows
+from the general fact that the Euler characteristic remains constant
+on each page of the LHS-spectral sequence. Thus our induction on $n$ goes
+through. 
+
+Finally the equality $\chi(G)=\chi(G_1)\chi(G/G_1)$ follows from
+the previous one which had $T$ instead of $G$,
+ theorem~\ref{prop: Eulerfinindex}, and the fact that
+the index of $T$ in $G$ is the same as the index of $T/G_1$ in $G/G_1$.
+
+\end{proof}
+
+\begin{prop}
+Let $G$ be a polyfree group with a polyfree series of length $n$
+and exponents $d_k$, $1 \leq k \leq n$.
+Then $cd(G)=n$ and so every polyfree series of $G$ has length $n$.
+Furthermore $\chi(G)=\prod_{k=1}^n(1-d_k)$.
+\end{prop}
+\begin{proof}
+By proposition~\ref{prop: baspoly}, we have $cd(G) \leq n$.
+On the other hand, by lemma~\ref{lem: lowbound}, we have a subgroup $T$ of
+$G$ of finite index, such that $cd(T) \geq n$. Thus the first
+part follows as $cd(G)=cd(T)$ by proposition~\ref{thm: cdfinindex}.
+
+Now let us prove the formula for $\chi(G)$ by induction on $n$. For $n=1$,
+it follows as a bouquet of $d_1$ circles is a $K(G,1)$. So as usual we
+can assume $n>1$ and that we have the formula for smaller $n$.
+
+ Again by lemma~\ref{lem: lowbound}, we have
+$\chi(G) = \chi(G_1)\chi(G/G_1) = (1-d_1)\chi(G/G_1)$.
+The formula now follows readily once we observe that $G/G_1$ has a polyfree
+series of length $n-1$ with exponents $d_2,\dots,d_n$ and so by induction,
+$$
+\chi(G/G_1)=\prod_{k=2}^n(1-d_k).
+$$
+\end{proof}
+ 
+\begin{rem}
+So from what we have seen, all polyfree series for a given polyfree
+group $G$, have the same length which is equal to $cd(G)$. However
+the exponents of different polyfree series need not be the same.
+
+For example we saw that $PB_4(\mathbb{R}^2)=PB_3(\mathbb{R}^2 - Q_1)$
+is polyfree with exponents $(3,2,1)$ by theorem~\ref{thm: motpoly}.
+However it is known that this group also admits a polyfree series with
+exponents $(5,2,1)$ (see \cite{Dan}).
+
+However $\prod_{k=1}^n(1-d_k)$ is independent of the polyfree series chosen
+as it is equal to $\chi(G)$ as we have seen. 
+\end{rem}
+
+\section{Configuration spaces for the 2-sphere}
+	We have seen in theorem ~\ref{thm: Kpi1} 
+that for any closed 2-dimensional manifold $M$ besides
+the sphere $S^2$ and the projective plane $\mathbb{R}P^2$, $F(M,k)$
+is a $K(PB_k(M),1)$. Thus the configuration space is a good model
+for the pure braid group of $M$.
+	Now let us see what we can say in the case where $M$ is $S^2$ or
+$\mathbb{R}P^2$.  
+ 	Let us first look at $S^2$. First note that $SO(3)$ acts naturally
+on $\mathbb{R}^3$ and this action preserves the unit sphere $S^2$. 
+Hence $SO(3)$ acts naturally on $F(S^2,k)$ for any $k$ via a diagonal action.
+We will describe these configuration spaces now up to 
+homotopy equivalence (which will be denoted by $\simeq$).
+In fact we will find homotopy equivalences which preserve the $SO(3)$ actions.
+
+\begin{prop}
+\label{pro: configsphere}
+$$
+F(S^2,k) \simeq
+\begin{cases}
+S^2 &\text{ if } k=1,2 \\
+SO(3) &\text{ if } k=3 \\
+SO(3) \times F(S^2 - Q_3, k-3) &\text{ if } k>3.
+\end{cases}
+$$
+Furthermore, there are homotopy equivalences which are equivariant with
+respect to the natural $SO(3)$ actions on $F(S^2,k)$ and the action of
+$SO(3)$ on itself by left multiplication. (Here $SO(3)$
+acts on $SO(3) \times F(S^2 - Q_3, k-3)$ by acting entirely on the left
+factor via left multiplication.) 
+\end{prop}
+\begin{proof}
+The $k=1$ case is trivial so let us look at the $k=2$ case first. 
+By theorem~\ref{thm: fib}, 
+$\pi: F(S^2,2) \rightarrow F(S^2,1)=S^2$ is a fibration with
+contractible fiber $F(S^2 - Q_1, 1)=R^2$. Thus $\pi$ is a homotopy
+equivalence and it is trivial to see it is equivariant with respect to the
+natural actions of $SO(3)$ on $F(S^2,2)$ and $S^2$.
+
+Now let us look at the case where $k=3$.
+Again by theorem~\ref{thm: fib}, there is a fibration
+$$
+\pi: F(S^2,3) \rightarrow S^2
+$$ 
+obtained by projecting onto the first factor.
+
+Fix a point $p_1 \in S^2$. Let $F=\pi^{-1}(p_1)$, the fiber over the point
+$p_1$. 
+Then again by theorem~\ref{thm: fib},
+since $F=F(S^2 - Q_1,2)$ there is a fibration 
+$$
+\hat{\pi} : F \rightarrow (S^2-Q_1)=
+\mathbb{R}^2
+$$ 
+with fiber $S^2-Q_2$, obtained by projecting onto a factor. 
+
+Since
+the base space of the fibration $\hat{\pi}$ is contractible, we conclude that
+$$
+F = \mathbb{R}^2 \times (S^2 - Q_2) \simeq S^1.
+$$
+
+Now we will define a map $\lambda : SO(3) \rightarrow F(S^2,3)$. Fix
+$\bar{p}=(p_1,p_2,p_3) \in F(S^2,3)$. Specifically, we will take
+$p_1=(0,0,1), p_2=-p_1$ and $p_3=(1,0,0)$. Then we can set
+$$
+\lambda(\alpha) = (\alpha(p_1),\alpha(p_2),\alpha(p_3))
+$$ 
+for all $\alpha \in
+SO(3)$. 
+
+It is easy to see that $\lambda$ is a $SO(3)$-equivariant, continuous
+map from $SO(3)$ to $F(S^2,3)$. We now want to show it is a homotopy
+equivalence. Let $I$ denote the isotropy group of the point $p_1 \in S^2$
+under the $SO(3)$ action. Then $I$ is isomorphic to $SO(2)$ as a topological
+group and $\lambda|_I$ maps $I$ into $F$. 
+
+\begin{claim}
+The map $\lambda|_I : I \rightarrow F$ is a homotopy equivalence.
+\end{claim}
+\begin{proof}
+The action of $I$ on $S^2$ is given
+by rotation about the $z$-axis fixing $p_1$ which can be thought of as
+the north pole of $S^2$. Notice that since we chose
+$p_2=-p_1$, any element of $I$ will also fix $p_2$ (which is the south pole).
+Recall we had a fibration $\hat{\pi}: F \rightarrow S^2 - \{p_1\}$ and let
+us set $F' = \hat{\pi}^{-1}(p_2)$, the fiber above the point $p_2$. We saw
+above that $F' = S^2 - \{p_1,p_2\} \simeq S^1$ 
+and that the 
+inclusion
+of $F'$ into $F$ is a homotopy equivalence. 
+
+Now notice, that $\lambda|_I$ actually maps $I$ into $F'$ since any element
+of $I$ fixes $p_2$. If we let $\alpha_{\theta}$ denote the element of
+$I$ which corresponds to rotation through an angle $\theta$, then the
+loop $\{ \alpha_{\theta} : 0 \leq \theta \leq 2\pi \}$ gets mapped
+by $\lambda$ to the generator of $\pi_1(F')$. Thus we see
+that $\lambda |_{I} : I \rightarrow F'$ is a homotopy equivalence since
+both $I$ and $F'$ are homotopic to $S^1$ and $\lambda$ is surjective
+on the $\pi_1$ level. 
+Hence $\lambda |_{I} : I \rightarrow F$ is a homotopy equivalence
+since the inclusion of $F'$ into $F$ is a homotopy equivalence.  
+\end{proof}
+
+Now one can check easily that we get the following commutative diagram:
+
+$$
+\begin{CD}
+I @>>> SO(3) @> f >> S^2 \\
+@VV \lambda |_I V @VV \lambda V @VV Id V \\
+F @>>> F(S^2,3) @> \pi >> S^2
+\end{CD}
+$$
+where $Id$ is the identity map and $f(\alpha) = \alpha(p_1)$ for $\alpha \in
+SO(3)$. Furthermore, each row is a fibration. Comparing  
+the long exact sequence in homotopy for the two fibrations, one sees
+that the vertical maps induce an isomorphism on homotopy groups
+on the base and fiber levels of these fibrations and hence (by the five lemma)
+ also on the level
+of total spaces. Thus, 
+$\lambda: SO(3) \rightarrow F(S^2,3)$
+induces an isomorphism on homotopy groups and hence is a homotopy
+equivalence and so we have the result for the case $k=3$.
+ 
+	Now for the final case when $k > 3$. Let $\bar{p}=(p_1,\dots,p_k)
+\in F(S^2,k)$ extend $(p_1,p_2,p_3)$ chosen in the previous case.
+Then again we can define a map 
+$$
+\lambda: SO(3) \times F(S^2 - \{p_1,p_2,p_3\},k-3) \rightarrow F(S^2,k)
+$$
+by 
+$$
+\lambda(\alpha, (a_4,\dots, a_k)) = (\alpha(p_1),\alpha(p_2),\alpha(p_3),
+\alpha(a_4),\dots,\alpha(a_k))
+$$
+for $\alpha \in SO(3)$ and $(a_4,\dots,a_k) \in F(S^2-\{p_1,p_2,p_3\},k-3)$.
+
+It is easy to see that this map is continuous and $SO(3)$-equivariant
+under the $SO(3)$-actions described in the statement of this lemma.
+Furthermore, we get the following commutative diagram:
+
+$$
+\begin{CD}
+\pi^{-1}(Id) @>>> SO(3) \times F(S^2-\{p_1,p_2,p_3\},k-3)
+@> \pi >> SO(3) \\
+@V Id VV @V \lambda VV @V \lambda VV \\
+\pi_{k,3}^{-1}(p_1,p_2,p_3) @>>> F(S^2,k) @> \pi_{k,3} >> F(S^2,3)
+\end{CD}
+$$
+where as usual $Id$ stands for an identity map and $\pi$ is projection onto
+the first factor. Furthermore both rows are fibrations. We have
+seen that the vertical map on the base level is a homotopy equivalence
+and also trivially the vertical map on the fiber level is also a homotopy
+equivalence and so it follows that $\lambda$ is indeed a homotopy equivalence
+(by looking at the long exact sequences in homotopy for the fibrations,
+and using the five-lemma).
+So this concludes the proof of the lemma.
+\end{proof}
+
+Proposition~\ref{pro: configsphere} has the following immediate
+corollary:
+
+\begin{cor}
+$$
+PB_k(S^2) =
+\begin{cases}
+1 &\text{ if } k=1,2 \\
+\mathbb{Z}/2\mathbb{Z} &\text{ if } k=3 \\
+\mathbb{Z}/2\mathbb{Z} \times PB_{k-3}(\mathbb{R}^2-Q_2)
+&\text{ if } k>3
+\end{cases}
+$$
+\end{cor}
+
+Notice that $F(S^2,k)$ is never a $K(\pi,1)$-space due to the higher
+homotopy in $SO(3)$ and $S^2$. However, we will see in the next subsection,
+that one can perform a natural construction to $F(S^2,k)$ for $k \geq 3$
+and obtain a useful $K(\pi,1)$-space. 
+
+\subsection{The Borel Construction}
+We will now recall a very important construction. First some
+elementary definitions:
+
+\begin{defn}
+If $G$ is a topological group with identity element $e$, then a (left) 
+$G$-space is a space $X$
+together with a continuous map $\mu : G \times X \rightarrow X$ which 
+satisfies: \\
+\noindent
+(a) $g_1 \cdot (g_2 \cdot x) = (g_1g_2)\cdot x$ and \\
+\noindent 
+(b) $e \cdot x = x$ \\ 
+\noindent
+for all $g_1,g_2 \in G$, $x \in X$. (Here we use the notation
+$g \cdot x$ for $\mu(g,x)$ and $e$ denotes the identity element of $G$). 
+Of course, similarly there is a notion
+of right $G$-space where the action is on the right instead of on
+the left.
+\end{defn}
+
+\begin{defn}
+Keeping the notation above, we say a $G$-space $X$ is free if 
+$g \cdot x = x$ implies that $g=e$.
+\end{defn}
+
+Recall that for a
+``nice'' topological group $G$, there is a universal $G$-bundle:
+
+$$
+G \rightarrow EG \rightarrow BG
+$$
+
+where $EG$ is a contractible free (right) $G$-space.
+
+\begin{defn}
+Given a (left) $G$-space $X$, one can perform the 
+Borel construction:
+$$
+EG \times_G X = EG \times X / \sim
+$$
+where $\sim$ is the equivalence relation generated by
+$ (tg,x) \sim (t,gx) $ for all $t \in EG, x \in X, g \in G$. 
+\end{defn}
+
+\begin{rem}
+\label{rem: basborel}
+It is easy to see from this definition, that
+$EG \times_G G = EG \simeq *$.
+Here $G$ is viewed as a left $G$-space via left multiplication on
+itself and we are using the standard notation of $*$ to denote
+a space which consists of a single point. 
+\end{rem}
+
+The next lemma collects some well-known elementary facts about
+the Borel construction:
+
+\begin{lem}
+Let $G$ be a topological group and $X$ be a $G$-space
+then 
+$$
+\pi_1: EG \times_G X \rightarrow BG=EG/G,
+$$ 
+the map induced
+by projection onto the first factor, is a bundle
+map with fiber $X$.
+
+Furthermore, if $X$ is a free $G$-space, then the map
+$$
+\pi_2: EG \times_G X \rightarrow X/G,
+$$ 
+induced by projection
+onto the second factor is a bundle map with fiber $EG$. Since
+$EG$ is contractible, this implies $\pi_2$ is a (weak) homotopy equivalence.
+\end{lem}
+
+Let $G_1,G_2$ be two topological groups and let 
+$\mu : G_1 \rightarrow G_2$ be a homomorphism of topological groups.
+Suppose further that you are given a $\mu$-equivariant map 
+$$
+f: X_1 \rightarrow X_2,
+$$
+where $X_i$ is a left $G_i$-space for $i=1,2$. In other words, $f$
+satisfies:
+$$
+f(g \cdot x) = \mu(g) \cdot f(x)
+$$ 
+for all $g \in G_1, x \in X_1$.
+
+Furthermore recall, from the functoriality of the construction of the
+universal principal $G$-bundle, one has the map 
+$E(\mu): EG_1 \rightarrow EG_2$
+which is also $\mu$-equivariant which induces the map 
+$B(\mu): BG_1 \rightarrow BG_2$ on the level of the quotient spaces.
+
+Thus one can look at
+$$
+E(\mu) \times f : EG_1 \times X_1 \rightarrow EG_2 \times X_2.
+$$
+It is easy to check that this map respects the equivalence relations
+used in forming the 
+respective Borel constructions and thus one gets a map:
+
+$$
+E(\mu) \bar{\times} f : EG_1 \times_{G_1} X_1 \rightarrow EG_2 \times_{G_2}
+X_2.
+$$ 
+
+There is a commutative diagram in this context that is very useful.
+We state it as the next lemma.
+
+\begin{lem}
+\label{lem: CD for Borel}
+Given $\mu: G_1 \rightarrow G_2$ a homomorphism of topological groups
+and $f: X_1 \rightarrow X_2$ a $\mu$-equivariant map one has
+the following commutative diagram:
+$$
+\begin{CD}
+X_1 @>>> EG_1 \times_{G_1} X_1 @>>> BG_1 \\
+@VV f V @VV E(\mu) \bar{\times} f V @VV B(\mu) V \\
+X_2 @>>> EG_2 \times_{G_2} X_2 @>>> BG_2 
+\end{CD}
+$$
+where each row is a fiber bundle.
+So in particular, if $B(\mu)$ and $f$ are weak homotopy equivalences,
+then so is $E(\mu) \bar{\times} f$. 
+\end{lem}
+\begin{proof}
+It is a routine exercise to check that the diagram commutes.
+The last sentence then follows once again from the five lemma
+applied to the long exact sequences in homotopy for the
+two bundles.
+\end{proof}
+
+Lemma~\ref{lem: CD for Borel} gives us a convenient way to restate 
+part of the
+results of proposition~\ref{pro: configsphere}.
+
+\begin{prop}
+\label{pro: BSKpi1}
+For $k \geq 3$ one has that 
+$$
+ESO(3) \times_{SO(3)} F(S^2,k) = K(PB_{k-3}(\mathbb{R}^2 - Q_2),1).
+$$
+Here we are using the natural action of $SO(3)$ on $F(S^2,k)$
+described before. (We are using the convention, that $PB_0(X)$ denotes
+the trivial group.) 
+\end{prop}
+\begin{proof}
+Fix $k \geq 3$, then from proposition~\ref{pro: configsphere}, 
+one has a $SO(3)$-equivariant
+homotopy equivalence 
+$$
+\lambda: SO(3) \times Y \rightarrow F(S^2,k). 
+$$ 
+where we have denoted $F(S^2-Q_3,k-3)$ by $Y$ for convenience.
+(This means that $Y$ is a point when $k=3$.)
+
+Applying lemma~\ref{lem: CD for Borel} using $Id: SO(3) \rightarrow
+SO(3)$ as $\mu$, and $\lambda$ as the equivariant map, one sees immediately
+that since $B(\mu)$ and $\lambda$ are homotopy equivalences, then
+$$
+E(Id) \bar{\times} \lambda : ESO(3) \times_{SO(3)} (SO(3) \times
+Y ) \rightarrow ESO(3) \times_{SO(3)} F(S^2,k)
+$$
+is a (weak) homotopy equivalence. However,
+\begin{align*}
+\begin{split}
+ESO(3) \times_{SO(3)} (SO(3) \times Y)
+&= (ESO(3) \times_{SO(3)} SO(3)) \times Y \\
+&= ESO(3) \times Y \\
+&\simeq Y 
+\end{split}
+\end{align*}
+by remark~\ref{rem: basborel} and the contractibility of $ESO(3)$.
+Theorem~\ref{thm: Kpi1} then gives us the desired result.
+\end{proof}
+
+Now notice the following. If $X$ is a left $G$-space, then
+$F(X,k)$ is also a $G$-space via a diagonal action (as any group
+action takes distinct points to distinct points). On the other
+hand $\Sigma_k$ acts on $F(X,k)$ on the right by permuting
+coordinates. It is easy to see that the $\Sigma_k$-action
+on $F(X,k)$ commutes with the $G$-action. Thus if we look
+at the $\Sigma_k$ action on $EG \times F(X,k)$ where
+$\Sigma_k$ acts purely on the right factor by permuting coordinates,
+then it is easy to check that this action descends to an
+action of $\Sigma_k$ on the Borel construction $EG \times_G F(X,k)$.
+It is also routine to check that this action of $\Sigma_k$ on
+the Borel contruction is still free and that
+$$
+(EG \times_G F(X,k))/\Sigma_k = EG \times_G SF(X,k)
+$$
+where recall that $SF(X,k)$ denotes $F(X,k)/\Sigma_k$.
+
+We summarize this useful fact in the following remark:
+
+\begin{rem}
+\label{rem: Borelcover}
+Let $G$ be a topological group and let $X$ be a left $G$-space
+then there is a natural $\Sigma_k$-covering map:
+$$
+EG \times_G F(X,k) \overset{\pi}{\rightarrow} EG \times_G SF(X,k)
+$$
+where the natural diagonal actions of $G$ on $F(X,k)$ and $SF(X,k)$
+are used to form the Borel constructions. 
+\end{rem}
+
+Remark~\ref{rem: Borelcover} and proposition~\ref{pro: BSKpi1}
+have the following immediate corollary:
+
+\begin{cor}
+\label{cor: BSKpi1}
+$ESO(3) \times_{SO(3)} SF(S^2,k)$ is a $K(\pi,1)$ space for all $k \geq 3$.
+\end{cor} 
+
+One bad thing about the Borel constructions so far, is that although
+they produced $K(\pi,1)$ spaces, these spaces did not have $PB_k(S^2)$
+as their fundamental group.
+We will now fix this point.
+
+If a topological group $G$ has a universal cover $\tilde{G}$ (which
+we always assume is connected), then it is elementary to show that
+$\tilde{G}$ has the structure of a topological group such that
+the covering map $\mu: \tilde{G} \rightarrow G$ is a homomorphism
+of topological groups. $\tilde{G}$ is called the covering group
+of $G$.
+
+Now given a (left) $G$-space $X$, $X$ can also be viewed as a
+$\tilde{G}$-space via $\mu$. Thus the identity map of $X$ is
+$\mu$-equivariant in our previous terminology.
+It then follows from lemma~\ref{lem: CD for Borel} that we have
+the following commutative diagram where each row is a fibration:
+
+$$
+\begin{CD}
+X @>>> E\tilde{G} \times_{\tilde{G}} X @>>> B\tilde{G} \\
+@VV Id V @VV E(\mu) \bar{\times} Id V @VV B(\mu) V \\
+X @>>> EG \times_G X @>>> BG 
+\end{CD}
+$$
+
+We wish to study the vertical map in the middle.
+To do this, we need to look at the vertical maps on the sides
+first. It is obvious that the identity map is a homotopy equivalence,
+ so let
+us first look at $B(\mu)$. Recall the following elementary remarks:
+
+\begin{rem}
+For any topological group $G$, $BG$ is always path connected and
+$\pi_n(BG) \cong \pi_{n-1}(G)$ for $n>1$.
+\end{rem}
+\begin{proof}
+We have the universal principal $G$-bundle $EG \rightarrow BG$.
+The result follows immediately from the long exact sequence
+in homotopy for this fibration and the contractibility of $EG$.
+\end{proof} 
+
+\begin{rem}
+A covering map $\pi: \tilde{X} \rightarrow X$ induces
+isomorphisms between $\pi_n(\tilde{X})$ and $\pi_n(X)$
+for all $n>1$. 
+\end{rem}
+
+It follows from these remarks that $\mu : \tilde{G} \rightarrow G$
+induces isomorphisms between the higher homotopy groups ($\pi_n$ for
+$n>1$) and hence that $B(\mu)$ induces isomorphisms in $\pi_n$ for
+all $n \neq 2$. (Here recall that we insist that $\tilde{G}$ and
+hence also $G$ is 
+path connected.) Of course it induces the zero map on the $\pi_2$ level
+as 
+$$
+\pi_2(B\tilde{G}) = \pi_1(\tilde{G}) = 0.
+$$
+
+With this knowledge of $B(\mu)$ and by
+using the usual argument of applying the five-lemma to the
+vertical maps between the long exact 
+sequences in homotopy for the two fibrations, one finds easily that
+$E(\mu) \bar{\times} Id$ induces an isomorphism in $\pi_n$
+for all $n \neq 1,2$. Using the refined form of the five-lemma
+(stated in lemma~\ref{lem: 5lem}), it also follows easily that
+$E(\mu) \bar{\times} Id$ induces a monomorphism on the $\pi_2$
+level. 
+
+This is the main step in proving the following useful lemma:
+
+\begin{lem}
+\label{lem: compareBorel}
+Let $G$ be a path connected, topological group.
+Let $\tilde{G}$ be the universal covering group with
+$\mu: \tilde{G} \rightarrow G$ the covering map. Furthermore
+suppose $X$ is a $G$-space. Then
+$E(\mu) \bar{\times} Id$ induces isomorphisms
+$$
+\pi_n(E\tilde{G} \times_{\tilde{G}} X) \cong \pi_n(EG \times_G X)
+$$
+for all $n \neq 1,2$ and a monomorphism
+$$
+\pi_2(E\tilde{G} \times_{\tilde{G}} X) \overset{1-1}{\rightarrow}
+ \pi_2(EG \times_G X).
+$$
+Furthermore,
+$$
+\pi_1(E\tilde{G} \times_{\tilde{G}} X) \cong \pi_1(X) 
+$$
+\end{lem}
+\begin{proof}
+We have already proved everything besides the final isomorphism listed.
+To prove this, look at the fiber bundle
+$$
+X \rightarrow E\tilde{G} \times_{\tilde{G}} X \rightarrow B\tilde{G}.
+$$ 
+Now we saw, in the paragraph preceding the lemma, that 
+$\pi_2(B\tilde{G})=0$, but one also has
+$$
+\pi_1(B\tilde{G}) \cong \pi_{0}(\tilde{G})=0.
+$$
+Using this, it is easy to obtain our desired result 
+from the
+long exact sequence in homotopy for the fiber bundle above.
+\end{proof}
+
+Now it is a well known fact that $\widetilde{SO(3)}$ is $S^3$,
+the group of unit quarternions, which is topologically a 3-sphere.
+Thus applying lemma~\ref{lem: compareBorel} to this group and
+using proposition~\ref{pro: BSKpi1} and
+corollary~\ref{cor: BSKpi1}, one easily obtains:
+
+\begin{cor}
+$$
+ES^3 \times_{S^3} F(S^2,k) = K(PB_k(S^2),1)
+$$
+and 
+$$
+ES^3 \times_{S^3} SF(S^2,k) = K(B_k(S^2),1),
+$$
+for $k \geq 3$.
+\end{cor}
+
+Thus, once again we see that the configuration space provides
+a good model (this time using a Borel construction)
+for the (pure) braid group of the underlying space.
+
+Thus the only surface whose configuration space we have not studied
+yet is $\mathbb{R}P^2$. We will do this now, in the next section.  
+
+\section{Configuration spaces for the real projective plane}
+
+\subsection{Orbit configuration spaces}
+
+In our study of the configuration spaces of $\mathbb{R}P^2$,
+we will find the concept of an orbit configuration space quite
+useful. These were introduced by M. Xicot$\acute{e}$ncatl and
+are defined as follows:
+
+\begin{defn}
+Let $G$ be a group and $X$ a $G$-space. Then 
+$$
+F_G(X,k) = \{(x_1,\dots, x_k) \in X^k | x_i,x_j \text{ are in different
+ G orbits if } i \neq j \}.
+$$
+$F_G(X,k)$ is called the $k$-fold orbit configuration space of $X$.
+\end{defn}
+
+\begin{rem}
+Thus we see that $F_G(X,k)$ is the space of $k$-tuples of points 
+which lie in distinct $G$ orbits of $X$.
+Note that $F_G(X,1)=X$ and $F_1(X,k)=F(X,k)$ for the action of
+the trivial group 1 on $X$.
+\end{rem}
+
+We will now prove some elementary but useful properties of these orbit
+configuration spaces. First some necessary definitions.
+
+\begin{defn}
+Given two groups $G_1$ and $G_2$, 
+a left $G_1$-space $X$ is said to have a compatible $G_2$ action if \\
+(a) $X$ is a left $G_2$-space. \\
+(b) For every $g_1 \in G_1, g_2 \in G_2, x \in X$, there
+exists $g_1' \in G_1$ such that
+$$
+g_2 \cdot (g_1 \cdot x) = g_1' \cdot (g_2 \cdot x).
+$$ 
+If it is always possible to take $g_1'=g_1$, we say that the two actions
+commute.
+\end{defn}
+
+\begin{rem}
+\label{rem: compatorbit}
+Notice that if a $G_1$-space $X$ has a compatible $G_2$ action
+then the $G_2$ action takes $G_1$-orbits to $G_1$-orbits
+and hence induces a $G_2$ action on $X/G_1$. (To guarantee the continuity 
+of this action, one should assume that $G_2$ is locally compact, Hausdorff 
+so that $G_2 \times X \rightarrow G_2 \times X/G_1$ is a quotient map. This 
+holds for all Lie groups and hence discrete groups.)
+\end{rem}
+
+\begin{rem}
+The most important examples of compatible actions are: \\
+(a) commuting actions. \\
+(b) When $G_1=G_2=G$ and both groups act in the same way on $X$.
+These are compatible actions as
+$$
+g_2 \cdot (g_1 \cdot x) = (g_2 g_1 g_2^{-1}) \cdot (g_2 \cdot x)
+$$
+and so we can take $g_1'=g_2 g_1 g_2^{-1}$.
+\end{rem}
+
+\begin{lem}
+\label{lem: actiononorbit}
+If $X$ is a $G_1$-space which supports a compatible $G_2$-action,
+then there is a natural $G_2^k$ action on $F_{G_1}(X,k)$ defined via
+$$
+(g_1,\dots,g_k) \cdot (x_1,\dots,x_k) = (g_1\cdot x_1,\dots,g_k\cdot x_k)
+$$
+for all $(g_1,\dots,g_k) \in G_2^k$ and $(x_1,\dots,x_k) \in F_{G_1}(X,k)$.
+Notice of course, this also gives a $G_2$ action on $F_{G_1}(X,k)$ obtained
+by precomposing the above action with the diagonal homomorphism 
+$\Delta : G_2 \rightarrow G_2^k$ which sends $g$ to $(g,\cdots,g)$.
+\end{lem}
+\begin{proof}
+The proof follows easily from remark~\ref{rem: compatorbit} and
+is left to the reader.
+\end{proof}
+
+>From lemma~\ref{lem: actiononorbit}, we see that there is always a natural
+action of $G^k$ on $F_G(X,k)$. If the original $G$-action on $X$ is
+reasonable, we can say something about this $G^k$-action on $F_G(X,k)$: 
+
+\begin{prop}
+\label{pro: orbittonormalconfig}
+If $\pi: X \rightarrow X/G$ is a principal $G$-bundle, 
+there is a map
+$$
+\bar{\pi}: F_G(X,k) \rightarrow F(X/G,k)
+$$
+which is a principal $G^k$-bundle, where 
+$$
+\bar{\pi}(x_1,\dots,x_k)=
+(\pi(x_1),\dots,\pi(x_k))
+$$ 
+and the $G^k$ action on $F_G(X,k)$
+is that which is described in lemma~\ref{lem: actiononorbit}.
+\end{prop}
+\begin{proof}
+First notice that by taking a $k$-fold product we get a principal
+$G^k$-bundle 
+$$
+G^k \rightarrow X^k \overset{\times \pi}{\rightarrow} (X/G)^k.
+$$
+Then we can take the pullback of this bundle with respect to the inclusion map
+$i: F(X/G,k) \rightarrow (X/G)^k$ and hence get the commutative diagram:
+$$
+\begin{CD}
+G^k @>> Id > G^k \\
+@VVV @VVV \\
+E @>>> X^k \\
+@VV \bar{\pi} V @VV \times \pi V \\
+F(X/G,k) @>> i > (X/G)^k
+\end{CD}
+$$
+Thus the left hand column is also a principal $G^k$-bundle and
+the reader can easily check from the definition of a pullback
+(see \cite{Bred}),
+ that $E$ is naturally identified with  
+$F_G(X,k)$ and that with this identification, $\bar{\pi}$
+has the form stated above and the $G^k$ action on $E=F_G(X,k)$ is that
+which is described in lemma~\ref{lem: actiononorbit}.
+\end{proof}
+
+\begin{rem}
+Recall, that when $G$ is discrete, a principal $G$-bundle is the same thing
+as a regular cover with covering group $G$.
+With this, it follows easily from proposition~\ref{pro: orbittonormalconfig},
+that if $G$ is a finite group and $X$ a free $G$-space, then there is a
+covering map
+$$
+\pi: F_G(X,k) \rightarrow F(X/G,k)
+$$
+with covering group $G^k$. 
+\end{rem}
+
+Proposition~\ref{pro: orbittonormalconfig} shows us immediately how
+orbit configuration spaces can help us understand the configuration
+space of $\mathbb{R}P^2$. To see this, we can take 
+$S^2$ as a $\mathbb{Z}/2\mathbb{Z}$-space where the nontrivial 
+element 
+of $\mathbb{Z}/2\mathbb{Z}$ is acting via the
+antipodal map. Then proposition~\ref{pro: orbittonormalconfig}
+gives us the following covering map
+$$
+(\mathbb{Z}/2\mathbb{Z})^k \rightarrow 
+F_{\mathbb{Z}/2\mathbb{Z}}(S^2,k) \overset{\pi}{\rightarrow} 
+F(\mathbb{R}P^2,k).
+$$
+
+Thus we need to study $F_{\mathbb{Z}/2\mathbb{Z}}(S^2,k)$. To do
+this, we will need to use the analogue of the Fadell-Neuwirth theorem
+(theorem~\ref{thm: fib}) for orbit configuration spaces. We will
+state and prove this analogue next.
+
+\begin{defn}
+Given a free $G$-space $X$, 
+we will use the notation $O_k$ to denote the disjoint union
+of $k$ distinct $G$-orbits. Notice $X-O_k$ is hence also
+a $G$-space.
+\end{defn}
+
+\begin{thm}
+Let $G$ be a finite group and $X$ be a free $G$-space. Suppose
+further that $X$ is a connected manifold without boundary with
+dimension $\geq 1$.
+Then 
+for all $n > k$, there
+are fibrations
+$$
+F_G(X-O_k,n-k) \rightarrow F_G(X,n) \overset{\pi}{\rightarrow} F_G(X,k)
+$$
+where $\pi$ is projection onto the first $k$ factors.
+\end{thm}
+\label{thm: orbit fib}
+\begin{proof}
+Once one has verified that $\pi$ is a fibration, it is an easy exercise
+to see that the fiber is as described in the statement of this theorem.
+Thus, we will only show that $\pi$ is a fibration. 
+
+Since the composition
+of fibrations is a fibration, it is enough to show that $\pi$ is
+a fibration in the case when $n=k+1$, since an arbitrary projection
+from $F_G(X,n)$ to $F_G(X,k)$ can be broken up as a composition of maps
+of this sort. Thus, we assume that $n=k+1$ from now on. 
+
+Let the order of $G$ be $s$ and write $G=\{g_1,\dots,g_s\}$. 
+Define $\lambda: F_G(X,k) \rightarrow F(X,sk)$ by 
+$$
+\lambda(x_1,\dots,x_k) = 
+(g_1x_1,g_2x_1,\dots,g_sx_1,g_1x_2,\dots,g_sx_2,\dots,g_1x_k,\dots,g_sx_k).
+$$
+
+The following diagram commutes:
+
+$$
+\begin{CD}
+F(M-Q_{ks},1) @>>> F(M, ks+1) @> \mu >> F(M,ks) \\ 
+@AA Id A @AA \bar{\lambda} A @AA \lambda A \\
+F_G(M-O_k,1) @>>> E @> \bar{\mu} >> F_G(M,k)
+\end{CD}
+$$
+Here the top row is a fibration by theorem~\ref{thm: fib}, 
+where $\mu$ is projection onto the
+first $ks$ factors. The bottom row is the pullback of this fibration
+under
+the map $\lambda$. 
+
+Thus $\bar{\mu}$ is a fibration. It remains only to show that the pullback
+$E$
+is naturally homeomorphic to $F_G(M,k+1)$. Recall that 
+$$
+E=\{(x,y) \in F_G(M,k) \times F(M,ks+1) | \lambda(x)=\mu(y)\}.
+$$
+
+Define $\theta: F_G(M,k+1) \rightarrow F_G(M,k) \times F(M,ks+1)$
+by
+$$
+\theta(x_1,\dots,x_{k+1})=
+((x_1,\dots,x_k), (g_1x_1,\dots,g_sx_1,\dots,g_1x_k,\dots,g_sx_k,x_{k+1})).
+$$
+It is easy to check that in fact $\theta: F_G(M,k+1) \rightarrow E$.
+
+Now, $\theta: F_G(M,k+1) \rightarrow E$ has an inverse given by
+$$
+((x_1,\dots,x_k),(g_1x_1,\dots,g_sx_k,x_{k+1}))
+\rightarrow
+(x_1,\dots,x_k,x_{k+1}).
+$$
+
+Thus, $\theta$ is our desired homeomorphism and furthermore
+$\bar{\mu} \circ \theta: F_G(X,k+1) \rightarrow F_G(X,k)$ is indeed 
+projection onto the first $k$ coordinates.
+This is a fibration as $\bar{\mu}$ is. Thus the theorem is proven. 
+\end{proof}
+
+(The authors would like to thank Dan Cohen for informing us about
+the nice proof above. Previous proofs consisted of going through the
+proof of theorem~\ref{thm: fib} carefully and doing the necessary
+modifications, which is considerably more messy.)
+
+\subsection{Application of orbit configuration spaces to 
+$F(\RR P^2,k)$}
+
+First, we need to study $F_{\mathbb{Z}/2\mathbb{Z}}(S^2,k)$.
+
+\begin{lem}
+\label{lem: orbitKpi1}
+Let $S^2$ be given a $\mathbb{Z}/2\mathbb{Z}$ action
+via the antipodal map. 
+
+Then $F_{\mathbb{Z}/2\mathbb{Z}}(S^2 - O_n,k)$ is a $K(\pi,1)$
+space for all $n,k \geq 1$. 
+
+Furthermore $\pi_1(F_{\mathbb{Z}/2\mathbb{Z}}(S^2 - O_n,k))$ is
+a polyfree group of cohomological dimension $k$ and it has
+a polyfree series with exponents 
+$$
+(2(n+k-1)-1,\dots,2(n+1)-1,2(n+0)-1).
+$$
+\end{lem}
+\begin{proof}
+We will prove this lemma by induction on $k$. First the case when
+$k=1$. Here we have that
+$$
+F_{\mathbb{Z}/2\mathbb{Z}}(S^2-O_n,1) = S^2-O_n = \mathbb{R}^2 - Q_{2n-1}
+= K(F_{2n-1},1).
+$$
+Thus the result follows as $F_{2n-1}$, the free group on $2n-1$ generators,
+is polyfree, of cohomological dimension one with the stated exponent.
+
+So without loss of generality, $k>1$ and we can assume the theorem
+is proven for numbers smaller than $k$.
+
+Now by theorem~\ref{thm: orbit fib}, we have a fibration
+$$
+F_{\mathbb{Z}/2\mathbb{Z}}(S^2-O_{n+k-1},1) \rightarrow
+F_{\mathbb{Z}/2\mathbb{Z}}(S^2-O_n,k) \rightarrow
+F_{\mathbb{Z}/2\mathbb{Z}}(S^2-O_n,k-1).
+$$
+By induction, the fiber and the base space are $K(\pi,1)$ spaces
+and hence, by the long exact sequence in homotopy, so is the total space.  
+
+Furthermore, on the level of fundamental groups, the long exact
+sequence in homotopy for the fibration above gives us a short exact
+sequence of groups:
+
+$$
+\pi_1(F_{\mathbb{Z}/2\mathbb{Z}}(S^2-O_{n+k-1},1)) \rightarrow
+\pi_1(F_{\mathbb{Z}/2\mathbb{Z}}(S^2-O_n,k)) \rightarrow
+\pi_1(F_{\mathbb{Z}/2\mathbb{Z}}(S^2-O_n,k-1)).
+$$
+
+By induction, the base (quotient) group is polyfree, of cohomological 
+dimension $k-1$,
+with exponents:
+$$
+(2(n+k-2)-1,\dots,2(n+0)-1)
+$$
+and also the fiber group (kernel) is a free group of rank $2(n+k-1)-1$.
+>From this, the properties of $\pi_1(F_{\mathbb{Z}/2\mathbb{Z}}(S^2-O_n,k))$
+stated in the lemma, follow easily.
+\end{proof}
+
+Unfortunately, lemma~\ref{lem: orbitKpi1} does not tell us anything
+about $F_{\Ztwo}(S^2,k)$ directly - the lemma only applies if at least one 
+$\Ztwo$-orbit
+has been removed from $S^2$. We have to do some genuine geometric
+analysis to go any further, so let us analyze $F_{\Ztwo}(S^2,2)$
+and show it is homotopy equivalent to $SO(3)$ in a nice way.
+
+First, let us notice that if we view $S^2$ as the unit vectors
+in $\RR^3$, then $F_{\Ztwo}(S^2,2)$ is naturally identified as 
+the space of pairs of linearly independent unit vectors of $\RR^3$.  
+
+Thus, inside of $F_{\Ztwo}(S^2,2)$ is the subspace
+$$
+U = \{(x,y) | x \text{ is orthogonal to } y \text{ and } x,y \in S^2\}
+$$
+of pairs of orthogonal unit vectors. Notice that $U$ can be 
+naturally identified with
+the unit tangent bundle of $S^2$ (We will not need this fact).
+
+$SO(3)$ acts naturally on $S^2$ and this action commutes with the
+antipodal map, thus by lemma~\ref{lem: actiononorbit}, $SO(3)$
+acts diagonally on $F_{\Ztwo}(S^2,2)$.
+
+It is easy to see that this action preserves the subspace $U$.
+In fact, even more is true. Let $e_i$ be the ith standard 
+unit vector of $\RR^3$
+for $i=1,2,3$. Then given $(x,y) \in U$, since there are elements of
+$O(3)$ mapping $(e_1,e_2,e_3)$ to any other given orthonormal basis, 
+it is easy to see
+that there is an element of $SO(3)$ mapping $(e_1,e_2)$ to $(x,y)$.
+In fact this element is unique as any element of $SO(3)$
+mapping $(e_1,e_2)$ to $(x,y)$ would have to map $e_1 \times e_2 = e_3$
+to $x \times y$ and so is determined on a basis. (Here $\times$ stands
+for the cross product in $\RR^3$.)
+
+Thus we see that the $SO(3)$ action on $U$ is transitive and free
+and hence $U=SO(3)$. Furthermore, the $SO(3)$ action on $U$ corresponds
+to the left multiplication action on $SO(3)$ under this correspondence. 
+
+\begin{prop}
+\label{pro: gramschmidtS^2}
+The inclusion $i: U \rightarrow F_{\Ztwo}(S^2,2)$ is a 
+$SO(3)$-equivariant homotopy
+equivalence. Furthermore $U=SO(3)$, with $SO(3)$-action given
+by left multiplication.
+\end{prop}
+\begin{proof}
+We have already proven the final sentence of the proposition
+ in the preceding paragraph.
+It remains only to show that $i$ is a homotopy equivalence. 
+
+We will need a bit of notation. For $x,y \in \RR^n$, let $x \cdot y$ denote
+the dot product of $x$ and $y$. Let $\parallel x \parallel = 
+\sqrt{x \cdot x}$ denote the norm of $x$.
+
+Now we construct $R: F_{\Ztwo}(S^2,2) \times I \rightarrow F_{\Ztwo}(S^2,2)$
+as follows:
+$$
+R(x,y,t) = (x, \frac{y-t(x \cdot y) x}{\parallel y-t(x \cdot y)x \parallel}).
+$$
+Notice $R$ is well defined as $y$ is not a multiple of $x$.
+The following properties of $R$ follow easily: \\
+(a) $R(x,y,0) = (x,y) \text{ for all } (x,y) \in F_{\Ztwo}(S^2,2)$, \\
+(b) $R(x,y,1) \in U$, \\
+(c) $R(x,y,t) = (x,y) \text{ for all } (x,y) \in U, t \in I$. \\
+(d) $R(\alpha x, \alpha y, t) = \alpha R(x,y,t)$ for all $(x,y) \in 
+F_{\Ztwo}(S^2,2), t \in I, \alpha \in O(3)$. Here $O(3)$ is acting
+diagonally on $F_{\Ztwo}(S^2,2)$ in the natural way.
+
+Properties (a)-(c) tell us that $U$ is a strong deformation retract
+of $F_{\Ztwo}(S^2,2)$ which is all we need to finish the proof
+of the proposition. Property (d) says in fact, that there is a
+strong deformation through $SO(3)$-equivariant maps of $F_{\Ztwo}(S^2,2)$
+to itself.
+
+(Notice, that $R$, is in effect, performing a Gram-Schmidt orthogonalization
+process globally.)
+\end{proof}
+
+\begin{cor}
+\label{cor: orbS^22}
+If $F_{\Ztwo}(S^2,2)$ is given the diagonal $SO(3)$ action induced
+from the natural action of $SO(3)$ on $S^2$ then 
+$ESO(3) \times_{SO(3)} F_{\Ztwo}(S^2,2)$ is (weakly) contractible.
+\end{cor}
+\begin{proof}
+Proposition~\ref{pro: gramschmidtS^2} shows that 
+$i: U=SO(3) \rightarrow F_{\Ztwo}(S^2,2)$ is a $SO(3)$-equivariant
+homotopy equivalence. 
+By lemma~\ref{lem: CD for Borel}, it follows that
+$$
+Id \bar{\times} i: ESO(3) \times_{SO(3)} U \rightarrow
+ESO(3) \times_{SO(3)} F_{\Ztwo}(S^2,2)
+$$
+is a (weak) homotopy equivalence.
+
+On the other hand,
+$$
+	ESO(3) \times_{SO(3)} U = ESO(3) \times_{SO(3)} SO(3) 
+= ESO(3) \simeq * 
+$$
+
+\end{proof}
+
+This was the crucial ingredient to the following proposition:
+
+\begin{prop}
+\label{pro: orbitS2Kpi1}
+If $F_{\Ztwo}(S^2,k)$ is given the diagonal $SO(3)$-action induced
+from the natural $SO(3)$ action on $S^2$ then
+$ESO(3) \times_{SO(3)} F_{\Ztwo}(S^2,k)$ is a $K(\pi,1)$-space
+for all $k \geq 2$.
+\end{prop}
+\begin{proof}
+We will prove this by induction on $k$. The case $k=2$ was
+proven in corollary~\ref{cor: orbS^22} so assume $k>2$ and
+that we have proven the proposition for smaller numbers.
+
+Let $\pi: F_{\Ztwo}(S^2,k) \rightarrow F_{\Ztwo}(S^2,2)$
+be projection onto the first $2$ factors. Notice that $\pi$
+is $SO(3)$-equivariant. 
+
+By 
+theorem~\ref{thm: orbit fib}, $\pi$ is a fibration with fiber
+$F_{\Ztwo}(S^2-O_2,k-2)$ which is a $K(\pi,1)$-space by 
+lemma~\ref{lem: orbitKpi1}.
+Thus $\pi$ induces an isomorphism in $\pi_i$ for $i \neq 1,2$. 
+However $\pi_2(F_{\Ztwo}(S^2,2))=\pi_2(SO(3))=0$ so in fact
+in the long exact sequence for the fibration above, the boundary
+map from $\pi_2(F_{\Ztwo}(S^2,2))$ to $\pi_1(fiber)$ necessarily
+vanishes and $\pi$ is an isomorphism on the $\pi_2$ level also.
+
+By lemma~\ref{lem: CD for Borel}, we have the following commutative
+diagram
+$$
+\begin{CD}
+F_{\Ztwo}(S^2,k) @>>> ESO(3) \times_{SO(3)} F_{\Ztwo}(S^2,k) @>>>
+BSO(3) \\
+@VV \pi V @VV Id \bar{\times} \pi V @VV Id V \\
+F_{\Ztwo}(S^2,2) @>>> ESO(3) \times_{SO(3)} F_{\Ztwo}(S^2,2) @>>>
+BSO(3)
+\end{CD}
+$$
+where each row is a fibration.
+In the preceding paragraph, we saw that $\pi$ induced isomorphisms
+in $\pi_i$ for all $i \neq 1$. Thus by the refined form of the
+five lemma given in lemma~\ref{lem: 5lem}, we see
+that $Id \bar{\times} \pi$ induces a monomorphism in $\pi_i$ for
+all $i \neq 1$. Since $\pi_i(ESO(3) \times_{SO(3)} F_{\Ztwo}(S^2,2))=0$
+for all $i$ this lets us conclude that
+$\pi_i(ESO(3) \times_{SO(3)} F_{\Ztwo}(S^2,k))=0$ for all $i \neq 1$
+which is what we set out to prove.
+\end{proof}
+
+Now we are finally ready to study the configuration space
+$F(\RR P^2,k)$. Recall we had the covering map:
+$$
+(\Ztwo)^k \rightarrow F_{\Ztwo}(S^2,k) \overset{\pi}{\rightarrow} F(\RR P^2,k).
+$$
+As before, $SO(3)$ acts diagonally on $F_{\Ztwo}(S^2,k)$ using the
+natural action of $SO(3)$ on $S^2$. Of course, $SO(3)$ also acts
+naturally on $\RR P^2$ viewed as the space of lines in $\RR^3$.
+Hence, $SO(3)$ acts diagonally on $F(\RR P^2,k)$.
+Furthermore, it is easy to see, that the covering map $\pi$ above
+is $SO(3)$-equivariant with respect to these actions. (For $k=1$, $\pi$
+is just the map taking a unit vector, to the line it spans.) 
+
+Being a covering map, $\pi$ induces isomorphisms in $\pi_i$ for all
+$i \neq 1$, and a monomorphism in $\pi_1$.
+We have the usual commutative diagram
+
+$$
+\begin{CD}
+F_{\Ztwo}(S^2,k) @>>> ESO(3) \times_{SO(3)} F_{\Ztwo}(S^2,k)
+@>>> BSO(3) \\
+@VV \pi V @VV Id \bar{\times} \pi V @VV Id V \\
+F(\RR P^2,k) @>>> ESO(3) \times_{SO(3)} F(\RR P^2,k) @>>> BSO(3)
+\end{CD}
+$$
+where each row is a fibration.
+
+>From the five lemma (lemma~\ref{lem: 5lem}), it follows easily
+that $Id \bar{\times} \pi$ induces an epimorphism in $\pi_i$ for
+$i \neq 1$. Thus from proposition~\ref{pro: orbitS2Kpi1}, it follows that
+$ ESO(3) \times_{SO(3)} F(\RR P^2,k)$ is a $K(\pi,1)$-space. 
+This is the result we wanted in this section and we state it as:
+
+\begin{thm}
+\label{thm: BorelconfRP2Kpi1}
+$ESO(3) \times_{SO(3)} F(\RR P^2,k)$ is a $K(\pi,1)$-space if $k \geq 2$ and
+furthermore
+$$
+ES^3 \times_{S^3} F(\RR P^2,k) = K(PB_k(\RR P^2),1) 
+$$
+and 
+$$
+ES^3 \times_{S^3} SF(\RR P^2,k) = K(B_k(\RR P^2),1).
+$$ 
+Here, the $SO(3)$ action is induced from the natural action of
+$SO(3)$ on $\RR P^2$ viewed as the space of lines in $\RR^3$.
+The $S^3$ action is obtained from the $SO(3)$ action using that
+$S^3$ is the universal covering group of $SO(3)$. 
+\end{thm}
+\begin{proof}
+Most of the theorem was proven in the preceding paragraph. The
+only thing remaining is the statement about the $S^3$ Borel
+constructions which follows immediately from lemma~\ref{lem: compareBorel}
+and remark~\ref{rem: Borelcover}. 
+\end{proof}
+
+\begin{rem}
+>From the fibration, 
+$$
+F(\RR P^2,k) \rightarrow ES^3 \times_{S^3} F(\RR P^2,k) \rightarrow
+BS^3
+$$
+and the fact that $ES^3 \times_{S^3} F(\RR P^2,k)$ is a $K(\pi,1)$-space,
+we see easily that
+$$
+\pi_n(F(\RR P^2,k)) \cong \pi_{n+1}(BS^3) \cong \pi_{n}(S^3)
+$$
+for $n \geq 2$.
+
+Thus, $F(\RR P^2,k)$ has the same higher homotopy as the 3-sphere.
+\end{rem}
+
+This completes our analysis of $F(M,k)$ for 2-manifolds $M$
+without boundary.
+The conclusion is that these are always $K(PB_k(M),1)$-spaces except
+when $M$ is $S^2$ or $\RR P^2$. However in these cases,
+there is an associated Borel construction which is a $K(PB_k(M),1)$.
+
+For now, these results might seem to be a pretty formal analysis 
+of the homotopy type of the configuration spaces of surfaces - however we
+will see their true power when we begin talking about labeled
+configuration spaces, and
+the ``classical'' connection of these labeled configuration spaces with
+loop spaces.
+
+Furthermore, Borel constructions will provide a crucial tool in connecting
+the braid groups we have studied, to mapping class groups, another important
+class of groups associated to surfaces, which we will introduce
+and study later on in these notes. 
+
+\input{EellsSmale.tex}
+
+\section{The Thom construction}
+
+\subsection{Basic definitions}
+In this section, we will be working in the category of pointed
+spaces and maps. Recall the basic definitions:
+
+\begin{defn}
+A pointed space is a space $X$ together with a fixed basepoint $* \in X$.
+A map $f: X \rightarrow Y$ between two pointed spaces is said to be
+a pointed map if $f(*)=*$. A homotopy $F$ between two pointed maps
+$f,g: X \rightarrow Y$ is said to preserve basepoints if 
+$F(* \times I)=*$ and we write $f \simeq_* g$. If $f$ and $g$
+are homotopic but not necessarily by a homotopy that preserves
+basepoints, we write $f \simeq g$ and say $f$ is freely homotopic
+to $g$. 
+\end{defn}
+
+We recall some basic constructions. See \cite{Bred} for 
+proofs of the basic properties of these constructions.
+
+\begin{defn}
+Given two pointed spaces $X$ and $Y$, $X \times Y$ can be made
+a pointed space by taking $(*,*)$ as basepoint. Define
+$$
+X \vee Y = \{ (x,y) \in X \times Y \text{ such that either }
+x=* \text{ or } y=* \}.
+$$
+$X \vee Y$ is called the wedge product of $X$ and $Y$ and is a pointed space
+consisting of the spaces $X=X \times *$ and $Y=* \times Y$ 
+attached at the basepoint
+$(*,*)$.
+\end{defn}
+
+\begin{defn}
+Given two pointed spaces $X$ and $Y$,
+$$
+X \wedge Y = X \times Y / X \vee Y
+$$
+is called the smash product of $X$ and $Y$ and is 
+itself a pointed space where we set the equivalence
+class of $X \vee Y$ as the basepoint.
+\end{defn}
+
+The following lemma collects some useful facts about 
+the wedge and smash products. The proof of these
+facts is left to the reader and can be found in introductory
+texts like \cite{Bred} or 
+\cite{Span}.
+
+\begin{lem}
+\label{lem: basicwedgesmash}
+Let $Top_*$ denote the category of pointed spaces and maps.
+We will write $X=_*Y$ if $X$ and $Y$ are isomorphic in this
+category. Then \\
+\noindent
+(a) $-\vee-$ and $-\wedge-$ are functors from $Top_*$ to itself, which
+are covariant in both entries. If $f: X_1 \rightarrow X_2$ and
+$g: Y_1 \rightarrow Y_2$ are two pointed maps we will denote the
+maps given by these functors as
+$f \vee g: X_1 \vee Y_1 \rightarrow X_2 \vee Y_2$ and
+$f \wedge g: X_1 \wedge Y_1 \rightarrow X_2 \wedge Y_2$.
+\\
+\noindent
+(b) $-\vee-$ equips the isomorphism classes of objects in $Top_*$ 
+with the structure of a
+commutative monoid with identity where the identity is the point space $*$.
+In other words: \\
+(i) $X \vee Y =_* Y \vee X$ \\
+(ii) $(X \vee Y) \vee Z =_* X \vee (Y \vee Z)$ \\
+(iii) $X \vee * =_* X$. \\
+\noindent
+(c) $-\wedge-$ equips the isomorphism classes of objects in
+$Top_*$ with a commutative multiplication structure, 
+which together with $\vee$
+gives a commutative semiring structure on $Top_*$. (A semiring is something 
+which satisfies
+all the axioms of a ring except the existance of additive inverses.)
+In other words: \\
+(i) $X \wedge Y =_* Y \wedge X$ \\
+(ii) $(X \wedge Y) \wedge Z =_* X \wedge (Y \wedge Z)$ \\ 
+(iii) $X \wedge S^0 =_* X$ where $S^0=\{0,1\}$ with 
+$0$ as the basepoint. \\ 
+(iv) $(X \vee Y) \wedge Z = (X \wedge Z) \vee (Y \wedge Z)$. \\ 
+\noindent
+(d) $\vee$ and $\wedge$ are homotopy functors, i.e., if $f \simeq_*
+f'$ and $g \simeq_* g'$ then we have $f \vee g \simeq_*
+f' \vee g'$ and $f \wedge g \simeq_* f' \wedge g'$.
+\end{lem}
+
+\begin{rem}
+The reader should be careful in interpreting the semiring structure in 
+lemma~\ref{lem: basicwedgesmash} since the objects of $Top_*$ do not
+form a set. However, in practice, this is not a problem as we
+can always confine ourselves to a suitable set of objects if we wish to use
+the semiring structure. The reader can check for example, that the
+``subsemiring'' generated by $S^0$ is naturally identified with
+the semiring of natural numbers. In fact, if we confine ourselves
+to objects in $Top_*$ where the Euler characteristic $\chi$ is defined, 
+and where we can identify $\tilde{H}_*(X \wedge Y)$ as $H_*(X \times Y, X 
+\vee Y)$, 
+then the map taking $X$ to $\chi(X)-1$ is a semiring morphism to the
+integers.
+\end{rem}
+
+\begin{defn}
+\label{rem: sigmakactiononwedge}
+We use $X^{(k)}$ to stand for the $kth$ power of the pointed space $X$
+under the smash product multiplication. It is understood then that
+$X^{(0)}=S^0$ and $X^{(1)}=X$. Notice that, for $k \geq 1$, we have 
+$$
+X^{(k)} = X^k/F
+$$
+where $F=\{ (x_1,\dots,x_k) \in X^k \text{ such that } x_i = *
+\text{ for some } i \}$, is the so called fattened wedge. 
+Notice that the symmetric group $\Sigma_k$ acts on $X^k$
+by permuting coordinates and that this action preserves $F$.
+Thus this induces a natural action of $\Sigma_k$ on $X^{(k)}$
+which fixes the basepoint.
+\end{defn}
+
+\begin{defn}
+Given a space $X$, the unreduced suspension of $X$,
+denoted $SX$, is the quotient space obtained from $X \times I$
+by identifying $X \times \{0\}$ to a point and
+$X \times \{1\}$ to another point. \\
+Given a pointed space $X$, the reduced suspension of $X$,
+is defined as
+$$
+\Sigma X = X \times I/(X \times \{0\} \cup * \times I \cup
+X \times \{1\}).
+$$
+and is given the equivalence class of $* \times I$ as the basepoint.
+\end{defn}
+
+\begin{rem}
+We will identify the 1-sphere $S^1$ as the quotient space formed
+from $[0,1]$ where we identify $0$ and $1$ to form a common basepoint.
+With this, it is easy to see that
+$$
+S^1 \wedge X =_* \Sigma X.
+$$
+Thus $(S^1)^{(k)}=S^k$ for all $k \geq 0$.
+\end{rem}
+
+\begin{defn}
+A well pointed space $X$ is a pointed space where the inclusion
+$* \rightarrow X$ is a cofibration. Recall that for such a space,
+the reduced and unreduced suspensions are homotopy equivalent. (See
+\cite{Bred} or \cite{Span}). Any $CW$-complex $X$ is well pointed
+if we take the basepoint to be an element of the zero skeleton
+$X_{(0)}$.
+\end{defn}
+
+\subsection{The Thom construction}
+
+We now introduce an important construction.
+Let $M$ be a free right $\Sigma_k$-space and $X$ be a well pointed space.
+Then from the final remark in definition~\ref{rem: sigmakactiononwedge},
+there is a natural $\Sigma_k$ action on $X^{(k)}$ which fixes the basepoint.
+Thus we can form
+$$
+M \times_{\Sigma_k} X^{(k)} = M \times X^{(k)}/\sim,
+$$ 
+where $(m \sigma, \bar{x}) \sim (m, \sigma \bar{x})$ for all
+$\sigma \in \Sigma_k$, $\bar{x} \in X^{(k)}$ and $m \in M$.
+
+As in the Borel construction, one can easily show that as
+the $\Sigma_k$ action on $M$ is free, the map 
+$$
+\pi: M \times_{\Sigma_k} X^{(k)} \rightarrow M/\Sigma_k,
+$$
+obtained by projecting on the first factor, is a fiber bundle with
+fiber $X^{(k)}$.
+Furthermore $\pi$ has a section $\sigma: M/\Sigma_k \rightarrow
+M \times_{\Sigma_k} X^{(k)}$ defined by 
+$\sigma(\bar{m})=(m,*)$ where $*$ is the basepoint of $X^{(k)}$.
+(This section is well defined as $*$ is fixed under the $\Sigma_k$
+action on $X^{(k)}$.)
+
+Given a field $\FF$, we will now set out to find $H^*(\MsigX; \FF)$. 
+To do that using the spectral sequence for the fiber bundle described 
+above, we see that we first need to describe $H^*(X^{(k)}; \FF)$.
+So let us do that now.
+
+Recall that if the inclusion of $A$ into $X$ is a cofibration, then 
+we have a natural isomorphism 
+$H^*(X,A; \FF) \cong \bar{H}^*(X/A; \FF)$ where the bar signifies reduced 
+cohomology. (See for example \cite{Bred}).
+
+Now if $X$ and $Y$ are well pointed spaces, 
+then the inclusion of $X \vee Y$ into $X \times Y$ is a cofibration?
+
+Thus $H^*(X \times Y, X \vee Y; \FF) \cong \bar{H}^*(X \wedge Y ; \FF)$.
+On the other hand, it is easy to argue that the long exact sequence in 
+reduced cohomology for the pair $(X \times Y, X \vee Y)$ degenerates 
+into split short exact sequences:
+
+$$
+0 \rightarrow H^*(X \times Y, X \vee Y; \FF) \rightarrow 
+\bar{H}^*(X \times Y; \FF) \overset{i^*}{\rightarrow} 
+\bar{H}^*(X \vee Y; \FF) \rightarrow 0
+$$
+ 
+Thus $\bar{H}^*(X \wedge Y; \FF)$ is algebra isomorphic to 
+the kernel of $i^*$. We are able to get a complete description of this 
+kernel via the K$\ddot{u}$nneth Theorem in the case when one of the spaces has 
+finite dimensional $\FF$-cohomology in each dimension. (We need this 
+condition, to apply the cohomology version of K$\ddot{u}$nneth's theorem - see 
+\cite{Bred}).
+
+Using this, one easily describes the cohomology algebra of the smash product 
+in terms of the cohomology algebras of the original spaces. We 
+state the result as a lemma and leave the completion of the details of its 
+proof to the reader.
+
+\begin{lem}
+\label{lem: wedge}
+If $X, Y$ are path connected, well pointed spaces and at least one of them 
+has finite dimensional $\FF$-cohomology in each dimension, then 
+$\bar{H}^*(X \wedge Y; \FF) \cong \bar{H}^*(X; \FF) \otimes \bar{H}^*(Y; \FF)$
+as $\FF$-algebras (without identity element). 
+\end{lem} 
+
+It follows from lemma~\ref{lem: wedge} that for a path connected, well pointed 
+space $X$, one has $\bar{H}^*(X^{(k)};\FF)$ is isomorphic to 
+the tensor product of $k$ copies of the algebra $\bar{H}^*(X;\FF)$ with 
+itself. 
+
+\begin{defn}
+Given a graded $\FF$-algebra $\mathfrak{A}$ with $\mathfrak{A}^0=0$ 
+(so $\mathfrak{A}$ does not have an identity element), we define 
+$T_k(\mathfrak{A})$ to be the $\FF$-algebra with identity obtained in 
+the following way. We first take the tensor product of $k$-copies of 
+$\mathfrak{A}$. This has nothing in degree zero. Finally, we include 
+a 1-dimensional vector space in degree zero generated by an identity element.
+\end{defn}
+
+Thus we can restate our results as 
+$H^*(X^{(k)}; \FF) \cong T_k(\bar{H}^*(X; \FF))$.
+
+Fix a label space $X$. 
+Now as we mentioned before, there is a natural left $\Sigma_k$ action on 
+$X^{(k)}$ induced from the left $\Sigma_k$ action on $X^k$ given by 
+$\sigma \cdot (x_1, \dots, x_k)=(x_{\sigma(1)}, \dots, x_{\sigma(k)})$.
+
+Since cohomology is a contravariant functor, it is easy to check that we 
+get a right $\Sigma_k$ action on $H^*(X^k; \FF)$. Let us describe this 
+action using the K$\ddot{u}$nneth theorem to identify 
+$H^*(X^k; \FF)$ as the tensor product of $k$ copies of $H^*(X; \FF)$.
+It is easy to check that an element of the form $1 \otimes \dots \alpha 
+\dots \otimes 1$ where $\alpha$ is in the $i$th spot gets taken 
+under $\sigma \in \Sigma_k$  
+to a similar element where $\alpha$ is in the $\sigma^{-1}(i)$th spot.
+(To check this note that such elements correspond nicely to elements 
+in the cohomology of the $k$-fold wedge product of $X$ where the statement 
+is clear.)
+
+This describes the right $\Sigma_k$ action on $H^*(X^k; \FF)$ completely 
+as elements of the form $1 \otimes \dots \alpha \dots \otimes 1$ 
+generate this cohomology as an algebra and $\Sigma_k$ acts via 
+algebra maps. 
+
+It is convenient, to switch this right $\Sigma_k$ action to a left 
+$\Sigma_k$ action via a standard procedure. Given a right action of 
+a group $G$ on some object $X$, one obtains a left action of $G$ on $X$ 
+by defining
+$$ g \cdot x \equiv x \cdot g^{-1} .$$ 
+
+Doing this the left action of $\Sigma_k$ on $H^*(X^k; \FF)$ sends  
+$1 \otimes \dots \alpha \dots \otimes 1$ where $\alpha$ is in the $i$th 
+spot to the corresponding element where $\alpha$ is in the 
+$\sigma(i)$th spot under $\sigma \in \Sigma_k$.
+
+Thus we have in general that 
+$$
+\sigma \cdot (\alpha_1 \otimes \dots \otimes \alpha_k) 
+= \pm \alpha_{\sigma(1)} \otimes \dots \otimes \alpha_{\sigma(k)}.
+$$ 
+The $\pm$ sign occurs because of the grading as the following 
+example illustrates:
+
+Let $k=2$ and $\sigma=(1,2)$, then 
+\begin{align*}
+\begin{split}
+\sigma \cdot (\alpha \otimes \beta) &= \sigma \cdot (\alpha \otimes 1 \cup 
+1 \otimes \beta) \\
+&= (\sigma \cdot ( \alpha \otimes 1)) \cup (\sigma \cdot (1 \otimes \beta)) \\
+&= (1 \otimes \alpha) \cup (\beta \otimes 1) \\
+&= (-1)^{|\alpha||\beta|}(\beta \otimes 1 ) \cup (1 \otimes \alpha) \\
+&= (-1)^{|\alpha||\beta|}(\beta \otimes \alpha) 
+\end{split}
+\end{align*}
+
+Of course, this description of the left $\Sigma_k$ action on 
+$H^*(X^k; \FF)$ restricts to a description of the left 
+$\Sigma_k$ action on  
+$H^*(X^{(k)}; \FF) \cong T_k(\bar{H}^*(X; \FF))$. 
+
+One of the main cases we will be looking at is when $X$ is $S^d$, the 
+$d$-sphere. In this case, we can make the sign in the left $\Sigma_k$ 
+action on $H^*(X^{(k)}; \FF)$ explicit. 
+
+\begin{defn}
+A representation of $\Sigma_k$ on a $\FF$-vector space is said to 
+be trivial if every element acts as the identity map of the vector 
+space.
+
+The sign representation of $\Sigma_k$ is a one dimensional 
+$\FF$-vector space where the even elements of $\Sigma_k$ act as 
+multiplication by $1$ while the odd elements of $\Sigma_k$ act 
+as multiplication by $-1$. 
+
+Notice that if the characteristic of $\FF$ is two, then the 
+sign representation is actually trivial.
+\end{defn}
+
+First note, that the reduced 
+cohomology of $S^d$ is zero except in degree $d$ where it is 
+one dimensional generated by $\alpha$ say. 
+
+Thus 
+$\bar{H}^*((S^d)^{(k)}; \FF)$ is zero except in degree $kd$ 
+where it is one dimensional generated by $T=\alpha \otimes \dots \otimes 
+\alpha$. (In fact in this case we know $(S^d)^{(k)}=S^{dk}$ but we will not 
+use that.)
+
+Each element in $\Sigma_k$ takes $T$ to $ \pm T$. It is easy to 
+see that if $d$ is even, $\sigma(T)=T$ for all $\sigma \in \Sigma_k$ 
+while if $d$ is odd, $\sigma(T)=(-1)^{\epsilon(\sigma)}T$ 
+where $\epsilon$ is the sign representation of $\Sigma_k$ into 
+$\{-1,+1\} \subset \FF^*$. ($\FF^*$ stands for the group of nonzero 
+elements of $\FF$.)
+
+Thus we have shown the following useful proposition:
+
+\begin{prop}
+As a left $\Sigma_k$-module, 
+$\bar{H}^*((S^d)^{(k)}; \FF)$ is concentrated in degree $kd$ and 
+in that degree it is \\
+(a) A trivial one dimensional $\Sigma_k$-module if $d$ is even. \\
+(b) The one dimensional sign representation if $d$ is odd.  
+\end{prop} 
+
+Now let us calculate the cohomology of $\MsigX$ where $X=S^d$.
+First recall that we had a fiber bundle 
+$\pi: \MsigX \rightarrow M/\Sigma_k$ with fiber $X^{(k)}$. 
+Thus we have a Serre spectral sequence with 
+$$
+E^{p,q}_2 = H^p(M/\Sigma_k; H^q(X^{(k)};\FF))
+$$
+abutting to $H^{p+q}(\MsigX; \FF)$.
+The reader is warned that the coefficients in the $E_2$-term are twisted. 
+In fact from the cover $M \rightarrow M/\Sigma_k$ we get a short exact 
+sequence of groups 
+$$
+\pi_1(M) \rightarrow \pi_1(M/\Sigma_k) \overset{\lambda}{\rightarrow} 
+\Sigma_k.
+$$ 
+The action of $\pi_1(M/\Sigma_k)$ on the cohomology of the fiber 
+is easily checked to be given by 
+the composition of $\lambda$ and the $\Sigma_k$-action on $H^*(X^{(k)}; \FF)$
+described in the previous paragraphs.
+
+Recall that the fiber bundle $\pi$ had a section $\sigma$. This means that in 
+this spectral sequence, no differentials will hit the horizontal line 
+$q=0$. Thus for general $X$, $E^{p,0}_2=E^{p,0}_{\infty}$ in this 
+spectral sequence. 
+
+Now for $X=S^d$, we have $E_2$ is concentrated on the horizontal lines 
+$q=0$ and $q=kd$. Since we know no differential can hit the line $q=0$, 
+we conclude all diffenrentials are zero in this spectral sequence 
+and $E_2^{*,*}=E_{\infty}^{*,*}$. Thus we conclude for $X=S^d$, 
+we have an isomorphism of vector spaces
+$$
+H^*(\MsigSd; \FF) \cong H^*(M/\Sigma_k; \FF) \oplus H^{*-kd}(M/\Sigma_k; 
+H^{kd}((S^d)^{(k)}; \FF))
+$$
+where again recall that the last summand has a twisted coefficient.
+
+The first summand above, is the part of $H^*(\MsigX; \FF)$ coming 
+from the image of $\pi^*$ or in other words coming from the image of our 
+section. It can be shown that the section above is a cofibration, so if 
+we form $\MtsigX$ the space obtained from $\MsigX$ by collapsing the 
+image of the section to a basepoint, we conclude that 
+
+$$
+\bar{H}^*(\MtsigSd; \FF) \cong H^{*-kd}(M/\Sigma_k; H^{kd}((S^d)^{(k)}; \FF))
+$$
+as algebras. (Here we notice that in the $E_{\infty}$ term above, 
+once we collapse the image of the section to a basepoint, we lose 
+the row $q=0$ and hence there are no lifting problems anymore since 
+everything is concentrated in the row $q=kd$.)
+
+This shows that the algebra structure of $\bar{H}^*(\MtsigSd; \FF)$ is 
+trivial, i.e., the product of any two elements is zero.
+
+\section{Lie Algebras and Kohno-Falk-Randell Theory}
+\input{Frandell.tex}
+
+\input{Loop.tex}
+
+%\input{Salvetti.tex}
+
+\begin{thebibliography}{EMG}
+
+\bibitem[Bre]{Bred}{Bredon,}
+\textit{Topology and Geometry}, Springer Verlag GTM 139,
+New York-Heidelberg-Berlin, 1993.
+
+\bibitem[B]{Brown}{K. S. Brown,}
+\textit{Cohomology of Groups}, Springer Verlag GTM 87, 
+New York-Heidelberg-Berlin, 1994.
+
+\bibitem[BM]{BM}{Bergau, and Mennicke}
+
+\bibitem[BH]{BH}{Birman, and H. Hilden,}
+
+\bibitem[C1]{C1}{F. R. Cohen,} 
+\textit{On the hyperelliptic mapping class groups, 
+$SO(3)$, and Spin$^c(3)$}, 
+American J. Math., {\bf 115} (1993), 389--434.
+
+\bibitem[C2]{C2}{F.R. Cohen,}
+\textit{On configuration spaces, their homology, and Lie Algebras,}
+Journal of Pure and Applied Algebra {\bf 100} (1995), 19-42.
+
+\bibitem[CG]{CG}{F.R. Cohen, S. Gitler,} 
+(i) {On loop spaces of configuration spaces}, submitted to the Memoirs of the
+AMS, and (ii) {Loop spaces of configuration spaces, braid-like groups, and
+knots}, to appear in the Proceedings of the 1998 Barcelona
+Conference on Algebraic Topology.
+
+\bibitem[CLM]{CLM}{F.R. Cohen, T.J. Lada and J.P. May,}
+\textit{The homology of iterated loop spaces,}
+Lecture Notes in Math., vol. {\bf 533}, Springer-Verlag (1976).
+
+\bibitem[CS]{CS}{F.R. Cohen, T. Sato,} in preparation.
+
+\bibitem[CX]{CX}{F.R. Cohen, M. Xicot\'encatl,} submitted.
+
+\bibitem[DC]{DC}{D. C. Cohen,} 
+\textit{Monodromy of fibre-type arrangements and
+orbit configuration spaces,} 
+to appear in Forum Mathematicum.
+
+\bibitem[DCS]{Dan}{D. C. Cohen, Alexander I. Suciu,}
+\textit{Homology of iterated semidirect products of free groups},
+J. Pure Appl. Algebra $\bf{126}$ (1998), pg 87-120.
+
+\bibitem[EE]{EE}{C. Earle, and J. Eells,} 
+\textit{A fibre bundle description of Teichm\"uller theory,} 
+J. Differential Geometry {\bf 3}(1969), 19-43.
+
+
+\bibitem[FH1]{FH1}{E. Fadell and S. Husseini,}
+\textit{The space of loops on configuration spaces and the
+Majer-Terracini index}, Topol. Methods in Nonlinear Anal.,
+Journal of the Julius Schauder Center, {\bf 11} (1998), 249--271.
+
+\bibitem[FH2]{FH2}{E. Fadell and S. Husseini,} 
+\textit{Geometry and Topology of
+Configuration Spaces,} in preparation.
+
+\bibitem[FN]{FN}{E. Fadell and L. Neuwirth,}
+\textit{Configuration spaces,} 
+Math. Scand. {\bf 10} (1962), 119-126.
+
+\bibitem[FR]{FR}{M. Falk, and R. Randell,} 
+\textit{The lower
+central series of a fiber-type arrangement,} 
+Invent. Math. {\bf 82} (1985), 77-88.
+
+\bibitem[GP]{GP}{V. Guillemin, and A. Pollack,}
+\textit{Differential Topology,}
+Prentice-Hall, 1974.
+
+
+\bibitem[H]{H}{R. Hain,}
+\textit{Infinitesimal presentations of the
+Torelli group,} 
+J. Amer. Math. Soc. {\bf 10} (1997),597-691.
+
+\bibitem[K1]{K1}{T. Kohno,} 
+\textit{Linear represenations of
+braid groups and classical Yang-Baxter equations,} 
+Cont. Math. {\bf 78} (1988), 339-363.
+
+\bibitem[K2]{K2}{T. Kohno,}
+\textit{Vassiliev invariants and de Rham complex on the
+space of knots,} 
+Cont. Math. {\bf 179} (1994), 123-138.
+
+\bibitem[K3]{K3}{T. Kohno,} 
+\textit{Elliptic KZ system, braid groups of the
+torus and Vassiliev invariants,} 
+Topology and its Applications, {\bf 78} (1997), 79-94.
+
+\bibitem[KO]{KO}{T. Kohno, and T. Oda,} 
+\textit{The lower central series of the pure
+braid group of an algebraic curve,} 
+Advanced Studies in Pure
+Mathematics, Galois Represntations and Arithmetic Algebraic Geometry
+{\bf 12} (1987), 201-219.
+
+\bibitem[MM]{MM}{J. W. Milnor, and J.C. Moore,} 
+\textit{On the structure of Hopf algebras,} 
+Ann. of Math. {\bf 81} (1965), 211-264.
+
+\bibitem[R]{Robin}{Derek J.S. Robinson,}
+\textit{A Course in the Theory of Groups}, Springer Verlag GTM 80,
+New York-Heidelberg-Berlin, 1995.
+
+\bibitem[S]{S}{N. E. Steenrod,} 
+\textit{The Topology of Fibre Bundles,}
+Princeton University Press.
+
+\bibitem[Sa]{Sa}{T. Sato,} 
+\textit{On free groups and
+morphisms of coalgebras,} 
+student topology seminar, Univ. of Roch.,
+Spring 1998, preprint.
+
+\bibitem[Smale]{Smale}{S. Smale,} 
+P.A.M.S.
+
+\bibitem[Spa]{Span}{Edwin H. Spanier,}
+\textit{Algebraic Topology}, Springer Verlag,
+New York-Heidelberg-Berlin, 1966.
+
+\bibitem[Wh]{White}{Whitehead,}
+\textit{Elements of Homotopy Theory}, Springer Verlag GTM 61,
+New York-Heidelberg-Berlin, .
+
+\bibitem[W]{W}{S. Willerton,} thesis.
+
+\bibitem[X]{X}{M. Xicot\'encatl,} 
+\textit{Orbit configuration spaces, infinitesimal
+braid relations, and equivariant function spaces,} 
+Ph.D. thesis, University of Rochester, Spring 1997.
+
+\bibitem[Xia]{Xia}{Yining Xia,}
+
+\end{thebibliography}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

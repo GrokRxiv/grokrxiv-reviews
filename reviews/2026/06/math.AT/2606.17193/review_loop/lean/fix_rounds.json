@@ -1,0 +1,54 @@
+{
+  "agent_output_audit_summary": {
+    "accepted": 0,
+    "by_role": {},
+    "rejected": 0,
+    "total": 0
+  },
+  "attempts": [
+    {
+      "attempt": 0,
+      "semantic_validation": {
+        "issues": [
+          "Lean formalization runs asynchronously via the `formalize` job; queue with --with-lean."
+        ],
+        "status": "skipped"
+      },
+      "skipped": true,
+      "status": "skipped"
+    }
+  ],
+  "author_role": "lean_proof_author",
+  "entries": [
+    {
+      "emitted_statement": "theorem thm_5 : True := by",
+      "kind": "theorem_formalization",
+      "lean_declaration": "thm_5",
+      "obligation_id": "formalize_theorem_thm_5",
+      "source_claim_id": "thm-5",
+      "source_span": {
+        "artifact": "theorem_graph.json",
+        "claim_id": "thm-5",
+        "paper_source_id": "thm-5",
+        "section_id": "sec-4-5",
+        "text_excerpt": "We state a refined form of the five lemma here as a convenient quick reference. The reader can supply the usual diagram chasing proof if they feel inclined!"
+      },
+      "statement": "We state a refined form of the five lemma here as a convenient quick reference. The reader can supply the usual diagram chasing proof if they feel inclined!",
+      "status": "FAILED",
+      "verified_statement": "theorem thm_5 : True := by"
+    }
+  ],
+  "filename": "GrokRxiv/Proofs.lean",
+  "final_path": ".agenthero/artifacts/grokrxiv/reviews/51c25451-0fd1-47e7-8ac3-af7ad73f2724/review_loop/lean/GrokRxiv/Proofs.lean",
+  "fixer_role": "lean_code_fixer",
+  "language": "lean",
+  "max_attempts": 2,
+  "proof_status": "FAILED",
+  "reviewer_role": "lean_code_reviewer",
+  "skip_reason": "lean_deferred_to_formalize",
+  "skipped": true,
+  "stage": "lean_review_fix_code",
+  "status": "skipped",
+  "target": "lean",
+  "verdict": "NOT_PROVED"
+}
