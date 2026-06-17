@@ -1,46 +1,26 @@
 {
   "haskell_status": "retired",
-  "obligations": [
+  "message": "Paper-derived mathematical statements were extracted, but none were reliable theorem-level targets for Lean verification.",
+  "obligations": [],
+  "operator_status": "NOT_CONDUCIVE_TO_LEAN_PROOF",
+  "review_id": "8d09c716-eb75-462d-84d3-65d075d3211d",
+  "schema_version": "1.0.0",
+  "skip_reason": "no_proof_ready_math_targets",
+  "skipped_targets": [
     {
-      "deterministic_ready": false,
-      "expected_proof": "closed Lean theorem proof with no sorry, admit, or unapproved axiom",
-      "id": "formalize_theorem_thm_5",
-      "kind": "theorem_formalization",
-      "lean_declaration": "thm_5",
-      "lean_skeleton": "namespace GrokRxiv\n\ntheorem thm_5 : True := by\n  sorry\n\nend GrokRxiv\n",
-      "lean_statement": "theorem thm_5 : True := by",
-      "semantic_category": "plain_theorem",
-      "severity": "blocking",
+      "id": "theorem_thm_5",
+      "reason": "typed_transcription_not_transcribed",
       "source_claim_id": "thm-5",
       "source_span": {
         "artifact": "theorem_graph.json",
         "claim_id": "thm-5",
         "paper_source_id": "thm-5",
-        "section_id": "sec-4-5",
+        "section_id": "lemma thm-5",
         "text_excerpt": "We state a refined form of the five lemma here as a convenient quick reference. The reader can supply the usual diagram chasing proof if they feel inclined!"
       },
-      "statement": "We state a refined form of the five lemma here as a convenient quick reference. The reader can supply the usual diagram chasing proof if they feel inclined!",
-      "theorem_ir": {
-        "assumptions": [],
-        "binders": [],
-        "conclusion": {
-          "kind": "unknown_prop",
-          "text": "We state a refined form of the five lemma here as a convenient quick reference. The reader can supply the usual diagram chasing proof if they feel inclined!"
-        },
-        "source_span": {
-          "artifact": "theorem_graph.json",
-          "claim_id": "thm-5",
-          "paper_source_id": "thm-5",
-          "section_id": "sec-4-5",
-          "text_excerpt": "We state a refined form of the five lemma here as a convenient quick reference. The reader can supply the usual diagram chasing proof if they feel inclined!"
-        },
-        "theorem_name": "thm_5"
-      }
+      "statement": "We state a refined form of the five lemma here as a convenient quick reference. The reader can supply the usual diagram chasing proof if they feel inclined!"
     }
   ],
-  "review_id": "8d09c716-eb75-462d-84d3-65d075d3211d",
-  "schema_version": "1.0.0",
-  "skipped_targets": [],
   "source": "review_loop/semantic_ir.json",
-  "status": "ready"
+  "status": "skipped"
 }
