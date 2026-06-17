@@ -4,8 +4,8 @@
   "targets": [
     {
       "lean_declaration": "thm_Hall",
-      "lean_skeleton": "namespace GrokRxiv\n\ntheorem thm_Hall (N : group) (G : group) (Q : group) : finitely_presented G := by\n  sorry\n\nend GrokRxiv\n",
-      "lean_statement": "theorem thm_Hall (N : group) (G : group) (Q : group) : finitely_presented G := by",
+      "lean_skeleton": "namespace GrokRxiv\n\ntheorem thm_Hall (N : Group) (G : Group) (Q : Group) : FinitelyPresented G := by\n  sorry\n\nend GrokRxiv\n",
+      "lean_statement": "theorem thm_Hall (N : Group) (G : Group) (Q : Group) : FinitelyPresented G := by",
       "obligation_id": "formalize_theorem_thm_Hall",
       "semantic_category": "plain_theorem",
       "source_claim_id": "thm: Hall",
@@ -13,10 +13,10 @@
         "artifact": "theorem_graph.json",
         "claim_id": "thm: Hall",
         "paper_source_id": "thm: Hall",
-        "section_id": "newbraid.tex",
-        "text_excerpt": "(P. Hall) If 1 → N → G → Q → 1 is a short exact sequence of groups with N and Q finitely presented, then G is finitely presented."
+        "section_id": "Finite presentability of groups",
+        "text_excerpt": "P. Hall's theorem: if 1 -> N -> G -> Q -> 1 is a short exact sequence of groups with N and Q finitely presented, then G is finitely presented."
       },
-      "statement": "(P. Hall) If 1 → N → G → Q → 1 is a short exact sequence of groups with N and Q finitely presented, then G is finitely presented.",
+      "statement": "P. Hall's theorem: if 1 -> N -> G -> Q -> 1 is a short exact sequence of groups with N and Q finitely presented, then G is finitely presented.",
       "theorem_ir": {
         "assumptions": [
           {
@@ -35,7 +35,7 @@
               }
             ],
             "kind": "uninterpreted_predicate",
-            "name": "short_exact_sequence"
+            "name": "ShortExactSequence"
           },
           {
             "args": [
@@ -45,7 +45,7 @@
               }
             ],
             "kind": "uninterpreted_predicate",
-            "name": "finitely_presented"
+            "name": "FinitelyPresented"
           },
           {
             "args": [
@@ -55,7 +55,7 @@
               }
             ],
             "kind": "uninterpreted_predicate",
-            "name": "finitely_presented"
+            "name": "FinitelyPresented"
           }
         ],
         "binders": [
@@ -63,21 +63,21 @@
             "name": "N",
             "type": {
               "kind": "custom",
-              "name": "group"
+              "name": "Group"
             }
           },
           {
             "name": "G",
             "type": {
               "kind": "custom",
-              "name": "group"
+              "name": "Group"
             }
           },
           {
             "name": "Q",
             "type": {
               "kind": "custom",
-              "name": "group"
+              "name": "Group"
             }
           }
         ],
@@ -89,16 +89,16 @@
             }
           ],
           "kind": "uninterpreted_predicate",
-          "name": "finitely_presented"
+          "name": "FinitelyPresented"
         },
         "source_span": {
           "artifact": "theorem_graph.json",
           "claim_id": "thm: Hall",
           "paper_source_id": "thm: Hall",
-          "section_id": "newbraid.tex",
-          "text_excerpt": "(P. Hall) If 1 → N → G → Q → 1 is a short exact sequence of groups with N and Q finitely presented, then G is finitely presented."
+          "section_id": "Finite presentability of groups",
+          "text_excerpt": "P. Hall's theorem: if 1 -> N -> G -> Q -> 1 is a short exact sequence of groups with N and Q finitely presented, then G is finitely presented."
         },
-        "theorem_name": "hall_finite_presentation"
+        "theorem_name": "hall_finitely_presented_extension"
       }
     }
   ]

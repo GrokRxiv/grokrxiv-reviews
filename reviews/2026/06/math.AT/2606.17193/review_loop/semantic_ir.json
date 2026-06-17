@@ -707,6 +707,7 @@
       "formalize:theorem_graph_extractor_typed_ir",
       "formalize:theorem_graph_extractor_typed_ir",
       "formalize:theorem_graph_extractor_typed_ir",
+      "formalize:theorem_graph_extractor_typed_ir",
       "formalize:theorem_graph_extractor_typed_ir"
     ],
     "body": {
@@ -20427,9 +20428,9 @@
         {
           "depends_on": [],
           "id": "thm: fib",
-          "section": "newbraid.tex",
+          "section": "Fibrations of configuration spaces",
           "source_tex": "\\begin{thm}[Fadell and Neuwirth]\n\\label{thm: fib}\nIf $M$ is a manifold without boundary (not necessarily compact) and $k \\geq\nm \\geq 1$, then the map $\\pikm$ is a fibration with fiber $F(M - Q_m, k-m)$.\n\\end{thm}",
-          "statement": "(Fadell and Neuwirth) If M is a manifold without boundary (not necessarily compact) and k ≥ m ≥ 1, then the projection map π_{k,m} from F(M,k) to F(M,m) is a fibration with fiber F(M − Q_m, k−m).",
+          "statement": "Fadell–Neuwirth fibration theorem: if M is a manifold without boundary (not necessarily compact) and k >= m >= 1, then the projection map pi_{k,m} (from the configuration space of k points in M to the configuration space of m points in M) is a fibration with fiber F(M - Q_m, k-m).",
           "theorem_ir": {
             "assumptions": [
               {
@@ -20440,7 +20441,7 @@
                   }
                 ],
                 "kind": "uninterpreted_predicate",
-                "name": "manifold_without_boundary"
+                "name": "ManifoldWithoutBoundary"
               },
               {
                 "kind": "greater_equal",
@@ -20470,7 +20471,7 @@
                 "name": "M",
                 "type": {
                   "kind": "custom",
-                  "name": "manifold without boundary"
+                  "name": "Manifold"
                 }
               },
               {
@@ -20498,7 +20499,7 @@
                 }
               ],
               "kind": "uninterpreted_predicate",
-              "name": "is_fibration_with_fiber"
+              "name": "IsFibrationWithFiber"
             },
             "theorem_name": "fadell_neuwirth_fibration"
           },
@@ -20513,7 +20514,8 @@
                   }
                 ],
                 "kind": "uninterpreted_predicate",
-                "name": "manifold_without_boundary"
+                "name": "ManifoldWithoutBoundary",
+                "text": "M is a manifold without boundary (not necessarily compact)"
               },
               {
                 "kind": "greater_equal",
@@ -20543,7 +20545,7 @@
                 "name": "M",
                 "type": {
                   "kind": "custom",
-                  "name": "manifold without boundary"
+                  "name": "Manifold"
                 }
               },
               {
@@ -20571,53 +20573,43 @@
                 }
               ],
               "kind": "uninterpreted_predicate",
-              "name": "is_fibration_with_fiber"
+              "name": "IsFibrationWithFiber",
+              "text": "the map pi_{k,m} is a fibration with fiber F(M - Q_m, k-m)"
             },
             "math_objects": [
               {
                 "name": "M",
                 "type": {
                   "kind": "custom",
-                  "name": "manifold without boundary"
+                  "name": "Manifold",
+                  "reason": "M is a topological manifold without boundary"
                 }
               },
               {
                 "name": "k",
                 "type": {
-                  "kind": "nat"
+                  "kind": "nat",
+                  "reason": "number of configuration points, a positive integer"
                 }
               },
               {
                 "name": "m",
                 "type": {
-                  "kind": "nat"
-                }
-              },
-              {
-                "name": "\\pi_{k,m}",
-                "type": {
-                  "kind": "custom",
-                  "name": "projection map of configuration spaces"
-                }
-              },
-              {
-                "name": "F(M - Q_m, k-m)",
-                "type": {
-                  "kind": "custom",
-                  "name": "configuration space"
+                  "kind": "nat",
+                  "reason": "number of configuration points, a positive integer"
                 }
               }
             ],
-            "source_text": "\\begin{thm}[Fadell and Neuwirth]\n\\label{thm: fib}\nIf $M$ is a manifold without boundary (not necessarily compact) and $k \\geq\nm \\geq 1$, then the map $\\pikm$ is a fibration with fiber $F(M - Q_m, k-m)$.\n\\end{thm}",
+            "source_text": "If $M$ is a manifold without boundary (not necessarily compact) and $k \\geq m \\geq 1$, then the map $\\pikm$ is a fibration with fiber $F(M - Q_m, k-m)$.",
             "status": "transcribed"
           }
         },
         {
           "depends_on": [],
           "id": "thm: cdfinindex",
-          "section": "newbraid.tex",
+          "section": "Cohomological dimension of groups",
           "source_tex": "\\begin{thm}\n\\label{thm: cdfinindex}\nLet $G$ be a torsion-free group and $H$ a subgroup of finite index.\nThen $cd(G)=cd(H)$.\n\\end{thm}",
-          "statement": "Let G be a torsion-free group and H a subgroup of finite index. Then the cohomological dimension of G equals the cohomological dimension of H, i.e. cd(G) = cd(H).",
+          "statement": "If G is a torsion-free group and H is a subgroup of finite index, then the cohomological dimension of G equals the cohomological dimension of H, i.e. cd(G) = cd(H).",
           "theorem_ir": {
             "assumptions": [
               {
@@ -20628,7 +20620,7 @@
                   }
                 ],
                 "kind": "uninterpreted_predicate",
-                "name": "torsion_free"
+                "name": "TorsionFree"
               },
               {
                 "args": [
@@ -20642,7 +20634,7 @@
                   }
                 ],
                 "kind": "uninterpreted_predicate",
-                "name": "finite_index_subgroup"
+                "name": "FiniteIndexSubgroup"
               }
             ],
             "binders": [
@@ -20650,14 +20642,14 @@
                 "name": "G",
                 "type": {
                   "kind": "custom",
-                  "name": "group"
+                  "name": "Group"
                 }
               },
               {
                 "name": "H",
                 "type": {
                   "kind": "custom",
-                  "name": "group"
+                  "name": "Group"
                 }
               }
             ],
@@ -20672,7 +20664,7 @@
                 "text": "cd(H)"
               }
             },
-            "theorem_name": "cd_finite_index"
+            "theorem_name": "cd_eq_for_finite_index_subgroup"
           },
           "type": "theorem",
           "typed_transcription": {
@@ -20685,7 +20677,8 @@
                   }
                 ],
                 "kind": "uninterpreted_predicate",
-                "name": "torsion_free"
+                "name": "TorsionFree",
+                "text": "G is torsion-free"
               },
               {
                 "args": [
@@ -20699,7 +20692,8 @@
                   }
                 ],
                 "kind": "uninterpreted_predicate",
-                "name": "finite_index_subgroup"
+                "name": "FiniteIndexSubgroup",
+                "text": "H is a subgroup of G of finite index"
               }
             ],
             "binders": [
@@ -20707,14 +20701,14 @@
                 "name": "G",
                 "type": {
                   "kind": "custom",
-                  "name": "group"
+                  "name": "Group"
                 }
               },
               {
                 "name": "H",
                 "type": {
                   "kind": "custom",
-                  "name": "group"
+                  "name": "Group"
                 }
               }
             ],
@@ -20734,41 +20728,29 @@
                 "name": "G",
                 "type": {
                   "kind": "custom",
-                  "name": "torsion-free group"
+                  "name": "Group",
+                  "reason": "G is a torsion-free group"
                 }
               },
               {
                 "name": "H",
                 "type": {
                   "kind": "custom",
-                  "name": "finite-index subgroup of G"
-                }
-              },
-              {
-                "name": "cd(G)",
-                "type": {
-                  "kind": "nat",
-                  "reason": "cohomological dimension is a non-negative integer (or infinity)"
-                }
-              },
-              {
-                "name": "cd(H)",
-                "type": {
-                  "kind": "nat",
-                  "reason": "cohomological dimension is a non-negative integer (or infinity)"
+                  "name": "Group",
+                  "reason": "H is a finite-index subgroup of G"
                 }
               }
             ],
-            "source_text": "\\begin{thm}\n\\label{thm: cdfinindex}\nLet $G$ be a torsion-free group and $H$ a subgroup of finite index.\nThen $cd(G)=cd(H)$.\n\\end{thm}",
+            "source_text": "Let $G$ be a torsion-free group and $H$ a subgroup of finite index. Then $cd(G)=cd(H)$.",
             "status": "transcribed"
           }
         },
         {
           "depends_on": [],
           "id": "thm: Hall",
-          "section": "newbraid.tex",
+          "section": "Finite presentability of groups",
           "source_tex": "\\begin{thm}[P. Hall]\n\\label{thm: Hall}\nIf \n$$\n1 \\rightarrow N \\rightarrow G \\rightarrow Q \\rightarrow 1 \n$$\nis a short exact sequence of groups, with $N$ and $Q$ finitely presented,\nthen $G$ is finitely presented.\n\\end{thm}",
-          "statement": "(P. Hall) If 1 → N → G → Q → 1 is a short exact sequence of groups with N and Q finitely presented, then G is finitely presented.",
+          "statement": "P. Hall's theorem: if 1 -> N -> G -> Q -> 1 is a short exact sequence of groups with N and Q finitely presented, then G is finitely presented.",
           "theorem_ir": {
             "assumptions": [
               {
@@ -20787,7 +20769,7 @@
                   }
                 ],
                 "kind": "uninterpreted_predicate",
-                "name": "short_exact_sequence"
+                "name": "ShortExactSequence"
               },
               {
                 "args": [
@@ -20797,7 +20779,7 @@
                   }
                 ],
                 "kind": "uninterpreted_predicate",
-                "name": "finitely_presented"
+                "name": "FinitelyPresented"
               },
               {
                 "args": [
@@ -20807,7 +20789,7 @@
                   }
                 ],
                 "kind": "uninterpreted_predicate",
-                "name": "finitely_presented"
+                "name": "FinitelyPresented"
               }
             ],
             "binders": [
@@ -20815,21 +20797,21 @@
                 "name": "N",
                 "type": {
                   "kind": "custom",
-                  "name": "group"
+                  "name": "Group"
                 }
               },
               {
                 "name": "G",
                 "type": {
                   "kind": "custom",
-                  "name": "group"
+                  "name": "Group"
                 }
               },
               {
                 "name": "Q",
                 "type": {
                   "kind": "custom",
-                  "name": "group"
+                  "name": "Group"
                 }
               }
             ],
@@ -20841,9 +20823,9 @@
                 }
               ],
               "kind": "uninterpreted_predicate",
-              "name": "finitely_presented"
+              "name": "FinitelyPresented"
             },
-            "theorem_name": "hall_finite_presentation"
+            "theorem_name": "hall_finitely_presented_extension"
           },
           "type": "theorem",
           "typed_transcription": {
@@ -20864,7 +20846,8 @@
                   }
                 ],
                 "kind": "uninterpreted_predicate",
-                "name": "short_exact_sequence"
+                "name": "ShortExactSequence",
+                "text": "1 -> N -> G -> Q -> 1 is a short exact sequence of groups"
               },
               {
                 "args": [
@@ -20874,7 +20857,8 @@
                   }
                 ],
                 "kind": "uninterpreted_predicate",
-                "name": "finitely_presented"
+                "name": "FinitelyPresented",
+                "text": "N is finitely presented"
               },
               {
                 "args": [
@@ -20884,7 +20868,8 @@
                   }
                 ],
                 "kind": "uninterpreted_predicate",
-                "name": "finitely_presented"
+                "name": "FinitelyPresented",
+                "text": "Q is finitely presented"
               }
             ],
             "binders": [
@@ -20892,21 +20877,21 @@
                 "name": "N",
                 "type": {
                   "kind": "custom",
-                  "name": "group"
+                  "name": "Group"
                 }
               },
               {
                 "name": "G",
                 "type": {
                   "kind": "custom",
-                  "name": "group"
+                  "name": "Group"
                 }
               },
               {
                 "name": "Q",
                 "type": {
                   "kind": "custom",
-                  "name": "group"
+                  "name": "Group"
                 }
               }
             ],
@@ -20918,32 +20903,36 @@
                 }
               ],
               "kind": "uninterpreted_predicate",
-              "name": "finitely_presented"
+              "name": "FinitelyPresented",
+              "text": "G is finitely presented"
             },
             "math_objects": [
               {
                 "name": "N",
                 "type": {
                   "kind": "custom",
-                  "name": "group"
+                  "name": "Group",
+                  "reason": "kernel term of the short exact sequence"
                 }
               },
               {
                 "name": "G",
                 "type": {
                   "kind": "custom",
-                  "name": "group"
+                  "name": "Group",
+                  "reason": "middle term of the short exact sequence"
                 }
               },
               {
                 "name": "Q",
                 "type": {
                   "kind": "custom",
-                  "name": "group"
+                  "name": "Group",
+                  "reason": "quotient term of the short exact sequence"
                 }
               }
             ],
-            "source_text": "\\begin{thm}[P. Hall]\n\\label{thm: Hall}\nIf \n$$\n1 \\rightarrow N \\rightarrow G \\rightarrow Q \\rightarrow 1 \n$$\nis a short exact sequence of groups, with $N$ and $Q$ finitely presented,\nthen $G$ is finitely presented.\n\\end{thm}",
+            "source_text": "If $1 \\rightarrow N \\rightarrow G \\rightarrow Q \\rightarrow 1$ is a short exact sequence of groups, with $N$ and $Q$ finitely presented, then $G$ is finitely presented.",
             "status": "transcribed"
           }
         }
@@ -57696,10 +57685,10 @@
         "artifact": "theorem_graph.json",
         "claim_id": "thm: fib",
         "paper_source_id": "thm: fib",
-        "section_id": "newbraid.tex",
-        "text_excerpt": "(Fadell and Neuwirth) If M is a manifold without boundary (not necessarily compact) and k ≥ m ≥ 1, then the projection map π_{k,m} from F(M,k) to F(M,m) is a fibration with fiber F(M − Q_m, k−m)."
+        "section_id": "Fibrations of configuration spaces",
+        "text_excerpt": "Fadell–Neuwirth fibration theorem: if M is a manifold without boundary (not necessarily compact) and k >= m >= 1, then the projection map pi_{k,m} (from the configuration space of k points in M to the configuration space of m points in M) is a fibration with ..."
       },
-      "statement": "(Fadell and Neuwirth) If M is a manifold without boundary (not necessarily compact) and k ≥ m ≥ 1, then the projection map π_{k,m} from F(M,k) to F(M,m) is a fibration with fiber F(M − Q_m, k−m).",
+      "statement": "Fadell–Neuwirth fibration theorem: if M is a manifold without boundary (not necessarily compact) and k >= m >= 1, then the projection map pi_{k,m} (from the configuration space of k points in M to the configuration space of m points in M) is a fibration with fiber F(M - Q_m, k-m).",
       "theorem_ir": {
         "assumptions": [
           {
@@ -57710,7 +57699,7 @@
               }
             ],
             "kind": "uninterpreted_predicate",
-            "name": "manifold_without_boundary"
+            "name": "ManifoldWithoutBoundary"
           },
           {
             "kind": "greater_equal",
@@ -57740,7 +57729,7 @@
             "name": "M",
             "type": {
               "kind": "custom",
-              "name": "manifold without boundary"
+              "name": "Manifold"
             }
           },
           {
@@ -57768,14 +57757,14 @@
             }
           ],
           "kind": "uninterpreted_predicate",
-          "name": "is_fibration_with_fiber"
+          "name": "IsFibrationWithFiber"
         },
         "source_span": {
           "artifact": "theorem_graph.json",
           "claim_id": "thm: fib",
           "paper_source_id": "thm: fib",
-          "section_id": "newbraid.tex",
-          "text_excerpt": "(Fadell and Neuwirth) If M is a manifold without boundary (not necessarily compact) and k ≥ m ≥ 1, then the projection map π_{k,m} from F(M,k) to F(M,m) is a fibration with fiber F(M − Q_m, k−m)."
+          "section_id": "Fibrations of configuration spaces",
+          "text_excerpt": "Fadell–Neuwirth fibration theorem: if M is a manifold without boundary (not necessarily compact) and k >= m >= 1, then the projection map pi_{k,m} (from the configuration space of k points in M to the configuration space of m points in M) is a fibration with ..."
         },
         "theorem_name": "fadell_neuwirth_fibration"
       },
@@ -57789,7 +57778,8 @@
               }
             ],
             "kind": "uninterpreted_predicate",
-            "name": "manifold_without_boundary"
+            "name": "ManifoldWithoutBoundary",
+            "text": "M is a manifold without boundary (not necessarily compact)"
           },
           {
             "kind": "greater_equal",
@@ -57819,7 +57809,7 @@
             "name": "M",
             "type": {
               "kind": "custom",
-              "name": "manifold without boundary"
+              "name": "Manifold"
             }
           },
           {
@@ -57847,44 +57837,34 @@
             }
           ],
           "kind": "uninterpreted_predicate",
-          "name": "is_fibration_with_fiber"
+          "name": "IsFibrationWithFiber",
+          "text": "the map pi_{k,m} is a fibration with fiber F(M - Q_m, k-m)"
         },
         "math_objects": [
           {
             "name": "M",
             "type": {
               "kind": "custom",
-              "name": "manifold without boundary"
+              "name": "Manifold",
+              "reason": "M is a topological manifold without boundary"
             }
           },
           {
             "name": "k",
             "type": {
-              "kind": "nat"
+              "kind": "nat",
+              "reason": "number of configuration points, a positive integer"
             }
           },
           {
             "name": "m",
             "type": {
-              "kind": "nat"
-            }
-          },
-          {
-            "name": "\\pi_{k,m}",
-            "type": {
-              "kind": "custom",
-              "name": "projection map of configuration spaces"
-            }
-          },
-          {
-            "name": "F(M - Q_m, k-m)",
-            "type": {
-              "kind": "custom",
-              "name": "configuration space"
+              "kind": "nat",
+              "reason": "number of configuration points, a positive integer"
             }
           }
         ],
-        "source_text": "\\begin{thm}[Fadell and Neuwirth]\n\\label{thm: fib}\nIf $M$ is a manifold without boundary (not necessarily compact) and $k \\geq\nm \\geq 1$, then the map $\\pikm$ is a fibration with fiber $F(M - Q_m, k-m)$.\n\\end{thm}",
+        "source_text": "If $M$ is a manifold without boundary (not necessarily compact) and $k \\geq m \\geq 1$, then the map $\\pikm$ is a fibration with fiber $F(M - Q_m, k-m)$.",
         "status": "partial"
       }
     },
@@ -57904,10 +57884,10 @@
         "artifact": "theorem_graph.json",
         "claim_id": "thm: cdfinindex",
         "paper_source_id": "thm: cdfinindex",
-        "section_id": "newbraid.tex",
-        "text_excerpt": "Let G be a torsion-free group and H a subgroup of finite index. Then the cohomological dimension of G equals the cohomological dimension of H, i.e. cd(G) = cd(H)."
+        "section_id": "Cohomological dimension of groups",
+        "text_excerpt": "If G is a torsion-free group and H is a subgroup of finite index, then the cohomological dimension of G equals the cohomological dimension of H, i.e. cd(G) = cd(H)."
       },
-      "statement": "Let G be a torsion-free group and H a subgroup of finite index. Then the cohomological dimension of G equals the cohomological dimension of H, i.e. cd(G) = cd(H).",
+      "statement": "If G is a torsion-free group and H is a subgroup of finite index, then the cohomological dimension of G equals the cohomological dimension of H, i.e. cd(G) = cd(H).",
       "theorem_ir": {
         "assumptions": [
           {
@@ -57918,7 +57898,7 @@
               }
             ],
             "kind": "uninterpreted_predicate",
-            "name": "torsion_free"
+            "name": "TorsionFree"
           },
           {
             "args": [
@@ -57932,7 +57912,7 @@
               }
             ],
             "kind": "uninterpreted_predicate",
-            "name": "finite_index_subgroup"
+            "name": "FiniteIndexSubgroup"
           }
         ],
         "binders": [
@@ -57940,14 +57920,14 @@
             "name": "G",
             "type": {
               "kind": "custom",
-              "name": "group"
+              "name": "Group"
             }
           },
           {
             "name": "H",
             "type": {
               "kind": "custom",
-              "name": "group"
+              "name": "Group"
             }
           }
         ],
@@ -57966,10 +57946,10 @@
           "artifact": "theorem_graph.json",
           "claim_id": "thm: cdfinindex",
           "paper_source_id": "thm: cdfinindex",
-          "section_id": "newbraid.tex",
-          "text_excerpt": "Let G be a torsion-free group and H a subgroup of finite index. Then the cohomological dimension of G equals the cohomological dimension of H, i.e. cd(G) = cd(H)."
+          "section_id": "Cohomological dimension of groups",
+          "text_excerpt": "If G is a torsion-free group and H is a subgroup of finite index, then the cohomological dimension of G equals the cohomological dimension of H, i.e. cd(G) = cd(H)."
         },
-        "theorem_name": "cd_finite_index"
+        "theorem_name": "cd_eq_for_finite_index_subgroup"
       },
       "typed_transcription": {
         "assumptions": [
@@ -57981,7 +57961,8 @@
               }
             ],
             "kind": "uninterpreted_predicate",
-            "name": "torsion_free"
+            "name": "TorsionFree",
+            "text": "G is torsion-free"
           },
           {
             "args": [
@@ -57995,7 +57976,8 @@
               }
             ],
             "kind": "uninterpreted_predicate",
-            "name": "finite_index_subgroup"
+            "name": "FiniteIndexSubgroup",
+            "text": "H is a subgroup of G of finite index"
           }
         ],
         "binders": [
@@ -58003,14 +57985,14 @@
             "name": "G",
             "type": {
               "kind": "custom",
-              "name": "group"
+              "name": "Group"
             }
           },
           {
             "name": "H",
             "type": {
               "kind": "custom",
-              "name": "group"
+              "name": "Group"
             }
           }
         ],
@@ -58030,32 +58012,20 @@
             "name": "G",
             "type": {
               "kind": "custom",
-              "name": "torsion-free group"
+              "name": "Group",
+              "reason": "G is a torsion-free group"
             }
           },
           {
             "name": "H",
             "type": {
               "kind": "custom",
-              "name": "finite-index subgroup of G"
-            }
-          },
-          {
-            "name": "cd(G)",
-            "type": {
-              "kind": "nat",
-              "reason": "cohomological dimension is a non-negative integer (or infinity)"
-            }
-          },
-          {
-            "name": "cd(H)",
-            "type": {
-              "kind": "nat",
-              "reason": "cohomological dimension is a non-negative integer (or infinity)"
+              "name": "Group",
+              "reason": "H is a finite-index subgroup of G"
             }
           }
         ],
-        "source_text": "\\begin{thm}\n\\label{thm: cdfinindex}\nLet $G$ be a torsion-free group and $H$ a subgroup of finite index.\nThen $cd(G)=cd(H)$.\n\\end{thm}",
+        "source_text": "Let $G$ be a torsion-free group and $H$ a subgroup of finite index. Then $cd(G)=cd(H)$.",
         "status": "partial"
       }
     },
@@ -58075,10 +58045,10 @@
         "artifact": "theorem_graph.json",
         "claim_id": "thm: Hall",
         "paper_source_id": "thm: Hall",
-        "section_id": "newbraid.tex",
-        "text_excerpt": "(P. Hall) If 1 → N → G → Q → 1 is a short exact sequence of groups with N and Q finitely presented, then G is finitely presented."
+        "section_id": "Finite presentability of groups",
+        "text_excerpt": "P. Hall's theorem: if 1 -> N -> G -> Q -> 1 is a short exact sequence of groups with N and Q finitely presented, then G is finitely presented."
       },
-      "statement": "(P. Hall) If 1 → N → G → Q → 1 is a short exact sequence of groups with N and Q finitely presented, then G is finitely presented.",
+      "statement": "P. Hall's theorem: if 1 -> N -> G -> Q -> 1 is a short exact sequence of groups with N and Q finitely presented, then G is finitely presented.",
       "theorem_ir": {
         "assumptions": [
           {
@@ -58097,7 +58067,7 @@
               }
             ],
             "kind": "uninterpreted_predicate",
-            "name": "short_exact_sequence"
+            "name": "ShortExactSequence"
           },
           {
             "args": [
@@ -58107,7 +58077,7 @@
               }
             ],
             "kind": "uninterpreted_predicate",
-            "name": "finitely_presented"
+            "name": "FinitelyPresented"
           },
           {
             "args": [
@@ -58117,7 +58087,7 @@
               }
             ],
             "kind": "uninterpreted_predicate",
-            "name": "finitely_presented"
+            "name": "FinitelyPresented"
           }
         ],
         "binders": [
@@ -58125,21 +58095,21 @@
             "name": "N",
             "type": {
               "kind": "custom",
-              "name": "group"
+              "name": "Group"
             }
           },
           {
             "name": "G",
             "type": {
               "kind": "custom",
-              "name": "group"
+              "name": "Group"
             }
           },
           {
             "name": "Q",
             "type": {
               "kind": "custom",
-              "name": "group"
+              "name": "Group"
             }
           }
         ],
@@ -58151,16 +58121,16 @@
             }
           ],
           "kind": "uninterpreted_predicate",
-          "name": "finitely_presented"
+          "name": "FinitelyPresented"
         },
         "source_span": {
           "artifact": "theorem_graph.json",
           "claim_id": "thm: Hall",
           "paper_source_id": "thm: Hall",
-          "section_id": "newbraid.tex",
-          "text_excerpt": "(P. Hall) If 1 → N → G → Q → 1 is a short exact sequence of groups with N and Q finitely presented, then G is finitely presented."
+          "section_id": "Finite presentability of groups",
+          "text_excerpt": "P. Hall's theorem: if 1 -> N -> G -> Q -> 1 is a short exact sequence of groups with N and Q finitely presented, then G is finitely presented."
         },
-        "theorem_name": "hall_finite_presentation"
+        "theorem_name": "hall_finitely_presented_extension"
       },
       "typed_transcription": {
         "assumptions": [
@@ -58180,7 +58150,8 @@
               }
             ],
             "kind": "uninterpreted_predicate",
-            "name": "short_exact_sequence"
+            "name": "ShortExactSequence",
+            "text": "1 -> N -> G -> Q -> 1 is a short exact sequence of groups"
           },
           {
             "args": [
@@ -58190,7 +58161,8 @@
               }
             ],
             "kind": "uninterpreted_predicate",
-            "name": "finitely_presented"
+            "name": "FinitelyPresented",
+            "text": "N is finitely presented"
           },
           {
             "args": [
@@ -58200,7 +58172,8 @@
               }
             ],
             "kind": "uninterpreted_predicate",
-            "name": "finitely_presented"
+            "name": "FinitelyPresented",
+            "text": "Q is finitely presented"
           }
         ],
         "binders": [
@@ -58208,21 +58181,21 @@
             "name": "N",
             "type": {
               "kind": "custom",
-              "name": "group"
+              "name": "Group"
             }
           },
           {
             "name": "G",
             "type": {
               "kind": "custom",
-              "name": "group"
+              "name": "Group"
             }
           },
           {
             "name": "Q",
             "type": {
               "kind": "custom",
-              "name": "group"
+              "name": "Group"
             }
           }
         ],
@@ -58234,32 +58207,36 @@
             }
           ],
           "kind": "uninterpreted_predicate",
-          "name": "finitely_presented"
+          "name": "FinitelyPresented",
+          "text": "G is finitely presented"
         },
         "math_objects": [
           {
             "name": "N",
             "type": {
               "kind": "custom",
-              "name": "group"
+              "name": "Group",
+              "reason": "kernel term of the short exact sequence"
             }
           },
           {
             "name": "G",
             "type": {
               "kind": "custom",
-              "name": "group"
+              "name": "Group",
+              "reason": "middle term of the short exact sequence"
             }
           },
           {
             "name": "Q",
             "type": {
               "kind": "custom",
-              "name": "group"
+              "name": "Group",
+              "reason": "quotient term of the short exact sequence"
             }
           }
         ],
-        "source_text": "\\begin{thm}[P. Hall]\n\\label{thm: Hall}\nIf \n$$\n1 \\rightarrow N \\rightarrow G \\rightarrow Q \\rightarrow 1 \n$$\nis a short exact sequence of groups, with $N$ and $Q$ finitely presented,\nthen $G$ is finitely presented.\n\\end{thm}",
+        "source_text": "If $1 \\rightarrow N \\rightarrow G \\rightarrow Q \\rightarrow 1$ is a short exact sequence of groups, with $N$ and $Q$ finitely presented, then $G$ is finitely presented.",
         "status": "transcribed"
       }
     }
