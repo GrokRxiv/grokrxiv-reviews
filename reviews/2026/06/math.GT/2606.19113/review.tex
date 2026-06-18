@@ -1,0 +1,766 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\title{Maximal universal invariants from quantum traces on finite quotients of Verma modules}
+\author{Cristina Ana-Maria Anghel \and Jun Murakami}
+\date{}
+\begin{document}
+\maketitle
+
+\noindent\textbf{Source:} \href{https://arxiv.org/abs/2606.19113}{arXiv:2606.19113} \quad \textbf{Field:} math.GT\\
+
+\section*{TL;DR}
+The paper introduces a family of level-N universal quantum knot invariants constructed via quantum traces on finite-dimensional quotients of the Verma module of U\_q(sl\_2), valued in two-variable polynomial quotient rings. The novelty specialist rates the contribution significant (score 0.85, confidence 0.90): the construction is genuinely new, the prior-art landscape is correctly charted, and no missing prior art was identified. The technical-correctness specialist (overall: mostly\_sound, confidence 0.62) finds the braid-representation foundation (Theorem 4, C1) and the prime-N corollary (Corollary 9, C6) fully supported, but flags two major gaps: (1) the converse direction of the headline maximality claim in Theorem 8 is not explicitly proved --- the argument that any knot-invariant quotient must annihilate every generator of C\_N is missing, leaving open the possibility of cancellations in braid closures that the paper does not exclude (C4, major); (2) the 'richer structure' assertion for composite N in Remark 11 is entirely unsupported by computation --- no example knot pair is exhibited (C7, major). The interpolation formula proof (Theorem 39, C5) and the quantum-trace uniqueness proof (Theorem 29, C3) each contain typographic errors that impede independent verification, though the underlying arguments appear directionally correct. Lemma 31's inductive step is asserted without proof (C9, minor). The reproducibility specialist (score 0.22, confidence 0.86) flags the complete absence of computational or formal-proof artifacts as critical: no code repository, no worked examples, and no machine-checkable verification of the maximality theorem, in a field where computer-algebra verification of quantum invariants is standard. The citation specialist (confidence 1.00) finds the bibliography largely sound, with only minor clerical issues: a surname typo in [ADO] (Akustu for Akutsu) and self-citations [Cr1, Cr2] attributed to 'the second author' when C. Anghel is the first author of both. Because the paper is in a code-amenable field (math.QA/math.GT) and both reproducibility and technical-correctness flag missing proof artifacts for the headline maximality claim at critical and major severity respectively, the recommendation gate mandates major\_revision. The theoretical contribution is real and the mathematical gaps are addressable, but the converse of Theorem 8 requires a rigorous proof, Remark 11 needs either a computational example or downgrade to conjecture, the interpolation formula proof must be rewritten cleanly, and minimal computational verification artifacts must accompany the revision.
+
+\textbf{Recommendation:} Major revision \quad \textbf{Confidence:} 74\%\\
+
+\section*{Strengths}
+\begin{itemize}[leftmargin=*]
+  \item The construction of level-N universal quantum knot invariants over two-variable polynomial quotient rings is novel and cleanly separated from prior work on coloured Jones and ADO polynomials, which are defined only at roots of unity or at generic q but not simultaneously (novelty specialist, score 0.85).
+  \item The braid-group representation result (Theorem 4 / Proposition 26) is fully supported: the R-matrix action on tensor powers of V\_N is shown to close in the quotient module modulo C\_N by explicit coefficient analysis (C1, technical\_correctness).
+  \item The prime-N specialization (Corollary 9 / 35) is a clean consequence of the ideal-coincidence structure and is correctly derived once Theorem 8 is accepted, providing a concrete maximality statement for an infinite family of levels (C6, technical\_correctness).
+  \item The algebraic framework --- quantum group U\_q(sl\_2) with divided powers, Verma module truncation, and two-variable quotient ring --- is well-motivated and correctly positioned relative to the Jackson-Kerler representation theory on which it builds (novelty specialist, relation: builds\_on).
+  \item Citation hygiene is strong: the bibliography covers foundational texts on ADO invariants, the Volume Conjecture, non-semisimple TQFTs, and the Gukov-Manolescu conjecture, with no missing prior art identified by the novelty specialist.
+\end{itemize}
+
+\section*{Weaknesses}
+\begin{itemize}[leftmargin=*]
+  \item Theorem 8 / Theorem 34: the converse direction of the maximality claim is not proved --- the paper does not show that every generator of C\_N must vanish in any quotient ring yielding a knot invariant, leaving open the possibility that braid-closure cancellations could produce an invariant in a strictly larger quotient (C4, major, technical\_correctness).
+  \item Remark 11 (richer structure for composite N) is completely unsupported: the claim that tilde \ensuremath{\Omega}\_N encodes information beyond the sequence (J\_d, \ensuremath{\Phi}\_d : d|N) is argued only heuristically via ideal structure, with no example knot pair distinguishing the universal invariant from the classical sequence (C7, major, technical\_correctness).
+  \item The proof of Theorem 39 (interpolation formula) contains multiple typographic errors --- 's \ensuremath{-} 1\^{}\{1\ensuremath{-}N\}' for 's \ensuremath{-} q\^{}\{1\ensuremath{-}N\}', '\ensuremath{\phi}\_N(q)' for '\ensuremath{\phi}\_N(q\^{}2)', and a garbled factorization in the inductive step --- preventing mechanical independent verification of the paper's central identity (C5, major, technical\_correctness).
+  \item No computational or formal-proof artifacts are provided in a code-amenable field: there is no code repository, no worked example computing \ensuremath{\Omega}\_N for any knot and level, and no machine-checkable verification of the headline maximality theorem, the ideal equalities, or the interpolation formula (C10, major / reproducibility critical).
+  \item Lemma 31, which is load-bearing for the quantum-trace uniqueness proof (Theorem 6 / 29), is verified only for M \ensuremath{\in} \{0,1,2,3\}; the general inductive step is asserted without being written down (C9, minor, technical\_correctness).
+  \item Two bibliography entries (Mur, WRT) appear in the reference list without explicit in-text citation markers in the provided manuscript sections, weakening their bibliographic justification (citation specialist).
+  \item Self-citations [Cr1] and [Cr2] are incorrectly attributed to 'the second author' in the manuscript text, whereas C. Anghel is the first author of both those papers and of the present paper (citation specialist).
+\end{itemize}
+
+\section*{Revision Targets}
+\begin{itemize}[leftmargin=*]
+  \item [open] paper\_tex at `Theorem 8, restated as Theorem 34`: Add a separate lemma showing that for every generator g \ensuremath{\in} C\_N there exists a braid \ensuremath{\beta} whose normalized closure scalar contains g as a coefficient of v\_0 \ensuremath{\to} v\_0, so vanishing in the target quotient is necessary for Reidemeister II/III invariance. Alternatively, derive the maximality from a universality argument à la Reshetikhin--Turaev for the truncated category. A small computational supplement (e.g. verification/maximality\_check.py) confirming that for N=4 the unknotting move forces every C\_N-generator into the kernel would also help. Check: Re-review should confirm `Theorem 8, restated as Theorem 34` is corrected or justified.
+  \item [open] paper\_tex at `Remark 11`: Provide at least one explicit computational example: compute tilde \ensuremath{\Omega}\_4 and tilde \ensuremath{\Omega}\_6 for a small candidate pair of knots (e.g. mutant pairs Kinoshita--Terasaka / Conway, or 11n\_34 / 11n\_42) and show numerically that tilde \ensuremath{\Omega}\_N distinguishes them while every J\_d, \ensuremath{\Phi}\_d at d|N do not. Ship the code as verification/richer\_structure\_example.py using a quantum-trace implementation (e.g. on top of snappy or a custom braid implementation). Check: Re-review should confirm `Remark 11` is corrected or justified.
+  \item [open] paper\_tex at `Theorem 6 (statement), Theorem 29 and its proof (Section 'Unique quantum trace at level N')`: (a) Provide the complete inductive proof of Lemma 31 (the general M step) instead of stopping at M=3. (b) Correct the typos in the statement of Theorem 29 ('-2i' \ensuremath{\to} '-2j') and in the proof base case ('g\_1 = q\^{}\{-2\}' \ensuremath{\to} 'g\_1 = g\_0 q\^{}\{-2\}') and inductive step ('q\_0(q,s) q\^{}\{-2(M+2)\}' \ensuremath{\to} 'g\_0(q,s) q\^{}\{-2(M+1)\}'). (c) Ship a symbolic verification (e.g. verification/qtrace\_uniqueness.py using SymPy) that checks the identity in eq:sum for N \ensuremath{\le} 8. Check: Re-review should confirm `Theorem 6 (statement), Theorem 29 and its proof (Section 'Unique quantum trace at level N')` is corrected or justified.
+  \item [open] paper\_tex at `Whole paper`: Add a verification/ directory shipping at minimum: (i) verification/rmatrix.py implementing the two-variable R-matrix and the braid action on V\_N\^{}\{\ensuremath{\otimes}n\}; (ii) verification/quantum\_trace.py implementing the quantum partial trace with the weights g\_j = g\_0 q\^{}\{-2j\}; (iii) verification/omega\_compute.py computing \ensuremath{\Omega}\_N(K)(q,s) for K \ensuremath{\in} \{3\_1, 4\_1, 5\_1, 5\_2\} and N \ensuremath{\in} \{2,3,4,5\}; (iv) verification/check\_interpolation.py confirming \ensuremath{\Omega}\_N(K) = J\_N(K,q) + \ensuremath{\Phi}\_N(K,s) \ensuremath{-} \ensuremath{\Phi}\_N(K,q\^{}\{1-N\}) for each pair. A Lean/Coq formalisation of Theorem 29's uniqueness statement (src/proofs/QuantumTraceUnique.lean) would be the gold standard but is optional. Check: Re-review should confirm `Whole paper` is corrected or justified.
+  \item [open] paper\_tex at `Theorem 6 (statement), Theorem 29 and its proof (Section 'Unique quantum trace at level N')`: (a) Provide the complete inductive proof of Lemma 31 (the general M step) instead of stopping at M=3. (b) Correct the typos in the statement of Theorem 29 ('-2i' \ensuremath{\to} '-2j') and in the proof base case ('g\_1 = q\^{}\{-2\}' \ensuremath{\to} 'g\_1 = g\_0 q\^{}\{-2\}') and inductive step ('q\_0(q,s) q\^{}\{-2(M+2)\}' \ensuremath{\to} 'g\_0(q,s) q\^{}\{-2(M+1)\}'). (c) Ship a symbolic verification (e.g. verification/qtrace\_uniqueness.py using SymPy) that checks the identity in eq:sum for N \ensuremath{\le} 8. Check: Re-review should confirm `Theorem 6 (statement), Theorem 29 and its proof (Section 'Unique quantum trace at level N')` is corrected or justified.
+  \item [open] bibliography at `WRT`: Verify `WRT` against an authoritative source; replace it with a resolvable relevant citation or remove it. Check: Re-review should confirm the citation resolves and is relevant.
+  \item [open] bibliography at `WRT`: Verify `WRT` against an authoritative source; replace it with a resolvable relevant citation or remove it. Check: Re-review should confirm the citation resolves and is relevant.
+\end{itemize}
+
+\section*{Open Questions}
+\begin{itemize}[leftmargin=*]
+  \item For every generator g of C\_N, does there exist an explicit braid \ensuremath{\beta} such that the normalized quantum-trace scalar of the closure \ensuremath{\beta}\^{} contains g as a coefficient --- thereby making vanishing of g in the quotient ring a necessary condition for Reidemeister-II/III invariance? If so, which braid witnesses each generator?
+  \item Can tilde \ensuremath{\Omega}\_4 or tilde \ensuremath{\Omega}\_6 be computed explicitly for at least one knot pair (e.g., Kinoshita--Terasaka / Conway mutants) and shown to separate them while every J\_d and \ensuremath{\Phi}\_d at d|N agree? If no such pair is currently known, should Remark 11 be recast as a conjecture rather than an assertion?
+  \item What is the general M step of the inductive argument for Lemma 31? In particular, what is the closed-form expression for R\_\{v\_\{M,j\}\}\^{}\{v\_\{M,j\}\} \ensuremath{-} R\_\{v\_\{M+1,j\}\}\^{}\{v\_\{M+1,j\}\} that makes the telescoping work for arbitrary M \ensuremath{\le} N \ensuremath{-} 2?
+  \item Are the typographic errors in Theorems 29, 37, and 39 purely transcription artifacts, or does any one of them reflect a substantive ambiguity in the ring-theoretic cancellation argument --- specifically, is the generator of the ideal I\_N in Theorem 39 \ensuremath{\phi}\_N(q\^{}2)\ensuremath{\cdot}(s \ensuremath{-} q\^{}\{1\ensuremath{-}N\}) or some other element?
+  \item Why are the bibliography entries [Mur] and [WRT] included in the reference list without in-text citation in the main body? Are they cited in sections not extracted for review, or are they listed for background purposes only?
+\end{itemize}
+
+\section*{Per-Agent Reviews}
+\subsection*{citation (\texttt{gemini-3-flash-preview})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "confidence": 1.0,\\
+  "entries": [\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "Y. Akustu",\\
+          "T. Deguchi",\\
+          "T. Ohtsuki"\\
+        ],\\
+        "doi": null,\\
+        "key": "ADO",\\
+        "raw": "ADO: Y. Akustu, T. Deguchi, T. Ohtsuki, \{\textbackslash{}\textbackslash{}em Invariants of colored knots\}, J. Knot Theory Ramifications 1, 161-184, (1992).",\\
+        "title": "Invariants of colored knots",\\
+        "url": null,\\
+        "venue": "J. Knot Theory Ramifications",\\
+        "year": 1992\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Defines the ADO invariants (colored Alexander invariants) which are central to the paper's goal of constructing a level N universal invariant interpolating between colored Jones and ADO polynomials.",\\
+      "notes": "Typo in the first author's surname: 'Akustu' instead of 'Akutsu'.",\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "C. Blanchet",\\
+          "F. Costantino",\\
+          "N. Geer",\\
+          "B. Patureau-Mirand"\\
+        ],\\
+        "doi": null,\\
+        "key": "BCGP",\\
+        "raw": "BCGP: C. Blanchet, F. Costantino, N. Geer, B. Patureau-Mirand, \{\textbackslash{}\textbackslash{}em Non-Semisimple TQFTs, Reidemeister Torsion and Kashaev's Invariants\}, Advances in Mathematics, Volume 301, Pages 1-78 (2016).",\\
+        "title": "Non-Semisimple TQFTs, Reidemeister Torsion and Kashaev's Invariants",\\
+        "url": null,\\
+        "venue": "Advances in Mathematics",\\
+        "year": 2016\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited as prior work building on ADO invariants to construct non-semisimple TQFTs.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "C. Anghel"\\
+        ],\\
+        "doi": null,\\
+        "key": "Cr1",\\
+        "raw": "Cr1: C. Anghel, \{\textbackslash{}\textbackslash{}em A topological model for the coloured Jones polynomials\}, 50 pages, \{Selecta Mathematica New Series\} 28:63, (2022).",\\
+        "title": "A topological model for the coloured Jones polynomials",\\
+        "url": null,\\
+        "venue": "Selecta Mathematica New Series",\\
+        "year": 2022\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Provides the unified topological framework via configuration spaces that the current paper extends to higher colors and Verma modules.",\\
+      "notes": "The text incorrectly attributes this work to 'the second author', but C. Anghel is the first author of the current paper.",\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "C. Anghel"\\
+        ],\\
+        "doi": null,\\
+        "key": "Cr2",\\
+        "raw": "Cr2: C. Anghel, \{ \textbackslash{}\textbackslash{}em Coloured Jones and Alexander polynomials as topological intersections of cycles in configuration spaces\}, 71 pages, \{Advances in Mathematics\} 459 109993, (2024). \%",\\
+        "title": "Coloured Jones and Alexander polynomials as topological intersections of cycles in configuration spaces",\\
+        "url": null,\\
+        "venue": "Advances in Mathematics",\\
+        "year": 2024\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Constructs unifications of coloured Jones and ADO polynomials using topological intersections in configuration spaces, which is directly extended in this work.",\\
+      "notes": "The text incorrectly attributes this work to 'the second author', but C. Anghel is the first author of the current paper.",\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "C. Anghel"\\
+        ],\\
+        "doi": null,\\
+        "key": "CrG",\\
+        "raw": "CrG: C. Anghel, \{\textbackslash{}\textbackslash{}em A globalisation of Jones and Alexander polynomials constructed from a graded intersection of two Lagrangians in a configuration space\}, Annales de l’Institut Fourier 75, no. 6 p. 2609-2656, (2025).",\\
+        "title": "A globalisation of Jones and Alexander polynomials constructed from a graded intersection of two Lagrangians in a configuration space",\\
+        "url": null,\\
+        "venue": "Annales de l’Institut Fourier",\\
+        "year": 2025\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited as a previous globalization of Jones and Alexander invariants taking values in a two-variable polynomial ring quotient.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": "2401.17245",\\
+        "authors": [\\
+          "C. Anghel"\\
+        ],\\
+        "doi": null,\\
+        "key": "Cru1",\\
+        "raw": "Cru1: C. Anghel, \{\textbackslash{}\textbackslash{}em Geometric universal Jones invariant from configurations on ovals in the disc\}, math.GT arxiv: 2401.17245v3, 58 pages, (2025). | arxiv: 2401.17245",\\
+        "title": "Geometric universal Jones invariant from configurations on ovals in the disc",\\
+        "url": null,\\
+        "venue": null,\\
+        "year": 2025\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited as a universal geometrical invariant for links leading up to the current universal invariants.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": "2505.18108",\\
+        "authors": [\\
+          "C. Anghel"\\
+        ],\\
+        "doi": null,\\
+        "key": "Cru2",\\
+        "raw": "Cru2: C. Anghel, \{\textbackslash{}\textbackslash{}em Geometric universal link invariants\}, math.GT arxiv.org/abs/2505.18108, 54 pages, (2025). | arxiv: 2505.18108",\\
+        "title": "Geometric universal link invariants",\\
+        "url": null,\\
+        "venue": null,\\
+        "year": 2025\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited alongside Cru1 as establishing universal geometric link invariants.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "S. Gukov",\\
+          "C. Manolescu"\\
+        ],\\
+        "doi": null,\\
+        "key": "GM",\\
+        "raw": "GM: S. Gukov, C. Manolescu, \{\textbackslash{}\textbackslash{}em A two-variable series for knot complements\}, Quantum Topology 12, 1-109, (2021).",\\
+        "title": "A two-variable series for knot complements",\\
+        "url": null,\\
+        "venue": "Quantum Topology",\\
+        "year": 2021\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Provides motivation regarding the Gukov-Manolescu conjecture on the asymptotic behavior of quantum invariants.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "C. Jackson",\\
+          "T. Kerler"\\
+        ],\\
+        "doi": null,\\
+        "key": "JK",\\
+        "raw": "JK: C. Jackson, T. Kerler, \{\textbackslash{}\textbackslash{}em The Lawrence-Krammer-Bigelow representations of the braid groups via \$U\_q(sl\_2)\$\}, Adv. Math. 228, 1689-1717, (2011).",\\
+        "title": "The Lawrence-Krammer-Bigelow representations of the braid groups via \$U\_q(sl\_2)\$",\\
+        "url": null,\\
+        "venue": "Adv. Math.",\\
+        "year": 2011\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Provides the specific version of the quantum group U\_q(sl\_2) with divided powers, its Hopf algebra structure, and generic R-matrix action used directly in this paper.",\\
+      "notes": null,\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "R. Kashaev"\\
+        ],\\
+        "doi": null,\\
+        "key": "K",\\
+        "raw": "K: R. Kashaev, \{\textbackslash{}\textbackslash{}em The hyperbolic volume of knots from the quantum dilogarithm\}, Lett. Math. Phys. 39, 269-275, (1997).",\\
+        "title": "The hyperbolic volume of knots from the quantum dilogarithm",\\
+        "url": null,\\
+        "venue": "Lett. Math. Phys.",\\
+        "year": 1997\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Introduces Kashaev's invariant, forming the basis of the Volume Conjecture which motivates the study of the asymptotic behavior of these invariants.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "H. Murakami",\\
+          "J. Murakami"\\
+        ],\\
+        "doi": null,\\
+        "key": "M2",\\
+        "raw": "M2: H. Murakami, J. Murakami, \{\textbackslash{}\textbackslash{}em The colored Jones polynomials and the simplicial volume of a knot\}, Acta Math. 186, 85-104, (2001).",\\
+        "title": "The colored Jones polynomials and the simplicial volume of a knot",\\
+        "url": null,\\
+        "venue": "Acta Math.",\\
+        "year": 2001\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Formulates the Volume Conjecture connecting colored Jones polynomials to the hyperbolic volume of knot complements.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "J. Murakami"\\
+        ],\\
+        "doi": null,\\
+        "key": "Mur",\\
+        "raw": "Mur: J. Murakami \{\textbackslash{}\textbackslash{}em Colored Alexander invariants and cone-manifolds\}, Osaka J. Math. 45, 541-564, (2008).",\\
+        "title": "Colored Alexander invariants and cone-manifolds",\\
+        "url": null,\\
+        "venue": "Osaka J. Math.",\\
+        "year": 2008\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Provides background on colored Alexander invariants and cone-manifolds by the co-author, but lacks an explicit in-text citation marker in the provided body text.",\\
+      "notes": "Listed in the bibliography but not explicitly cited or discussed in the provided text sections.",\\
+      "relevance": "low",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "N. Reshetikhin",\\
+          "V. Turaev"\\
+        ],\\
+        "doi": null,\\
+        "key": "RT",\\
+        "raw": "RT: N. Reshetikhin, V. Turaev, \{\textbackslash{}\textbackslash{}em Invariants of 3-manifolds via link polynomials and quantum groups\}, Invent. Math. 103, 547-597, (1991).",\\
+        "title": "Invariants of 3-manifolds via link polynomials and quantum groups",\\
+        "url": null,\\
+        "venue": "Invent. Math.",\\
+        "year": 1991\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited as foundational work for the construction of Witten-Reshetikhin-Turaev invariants of 3-manifolds.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "T. M. Apostol"\\
+        ],\\
+        "doi": null,\\
+        "key": "TA",\\
+        "raw": "TA: T. M. Apostol, \{\textbackslash{}\textbackslash{}em Resultants of cyclotomic polynomials\}, Proc. Amer. Math. Soc. \{\textbackslash{}\textbackslash{}bf 24\}, 457--462, (1970).",\\
+        "title": "Resultants of cyclotomic polynomials",\\
+        "url": null,\\
+        "venue": "Proc. Amer. Math. Soc.",\\
+        "year": 1970\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Provides a counterexample regarding properties over Z[q\^{}\{\textbackslash{}\textbackslash{}pm 2\}], supporting the necessity of the chosen ring structure.",\\
+      "notes": null,\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "C. Anghel"\\
+        ],\\
+        "doi": null,\\
+        "key": "WRT",\\
+        "raw": "WRT: C. Anghel - \{\textbackslash{}\textbackslash{}em Witten-Reshetikhin-Turaev invariants for 3-manifolds from Lagrangian intersections in configuration spaces\}, 39 pages, \{Quantum topology\} - 14, no. 4, pp. 693\textbackslash{}\textbackslash{}UTF\{2013\}731, (2023).",\\
+        "title": "Witten-Reshetikhin-Turaev invariants for 3-manifolds from Lagrangian intersections in configuration spaces",\\
+        "url": null,\\
+        "venue": "Quantum topology",\\
+        "year": 2023\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Provides relevant background work by the author on Witten-Reshetikhin-Turaev invariants from Lagrangian intersections, but lacks an explicit in-text citation marker in the provided body text.",\\
+      "notes": "Listed in the bibliography but not explicitly cited or discussed in the provided text sections.",\\
+      "relevance": "low",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "E. Witten"\\
+        ],\\
+        "doi": null,\\
+        "key": "Witt",\\
+        "raw": "Witt: E. Witten, \{\textbackslash{}\textbackslash{}em Quantum field theory and the Jones polynomial\}, Comm. Math. Phys. 121, 351-399, (1989).",\\
+        "title": "Quantum field theory and the Jones polynomial",\\
+        "url": null,\\
+        "venue": "Comm. Math. Phys.",\\
+        "year": 1989\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Provides the foundational context for Witten-Reshetikhin-Turaev invariants, which are built from the knot invariants studied in this paper.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \}\\
+  ],\\
+  "missing\_references": [],\\
+  "summary": "The paper demonstrates strong citation hygiene, anchoring its work in key foundational texts of quantum topology, such as the ADO invariants, the Volume Conjecture, and quantum group representations. However, there are minor clerical issues, including a typographical error in the surname of a first author (Akustu instead of Akutsu) and text that incorrectly attributes self-citations to 'the second author' instead of the first author. Additionally, a couple of references listed in the bibliography are not explicitly cited within the provided body text."\\
+\}\\
+\end{quote}
+
+\subsection*{meta\_reviewer (\texttt{claude-sonnet-4-6})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "confidence": 0.74,\\
+  "questions": [\\
+    "For every generator g of C\_N, does there exist an explicit braid \ensuremath{\beta} such that the normalized quantum-trace scalar of the closure \ensuremath{\beta}\^{} contains g as a coefficient --- thereby making vanishing of g in the quotient ring a necessary condition for Reidemeister-II/III invariance? If so, which braid witnesses each generator?",\\
+    "Can tilde \ensuremath{\Omega}\_4 or tilde \ensuremath{\Omega}\_6 be computed explicitly for at least one knot pair (e.g., Kinoshita--Terasaka / Conway mutants) and shown to separate them while every J\_d and \ensuremath{\Phi}\_d at d|N agree? If no such pair is currently known, should Remark 11 be recast as a conjecture rather than an assertion?",\\
+    "What is the general M step of the inductive argument for Lemma 31? In particular, what is the closed-form expression for R\_\{v\_\{M,j\}\}\^{}\{v\_\{M,j\}\} \ensuremath{-} R\_\{v\_\{M+1,j\}\}\^{}\{v\_\{M+1,j\}\} that makes the telescoping work for arbitrary M \ensuremath{\le} N \ensuremath{-} 2?",\\
+    "Are the typographic errors in Theorems 29, 37, and 39 purely transcription artifacts, or does any one of them reflect a substantive ambiguity in the ring-theoretic cancellation argument --- specifically, is the generator of the ideal I\_N in Theorem 39 \ensuremath{\phi}\_N(q\^{}2)\ensuremath{\cdot}(s \ensuremath{-} q\^{}\{1\ensuremath{-}N\}) or some other element?",\\
+    "Why are the bibliography entries [Mur] and [WRT] included in the reference list without in-text citation in the main body? Are they cited in sections not extracted for review, or are they listed for background purposes only?"\\
+  ],\\
+  "recommendation": "major\_revision",\\
+  "revision\_targets": [\\
+    \{\\
+      "evidence": "The 'forward' direction (the image in tilde L\_N is a knot invariant) follows from Theorems 4/29 plus Markov-trace properties of the quantum trace. The 'maximality' direction is the substantive part of the claim. The paper's argument is essentially that C\_N is exactly the ideal generated by R-matrix coefficients whose vanishing is required for R to preserve the N-truncation (Proposition 26), and any larger quotient fails this preservation. However, the converse --- that ANY quotient in which the resulting scalar is a knot invariant must necessarily annihilate every generator of C\_N --- is not explicitly written. In particular, it is conceivable a priori that some coefficient of R fails to lie in the quotient ideal yet cancellations in the closure of an arbitrary braid still produce an invariant. The paper does not exclude this possibility by a separate Markov-II / writhe-cancellation argument.",\\
+      "id": "weakness-1",\\
+      "locator": "Theorem 8, restated as Theorem 34",\\
+      "required\_update": "Add a separate lemma showing that for every generator g \ensuremath{\in} C\_N there exists a braid \ensuremath{\beta} whose normalized closure scalar contains g as a coefficient of v\_0 \ensuremath{\to} v\_0, so vanishing in the target quotient is necessary for Reidemeister II/III invariance. Alternatively, derive the maximality from a universality argument à la Reshetikhin--Turaev for the truncated category. A small computational supplement (e.g. verification/maximality\_check.py) confirming that for N=4 the unknotting move forces every C\_N-generator into the kernel would also help.",\\
+      "source\_path": null,\\
+      "source\_role": "technical\_correctness",\\
+      "status": "open",\\
+      "target\_kind": "paper\_tex",\\
+      "verification\_check": "Re-review should confirm `Theorem 8, restated as Theorem 34` is corrected or justified.",\\
+      "weakness\_index": 0\\
+    \},\\
+    \{\\
+      "evidence": "This is the central novelty claim of the paper --- that for composite N the universal invariant strictly refines the sequence (J\_d, \ensuremath{\Phi}\_d : d | N). The text only argues *heuristically* via the ideal structure (the d-part contains both \ensuremath{\phi}\_d(q\^{}2) and (s\^{}\{2d\}-1)/(s\^{}2-1)) that 'this suggests that the invariant itself could encode deeper information'. No example knot is given for which tilde \ensuremath{\Omega}\_N distinguishes two knots that all coloured Jones and ADO invariants at level d | N fail to distinguish. The paper does not exhibit a single pair of knots that the universal invariant separates and the sequence does not.",\\
+      "id": "weakness-2",\\
+      "locator": "Remark 11",\\
+      "required\_update": "Provide at least one explicit computational example: compute tilde \ensuremath{\Omega}\_4 and tilde \ensuremath{\Omega}\_6 for a small candidate pair of knots (e.g. mutant pairs Kinoshita--Terasaka / Conway, or 11n\_34 / 11n\_42) and show numerically that tilde \ensuremath{\Omega}\_N distinguishes them while every J\_d, \ensuremath{\Phi}\_d at d|N do not. Ship the code as verification/richer\_structure\_example.py using a quantum-trace implementation (e.g. on top of snappy or a custom braid implementation).",\\
+      "source\_path": null,\\
+      "source\_role": "technical\_correctness",\\
+      "status": "open",\\
+      "target\_kind": "paper\_tex",\\
+      "verification\_check": "Re-review should confirm `Remark 11` is corrected or justified.",\\
+      "weakness\_index": 1\\
+    \},\\
+    \{\\
+      "evidence": "The induction relies on Lemma 31 (the diagonal R-matrix sum identity), which itself is proved by an explicit but tedious computation displayed for the first four cases and then asserted 'following an inductive argument' for general M. The inductive step is not actually written down --- only base cases up to M=3 are presented and the general formula is asserted. Additionally, the displayed proof of Theorem 29 contains visible typos: the statement says 'g\_0(q,s) q\^{}\{-2i\}' (i should be j), the M=0 base derivation writes 'g\_1(q,s) = q\^{}\{-2\}' (missing the g\_0 factor), and the inductive step writes 'q\_0(q, s) q\^{}\{-2(M+2)\}' where it should read 'g\_0(q,s) q\^{}\{-2(M+1)\}'. These typos do not break the underlying argument but cloud verification.",\\
+      "id": "weakness-3",\\
+      "locator": "Theorem 6 (statement), Theorem 29 and its proof (Section 'Unique quantum trace at level N')",\\
+      "required\_update": "(a) Provide the complete inductive proof of Lemma 31 (the general M step) instead of stopping at M=3. (b) Correct the typos in the statement of Theorem 29 ('-2i' \ensuremath{\to} '-2j') and in the proof base case ('g\_1 = q\^{}\{-2\}' \ensuremath{\to} 'g\_1 = g\_0 q\^{}\{-2\}') and inductive step ('q\_0(q,s) q\^{}\{-2(M+2)\}' \ensuremath{\to} 'g\_0(q,s) q\^{}\{-2(M+1)\}'). (c) Ship a symbolic verification (e.g. verification/qtrace\_uniqueness.py using SymPy) that checks the identity in eq:sum for N \ensuremath{\le} 8.",\\
+      "source\_path": null,\\
+      "source\_role": "technical\_correctness",\\
+      "status": "open",\\
+      "target\_kind": "paper\_tex",\\
+      "verification\_check": "Re-review should confirm `Theorem 6 (statement), Theorem 29 and its proof (Section 'Unique quantum trace at level N')` is corrected or justified.",\\
+      "weakness\_index": 2\\
+    \},\\
+    \{\\
+      "evidence": "Per the Proof-as-Code axiom, this paper sits squarely in a code-amenable field: quantum invariants are routinely computed by computer algebra (SageMath/KnotAtlas/snappy implementations of coloured Jones and ADO invariants exist; the R-matrix of U\_q(sl\_2) has been implemented in numerous packages). The headline claims --- uniqueness of the quantum trace, ideal equalities (Prop 20), the interpolation formula (Thm 10), and especially the 'richer structure' claim (Remark 11) --- could and should be backed by concrete computations for small N and small knots. The paper ships no code, no example computation, no comparison against existing tabulated values of J\_N or \ensuremath{\Phi}\_N.",\\
+      "id": "weakness-4",\\
+      "locator": "Whole paper",\\
+      "required\_update": "Add a verification/ directory shipping at minimum: (i) verification/rmatrix.py implementing the two-variable R-matrix and the braid action on V\_N\^{}\{\ensuremath{\otimes}n\}; (ii) verification/quantum\_trace.py implementing the quantum partial trace with the weights g\_j = g\_0 q\^{}\{-2j\}; (iii) verification/omega\_compute.py computing \ensuremath{\Omega}\_N(K)(q,s) for K \ensuremath{\in} \{3\_1, 4\_1, 5\_1, 5\_2\} and N \ensuremath{\in} \{2,3,4,5\}; (iv) verification/check\_interpolation.py confirming \ensuremath{\Omega}\_N(K) = J\_N(K,q) + \ensuremath{\Phi}\_N(K,s) \ensuremath{-} \ensuremath{\Phi}\_N(K,q\^{}\{1-N\}) for each pair. A Lean/Coq formalisation of Theorem 29's uniqueness statement (src/proofs/QuantumTraceUnique.lean) would be the gold standard but is optional.",\\
+      "source\_path": null,\\
+      "source\_role": "technical\_correctness",\\
+      "status": "open",\\
+      "target\_kind": "paper\_tex",\\
+      "verification\_check": "Re-review should confirm `Whole paper` is corrected or justified.",\\
+      "weakness\_index": 3\\
+    \},\\
+    \{\\
+      "evidence": "The induction relies on Lemma 31 (the diagonal R-matrix sum identity), which itself is proved by an explicit but tedious computation displayed for the first four cases and then asserted 'following an inductive argument' for general M. The inductive step is not actually written down --- only base cases up to M=3 are presented and the general formula is asserted. Additionally, the displayed proof of Theorem 29 contains visible typos: the statement says 'g\_0(q,s) q\^{}\{-2i\}' (i should be j), the M=0 base derivation writes 'g\_1(q,s) = q\^{}\{-2\}' (missing the g\_0 factor), and the inductive step writes 'q\_0(q, s) q\^{}\{-2(M+2)\}' where it should read 'g\_0(q,s) q\^{}\{-2(M+1)\}'. These typos do not break the underlying argument but cloud verification.",\\
+      "id": "weakness-5",\\
+      "locator": "Theorem 6 (statement), Theorem 29 and its proof (Section 'Unique quantum trace at level N')",\\
+      "required\_update": "(a) Provide the complete inductive proof of Lemma 31 (the general M step) instead of stopping at M=3. (b) Correct the typos in the statement of Theorem 29 ('-2i' \ensuremath{\to} '-2j') and in the proof base case ('g\_1 = q\^{}\{-2\}' \ensuremath{\to} 'g\_1 = g\_0 q\^{}\{-2\}') and inductive step ('q\_0(q,s) q\^{}\{-2(M+2)\}' \ensuremath{\to} 'g\_0(q,s) q\^{}\{-2(M+1)\}'). (c) Ship a symbolic verification (e.g. verification/qtrace\_uniqueness.py using SymPy) that checks the identity in eq:sum for N \ensuremath{\le} 8.",\\
+      "source\_path": null,\\
+      "source\_role": "technical\_correctness",\\
+      "status": "open",\\
+      "target\_kind": "paper\_tex",\\
+      "verification\_check": "Re-review should confirm `Theorem 6 (statement), Theorem 29 and its proof (Section 'Unique quantum trace at level N')` is corrected or justified.",\\
+      "weakness\_index": 4\\
+    \},\\
+    \{\\
+      "evidence": "Listed in the bibliography but not explicitly cited or discussed in the provided text sections.",\\
+      "id": "weakness-6",\\
+      "locator": "WRT",\\
+      "required\_update": "Verify `WRT` against an authoritative source; replace it with a resolvable relevant citation or remove it.",\\
+      "source\_path": null,\\
+      "source\_role": "citation",\\
+      "status": "open",\\
+      "target\_kind": "bibliography",\\
+      "verification\_check": "Re-review should confirm the citation resolves and is relevant.",\\
+      "weakness\_index": 5\\
+    \},\\
+    \{\\
+      "evidence": "Listed in the bibliography but not explicitly cited or discussed in the provided text sections.",\\
+      "id": "weakness-7",\\
+      "locator": "WRT",\\
+      "required\_update": "Verify `WRT` against an authoritative source; replace it with a resolvable relevant citation or remove it.",\\
+      "source\_path": null,\\
+      "source\_role": "citation",\\
+      "status": "open",\\
+      "target\_kind": "bibliography",\\
+      "verification\_check": "Re-review should confirm the citation resolves and is relevant.",\\
+      "weakness\_index": 6\\
+    \}\\
+  ],\\
+  "strengths": [\\
+    "The construction of level-N universal quantum knot invariants over two-variable polynomial quotient rings is novel and cleanly separated from prior work on coloured Jones and ADO polynomials, which are defined only at roots of unity or at generic q but not simultaneously (novelty specialist, score 0.85).",\\
+    "The braid-group representation result (Theorem 4 / Proposition 26) is fully supported: the R-matrix action on tensor powers of V\_N is shown to close in the quotient module modulo C\_N by explicit coefficient analysis (C1, technical\_correctness).",\\
+    "The prime-N specialization (Corollary 9 / 35) is a clean consequence of the ideal-coincidence structure and is correctly derived once Theorem 8 is accepted, providing a concrete maximality statement for an infinite family of levels (C6, technical\_correctness).",\\
+    "The algebraic framework --- quantum group U\_q(sl\_2) with divided powers, Verma module truncation, and two-variable quotient ring --- is well-motivated and correctly positioned relative to the Jackson-Kerler representation theory on which it builds (novelty specialist, relation: builds\_on).",\\
+    "Citation hygiene is strong: the bibliography covers foundational texts on ADO invariants, the Volume Conjecture, non-semisimple TQFTs, and the Gukov-Manolescu conjecture, with no missing prior art identified by the novelty specialist."\\
+  ],\\
+  "summary": "The paper introduces a family of level-N universal quantum knot invariants constructed via quantum traces on finite-dimensional quotients of the Verma module of U\_q(sl\_2), valued in two-variable polynomial quotient rings. The novelty specialist rates the contribution significant (score 0.85, confidence 0.90): the construction is genuinely new, the prior-art landscape is correctly charted, and no missing prior art was identified. The technical-correctness specialist (overall: mostly\_sound, confidence 0.62) finds the braid-representation foundation (Theorem 4, C1) and the prime-N corollary (Corollary 9, C6) fully supported, but flags two major gaps: (1) the converse direction of the headline maximality claim in Theorem 8 is not explicitly proved --- the argument that any knot-invariant quotient must annihilate every generator of C\_N is missing, leaving open the possibility of cancellations in braid closures that the paper does not exclude (C4, major); (2) the 'richer structure' assertion for composite N in Remark 11 is entirely unsupported by computation --- no example knot pair is exhibited (C7, major). The interpolation formula proof (Theorem 39, C5) and the quantum-trace uniqueness proof (Theorem 29, C3) each contain typographic errors that impede independent verification, though the underlying arguments appear directionally correct. Lemma 31's inductive step is asserted without proof (C9, minor). The reproducibility specialist (score 0.22, confidence 0.86) flags the complete absence of computational or formal-proof artifacts as critical: no code repository, no worked examples, and no machine-checkable verification of the maximality theorem, in a field where computer-algebra verification of quantum invariants is standard. The citation specialist (confidence 1.00) finds the bibliography largely sound, with only minor clerical issues: a surname typo in [ADO] (Akustu for Akutsu) and self-citations [Cr1, Cr2] attributed to 'the second author' when C. Anghel is the first author of both. Because the paper is in a code-amenable field (math.QA/math.GT) and both reproducibility and technical-correctness flag missing proof artifacts for the headline maximality claim at critical and major severity respectively, the recommendation gate mandates major\_revision. The theoretical contribution is real and the mathematical gaps are addressable, but the converse of Theorem 8 requires a rigorous proof, Remark 11 needs either a computational example or downgrade to conjecture, the interpolation formula proof must be rewritten cleanly, and minimal computational verification artifacts must accompany the revision.",\\
+  "weaknesses": [\\
+    "Theorem 8 / Theorem 34: the converse direction of the maximality claim is not proved --- the paper does not show that every generator of C\_N must vanish in any quotient ring yielding a knot invariant, leaving open the possibility that braid-closure cancellations could produce an invariant in a strictly larger quotient (C4, major, technical\_correctness).",\\
+    "Remark 11 (richer structure for composite N) is completely unsupported: the claim that tilde \ensuremath{\Omega}\_N encodes information beyond the sequence (J\_d, \ensuremath{\Phi}\_d : d|N) is argued only heuristically via ideal structure, with no example knot pair distinguishing the universal invariant from the classical sequence (C7, major, technical\_correctness).",\\
+    "The proof of Theorem 39 (interpolation formula) contains multiple typographic errors --- 's \ensuremath{-} 1\^{}\{1\ensuremath{-}N\}' for 's \ensuremath{-} q\^{}\{1\ensuremath{-}N\}', '\ensuremath{\phi}\_N(q)' for '\ensuremath{\phi}\_N(q\^{}2)', and a garbled factorization in the inductive step --- preventing mechanical independent verification of the paper's central identity (C5, major, technical\_correctness).",\\
+    "No computational or formal-proof artifacts are provided in a code-amenable field: there is no code repository, no worked example computing \ensuremath{\Omega}\_N for any knot and level, and no machine-checkable verification of the headline maximality theorem, the ideal equalities, or the interpolation formula (C10, major / reproducibility critical).",\\
+    "Lemma 31, which is load-bearing for the quantum-trace uniqueness proof (Theorem 6 / 29), is verified only for M \ensuremath{\in} \{0,1,2,3\}; the general inductive step is asserted without being written down (C9, minor, technical\_correctness).",\\
+    "Two bibliography entries (Mur, WRT) appear in the reference list without explicit in-text citation markers in the provided manuscript sections, weakening their bibliographic justification (citation specialist).",\\
+    "Self-citations [Cr1] and [Cr2] are incorrectly attributed to 'the second author' in the manuscript text, whereas C. Anghel is the first author of both those papers and of the present paper (citation specialist)."\\
+  ]\\
+\}\\
+\end{quote}
+
+\subsection*{novelty (\texttt{gemini-3-flash-preview})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "confidence": 0.9,\\
+  "missing\_prior\_art": [],\\
+  "novelty\_score": 0.85,\\
+  "related\_work": [\\
+    \{\\
+      "citation\_key": "ADO",\\
+      "delta": "This paper constructs a sequence of universal quantum knot invariants that lift both the semi-simple and non-semi-simple invariants, providing a specific interpolation formula between the coloured Jones and ADO polynomials, whereas the ADO polynomials are defined only at roots of unity.",\\
+      "relation": "prior\_art",\\
+      "title": "Invariants of colored knots"\\
+    \},\\
+    \{\\
+      "citation\_key": "JK",\\
+      "delta": "This paper builds directly on the algebraic formulation of U\_q(sl\_2) with divided powers and generic R-matrix action on Verma modules from Jackson and Kerler, but specializes and extends it to finite quotients over two-variable quotient rings to define unique quantum traces and universal knot invariants.",\\
+      "relation": "builds\_on",\\
+      "title": "The Lawrence-Krammer-Bigelow representations of the braid groups via U\_q(sl\_2)"\\
+    \},\\
+    \{\\
+      "citation\_key": "CrG",\\
+      "delta": "While CrG constructs a globalization of Jones and Alexander invariants using a topological approach with graded intersections in configuration spaces, this paper addresses the problem at higher colors using a purely algebraic framework with quantum groups, Verma modules, and quantum partial traces.",\\
+      "relation": "prior\_art",\\
+      "title": "A globalisation of Jones and Alexander polynomials constructed from a graded intersection of two Lagrangians in a configuration space"\\
+    \},\\
+    \{\\
+      "citation\_key": "GM",\\
+      "delta": "Gukov and Manolescu introduce a two-variable series for knot complements that predicts geometric information, which serves as a key motivation for the present work, but their approach is distinct from the explicit construction of maximal universal invariants from quantum traces on finite quotients of Verma modules presented here.",\\
+      "relation": "orthogonal",\\
+      "title": "A two-variable series for knot complements"\\
+    \}\\
+  ],\\
+  "verdict": "significant"\\
+\}\\
+\end{quote}
+
+\subsection*{reproducibility (\texttt{gpt-5.5})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "code\_availability": "unspecified",\\
+  "code\_url": null,\\
+  "concerns": [\\
+    \{\\
+      "area": "code",\\
+      "description": "No source repository, formalization package, computer algebra scripts, or release/commit is provided for constructing the level-N quotient rings, braid representations, quantum traces, or knot invariants.",\\
+      "severity": "critical"\\
+    \},\\
+    \{\\
+      "area": "other",\\
+      "description": "The headline maximality claim in Theorem 8 lacks a machine-checkable proof artifact; a file such as proofs/Theorem8\_MaximalUniversalInvariant.lean or scripts/verify\_maximal\_quotient.sage would close this gap.",\\
+      "severity": "critical"\\
+    \},\\
+    \{\\
+      "area": "other",\\
+      "description": "The uniqueness/existence claim for the quantum trace in Theorem 6 lacks a formal proof artifact; a file such as proofs/Theorem6\_QuantumTraceUniqueness.lean would make this independently reproducible.",\\
+      "severity": "major"\\
+    \},\\
+    \{\\
+      "area": "other",\\
+      "description": "The quotient-ideal equalities and structural lemmas supporting the maximal ring, including Lemmas 40-43, are not accompanied by executable algebra checks; scripts/verify\_quotient\_ideals.sage or proofs/QuotientIdeals.lean would help reproduce them.",\\
+      "severity": "major"\\
+    \},\\
+    \{\\
+      "area": "evaluation",\\
+      "description": "No worked computational examples are provided to verify the invariant on small knots and levels or to check recovery of colored Jones and ADO polynomials; examples/trefoil\_level\_N.sage would provide a reproducible sanity check.",\\
+      "severity": "major"\\
+    \},\\
+    \{\\
+      "area": "compute",\\
+      "description": "No computational environment is specified for any possible formal proof or computer algebra reproduction, including prover/CAS versions and dependency pins.",\\
+      "severity": "minor"\\
+    \}\\
+  ],\\
+  "confidence": 0.86,\\
+  "data\_availability": "unspecified",\\
+  "data\_url": null,\\
+  "environment": \{\\
+    "dependencies": [],\\
+    "hardware": null,\\
+    "software": null\\
+  \},\\
+  "reproducibility\_score": 0.22\\
+\}\\
+\end{quote}
+
+\subsection*{summary (\texttt{claude-haiku-4-5-20251001})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "audience": "Knot theorists and quantum topology researchers; mathematicians working with quantum groups, braid group representations, and knot invariants; researchers interested in unifying different families of quantum invariants and exploring connections to 3-manifold topology.",\\
+  "key\_contributions": [\\
+    "Construction of level N unified invariants for any level N \ensuremath{\ge} 2, represented in maximal quotient rings of the polynomial ring Q[q\^{}\ensuremath{\pm}2, s\^{}\ensuremath{\pm}2]",\\
+    "Proof that for prime N, the interpolation ring gives the maximal quotient allowing knot invariants from the N-part of the Verma module",\\
+    "Explicit interpolation formula showing the unified invariant equals a combination of coloured Jones and ADO invariants",\\
+    "Extension to non-prime N with a richer maximal ring structure that recovers both classical invariants but potentially contains additional information",\\
+    "Demonstration that the universal invariants specialize to both semi-simple (Jones) and non-semisimple (ADO) invariants through coefficient specialization"\\
+  ],\\
+  "plain\_language\_summary": "Quantum knot invariants are algebraic tools that help distinguish knots by assigning polynomial or other algebraic objects to them. The coloured Jones polynomials and ADO (Akutsu-Deguchi-Ohtsuki) invariants are two fundamental families of such invariants derived from quantum group representation theory, each revealing different geometric information about knots. This paper constructs new \textbackslash{}"level N universal invariants\textbackslash{}" that unify both families by leveraging the Verma module---an infinite-dimensional representation of the quantum group U\_q(sl\_2)---and examining how it acts on braids when restricted to finite-dimensional subspaces.\textbackslash{}n\textbackslash{}nThe authors work over polynomial rings in two variables and define a maximal quotient ring structure for each level N. For prime levels, this quotient ring is relatively simple and captures an interpolation formula between coloured Jones and ADO invariants. For non-prime levels, the quotient ring has richer structure with potentially new information not visible in the classical sequences of invariants. The paper proves that their invariants are maximal---no larger quotient ring can produce well-defined knot invariants from the Verma module at that level.",\\
+  "tldr": "A construction of universal quantum knot invariants that unify and extend the coloured Jones and ADO polynomials through quantum traces on quotients of the Verma module."\\
+\}\\
+\end{quote}
+
+\subsection*{technical\_correctness (\texttt{claude-opus-4-7})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "claims": [\\
+    \{\\
+      "assessment": "supported",\\
+      "claim": "Theorem 4: The generic two-variable braid group action on the Verma module descends to well-defined braid group representations on the tensor powers of the level-N submodules V\_N and tilde V\_N over the quotient rings L\_N and tilde L\_N respectively.",\\
+      "evidence": "Proposition 26 gives an explicit proof that R(v\_i \ensuremath{\otimes} v\_j) lies in tilde V\_N\^{}\{\ensuremath{\otimes}2\} after reduction modulo C\_N. The argument shows that for j+n \ensuremath{\ge} N the coefficient of v\_\{j+n\} \ensuremath{\otimes} v\_\{i-n\} lies in C\_N by construction of the maximal quotient ideal.",\\
+      "id": "C1",\\
+      "location": "Section 2 (Level N representation), Theorem 4; proof via Proposition 26",\\
+      "severity": "info",\\
+      "suggested\_fix": null\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "Proposition 20: The three ideals C\_N, tilde J\_N, and tilde I\_N coincide over the rationals.",\\
+      "evidence": "The appendix proves C\_N = tilde J\_N via an intermediate ideal I'\_N (Lemma 40, Steps I-IV) and tilde J\_N = tilde I\_N via comaximality of the per-divisor ideals (Lemmas 42-43). The Step I argument is intricate (uses cyclotomic divisibility of quantum binomials via Lemma 41) and is not independently verified by computation for any concrete N. Remark 22 itself warns the rational-vs-integer distinction matters but does not pinpoint which step fails over Z. A small-case numerical check (N=4, 6, 9) for ideal equality would tighten the result.",\\
+      "id": "C2",\\
+      "location": "Section 'Coincidence of defining ideals', Proposition 20; Appendix Lemma 40-43",\\
+      "severity": "minor",\\
+      "suggested\_fix": "Add an executable check (e.g. a SageMath/Macaulay2 script under verification/ideal\_equality.sage) that, for N \ensuremath{\in} \{4,6,8,9,12\}, verifies (C\_N : *) = (tilde J\_N : *) = (tilde I\_N : *) as ideals in Q[q\^{}\{\ensuremath{\pm}2\}, s\^{}\{\ensuremath{\pm}2\}]. Also explicitly demonstrate the failure mode mentioned in Remark 22 over Z[q\^{}\{\ensuremath{\pm}2\}, s\^{}\{\ensuremath{\pm}2\}]."\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "Theorem 6 / Theorem 29: There exists a unique (up to scalar) quantum partial trace on End(tilde V\_N\^{}\{\ensuremath{\otimes}(n+1)\}) \ensuremath{\to} End(tilde V\_N\^{}\{\ensuremath{\otimes}n\}) with weights g\_j(q,s) = g\_0(q,s) q\^{}\{-2j\}.",\\
+      "evidence": "The induction relies on Lemma 31 (the diagonal R-matrix sum identity), which itself is proved by an explicit but tedious computation displayed for the first four cases and then asserted 'following an inductive argument' for general M. The inductive step is not actually written down --- only base cases up to M=3 are presented and the general formula is asserted. Additionally, the displayed proof of Theorem 29 contains visible typos: the statement says 'g\_0(q,s) q\^{}\{-2i\}' (i should be j), the M=0 base derivation writes 'g\_1(q,s) = q\^{}\{-2\}' (missing the g\_0 factor), and the inductive step writes 'q\_0(q, s) q\^{}\{-2(M+2)\}' where it should read 'g\_0(q,s) q\^{}\{-2(M+1)\}'. These typos do not break the underlying argument but cloud verification.",\\
+      "id": "C3",\\
+      "location": "Theorem 6 (statement), Theorem 29 and its proof (Section 'Unique quantum trace at level N')",\\
+      "severity": "minor",\\
+      "suggested\_fix": "(a) Provide the complete inductive proof of Lemma 31 (the general M step) instead of stopping at M=3. (b) Correct the typos in the statement of Theorem 29 ('-2i' \ensuremath{\to} '-2j') and in the proof base case ('g\_1 = q\^{}\{-2\}' \ensuremath{\to} 'g\_1 = g\_0 q\^{}\{-2\}') and inductive step ('q\_0(q,s) q\^{}\{-2(M+2)\}' \ensuremath{\to} 'g\_0(q,s) q\^{}\{-2(M+1)\}'). (c) Ship a symbolic verification (e.g. verification/qtrace\_uniqueness.py using SymPy) that checks the identity in eq:sum for N \ensuremath{\le} 8."\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "Theorem 8 / Theorem 34: tilde L\_N is the largest quotient of L through which the quantum trace yields a knot invariant; i.e. any other such quotient factors through tilde L\_N.",\\
+      "evidence": "The 'forward' direction (the image in tilde L\_N is a knot invariant) follows from Theorems 4/29 plus Markov-trace properties of the quantum trace. The 'maximality' direction is the substantive part of the claim. The paper's argument is essentially that C\_N is exactly the ideal generated by R-matrix coefficients whose vanishing is required for R to preserve the N-truncation (Proposition 26), and any larger quotient fails this preservation. However, the converse --- that ANY quotient in which the resulting scalar is a knot invariant must necessarily annihilate every generator of C\_N --- is not explicitly written. In particular, it is conceivable a priori that some coefficient of R fails to lie in the quotient ideal yet cancellations in the closure of an arbitrary braid still produce an invariant. The paper does not exclude this possibility by a separate Markov-II / writhe-cancellation argument.",\\
+      "id": "C4",\\
+      "location": "Theorem 8, restated as Theorem 34",\\
+      "severity": "major",\\
+      "suggested\_fix": "Add a separate lemma showing that for every generator g \ensuremath{\in} C\_N there exists a braid \ensuremath{\beta} whose normalized closure scalar contains g as a coefficient of v\_0 \ensuremath{\to} v\_0, so vanishing in the target quotient is necessary for Reidemeister II/III invariance. Alternatively, derive the maximality from a universality argument à la Reshetikhin--Turaev for the truncated category. A small computational supplement (e.g. verification/maximality\_check.py) confirming that for N=4 the unknotting move forces every C\_N-generator into the kernel would also help."\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "Theorem 10 / Theorem 39: For any N \ensuremath{\ge} 2, \ensuremath{\Omega}\_N(L)(q,s) = J\_N(L,q) + \ensuremath{\Phi}\_N(L,s) \ensuremath{-} \ensuremath{\Phi}\_N(L,q\^{}\{1\ensuremath{-}N\}) in L\_N.",\\
+      "evidence": "The proof of Theorem 39 uses specialisations of \ensuremath{\Omega}\_N at s = q\^{}\{1\ensuremath{-}N\} (gives J\_N, by Theorem 37) and q = \ensuremath{\xi}\_N (gives \ensuremath{\Phi}\_N, also Theorem 37) and writes \ensuremath{\Omega}\_N \ensuremath{-} \ensuremath{\Phi}\_N as a multiple of \ensuremath{\phi}\_N(q\^{}2). It then asserts existence of \ensuremath{\Omega}\_N\^{}J such that \ensuremath{\Omega}\_N\^{}\ensuremath{\Phi}(s,q) = \ensuremath{\Omega}\_N\^{}\ensuremath{\Phi}(q\^{}\{1\ensuremath{-}N\},q) + \ensuremath{\Omega}\_N\^{}J(s,q)\ensuremath{\cdot}(s \ensuremath{-} 1\^{}\{1\ensuremath{-}N\}); the displayed expression contains an obvious typo (should be (s \ensuremath{-} q\^{}\{1\ensuremath{-}N\})). The next displayed line claims 'in the quotient ring' an equality involving '\ensuremath{\phi}\_N(q)' where \ensuremath{\phi}\_N(q\^{}2) is required, and the cancellation argument relies on (s \ensuremath{-} q\^{}\{1\ensuremath{-}N\})\ensuremath{\cdot}\ensuremath{\phi}\_N(q\^{}2) being zero in L\_N, which is consistent with the definition of I\_N but is glossed over. The end-formula is plausible and matches known interpolations between coloured Jones and ADO at low N, but the written derivation contains enough typos that the reader cannot mechanically verify it. Theorem 37 itself contains a transcription typo (\ensuremath{\Omega}\_N|\_\{q-\ensuremath{\xi}\_N\} instead of \ensuremath{\Omega}\_N|\_\{q=\ensuremath{\xi}\_N\}).",\\
+      "id": "C5",\\
+      "location": "Theorem 10 (statement); Theorem 39 (proof)",\\
+      "severity": "major",\\
+      "suggested\_fix": "Rewrite the proof of Theorem 39 cleanly with the correct substitutions (s \ensuremath{-} q\^{}\{1\ensuremath{-}N\}, not s \ensuremath{-} 1\^{}\{1\ensuremath{-}N\}; \ensuremath{\phi}\_N(q\^{}2), not \ensuremath{\phi}\_N(q)) and an explicit justification of why \ensuremath{\phi}\_N(q\^{}2)\ensuremath{\cdot}(s \ensuremath{-} q\^{}\{1\ensuremath{-}N\}) generates the full ideal I\_N. Add a verification script verification/interpolation\_check.sage that, for N \ensuremath{\in} \{2,3,4,5\} and the trefoil / figure-eight knots, evaluates \ensuremath{\Omega}\_N (via direct quantum-trace computation), J\_N, \ensuremath{\Phi}\_N(s), \ensuremath{\Phi}\_N(q\^{}\{1-N\}) and checks the identity holds in L\_N."\\
+    \},\\
+    \{\\
+      "assessment": "supported",\\
+      "claim": "Corollary 9 / 35: For prime N, L\_N is the largest quotient yielding a knot invariant, and \ensuremath{\Omega}\_N is the maximal level-N unified invariant.",\\
+      "evidence": "This follows immediately from Theorem 8 plus the observation that for prime N the maximal and interpolation ideals coincide (since the only divisors of N are 1 and N itself, so the intersection over divisors d \ensuremath{\ne} 1, N is empty). The statement has the same dependency on Theorem 8's maximality direction as flagged in C4.",\\
+      "id": "C6",\\
+      "location": "Corollary 9 (Section 'Universal versus unified'); Corollary 35",\\
+      "severity": "info",\\
+      "suggested\_fix": null\\
+    \},\\
+    \{\\
+      "assessment": "unsupported",\\
+      "claim": "Remark 11 (richer structure): For non-prime N, tilde \ensuremath{\Omega}\_N(L) encodes information beyond the sequence of coloured Jones and ADO invariants at divisor levels d | N.",\\
+      "evidence": "This is the central novelty claim of the paper --- that for composite N the universal invariant strictly refines the sequence (J\_d, \ensuremath{\Phi}\_d : d | N). The text only argues *heuristically* via the ideal structure (the d-part contains both \ensuremath{\phi}\_d(q\^{}2) and (s\^{}\{2d\}-1)/(s\^{}2-1)) that 'this suggests that the invariant itself could encode deeper information'. No example knot is given for which tilde \ensuremath{\Omega}\_N distinguishes two knots that all coloured Jones and ADO invariants at level d | N fail to distinguish. The paper does not exhibit a single pair of knots that the universal invariant separates and the sequence does not.",\\
+      "id": "C7",\\
+      "location": "Remark 11",\\
+      "severity": "major",\\
+      "suggested\_fix": "Provide at least one explicit computational example: compute tilde \ensuremath{\Omega}\_4 and tilde \ensuremath{\Omega}\_6 for a small candidate pair of knots (e.g. mutant pairs Kinoshita--Terasaka / Conway, or 11n\_34 / 11n\_42) and show numerically that tilde \ensuremath{\Omega}\_N distinguishes them while every J\_d, \ensuremath{\Phi}\_d at d|N do not. Ship the code as verification/richer\_structure\_example.py using a quantum-trace implementation (e.g. on top of snappy or a custom braid implementation)."\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "Theorem 37: \ensuremath{\Omega}\_N(L)|\_\{s = q\^{}\{1-N\}\} = J\_N(L,q) and \ensuremath{\Omega}\_N(L)|\_\{q = \ensuremath{\xi}\_N\} = \ensuremath{\Phi}\_N(L,s).",\\
+      "evidence": "The proof is essentially a one-line specialisation argument: V\_N |\_\{s = q\^{}\{1-N\}\} is the standard N-dim irreducible of U\_q(sl\_2) at generic q (giving coloured Jones), and V\_N |\_\{q = \ensuremath{\xi}\_N\} is the N-dim representation of U\_\ensuremath{\xi}(sl\_2) (giving ADO). The argument is correct in spirit and is standard in the quantum-topology literature ([JK], [ADO]), but written tersely --- for example, the normalisation factors s\^{}\{w(N-1)\} q\^{}\{-wN(N-1)\} are not explicitly matched against the conventional normalisations of J\_N and \ensuremath{\Phi}\_N. The proof also contains a transcription typo (\ensuremath{\Omega}\_N|\_\{q-\ensuremath{\xi}\_N\}).",\\
+      "id": "C8",\\
+      "location": "Theorem 37 and its proof",\\
+      "severity": "minor",\\
+      "suggested\_fix": "Add an explicit verification of normalisations (writhe factor matching) and a small computational confirmation: implement \ensuremath{\Omega}\_N for the trefoil at N=2,3,4 and compare against tabulated Jones/Kauffman bracket and ADO values from existing references (e.g. KnotAtlas). Fix the typo."\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "Lemma 31: For any M in \{0,...,N-2\}, \ensuremath{\Sigma}\_\{j=0\}\^{}\{M\} q\^{}\{-2j\}(R\_\{v\_\{M,j\}\}\^{}\{v\_\{M,j\}\} \ensuremath{-} R\_\{v\_\{M+1,j\}\}\^{}\{v\_\{M+1,j\}\}) = q\^{}\{-2(M+1)\} R\_\{v\_\{M+1,M+1\}\}\^{}\{v\_\{M+1,M+1\}\}.",\\
+      "evidence": "The proof explicitly computes the cases M = 0, 1, 2, 3 with detailed cancellations, then asserts 'following an inductive argument we deduce this property for any natural number M \ensuremath{\le} N \ensuremath{-} 2'. The pattern is plausible but the inductive step is not written; the reader must trust that the cancellation structure generalises. This is a load-bearing lemma --- the uniqueness proof of the quantum trace (Theorem 29) hinges on it.",\\
+      "id": "C9",\\
+      "location": "Lemma 31 and its proof",\\
+      "severity": "minor",\\
+      "suggested\_fix": "Either write the inductive step explicitly (express the generic difference R\_\{v\_\{M,j\}\}\^{}\{v\_\{M,j\}\} \ensuremath{-} R\_\{v\_\{M+1,j\}\}\^{}\{v\_\{M+1,j\}\} in closed form and complete the telescoping) or supply a SymPy/Mathematica verification (verification/lemma31.py) for N up to, say, 30, which is more than sufficient for any contemplated application."\\
+    \},\\
+    \{\\
+      "assessment": "unsupported",\\
+      "claim": "All theorems are formulated and proved without any executable verification, despite the paper being in a code-amenable field (math.QA / math.GT, quantum invariants of knots).",\\
+      "evidence": "Per the Proof-as-Code axiom, this paper sits squarely in a code-amenable field: quantum invariants are routinely computed by computer algebra (SageMath/KnotAtlas/snappy implementations of coloured Jones and ADO invariants exist; the R-matrix of U\_q(sl\_2) has been implemented in numerous packages). The headline claims --- uniqueness of the quantum trace, ideal equalities (Prop 20), the interpolation formula (Thm 10), and especially the 'richer structure' claim (Remark 11) --- could and should be backed by concrete computations for small N and small knots. The paper ships no code, no example computation, no comparison against existing tabulated values of J\_N or \ensuremath{\Phi}\_N.",\\
+      "id": "C10",\\
+      "location": "Whole paper",\\
+      "severity": "major",\\
+      "suggested\_fix": "Add a verification/ directory shipping at minimum: (i) verification/rmatrix.py implementing the two-variable R-matrix and the braid action on V\_N\^{}\{\ensuremath{\otimes}n\}; (ii) verification/quantum\_trace.py implementing the quantum partial trace with the weights g\_j = g\_0 q\^{}\{-2j\}; (iii) verification/omega\_compute.py computing \ensuremath{\Omega}\_N(K)(q,s) for K \ensuremath{\in} \{3\_1, 4\_1, 5\_1, 5\_2\} and N \ensuremath{\in} \{2,3,4,5\}; (iv) verification/check\_interpolation.py confirming \ensuremath{\Omega}\_N(K) = J\_N(K,q) + \ensuremath{\Phi}\_N(K,s) \ensuremath{-} \ensuremath{\Phi}\_N(K,q\^{}\{1-N\}) for each pair. A Lean/Coq formalisation of Theorem 29's uniqueness statement (src/proofs/QuantumTraceUnique.lean) would be the gold standard but is optional."\\
+    \}\\
+  ],\\
+  "confidence": 0.62,\\
+  "overall\_correctness": "mostly\_sound"\\
+\}\\
+\end{quote}
+
+\section*{Corrections}
+% corrections rendered from corrections table; empty on first publish
+No corrections have been recorded.
+
+\section*{Bibliography}
+\begin{enumerate}[leftmargin=*]
+  \item ADO: Y. Akustu, T. Deguchi, T. Ohtsuki, \{\textbackslash{}em Invariants of colored knots\}, J. Knot Theory Ramifications 1, 161-184, (1992).
+  \item BCGP: C. Blanchet, F. Costantino, N. Geer, B. Patureau-Mirand, \{\textbackslash{}em Non-Semisimple TQFTs, Reidemeister Torsion and Kashaev's Invariants\}, Advances in Mathematics, Volume 301, Pages 1-78 (2016).
+  \item Cr1: C. Anghel, \{\textbackslash{}em A topological model for the coloured Jones polynomials\}, 50 pages, \{Selecta Mathematica New Series\} 28:63, (2022).
+  \item Cr2: C. Anghel, \{ \textbackslash{}em Coloured Jones and Alexander polynomials as topological intersections of cycles in configuration spaces\}, 71 pages, \{Advances in Mathematics\} 459 109993, (2024). \%
+  \item CrG: C. Anghel, \{\textbackslash{}em A globalisation of Jones and Alexander polynomials constructed from a graded intersection of two Lagrangians in a configuration space\}, Annales de l’Institut Fourier 75, no. 6 p. 2609-2656, (2025).
+  \item Cru1: C. Anghel, \{\textbackslash{}em Geometric universal Jones invariant from configurations on ovals in the disc\}, math.GT arxiv: 2401.17245v3, 58 pages, (2025). \href{https://arxiv.org/abs/2401.17245}{arXiv:2401.17245}
+  \item Cru2: C. Anghel, \{\textbackslash{}em Geometric universal link invariants\}, math.GT arxiv.org/abs/2505.18108, 54 pages, (2025). \href{https://arxiv.org/abs/2505.18108}{arXiv:2505.18108}
+  \item GM: S. Gukov, C. Manolescu, \{\textbackslash{}em A two-variable series for knot complements\}, Quantum Topology 12, 1-109, (2021).
+  \item JK: C. Jackson, T. Kerler, \{\textbackslash{}em The Lawrence-Krammer-Bigelow representations of the braid groups via \$U\_q(sl\_2)\$\}, Adv. Math. 228, 1689-1717, (2011).
+  \item K: R. Kashaev, \{\textbackslash{}em The hyperbolic volume of knots from the quantum dilogarithm\}, Lett. Math. Phys. 39, 269-275, (1997).
+  \item M2: H. Murakami, J. Murakami, \{\textbackslash{}em The colored Jones polynomials and the simplicial volume of a knot\}, Acta Math. 186, 85-104, (2001).
+  \item Mur: J. Murakami \{\textbackslash{}em Colored Alexander invariants and cone-manifolds\}, Osaka J. Math. 45, 541-564, (2008).
+  \item RT: N. Reshetikhin, V. Turaev, \{\textbackslash{}em Invariants of 3-manifolds via link polynomials and quantum groups\}, Invent. Math. 103, 547-597, (1991).
+  \item TA: T. M. Apostol, \{\textbackslash{}em Resultants of cyclotomic polynomials\}, Proc. Amer. Math. Soc. \{\textbackslash{}bf 24\}, 457--462, (1970).
+  \item WRT: C. Anghel - \{\textbackslash{}em Witten-Reshetikhin-Turaev invariants for 3-manifolds from Lagrangian intersections in configuration spaces\}, 39 pages, \{Quantum topology\} - 14, no. 4, pp. 693\textbackslash{}UTF\{2013\}731, (2023).
+  \item Witt: E. Witten, \{\textbackslash{}em Quantum field theory and the Jones polynomial\}, Comm. Math. Phys. 121, 351-399, (1989).
+\end{enumerate}
+
+% \bibliographystyle{plain}
+% \bibliography{references}
+\end{document}
