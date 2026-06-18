@@ -5,7 +5,8 @@
     "sections.json",
     "body.md",
     "equations.json",
-    "theorem_graph.json"
+    "theorem_graph.json",
+    "formalize:theorem_graph_extractor_typed_ir"
   ],
   "body": {
     "artifact": "body.md",
@@ -4783,65 +4784,4293 @@
   "semantic_ast": null,
   "source": "paper_extract_artifacts",
   "theorem_graph": {
+    "artifact": "theorem_graph.json",
     "arxiv_id": "2606.19113",
+    "inventory_artifact": "review_loop/theorem_inventory.json",
+    "inventory_count": 34,
     "nodes": [
       {
         "depends_on": [],
-        "id": "thm-1",
-        "section_id": "sec-1",
-        "statement": "Proof. The condition that we want to prove is that the action $\\widetilde{\\rho}_{\\mathcal{N},n}$ on $\\hat{V}\\mid_{\\widetilde{{\\mathbb L}}_\\mathcal{N}}^{\\otimes n}$ preserves the vector subspace $\\wide...",
-        "type": "proof"
+        "id": "idealm",
+        "section": "InterpolatingAJ.tex:16357",
+        "source_tex": "\\begin{defn}[Level $\\cN$-quotient ideals] We are going to define two ideals in the ring $\\Liq$, and work over the associated quotient rings, as follows.\n\n1) (Interpolation quotient ideal) Let\n\\begin{equation}\\label{qideal}\n\\cI_\\cN:=\\left(\\varphi_\\cN(q^2)\\cdot (s^2q^{-2(\\cN-1)}-1)\\right)\n\\subseteq \\Liq=\\Q[q^{\\pm2}, s^{\\pm 2}]\n\\end{equation}\nand refer to it as the ``interpolation quotient ideal''.\n\n2) (Maximal quotient ideal) Also, we define \n\\begin{equation}\\label{idealm}\n\\widetilde{\\cI}_\\cN:=\\left( \\varphi_\\cN(q^2) \\cdot (s^2 q^{-2\\cN+2} - 1)\\right)  \\cap \\prod_{\\text{\\scriptsize$\\begin{matrix}\n d\\mid \\cN \\\\ d \\neq 1, \\cN \\end{matrix}$}}\n \\left(\\varphi_d(q^2),\\ \\  \\frac{s^{2d}-1}{s^2-1} \\right)\n\\subseteq \\Liq=\\Q[q^{\\pm2}, s^{\\pm 2}]\n\\end{equation}\nand call it the ``maximal quotient ideal''. Here, $\\varphi_\\cN(q)$ is the $\\cN^{th}$ cyclotomic polynomial.\n\\end{defn}",
+        "statement": "Defines two ideals in the ring $\\Liq=\\Q[q^{\\pm2},s^{\\pm2}]$. The interpolation quotient ideal is $\\cI_\\cN:=(\\varphi_\\cN(q^2)\\cdot(s^2 q^{-2(\\cN-1)}-1))$. The maximal quotient ideal is $\\widetilde{\\cI}_\\cN:=(\\varphi_\\cN(q^2)\\cdot(s^2 q^{-2\\cN+2}-1))\\cap\\prod_{d\\mid\\cN,\\,d\\neq 1,\\cN}(\\varphi_d(q^2),\\,(s^{2d}-1)/(s^2-1))$, where $\\varphi_\\cN$ is the $\\cN$th cyclotomic polynomial.",
+        "theorem_ir": null,
+        "type": "definition",
+        "typed_transcription": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "args": [
+              {
+                "kind": "var",
+                "name": "\\cI_\\cN"
+              },
+              {
+                "kind": "var",
+                "name": "\\widetilde{\\cI}_\\cN"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "defines_level_N_quotient_ideals"
+          },
+          "math_objects": [
+            {
+              "name": "\\Liq",
+              "type": {
+                "kind": "custom",
+                "name": "Laurent polynomial ring \\Q[q^{\\pm2},s^{\\pm2}]"
+              }
+            },
+            {
+              "name": "\\cI_\\cN",
+              "type": {
+                "kind": "custom",
+                "name": "ideal of \\Q[q^{\\pm2},s^{\\pm2}]"
+              }
+            },
+            {
+              "name": "\\widetilde{\\cI}_\\cN",
+              "type": {
+                "kind": "custom",
+                "name": "ideal of \\Q[q^{\\pm2},s^{\\pm2}]"
+              }
+            },
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "source_text": "Define the interpolation quotient ideal cI_N = (varphi_N(q^2)*(s^2 q^{-2(N-1)}-1)) and the maximal quotient ideal tilde_cI_N = (varphi_N(q^2)*(s^2 q^{-2N+2}-1)) intersect product over d|N, d != 1,N of (varphi_d(q^2), (s^{2d}-1)/(s^2-1)), both inside Q[q^{+-2}, s^{+-2}].",
+          "status": "transcribed"
+        }
       },
       {
         "depends_on": [],
-        "id": "thm-2",
-        "section_id": "sec-1",
-        "statement": "Proof. First of all, it is well-known that if $g_j(q, s) = g_0(q, s)q^{-2i}$, then $g_j(q, s)$ satisfies the condition [\\[eq:qtcondition\\]](#eq:qtcondition){reference-type=\"eqref\" reference=\"eq:qtcond...",
-        "type": "proof"
+        "id": "qring",
+        "section": "InterpolatingAJ.tex:17234",
+        "source_tex": "\\begin{defn}[Quotient rings] We define the following two  quotient rings of $\\Liq$.\n\n1) The ``interpolation ring'', given by:\n\\begin{equation}\n\\Li_{\\cN}:=\\Q[q^{\\pm2}, s^{\\pm 2}] \\ / \\ \\cI_\\cN.\n\\end{equation}\n2) The ``maximal ring'', given by\n\\begin{equation}\\label{qring}\n\\widetilde{\\Li}_{\\cN}:=\\Q[q^{\\pm2}, s^{\\pm 2}] \\ / \\widetilde{\\cI}_\\cN.\n\\end{equation}\n\\end{defn}",
+        "statement": "Defines two quotient rings of $\\Liq$: the interpolation ring $\\Li_\\cN:=\\Q[q^{\\pm2},s^{\\pm2}]/\\cI_\\cN$ and the maximal ring $\\widetilde{\\Li}_\\cN:=\\Q[q^{\\pm2},s^{\\pm2}]/\\widetilde{\\cI}_\\cN$.",
+        "theorem_ir": null,
+        "type": "definition",
+        "typed_transcription": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "args": [
+              {
+                "kind": "var",
+                "name": "\\Li_\\cN"
+              },
+              {
+                "kind": "var",
+                "name": "\\widetilde{\\Li}_\\cN"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "defines_quotient_rings"
+          },
+          "math_objects": [
+            {
+              "name": "\\Li_\\cN",
+              "type": {
+                "kind": "custom",
+                "name": "quotient ring \\Q[q^{\\pm2},s^{\\pm2}]/\\cI_\\cN"
+              }
+            },
+            {
+              "name": "\\widetilde{\\Li}_\\cN",
+              "type": {
+                "kind": "custom",
+                "name": "quotient ring \\Q[q^{\\pm2},s^{\\pm2}]/\\widetilde{\\cI}_\\cN"
+              }
+            },
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "source_text": "Define the interpolation ring Li_N = Q[q^{+-2}, s^{+-2}] / cI_N and the maximal ring tilde_Li_N = Q[q^{+-2}, s^{+-2}] / tilde_cI_N.",
+          "status": "transcribed"
+        }
       },
       {
         "depends_on": [],
-        "id": "thm-3",
-        "section_id": "sec-1",
-        "statement": "Proof. Recall that $$R_{v_{i,j}}^{v_{i,j}} = s^{-(i+j)}q^{\\frac{(i+j)^2-i+j}{2}} {i \\brack j}_q \\prod_{k=0}^{i-j-1}(sq^{-k-j}-s^{-1}q^{k+j}).$$ Hence we have $$\\begin{multline} R_{v_{M,0}}^{v_{M,0}} -...",
-        "type": "proof"
+        "id": "InterpolatingAJ_tex:defn:18536",
+        "section": "InterpolatingAJ.tex:18536",
+        "source_tex": "\\begin{defn}[Quotient modules]\nLet us denote the above specialisations of the $\\cN$-finite part from the Verma module over the interpolation ring and over the maximal ring respectively: \n\\begin{equation}\n\\begin{aligned}\n& 1) \\text{ Interpolation module}: \\ \\ \\ \\ \\\nV_{\\cN}:=\\langle v_{0},...,v_{\\cN-1}\\rangle_{\\Li_{\\cN}} \\subseteq \\hat{V}\\otimes_{\\Li}{\\Li_{\\cN}}\\\\\n& 2)  \\text{ Maximal module}: \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\widetilde{V}_{\\cN}:=\\langle v_{0},...,v_{\\cN-1}\\rangle_{\\widetilde{\\Li}_{\\cN}} \\subseteq \\hat{V}\\otimes_{\\Li}{\\widetilde{\\Li}_{\\cN}}.\n\\end{aligned}\n\\end{equation}\n\\end{defn}",
+        "statement": "Defines two quotient modules as specialisations of the $\\cN$-finite part of the Verma module: the interpolation module $V_\\cN:=\\langle v_0,\\dots,v_{\\cN-1}\\rangle_{\\Li_\\cN}\\subseteq\\hat V\\otimes_\\Li\\Li_\\cN$ and the maximal module $\\widetilde V_\\cN:=\\langle v_0,\\dots,v_{\\cN-1}\\rangle_{\\widetilde\\Li_\\cN}\\subseteq\\hat V\\otimes_\\Li\\widetilde\\Li_\\cN$.",
+        "theorem_ir": null,
+        "type": "definition",
+        "typed_transcription": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "args": [
+              {
+                "kind": "var",
+                "name": "V_\\cN"
+              },
+              {
+                "kind": "var",
+                "name": "\\widetilde{V}_\\cN"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "defines_quotient_modules"
+          },
+          "math_objects": [
+            {
+              "name": "V_\\cN",
+              "type": {
+                "kind": "custom",
+                "name": "free \\Li_\\cN-module of rank \\cN"
+              }
+            },
+            {
+              "name": "\\widetilde{V}_\\cN",
+              "type": {
+                "kind": "custom",
+                "name": "free \\widetilde{\\Li}_\\cN-module of rank \\cN"
+              }
+            },
+            {
+              "name": "\\hat{V}",
+              "type": {
+                "kind": "custom",
+                "name": "Verma module over \\Li"
+              }
+            },
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "source_text": "Define the interpolation module V_N = <v_0,...,v_{N-1}> over Li_N inside hat_V tensor_Li Li_N, and the maximal module tilde_V_N = <v_0,...,v_{N-1}> over tilde_Li_N inside hat_V tensor_Li tilde_Li_N.",
+          "status": "transcribed"
+        }
       },
       {
         "depends_on": [],
-        "id": "thm-4",
-        "section_id": "sec-1",
-        "statement": "Proof. We recall that the invariant $\\Omega_{\\mathcal{N}}(L)(q,s)$ is constructed from the representation theory of $U_q(sl_2)$ over the ring ${\\mathbb L}$. It uses the induced braid action on the spe...",
-        "type": "proof"
+        "id": "InterpolatingAJ_tex:thm:19154",
+        "section": "InterpolatingAJ.tex:19154",
+        "source_tex": "\\begin{thm}[Action on quotients of specialised Verma module over the quotient rings] \nThe generic braid group action $\\hat{\\rho}_n$ leads to braid group representations on the quotient modules as below:\n$$1) \\ \\rho_{\\cN,n}  :B_n \\rightarrow \\Aut_{\\Li_{\\cN}} \\left( V_{\\cN}^{\\otimes n}\\right) $$\n$$2) \\ \\widetilde{\\rho}_{\\cN,n}  :B_n \\rightarrow \\Aut_{\\widetilde{\\Li}_{\\cN}} \\left( \\widetilde{V}_{\\cN}^{\\otimes n}\\right). $$\n\\end{thm}",
+        "statement": "The generic braid group action $\\hat\\rho_n$ descends to braid group representations on the quotient modules: $\\rho_{\\cN,n}:B_n\\to\\Aut_{\\Li_\\cN}(V_\\cN^{\\otimes n})$ over the interpolation ring, and $\\widetilde\\rho_{\\cN,n}:B_n\\to\\Aut_{\\widetilde\\Li_\\cN}(\\widetilde V_\\cN^{\\otimes n})$ over the maximal ring.",
+        "theorem_ir": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "n",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "items": [
+              {
+                "args": [
+                  {
+                    "kind": "var",
+                    "name": "\\rho_{\\cN,n}"
+                  },
+                  {
+                    "kind": "var",
+                    "name": "B_n"
+                  },
+                  {
+                    "kind": "var",
+                    "name": "\\Aut_{\\Li_\\cN}(V_\\cN^{\\otimes n})"
+                  }
+                ],
+                "kind": "uninterpreted_predicate",
+                "name": "is_braid_group_representation"
+              },
+              {
+                "args": [
+                  {
+                    "kind": "var",
+                    "name": "\\widetilde{\\rho}_{\\cN,n}"
+                  },
+                  {
+                    "kind": "var",
+                    "name": "B_n"
+                  },
+                  {
+                    "kind": "var",
+                    "name": "\\Aut_{\\widetilde{\\Li}_\\cN}(\\widetilde{V}_\\cN^{\\otimes n})"
+                  }
+                ],
+                "kind": "uninterpreted_predicate",
+                "name": "is_braid_group_representation"
+              }
+            ],
+            "kind": "and"
+          },
+          "theorem_name": "Action on quotients of specialised Verma module over the quotient rings"
+        },
+        "type": "theorem",
+        "typed_transcription": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "n",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "items": [
+              {
+                "args": [
+                  {
+                    "kind": "var",
+                    "name": "\\rho_{\\cN,n}"
+                  },
+                  {
+                    "kind": "var",
+                    "name": "B_n"
+                  },
+                  {
+                    "kind": "var",
+                    "name": "\\Aut_{\\Li_\\cN}(V_\\cN^{\\otimes n})"
+                  }
+                ],
+                "kind": "uninterpreted_predicate",
+                "name": "is_braid_group_representation"
+              },
+              {
+                "args": [
+                  {
+                    "kind": "var",
+                    "name": "\\widetilde{\\rho}_{\\cN,n}"
+                  },
+                  {
+                    "kind": "var",
+                    "name": "B_n"
+                  },
+                  {
+                    "kind": "var",
+                    "name": "\\Aut_{\\widetilde{\\Li}_\\cN}(\\widetilde{V}_\\cN^{\\otimes n})"
+                  }
+                ],
+                "kind": "uninterpreted_predicate",
+                "name": "is_braid_group_representation"
+              }
+            ],
+            "kind": "and"
+          },
+          "math_objects": [
+            {
+              "name": "B_n",
+              "type": {
+                "kind": "custom",
+                "name": "braid group on n strands"
+              }
+            },
+            {
+              "name": "\\rho_{\\cN,n}",
+              "type": {
+                "kind": "custom",
+                "name": "braid group representation B_n -> Aut_{\\Li_\\cN}(V_\\cN^{\\otimes n})"
+              }
+            },
+            {
+              "name": "\\widetilde{\\rho}_{\\cN,n}",
+              "type": {
+                "kind": "custom",
+                "name": "braid group representation B_n -> Aut_{\\widetilde{\\Li}_\\cN}(\\widetilde{V}_\\cN^{\\otimes n})"
+              }
+            },
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "n",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "source_text": "The generic braid group action hat_rho_n yields braid group representations rho_{N,n}: B_n -> Aut_{Li_N}(V_N^{tensor n}) and tilde_rho_{N,n}: B_n -> Aut_{tilde_Li_N}(tilde_V_N^{tensor n}).",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [
+          "endcoeff"
+        ],
+        "id": "InterpolatingAJ_tex:defn:19872",
+        "section": "InterpolatingAJ.tex:19872",
+        "source_tex": "\\begin{defn}\nA map $\\qptr_{\\widetilde{V}_{\\cN}^{\\otimes n}} : \\End(\\widetilde{V}_{\\cN}^{\\otimes (n+1)})\\to \\End(\\widetilde{V}_{\\cN}^{\\otimes n})$\ndefined by\n\\[\n\\qptr_{\\widetilde{V}_{\\cN}^{\\otimes n}}(f)_{v_{i_1,i_2, \\cdots, i_n}}^{v_{j_1,j_2, \\cdots, j_n}}\n:=\\sum_{j=0}^{\\cN-1}\ng_j(q, s) \\cdot f_{v_{i_1,i_2, \\cdots, i_n,j}}^{v_{j_1,j_2, \\cdots, j_n,j}}\n\\]\nfor some scalars $g_i(s, q)$\n is called a ``quantum partial trace'' if there are two non-zero scalars $a$, $b$ satisfying\n%\n\\begin{equation}\n\\qptr_{\\widetilde{V}_{\\cN}^{\\otimes n}}(\\widetilde\\rho_{\\cN,n}(\\sigma_n\\beta_n)) \n=\na \\widetilde\\rho_{\\cN,n}(\\beta_n), \n\\quad\n\\qptr_{\\widetilde{V}_{\\cN}^{\\otimes n}}(\\widetilde\\rho_{\\cN,n}(\\sigma_n^{-1}\\beta_n) )\n=\na^{-1} \\widetilde\\rho_{\\cN,n}(\\beta_n)\n\\end{equation}\n for any braid $\\beta_n \\in B_n$ {(see also Notation \\ref{endcoeff})}.  \n\\end{defn}",
+        "statement": "Defines a quantum partial trace: a map $\\qptr_{\\widetilde V_\\cN^{\\otimes n}}:\\End(\\widetilde V_\\cN^{\\otimes(n+1)})\\to\\End(\\widetilde V_\\cN^{\\otimes n})$ given by $\\qptr(f)=\\sum_{j=0}^{\\cN-1} g_j(q,s)\\,f$ on matrix coefficients (tracing the last factor). It is called a quantum partial trace if there exist non-zero scalars $a,b$ with $\\qptr(\\widetilde\\rho_{\\cN,n}(\\sigma_n\\beta_n))=a\\,\\widetilde\\rho_{\\cN,n}(\\beta_n)$ and $\\qptr(\\widetilde\\rho_{\\cN,n}(\\sigma_n^{-1}\\beta_n))=a^{-1}\\,\\widetilde\\rho_{\\cN,n}(\\beta_n)$ for every braid $\\beta_n\\in B_n$.",
+        "theorem_ir": null,
+        "type": "definition",
+        "typed_transcription": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "n",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "args": [
+              {
+                "kind": "var",
+                "name": "\\qptr_{\\widetilde{V}_\\cN^{\\otimes n}}"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "is_quantum_partial_trace"
+          },
+          "math_objects": [
+            {
+              "name": "\\qptr_{\\widetilde{V}_\\cN^{\\otimes n}}",
+              "type": {
+                "kind": "custom",
+                "name": "linear map \\End(\\widetilde{V}_\\cN^{\\otimes(n+1)})\\to\\End(\\widetilde{V}_\\cN^{\\otimes n})"
+              }
+            },
+            {
+              "name": "g_j(q,s)",
+              "type": {
+                "kind": "custom",
+                "name": "scalars in the maximal ring"
+              }
+            },
+            {
+              "name": "B_n",
+              "type": {
+                "kind": "custom",
+                "name": "braid group on n strands"
+              }
+            },
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "n",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "source_text": "A map qtr from End(tilde_V_N^{tensor (n+1)}) to End(tilde_V_N^{tensor n}), given on matrix coefficients by qtr(f) = sum_{j=0}^{N-1} g_j(q,s) * f (with the last index j contracted), is a quantum partial trace if there exist non-zero scalars a, b with qtr(tilde_rho_{N,n}(sigma_n beta_n)) = a*tilde_rho_{N,n}(beta_n) and qtr(tilde_rho_{N,n}(sigma_n^{-1} beta_n)) = a^{-1}*tilde_rho_{N,n}(beta_n) for all braids beta_n in B_n.",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [
+          "thm:uqtr1"
+        ],
+        "id": "InterpolatingAJ_tex:thm:20726",
+        "section": "InterpolatingAJ.tex:20726",
+        "source_tex": "\\begin{thm}[Construction of a unique quantum trace over quotient rings]\n\nThere exists a unique quantum trace, up to a scalar, defined on the tensor powers of the maximal module (Theorem \\ref{thm:uqtr1}):\n$$\n\\qptr_{\\widetilde{V}_{\\cN}^{\\otimes n}}:\\operatorname{End}(\\widetilde{V}_{\\cN}^{\\otimes (n+1)})\\rightarrow \\operatorname{End}(\\widetilde{V}_{\\cN}^{\\otimes n}),\n$$ \nwhere $g_j(q, s) = g_0(q, s) q^{-2j}$ for some non-zero $g_0(q, s)$.  \n\\end{thm}",
+        "statement": "There exists a unique quantum trace, up to a scalar, on the tensor powers of the maximal module, $\\qptr_{\\widetilde V_\\cN^{\\otimes n}}:\\End(\\widetilde V_\\cN^{\\otimes(n+1)})\\to\\End(\\widetilde V_\\cN^{\\otimes n})$, whose coefficients satisfy $g_j(q,s)=g_0(q,s)\\,q^{-2j}$ for some non-zero $g_0(q,s)$.",
+        "theorem_ir": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "n",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "binders": [
+              {
+                "name": "\\qptr_{\\widetilde{V}_\\cN^{\\otimes n}}",
+                "type": {
+                  "kind": "custom",
+                  "name": "quantum partial trace \\End(\\widetilde{V}_\\cN^{\\otimes(n+1)})\\to\\End(\\widetilde{V}_\\cN^{\\otimes n})"
+                }
+              }
+            ],
+            "body": {
+              "items": [
+                {
+                  "args": [
+                    {
+                      "kind": "var",
+                      "name": "\\qptr_{\\widetilde{V}_\\cN^{\\otimes n}}"
+                    }
+                  ],
+                  "kind": "uninterpreted_predicate",
+                  "name": "is_unique_quantum_trace_up_to_scalar"
+                },
+                {
+                  "args": [
+                    {
+                      "kind": "var",
+                      "name": "g_j(q,s)=g_0(q,s)q^{-2j}"
+                    }
+                  ],
+                  "kind": "uninterpreted_predicate",
+                  "name": "coefficients_satisfy"
+                }
+              ],
+              "kind": "and"
+            },
+            "kind": "exists"
+          },
+          "theorem_name": "Construction of a unique quantum trace over quotient rings"
+        },
+        "type": "theorem",
+        "typed_transcription": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "n",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "binders": [
+              {
+                "name": "\\qptr_{\\widetilde{V}_\\cN^{\\otimes n}}",
+                "type": {
+                  "kind": "custom",
+                  "name": "quantum partial trace \\End(\\widetilde{V}_\\cN^{\\otimes(n+1)})\\to\\End(\\widetilde{V}_\\cN^{\\otimes n})"
+                }
+              }
+            ],
+            "body": {
+              "items": [
+                {
+                  "args": [
+                    {
+                      "kind": "var",
+                      "name": "\\qptr_{\\widetilde{V}_\\cN^{\\otimes n}}"
+                    }
+                  ],
+                  "kind": "uninterpreted_predicate",
+                  "name": "is_unique_quantum_trace_up_to_scalar"
+                },
+                {
+                  "args": [
+                    {
+                      "kind": "var",
+                      "name": "g_j(q,s)=g_0(q,s)q^{-2j}"
+                    }
+                  ],
+                  "kind": "uninterpreted_predicate",
+                  "name": "coefficients_satisfy"
+                }
+              ],
+              "kind": "and"
+            },
+            "kind": "exists"
+          },
+          "math_objects": [
+            {
+              "name": "\\qptr_{\\widetilde{V}_\\cN^{\\otimes n}}",
+              "type": {
+                "kind": "custom",
+                "name": "quantum partial trace \\End(\\widetilde{V}_\\cN^{\\otimes(n+1)})\\to\\End(\\widetilde{V}_\\cN^{\\otimes n})"
+              }
+            },
+            {
+              "name": "g_0(q,s)",
+              "type": {
+                "kind": "custom",
+                "name": "non-zero scalar in the maximal ring"
+              }
+            },
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "n",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "source_text": "There exists a unique quantum trace, up to a scalar, on tensor powers of the maximal module, qtr: End(tilde_V_N^{tensor (n+1)}) -> End(tilde_V_N^{tensor n}), with coefficients g_j(q,s) = g_0(q,s) q^{-2j} for some non-zero g_0(q,s).",
+          "status": "transcribed"
+        }
       },
       {
         "depends_on": [],
-        "id": "thm-5",
-        "section_id": "sec-1",
-        "statement": "Proof. The formula for our quotient ring is the following, as defined in relation [\\[qring\\]](#qring){reference-type=\"eqref\" reference=\"qring\"}: $$\\begin{equation} {\\mathbb L}_{\\mathcal{N}}=\\mathbb Q[...",
-        "type": "proof"
+        "id": "InterpolatingAJ_tex:defn:21996",
+        "section": "InterpolatingAJ.tex:21996",
+        "source_tex": "\\begin{defn}[Level $\\cN$ unified invariant]\nLet\n\\begin{equation}\n\\widetilde\\Omega_{\\cN}(\\beta_n)(q,s)\n:= \ns^{w(\\beta_n)(\\cN-1)}q^{-w(\\beta_n){\\cN(\\cN-1)}} \\cdot \n\\qptr_{\\widetilde{V}_{\\cN}}\\left( \\rho_{\\cN,n}\n\\right)_{v_0}^{v_0} \\in \\widetilde{\\Li}_{\\cN}.\n\\end{equation}\n%\n\\end{defn}",
+        "statement": "Defines the level $\\cN$ unified invariant $\\widetilde\\Omega_{\\cN}(\\beta_n)(q,s)$ as the normalised quantum trace, with prefactor $s^{w(\\beta_n)(\\cN-1)}q^{-w(\\beta_n)\\cN(\\cN-1)}$, of the representation $\\rho_{\\cN,n}$ on the finite quotient module $\\widetilde{V}_{\\cN}$ taken in the $(v_0,v_0)$ matrix entry, valued in the ring $\\widetilde{\\Li}_{\\cN}$.",
+        "theorem_ir": null,
+        "type": "definition",
+        "typed_transcription": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "\\beta_n",
+              "type": {
+                "kind": "custom",
+                "name": "braid"
+              }
+            }
+          ],
+          "conclusion": {
+            "kind": "equals",
+            "lhs": {
+              "kind": "raw_term",
+              "text": "\\widetilde\\Omega_{\\cN}(\\beta_n)(q,s)"
+            },
+            "rhs": {
+              "kind": "raw_term",
+              "text": "s^{w(\\beta_n)(\\cN-1)}q^{-w(\\beta_n)\\cN(\\cN-1)} \\cdot \\qptr_{\\widetilde{V}_{\\cN}}(\\rho_{\\cN,n})_{v_0}^{v_0}"
+            }
+          },
+          "math_objects": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat",
+                "reason": "level parameter, a natural number"
+              }
+            },
+            {
+              "name": "\\beta_n",
+              "type": {
+                "kind": "custom",
+                "name": "braid",
+                "reason": "n-strand braid representing a knot/link"
+              }
+            },
+            {
+              "name": "\\widetilde\\Omega_{\\cN}",
+              "type": {
+                "kind": "custom",
+                "name": "ring_element",
+                "reason": "element of the ring \\widetilde{\\Li}_{\\cN}"
+              }
+            }
+          ],
+          "source_text": "\\begin{defn}[Level $\\cN$ unified invariant]\nLet\n\\begin{equation}\n\\widetilde\\Omega_{\\cN}(\\beta_n)(q,s)\n:= \ns^{w(\\beta_n)(\\cN-1)}q^{-w(\\beta_n){\\cN(\\cN-1)}} \\cdot \n\\qptr_{\\widetilde{V}_{\\cN}}\\left( \\rho_{\\cN,n}\n\\right)_{v_0}^{v_0} \\in \\widetilde{\\Li}_{\\cN}.\n\\end{equation}\n%\n\\end{defn}",
+          "status": "transcribed"
+        }
       },
       {
         "depends_on": [],
-        "id": "thm-6",
-        "section_id": "sec-1",
-        "statement": "Proof. We use the following intermediate ideal $$\\begin{equation} %\\label{eq:INprime} \\mathcal{I}'_\\mathcal{N}= \\sum_{k=0}^{\\mathcal{N}-2} \\left( {\\mathcal{N}\\brack k+1}_q \\cdot \\prod_{i=1}^{\\mathcal{...",
-        "type": "proof"
+        "id": "thm:THEOREM",
+        "section": "InterpolatingAJ.tex:22442",
+        "source_tex": "\\begin{thm}[{\\bf Level $\\cN$ maximal universal invariant}]\\label{thm:THEOREM}\n%\nFor any $\\cN \\in \\N$, $\\cN \\geq 2$, $\\widetilde{\\Li}_{\\cN}$ is the largest quotient of the polynomial ring $\\Liq$ with the property that the image of the quantum trace in this quotient gives a knot invariant. \n\\par\nMore precisely, the image of the level $\\cN$ quantum trace in this quotient ring $\\widetilde{\\Omega}_{\\cN}(L)(q,s) \\in \\widetilde{\\Li}_{\\cN}$ is a knot invariant. \nAlso, if $\\widetilde{\\Li}_{\\cN}'$ is a quotient of $ \\Li$ in which $\\widetilde{\\Omega}_{\\cN}(\\beta_n)$ is a knot invariant, then the quotient onto $\\widetilde{\\Li}_{\\cN}'$ factors through $\\widetilde{\\Li}_{\\cN}$.\n\\end{thm}",
+        "statement": "For every natural number $\\cN \\geq 2$, the ring $\\widetilde{\\Li}_{\\cN}$ is the largest quotient of the polynomial ring $\\Liq$ in which the image of the level $\\cN$ quantum trace is a knot invariant: the image $\\widetilde{\\Omega}_{\\cN}(L)(q,s) \\in \\widetilde{\\Li}_{\\cN}$ is a knot invariant, and any quotient $\\widetilde{\\Li}_{\\cN}'$ of $\\Li$ in which $\\widetilde{\\Omega}_{\\cN}(\\beta_n)$ is a knot invariant factors through $\\widetilde{\\Li}_{\\cN}$.",
+        "theorem_ir": {
+          "assumptions": [
+            {
+              "kind": "greater_equal",
+              "lhs": {
+                "kind": "var",
+                "name": "\\cN"
+              },
+              "rhs": {
+                "kind": "nat_lit",
+                "value": 2
+              }
+            }
+          ],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "items": [
+              {
+                "args": [
+                  {
+                    "kind": "raw_term",
+                    "text": "\\widetilde{\\Li}_{\\cN}"
+                  },
+                  {
+                    "kind": "raw_term",
+                    "text": "\\Liq"
+                  }
+                ],
+                "kind": "uninterpreted_predicate",
+                "name": "is_largest_quotient_giving_knot_invariant"
+              },
+              {
+                "args": [
+                  {
+                    "kind": "raw_term",
+                    "text": "\\widetilde{\\Omega}_{\\cN}(L)(q,s)"
+                  }
+                ],
+                "kind": "uninterpreted_predicate",
+                "name": "is_knot_invariant"
+              },
+              {
+                "binders": [
+                  {
+                    "name": "\\widetilde{\\Li}_{\\cN}'",
+                    "type": {
+                      "kind": "custom",
+                      "name": "quotient_ring"
+                    }
+                  }
+                ],
+                "body": {
+                  "conclusion": {
+                    "args": [
+                      {
+                        "kind": "raw_term",
+                        "text": "\\widetilde{\\Li}_{\\cN}'"
+                      },
+                      {
+                        "kind": "raw_term",
+                        "text": "\\widetilde{\\Li}_{\\cN}"
+                      }
+                    ],
+                    "kind": "uninterpreted_predicate",
+                    "name": "factors_through"
+                  },
+                  "kind": "implies",
+                  "premise": {
+                    "args": [
+                      {
+                        "kind": "raw_term",
+                        "text": "\\widetilde{\\Omega}_{\\cN}(\\beta_n)"
+                      },
+                      {
+                        "kind": "raw_term",
+                        "text": "\\widetilde{\\Li}_{\\cN}'"
+                      }
+                    ],
+                    "kind": "uninterpreted_predicate",
+                    "name": "is_knot_invariant_in_quotient"
+                  }
+                },
+                "kind": "forall"
+              }
+            ],
+            "kind": "and"
+          },
+          "theorem_name": "thm:THEOREM"
+        },
+        "type": "theorem",
+        "typed_transcription": {
+          "assumptions": [
+            {
+              "kind": "greater_equal",
+              "lhs": {
+                "kind": "var",
+                "name": "\\cN"
+              },
+              "rhs": {
+                "kind": "nat_lit",
+                "value": 2
+              }
+            }
+          ],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "items": [
+              {
+                "args": [
+                  {
+                    "kind": "raw_term",
+                    "text": "\\widetilde{\\Li}_{\\cN}"
+                  },
+                  {
+                    "kind": "raw_term",
+                    "text": "\\Liq"
+                  }
+                ],
+                "kind": "uninterpreted_predicate",
+                "name": "is_largest_quotient_giving_knot_invariant"
+              },
+              {
+                "args": [
+                  {
+                    "kind": "raw_term",
+                    "text": "\\widetilde{\\Omega}_{\\cN}(L)(q,s)"
+                  }
+                ],
+                "kind": "uninterpreted_predicate",
+                "name": "is_knot_invariant"
+              },
+              {
+                "binders": [
+                  {
+                    "name": "\\widetilde{\\Li}_{\\cN}'",
+                    "type": {
+                      "kind": "custom",
+                      "name": "quotient_ring"
+                    }
+                  }
+                ],
+                "body": {
+                  "conclusion": {
+                    "args": [
+                      {
+                        "kind": "raw_term",
+                        "text": "\\widetilde{\\Li}_{\\cN}'"
+                      },
+                      {
+                        "kind": "raw_term",
+                        "text": "\\widetilde{\\Li}_{\\cN}"
+                      }
+                    ],
+                    "kind": "uninterpreted_predicate",
+                    "name": "factors_through"
+                  },
+                  "kind": "implies",
+                  "premise": {
+                    "args": [
+                      {
+                        "kind": "raw_term",
+                        "text": "\\widetilde{\\Omega}_{\\cN}(\\beta_n)"
+                      },
+                      {
+                        "kind": "raw_term",
+                        "text": "\\widetilde{\\Li}_{\\cN}'"
+                      }
+                    ],
+                    "kind": "uninterpreted_predicate",
+                    "name": "is_knot_invariant_in_quotient"
+                  }
+                },
+                "kind": "forall"
+              }
+            ],
+            "kind": "and"
+          },
+          "math_objects": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat",
+                "reason": "level parameter \\cN \\in \\N, \\cN \\geq 2"
+              }
+            },
+            {
+              "name": "\\widetilde{\\Li}_{\\cN}",
+              "type": {
+                "kind": "custom",
+                "name": "quotient_ring",
+                "reason": "quotient of the polynomial ring \\Liq"
+              }
+            },
+            {
+              "name": "\\widetilde{\\Omega}_{\\cN}(L)",
+              "type": {
+                "kind": "custom",
+                "name": "knot_invariant",
+                "reason": "image of the quantum trace"
+              }
+            }
+          ],
+          "source_text": "\\begin{thm}[{\\bf Level $\\cN$ maximal universal invariant}]\\label{thm:THEOREM}\n%\nFor any $\\cN \\in \\N$, $\\cN \\geq 2$, $\\widetilde{\\Li}_{\\cN}$ is the largest quotient of the polynomial ring $\\Liq$ with the property that the image of the quantum trace in this quotient gives a knot invariant. \n\\par\nMore precisely, the image of the level $\\cN$ quantum trace in this quotient ring $\\widetilde{\\Omega}_{\\cN}(L)(q,s) \\in \\widetilde{\\Li}_{\\cN}$ is a knot invariant. \nAlso, if $\\widetilde{\\Li}_{\\cN}'$ is a quotient of $ \\Li$ in which $\\widetilde{\\Omega}_{\\cN}(\\beta_n)$ is a knot invariant, then the quotient onto $\\widetilde{\\Li}_{\\cN}'$ factors through $\\widetilde{\\Li}_{\\cN}$.\n\\end{thm}",
+          "status": "transcribed"
+        }
       },
       {
         "depends_on": [],
-        "id": "thm-7",
-        "section_id": "sec-1",
-        "statement": "Proof. First of all, we have $$[d + k] = -[k] \\mod \\Phi_d(q^2).$$ This implies that $$\\begin{equation} \\label{eq:quantum integerd} \\frac{[ld + d-1][ld+d-2]\\cdots[ld+1]} {[d-1][d-2]\\cdots[1]} = (-1)^{l...",
-        "type": "proof"
+        "id": "coro:prime",
+        "section": "InterpolatingAJ.tex:23238",
+        "source_tex": "\\begin{coro}[{\\bf Level $\\cN$ maximal unified invariant at prime parameters}]\n\\label{coro:prime}\nIf $\\cN \\in \\mathbb N$ is prime, the ring $\\Liq_{\\cN}$ is the largest quotient of the polynomial ring $\\Li$ with the property that the image of the quantum trace in this quotient gives a knot invariant. \n\nMore precisely, for any $\\cN \\in \\cN$, $\\cN\\geq 2$ we have that \n\\[\n\\Omega_{\\cN}(L)(q,s) = \\pi_{\\cN}(\\widetilde{\\Omega}_{\\cN}(\\beta_n)) \\in \\Li_{\\cN}\n\\]\n is a well-defined oriented knot invariant. Also, if $\\cN$ prime and we consider $\\Li_{\\cN}'$ a quotient of $ \\Li$ in which $\\Omega_{\\cN}(\\beta_n)$ is a knot invariant, then the quotient onto $\\Li_{\\cN}'$ factors through $\\Li_{\\cN}$.\n\\end{coro}",
+        "statement": "If $\\cN$ is a prime natural number, then $\\Liq_{\\cN}$ is the largest quotient of the polynomial ring $\\Li$ in which the image of the quantum trace gives a knot invariant; concretely $\\Omega_{\\cN}(L)(q,s) = \\pi_{\\cN}(\\widetilde{\\Omega}_{\\cN}(\\beta_n)) \\in \\Li_{\\cN}$ is a well-defined oriented knot invariant, and any quotient $\\Li_{\\cN}'$ of $\\Li$ in which $\\Omega_{\\cN}(\\beta_n)$ is a knot invariant factors through $\\Li_{\\cN}$.",
+        "theorem_ir": {
+          "assumptions": [
+            {
+              "args": [
+                {
+                  "kind": "var",
+                  "name": "\\cN"
+                }
+              ],
+              "kind": "uninterpreted_predicate",
+              "name": "is_prime"
+            }
+          ],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "items": [
+              {
+                "args": [
+                  {
+                    "kind": "raw_term",
+                    "text": "\\Liq_{\\cN}"
+                  },
+                  {
+                    "kind": "raw_term",
+                    "text": "\\Li"
+                  }
+                ],
+                "kind": "uninterpreted_predicate",
+                "name": "is_largest_quotient_giving_knot_invariant"
+              },
+              {
+                "kind": "equals",
+                "lhs": {
+                  "kind": "raw_term",
+                  "text": "\\Omega_{\\cN}(L)(q,s)"
+                },
+                "rhs": {
+                  "kind": "raw_term",
+                  "text": "\\pi_{\\cN}(\\widetilde{\\Omega}_{\\cN}(\\beta_n))"
+                }
+              },
+              {
+                "args": [
+                  {
+                    "kind": "raw_term",
+                    "text": "\\Omega_{\\cN}(L)(q,s)"
+                  }
+                ],
+                "kind": "uninterpreted_predicate",
+                "name": "is_well_defined_oriented_knot_invariant"
+              },
+              {
+                "binders": [
+                  {
+                    "name": "\\Li_{\\cN}'",
+                    "type": {
+                      "kind": "custom",
+                      "name": "quotient_ring"
+                    }
+                  }
+                ],
+                "body": {
+                  "conclusion": {
+                    "args": [
+                      {
+                        "kind": "raw_term",
+                        "text": "\\Li_{\\cN}'"
+                      },
+                      {
+                        "kind": "raw_term",
+                        "text": "\\Li_{\\cN}"
+                      }
+                    ],
+                    "kind": "uninterpreted_predicate",
+                    "name": "factors_through"
+                  },
+                  "kind": "implies",
+                  "premise": {
+                    "args": [
+                      {
+                        "kind": "raw_term",
+                        "text": "\\Omega_{\\cN}(\\beta_n)"
+                      },
+                      {
+                        "kind": "raw_term",
+                        "text": "\\Li_{\\cN}'"
+                      }
+                    ],
+                    "kind": "uninterpreted_predicate",
+                    "name": "is_knot_invariant_in_quotient"
+                  }
+                },
+                "kind": "forall"
+              }
+            ],
+            "kind": "and"
+          },
+          "theorem_name": "coro:prime"
+        },
+        "type": "corollary",
+        "typed_transcription": {
+          "assumptions": [
+            {
+              "args": [
+                {
+                  "kind": "var",
+                  "name": "\\cN"
+                }
+              ],
+              "kind": "uninterpreted_predicate",
+              "name": "is_prime"
+            }
+          ],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "items": [
+              {
+                "args": [
+                  {
+                    "kind": "raw_term",
+                    "text": "\\Liq_{\\cN}"
+                  },
+                  {
+                    "kind": "raw_term",
+                    "text": "\\Li"
+                  }
+                ],
+                "kind": "uninterpreted_predicate",
+                "name": "is_largest_quotient_giving_knot_invariant"
+              },
+              {
+                "kind": "equals",
+                "lhs": {
+                  "kind": "raw_term",
+                  "text": "\\Omega_{\\cN}(L)(q,s)"
+                },
+                "rhs": {
+                  "kind": "raw_term",
+                  "text": "\\pi_{\\cN}(\\widetilde{\\Omega}_{\\cN}(\\beta_n))"
+                }
+              },
+              {
+                "args": [
+                  {
+                    "kind": "raw_term",
+                    "text": "\\Omega_{\\cN}(L)(q,s)"
+                  }
+                ],
+                "kind": "uninterpreted_predicate",
+                "name": "is_well_defined_oriented_knot_invariant"
+              }
+            ],
+            "kind": "and"
+          },
+          "math_objects": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat",
+                "reason": "prime natural number parameter"
+              }
+            },
+            {
+              "name": "\\Liq_{\\cN}",
+              "type": {
+                "kind": "custom",
+                "name": "quotient_ring",
+                "reason": "quotient of \\Li at prime level"
+              }
+            },
+            {
+              "name": "\\Omega_{\\cN}(L)",
+              "type": {
+                "kind": "custom",
+                "name": "knot_invariant",
+                "reason": "projected unified invariant \\pi_{\\cN}(\\widetilde{\\Omega}_{\\cN}(\\beta_n))"
+              }
+            }
+          ],
+          "source_text": "\\begin{coro}[{\\bf Level $\\cN$ maximal unified invariant at prime parameters}]\n\\label{coro:prime}\nIf $\\cN \\in \\mathbb N$ is prime, the ring $\\Liq_{\\cN}$ is the largest quotient of the polynomial ring $\\Li$ with the property that the image of the quantum trace in this quotient gives a knot invariant. \n\nMore precisely, for any $\\cN \\in \\cN$, $\\cN\\geq 2$ we have that \n\\[\n\\Omega_{\\cN}(L)(q,s) = \\pi_{\\cN}(\\widetilde{\\Omega}_{\\cN}(\\beta_n)) \\in \\Li_{\\cN}\n\\]\n is a well-defined oriented knot invariant. Also, if $\\cN$ prime and we consider $\\Li_{\\cN}'$ a quotient of $ \\Li$ in which $\\Omega_{\\cN}(\\beta_n)$ is a knot invariant, then the quotient onto $\\Li_{\\cN}'$ factors through $\\Li_{\\cN}$.\n\\end{coro}",
+          "status": "transcribed"
+        }
       },
       {
         "depends_on": [],
-        "id": "thm-8",
-        "section_id": "sec-1",
-        "statement": "Proof. We recall that $$\\begin{equation} \\widetilde{\\mathcal{J}}_\\mathcal{N} =\\left( \\varphi_\\mathcal{N}(q^2) \\cdot (s^2 q^{-2\\mathcal{N}+2} - 1)\\right) \\cap \\bigcap_{\\text{\\scriptsize$\\begin{matrix} ...",
-        "type": "proof"
+        "id": "TINT",
+        "section": "InterpolatingAJ.tex:27377",
+        "source_tex": "\\begin{thm}[{\\bf Level $\\cN$ unified invariant interpolates coloured Jones and ADO invariants}]\\label{TINT} We have that  $\\Omega_{\\cN}(L)(q,s) \\in \\Li_{\\cN}$ is a well defined oriented knot invariant and globalises the $\\cN^{th}$ coloured Jones and coloured Alexander invariants, as follows: \n \\begin{equation}\n\\Omega_{\\cN}(L)(q,s) = J_{\\mathcal{N}}(L, q) + \\Phi_{\\mathcal{N}}(L, s) - \\Phi_{\\mathcal{N}}(L, q^{1-\\mathcal N}).\n\\end{equation}\n \\end{thm}",
+        "statement": "The level $\\cN$ unified invariant $\\Omega_{\\cN}(L)(q,s) \\in \\Li_{\\cN}$ is a well-defined oriented knot invariant that globalises the $\\cN^{th}$ coloured Jones and coloured Alexander (ADO) invariants via the identity $\\Omega_{\\cN}(L)(q,s) = J_{\\cN}(L, q) + \\Phi_{\\cN}(L, s) - \\Phi_{\\cN}(L, q^{1-\\cN})$.",
+        "theorem_ir": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "items": [
+              {
+                "args": [
+                  {
+                    "kind": "raw_term",
+                    "text": "\\Omega_{\\cN}(L)(q,s)"
+                  }
+                ],
+                "kind": "uninterpreted_predicate",
+                "name": "is_well_defined_oriented_knot_invariant"
+              },
+              {
+                "kind": "equals",
+                "lhs": {
+                  "kind": "raw_term",
+                  "text": "\\Omega_{\\cN}(L)(q,s)"
+                },
+                "rhs": {
+                  "kind": "sub",
+                  "lhs": {
+                    "kind": "add",
+                    "lhs": {
+                      "kind": "raw_term",
+                      "text": "J_{\\cN}(L, q)"
+                    },
+                    "rhs": {
+                      "kind": "raw_term",
+                      "text": "\\Phi_{\\cN}(L, s)"
+                    }
+                  },
+                  "rhs": {
+                    "kind": "raw_term",
+                    "text": "\\Phi_{\\cN}(L, q^{1-\\cN})"
+                  }
+                }
+              }
+            ],
+            "kind": "and"
+          },
+          "theorem_name": "TINT"
+        },
+        "type": "theorem",
+        "typed_transcription": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "items": [
+              {
+                "args": [
+                  {
+                    "kind": "raw_term",
+                    "text": "\\Omega_{\\cN}(L)(q,s)"
+                  }
+                ],
+                "kind": "uninterpreted_predicate",
+                "name": "is_well_defined_oriented_knot_invariant"
+              },
+              {
+                "kind": "equals",
+                "lhs": {
+                  "kind": "raw_term",
+                  "text": "\\Omega_{\\cN}(L)(q,s)"
+                },
+                "rhs": {
+                  "kind": "sub",
+                  "lhs": {
+                    "kind": "add",
+                    "lhs": {
+                      "kind": "raw_term",
+                      "text": "J_{\\cN}(L, q)"
+                    },
+                    "rhs": {
+                      "kind": "raw_term",
+                      "text": "\\Phi_{\\cN}(L, s)"
+                    }
+                  },
+                  "rhs": {
+                    "kind": "raw_term",
+                    "text": "\\Phi_{\\cN}(L, q^{1-\\cN})"
+                  }
+                }
+              }
+            ],
+            "kind": "and"
+          },
+          "math_objects": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat",
+                "reason": "level parameter"
+              }
+            },
+            {
+              "name": "\\Omega_{\\cN}(L)",
+              "type": {
+                "kind": "custom",
+                "name": "knot_invariant",
+                "reason": "unified invariant valued in \\Li_{\\cN}"
+              }
+            },
+            {
+              "name": "J_{\\cN}(L,q)",
+              "type": {
+                "kind": "custom",
+                "name": "coloured_jones_invariant",
+                "reason": "Nth coloured Jones invariant"
+              }
+            },
+            {
+              "name": "\\Phi_{\\cN}(L,s)",
+              "type": {
+                "kind": "custom",
+                "name": "coloured_alexander_invariant",
+                "reason": "coloured Alexander / ADO invariant"
+              }
+            }
+          ],
+          "source_text": "\\begin{thm}[{\\bf Level $\\cN$ unified invariant interpolates coloured Jones and ADO invariants}]\\label{TINT} We have that  $\\Omega_{\\cN}(L)(q,s) \\in \\Li_{\\cN}$ is a well defined oriented knot invariant and globalises the $\\cN^{th}$ coloured Jones and coloured Alexander invariants, as follows: \n \\begin{equation}\n\\Omega_{\\cN}(L)(q,s) = J_{\\mathcal{N}}(L, q) + \\Phi_{\\mathcal{N}}(L, s) - \\Phi_{\\mathcal{N}}(L, q^{1-\\mathcal N}).\n\\end{equation}\n \\end{thm}",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [],
+        "id": "InterpolatingAJ_tex:defn:33576",
+        "section": "InterpolatingAJ.tex:33576",
+        "source_tex": "\\begin{defn}[Quantum group over two variables]\nLet  $U_q(sl_2)$ be the algebra over $\\Li$ that is generated by the sequence of elements $\\{ E,\\, F^{(n)}, \\,K^{\\pm1} \\mid n \\in \\mathbb N\\}$ subject to the following relations:\n\\begin{equation*}\n\\begin{aligned}\n&KK^{-1}=K^{-1}K=1; \\ \\ \\ KE=q^2EK; \\ \\ \\ KF^{(n)}=q^{-2n} F^{(n)}K;\\\\\n&F^{(n)}F^{(m)}= {n+m \\brack n}_{q} F^{(n+m)};\\\\\n&[E,F^{(n+1)}]=F^{(n)}(q^{-n}K-q^{n}K^{-1}).\n\\end{aligned}\n\\end{equation*}\n\\end{defn}",
+        "statement": "Defines the two-variable quantum group $U_q(sl_2)$ as the $\\Li$-algebra generated by $E$, the divided powers $F^{(n)}$, and $K^{\\pm1}$ ($n \\in \\mathbb N$) subject to the relations $KK^{-1}=K^{-1}K=1$, $KE=q^2EK$, $KF^{(n)}=q^{-2n}F^{(n)}K$, $F^{(n)}F^{(m)}={n+m \\brack n}_q F^{(n+m)}$, and $[E,F^{(n+1)}]=F^{(n)}(q^{-n}K-q^{n}K^{-1})$.",
+        "theorem_ir": null,
+        "type": "definition",
+        "typed_transcription": {
+          "assumptions": [],
+          "binders": [],
+          "conclusion": {
+            "args": [
+              {
+                "kind": "raw_term",
+                "text": "U_q(sl_2)"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "defines_quantum_group_Uq_sl2"
+          },
+          "math_objects": [
+            {
+              "name": "U_q(sl_2)",
+              "type": {
+                "kind": "custom",
+                "name": "associative_algebra",
+                "reason": "algebra over the base ring \\Li"
+              }
+            },
+            {
+              "name": "E",
+              "type": {
+                "kind": "custom",
+                "name": "algebra_generator",
+                "reason": "raising generator"
+              }
+            },
+            {
+              "name": "F^{(n)}",
+              "type": {
+                "kind": "custom",
+                "name": "algebra_generator",
+                "reason": "divided-power lowering generators"
+              }
+            },
+            {
+              "name": "K^{\\pm1}",
+              "type": {
+                "kind": "custom",
+                "name": "algebra_generator",
+                "reason": "invertible Cartan generator"
+              }
+            }
+          ],
+          "source_text": "\\begin{defn}[Quantum group over two variables]\nLet  $U_q(sl_2)$ be the algebra over $\\Li$ that is generated by the sequence of elements $\\{ E,\\, F^{(n)}, \\,K^{\\pm1} \\mid n \\in \\mathbb N\\}$ subject to the following relations:\n\\begin{equation*}\n\\begin{aligned}\n&KK^{-1}=K^{-1}K=1; \\ \\ \\ KE=q^2EK; \\ \\ \\ KF^{(n)}=q^{-2n} F^{(n)}K;\\\\\n&F^{(n)}F^{(m)}= {n+m \\brack n}_{q} F^{(n+m)};\\\\\n&[E,F^{(n+1)}]=F^{(n)}(q^{-n}K-q^{n}K^{-1}).\n\\end{aligned}\n\\end{equation*}\n\\end{defn}",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [],
+        "id": "action",
+        "section": "InterpolatingAJ.tex:34116",
+        "source_tex": "\\begin{defn}[Verma module]\n%\nWe define $\\hat{V}$ to be the $\\Li$-module that is generated by a sequence of vectors that we denote as $\\{v_0, v_1,...\\}$. Then, we consider the following $U_q(sl_2)$ action on this module $\\hat{V}$ (see \\cite{JK}):\n%\n\\begin{equation*}%\\label{action}  \n\\begin{cases}\nKv_i=sq^{-2i}v_i,\\\\\nEv_i=v_{i-1},\\\\\n\\displaystyle F^{(n)}v_i = {n+i \\brack i}_q \\prod _{k=0}^{n-1} (sq^{-k-i}-s^{-1} q^{k+i}) v_{i+n}.\n\\end{cases}\n\\end{equation*}\n%\n\\end{defn}",
+        "statement": "Defines the Verma module $\\hat{V}$ as the $\\Li$-module generated by the sequence of vectors $\\{v_0, v_1, \\dots\\}$, equipped with the $U_q(sl_2)$ action $Kv_i = sq^{-2i}v_i$, $Ev_i = v_{i-1}$, and $F^{(n)}v_i = {n+i \\brack i}_q \\prod_{k=0}^{n-1}(sq^{-k-i}-s^{-1}q^{k+i}) v_{i+n}$.",
+        "theorem_ir": null,
+        "type": "definition",
+        "typed_transcription": {
+          "assumptions": [],
+          "binders": [],
+          "conclusion": {
+            "items": [
+              {
+                "args": [
+                  {
+                    "kind": "raw_term",
+                    "text": "\\hat{V}"
+                  }
+                ],
+                "kind": "uninterpreted_predicate",
+                "name": "defines_Verma_module"
+              },
+              {
+                "kind": "equals",
+                "lhs": {
+                  "kind": "raw_term",
+                  "text": "Kv_i"
+                },
+                "rhs": {
+                  "kind": "raw_term",
+                  "text": "sq^{-2i}v_i"
+                }
+              },
+              {
+                "kind": "equals",
+                "lhs": {
+                  "kind": "raw_term",
+                  "text": "Ev_i"
+                },
+                "rhs": {
+                  "kind": "raw_term",
+                  "text": "v_{i-1}"
+                }
+              },
+              {
+                "kind": "equals",
+                "lhs": {
+                  "kind": "raw_term",
+                  "text": "F^{(n)}v_i"
+                },
+                "rhs": {
+                  "kind": "raw_term",
+                  "text": "{n+i \\brack i}_q \\prod_{k=0}^{n-1}(sq^{-k-i}-s^{-1}q^{k+i}) v_{i+n}"
+                }
+              }
+            ],
+            "kind": "and"
+          },
+          "math_objects": [
+            {
+              "name": "\\hat{V}",
+              "type": {
+                "kind": "custom",
+                "name": "module",
+                "reason": "Verma \\Li-module on basis {v_0, v_1, ...}"
+              }
+            },
+            {
+              "name": "v_i",
+              "type": {
+                "kind": "custom",
+                "name": "module_basis_vector",
+                "reason": "generating vectors of \\hat{V}"
+              }
+            },
+            {
+              "name": "U_q(sl_2)",
+              "type": {
+                "kind": "custom",
+                "name": "associative_algebra",
+                "reason": "algebra acting on \\hat{V}"
+              }
+            }
+          ],
+          "source_text": "\\begin{defn}[Verma module]\n%\nWe define $\\hat{V}$ to be the $\\Li$-module that is generated by a sequence of vectors that we denote as $\\{v_0, v_1,...\\}$. Then, we consider the following $U_q(sl_2)$ action on this module $\\hat{V}$ (see \\cite{JK}):\n%\n\\begin{equation*}%\\label{action}  \n\\begin{cases}\nKv_i=sq^{-2i}v_i,\\\\\nEv_i=v_{i-1},\\\\\n\\displaystyle F^{(n)}v_i = {n+i \\brack i}_q \\prod _{k=0}^{n-1} (sq^{-k-i}-s^{-1} q^{k+i}) v_{i+n}.\n\\end{cases}\n\\end{equation*}\n%\n\\end{defn}",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [],
+        "id": "R:R",
+        "section": "InterpolatingAJ.tex:34700",
+        "source_tex": "\\begin{prop}[Generic R-matrix action (\\cite{JK})] \\label{R:R}\nWe have the following action on the basis of the tensor power $\\hat{V}\\otimes \\hat{V}$:\n%\n\\begin{equation}\\label{eq:Rpositive}\nR(v_i\\otimes v_j)= s^{-(i+j)} \\sum_{n=0}^{i} q^{2(i-n)(j+n)}q^{\\frac{n(n-1)}{2}} {n+j \\brack j}_q \\prod_{k=0}^{n-1}(sq^{-k-j}-s^{-1}q^{k+j}) \\ v_{j+n}\\otimes v_{i-n}\n \\end{equation}\n %\n \\begin{equation}\\label{eq:Rnegative}\n R^{-1}(v_i\\otimes v_j)= s^{(i+j)} \\sum_{n=0}^{j} (-1)^{n}q^{-2ij}q^{-\\frac{n(n-1)}{2}} {n+i \\brack i}_q \\prod_{k=0}^{n-1}(sq^{-i-k}-s^{-1}q^{k+i}) \\ v_{j-n}\\otimes v_{i+n}.\n \\end{equation}\n%\nThen, this will lead to a braid group representation, which we denote as follows:\n\\begin{equation}\n\\begin{aligned}\n\\hat{\\rho}_n: B_n \\rightarrow \\Aut_{U_q(sl_2)}\\left(\\hat{V}^{\\otimes n}\\right), \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\\\\n\\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\sigma _i^{\\pm 1}\\mapsto Id_V^{\\otimes (i-1)}\\otimes  R^{\\pm 1}  \\otimes Id_V^{\\otimes (n-i-1)}.\n\\end{aligned}\n\\label{eq:action}\n\\end{equation}\n%\n\\end{prop}",
+        "statement": "The generic R-matrix acts on the basis of the tensor square V̂ ⊗ V̂ by the explicit formulas R(v_i ⊗ v_j) = s^{-(i+j)} Σ_{n=0}^{i} q^{2(i-n)(j+n)} q^{n(n-1)/2} [n+j choose j]_q ∏_{k=0}^{n-1}(s q^{-k-j} - s^{-1} q^{k+j}) v_{j+n} ⊗ v_{i-n} and the corresponding formula for R^{-1}. Consequently σ_i^{±1} ↦ Id_V^{⊗(i-1)} ⊗ R^{±1} ⊗ Id_V^{⊗(n-i-1)} defines a braid group representation ρ̂_n : B_n → Aut_{U_q(sl_2)}(V̂^{⊗n}).",
+        "theorem_ir": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "i",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "j",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "n",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "args": [
+              {
+                "kind": "raw_term",
+                "text": "R(v_i \\otimes v_j)"
+              },
+              {
+                "kind": "raw_term",
+                "text": "R^{-1}(v_i \\otimes v_j)"
+              },
+              {
+                "kind": "raw_term",
+                "text": "\\hat{\\rho}_n: B_n \\to \\Aut_{U_q(sl_2)}(\\hat{V}^{\\otimes n})"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "r_matrix_action_yields_braid_representation",
+            "text": "The R-matrix acts on the basis v_i ⊗ v_j of V̂ ⊗ V̂ by the stated explicit formulas for R and R^{-1}, and σ_i^{±1} ↦ Id^{⊗(i-1)} ⊗ R^{±1} ⊗ Id^{⊗(n-i-1)} defines the braid group representation ρ̂_n : B_n → Aut_{U_q(sl_2)}(V̂^{⊗n})."
+          },
+          "theorem_name": "R:R"
+        },
+        "type": "proposition",
+        "typed_transcription": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "i",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "j",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "n",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "kind": "uninterpreted_predicate",
+            "name": "r_matrix_action_yields_braid_representation",
+            "text": "The R-matrix acts on the basis v_i ⊗ v_j of V̂ ⊗ V̂ by the stated explicit formulas for R and R^{-1}, inducing the braid group representation ρ̂_n via σ_i^{±1} ↦ Id^{⊗(i-1)} ⊗ R^{±1} ⊗ Id^{⊗(n-i-1)}."
+          },
+          "math_objects": [
+            {
+              "name": "R",
+              "type": {
+                "kind": "custom",
+                "name": "R-matrix endomorphism of V̂ ⊗ V̂"
+              }
+            },
+            {
+              "name": "\\hat{V}",
+              "type": {
+                "kind": "custom",
+                "name": "U_q(sl_2)-module (completed Verma module)"
+              }
+            },
+            {
+              "name": "B_n",
+              "type": {
+                "kind": "custom",
+                "name": "braid group on n strands"
+              }
+            },
+            {
+              "name": "\\hat{\\rho}_n",
+              "type": {
+                "kind": "custom",
+                "name": "braid group representation B_n → Aut_{U_q(sl_2)}(V̂^{⊗n})"
+              }
+            }
+          ],
+          "source_text": "\\begin{prop}[Generic R-matrix action (\\cite{JK})] \\label{R:R}\nWe have the following action on the basis of the tensor power $\\hat{V}\\otimes \\hat{V}$:\n%\n\\begin{equation}\\label{eq:Rpositive}\nR(v_i\\otimes v_j)= s^{-(i+j)} \\sum_{n=0}^{i} q^{2(i-n)(j+n)}q^{\\frac{n(n-1)}{2}} {n+j \\brack j}_q \\prod_{k=0}^{n-1}(sq^{-k-j}-s^{-1}q^{k+j}) \\ v_{j+n}\\otimes v_{i-n}\n \\end{equation}\n %\n \\begin{equation}\\label{eq:Rnegative}\n R^{-1}(v_i\\otimes v_j)= s^{(i+j)} \\sum_{n=0}^{j} (-1)^{n}q^{-2ij}q^{-\\frac{n(n-1)}{2}} {n+i \\brack i}_q \\prod_{k=0}^{n-1}(sq^{-i-k}-s^{-1}q^{k+i}) \\ v_{j-n}\\otimes v_{i+n}.\n \\end{equation}\n%\nThen, this will lead to a braid group representation, which we denote as follows:\n\\begin{equation}\n\\begin{aligned}\n\\hat{\\rho}_n: B_n \\rightarrow \\Aut_{U_q(sl_2)}\\left(\\hat{V}^{\\otimes n}\\right), \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\\\\n\\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\ \\sigma _i^{\\pm 1}\\mapsto Id_V^{\\otimes (i-1)}\\otimes  R^{\\pm 1}  \\otimes Id_V^{\\otimes (n-i-1)}.\n\\end{aligned}\n\\label{eq:action}\n\\end{equation}\n%\n\\end{prop}",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [
+          "qideal"
+        ],
+        "id": "def:condition",
+        "section": "InterpolatingAJ.tex:35949",
+        "source_tex": "\\begin{defn}[Condition ideal] \n\\label{def:condition} \nLet us consider the following ideals in $\\Liq$: \n%\n%\\begin{equation}\n%\\cI_{\\cN}:=\\Big( \\varphi_\\cN(q^2)\\cdot (s^2q^{-2\\cN+2}-1) \\Big),\n%\\end{equation}\n%\n\\begin{equation*}\n\\cJ_{\\cN,k}:=\\left( \\varphi_k(q^2),\\  \\ \\prod_{i=0}^{k-2}(s^2q^{-2i}-1) \\right)\n\\end{equation*}\nfor $k| \\cN$, $k \\neq 1$, $2$, $\\cN-1$, $\\cN$ where $\\varphi_k$ is the $k^{th}$ cyclotomic polynomial, and\n\\begin{equation*}\n\\widetilde{\\cJ}_\\cN = \\cI_\\cN \\cap\\!\\!\\!\\! \\bigcap_{\\text{\\scriptsize$\\begin{matrix}\nd | \\cN\\\\[-1pt]\nd\\neq 1, \\cN\n\\end{matrix}$}} \\cJ_{\\cN,d},  \n\\end{equation*}\nwhere $\\cI_\\cN = \\Big( \\varphi_\\cN(q^2)\\cdot (s^2q^{-2\\cN+2}-1) \\Big)$ given by \\eqref{qideal}.  \nWe call $\\widetilde{\\cJ}_\\cN$ the ``condition ideal''.\n\\end{defn}",
+        "statement": "Defines the 'condition ideal' J̃_N in L_q as the intersection of I_N with the ideals J_{N,k} = (φ_k(q²), ∏_{i=0}^{k-2}(s²q^{-2i} - 1)) taken over divisors k | N with k ≠ 1, 2, N-1, N (φ_k denoting the k-th cyclotomic polynomial), where I_N = (φ_N(q²)·(s²q^{-2N+2} - 1)).",
+        "theorem_ir": null,
+        "type": "definition",
+        "typed_transcription": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "k",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "args": [
+              {
+                "kind": "raw_term",
+                "text": "\\widetilde{\\cJ}_\\cN"
+              },
+              {
+                "kind": "raw_term",
+                "text": "\\cI_\\cN \\cap \\bigcap_{d|\\cN, d\\neq 1,\\cN} \\cJ_{\\cN,d}"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "defines_condition_ideal",
+            "text": "J̃_N := I_N ∩ ⋂_{d|N, d≠1,N} J_{N,d}, where J_{N,k} = (φ_k(q²), ∏_{i=0}^{k-2}(s²q^{-2i}-1)) for k|N with k≠1,2,N-1,N, and I_N = (φ_N(q²)·(s²q^{-2N+2}-1)); J̃_N is called the condition ideal."
+          },
+          "math_objects": [
+            {
+              "name": "\\widetilde{\\cJ}_\\cN",
+              "type": {
+                "kind": "custom",
+                "name": "ideal (the condition ideal) in L_q"
+              }
+            },
+            {
+              "name": "\\cJ_{\\cN,k}",
+              "type": {
+                "kind": "custom",
+                "name": "ideal generated by φ_k(q²) and the stated product"
+              }
+            },
+            {
+              "name": "\\cI_\\cN",
+              "type": {
+                "kind": "custom",
+                "name": "principal ideal (φ_N(q²)·(s²q^{-2N+2}-1))"
+              }
+            },
+            {
+              "name": "\\varphi_k",
+              "type": {
+                "kind": "custom",
+                "name": "k-th cyclotomic polynomial"
+              }
+            },
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "source_text": "\\begin{defn}[Condition ideal] \n\\label{def:condition} \nLet us consider the following ideals in $\\Liq$: \n%\n%\\begin{equation}\n%\\cI_{\\cN}:=\\Big( \\varphi_\\cN(q^2)\\cdot (s^2q^{-2\\cN+2}-1) \\Big),\n%\\end{equation}\n%\n\\begin{equation*}\n\\cJ_{\\cN,k}:=\\left( \\varphi_k(q^2),\\  \\ \\prod_{i=0}^{k-2}(s^2q^{-2i}-1) \\right)\n\\end{equation*}\nfor $k| \\cN$, $k \\neq 1$, $2$, $\\cN-1$, $\\cN$ where $\\varphi_k$ is the $k^{th}$ cyclotomic polynomial, and\n\\begin{equation*}\n\\widetilde{\\cJ}_\\cN = \\cI_\\cN \\cap\\!\\!\\!\\! \\bigcap_{\\text{\\scriptsize$\\begin{matrix}\nd | \\cN\\\\[-1pt]\nd\\neq 1, \\cN\n\\end{matrix}$}} \\cJ_{\\cN,d},  \n\\end{equation*}\nwhere $\\cI_\\cN = \\Big( \\varphi_\\cN(q^2)\\cdot (s^2q^{-2\\cN+2}-1) \\Big)$ given by \\eqref{qideal}.  \nWe call $\\widetilde{\\cJ}_\\cN$ the ``condition ideal''.\n\\end{defn}",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [],
+        "id": "def:maximal",
+        "section": "InterpolatingAJ.tex:36724",
+        "source_tex": "\\begin{defn}[Maximal quotient ideal]\n\\label{def:maximal}\nLet us consider as well the ideal\n\\begin{equation}\\label{idealb}\n\\cC_\\cN = \\sum_{\\substack{i,j=0 \\\\ j+n\\geq \\cN,0\\leq  n\\leq i}}^{\\cN-1}\n \\left( {n+j \\brack j}_q \\prod_{k=0}^{n-1}(sq^{-k-j}-s^{-1}q^{k+j}) \\right) \\subseteq \\Liq_{\\cN}\n\\end{equation}\nand call it the ``maximal quotient ideal''.\n\\end{defn}",
+        "statement": "Defines the 'maximal quotient ideal' C_N ⊆ L_{q,N} as the sum, over indices i, j ∈ {0,…,N-1} with j+n ≥ N and 0 ≤ n ≤ i, of the ideal generators ([n+j choose j]_q ∏_{k=0}^{n-1}(s q^{-k-j} - s^{-1} q^{k+j})).",
+        "theorem_ir": null,
+        "type": "definition",
+        "typed_transcription": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "args": [
+              {
+                "kind": "raw_term",
+                "text": "\\cC_\\cN"
+              },
+              {
+                "kind": "raw_term",
+                "text": "\\sum_{i,j=0, j+n\\geq\\cN, 0\\leq n\\leq i}^{\\cN-1} ({n+j \\brack j}_q \\prod_{k=0}^{n-1}(sq^{-k-j}-s^{-1}q^{k+j}))"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "defines_maximal_quotient_ideal",
+            "text": "C_N = Σ_{i,j=0}^{N-1, j+n≥N, 0≤n≤i} ([n+j choose j]_q ∏_{k=0}^{n-1}(s q^{-k-j} - s^{-1} q^{k+j})) ⊆ L_{q,N}, called the maximal quotient ideal."
+          },
+          "math_objects": [
+            {
+              "name": "\\cC_\\cN",
+              "type": {
+                "kind": "custom",
+                "name": "ideal (the maximal quotient ideal) in L_{q,N}"
+              }
+            },
+            {
+              "name": "\\Liq_{\\cN}",
+              "type": {
+                "kind": "custom",
+                "name": "ring L_{q,N}"
+              }
+            },
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "source_text": "\\begin{defn}[Maximal quotient ideal]\n\\label{def:maximal}\nLet us consider as well the ideal\n\\begin{equation}\\label{idealb}\n\\cC_\\cN = \\sum_{\\substack{i,j=0 \\\\ j+n\\geq \\cN,0\\leq  n\\leq i}}^{\\cN-1}\n \\left( {n+j \\brack j}_q \\prod_{k=0}^{n-1}(sq^{-k-j}-s^{-1}q^{k+j}) \\right) \\subseteq \\Liq_{\\cN}\n\\end{equation}\nand call it the ``maximal quotient ideal''.\n\\end{defn}",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [],
+        "id": "eq:EQ",
+        "section": "InterpolatingAJ.tex:37244",
+        "source_tex": "\\begin{prop}[Structural inclusion of condition ideals]\\label{prop:EQ}\nThe  above three mentioned structural ideals coincide and they also coincide with $\\widetilde\\cI_\\cN$, i.e.\n\\begin{equation}\\label{eq:EQ}\n\\cC_\\cN = \\widetilde{\\cJ}_{\\cN} = \\widetilde\\cI_\\cN. \n\\end{equation}\n\\end{prop}",
+        "statement": "The three structural ideals coincide: the maximal quotient ideal C_N, the condition ideal J̃_N, and Ĩ_N are all equal, i.e. C_N = J̃_N = Ĩ_N.",
+        "theorem_ir": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "items": [
+              {
+                "kind": "equals",
+                "lhs": {
+                  "kind": "raw_term",
+                  "text": "\\cC_\\cN"
+                },
+                "rhs": {
+                  "kind": "raw_term",
+                  "text": "\\widetilde{\\cJ}_{\\cN}"
+                }
+              },
+              {
+                "kind": "equals",
+                "lhs": {
+                  "kind": "raw_term",
+                  "text": "\\widetilde{\\cJ}_{\\cN}"
+                },
+                "rhs": {
+                  "kind": "raw_term",
+                  "text": "\\widetilde\\cI_\\cN"
+                }
+              }
+            ],
+            "kind": "and"
+          },
+          "theorem_name": "prop:EQ"
+        },
+        "type": "proposition",
+        "typed_transcription": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "items": [
+              {
+                "kind": "equals",
+                "lhs": {
+                  "kind": "raw_term",
+                  "text": "\\cC_\\cN"
+                },
+                "rhs": {
+                  "kind": "raw_term",
+                  "text": "\\widetilde{\\cJ}_{\\cN}"
+                }
+              },
+              {
+                "kind": "equals",
+                "lhs": {
+                  "kind": "raw_term",
+                  "text": "\\widetilde{\\cJ}_{\\cN}"
+                },
+                "rhs": {
+                  "kind": "raw_term",
+                  "text": "\\widetilde\\cI_\\cN"
+                }
+              }
+            ],
+            "kind": "and"
+          },
+          "math_objects": [
+            {
+              "name": "\\cC_\\cN",
+              "type": {
+                "kind": "custom",
+                "name": "ideal (maximal quotient ideal)"
+              }
+            },
+            {
+              "name": "\\widetilde{\\cJ}_{\\cN}",
+              "type": {
+                "kind": "custom",
+                "name": "ideal (condition ideal)"
+              }
+            },
+            {
+              "name": "\\widetilde\\cI_\\cN",
+              "type": {
+                "kind": "custom",
+                "name": "ideal Ĩ_N"
+              }
+            },
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "source_text": "\\begin{prop}[Structural inclusion of condition ideals]\\label{prop:EQ}\nThe  above three mentioned structural ideals coincide and they also coincide with $\\widetilde\\cI_\\cN$, i.e.\n\\begin{equation}\\label{eq:EQ}\n\\cC_\\cN = \\widetilde{\\cJ}_{\\cN} = \\widetilde\\cI_\\cN. \n\\end{equation}\n\\end{prop}",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [],
+        "id": "eq:EQp",
+        "section": "InterpolatingAJ.tex:37599",
+        "source_tex": "\\begin{coro}\nIf $\\cN$ is prime, then \n\\begin{equation}\\label{eq:EQp}\n\\cC_\\cN = \\widetilde{\\cJ}_{\\cN}  = \\widetilde\\cI_\\cN= \\cI_\\cN.\n\\end{equation}\n\\end{coro}",
+        "statement": "If N is prime, then the maximal quotient ideal, the condition ideal, Ĩ_N, and I_N all coincide: C_N = J̃_N = Ĩ_N = I_N.",
+        "theorem_ir": {
+          "assumptions": [
+            {
+              "args": [
+                {
+                  "kind": "var",
+                  "name": "\\cN"
+                }
+              ],
+              "kind": "uninterpreted_predicate",
+              "name": "is_prime"
+            }
+          ],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "items": [
+              {
+                "kind": "equals",
+                "lhs": {
+                  "kind": "raw_term",
+                  "text": "\\cC_\\cN"
+                },
+                "rhs": {
+                  "kind": "raw_term",
+                  "text": "\\widetilde{\\cJ}_{\\cN}"
+                }
+              },
+              {
+                "kind": "equals",
+                "lhs": {
+                  "kind": "raw_term",
+                  "text": "\\widetilde{\\cJ}_{\\cN}"
+                },
+                "rhs": {
+                  "kind": "raw_term",
+                  "text": "\\widetilde\\cI_\\cN"
+                }
+              },
+              {
+                "kind": "equals",
+                "lhs": {
+                  "kind": "raw_term",
+                  "text": "\\widetilde\\cI_\\cN"
+                },
+                "rhs": {
+                  "kind": "raw_term",
+                  "text": "\\cI_\\cN"
+                }
+              }
+            ],
+            "kind": "and"
+          },
+          "theorem_name": "eq:EQp"
+        },
+        "type": "corollary",
+        "typed_transcription": {
+          "assumptions": [
+            {
+              "args": [
+                {
+                  "kind": "var",
+                  "name": "\\cN"
+                }
+              ],
+              "kind": "uninterpreted_predicate",
+              "name": "is_prime"
+            }
+          ],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "items": [
+              {
+                "kind": "equals",
+                "lhs": {
+                  "kind": "raw_term",
+                  "text": "\\cC_\\cN"
+                },
+                "rhs": {
+                  "kind": "raw_term",
+                  "text": "\\widetilde{\\cJ}_{\\cN}"
+                }
+              },
+              {
+                "kind": "equals",
+                "lhs": {
+                  "kind": "raw_term",
+                  "text": "\\widetilde{\\cJ}_{\\cN}"
+                },
+                "rhs": {
+                  "kind": "raw_term",
+                  "text": "\\widetilde\\cI_\\cN"
+                }
+              },
+              {
+                "kind": "equals",
+                "lhs": {
+                  "kind": "raw_term",
+                  "text": "\\widetilde\\cI_\\cN"
+                },
+                "rhs": {
+                  "kind": "raw_term",
+                  "text": "\\cI_\\cN"
+                }
+              }
+            ],
+            "kind": "and"
+          },
+          "math_objects": [
+            {
+              "name": "\\cC_\\cN",
+              "type": {
+                "kind": "custom",
+                "name": "ideal (maximal quotient ideal)"
+              }
+            },
+            {
+              "name": "\\widetilde{\\cJ}_{\\cN}",
+              "type": {
+                "kind": "custom",
+                "name": "ideal (condition ideal)"
+              }
+            },
+            {
+              "name": "\\widetilde\\cI_\\cN",
+              "type": {
+                "kind": "custom",
+                "name": "ideal Ĩ_N"
+              }
+            },
+            {
+              "name": "\\cI_\\cN",
+              "type": {
+                "kind": "custom",
+                "name": "principal ideal I_N"
+              }
+            },
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "source_text": "\\begin{coro}\nIf $\\cN$ is prime, then \n\\begin{equation}\\label{eq:EQp}\n\\cC_\\cN = \\widetilde{\\cJ}_{\\cN}  = \\widetilde\\cI_\\cN= \\cI_\\cN.\n\\end{equation}\n\\end{coro}",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [],
+        "id": "def:ring",
+        "section": "InterpolatingAJ.tex:38146",
+        "source_tex": "\\begin{defn}[Quotient ring at non prime levels] \n\\label{def:ring}\nLet us consider the following quotient ring, and call it ``maximal quotient ring'':\n\\begin{equation*}\n\\widetilde{\\Li}_{\\cN}=\\Q[q^{\\pm2}, s^{\\pm 2}] \\ / \n{\\widetilde{\\cI}_\\cN}=\n\\Q[q^{\\pm2}, s^{\\pm 2}] \\ / \n{\\cC_\\cN}.\n\\end{equation*}\n\\end{defn}",
+        "statement": "Defines the 'maximal quotient ring' L̃_N = Q[q^{±2}, s^{±2}] / Ĩ_N = Q[q^{±2}, s^{±2}] / C_N (the two quotients being equal by the structural inclusion of ideals).",
+        "theorem_ir": null,
+        "type": "definition",
+        "typed_transcription": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "args": [
+              {
+                "kind": "raw_term",
+                "text": "\\widetilde{\\Li}_{\\cN}"
+              },
+              {
+                "kind": "raw_term",
+                "text": "\\Q[q^{\\pm2}, s^{\\pm 2}] / \\widetilde{\\cI}_\\cN"
+              },
+              {
+                "kind": "raw_term",
+                "text": "\\Q[q^{\\pm2}, s^{\\pm 2}] / \\cC_\\cN"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "defines_maximal_quotient_ring",
+            "text": "L̃_N := Q[q^{±2}, s^{±2}] / Ĩ_N = Q[q^{±2}, s^{±2}] / C_N, called the maximal quotient ring."
+          },
+          "math_objects": [
+            {
+              "name": "\\widetilde{\\Li}_{\\cN}",
+              "type": {
+                "kind": "custom",
+                "name": "quotient ring (maximal quotient ring)"
+              }
+            },
+            {
+              "name": "\\Q[q^{\\pm2}, s^{\\pm 2}]",
+              "type": {
+                "kind": "custom",
+                "name": "ring of Laurent polynomials over Q in q^{±2}, s^{±2}"
+              }
+            },
+            {
+              "name": "\\widetilde{\\cI}_\\cN",
+              "type": {
+                "kind": "custom",
+                "name": "ideal Ĩ_N"
+              }
+            },
+            {
+              "name": "\\cC_\\cN",
+              "type": {
+                "kind": "custom",
+                "name": "ideal (maximal quotient ideal)"
+              }
+            },
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "source_text": "\\begin{defn}[Quotient ring at non prime levels] \n\\label{def:ring}\nLet us consider the following quotient ring, and call it ``maximal quotient ring'':\n\\begin{equation*}\n\\widetilde{\\Li}_{\\cN}=\\Q[q^{\\pm2}, s^{\\pm 2}] \\ / \n{\\widetilde{\\cI}_\\cN}=\n\\Q[q^{\\pm2}, s^{\\pm 2}] \\ / \n{\\cC_\\cN}.\n\\end{equation*}\n\\end{defn}",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [
+          "eq:action"
+        ],
+        "id": "InterpolatingAJ_tex:prop:39883",
+        "section": "InterpolatingAJ.tex:39883",
+        "source_tex": "\\begin{prop}[Action on the higher level $\\cN$ module over the quotient ring] \nThe action $\\hat{\\rho}_n$ given by \\eqref{eq:action} specialized to the level $\\cN$ quotient ring $\\widetilde\\Li_\\cN$ leads to a well defined induced braid group action:\n$$ \\widetilde{\\rho}_{\\cN,n}  :B_n \\rightarrow \\Aut_{\\widetilde{\\Li}_{\\cN}} \\left( \\widetilde{V}_{\\cN}^{\\otimes n}\\right). $$\n\\end{prop}",
+        "statement": "The braid action \\hat{\\rho}_n defined in equation (eq:action), when specialized to the level \\cN quotient ring \\widetilde{\\Li}_\\cN, descends to a well-defined induced braid group action \\widetilde{\\rho}_{\\cN,n} : B_n \\to \\Aut_{\\widetilde{\\Li}_\\cN}(\\widetilde{V}_\\cN^{\\otimes n}).",
+        "theorem_ir": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "n",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "args": [
+              {
+                "kind": "var",
+                "name": "\\widetilde{\\rho}_{\\cN,n}"
+              },
+              {
+                "kind": "var",
+                "name": "B_n"
+              },
+              {
+                "kind": "var",
+                "name": "\\Aut_{\\widetilde{\\Li}_\\cN}(\\widetilde{V}_\\cN^{\\otimes n})"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "induced_braid_action_well_defined"
+          },
+          "theorem_name": "InterpolatingAJ_tex:prop:39883"
+        },
+        "type": "proposition",
+        "typed_transcription": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "n",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "args": [
+              {
+                "kind": "var",
+                "name": "\\widetilde{\\rho}_{\\cN,n}"
+              },
+              {
+                "kind": "var",
+                "name": "B_n"
+              },
+              {
+                "kind": "var",
+                "name": "\\Aut_{\\widetilde{\\Li}_\\cN}(\\widetilde{V}_\\cN^{\\otimes n})"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "induced_braid_action_well_defined"
+          },
+          "math_objects": [
+            {
+              "name": "\\hat{\\rho}_n",
+              "type": {
+                "kind": "custom",
+                "name": "braid group action on tensor module"
+              }
+            },
+            {
+              "name": "\\widetilde{\\rho}_{\\cN,n}",
+              "type": {
+                "kind": "custom",
+                "name": "induced braid group homomorphism B_n -> Aut(V_N^{tensor n})"
+              }
+            },
+            {
+              "name": "B_n",
+              "type": {
+                "kind": "custom",
+                "name": "braid group on n strands"
+              }
+            },
+            {
+              "name": "\\widetilde{\\Li}_\\cN",
+              "type": {
+                "kind": "custom",
+                "name": "level N quotient ring"
+              }
+            },
+            {
+              "name": "\\widetilde{V}_\\cN^{\\otimes n}",
+              "type": {
+                "kind": "custom",
+                "name": "n-fold tensor power of level N module"
+              }
+            }
+          ],
+          "source_text": "\\begin{prop}[Action on the higher level $\\cN$ module over the quotient ring] \nThe action $\\hat{\\rho}_n$ given by \\eqref{eq:action} specialized to the level $\\cN$ quotient ring $\\widetilde\\Li_\\cN$ leads to a well defined induced braid group action:\n$$ \\widetilde{\\rho}_{\\cN,n}  :B_n \\rightarrow \\Aut_{\\widetilde{\\Li}_{\\cN}} \\left( \\widetilde{V}_{\\cN}^{\\otimes n}\\right). $$\n\\end{prop}",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [],
+        "id": "eq:qtcondition",
+        "section": "InterpolatingAJ.tex:43694",
+        "source_tex": "\\begin{defn}\nA quantum partial trace is a map\n$$\n\\qptr_{\\widetilde{V}_{\\cN}^{\\otimes n}}:\\operatorname{End}(\\widetilde{V}_{\\cN}^{\\otimes (n+1)})\\rightarrow \\operatorname{End}(\\widetilde{V}_{\\cN}^{\\otimes n})\n$$\n%\na map which has the form\n\\[\n\\qptr_{\\widetilde{V}_{\\cN}^{\\otimes n}}(f)_{v_{i_1,i_2, \\cdots, i_n}}^{v_{j_1,j_2, \\cdots, j_n}}\n:=\\sum_{j=0}^{\\cN-1}\ng_j(q, s) \\cdot f_{v_{i_1,i_2, \\cdots, i_n,j}}^{v_{j_1,j_2, \\cdots, j_n,j}}\n\\]\n%\nand which satisfies\n%\n\\begin{equation}\n\\qptr_{\\widetilde{V}_{\\cN}^{\\otimes n}}(\\widetilde\\rho_{\\cN,{n+1}}(\\sigma_n\\beta_n)) \n=\na \\widetilde\\rho_{\\cN,n}(\\beta_n), \\quad\n\\qptr_{\\widetilde{V}_{\\cN}^{\\otimes n}}(\\widetilde\\rho_{\\cN,{n+1}}(\\sigma_n^{-1}\\beta_n) )\n=\na^{-1} \\widetilde\\rho_{\\cN,n}(\\beta_n)\n\\label{eq:qtcondition}\n\\end{equation}\n%\n for {any }$\\beta_n \\in B_n$ and a non-zero element $a \\in \\widetilde\\Li_\\cN$.  \n\\end{defn}",
+        "statement": "A quantum partial trace is a map \\qptr : \\operatorname{End}(\\widetilde{V}_\\cN^{\\otimes (n+1)}) \\to \\operatorname{End}(\\widetilde{V}_\\cN^{\\otimes n}) of the prescribed entrywise summation form (with coefficients g_j(q,s)) that satisfies the Markov-type conditions \\qptr(\\widetilde{\\rho}_{\\cN,n+1}(\\sigma_n\\beta_n)) = a\\,\\widetilde{\\rho}_{\\cN,n}(\\beta_n) and \\qptr(\\widetilde{\\rho}_{\\cN,n+1}(\\sigma_n^{-1}\\beta_n)) = a^{-1}\\widetilde{\\rho}_{\\cN,n}(\\beta_n) for every \\beta_n \\in B_n and some non-zero a \\in \\widetilde{\\Li}_\\cN.",
+        "theorem_ir": null,
+        "type": "definition",
+        "typed_transcription": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "n",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "args": [
+              {
+                "kind": "var",
+                "name": "\\qptr_{\\widetilde{V}_\\cN^{\\otimes n}}"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "is_quantum_partial_trace"
+          },
+          "math_objects": [
+            {
+              "name": "\\qptr_{\\widetilde{V}_\\cN^{\\otimes n}}",
+              "type": {
+                "kind": "custom",
+                "name": "quantum partial trace map End(V^{(n+1)}) -> End(V^{n})"
+              }
+            },
+            {
+              "name": "g_j(q,s)",
+              "type": {
+                "kind": "custom",
+                "name": "coefficient in the quotient ring"
+              }
+            },
+            {
+              "name": "a",
+              "type": {
+                "kind": "custom",
+                "name": "non-zero element of level N quotient ring"
+              }
+            },
+            {
+              "name": "\\beta_n",
+              "type": {
+                "kind": "custom",
+                "name": "braid in B_n"
+              }
+            },
+            {
+              "name": "\\sigma_n",
+              "type": {
+                "kind": "custom",
+                "name": "braid group generator"
+              }
+            }
+          ],
+          "source_text": "\\begin{defn}\nA quantum partial trace is a map\n$$\n\\qptr_{\\widetilde{V}_{\\cN}^{\\otimes n}}:\\operatorname{End}(\\widetilde{V}_{\\cN}^{\\otimes (n+1)})\\rightarrow \\operatorname{End}(\\widetilde{V}_{\\cN}^{\\otimes n})\n$$\n%\na map which has the form\n\\[\n\\qptr_{\\widetilde{V}_{\\cN}^{\\otimes n}}(f)_{v_{i_1,i_2, \\cdots, i_n}}^{v_{j_1,j_2, \\cdots, j_n}}\n:=\\sum_{j=0}^{\\cN-1}\ng_j(q, s) \\cdot f_{v_{i_1,i_2, \\cdots, i_n,j}}^{v_{j_1,j_2, \\cdots, j_n,j}}\n\\]\n%\nand which satisfies\n%\n\\begin{equation}\n\\qptr_{\\widetilde{V}_{\\cN}^{\\otimes n}}(\\widetilde\\rho_{\\cN,{n+1}}(\\sigma_n\\beta_n)) \n=\na \\widetilde\\rho_{\\cN,n}(\\beta_n), \\quad\n\\qptr_{\\widetilde{V}_{\\cN}^{\\otimes n}}(\\widetilde\\rho_{\\cN,{n+1}}(\\sigma_n^{-1}\\beta_n) )\n=\na^{-1} \\widetilde\\rho_{\\cN,n}(\\beta_n)\n\\label{eq:qtcondition}\n\\end{equation}\n%\n for {any }$\\beta_n \\in B_n$ and a non-zero element $a \\in \\widetilde\\Li_\\cN$.  \n\\end{defn}",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [],
+        "id": "thm:uqtr1",
+        "section": "InterpolatingAJ.tex:44568",
+        "source_tex": "\\begin{thm}[Unique level $\\cN$ quantum trace]\\label{thm:uqtr1}\nThere exists a unique quantum trace $\\qptr_{V_{\\cN}^{\\otimes n}}$, up to a scalar multiple, \nfor the level $\\cN$ sequence of braid group representations \n  $\n \\{\\widetilde\\rho_{\\cN,n}\\mid n \\in \\N \\}\n $.\n In other words, {for any choice of a quantum trace associated to $\\widetilde{V}_{\\cN}^{\\otimes n}$} there is a non-zero element $g_0(q, s)\\in \\Li_\\cN$ such that\n\\[\n\\qptr_{\\widetilde{V}_{\\cN}^{\\otimes n}}(f)_{v_{i_1,i_2, \\cdots, i_n}}^{v_{j_1,j_2, \\cdots, j_n}}\n:=\\sum_{j=0}^{\\cN-1}\ng_0(q, s)q^{-2i} \\cdot f_{v_{i_1,i_2, \\cdots, i_n,j}}^{v_{j_1,j_2, \\cdots, j_n,j}}.\n\\]\n\\end{thm}",
+        "statement": "There exists a unique quantum trace \\qptr_{V_\\cN^{\\otimes n}}, up to a scalar multiple, for the level \\cN sequence of braid group representations \\{\\widetilde{\\rho}_{\\cN,n} \\mid n \\in \\N\\}. Equivalently, for any quantum trace associated to \\widetilde{V}_\\cN^{\\otimes n} there is a non-zero g_0(q,s) \\in \\Li_\\cN such that \\qptr(f) is given entrywise by \\sum_{j=0}^{\\cN-1} g_0(q,s) q^{-2i} f.",
+        "theorem_ir": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "n",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "binders": [
+              {
+                "name": "\\qptr_{V_\\cN^{\\otimes n}}",
+                "type": {
+                  "kind": "custom",
+                  "name": "quantum trace"
+                }
+              }
+            ],
+            "body": {
+              "args": [
+                {
+                  "kind": "var",
+                  "name": "\\qptr_{V_\\cN^{\\otimes n}}"
+                },
+                {
+                  "kind": "var",
+                  "name": "\\{\\widetilde{\\rho}_{\\cN,n}\\}"
+                }
+              ],
+              "kind": "uninterpreted_predicate",
+              "name": "unique_quantum_trace_up_to_scalar"
+            },
+            "kind": "exists"
+          },
+          "theorem_name": "thm:uqtr1"
+        },
+        "type": "theorem",
+        "typed_transcription": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "n",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "args": [
+              {
+                "kind": "var",
+                "name": "\\qptr_{V_\\cN^{\\otimes n}}"
+              },
+              {
+                "kind": "var",
+                "name": "\\{\\widetilde{\\rho}_{\\cN,n}\\}"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "exists_unique_quantum_trace_up_to_scalar"
+          },
+          "math_objects": [
+            {
+              "name": "\\qptr_{V_\\cN^{\\otimes n}}",
+              "type": {
+                "kind": "custom",
+                "name": "quantum trace for the level N braid representation sequence"
+              }
+            },
+            {
+              "name": "\\widetilde{\\rho}_{\\cN,n}",
+              "type": {
+                "kind": "custom",
+                "name": "level N braid group representation"
+              }
+            },
+            {
+              "name": "g_0(q,s)",
+              "type": {
+                "kind": "custom",
+                "name": "non-zero element of \\Li_\\cN"
+              }
+            }
+          ],
+          "source_text": "\\begin{thm}[Unique level $\\cN$ quantum trace]\\label{thm:uqtr1}\nThere exists a unique quantum trace $\\qptr_{V_{\\cN}^{\\otimes n}}$, up to a scalar multiple, \nfor the level $\\cN$ sequence of braid group representations \n  $\n \\{\\widetilde\\rho_{\\cN,n}\\mid n \\in \\N \\}\n $.\n In other words, {for any choice of a quantum trace associated to $\\widetilde{V}_{\\cN}^{\\otimes n}$} there is a non-zero element $g_0(q, s)\\in \\Li_\\cN$ such that\n\\[\n\\qptr_{\\widetilde{V}_{\\cN}^{\\otimes n}}(f)_{v_{i_1,i_2, \\cdots, i_n}}^{v_{j_1,j_2, \\cdots, j_n}}\n:=\\sum_{j=0}^{\\cN-1}\ng_0(q, s)q^{-2i} \\cdot f_{v_{i_1,i_2, \\cdots, i_n,j}}^{v_{j_1,j_2, \\cdots, j_n,j}}.\n\\]\n\\end{thm}",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [],
+        "id": "eq:sum1",
+        "section": "InterpolatingAJ.tex:49037",
+        "source_tex": "\\begin{lem}\\label{lem:qptr}\nThe following holds for any $M \\in \\{0,\\dots,\\cN-2\\}$:\n\\begin{equation}\n\\sum_{j=0}^{M}q^{-2j} \\cdot \n\\left(R_{v_{M,j}}^{v_{M,j}}\n-\nR_{v_{M+1,j}}^{v_{M+1,j}}\\right)\n=\nq^{-2(M+1)}R_{v_{M+1,M+1}}^{v_{M+1,M+1}}.\n\\label{eq:sum1}\n\\end{equation}\n\\end{lem}",
+        "statement": "For any M \\in \\{0,\\dots,\\cN-2\\}, the identity \\sum_{j=0}^{M} q^{-2j} (R_{v_{M,j}}^{v_{M,j}} - R_{v_{M+1,j}}^{v_{M+1,j}}) = q^{-2(M+1)} R_{v_{M+1,M+1}}^{v_{M+1,M+1}} holds.",
+        "theorem_ir": {
+          "assumptions": [
+            {
+              "kind": "less_equal",
+              "lhs": {
+                "kind": "var",
+                "name": "M"
+              },
+              "rhs": {
+                "kind": "sub",
+                "lhs": {
+                  "kind": "var",
+                  "name": "\\cN"
+                },
+                "rhs": {
+                  "kind": "nat_lit",
+                  "value": 2
+                }
+              }
+            }
+          ],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "M",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "kind": "equals",
+            "lhs": {
+              "kind": "raw_term",
+              "text": "\\sum_{j=0}^{M}q^{-2j}\\left(R_{v_{M,j}}^{v_{M,j}}-R_{v_{M+1,j}}^{v_{M+1,j}}\\right)"
+            },
+            "rhs": {
+              "kind": "raw_term",
+              "text": "q^{-2(M+1)}R_{v_{M+1,M+1}}^{v_{M+1,M+1}}"
+            }
+          },
+          "theorem_name": "lem:qptr"
+        },
+        "type": "lemma",
+        "typed_transcription": {
+          "assumptions": [
+            {
+              "kind": "less_equal",
+              "lhs": {
+                "kind": "var",
+                "name": "M"
+              },
+              "rhs": {
+                "kind": "sub",
+                "lhs": {
+                  "kind": "var",
+                  "name": "\\cN"
+                },
+                "rhs": {
+                  "kind": "nat_lit",
+                  "value": 2
+                }
+              }
+            }
+          ],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "M",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "kind": "equals",
+            "lhs": {
+              "kind": "raw_term",
+              "text": "\\sum_{j=0}^{M}q^{-2j}\\left(R_{v_{M,j}}^{v_{M,j}}-R_{v_{M+1,j}}^{v_{M+1,j}}\\right)"
+            },
+            "rhs": {
+              "kind": "raw_term",
+              "text": "q^{-2(M+1)}R_{v_{M+1,M+1}}^{v_{M+1,M+1}}"
+            }
+          },
+          "math_objects": [
+            {
+              "name": "M",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "q",
+              "type": {
+                "kind": "custom",
+                "name": "quantum parameter"
+              }
+            },
+            {
+              "name": "R_{v_{a,b}}^{v_{a,b}}",
+              "type": {
+                "kind": "custom",
+                "name": "diagonal R-matrix entry"
+              }
+            }
+          ],
+          "source_text": "\\begin{lem}\\label{lem:qptr}\nThe following holds for any $M \\in \\{0,\\dots,\\cN-2\\}$:\n\\begin{equation}\n\\sum_{j=0}^{M}q^{-2j} \\cdot \n\\left(R_{v_{M,j}}^{v_{M,j}}\n-\nR_{v_{M+1,j}}^{v_{M+1,j}}\\right)\n=\nq^{-2(M+1)}R_{v_{M+1,M+1}}^{v_{M+1,M+1}}.\n\\label{eq:sum1}\n\\end{equation}\n\\end{lem}",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [],
+        "id": "O",
+        "section": "InterpolatingAJ.tex:53584",
+        "source_tex": "\\begin{defn}\n\\label{O}\nFor $\\cN \\in \\mathbb N$ and for $\\beta_n \\in B_n$ let us consider \n$\n\\widetilde\\Omega(\\beta_n)(q,s) \\in \\Li_{\\cN}\n$\n obtained from the above braid action via the quantum partial trace on the first component:\n\\begin{equation*}\n\\widetilde\\Omega_{\\cN}(\\beta_n)(q,s)\n= \ns^{w(\\beta_n)(\\cN-1)}q^{-w(\\beta_n){\\cN(\\cN-1)}} \\cdot \n\\qt_{\\widetilde{V}_{\\cN}}\\left( \\widetilde\\rho_{\\cN,n}(\\beta_n)\n\\right)_{v_0}^{v_0} \\in \\Li_{\\cN}.\n\\end{equation*}\n\\end{defn}",
+        "statement": "For \\cN \\in \\mathbb{N} and \\beta_n \\in B_n, define \\widetilde{\\Omega}_\\cN(\\beta_n)(q,s) \\in \\Li_\\cN, obtained from the braid action via the quantum partial trace on the first component, by \\widetilde{\\Omega}_\\cN(\\beta_n)(q,s) = s^{w(\\beta_n)(\\cN-1)} q^{-w(\\beta_n)\\cN(\\cN-1)} \\cdot \\qt_{\\widetilde{V}_\\cN}(\\widetilde{\\rho}_{\\cN,n}(\\beta_n))_{v_0}^{v_0}.",
+        "theorem_ir": null,
+        "type": "definition",
+        "typed_transcription": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "n",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "\\beta_n",
+              "type": {
+                "kind": "custom",
+                "name": "braid in B_n"
+              }
+            }
+          ],
+          "conclusion": {
+            "args": [
+              {
+                "kind": "var",
+                "name": "\\widetilde{\\Omega}_\\cN(\\beta_n)(q,s)"
+              },
+              {
+                "kind": "raw_term",
+                "text": "s^{w(\\beta_n)(\\cN-1)}q^{-w(\\beta_n)\\cN(\\cN-1)}\\cdot\\qt_{\\widetilde{V}_\\cN}(\\widetilde{\\rho}_{\\cN,n}(\\beta_n))_{v_0}^{v_0}"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "defines_Omega_invariant"
+          },
+          "math_objects": [
+            {
+              "name": "\\widetilde{\\Omega}_\\cN(\\beta_n)(q,s)",
+              "type": {
+                "kind": "custom",
+                "name": "element of \\Li_\\cN obtained by quantum partial trace"
+              }
+            },
+            {
+              "name": "\\beta_n",
+              "type": {
+                "kind": "custom",
+                "name": "braid in B_n"
+              }
+            },
+            {
+              "name": "w(\\beta_n)",
+              "type": {
+                "kind": "int",
+                "name": "writhe / exponent sum of the braid"
+              }
+            },
+            {
+              "name": "\\qt_{\\widetilde{V}_\\cN}",
+              "type": {
+                "kind": "custom",
+                "name": "quantum trace on first component"
+              }
+            },
+            {
+              "name": "\\widetilde{\\rho}_{\\cN,n}",
+              "type": {
+                "kind": "custom",
+                "name": "level N braid group representation"
+              }
+            }
+          ],
+          "source_text": "\\begin{defn}\n\\label{O}\nFor $\\cN \\in \\mathbb N$ and for $\\beta_n \\in B_n$ let us consider \n$\n\\widetilde\\Omega(\\beta_n)(q,s) \\in \\Li_{\\cN}\n$\n obtained from the above braid action via the quantum partial trace on the first component:\n\\begin{equation*}\n\\widetilde\\Omega_{\\cN}(\\beta_n)(q,s)\n= \ns^{w(\\beta_n)(\\cN-1)}q^{-w(\\beta_n){\\cN(\\cN-1)}} \\cdot \n\\qt_{\\widetilde{V}_{\\cN}}\\left( \\widetilde\\rho_{\\cN,n}(\\beta_n)\n\\right)_{v_0}^{v_0} \\in \\Li_{\\cN}.\n\\end{equation*}\n\\end{defn}",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [],
+        "id": "thm:THEOREMG",
+        "section": "InterpolatingAJ.tex:54191",
+        "source_tex": "\\begin{thm}[{\\bf Level $\\cN$ maximal universal invariant}]\\label{thm:THEOREMG}\n%\nFor any $\\cN \\in \\N$, $\\cN \\geq 2$, $\\widetilde{\\Li}_{\\cN}$ is the largest quotient of the polynomial ring $\\Liq$ with the property that the image of the quantum trace in this quotient gives a knot invariant. \n\\par\nMore precisely, the image of the level $\\cN$ quantum trace in this quotient ring $\\widetilde{\\Omega}_{\\cN}(L)(q,s) \\in \\widetilde{\\Li}_{\\cN}$ is a knot invariant. \nAlso, if $\\widetilde{\\Li}_{\\cN}'$ is a quotient of $ \\Li$ in which $\\widetilde{\\Omega}_{\\cN}(\\beta_n)$ is a knot invariant, then the quotient onto $\\widetilde{\\Li}_{\\cN}'$ factors through $\\widetilde{\\Li}_{\\cN}$.\n\\end{thm}",
+        "statement": "For any \\cN \\in \\N with \\cN \\geq 2, \\widetilde{\\Li}_\\cN is the largest quotient of the polynomial ring \\Liq with the property that the image of the quantum trace in this quotient yields a knot invariant. More precisely, the image of the level \\cN quantum trace \\widetilde{\\Omega}_\\cN(L)(q,s) \\in \\widetilde{\\Li}_\\cN is a knot invariant; and if \\widetilde{\\Li}_\\cN' is any quotient of \\Li in which \\widetilde{\\Omega}_\\cN(\\beta_n) is a knot invariant, then the quotient onto \\widetilde{\\Li}_\\cN' factors through \\widetilde{\\Li}_\\cN.",
+        "theorem_ir": {
+          "assumptions": [
+            {
+              "kind": "greater_equal",
+              "lhs": {
+                "kind": "var",
+                "name": "\\cN"
+              },
+              "rhs": {
+                "kind": "nat_lit",
+                "value": 2
+              }
+            }
+          ],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "items": [
+              {
+                "args": [
+                  {
+                    "kind": "var",
+                    "name": "\\widetilde{\\Li}_\\cN"
+                  },
+                  {
+                    "kind": "var",
+                    "name": "\\Liq"
+                  }
+                ],
+                "kind": "uninterpreted_predicate",
+                "name": "is_largest_quotient_yielding_knot_invariant"
+              },
+              {
+                "args": [
+                  {
+                    "kind": "var",
+                    "name": "\\widetilde{\\Omega}_\\cN(L)(q,s)"
+                  }
+                ],
+                "kind": "uninterpreted_predicate",
+                "name": "is_knot_invariant"
+              },
+              {
+                "binders": [
+                  {
+                    "name": "\\widetilde{\\Li}_\\cN'",
+                    "type": {
+                      "kind": "custom",
+                      "name": "quotient ring of \\Li"
+                    }
+                  }
+                ],
+                "body": {
+                  "conclusion": {
+                    "args": [
+                      {
+                        "kind": "var",
+                        "name": "\\widetilde{\\Li}_\\cN'"
+                      },
+                      {
+                        "kind": "var",
+                        "name": "\\widetilde{\\Li}_\\cN"
+                      }
+                    ],
+                    "kind": "uninterpreted_predicate",
+                    "name": "quotient_factors_through"
+                  },
+                  "kind": "implies",
+                  "premise": {
+                    "args": [
+                      {
+                        "kind": "var",
+                        "name": "\\widetilde{\\Omega}_\\cN(\\beta_n)"
+                      },
+                      {
+                        "kind": "var",
+                        "name": "\\widetilde{\\Li}_\\cN'"
+                      }
+                    ],
+                    "kind": "uninterpreted_predicate",
+                    "name": "is_knot_invariant_in_quotient"
+                  }
+                },
+                "kind": "forall"
+              }
+            ],
+            "kind": "and"
+          },
+          "theorem_name": "thm:THEOREMG"
+        },
+        "type": "theorem",
+        "typed_transcription": {
+          "assumptions": [
+            {
+              "kind": "greater_equal",
+              "lhs": {
+                "kind": "var",
+                "name": "\\cN"
+              },
+              "rhs": {
+                "kind": "nat_lit",
+                "value": 2
+              }
+            }
+          ],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "items": [
+              {
+                "args": [
+                  {
+                    "kind": "var",
+                    "name": "\\widetilde{\\Li}_\\cN"
+                  },
+                  {
+                    "kind": "var",
+                    "name": "\\Liq"
+                  }
+                ],
+                "kind": "uninterpreted_predicate",
+                "name": "is_largest_quotient_yielding_knot_invariant"
+              },
+              {
+                "args": [
+                  {
+                    "kind": "var",
+                    "name": "\\widetilde{\\Omega}_\\cN(L)(q,s)"
+                  }
+                ],
+                "kind": "uninterpreted_predicate",
+                "name": "is_knot_invariant"
+              },
+              {
+                "binders": [
+                  {
+                    "name": "\\widetilde{\\Li}_\\cN'",
+                    "type": {
+                      "kind": "custom",
+                      "name": "quotient ring of \\Li"
+                    }
+                  }
+                ],
+                "body": {
+                  "conclusion": {
+                    "args": [
+                      {
+                        "kind": "var",
+                        "name": "\\widetilde{\\Li}_\\cN'"
+                      },
+                      {
+                        "kind": "var",
+                        "name": "\\widetilde{\\Li}_\\cN"
+                      }
+                    ],
+                    "kind": "uninterpreted_predicate",
+                    "name": "quotient_factors_through"
+                  },
+                  "kind": "implies",
+                  "premise": {
+                    "args": [
+                      {
+                        "kind": "var",
+                        "name": "\\widetilde{\\Omega}_\\cN(\\beta_n)"
+                      },
+                      {
+                        "kind": "var",
+                        "name": "\\widetilde{\\Li}_\\cN'"
+                      }
+                    ],
+                    "kind": "uninterpreted_predicate",
+                    "name": "is_knot_invariant_in_quotient"
+                  }
+                },
+                "kind": "forall"
+              }
+            ],
+            "kind": "and"
+          },
+          "math_objects": [
+            {
+              "name": "\\widetilde{\\Li}_\\cN",
+              "type": {
+                "kind": "custom",
+                "name": "level N quotient ring"
+              }
+            },
+            {
+              "name": "\\Liq",
+              "type": {
+                "kind": "custom",
+                "name": "polynomial ring"
+              }
+            },
+            {
+              "name": "\\widetilde{\\Omega}_\\cN(L)(q,s)",
+              "type": {
+                "kind": "custom",
+                "name": "image of level N quantum trace; knot invariant"
+              }
+            },
+            {
+              "name": "\\widetilde{\\Li}_\\cN'",
+              "type": {
+                "kind": "custom",
+                "name": "alternative quotient ring of \\Li"
+              }
+            },
+            {
+              "name": "L",
+              "type": {
+                "kind": "custom",
+                "name": "knot / link"
+              }
+            }
+          ],
+          "source_text": "\\begin{thm}[{\\bf Level $\\cN$ maximal universal invariant}]\\label{thm:THEOREMG}\n%\nFor any $\\cN \\in \\N$, $\\cN \\geq 2$, $\\widetilde{\\Li}_{\\cN}$ is the largest quotient of the polynomial ring $\\Liq$ with the property that the image of the quantum trace in this quotient gives a knot invariant. \n\\par\nMore precisely, the image of the level $\\cN$ quantum trace in this quotient ring $\\widetilde{\\Omega}_{\\cN}(L)(q,s) \\in \\widetilde{\\Li}_{\\cN}$ is a knot invariant. \nAlso, if $\\widetilde{\\Li}_{\\cN}'$ is a quotient of $ \\Li$ in which $\\widetilde{\\Omega}_{\\cN}(\\beta_n)$ is a knot invariant, then the quotient onto $\\widetilde{\\Li}_{\\cN}'$ factors through $\\widetilde{\\Li}_{\\cN}$.\n\\end{thm}",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [],
+        "id": "coro:COROLLARY",
+        "section": "InterpolatingAJ.tex:54876",
+        "source_tex": "\\begin{coro}[{\\bf Level $\\cN$ maximal unified invariant at prime parameters}]\n\\label{coro:COROLLARY}\nIf $\\cN \\in \\mathbb N$ is prime, the ring $\\Liq_{\\cN}$ is the largest quotient of the polynomial ring $\\Li$ with the property that the image of the quantum trace in this quotient gives a knot invariant. \n%\nMore precisely, for any $\\cN \\in \\cN$, $\\cN\\geq 2$ we have that \n\\[\n\\Omega_{\\cN}(L)(q,s) = \\pi_{\\cN}(\\widetilde{\\Omega}_{\\cN}(\\beta_n)) \\in \\Li_{\\cN}\n\\]\n is a well defined oriented knot invariant where $\\pi_\\cN$ is the natural projection from $\\widetilde\\Li_\\cN$ to $\\Li_\\cN$. \n Also, if $\\cN$ prime and we consider $\\Li_{\\cN}'$ a quotient of $ \\Li$ in which $\\Omega_{\\cN}(\\beta_n)$ is a knot invariant, then the quotient onto $\\Li_{\\cN}'$ factors through $\\Li_{\\cN}$.\n\\end{coro}",
+        "statement": "If the level N is a prime natural number, then the ring Li_N is the largest quotient of the polynomial ring Li with the property that the image of the quantum trace in this quotient gives a knot invariant. More precisely, for any N >= 2, the element Omega_N(L)(q,s) = pi_N( tilde{Omega}_N(beta_n) ) in Li_N, where pi_N is the natural projection from the universal ring tilde{Li}_N onto Li_N, is a well-defined oriented knot invariant. Moreover, when N is prime, any quotient Li_N' of Li in which Omega_N(beta_n) is a knot invariant factors through Li_N.",
+        "theorem_ir": {
+          "assumptions": [
+            {
+              "args": [
+                {
+                  "kind": "var",
+                  "name": "N"
+                }
+              ],
+              "kind": "uninterpreted_predicate",
+              "name": "is_prime"
+            }
+          ],
+          "binders": [
+            {
+              "name": "N",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "L",
+              "type": {
+                "kind": "custom",
+                "name": "OrientedKnot"
+              }
+            }
+          ],
+          "conclusion": {
+            "items": [
+              {
+                "args": [
+                  {
+                    "kind": "var",
+                    "name": "Li_N"
+                  },
+                  {
+                    "kind": "var",
+                    "name": "Li"
+                  }
+                ],
+                "kind": "uninterpreted_predicate",
+                "name": "is_largest_quotient_with_knot_invariant_quantum_trace"
+              },
+              {
+                "args": [
+                  {
+                    "kind": "raw_term",
+                    "text": "\\Omega_{\\cN}(L)(q,s)"
+                  }
+                ],
+                "kind": "uninterpreted_predicate",
+                "name": "is_well_defined_oriented_knot_invariant"
+              },
+              {
+                "binders": [
+                  {
+                    "name": "LiNprime",
+                    "type": {
+                      "kind": "custom",
+                      "name": "QuotientRing"
+                    }
+                  }
+                ],
+                "body": {
+                  "conclusion": {
+                    "args": [
+                      {
+                        "kind": "var",
+                        "name": "LiNprime"
+                      },
+                      {
+                        "kind": "var",
+                        "name": "Li_N"
+                      }
+                    ],
+                    "kind": "uninterpreted_predicate",
+                    "name": "factors_through"
+                  },
+                  "kind": "implies",
+                  "premise": {
+                    "args": [
+                      {
+                        "kind": "var",
+                        "name": "LiNprime"
+                      }
+                    ],
+                    "kind": "uninterpreted_predicate",
+                    "name": "quantum_trace_is_knot_invariant_in_quotient"
+                  }
+                },
+                "kind": "forall"
+              }
+            ],
+            "kind": "and"
+          },
+          "theorem_name": "coro:COROLLARY"
+        },
+        "type": "corollary",
+        "typed_transcription": {
+          "assumptions": [
+            {
+              "args": [
+                {
+                  "kind": "var",
+                  "name": "N"
+                }
+              ],
+              "kind": "uninterpreted_predicate",
+              "name": "is_prime"
+            }
+          ],
+          "binders": [
+            {
+              "name": "N",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "L",
+              "type": {
+                "kind": "custom",
+                "name": "OrientedKnot"
+              }
+            }
+          ],
+          "conclusion": {
+            "items": [
+              {
+                "args": [
+                  {
+                    "kind": "var",
+                    "name": "Li_N"
+                  },
+                  {
+                    "kind": "var",
+                    "name": "Li"
+                  }
+                ],
+                "kind": "uninterpreted_predicate",
+                "name": "is_largest_quotient_with_knot_invariant_quantum_trace"
+              },
+              {
+                "args": [
+                  {
+                    "kind": "raw_term",
+                    "text": "\\Omega_{\\cN}(L)(q,s) = \\pi_{\\cN}(\\widetilde{\\Omega}_{\\cN}(\\beta_n)) \\in \\Li_{\\cN}"
+                  }
+                ],
+                "kind": "uninterpreted_predicate",
+                "name": "is_well_defined_oriented_knot_invariant"
+              },
+              {
+                "binders": [
+                  {
+                    "name": "LiNprime",
+                    "type": {
+                      "kind": "custom",
+                      "name": "QuotientRing"
+                    }
+                  }
+                ],
+                "body": {
+                  "conclusion": {
+                    "args": [
+                      {
+                        "kind": "var",
+                        "name": "LiNprime"
+                      },
+                      {
+                        "kind": "var",
+                        "name": "Li_N"
+                      }
+                    ],
+                    "kind": "uninterpreted_predicate",
+                    "name": "factors_through"
+                  },
+                  "kind": "implies",
+                  "premise": {
+                    "args": [
+                      {
+                        "kind": "var",
+                        "name": "LiNprime"
+                      }
+                    ],
+                    "kind": "uninterpreted_predicate",
+                    "name": "quantum_trace_is_knot_invariant_in_quotient"
+                  }
+                },
+                "kind": "forall"
+              }
+            ],
+            "kind": "and"
+          },
+          "math_objects": [
+            {
+              "name": "N",
+              "type": {
+                "kind": "nat",
+                "reason": "level parameter, a natural number assumed prime"
+              }
+            },
+            {
+              "name": "L",
+              "type": {
+                "kind": "custom",
+                "name": "OrientedKnot",
+                "reason": "oriented knot / link, closure of a braid beta_n"
+              }
+            },
+            {
+              "name": "Li",
+              "type": {
+                "kind": "custom",
+                "name": "PolynomialRing",
+                "reason": "ambient polynomial ring of which Li_N is a quotient"
+              }
+            },
+            {
+              "name": "Li_N",
+              "type": {
+                "kind": "custom",
+                "name": "QuotientRing",
+                "reason": "finite quotient ring at level N"
+              }
+            },
+            {
+              "name": "Omega_N",
+              "type": {
+                "kind": "custom",
+                "name": "KnotInvariant",
+                "reason": "level-N unified invariant"
+              }
+            }
+          ],
+          "source_text": "If $\\cN \\in \\mathbb N$ is prime, the ring $\\Liq_{\\cN}$ is the largest quotient of the polynomial ring $\\Li$ with the property that the image of the quantum trace in this quotient gives a knot invariant. More precisely, for any $\\cN\\geq 2$ we have that $\\Omega_{\\cN}(L)(q,s) = \\pi_{\\cN}(\\widetilde{\\Omega}_{\\cN}(\\beta_n)) \\in \\Li_{\\cN}$ is a well defined oriented knot invariant where $\\pi_\\cN$ is the natural projection from $\\widetilde\\Li_\\cN$ to $\\Li_\\cN$. Also, if $\\cN$ prime and we consider $\\Li_{\\cN}'$ a quotient of $\\Li$ in which $\\Omega_{\\cN}(\\beta_n)$ is a knot invariant, then the quotient onto $\\Li_{\\cN}'$ factors through $\\Li_{\\cN}$.",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [],
+        "id": "JA1",
+        "section": "InterpolatingAJ.tex:56537",
+        "source_tex": "\\begin{thm}[The level $\\cN$ unified invariant recovers coloured Jones and ADO invariants]\\label{JA1} We have that: \n \\begin{equation*}\n\\Omega_{\\cN}(L)\\mid_{s = q^{1-\\mathcal{N}}} = J_{\\mathcal{N}}(L, q), \\qquad\n\\Omega_{\\cN}(L)\\mid_{q=\\xi_{\\cN}}=\\Phi_{\\mathcal{N}}(L, s). \n\\end{equation*}\n \\end{thm}",
+        "statement": "The level-N unified invariant Omega_N(L) recovers the coloured Jones and ADO invariants by specialisation: setting s = q^{1-N} gives the N-th coloured Jones invariant J_N(L,q), and setting q = xi_N gives the N-th coloured Alexander (ADO) invariant Phi_N(L,s).",
+        "theorem_ir": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "N",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "L",
+              "type": {
+                "kind": "custom",
+                "name": "OrientedKnot"
+              }
+            }
+          ],
+          "conclusion": {
+            "items": [
+              {
+                "kind": "equals",
+                "lhs": {
+                  "kind": "raw_term",
+                  "text": "\\Omega_{\\cN}(L)\\mid_{s = q^{1-\\mathcal{N}}}"
+                },
+                "rhs": {
+                  "kind": "raw_term",
+                  "text": "J_{\\mathcal{N}}(L, q)"
+                }
+              },
+              {
+                "kind": "equals",
+                "lhs": {
+                  "kind": "raw_term",
+                  "text": "\\Omega_{\\cN}(L)\\mid_{q=\\xi_{\\cN}}"
+                },
+                "rhs": {
+                  "kind": "raw_term",
+                  "text": "\\Phi_{\\mathcal{N}}(L, s)"
+                }
+              }
+            ],
+            "kind": "and"
+          },
+          "theorem_name": "JA1"
+        },
+        "type": "theorem",
+        "typed_transcription": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "N",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "L",
+              "type": {
+                "kind": "custom",
+                "name": "OrientedKnot"
+              }
+            }
+          ],
+          "conclusion": {
+            "items": [
+              {
+                "kind": "equals",
+                "lhs": {
+                  "kind": "raw_term",
+                  "text": "\\Omega_{\\cN}(L)\\mid_{s = q^{1-\\mathcal{N}}}"
+                },
+                "rhs": {
+                  "kind": "raw_term",
+                  "text": "J_{\\mathcal{N}}(L, q)"
+                }
+              },
+              {
+                "kind": "equals",
+                "lhs": {
+                  "kind": "raw_term",
+                  "text": "\\Omega_{\\cN}(L)\\mid_{q=\\xi_{\\cN}}"
+                },
+                "rhs": {
+                  "kind": "raw_term",
+                  "text": "\\Phi_{\\mathcal{N}}(L, s)"
+                }
+              }
+            ],
+            "kind": "and"
+          },
+          "math_objects": [
+            {
+              "name": "N",
+              "type": {
+                "kind": "nat",
+                "reason": "level parameter"
+              }
+            },
+            {
+              "name": "L",
+              "type": {
+                "kind": "custom",
+                "name": "OrientedKnot",
+                "reason": "oriented knot / link"
+              }
+            },
+            {
+              "name": "Omega_N",
+              "type": {
+                "kind": "custom",
+                "name": "KnotInvariant",
+                "reason": "level-N unified invariant in two variables q,s"
+              }
+            },
+            {
+              "name": "J_N",
+              "type": {
+                "kind": "custom",
+                "name": "ColouredJonesInvariant",
+                "reason": "N-th coloured Jones invariant"
+              }
+            },
+            {
+              "name": "Phi_N",
+              "type": {
+                "kind": "custom",
+                "name": "ADOInvariant",
+                "reason": "N-th coloured Alexander / ADO invariant"
+              }
+            }
+          ],
+          "source_text": "$\\Omega_{\\cN}(L)\\mid_{s = q^{1-\\mathcal{N}}} = J_{\\mathcal{N}}(L, q)$, and $\\Omega_{\\cN}(L)\\mid_{q=\\xi_{\\cN}}=\\Phi_{\\mathcal{N}}(L, s)$.",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [],
+        "id": "InterpolatingAJ_tex:coro:57941",
+        "section": "InterpolatingAJ.tex:57941",
+        "source_tex": "\\begin{coro}[The level $\\cN$ universal invariant recovers coloured Jones and ADO invariants] We have that: \\begin{equation*}\n \\widetilde{\\Omega}_{\\cN}(L)\\mid_{s = q^{1-\\mathcal{N}}} \n =\n  J_{\\mathcal{N}}(L, q), \\qquad\n\\widetilde{\\Omega}_{\\cN}(L)\\mid_{q=\\xi_{\\cN}}=\\Phi_{\\mathcal{N}}(L, s). \n\\end{equation*}\n \\end{coro}",
+        "statement": "The level-N universal invariant tilde{Omega}_N(L) recovers the coloured Jones and ADO invariants by specialisation: setting s = q^{1-N} gives the N-th coloured Jones invariant J_N(L,q), and setting q = xi_N gives the N-th coloured Alexander (ADO) invariant Phi_N(L,s).",
+        "theorem_ir": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "N",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "L",
+              "type": {
+                "kind": "custom",
+                "name": "OrientedKnot"
+              }
+            }
+          ],
+          "conclusion": {
+            "items": [
+              {
+                "kind": "equals",
+                "lhs": {
+                  "kind": "raw_term",
+                  "text": "\\widetilde{\\Omega}_{\\cN}(L)\\mid_{s = q^{1-\\mathcal{N}}}"
+                },
+                "rhs": {
+                  "kind": "raw_term",
+                  "text": "J_{\\mathcal{N}}(L, q)"
+                }
+              },
+              {
+                "kind": "equals",
+                "lhs": {
+                  "kind": "raw_term",
+                  "text": "\\widetilde{\\Omega}_{\\cN}(L)\\mid_{q=\\xi_{\\cN}}"
+                },
+                "rhs": {
+                  "kind": "raw_term",
+                  "text": "\\Phi_{\\mathcal{N}}(L, s)"
+                }
+              }
+            ],
+            "kind": "and"
+          },
+          "theorem_name": "InterpolatingAJ_tex:coro:57941"
+        },
+        "type": "corollary",
+        "typed_transcription": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "N",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "L",
+              "type": {
+                "kind": "custom",
+                "name": "OrientedKnot"
+              }
+            }
+          ],
+          "conclusion": {
+            "items": [
+              {
+                "kind": "equals",
+                "lhs": {
+                  "kind": "raw_term",
+                  "text": "\\widetilde{\\Omega}_{\\cN}(L)\\mid_{s = q^{1-\\mathcal{N}}}"
+                },
+                "rhs": {
+                  "kind": "raw_term",
+                  "text": "J_{\\mathcal{N}}(L, q)"
+                }
+              },
+              {
+                "kind": "equals",
+                "lhs": {
+                  "kind": "raw_term",
+                  "text": "\\widetilde{\\Omega}_{\\cN}(L)\\mid_{q=\\xi_{\\cN}}"
+                },
+                "rhs": {
+                  "kind": "raw_term",
+                  "text": "\\Phi_{\\mathcal{N}}(L, s)"
+                }
+              }
+            ],
+            "kind": "and"
+          },
+          "math_objects": [
+            {
+              "name": "N",
+              "type": {
+                "kind": "nat",
+                "reason": "level parameter"
+              }
+            },
+            {
+              "name": "L",
+              "type": {
+                "kind": "custom",
+                "name": "OrientedKnot",
+                "reason": "oriented knot / link"
+              }
+            },
+            {
+              "name": "tilde_Omega_N",
+              "type": {
+                "kind": "custom",
+                "name": "UniversalInvariant",
+                "reason": "level-N universal invariant in variables q,s"
+              }
+            },
+            {
+              "name": "J_N",
+              "type": {
+                "kind": "custom",
+                "name": "ColouredJonesInvariant",
+                "reason": "N-th coloured Jones invariant"
+              }
+            },
+            {
+              "name": "Phi_N",
+              "type": {
+                "kind": "custom",
+                "name": "ADOInvariant",
+                "reason": "N-th coloured Alexander / ADO invariant"
+              }
+            }
+          ],
+          "source_text": "$\\widetilde{\\Omega}_{\\cN}(L)\\mid_{s = q^{1-\\mathcal{N}}} = J_{\\mathcal{N}}(L, q)$, and $\\widetilde{\\Omega}_{\\cN}(L)\\mid_{q=\\xi_{\\cN}}=\\Phi_{\\mathcal{N}}(L, s)$.",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [],
+        "id": "JA3",
+        "section": "InterpolatingAJ.tex:58370",
+        "source_tex": "\\begin{thm}[The level $\\cN$ intersection form interpolates coloured Jones and ADO invariants] \n\\label{JA3} \nWe have that  $\\Omega_{\\cN}(L)(q,s) \\in \\Li_{\\cN}$ is a well defined oriented knot invariant and globalises the $\\cN^{th}$ coloured Jones and coloured Alexander invariants, as follows: \n%\n\\begin{equation*}\n\\Omega_{\\cN}(L)(q,s) = J_{\\mathcal{N}}(L, q) + \\Phi_{\\mathcal{N}}({L}, s) - \\Phi_{\\mathcal{N}}(L, q^{1-\\mathcal N}).\n\\end{equation*}\n%\n \\end{thm}",
+        "statement": "The element Omega_N(L)(q,s) in Li_N is a well-defined oriented knot invariant that globalises the N-th coloured Jones and coloured Alexander invariants, via Omega_N(L)(q,s) = J_N(L,q) + Phi_N(L,s) - Phi_N(L, q^{1-N}).",
+        "theorem_ir": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "N",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "L",
+              "type": {
+                "kind": "custom",
+                "name": "OrientedKnot"
+              }
+            }
+          ],
+          "conclusion": {
+            "items": [
+              {
+                "args": [
+                  {
+                    "kind": "raw_term",
+                    "text": "\\Omega_{\\cN}(L)(q,s)"
+                  }
+                ],
+                "kind": "uninterpreted_predicate",
+                "name": "is_well_defined_oriented_knot_invariant"
+              },
+              {
+                "kind": "equals",
+                "lhs": {
+                  "kind": "raw_term",
+                  "text": "\\Omega_{\\cN}(L)(q,s)"
+                },
+                "rhs": {
+                  "kind": "sub",
+                  "lhs": {
+                    "kind": "add",
+                    "lhs": {
+                      "kind": "raw_term",
+                      "text": "J_{\\mathcal{N}}(L, q)"
+                    },
+                    "rhs": {
+                      "kind": "raw_term",
+                      "text": "\\Phi_{\\mathcal{N}}({L}, s)"
+                    }
+                  },
+                  "rhs": {
+                    "kind": "raw_term",
+                    "text": "\\Phi_{\\mathcal{N}}(L, q^{1-\\mathcal N})"
+                  }
+                }
+              }
+            ],
+            "kind": "and"
+          },
+          "theorem_name": "JA3"
+        },
+        "type": "theorem",
+        "typed_transcription": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "N",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "L",
+              "type": {
+                "kind": "custom",
+                "name": "OrientedKnot"
+              }
+            }
+          ],
+          "conclusion": {
+            "items": [
+              {
+                "args": [
+                  {
+                    "kind": "raw_term",
+                    "text": "\\Omega_{\\cN}(L)(q,s) \\in \\Li_{\\cN}"
+                  }
+                ],
+                "kind": "uninterpreted_predicate",
+                "name": "is_well_defined_oriented_knot_invariant"
+              },
+              {
+                "kind": "equals",
+                "lhs": {
+                  "kind": "raw_term",
+                  "text": "\\Omega_{\\cN}(L)(q,s)"
+                },
+                "rhs": {
+                  "kind": "sub",
+                  "lhs": {
+                    "kind": "add",
+                    "lhs": {
+                      "kind": "raw_term",
+                      "text": "J_{\\mathcal{N}}(L, q)"
+                    },
+                    "rhs": {
+                      "kind": "raw_term",
+                      "text": "\\Phi_{\\mathcal{N}}({L}, s)"
+                    }
+                  },
+                  "rhs": {
+                    "kind": "raw_term",
+                    "text": "\\Phi_{\\mathcal{N}}(L, q^{1-\\mathcal N})"
+                  }
+                }
+              }
+            ],
+            "kind": "and"
+          },
+          "math_objects": [
+            {
+              "name": "N",
+              "type": {
+                "kind": "nat",
+                "reason": "level parameter"
+              }
+            },
+            {
+              "name": "L",
+              "type": {
+                "kind": "custom",
+                "name": "OrientedKnot",
+                "reason": "oriented knot / link"
+              }
+            },
+            {
+              "name": "Omega_N",
+              "type": {
+                "kind": "custom",
+                "name": "KnotInvariant",
+                "reason": "level-N intersection-form invariant valued in Li_N"
+              }
+            },
+            {
+              "name": "J_N",
+              "type": {
+                "kind": "custom",
+                "name": "ColouredJonesInvariant",
+                "reason": "N-th coloured Jones invariant"
+              }
+            },
+            {
+              "name": "Phi_N",
+              "type": {
+                "kind": "custom",
+                "name": "ADOInvariant",
+                "reason": "N-th coloured Alexander / ADO invariant"
+              }
+            }
+          ],
+          "source_text": "$\\Omega_{\\cN}(L)(q,s) \\in \\Li_{\\cN}$ is a well defined oriented knot invariant and globalises the $\\cN^{th}$ coloured Jones and coloured Alexander invariants: $\\Omega_{\\cN}(L)(q,s) = J_{\\mathcal{N}}(L, q) + \\Phi_{\\mathcal{N}}({L}, s) - \\Phi_{\\mathcal{N}}(L, q^{1-\\mathcal N})$.",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [
+          "def:condition",
+          "def:maximal"
+        ],
+        "id": "lem:EQ3",
+        "section": "InterpolatingAJ.tex:61709",
+        "source_tex": "\\begin{lem}\n\\label{lem:EQ3}\nThe   three  structural ideals introduced in Definitions \\ref{def:condition} and \\ref{def:maximal} are equal, i.e. \n\\begin{equation*}\n\\cC_\\cN = \\widetilde{\\cJ}_{\\cN}. \n\\end{equation*}\n\\end{lem}",
+        "statement": "The three structural ideals introduced in Definitions def:condition and def:maximal coincide; in particular C_N = tilde{J}_N.",
+        "theorem_ir": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "N",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "kind": "equals",
+            "lhs": {
+              "kind": "raw_term",
+              "text": "\\cC_\\cN"
+            },
+            "rhs": {
+              "kind": "raw_term",
+              "text": "\\widetilde{\\cJ}_{\\cN}"
+            }
+          },
+          "theorem_name": "lem:EQ3"
+        },
+        "type": "lemma",
+        "typed_transcription": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "N",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "kind": "equals",
+            "lhs": {
+              "kind": "raw_term",
+              "text": "\\cC_\\cN"
+            },
+            "rhs": {
+              "kind": "raw_term",
+              "text": "\\widetilde{\\cJ}_{\\cN}"
+            }
+          },
+          "math_objects": [
+            {
+              "name": "N",
+              "type": {
+                "kind": "nat",
+                "reason": "level parameter"
+              }
+            },
+            {
+              "name": "C_N",
+              "type": {
+                "kind": "custom",
+                "name": "Ideal",
+                "reason": "structural ideal C_N from def:condition"
+              }
+            },
+            {
+              "name": "tilde_J_N",
+              "type": {
+                "kind": "custom",
+                "name": "Ideal",
+                "reason": "structural ideal tilde{J}_N from def:maximal"
+              }
+            }
+          ],
+          "source_text": "The three structural ideals introduced in Definitions \\ref{def:condition} and \\ref{def:maximal} are equal, i.e. $\\cC_\\cN = \\widetilde{\\cJ}_{\\cN}$.",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [],
+        "id": "lem:qi",
+        "section": "InterpolatingAJ.tex:68837",
+        "source_tex": "\\begin{lem}\\label{lem:qi}\nIf $k$ and $l$ are both multiple of $d$, then ${k \\brack l}_q$\nis equal to ${k/d \\brack l/d}_1$ or $-{k/d \\brack l/d}_1$ modulo $\\Phi_d(q^2)$.  \n\\end{lem}",
+        "statement": "If k and l are both multiples of d, then the q-binomial coefficient [k choose l]_q is equal to [k/d choose l/d]_1 or to -[k/d choose l/d]_1 modulo Phi_d(q^2).",
+        "theorem_ir": {
+          "assumptions": [
+            {
+              "args": [
+                {
+                  "kind": "var",
+                  "name": "d"
+                },
+                {
+                  "kind": "var",
+                  "name": "k"
+                }
+              ],
+              "kind": "uninterpreted_predicate",
+              "name": "divides"
+            },
+            {
+              "args": [
+                {
+                  "kind": "var",
+                  "name": "d"
+                },
+                {
+                  "kind": "var",
+                  "name": "l"
+                }
+              ],
+              "kind": "uninterpreted_predicate",
+              "name": "divides"
+            }
+          ],
+          "binders": [
+            {
+              "name": "k",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "l",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "d",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "items": [
+              {
+                "args": [
+                  {
+                    "kind": "raw_term",
+                    "text": "{k \\brack l}_q"
+                  },
+                  {
+                    "kind": "raw_term",
+                    "text": "{k/d \\brack l/d}_1"
+                  },
+                  {
+                    "kind": "raw_term",
+                    "text": "\\Phi_d(q^2)"
+                  }
+                ],
+                "kind": "uninterpreted_predicate",
+                "name": "congruent_modulo"
+              },
+              {
+                "args": [
+                  {
+                    "kind": "raw_term",
+                    "text": "{k \\brack l}_q"
+                  },
+                  {
+                    "kind": "raw_term",
+                    "text": "-{k/d \\brack l/d}_1"
+                  },
+                  {
+                    "kind": "raw_term",
+                    "text": "\\Phi_d(q^2)"
+                  }
+                ],
+                "kind": "uninterpreted_predicate",
+                "name": "congruent_modulo"
+              }
+            ],
+            "kind": "or"
+          },
+          "theorem_name": "lem:qi"
+        },
+        "type": "lemma",
+        "typed_transcription": {
+          "assumptions": [
+            {
+              "args": [
+                {
+                  "kind": "var",
+                  "name": "d"
+                },
+                {
+                  "kind": "var",
+                  "name": "k"
+                }
+              ],
+              "kind": "uninterpreted_predicate",
+              "name": "divides"
+            },
+            {
+              "args": [
+                {
+                  "kind": "var",
+                  "name": "d"
+                },
+                {
+                  "kind": "var",
+                  "name": "l"
+                }
+              ],
+              "kind": "uninterpreted_predicate",
+              "name": "divides"
+            }
+          ],
+          "binders": [
+            {
+              "name": "k",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "l",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "d",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "items": [
+              {
+                "args": [
+                  {
+                    "kind": "raw_term",
+                    "text": "{k \\brack l}_q"
+                  },
+                  {
+                    "kind": "raw_term",
+                    "text": "{k/d \\brack l/d}_1"
+                  },
+                  {
+                    "kind": "raw_term",
+                    "text": "\\Phi_d(q^2)"
+                  }
+                ],
+                "kind": "uninterpreted_predicate",
+                "name": "congruent_modulo"
+              },
+              {
+                "args": [
+                  {
+                    "kind": "raw_term",
+                    "text": "{k \\brack l}_q"
+                  },
+                  {
+                    "kind": "raw_term",
+                    "text": "-{k/d \\brack l/d}_1"
+                  },
+                  {
+                    "kind": "raw_term",
+                    "text": "\\Phi_d(q^2)"
+                  }
+                ],
+                "kind": "uninterpreted_predicate",
+                "name": "congruent_modulo"
+              }
+            ],
+            "kind": "or"
+          },
+          "math_objects": [
+            {
+              "name": "k",
+              "type": {
+                "kind": "nat",
+                "reason": "index of q-binomial coefficient, a multiple of d"
+              }
+            },
+            {
+              "name": "l",
+              "type": {
+                "kind": "nat",
+                "reason": "index of q-binomial coefficient, a multiple of d"
+              }
+            },
+            {
+              "name": "d",
+              "type": {
+                "kind": "nat",
+                "reason": "divisor of both k and l"
+              }
+            }
+          ],
+          "source_text": "If $k$ and $l$ are both multiple of $d$, then ${k \\brack l}_q$ is equal to ${k/d \\brack l/d}_1$ or $-{k/d \\brack l/d}_1$ modulo $\\Phi_d(q^2)$.",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [],
+        "id": "strcy",
+        "section": "InterpolatingAJ.tex:69922",
+        "source_tex": "\\begin{lem}[Structure of the maximal ideal at non-prime parameters] \\label{strcy}The ideal $\\widetilde{\\cJ}_\\cN$ has the following structure: \n\\begin{equation*}\n\\widetilde{\\cJ}_\\cN\n=\\left( \\varphi_\\cN(q^2) \\cdot (s^2 q^{-2\\cN+2} - 1)\\right)  \\cap \\bigcap_{\\text{\\scriptsize$\\begin{matrix}\n d\\mid \\cN \\\\ d \\neq 1, \\cN \\end{matrix}$}}\n \\left(\\varphi_d(q^2), \\frac{s^{2d}-1}{s^2-1} \\right).\n\\end{equation*}\n%\n \\end{lem}",
+        "statement": "For a positive integer N, the ideal J̃_N has the explicit structure given as the intersection of the principal ideal generated by φ_N(q^2)·(s^2 q^{-2N+2} − 1) with the intersection, over all divisors d of N with d ≠ 1 and d ≠ N, of the ideals (φ_d(q^2), (s^{2d} − 1)/(s^2 − 1)).",
+        "theorem_ir": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "q",
+              "type": {
+                "kind": "custom",
+                "name": "Laurent polynomial variable"
+              }
+            },
+            {
+              "name": "s",
+              "type": {
+                "kind": "custom",
+                "name": "Laurent polynomial variable"
+              }
+            }
+          ],
+          "conclusion": {
+            "kind": "equals",
+            "lhs": {
+              "kind": "raw_term",
+              "text": "\\widetilde{\\cJ}_\\cN"
+            },
+            "rhs": {
+              "kind": "raw_term",
+              "text": "\\left(\\varphi_\\cN(q^2)\\cdot(s^2 q^{-2\\cN+2}-1)\\right)\\cap\\bigcap_{d\\mid\\cN,\\ d\\neq 1,\\cN}\\left(\\varphi_d(q^2),\\frac{s^{2d}-1}{s^2-1}\\right)"
+            }
+          },
+          "theorem_name": "strcy"
+        },
+        "type": "lemma",
+        "typed_transcription": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "q",
+              "type": {
+                "kind": "custom",
+                "name": "Laurent polynomial variable"
+              }
+            },
+            {
+              "name": "s",
+              "type": {
+                "kind": "custom",
+                "name": "Laurent polynomial variable"
+              }
+            }
+          ],
+          "conclusion": {
+            "kind": "equals",
+            "lhs": {
+              "kind": "raw_term",
+              "text": "\\widetilde{\\cJ}_\\cN"
+            },
+            "rhs": {
+              "kind": "raw_term",
+              "text": "\\left(\\varphi_\\cN(q^2)\\cdot(s^2 q^{-2\\cN+2}-1)\\right)\\cap\\bigcap_{d\\mid\\cN,\\ d\\neq 1,\\cN}\\left(\\varphi_d(q^2),\\frac{s^{2d}-1}{s^2-1}\\right)"
+            }
+          },
+          "math_objects": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat",
+                "reason": "Level / quotient parameter, a positive integer"
+              }
+            },
+            {
+              "name": "q",
+              "type": {
+                "kind": "custom",
+                "name": "Laurent polynomial variable"
+              }
+            },
+            {
+              "name": "s",
+              "type": {
+                "kind": "custom",
+                "name": "Laurent polynomial variable"
+              }
+            },
+            {
+              "name": "\\widetilde{\\cJ}_\\cN",
+              "type": {
+                "kind": "custom",
+                "name": "ideal in a Laurent polynomial ring"
+              }
+            },
+            {
+              "name": "\\varphi_d",
+              "type": {
+                "kind": "custom",
+                "name": "cyclotomic polynomial"
+              }
+            }
+          ],
+          "source_text": "\\begin{lem}[Structure of the maximal ideal at non-prime parameters] \\label{strcy}The ideal $\\widetilde{\\cJ}_\\cN$ has the following structure: \n\\begin{equation*}\n\\widetilde{\\cJ}_\\cN\n=\\left( \\varphi_\\cN(q^2) \\cdot (s^2 q^{-2\\cN+2} - 1)\\right)  \\cap \\bigcap_{\\text{\\scriptsize$\\begin{matrix}\n d\\mid \\cN \\\\ d \\neq 1, \\cN \\end{matrix}$}}\n \\left(\\varphi_d(q^2), \\frac{s^{2d}-1}{s^2-1} \\right).\n\\end{equation*}\n%\n \\end{lem}",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [
+          "qideal"
+        ],
+        "id": "lem:idcy",
+        "section": "InterpolatingAJ.tex:71436",
+        "source_tex": "\\begin{lem}[Structural theorem of the maximal quotient ideal]\\label{lem:idcy}\nThe ideal $\\widetilde{\\cJ}_\\cN$ is equal to the ideal $\\widetilde\\cI_{\\cN}$ given in \\eqref{qideal}, i.e. it can be described via the product of the ideals associated to the set of divisors of $\\cN$, as below:\n\\begin{equation*}\n\\widetilde{\\cJ}_\\cN\n=\n\\widetilde{\\cI}_\\cN\n=\\left(\\left(\\varphi_\\cN(q^2)\\right) \\cdot (s^2 q^{-2\\cN+2} - 1)\\right) \\cap \\prod_{\\text{\\scriptsize$\\begin{matrix}\n d\\mid \\cN \\\\ d \\neq 1, \\cN \\end{matrix}$}}\n \\left(\\varphi_d(q^2), \\frac{s^{2d}-1}{s^2-1} \\right).\n\\end{equation*}\n \\end{lem}",
+        "statement": "For a positive integer N, the ideal J̃_N is equal to the ideal Ĩ_N defined in equation (qideal); equivalently it can be described as the intersection of the principal ideal generated by φ_N(q^2)·(s^2 q^{-2N+2} − 1) with the product, over all divisors d of N with d ≠ 1 and d ≠ N, of the ideals (φ_d(q^2), (s^{2d} − 1)/(s^2 − 1)).",
+        "theorem_ir": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "q",
+              "type": {
+                "kind": "custom",
+                "name": "Laurent polynomial variable"
+              }
+            },
+            {
+              "name": "s",
+              "type": {
+                "kind": "custom",
+                "name": "Laurent polynomial variable"
+              }
+            }
+          ],
+          "conclusion": {
+            "kind": "equals",
+            "lhs": {
+              "kind": "raw_term",
+              "text": "\\widetilde{\\cJ}_\\cN"
+            },
+            "rhs": {
+              "kind": "raw_term",
+              "text": "\\widetilde{\\cI}_\\cN=\\left((\\varphi_\\cN(q^2))\\cdot(s^2 q^{-2\\cN+2}-1)\\right)\\cap\\prod_{d\\mid\\cN,\\ d\\neq 1,\\cN}\\left(\\varphi_d(q^2),\\frac{s^{2d}-1}{s^2-1}\\right)"
+            }
+          },
+          "theorem_name": "lem_idcy"
+        },
+        "type": "lemma",
+        "typed_transcription": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "q",
+              "type": {
+                "kind": "custom",
+                "name": "Laurent polynomial variable"
+              }
+            },
+            {
+              "name": "s",
+              "type": {
+                "kind": "custom",
+                "name": "Laurent polynomial variable"
+              }
+            }
+          ],
+          "conclusion": {
+            "kind": "equals",
+            "lhs": {
+              "kind": "raw_term",
+              "text": "\\widetilde{\\cJ}_\\cN"
+            },
+            "rhs": {
+              "kind": "raw_term",
+              "text": "\\widetilde{\\cI}_\\cN=\\left((\\varphi_\\cN(q^2))\\cdot(s^2 q^{-2\\cN+2}-1)\\right)\\cap\\prod_{d\\mid\\cN,\\ d\\neq 1,\\cN}\\left(\\varphi_d(q^2),\\frac{s^{2d}-1}{s^2-1}\\right)"
+            }
+          },
+          "math_objects": [
+            {
+              "name": "\\cN",
+              "type": {
+                "kind": "nat",
+                "reason": "Level / quotient parameter, a positive integer"
+              }
+            },
+            {
+              "name": "\\widetilde{\\cJ}_\\cN",
+              "type": {
+                "kind": "custom",
+                "name": "ideal in a Laurent polynomial ring"
+              }
+            },
+            {
+              "name": "\\widetilde{\\cI}_\\cN",
+              "type": {
+                "kind": "custom",
+                "name": "ideal defined in equation qideal"
+              }
+            },
+            {
+              "name": "\\varphi_d",
+              "type": {
+                "kind": "custom",
+                "name": "cyclotomic polynomial"
+              }
+            }
+          ],
+          "source_text": "\\begin{lem}[Structural theorem of the maximal quotient ideal]\\label{lem:idcy}\nThe ideal $\\widetilde{\\cJ}_\\cN$ is equal to the ideal $\\widetilde\\cI_{\\cN}$ given in \\eqref{qideal}, i.e. it can be described via the product of the ideals associated to the set of divisors of $\\cN$, as below:\n\\begin{equation*}\n\\widetilde{\\cJ}_\\cN\n=\n\\widetilde{\\cI}_\\cN\n=\\left(\\left(\\varphi_\\cN(q^2)\\right) \\cdot (s^2 q^{-2\\cN+2} - 1)\\right) \\cap \\prod_{\\text{\\scriptsize$\\begin{matrix}\n d\\mid \\cN \\\\ d \\neq 1, \\cN \\end{matrix}$}}\n \\left(\\varphi_d(q^2), \\frac{s^{2d}-1}{s^2-1} \\right).\n\\end{equation*}\n \\end{lem}",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [],
+        "id": "InterpolatingAJ_tex:lem:72872",
+        "section": "InterpolatingAJ.tex:72872",
+        "source_tex": "\\begin{lem}\nLet $R$ be a commutative ring and $I_1,...,I_n$ a set of ideals of $R$ such that any $I_i$ and $I_j$ are comaximal, meaning that:\n$$I_i+I_j=R, \\ \\ \\forall 1\\leq i<j\\leq n.$$\nThen we have:\n\\begin{equation*}\n\\bigcap_{i=1}^n I_i=\\prod_{i=1}^n I_i.\n\\end{equation*}\n\\end{lem}",
+        "statement": "Let R be a commutative ring and let I_1, ..., I_n be ideals of R that are pairwise comaximal, i.e. I_i + I_j = R for all 1 ≤ i < j ≤ n. Then the intersection of the ideals equals their product: the intersection over i from 1 to n of I_i equals the product over i from 1 to n of I_i.",
+        "theorem_ir": {
+          "assumptions": [
+            {
+              "args": [
+                {
+                  "kind": "raw_term",
+                  "text": "I_1,\\dots,I_n"
+                }
+              ],
+              "kind": "uninterpreted_predicate",
+              "name": "pairwise_comaximal",
+              "text": "I_i+I_j=R for all 1\\leq i<j\\leq n"
+            }
+          ],
+          "binders": [
+            {
+              "name": "R",
+              "type": {
+                "kind": "custom",
+                "name": "commutative ring"
+              }
+            },
+            {
+              "name": "n",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "I",
+              "type": {
+                "kind": "custom",
+                "name": "indexed family of ideals of R"
+              }
+            }
+          ],
+          "conclusion": {
+            "kind": "equals",
+            "lhs": {
+              "kind": "raw_term",
+              "text": "\\bigcap_{i=1}^n I_i"
+            },
+            "rhs": {
+              "kind": "raw_term",
+              "text": "\\prod_{i=1}^n I_i"
+            }
+          },
+          "theorem_name": "comaximal_intersection_equals_product"
+        },
+        "type": "lemma",
+        "typed_transcription": {
+          "assumptions": [
+            {
+              "args": [
+                {
+                  "kind": "raw_term",
+                  "text": "I_1,\\dots,I_n"
+                }
+              ],
+              "kind": "uninterpreted_predicate",
+              "name": "pairwise_comaximal",
+              "text": "I_i+I_j=R for all 1\\leq i<j\\leq n"
+            }
+          ],
+          "binders": [
+            {
+              "name": "R",
+              "type": {
+                "kind": "custom",
+                "name": "commutative ring"
+              }
+            },
+            {
+              "name": "n",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "I",
+              "type": {
+                "kind": "custom",
+                "name": "indexed family of ideals of R"
+              }
+            }
+          ],
+          "conclusion": {
+            "kind": "equals",
+            "lhs": {
+              "kind": "raw_term",
+              "text": "\\bigcap_{i=1}^n I_i"
+            },
+            "rhs": {
+              "kind": "raw_term",
+              "text": "\\prod_{i=1}^n I_i"
+            }
+          },
+          "math_objects": [
+            {
+              "name": "R",
+              "type": {
+                "kind": "custom",
+                "name": "commutative ring"
+              }
+            },
+            {
+              "name": "n",
+              "type": {
+                "kind": "nat",
+                "reason": "Number of ideals"
+              }
+            },
+            {
+              "name": "I_i",
+              "type": {
+                "kind": "custom",
+                "name": "ideal of R"
+              }
+            }
+          ],
+          "source_text": "\\begin{lem}\nLet $R$ be a commutative ring and $I_1,...,I_n$ a set of ideals of $R$ such that any $I_i$ and $I_j$ are comaximal, meaning that:\n$$I_i+I_j=R, \\ \\ \\forall 1\\leq i<j\\leq n.$$\nThen we have:\n\\begin{equation*}\n\\bigcap_{i=1}^n I_i=\\prod_{i=1}^n I_i.\n\\end{equation*}\n\\end{lem}",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [],
+        "id": "comax",
+        "section": "InterpolatingAJ.tex:73514",
+        "source_tex": "\\begin{lem}\\label{comax}\nIf $d_1 \\neq d_2$, then $\\varphi_{d_1}(q^2)$ and $\\varphi_{d_2}(q^2)$ are coprime in $\\Q[q^{\\pm1}]$ and so the ideals $\\left(\\varphi_{d_1}(q^2)\\right)$ and $\\left(\\varphi_{d_2}(q^2)\\right)$ are comaximal.\n\\end{lem}",
+        "statement": "If d_1 ≠ d_2, then the polynomials φ_{d_1}(q^2) and φ_{d_2}(q^2) are coprime in Q[q^{±1}], and consequently the principal ideals (φ_{d_1}(q^2)) and (φ_{d_2}(q^2)) are comaximal.",
+        "theorem_ir": {
+          "assumptions": [
+            {
+              "arg": {
+                "kind": "equals",
+                "lhs": {
+                  "kind": "var",
+                  "name": "d_1"
+                },
+                "rhs": {
+                  "kind": "var",
+                  "name": "d_2"
+                }
+              },
+              "kind": "not"
+            }
+          ],
+          "binders": [
+            {
+              "name": "d_1",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "d_2",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "items": [
+              {
+                "args": [
+                  {
+                    "kind": "raw_term",
+                    "text": "\\varphi_{d_1}(q^2)"
+                  },
+                  {
+                    "kind": "raw_term",
+                    "text": "\\varphi_{d_2}(q^2)"
+                  }
+                ],
+                "kind": "uninterpreted_predicate",
+                "name": "coprime"
+              },
+              {
+                "args": [
+                  {
+                    "kind": "raw_term",
+                    "text": "(\\varphi_{d_1}(q^2))"
+                  },
+                  {
+                    "kind": "raw_term",
+                    "text": "(\\varphi_{d_2}(q^2))"
+                  }
+                ],
+                "kind": "uninterpreted_predicate",
+                "name": "comaximal"
+              }
+            ],
+            "kind": "and"
+          },
+          "theorem_name": "comax"
+        },
+        "type": "lemma",
+        "typed_transcription": {
+          "assumptions": [
+            {
+              "arg": {
+                "kind": "equals",
+                "lhs": {
+                  "kind": "var",
+                  "name": "d_1"
+                },
+                "rhs": {
+                  "kind": "var",
+                  "name": "d_2"
+                }
+              },
+              "kind": "not"
+            }
+          ],
+          "binders": [
+            {
+              "name": "d_1",
+              "type": {
+                "kind": "nat"
+              }
+            },
+            {
+              "name": "d_2",
+              "type": {
+                "kind": "nat"
+              }
+            }
+          ],
+          "conclusion": {
+            "items": [
+              {
+                "args": [
+                  {
+                    "kind": "raw_term",
+                    "text": "\\varphi_{d_1}(q^2)"
+                  },
+                  {
+                    "kind": "raw_term",
+                    "text": "\\varphi_{d_2}(q^2)"
+                  }
+                ],
+                "kind": "uninterpreted_predicate",
+                "name": "coprime",
+                "text": "\\varphi_{d_1}(q^2) and \\varphi_{d_2}(q^2) are coprime in \\Q[q^{\\pm1}]"
+              },
+              {
+                "args": [
+                  {
+                    "kind": "raw_term",
+                    "text": "(\\varphi_{d_1}(q^2))"
+                  },
+                  {
+                    "kind": "raw_term",
+                    "text": "(\\varphi_{d_2}(q^2))"
+                  }
+                ],
+                "kind": "uninterpreted_predicate",
+                "name": "comaximal",
+                "text": "the ideals (\\varphi_{d_1}(q^2)) and (\\varphi_{d_2}(q^2)) are comaximal"
+              }
+            ],
+            "kind": "and"
+          },
+          "math_objects": [
+            {
+              "name": "d_1",
+              "type": {
+                "kind": "nat",
+                "reason": "Index of a cyclotomic polynomial"
+              }
+            },
+            {
+              "name": "d_2",
+              "type": {
+                "kind": "nat",
+                "reason": "Index of a cyclotomic polynomial"
+              }
+            },
+            {
+              "name": "\\varphi_{d}",
+              "type": {
+                "kind": "custom",
+                "name": "cyclotomic polynomial"
+              }
+            },
+            {
+              "name": "\\Q[q^{\\pm1}]",
+              "type": {
+                "kind": "custom",
+                "name": "ring of Laurent polynomials over the rationals"
+              }
+            }
+          ],
+          "source_text": "\\begin{lem}\\label{comax}\nIf $d_1 \\neq d_2$, then $\\varphi_{d_1}(q^2)$ and $\\varphi_{d_2}(q^2)$ are coprime in $\\Q[q^{\\pm1}]$ and so the ideals $\\left(\\varphi_{d_1}(q^2)\\right)$ and $\\left(\\varphi_{d_2}(q^2)\\right)$ are comaximal.\n\\end{lem}",
+          "status": "transcribed"
+        }
       }
-    ]
+    ],
+    "source": "formalize_source_inventory_typed_transcriber",
+    "theorem_level_count": 22,
+    "typed_count": 34
+  },
+  "theorem_inventory": {
+    "artifact": "review_loop/theorem_inventory.json",
+    "inventory_count": 34,
+    "theorem_level_count": 22,
+    "typed_count": 34
   },
   "warnings": []
 }
