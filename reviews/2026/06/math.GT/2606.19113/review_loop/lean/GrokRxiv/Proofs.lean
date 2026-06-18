@@ -1,1 +1,1 @@
-/- Lean formalization runs asynchronously via the `formalize` job; queue with --with-lean. -/
+/- Lean formalization skipped: No paper-derived formal mathematical statements were extracted for Lean verification. -/
