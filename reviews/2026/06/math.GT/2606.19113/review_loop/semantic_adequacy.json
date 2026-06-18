@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0.0",
+  "source": "review_loop/semantic_ir.json",
+  "status": "fail",
+  "theorem_map": "review_loop/lean/theorem_map.json",
+  "verdicts": [
+    {
+      "claim_id": "thm:THEOREM",
+      "emitted_statement": "theorem thm_THEOREM (\\cN : Nat) : (is_largest_quotient_with_knot_invariant_image widetilde_Li_cN) ∧ (is_knot_invariant 0) ∧ (∀ (\\widetilde{\\Li}_{\\cN}' : quotient_of_Li), is_knot_invariant_in_quotient 0 widetilde_Li_cN -> factors_through widetilde_Li_cN widetilde_Li_cN) := by",
+      "lean_declaration": "thm_THEOREM",
+      "proof_status": "TYPE_ERROR",
+      "statement": "For every integer N >= 2, the maximal quotient ring \\widetilde{\\Li}_{\\cN} is the largest quotient of the Laurent polynomial ring \\Liq for which the image of the level-N quantum trace is a knot invariant. Concretely, the image \\widetilde{\\Omega}_{\\cN}(L)(q,s) of the level-N quantum trace in \\widetilde{\\Li}_{\\cN} is a knot invariant, and any other quotient \\widetilde{\\Li}_{\\cN}' of \\Li in which \\widetilde{\\Omega}_{\\cN}(\\beta_n) is a knot invariant factors through \\widetilde{\\Li}_{\\cN} (universal/maximality property).",
+      "theorem_id": "theorem_thm_THEOREM",
+      "verdict": "OVERCLAIMED",
+      "verified_statement": "theorem thm_THEOREM (\\cN : Nat) : (is_largest_quotient_with_knot_invariant_image widetilde_Li_cN) ∧ (is_knot_invariant 0) ∧ (∀ (\\widetilde{\\Li}_{\\cN}' : quotient_of_Li), is_knot_invariant_in_quotient 0 widetilde_Li_cN -> factors_through widetilde_Li_cN widetilde_Li_cN) := by"
+    },
+    {
+      "claim_id": "TINT",
+      "emitted_statement": "theorem TINT (\\cN : Nat) (L : oriented_knot) : (is_well_defined_oriented_knot_invariant 0) ∧ (0 = 0 + 0 - 0) := by",
+      "lean_declaration": "TINT",
+      "proof_status": "TYPE_ERROR",
+      "statement": "The level-N unified invariant \\Omega_{\\cN}(L)(q,s) \\in \\Li_{\\cN} is a well-defined oriented knot invariant that globalises the N-th coloured Jones and coloured Alexander (ADO) invariants, via the identity \\Omega_{\\cN}(L)(q,s) = J_{N}(L,q) + \\Phi_{N}(L,s) - \\Phi_{N}(L, q^{1-N}).",
+      "theorem_id": "theorem_TINT",
+      "verdict": "OVERCLAIMED",
+      "verified_statement": "theorem TINT (\\cN : Nat) (L : oriented_knot) : (is_well_defined_oriented_knot_invariant 0) ∧ (0 = 0 + 0 - 0) := by"
+    },
+    {
+      "claim_id": "thm:uqtr1",
+      "emitted_statement": "theorem thm_uqtr1 (\\cN : Nat) (n : Nat) : ∃ (g_0 : non_zero_element_of_Li_cN), is_unique_quantum_trace_up_to_scalar 0 g_0 := by",
+      "lean_declaration": "thm_uqtr1",
+      "proof_status": "USES_SORRY",
+      "statement": "For the level-N sequence of braid group representations { \\widetilde\\rho_{\\cN,n} | n \\in \\N }, there exists a quantum trace \\qptr_{V_{\\cN}^{\\otimes n}} that is unique up to a scalar multiple. Equivalently, for any quantum trace associated to \\widetilde{V}_{\\cN}^{\\otimes n} there is a non-zero element g_0(q,s) \\in \\Li_{\\cN} such that \\qptr(f) = \\sum_{j=0}^{\\cN-1} g_0(q,s) q^{-2i} f on the relevant matrix coefficients.",
+      "theorem_id": "theorem_thm_uqtr1",
+      "verdict": "OVERCLAIMED",
+      "verified_statement": "theorem thm_uqtr1 (\\cN : Nat) (n : Nat) : ∃ (g_0 : non_zero_element_of_Li_cN), is_unique_quantum_trace_up_to_scalar 0 g_0 := by"
+    }
+  ]
+}

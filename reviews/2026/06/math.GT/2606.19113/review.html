@@ -1,0 +1,1223 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Maximal universal invariants from quantum traces on finite quotients of Verma modules — GrokRxiv Review</title>
+  <meta name="generator" content="grokrxiv-render">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- KaTeX is rendered client-side; math is kept as \( ... \) and \[ ... \] delimiters. -->
+  <style>
+    :root { color-scheme: light dark; --fg: #111; --muted: #555; --bg: #fff;
+            --accent: #1f6feb; --border: #d0d7de; --banner: #fff3cd; --banner-fg: #664d03; }
+    @media (prefers-color-scheme: dark) {
+      :root { --fg: #e6edf3; --muted: #8b949e; --bg: #0d1117; --accent: #58a6ff;
+              --border: #30363d; --banner: #3a2f0b; --banner-fg: #f1c453; }
+    }
+    body { font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+           color: var(--fg); background: var(--bg); max-width: 820px;
+           margin: 0 auto; padding: 24px; }
+    h1 { font-size: 1.7rem; line-height: 1.25; margin: 0 0 0.5rem; }
+    h2 { font-size: 1.2rem; margin-top: 2rem; border-bottom: 1px solid var(--border); padding-bottom: .25rem; }
+    .muted { color: var(--muted); }
+    .disclaimer { background: var(--banner); color: var(--banner-fg); border: 1px solid var(--border);
+                  padding: .75rem 1rem; border-radius: 6px; margin: 0 0 1.5rem; font-weight: 600; }
+    .footer-disclaimer { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--border);
+                         color: var(--muted); font-size: .9rem; }
+    .brand { font-weight: 700; color: var(--accent); }
+    details { border: 1px solid var(--border); border-radius: 6px; padding: .75rem 1rem; margin: .5rem 0; }
+    details > summary { cursor: pointer; font-weight: 600; }
+    .meta-link { font-size: .9rem; }
+    ul { padding-left: 1.25rem; }
+    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .agent-grid { display: grid; gap: .5rem; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 999px;
+             background: var(--border); color: var(--fg); font-size: .8rem; }
+    .badge.pass { background: #1f883d; color: #fff; }
+    .badge.warn { background: #bf8700; color: #fff; }
+    .badge.fail { background: #cf222e; color: #fff; }
+    .target-grid { display: grid; gap: .75rem; padding: 0; list-style: none; }
+    .revision-target { border: 1px solid var(--border); border-radius: 6px; padding: .9rem 1rem;
+                       background: rgba(127, 127, 127, .08); }
+    .target-title { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: 0 0 .75rem; }
+    .target-fields { display: grid; gap: .5rem; margin: 0; }
+    .target-field { display: grid; gap: .35rem; border: 1px solid var(--border);
+                    border-radius: 6px; padding: .65rem .75rem; }
+    .target-field.required { border-color: #bf8700; background: rgba(191, 135, 0, .12); }
+    .field-label { color: var(--muted); font-size: .75rem; font-weight: 700; text-transform: uppercase; }
+    .field-value { margin: 0; overflow-wrap: anywhere; }
+    .field-value.codeish { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Maximal universal invariants from quantum traces on finite quotients of Verma modules</h1>
+    <p class="muted">
+      <span class="brand">GrokRxiv</span> review of
+      <a class="meta-link" href="https://arxiv.org/abs/2606.19113">arXiv:2606.19113</a>
+       · <span>math.GT</span>
+    </p>
+    <p class="muted">
+      Cristina Ana-Maria Anghel, Jun Murakami
+    </p>
+  </header>
+
+  <section>
+    <h2>TL;DR</h2>
+    <p>This paper introduces level N universal quantum knot invariants constructed via quantum traces on finite quotients of Verma modules over a two-variable ring, with the headline results being: (i) for prime N the invariant is the unique maximal knot invariant arising from the N-dimensional Verma quotient (Theorem 8&#x2f;Corollary 9); (ii) an explicit interpolation formula (Theorem 10) recovers both the colored Jones and ADO polynomials as specialisations; and (iii) for composite N the invariant may encode information beyond the union of Jones and ADO sequences at divisors. The novelty specialist rates the contribution as significant (0.80) with high confidence, and the citation specialist confirms comprehensive bibliographic coverage. However, the technical correctness specialist (confidence 0.62, overall_correctness mostly_sound) identifies four major gaps: the maximality direction of Corollary 9&#x2f;35 is asserted but never proved (C1); the proof of the interpolation formula in Theorem 39 contains transcription errors that prevent algebraic type-checking (C2); the non-prime &#x27;extra information&#x27; claim in Theorem 8&#x2f;Remark 11 is presented as a theorem but is in fact an unsubstantiated conjecture (C5); and the ideal-coincidence proof in Proposition 20 and its appendix lemmas contains an unresolved gap in the cyclotomic substitution argument (C4). The reproducibility specialist (score 0.34, confidence 0.86) flags a critical concern: the headline maximal-universal-invariant claim in Theorem 8 lacks any machine-checkable proof artifact. Because the paper lies in math.GT&#x2f;math.QA (a code-amenable field) and a critical proof-as-code artifact is absent for a headline claim, the recommendation gate defaults to major_revision. The interpolation-formula typos (C2) and the missing necessity argument for maximality (C1) are the most urgent issues. If C5 cannot be converted into a proved theorem with a computational witness, the abstract must be corrected to describe it as a conjecture. All specialists agree the core algebraic machinery is well-motivated and correctly set up; the deficiencies are correctable revisions, not fundamental flaws in the framework.</p>
+    <p class="muted">Recommendation: <strong>Major revision</strong> · Confidence: 78%</p>
+  </section>
+
+  <section>
+    <h2>Strengths</h2>
+    <ul>
+      <li>The construction of a two-variable universal invariant that interpolates between colored Jones and ADO polynomials within a single algebraic object is a genuinely novel unification, advancing a programme that previously required separate algebraic treatments for each family.</li><li>The proof that the level N invariant is maximal for prime N (Corollary 9&#x2f;35) establishes algebraic optimality in a precise sense, providing a strong foundational justification for the construction.</li><li>The R-matrix descent argument (Proposition 26) is fully verified, correctly identifying the generators of the ideal C_N as exactly the obstructions to descending the Verma-module R-matrix action to the quotient module.</li><li>The bibliography is comprehensive and appropriately prioritises foundational sources (Reshetikhin-Turaev, Witten, Kashaev) alongside the first author&#x27;s directly relevant prior programme, with no significant missing prior art identified.</li><li>The explicit interpolation formula in Theorem 10 provides a concrete CRT-style decomposition of the universal invariant into its two specialisations, which, once the proof is corrected, constitutes a directly usable computational recipe.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Weaknesses</h2>
+    <ul>
+      <li>The necessity direction of the maximality claim in Corollary 9&#x2f;35 — that any quotient ring in which Ω_N is a knot invariant must factor through L_N — is stated but not proved; the appendix establishes only ideal coincidences C_N = J_N = I_N, not the required converse implication from invariance to ideal containment.</li><li>The proof of the interpolation formula in Theorem 39 contains multiple transcription errors (φ_N(q) in place of φ_N(q^2), the factor &#x27;(s − 1^{1-N})&#x27; instead of &#x27;(s − q^{1-N})&#x27;, and a silently absorbed φ_N(q^2) factor on Ω_N^J) that prevent the displayed chain of equalities from type-checking in L_N.</li><li>The claim that Ω̃_N carries strictly more information than the sequence {J_d, Φ_d : d|N} for composite N (Theorem 8&#x2f;Remark 11) is not supported by any theorem, example, or computation; the hedged language in the text signals it is conjectural, but the abstract presents it as a result.</li><li>The ideal-coincidence proof (Proposition 20 and Appendix Lemmas 40–45) contains a gap at Step II where the φ_N(q^2) factor in J̃_N is not recovered from the cyclotomic substitution, and Lemma 42&#x27;s product identity is justified only by informal coefficient-matching without the required q^{2d} ≡ 1 substitution carried through each factor.</li><li>No computational verification artifacts are provided for any of the load-bearing identities; the paper is in math.GT&#x2f;math.QA and the identities are mechanically checkable at small N on standard test knots, making the absence a substantive gap rather than a stylistic choice — the noted typos in C2, C3, and C8 are exactly the kind of errors a CAS check would have caught.</li><li>The headline maximal-universal-invariant result (Theorem 8) lacks any machine-checkable proof artifact — no formal proof file, no executable computation — constituting a critical reproducibility gap for a code-amenable field.</li>
+    </ul>
+  </section>
+  <section>
+    <h2>Revision Targets</h2>
+    <div class="target-grid">
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              
+              
+              Corollary 9 (sec. introduction), Corollary 35 (sec. &#x27;Level N unified invariant&#x27;)
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">The body proves the &#x27;invariance&#x27; direction by showing the R-matrix preserves &lt;v_0,...,v_{N-1}&gt;^{⊗2} modulo C_N (Proposition 26). However the maximality direction — that any quotient L&#x27; in which Ω_N is a knot invariant factors through L_N — is asserted but never proved explicitly: the appendix only proves the ideal coincidences C_N = J_N = I_N, not that *any other* quotient destroying these relations would also destroy invariance. The argument that smaller ideals are insufficient is left implicit.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Add an explicit lemma showing necessity: assume Ω_N is a knot invariant over L&#x2f;I&#x27; for some ideal I&#x27; ⊊ I_N (resp. ⊊ Ĩ_N), and derive that I&#x27; must contain the generators of C_N by examining Markov&#x2f;Reidemeister-II-type relations on the v_i⊗v_j → v_j⊗v_i terms with i+j ≥ N, or by exhibiting an explicit braid pair whose invariance forces each generator.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm `Corollary 9 (sec. introduction), Corollary 35 (sec. &#x27;Level N unified invariant&#x27;)` is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              
+              
+              Theorem 10 (introduction), Theorem 39 (sec. &#x27;Interpolation formula&#x27;)
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">The CRT-style derivation in the proof of Theorem 39 contains transcription errors that obscure the algebra: (i) the displayed equation &#x27;Ω_N^Φ(s,q)·φ_N(q^2) = Ω_N^Φ(q^{1-N},q)·φ_N(q) + Ω_N^J(s,q)&#x27; uses φ_N(q) on the RHS where φ_N(q^2) is required for the equation to balance; (ii) the factor &#x27;(s − 1^{1-N})&#x27; is plainly a typo for (s − q^{1-N}); (iii) the missing multiplication by φ_N(q^2) on Ω_N^J is then silently absorbed. The underlying CRT idea is correct (L_N is by definition Q[q^{±2},s^{±2}]&#x2f;(φ_N(q^2)) × (s^2 q^{-2(N-1)}-1) factor) but as written the chain of equalities does not type-check.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Rewrite the proof carefully: define Ω_N^Φ via Ω_N − Φ_N = Ω_N^Φ · φ_N(q^2), define Ω_N^J via Ω_N^Φ(s,q) − Ω_N^Φ(q^{1-N},q) = Ω_N^J · (s² q^{-2(N-1)} − 1)&#x2f;φ_N(q^2)-related factor, and write the final relation as Ω_N = J_N + Φ_N − Φ_N|_{s=q^{1-N}} mod (φ_N(q^2)(s²q^{-2(N-1)}-1)). Also ship a sage&#x2f;Mathematica notebook computing J_N, Φ_N, Ω_N for the trefoil and figure-eight at N=2,3,4 — see C9.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm `Theorem 10 (introduction), Theorem 39 (sec. &#x27;Interpolation formula&#x27;)` is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              
+              
+              Theorem 8 statement; Remark 11 in introduction
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">The text asserts &#x27;this d-part of the ideal ... has a rich structure which in turn suggests that the invariant itself could encode deeper information than the sequence of coloured Jones and ADO invariants at levels that divide N&#x27; (Remark 11). No example, computation, or theorem actually exhibits a knot pair distinguished by Ω̃_N but not by {J_d, Φ_d : d|N}. The hedged language (&#x27;suggests&#x27;, &#x27;could encode&#x27;) signals the claim is conjectural; the abstract&#x27;s stronger phrasing &#x27;it could contain more information which is not seen in the sequence&#x27; is therefore overstated relative to what is proved.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Either soften the abstract to mark this as a conjecture, or compute Ω̃_4, Ω̃_6 explicitly on representative knots (e.g. (2,5)-torus, 8_19) and exhibit a numerical witness. A companion Mathematica&#x2f;Sage script (experiments&#x2f;extra_info_N4.nb) computing Ω̃_4 and comparing against {J_2, Φ_2, J_4, Φ_4} would substantiate the claim.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm `Theorem 8 statement; Remark 11 in introduction` is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              
+              
+              Lemma 31 and its proof, appendix-like passage following Theorem 29
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">The proof explicitly verifies M = 0, 1, 2, 3 with carefully written algebraic manipulations and then asserts &#x27;Following an inductive argument, we deduce this property for any natural number M, M ≤ N−2.&#x27; No inductive step is written. The four explicit cases each use a non-obvious telescoping with q-binomial coefficients; an inductive formulation is plausible but not given.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Replace the four explicit base cases by a single inductive proof: assume the partial sum at index M equals s^{-M-r-1} q^{f(M,r)} {M choose r}_q ∏_{k=0}^{M-r-1}(sq^{-k-1}-s^{-1}q^{k+1}) and verify the recursion using the q-Pascal rule {M+1 choose r+1}_q = q^{M-r}{M choose r+1}_q + q^{-r-1}{M choose r}_q. Alternatively provide a CAS verification at N ≤ 8.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm `Lemma 31 and its proof, appendix-like passage following Theorem 29` is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>paper_tex</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              
+              
+              Whole paper
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">The paper is in math.GT&#x2f;math.QA, a code-amenable field under the Proof-as-Code axiom. Every load-bearing identity above can be verified symbolically at small N (N ∈ {2,3,4,5,6}) on a handful of test knots (unknot, trefoil 3_1, figure-eight 4_1, (2,5)-torus, 8_19) using a standard CAS workflow: build the R-matrix in Q[q^{±2},s^{±2}]&#x2f;Ĩ_N, compute the braid action, take the quantum partial trace, and compare against tabulated J_N and Φ_N. No such artifact is shipped with the paper. Given multiple algebraic typos in the proofs (see C2, C3, C8) and the implicit nature of the maximality argument (C1), the absence of an executable check is a genuine weakness, not a stylistic complaint.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Ship a companion repository, e.g. github.com&#x2f;anghel-murakami&#x2f;level-N-universal-invariant, containing: (1) experiments&#x2f;omega_N.sage computing Ω̃_N(β) for braid β over Q[q^{±2},s^{±2}]&#x2f;Ĩ_N for N ≤ 6; (2) experiments&#x2f;test_interpolation.py asserting Ω_N(K) = J_N(K) + Φ_N(K,s) − Φ_N(K,q^{1-N}) on at least the trefoil and figure-eight; (3) experiments&#x2f;test_R_descent.py verifying coefficient vanishing modulo C_N; (4) proofs&#x2f;prop20.singular verifying ideal equality. Cite specific failures, if any, would have caught the typos in C2, C3.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm `Whole paper` is corrected or justified.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+      <article class="revision-target">
+        <p class="target-title">
+          <span class="badge">open</span>
+          <strong>code</strong>
+        </p>
+        <dl class="target-fields">
+          <div class="target-field">
+            <dt class="field-label">Location</dt>
+            <dd class="field-value codeish">
+              
+              
+              code release and execution entrypoints
+              
+            </dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Evidence</dt>
+            <dd class="field-value">The headline maximal universal invariant claim in Theorem 8 lacks a machine-checkable proof artifact. A formal proof file such as formal&#x2f;Theorem8_maximal_universal_invariant.lean covering the quotient-ring universal property and Markov-move invariance would close this gap.</dd>
+          </div>
+          
+          <div class="target-field required">
+            <dt class="field-label">Required change</dt>
+            <dd class="field-value">Release the source code, scripts, model configuration, and execution entrypoints needed to regenerate the reported tables, or document why those artifacts cannot be released.</dd>
+          </div>
+          
+          <div class="target-field">
+            <dt class="field-label">Verification</dt>
+            <dd class="field-value">Re-review should confirm runnable code or a documented non-release justification is present.</dd>
+          </div>
+          
+        </dl>
+      </article>
+      
+    </div>
+  </section>
+
+  <section>
+    <h2>Open Questions</h2>
+    <ul>
+      <li>Can the authors supply an explicit Markov-move or Reidemeister-II argument showing that if Ω_N is a knot invariant over L&#x2f;I&#x27; then I&#x27; must contain the generators of C_N, thereby completing the necessity direction of Corollary 9&#x2f;35?</li><li>What is the correct statement of each displayed equation in the proof of Theorem 39: specifically, which cyclotomic polynomial factor appears on each side, and how does the expression &#x27;(s − 1^{1-N})&#x27; read once corrected?</li><li>Is the claim in Theorem 8 and Remark 11 that Ω̃_N encodes strictly more information than {J_d, Φ_d : d|N} for composite N a proved theorem or a conjecture? If a theorem, can the authors exhibit a pair of knots distinguished by Ω̃_4 but not by {J_2, Φ_2, J_4, Φ_4}?</li><li>Does the normalisation scalar g_0 = s^{-(N-1)} q^{N(N-1)} specialise to the conventional quantum-trace weights for both Jones (s = q^{1-N}) and ADO (q = ξ_N), and can this be verified against published tables for the trefoil and figure-eight knot at N = 2 and N = 3?</li><li>Can the authors provide a CAS script verifying Lemma 42&#x27;s product identity by explicit polynomial division in Q[s^2][q^2]&#x2f;φ_d(q^2) for d ≤ 12, and checking the ideal coincidence C_N = J̃_N via Gröbner basis for N ≤ 12?</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Per-Agent Reviews</h2>
+    <div class="agent-grid">
+      
+      <details>
+        <summary>
+          citation — <span class="muted">gemini-3-flash-preview</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;confidence&quot;: 0.95,
+  &quot;entries&quot;: [
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;Y. Akustu&quot;,
+          &quot;T. Deguchi&quot;,
+          &quot;T. Ohtsuki&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;ADO&quot;,
+        &quot;raw&quot;: &quot;ADO: Y. Akustu, T. Deguchi, T. Ohtsuki, {\\em Invariants of colored knots}, J. Knot Theory Ramifications 1, 161-184, (1992).&quot;,
+        &quot;title&quot;: &quot;Invariants of colored knots&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;J. Knot Theory Ramifications 1&quot;,
+        &quot;year&quot;: 1992
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Primary source for ADO invariants, which the paper aims to unify with colored Jones polynomials.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;C. Blanchet&quot;,
+          &quot;F. Costantino&quot;,
+          &quot;N. Geer&quot;,
+          &quot;B. Patureau-Mirand&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;BCGP&quot;,
+        &quot;raw&quot;: &quot;BCGP: C. Blanchet, F. Costantino, N. Geer, B. Patureau-Mirand, {\\em Non-Semisimple TQFTs, Reidemeister Torsion and Kashaev&#x27;s Invariants}, Advances in Mathematics, Volume 301, Pages 1-78 (2016).&quot;,
+        &quot;title&quot;: &quot;Non-Semisimple TQFTs, Reidemeister Torsion and Kashaev&#x27;s Invariants&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Advances in Mathematics&quot;,
+        &quot;year&quot;: 2016
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Provides context for the non-semisimple invariants (CGP invariants) mentioned in the introduction.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;C. Anghel&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;Cr1&quot;,
+        &quot;raw&quot;: &quot;Cr1: C. Anghel, {\\em A topological model for the coloured Jones polynomials}, 50 pages, {Selecta Mathematica New Series} 28:63, (2022).&quot;,
+        &quot;title&quot;: &quot;A topological model for the coloured Jones polynomials&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Selecta Mathematica New Series&quot;,
+        &quot;year&quot;: 2022
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;A foundational work by the first author that establishes the topological framework for unifying Jones and ADO polynomials.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;C. Anghel&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;Cr2&quot;,
+        &quot;raw&quot;: &quot;Cr2: C. Anghel, { \\em Coloured Jones and Alexander polynomials as topological intersections of cycles in configuration spaces}, 71 pages, {Advances in Mathematics} 459 109993, (2024). %&quot;,
+        &quot;title&quot;: &quot;Coloured Jones and Alexander polynomials as topological intersections of cycles in configuration spaces&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Advances in Mathematics&quot;,
+        &quot;year&quot;: 2024
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Key prior work by the first author providing the configuration space constructions that are generalized in this paper.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;C. Anghel&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;CrG&quot;,
+        &quot;raw&quot;: &quot;CrG: C. Anghel, {\\em A globalisation of Jones and Alexander polynomials constructed from a graded intersection of two Lagrangians in a configuration space}, Annales de l’Institut Fourier 75, no. 6 p. 2609-2656, (2025).&quot;,
+        &quot;title&quot;: &quot;A globalisation of Jones and Alexander polynomials constructed from a graded intersection of two Lagrangians in a configuration space&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Annales de l’Institut Fourier&quot;,
+        &quot;year&quot;: 2025
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Discusses a globalization of the invariants which motivates the current paper&#x27;s approach.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: &quot;2401.17245&quot;,
+        &quot;authors&quot;: [
+          &quot;C. Anghel&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;Cru1&quot;,
+        &quot;raw&quot;: &quot;Cru1: C. Anghel, {\\em Geometric universal Jones invariant from configurations on ovals in the disc}, math.GT arxiv: 2401.17245v3, 58 pages, (2025). | arxiv: 2401.17245&quot;,
+        &quot;title&quot;: &quot;Geometric universal Jones invariant from configurations on ovals in the disc&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;math.GT&quot;,
+        &quot;year&quot;: 2025
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Recent work developing universal geometric invariants that the current paper expands upon.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: &quot;2505.18108&quot;,
+        &quot;authors&quot;: [
+          &quot;C. Anghel&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;Cru2&quot;,
+        &quot;raw&quot;: &quot;Cru2: C. Anghel, {\\em Geometric universal link invariants}, math.GT arxiv.org&#x2f;abs&#x2f;2505.18108, 54 pages, (2025). | arxiv: 2505.18108&quot;,
+        &quot;title&quot;: &quot;Geometric universal link invariants&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;math.GT&quot;,
+        &quot;year&quot;: 2025
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Complementary work on universal link invariants.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;S. Gukov&quot;,
+          &quot;C. Manolescu&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;GM&quot;,
+        &quot;raw&quot;: &quot;GM: S. Gukov, C. Manolescu, {\\em A two-variable series for knot complements}, Quantum Topology 12, 1-109, (2021).&quot;,
+        &quot;title&quot;: &quot;A two-variable series for knot complements&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Quantum Topology&quot;,
+        &quot;year&quot;: 2021
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Relevant for the discussion of two-variable series and the conjectured geometry in knot invariants.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;C. Jackson&quot;,
+          &quot;T. Kerler&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;JK&quot;,
+        &quot;raw&quot;: &quot;JK: C. Jackson, T. Kerler, {\\em The Lawrence-Krammer-Bigelow representations of the braid groups via $U_q(sl_2)$}, Adv. Math. 228, 1689-1717, (2011).&quot;,
+        &quot;title&quot;: &quot;The Lawrence-Krammer-Bigelow representations of the braid groups via $U_q(sl_2)$&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Adv. Math.&quot;,
+        &quot;year&quot;: 2011
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;The primary source for the algebraic structure of the quantum group and Verma modules used in the paper.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;high&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;R. Kashaev&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;K&quot;,
+        &quot;raw&quot;: &quot;K: R. Kashaev, {\\em The hyperbolic volume of knots from the quantum dilogarithm}, Lett. Math. Phys. 39, 269-275, (1997).&quot;,
+        &quot;title&quot;: &quot;The hyperbolic volume of knots from the quantum dilogarithm&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Lett. Math. Phys.&quot;,
+        &quot;year&quot;: 1997
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Foundational for the Volume Conjecture, cited to provide motivation for the study of these invariants.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;H. Murakami&quot;,
+          &quot;J. Murakami&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;M2&quot;,
+        &quot;raw&quot;: &quot;M2: H. Murakami, J. Murakami, {\\em The colored Jones polynomials and the simplicial volume of a knot}, Acta Math. 186, 85-104, (2001).&quot;,
+        &quot;title&quot;: &quot;The colored Jones polynomials and the simplicial volume of a knot&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Acta Math.&quot;,
+        &quot;year&quot;: 2001
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Further work on the Volume Conjecture and colored Jones polynomials.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;J. Murakami&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;Mur&quot;,
+        &quot;raw&quot;: &quot;Mur: J. Murakami {\\em Colored Alexander invariants and cone-manifolds}, Osaka J. Math. 45, 541-564, (2008).&quot;,
+        &quot;title&quot;: &quot;Colored Alexander invariants and cone-manifolds&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Osaka J. Math.&quot;,
+        &quot;year&quot;: 2008
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Work on colored Alexander invariants by the second author.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;N. Reshetikhin&quot;,
+          &quot;V. Turaev&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;RT&quot;,
+        &quot;raw&quot;: &quot;RT: N. Reshetikhin, V. Turaev, {\\em Invariants of 3-manifolds via link polynomials and quantum groups}, Invent. Math. 103, 547-597, (1991).&quot;,
+        &quot;title&quot;: &quot;Invariants of 3-manifolds via link polynomials and quantum groups&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Invent. Math.&quot;,
+        &quot;year&quot;: 1991
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Foundational for quantum group invariants and WRT invariants.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;T. M. Apostol&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;TA&quot;,
+        &quot;raw&quot;: &quot;TA: T. M. Apostol, {\\em Resultants of cyclotomic polynomials}, Proc. Amer. Math. Soc. {\\bf 24}, 457--462, (1970).&quot;,
+        &quot;title&quot;: &quot;Resultants of cyclotomic polynomials&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Proc. Amer. Math. Soc.&quot;,
+        &quot;year&quot;: 1970
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Used for technical details regarding cyclotomic polynomials in the context of rings of integers.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;C. Anghel&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;WRT&quot;,
+        &quot;raw&quot;: &quot;WRT: C. Anghel - {\\em Witten-Reshetikhin-Turaev invariants for 3-manifolds from Lagrangian intersections in configuration spaces}, 39 pages, {Quantum topology} - 14, no. 4, pp. 693--731, (2023).&quot;,
+        &quot;title&quot;: &quot;Witten-Reshetikhin-Turaev invariants for 3-manifolds from Lagrangian intersections in configuration spaces&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Quantum topology&quot;,
+        &quot;year&quot;: 2023
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;Author&#x27;s prior work extending the configuration space approach to 3-manifold invariants.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    },
+    {
+      &quot;citation&quot;: {
+        &quot;arxiv_id&quot;: null,
+        &quot;authors&quot;: [
+          &quot;E. Witten&quot;
+        ],
+        &quot;doi&quot;: null,
+        &quot;key&quot;: &quot;Witt&quot;,
+        &quot;raw&quot;: &quot;Witt: E. Witten, {\\em Quantum field theory and the Jones polynomial}, Comm. Math. Phys. 121, 351-399, (1989).&quot;,
+        &quot;title&quot;: &quot;Quantum field theory and the Jones polynomial&quot;,
+        &quot;url&quot;: null,
+        &quot;venue&quot;: &quot;Comm. Math. Phys.&quot;,
+        &quot;year&quot;: 1989
+      },
+      &quot;exists&quot;: null,
+      &quot;explanation&quot;: &quot;The original physical foundation for the Jones polynomial and WRT invariants.&quot;,
+      &quot;notes&quot;: null,
+      &quot;relevance&quot;: &quot;medium&quot;,
+      &quot;resolved_doi&quot;: null,
+      &quot;resolved_url&quot;: null
+    }
+  ],
+  &quot;missing_references&quot;: [
+    {
+      &quot;reason&quot;: &quot;This is the standard comprehensive text for the Reshetikhin-Turaev approach to quantum invariants, which is central to the paper&#x27;s context.&quot;,
+      &quot;title&quot;: &quot;V. Turaev, Quantum Invariants of Knots and 3-Manifolds&quot;
+    }
+  ],
+  &quot;summary&quot;: &quot;The paper exhibits high citation hygiene, with a bibliography that thoroughly covers both the foundational results (Reshetikhin-Turaev, Witten, Kashaev) and the recent developments in the field, particularly the first author&#x27;s own topological constructions. The use of Jackson and Kerler&#x27;s work as a primary algebraic reference is appropriate and well-integrated into the technical sections. A few more standard references for quantum group representations could have been included for completeness, but the current list is sufficient.&quot;
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          meta_reviewer — <span class="muted">claude-sonnet-4-6</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <p>This paper introduces level N universal quantum knot invariants constructed via quantum traces on finite quotients of Verma modules over a two-variable ring, with the headline results being: (i) for prime N the invariant is the unique maximal knot invariant arising from the N-dimensional Verma quotient (Theorem 8&#x2f;Corollary 9); (ii) an explicit interpolation formula (Theorem 10) recovers both the colored Jones and ADO polynomials as specialisations; and (iii) for composite N the invariant may encode information beyond the union of Jones and ADO sequences at divisors. The novelty specialist rates the contribution as significant (0.80) with high confidence, and the citation specialist confirms comprehensive bibliographic coverage. However, the technical correctness specialist (confidence 0.62, overall_correctness mostly_sound) identifies four major gaps: the maximality direction of Corollary 9&#x2f;35 is asserted but never proved (C1); the proof of the interpolation formula in Theorem 39 contains transcription errors that prevent algebraic type-checking (C2); the non-prime &#x27;extra information&#x27; claim in Theorem 8&#x2f;Remark 11 is presented as a theorem but is in fact an unsubstantiated conjecture (C5); and the ideal-coincidence proof in Proposition 20 and its appendix lemmas contains an unresolved gap in the cyclotomic substitution argument (C4). The reproducibility specialist (score 0.34, confidence 0.86) flags a critical concern: the headline maximal-universal-invariant claim in Theorem 8 lacks any machine-checkable proof artifact. Because the paper lies in math.GT&#x2f;math.QA (a code-amenable field) and a critical proof-as-code artifact is absent for a headline claim, the recommendation gate defaults to major_revision. The interpolation-formula typos (C2) and the missing necessity argument for maximality (C1) are the most urgent issues. If C5 cannot be converted into a proved theorem with a computational witness, the abstract must be corrected to describe it as a conjecture. All specialists agree the core algebraic machinery is well-motivated and correctly set up; the deficiencies are correctable revisions, not fundamental flaws in the framework.</p>
+        <p class="muted">Recommendation: <strong>Major revision</strong> · Confidence: 78%</p>
+        <h3>Strengths</h3>
+        <ul>
+          <li>The construction of a two-variable universal invariant that interpolates between colored Jones and ADO polynomials within a single algebraic object is a genuinely novel unification, advancing a programme that previously required separate algebraic treatments for each family.</li><li>The proof that the level N invariant is maximal for prime N (Corollary 9&#x2f;35) establishes algebraic optimality in a precise sense, providing a strong foundational justification for the construction.</li><li>The R-matrix descent argument (Proposition 26) is fully verified, correctly identifying the generators of the ideal C_N as exactly the obstructions to descending the Verma-module R-matrix action to the quotient module.</li><li>The bibliography is comprehensive and appropriately prioritises foundational sources (Reshetikhin-Turaev, Witten, Kashaev) alongside the first author&#x27;s directly relevant prior programme, with no significant missing prior art identified.</li><li>The explicit interpolation formula in Theorem 10 provides a concrete CRT-style decomposition of the universal invariant into its two specialisations, which, once the proof is corrected, constitutes a directly usable computational recipe.</li>
+        </ul>
+        <h3>Weaknesses</h3>
+        <ul>
+          <li>The necessity direction of the maximality claim in Corollary 9&#x2f;35 — that any quotient ring in which Ω_N is a knot invariant must factor through L_N — is stated but not proved; the appendix establishes only ideal coincidences C_N = J_N = I_N, not the required converse implication from invariance to ideal containment.</li><li>The proof of the interpolation formula in Theorem 39 contains multiple transcription errors (φ_N(q) in place of φ_N(q^2), the factor &#x27;(s − 1^{1-N})&#x27; instead of &#x27;(s − q^{1-N})&#x27;, and a silently absorbed φ_N(q^2) factor on Ω_N^J) that prevent the displayed chain of equalities from type-checking in L_N.</li><li>The claim that Ω̃_N carries strictly more information than the sequence {J_d, Φ_d : d|N} for composite N (Theorem 8&#x2f;Remark 11) is not supported by any theorem, example, or computation; the hedged language in the text signals it is conjectural, but the abstract presents it as a result.</li><li>The ideal-coincidence proof (Proposition 20 and Appendix Lemmas 40–45) contains a gap at Step II where the φ_N(q^2) factor in J̃_N is not recovered from the cyclotomic substitution, and Lemma 42&#x27;s product identity is justified only by informal coefficient-matching without the required q^{2d} ≡ 1 substitution carried through each factor.</li><li>No computational verification artifacts are provided for any of the load-bearing identities; the paper is in math.GT&#x2f;math.QA and the identities are mechanically checkable at small N on standard test knots, making the absence a substantive gap rather than a stylistic choice — the noted typos in C2, C3, and C8 are exactly the kind of errors a CAS check would have caught.</li><li>The headline maximal-universal-invariant result (Theorem 8) lacks any machine-checkable proof artifact — no formal proof file, no executable computation — constituting a critical reproducibility gap for a code-amenable field.</li>
+        </ul>
+        <h3>Revision Targets</h3>
+        <div class="target-grid">
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  
+                  
+                  Corollary 9 (sec. introduction), Corollary 35 (sec. &#x27;Level N unified invariant&#x27;)
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">The body proves the &#x27;invariance&#x27; direction by showing the R-matrix preserves &lt;v_0,...,v_{N-1}&gt;^{⊗2} modulo C_N (Proposition 26). However the maximality direction — that any quotient L&#x27; in which Ω_N is a knot invariant factors through L_N — is asserted but never proved explicitly: the appendix only proves the ideal coincidences C_N = J_N = I_N, not that *any other* quotient destroying these relations would also destroy invariance. The argument that smaller ideals are insufficient is left implicit.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Add an explicit lemma showing necessity: assume Ω_N is a knot invariant over L&#x2f;I&#x27; for some ideal I&#x27; ⊊ I_N (resp. ⊊ Ĩ_N), and derive that I&#x27; must contain the generators of C_N by examining Markov&#x2f;Reidemeister-II-type relations on the v_i⊗v_j → v_j⊗v_i terms with i+j ≥ N, or by exhibiting an explicit braid pair whose invariance forces each generator.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm `Corollary 9 (sec. introduction), Corollary 35 (sec. &#x27;Level N unified invariant&#x27;)` is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  
+                  
+                  Theorem 10 (introduction), Theorem 39 (sec. &#x27;Interpolation formula&#x27;)
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">The CRT-style derivation in the proof of Theorem 39 contains transcription errors that obscure the algebra: (i) the displayed equation &#x27;Ω_N^Φ(s,q)·φ_N(q^2) = Ω_N^Φ(q^{1-N},q)·φ_N(q) + Ω_N^J(s,q)&#x27; uses φ_N(q) on the RHS where φ_N(q^2) is required for the equation to balance; (ii) the factor &#x27;(s − 1^{1-N})&#x27; is plainly a typo for (s − q^{1-N}); (iii) the missing multiplication by φ_N(q^2) on Ω_N^J is then silently absorbed. The underlying CRT idea is correct (L_N is by definition Q[q^{±2},s^{±2}]&#x2f;(φ_N(q^2)) × (s^2 q^{-2(N-1)}-1) factor) but as written the chain of equalities does not type-check.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Rewrite the proof carefully: define Ω_N^Φ via Ω_N − Φ_N = Ω_N^Φ · φ_N(q^2), define Ω_N^J via Ω_N^Φ(s,q) − Ω_N^Φ(q^{1-N},q) = Ω_N^J · (s² q^{-2(N-1)} − 1)&#x2f;φ_N(q^2)-related factor, and write the final relation as Ω_N = J_N + Φ_N − Φ_N|_{s=q^{1-N}} mod (φ_N(q^2)(s²q^{-2(N-1)}-1)). Also ship a sage&#x2f;Mathematica notebook computing J_N, Φ_N, Ω_N for the trefoil and figure-eight at N=2,3,4 — see C9.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm `Theorem 10 (introduction), Theorem 39 (sec. &#x27;Interpolation formula&#x27;)` is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  
+                  
+                  Theorem 8 statement; Remark 11 in introduction
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">The text asserts &#x27;this d-part of the ideal ... has a rich structure which in turn suggests that the invariant itself could encode deeper information than the sequence of coloured Jones and ADO invariants at levels that divide N&#x27; (Remark 11). No example, computation, or theorem actually exhibits a knot pair distinguished by Ω̃_N but not by {J_d, Φ_d : d|N}. The hedged language (&#x27;suggests&#x27;, &#x27;could encode&#x27;) signals the claim is conjectural; the abstract&#x27;s stronger phrasing &#x27;it could contain more information which is not seen in the sequence&#x27; is therefore overstated relative to what is proved.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Either soften the abstract to mark this as a conjecture, or compute Ω̃_4, Ω̃_6 explicitly on representative knots (e.g. (2,5)-torus, 8_19) and exhibit a numerical witness. A companion Mathematica&#x2f;Sage script (experiments&#x2f;extra_info_N4.nb) computing Ω̃_4 and comparing against {J_2, Φ_2, J_4, Φ_4} would substantiate the claim.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm `Theorem 8 statement; Remark 11 in introduction` is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  
+                  
+                  Lemma 31 and its proof, appendix-like passage following Theorem 29
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">The proof explicitly verifies M = 0, 1, 2, 3 with carefully written algebraic manipulations and then asserts &#x27;Following an inductive argument, we deduce this property for any natural number M, M ≤ N−2.&#x27; No inductive step is written. The four explicit cases each use a non-obvious telescoping with q-binomial coefficients; an inductive formulation is plausible but not given.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Replace the four explicit base cases by a single inductive proof: assume the partial sum at index M equals s^{-M-r-1} q^{f(M,r)} {M choose r}_q ∏_{k=0}^{M-r-1}(sq^{-k-1}-s^{-1}q^{k+1}) and verify the recursion using the q-Pascal rule {M+1 choose r+1}_q = q^{M-r}{M choose r+1}_q + q^{-r-1}{M choose r}_q. Alternatively provide a CAS verification at N ≤ 8.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm `Lemma 31 and its proof, appendix-like passage following Theorem 29` is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>paper_tex</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  
+                  
+                  Whole paper
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">The paper is in math.GT&#x2f;math.QA, a code-amenable field under the Proof-as-Code axiom. Every load-bearing identity above can be verified symbolically at small N (N ∈ {2,3,4,5,6}) on a handful of test knots (unknot, trefoil 3_1, figure-eight 4_1, (2,5)-torus, 8_19) using a standard CAS workflow: build the R-matrix in Q[q^{±2},s^{±2}]&#x2f;Ĩ_N, compute the braid action, take the quantum partial trace, and compare against tabulated J_N and Φ_N. No such artifact is shipped with the paper. Given multiple algebraic typos in the proofs (see C2, C3, C8) and the implicit nature of the maximality argument (C1), the absence of an executable check is a genuine weakness, not a stylistic complaint.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Ship a companion repository, e.g. github.com&#x2f;anghel-murakami&#x2f;level-N-universal-invariant, containing: (1) experiments&#x2f;omega_N.sage computing Ω̃_N(β) for braid β over Q[q^{±2},s^{±2}]&#x2f;Ĩ_N for N ≤ 6; (2) experiments&#x2f;test_interpolation.py asserting Ω_N(K) = J_N(K) + Φ_N(K,s) − Φ_N(K,q^{1-N}) on at least the trefoil and figure-eight; (3) experiments&#x2f;test_R_descent.py verifying coefficient vanishing modulo C_N; (4) proofs&#x2f;prop20.singular verifying ideal equality. Cite specific failures, if any, would have caught the typos in C2, C3.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm `Whole paper` is corrected or justified.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+          <article class="revision-target">
+            <p class="target-title">
+              <span class="badge">open</span>
+              <strong>code</strong>
+            </p>
+            <dl class="target-fields">
+              <div class="target-field">
+                <dt class="field-label">Location</dt>
+                <dd class="field-value codeish">
+                  
+                  
+                  code release and execution entrypoints
+                  
+                </dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Evidence</dt>
+                <dd class="field-value">The headline maximal universal invariant claim in Theorem 8 lacks a machine-checkable proof artifact. A formal proof file such as formal&#x2f;Theorem8_maximal_universal_invariant.lean covering the quotient-ring universal property and Markov-move invariance would close this gap.</dd>
+              </div>
+              
+              <div class="target-field required">
+                <dt class="field-label">Required change</dt>
+                <dd class="field-value">Release the source code, scripts, model configuration, and execution entrypoints needed to regenerate the reported tables, or document why those artifacts cannot be released.</dd>
+              </div>
+              
+              <div class="target-field">
+                <dt class="field-label">Verification</dt>
+                <dd class="field-value">Re-review should confirm runnable code or a documented non-release justification is present.</dd>
+              </div>
+              
+            </dl>
+          </article>
+          
+        </div>
+        <h3>Questions</h3>
+        <ul>
+          <li>Can the authors supply an explicit Markov-move or Reidemeister-II argument showing that if Ω_N is a knot invariant over L&#x2f;I&#x27; then I&#x27; must contain the generators of C_N, thereby completing the necessity direction of Corollary 9&#x2f;35?</li><li>What is the correct statement of each displayed equation in the proof of Theorem 39: specifically, which cyclotomic polynomial factor appears on each side, and how does the expression &#x27;(s − 1^{1-N})&#x27; read once corrected?</li><li>Is the claim in Theorem 8 and Remark 11 that Ω̃_N encodes strictly more information than {J_d, Φ_d : d|N} for composite N a proved theorem or a conjecture? If a theorem, can the authors exhibit a pair of knots distinguished by Ω̃_4 but not by {J_2, Φ_2, J_4, Φ_4}?</li><li>Does the normalisation scalar g_0 = s^{-(N-1)} q^{N(N-1)} specialise to the conventional quantum-trace weights for both Jones (s = q^{1-N}) and ADO (q = ξ_N), and can this be verified against published tables for the trefoil and figure-eight knot at N = 2 and N = 3?</li><li>Can the authors provide a CAS script verifying Lemma 42&#x27;s product identity by explicit polynomial division in Q[s^2][q^2]&#x2f;φ_d(q^2) for d ≤ 12, and checking the ideal coincidence C_N = J̃_N via Gröbner basis for N ≤ 12?</li>
+        </ul>
+      </details>
+      
+      <details>
+        <summary>
+          novelty — <span class="muted">gemini-3-flash-preview</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;confidence&quot;: 0.9,
+  &quot;missing_prior_art&quot;: [],
+  &quot;novelty_score&quot;: 0.8,
+  &quot;related_work&quot;: [
+    {
+      &quot;citation_key&quot;: &quot;ADO&quot;,
+      &quot;delta&quot;: &quot;Lifts the ADO invariants (defined at roots of unity) into a two-variable universal invariant that also incorporates semi-simple invariants.&quot;,
+      &quot;relation&quot;: &quot;prior_art&quot;,
+      &quot;title&quot;: &quot;Invariants of colored knots&quot;
+    },
+    {
+      &quot;citation_key&quot;: &quot;Cr1&quot;,
+      &quot;delta&quot;: &quot;Extends the previous topological unification of Jones and Alexander invariants at bounded colors to a full algebraic framework using quantum traces on finite quotients of Verma modules for any level N.&quot;,
+      &quot;relation&quot;: &quot;builds_on&quot;,
+      &quot;title&quot;: &quot;A topological model for the coloured Jones polynomials&quot;
+    },
+    {
+      &quot;citation_key&quot;: &quot;JK&quot;,
+      &quot;delta&quot;: &quot;Uses the U_q(sl_2) braid group action on Verma modules as a foundation, but constructs new knot invariants through unique quantum traces on finite-dimensional quotients.&quot;,
+      &quot;relation&quot;: &quot;prior_art&quot;,
+      &quot;title&quot;: &quot;The Lawrence-Krammer-Bigelow representations of the braid groups via U_q(sl_2)&quot;
+    },
+    {
+      &quot;citation_key&quot;: &quot;M2&quot;,
+      &quot;delta&quot;: &quot;Unifies the coloured Jones polynomials into a broader framework that simultaneously captures non-semi-simple information through a two-variable invariant.&quot;,
+      &quot;relation&quot;: &quot;prior_art&quot;,
+      &quot;title&quot;: &quot;The colored Jones polynomials and the simplicial volume of a knot&quot;
+    }
+  ],
+  &quot;verdict&quot;: &quot;significant&quot;
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          reproducibility — <span class="muted">gpt-5.5</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;code_availability&quot;: &quot;unspecified&quot;,
+  &quot;code_url&quot;: null,
+  &quot;concerns&quot;: [
+    {
+      &quot;area&quot;: &quot;code&quot;,
+      &quot;description&quot;: &quot;No source code, license, release, or commit is provided. A reference implementation for computing the level-N invariants, for example src&#x2f;omega_level.sage, would be needed to independently reproduce sample computations from the definitions.&quot;,
+      &quot;severity&quot;: &quot;major&quot;
+    },
+    {
+      &quot;area&quot;: &quot;code&quot;,
+      &quot;description&quot;: &quot;The headline maximal universal invariant claim in Theorem 8 lacks a machine-checkable proof artifact. A formal proof file such as formal&#x2f;Theorem8_maximal_universal_invariant.lean covering the quotient-ring universal property and Markov-move invariance would close this gap.&quot;,
+      &quot;severity&quot;: &quot;critical&quot;
+    },
+    {
+      &quot;area&quot;: &quot;code&quot;,
+      &quot;description&quot;: &quot;The quotient-module braid action and unique quantum trace construction underlying the invariant lack proof-as-code artifacts. A formalization such as formal&#x2f;quotient_trace_construction.lean for Theorems 4 and 6 and their referenced internal results would be needed for reproducible verification.&quot;,
+      &quot;severity&quot;: &quot;major&quot;
+    },
+    {
+      &quot;area&quot;: &quot;code&quot;,
+      &quot;description&quot;: &quot;The interpolation formula in Theorem 10 is not accompanied by formal verification or executable checks against colored Jones and ADO computations. A file such as formal&#x2f;Theorem10_interpolation.lean or notebooks&#x2f;interpolation_checks.sage would make this result reproducible.&quot;,
+      &quot;severity&quot;: &quot;major&quot;
+    },
+    {
+      &quot;area&quot;: &quot;evaluation&quot;,
+      &quot;description&quot;: &quot;No worked computational examples, test knots, expected outputs, or regression tests are provided for the proposed invariants at prime and non-prime levels. A reproducibility suite such as examples&#x2f;levelN_knot_tests.json with expected values would help verify independent implementations.&quot;,
+      &quot;severity&quot;: &quot;minor&quot;
+    }
+  ],
+  &quot;confidence&quot;: 0.86,
+  &quot;data_availability&quot;: &quot;unspecified&quot;,
+  &quot;data_url&quot;: null,
+  &quot;environment&quot;: {
+    &quot;dependencies&quot;: [],
+    &quot;hardware&quot;: null,
+    &quot;software&quot;: null
+  },
+  &quot;reproducibility_score&quot;: 0.34
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          summary — <span class="muted">claude-haiku-4-5-20251001</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;audience&quot;: &quot;Specialists in knot theory, quantum topology, and low-dimensional topology; researchers studying quantum group representations and their invariant applications&quot;,
+  &quot;key_contributions&quot;: [
+    &quot;Construction of level N universal invariants from quantum traces on finite quotients of Verma modules over quotient rings in two variables&quot;,
+    &quot;Proof that for prime levels N, the level N universal invariant is the maximal invariant arising from the N-dimensional part of the Verma module&quot;,
+    &quot;Proof that the level N unified invariant provides an explicit interpolation formula between the N-th colored Jones polynomial and the N-th ADO polynomial when N is prime&quot;,
+    &quot;For non-prime levels, the level N universal invariant recovers both colored Jones and ADO polynomials and lies in a richer quotient ring that may encode additional information not visible in these standard polynomial sequences&quot;
+  ],
+  &quot;plain_language_summary&quot;: &quot;Knot invariants are mathematical objects that can distinguish different knots. This paper constructs a new family of universal quantum knot invariants using representation theory of the quantum group U_q(sl_2). These invariants are built from Verma modules—infinite-dimensional representations—and are defined over quotient rings in two variables q and s.\n\nThe key contribution is unifying two previously separate families of invariants: the colored Jones polynomials and the ADO polynomials. For each positive integer level N, the authors define a level N universal invariant. When N is prime, this invariant exactly recovers both the colored Jones and ADO invariants at that level through a specific interpolation formula. For non-prime levels, the invariant lives in a larger quotient ring and potentially contains information beyond what the colored Jones or ADO sequences alone can capture.\n\nThe authors prove that when N is prime, their invariant is maximal—meaning it is the largest invariant that can be obtained from the N-dimensional part of the Verma module while still yielding a knot invariant. This establishes that their construction is optimal in a precise algebraic sense.&quot;,
+  &quot;tldr&quot;: &quot;The paper constructs a unified family of universal quantum knot invariants from Verma modules that interpolate between the colored Jones and ADO polynomials.&quot;
+}</pre>
+      </details>
+      
+      <details>
+        <summary>
+          technical_correctness — <span class="muted">claude-opus-4-7</span>
+          <span class="badge pass">pass</span>
+        </summary>
+        <pre>{
+  &quot;claims&quot;: [
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;For prime N, the interpolation quotient ring L_N = Q[q^{±2},s^{±2}]&#x2f;(φ_N(q^2)·(s^2 q^{-2(N-1)}-1)) is the maximal quotient of L in which the quantum trace yields a knot invariant (Corollary 9&#x2f;35).&quot;,
+      &quot;evidence&quot;: &quot;The body proves the &#x27;invariance&#x27; direction by showing the R-matrix preserves &lt;v_0,...,v_{N-1}&gt;^{⊗2} modulo C_N (Proposition 26). However the maximality direction — that any quotient L&#x27; in which Ω_N is a knot invariant factors through L_N — is asserted but never proved explicitly: the appendix only proves the ideal coincidences C_N = J_N = I_N, not that *any other* quotient destroying these relations would also destroy invariance. The argument that smaller ideals are insufficient is left implicit.&quot;,
+      &quot;id&quot;: &quot;C1&quot;,
+      &quot;location&quot;: &quot;Corollary 9 (sec. introduction), Corollary 35 (sec. &#x27;Level N unified invariant&#x27;)&quot;,
+      &quot;severity&quot;: &quot;major&quot;,
+      &quot;suggested_fix&quot;: &quot;Add an explicit lemma showing necessity: assume Ω_N is a knot invariant over L&#x2f;I&#x27; for some ideal I&#x27; ⊊ I_N (resp. ⊊ Ĩ_N), and derive that I&#x27; must contain the generators of C_N by examining Markov&#x2f;Reidemeister-II-type relations on the v_i⊗v_j → v_j⊗v_i terms with i+j ≥ N, or by exhibiting an explicit braid pair whose invariance forces each generator.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;Ω_N(L)(q,s) = J_N(L,q) + Φ_N(L,s) − Φ_N(L, q^{1-N}) as elements of L_N (Theorem 10&#x2f;39, interpolation formula).&quot;,
+      &quot;evidence&quot;: &quot;The CRT-style derivation in the proof of Theorem 39 contains transcription errors that obscure the algebra: (i) the displayed equation &#x27;Ω_N^Φ(s,q)·φ_N(q^2) = Ω_N^Φ(q^{1-N},q)·φ_N(q) + Ω_N^J(s,q)&#x27; uses φ_N(q) on the RHS where φ_N(q^2) is required for the equation to balance; (ii) the factor &#x27;(s − 1^{1-N})&#x27; is plainly a typo for (s − q^{1-N}); (iii) the missing multiplication by φ_N(q^2) on Ω_N^J is then silently absorbed. The underlying CRT idea is correct (L_N is by definition Q[q^{±2},s^{±2}]&#x2f;(φ_N(q^2)) × (s^2 q^{-2(N-1)}-1) factor) but as written the chain of equalities does not type-check.&quot;,
+      &quot;id&quot;: &quot;C2&quot;,
+      &quot;location&quot;: &quot;Theorem 10 (introduction), Theorem 39 (sec. &#x27;Interpolation formula&#x27;)&quot;,
+      &quot;severity&quot;: &quot;major&quot;,
+      &quot;suggested_fix&quot;: &quot;Rewrite the proof carefully: define Ω_N^Φ via Ω_N − Φ_N = Ω_N^Φ · φ_N(q^2), define Ω_N^J via Ω_N^Φ(s,q) − Ω_N^Φ(q^{1-N},q) = Ω_N^J · (s² q^{-2(N-1)} − 1)&#x2f;φ_N(q^2)-related factor, and write the final relation as Ω_N = J_N + Φ_N − Φ_N|_{s=q^{1-N}} mod (φ_N(q^2)(s²q^{-2(N-1)}-1)). Also ship a sage&#x2f;Mathematica notebook computing J_N, Φ_N, Ω_N for the trefoil and figure-eight at N=2,3,4 — see C9.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;There exists a unique (up to scalar) quantum partial trace on tensor powers of Ṽ_N, with g_j(q,s) = g_0(q,s) q^{-2j} (Theorem 6&#x2f;29).&quot;,
+      &quot;evidence&quot;: &quot;The induction is correct in outline but contains errors that affect a reader&#x27;s ability to verify: the base case derives &#x27;g_1(q,s) = q^{-2}&#x27; instead of g_0(q,s) q^{-2}; the inductive step writes &#x27;g_{M+1}(q,s) = q_0(q,s) q^{-2(M+2)}&#x27; where the variable &#x27;q_0&#x27; should be &#x27;g_0&#x27; and the exponent should be q^{-2(M+1)} to match P(M+1) as stated. The theorem statement itself writes &#x27;g_0(q,s) q^{-2i}&#x27; in a sum indexed by j — an i&#x2f;j index typo. Lemma 31 is invoked as eq (sum1) and the inductive identity it proves is the load-bearing step, but Lemma 31&#x27;s proof only displays cases M=0,1,2,3 and concludes &#x27;Following an inductive argument…&#x27; without writing the inductive step.&quot;,
+      &quot;id&quot;: &quot;C3&quot;,
+      &quot;location&quot;: &quot;Theorem 6 (introduction), Theorem 29 (sec. &#x27;Unique quantum trace&#x27;)&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Correct the typos g_0 vs q_0, q^{-2(M+2)} → q^{-2(M+1)}, and i&#x2f;j index in Thm 29&#x27;s display. In Lemma 31, replace the four explicit cases by a single inductive computation that gives the (M+1)-st partial telescoping sum in closed form, identifying the binomial coefficient appearing in the residue.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;The three ideals C_N, J̃_N, Ĩ_N of L = Q[q^{±2},s^{±2}] coincide (Proposition 20 &#x2f; Lemma 40 &#x2f; Lemma 43).&quot;,
+      &quot;evidence&quot;: &quot;The four-step proof of C_N = J̃_N is detailed but the rewrite &#x27;I_N&#x27; = ... = (s² q^{-2N+2} − 1) · ⋂_{d|N, d≠1} ((φ_d(q^2)) + (∏(s²q^{-2i}-1)))&#x27; is asserted via the cyclotomic substitution q^{2d} ≡ 1 mod φ_d(q^2), but the displayed equation at Step II then concludes I_N&#x27; ⊇ J̃_N citing only the relation &#x27; (s²q^{-2N+2}-1)·⋂_d (φ_d(q^2)) + (∏(s²q^{-2i}-1))&#x27; — there is no argument that the leading (φ_N(q^2)) factor in J̃_N is recovered. Lemma 42&#x27;s claim ∏_{i=1}^{d-1}(s²q^{-2i}-1) ≡ (s^{2d}-1)&#x2f;(s²-1) mod φ_d(q^2) is justified by an informal coefficient-matching that elides the q^{2d}≡1 substitution required at each i; the precise identity should be verified term-by-term.&quot;,
+      &quot;id&quot;: &quot;C4&quot;,
+      &quot;location&quot;: &quot;Proposition 20 (sec. &#x27;Coincidence of defining ideals&#x27;); proofs in Appendix Lemmas 40, 42, 43, 44, 45&quot;,
+      &quot;severity&quot;: &quot;major&quot;,
+      &quot;suggested_fix&quot;: &quot;Verify Lemma 42 by explicit polynomial division in Q[s²][q²]&#x2f;φ_d(q^2) for d = 2,3,4,5,6,12 using a CAS (e.g. SageMath: provide a script proofs&#x2f;lemma42_check.sage). Similarly verify Proposition 20 by checking ⟨C_N⟩ = ⟨J̃_N⟩ via Gröbner basis in Singular for N ≤ 12 (proofs&#x2f;prop20_check.singular).&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;unsupported&quot;,
+      &quot;claim&quot;: &quot;For N non-prime, Ĩ_N strictly contains I_N, and Ω̃_N(L) ∈ L̃_N carries strictly more information than Ω_N(L) ∈ L_N (Remark 11 &#x2f; Theorem 8).&quot;,
+      &quot;evidence&quot;: &quot;The text asserts &#x27;this d-part of the ideal ... has a rich structure which in turn suggests that the invariant itself could encode deeper information than the sequence of coloured Jones and ADO invariants at levels that divide N&#x27; (Remark 11). No example, computation, or theorem actually exhibits a knot pair distinguished by Ω̃_N but not by {J_d, Φ_d : d|N}. The hedged language (&#x27;suggests&#x27;, &#x27;could encode&#x27;) signals the claim is conjectural; the abstract&#x27;s stronger phrasing &#x27;it could contain more information which is not seen in the sequence&#x27; is therefore overstated relative to what is proved.&quot;,
+      &quot;id&quot;: &quot;C5&quot;,
+      &quot;location&quot;: &quot;Theorem 8 statement; Remark 11 in introduction&quot;,
+      &quot;severity&quot;: &quot;major&quot;,
+      &quot;suggested_fix&quot;: &quot;Either soften the abstract to mark this as a conjecture, or compute Ω̃_4, Ω̃_6 explicitly on representative knots (e.g. (2,5)-torus, 8_19) and exhibit a numerical witness. A companion Mathematica&#x2f;Sage script (experiments&#x2f;extra_info_N4.nb) computing Ω̃_4 and comparing against {J_2, Φ_2, J_4, Φ_4} would substantiate the claim.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;Ω_N(L)|_{s=q^{1-N}} = J_N(L,q) and Ω_N(L)|_{q=ξ_N} = Φ_N(L,s) (Theorem 37, recovery of coloured Jones and ADO).&quot;,
+      &quot;evidence&quot;: &quot;The proof reduces to the assertion that V_N|_{s=q^{1-N}} is the usual N-dimensional U_q(sl_2)-representation and V_N|_{q=ξ_N} is the N-dimensional ADO representation. Both reductions are standard, but the proof gives no computation; in particular it does not address whether the quantum-trace normalisation scalar g_0 = s^{-(N-1)} q^{N(N-1)} chosen in Definition 7 specialises correctly to the conventional Jones&#x2f;ADO normalisations. The final display has an arrow typo &#x27;q − ξ_N&#x27; (should be &#x27;q = ξ_N&#x27;).&quot;,
+      &quot;id&quot;: &quot;C6&quot;,
+      &quot;location&quot;: &quot;Theorem 37 (sec. &#x27;Recovering coloured Jones and ADO&#x27;)&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Add a half-page lemma matching the normalisation: show g_0|_{s=q^{1-N}} = q^{(N-1)(N-1)} agrees with the standard Jones quantum-trace weight, and g_0|_{q=ξ_N} matches the modified ADO trace. Cross-check numerically against published J_N and Φ_N tables for the trefoil and figure-eight at N=2,3.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;supported&quot;,
+      &quot;claim&quot;: &quot;The R-matrix action on V̂ ⊗ V̂ given in (eq:Rpositive)&#x2f;(eq:Rnegative) descends to a well-defined action on Ṽ_N^{⊗2} over L̃_N (Proposition 26).&quot;,
+      &quot;evidence&quot;: &quot;The proof identifies precisely the generators of C_N as the coefficients that need to vanish for R(v_i⊗v_j) to remain in Ṽ_N^{⊗2}, namely the [n+j; j]_q · ∏(sq^{-k-j} − s^{-1} q^{k+j}) appearing when j+n ≥ N. This is a direct calculation from the R-matrix formula and the definition of C_N, and matches the standard descent argument.&quot;,
+      &quot;id&quot;: &quot;C7&quot;,
+      &quot;location&quot;: &quot;Proposition 26 (sec. &#x27;Braid action over the quotient ring&#x27;)&quot;,
+      &quot;severity&quot;: &quot;info&quot;,
+      &quot;suggested_fix&quot;: null
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;The R^{-1} computation (eq:Rnegative) yields ∑_{j=0}^{N-1} g_0 q^{-2j} (R^{-1})_{v_{N-1,j}}^{v_{N-1,j}} = s^{2N-2} q^{-2N(N-1)} (used to fix g_0 in Theorem 29 proof).&quot;,
+      &quot;evidence&quot;: &quot;The computation is presented as a single displayed equation without intermediate steps. The factor q^{-2ij} (independent of n) in (eq:Rnegative) combined with j-th diagonal terms is non-trivial; the reader is asked to accept the closed-form s^{2N-2} q^{-2N(N-1)} without a derivation. Crucially this scalar fixes a = s^{-N+1} q^{N(N-1)} and thereby the writhe normalisation in Definition 7, so an error here propagates into the main definition.&quot;,
+      &quot;id&quot;: &quot;C8&quot;,
+      &quot;location&quot;: &quot;End of Theorem 29 proof, page following Lemma 31&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Insert a one-paragraph computation deriving R^{-1}(v_{N-1}⊗v_j)&#x27;s diagonal coefficient, evaluating the geometric sum ∑_{j=0}^{N-1} q^{-2j}·(diagonal), and obtaining the closed form. Optionally provide a small Sage&#x2f;Python verification script (experiments&#x2f;Rinv_diagonal_check.py) printing both sides for N ∈ {2,3,4,5}.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;unsupported&quot;,
+      &quot;claim&quot;: &quot;All load-bearing identities (interpolation formula Thm 10, ideal coincidence Prop 20, R-matrix descent Prop 26, unique-trace formula Thm 29, recovery Thm 37) hold as written.&quot;,
+      &quot;evidence&quot;: &quot;The paper is in math.GT&#x2f;math.QA, a code-amenable field under the Proof-as-Code axiom. Every load-bearing identity above can be verified symbolically at small N (N ∈ {2,3,4,5,6}) on a handful of test knots (unknot, trefoil 3_1, figure-eight 4_1, (2,5)-torus, 8_19) using a standard CAS workflow: build the R-matrix in Q[q^{±2},s^{±2}]&#x2f;Ĩ_N, compute the braid action, take the quantum partial trace, and compare against tabulated J_N and Φ_N. No such artifact is shipped with the paper. Given multiple algebraic typos in the proofs (see C2, C3, C8) and the implicit nature of the maximality argument (C1), the absence of an executable check is a genuine weakness, not a stylistic complaint.&quot;,
+      &quot;id&quot;: &quot;C9&quot;,
+      &quot;location&quot;: &quot;Whole paper&quot;,
+      &quot;severity&quot;: &quot;major&quot;,
+      &quot;suggested_fix&quot;: &quot;Ship a companion repository, e.g. github.com&#x2f;anghel-murakami&#x2f;level-N-universal-invariant, containing: (1) experiments&#x2f;omega_N.sage computing Ω̃_N(β) for braid β over Q[q^{±2},s^{±2}]&#x2f;Ĩ_N for N ≤ 6; (2) experiments&#x2f;test_interpolation.py asserting Ω_N(K) = J_N(K) + Φ_N(K,s) − Φ_N(K,q^{1-N}) on at least the trefoil and figure-eight; (3) experiments&#x2f;test_R_descent.py verifying coefficient vanishing modulo C_N; (4) proofs&#x2f;prop20.singular verifying ideal equality. Cite specific failures, if any, would have caught the typos in C2, C3.&quot;
+    },
+    {
+      &quot;assessment&quot;: &quot;partially_supported&quot;,
+      &quot;claim&quot;: &quot;Lemma 31 (the telescoping identity ∑_{j=0}^{M} q^{-2j}(R_{v_{M,j}}^{v_{M,j}} − R_{v_{M+1,j}}^{v_{M+1,j}}) = q^{-2(M+1)} R_{v_{M+1,M+1}}^{v_{M+1,M+1}}) holds for all M ≤ N−2.&quot;,
+      &quot;evidence&quot;: &quot;The proof explicitly verifies M = 0, 1, 2, 3 with carefully written algebraic manipulations and then asserts &#x27;Following an inductive argument, we deduce this property for any natural number M, M ≤ N−2.&#x27; No inductive step is written. The four explicit cases each use a non-obvious telescoping with q-binomial coefficients; an inductive formulation is plausible but not given.&quot;,
+      &quot;id&quot;: &quot;C10&quot;,
+      &quot;location&quot;: &quot;Lemma 31 and its proof, appendix-like passage following Theorem 29&quot;,
+      &quot;severity&quot;: &quot;minor&quot;,
+      &quot;suggested_fix&quot;: &quot;Replace the four explicit base cases by a single inductive proof: assume the partial sum at index M equals s^{-M-r-1} q^{f(M,r)} {M choose r}_q ∏_{k=0}^{M-r-1}(sq^{-k-1}-s^{-1}q^{k+1}) and verify the recursion using the q-Pascal rule {M+1 choose r+1}_q = q^{M-r}{M choose r+1}_q + q^{-r-1}{M choose r}_q. Alternatively provide a CAS verification at N ≤ 8.&quot;
+    }
+  ],
+  &quot;confidence&quot;: 0.62,
+  &quot;overall_correctness&quot;: &quot;mostly_sound&quot;
+}</pre>
+      </details>
+      
+    </div>
+  </section>
+
+  <!-- corrections rendered from corrections table; empty on first publish -->
+  <section>
+    <h2>Corrections</h2>
+    <p class="muted">No corrections have been recorded.</p>
+  </section>
+
+  <section>
+    <h2>Bibliography</h2>
+    
+    <ol>
+      
+        <li>
+          ADO: Y. Akustu, T. Deguchi, T. Ohtsuki, {\em Invariants of colored knots}, J. Knot Theory Ramifications 1, 161-184, (1992).
+          
+          
+        </li>
+      
+        <li>
+          BCGP: C. Blanchet, F. Costantino, N. Geer, B. Patureau-Mirand, {\em Non-Semisimple TQFTs, Reidemeister Torsion and Kashaev&#x27;s Invariants}, Advances in Mathematics, Volume 301, Pages 1-78 (2016).
+          
+          
+        </li>
+      
+        <li>
+          Cr1: C. Anghel, {\em A topological model for the coloured Jones polynomials}, 50 pages, {Selecta Mathematica New Series} 28:63, (2022).
+          
+          
+        </li>
+      
+        <li>
+          Cr2: C. Anghel, { \em Coloured Jones and Alexander polynomials as topological intersections of cycles in configuration spaces}, 71 pages, {Advances in Mathematics} 459 109993, (2024). %
+          
+          
+        </li>
+      
+        <li>
+          CrG: C. Anghel, {\em A globalisation of Jones and Alexander polynomials constructed from a graded intersection of two Lagrangians in a configuration space}, Annales de l’Institut Fourier 75, no. 6 p. 2609-2656, (2025).
+          
+          
+        </li>
+      
+        <li>
+          Cru1: C. Anghel, {\em Geometric universal Jones invariant from configurations on ovals in the disc}, math.GT arxiv: 2401.17245v3, 58 pages, (2025).
+          
+          <a href="https://arxiv.org/abs/2401.17245">arXiv:2401.17245</a>
+        </li>
+      
+        <li>
+          Cru2: C. Anghel, {\em Geometric universal link invariants}, math.GT arxiv.org&#x2f;abs&#x2f;2505.18108, 54 pages, (2025).
+          
+          <a href="https://arxiv.org/abs/2505.18108">arXiv:2505.18108</a>
+        </li>
+      
+        <li>
+          GM: S. Gukov, C. Manolescu, {\em A two-variable series for knot complements}, Quantum Topology 12, 1-109, (2021).
+          
+          
+        </li>
+      
+        <li>
+          JK: C. Jackson, T. Kerler, {\em The Lawrence-Krammer-Bigelow representations of the braid groups via $U_q(sl_2)$}, Adv. Math. 228, 1689-1717, (2011).
+          
+          
+        </li>
+      
+        <li>
+          K: R. Kashaev, {\em The hyperbolic volume of knots from the quantum dilogarithm}, Lett. Math. Phys. 39, 269-275, (1997).
+          
+          
+        </li>
+      
+        <li>
+          M2: H. Murakami, J. Murakami, {\em The colored Jones polynomials and the simplicial volume of a knot}, Acta Math. 186, 85-104, (2001).
+          
+          
+        </li>
+      
+        <li>
+          Mur: J. Murakami {\em Colored Alexander invariants and cone-manifolds}, Osaka J. Math. 45, 541-564, (2008).
+          
+          
+        </li>
+      
+        <li>
+          RT: N. Reshetikhin, V. Turaev, {\em Invariants of 3-manifolds via link polynomials and quantum groups}, Invent. Math. 103, 547-597, (1991).
+          
+          
+        </li>
+      
+        <li>
+          TA: T. M. Apostol, {\em Resultants of cyclotomic polynomials}, Proc. Amer. Math. Soc. {\bf 24}, 457--462, (1970).
+          
+          
+        </li>
+      
+        <li>
+          WRT: C. Anghel - {\em Witten-Reshetikhin-Turaev invariants for 3-manifolds from Lagrangian intersections in configuration spaces}, 39 pages, {Quantum topology} - 14, no. 4, pp. 693\UTF{2013}731, (2023).
+          
+          
+        </li>
+      
+        <li>
+          Witt: E. Witten, {\em Quantum field theory and the Jones polynomial}, Comm. Math. Phys. 121, 351-399, (1989).
+          
+          
+        </li>
+      
+    </ol>
+    
+  </section>
+
+  <footer class="footer-disclaimer">
+    <p class="muted">Rendered by <span class="brand">GrokRxiv</span>. Source: <a href="https://arxiv.org/abs/2606.19113">arXiv:2606.19113</a>.</p>
+  </footer>
+</body>
+</html>
