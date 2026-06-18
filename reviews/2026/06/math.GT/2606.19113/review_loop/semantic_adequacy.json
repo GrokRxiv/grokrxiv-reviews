@@ -1,0 +1,178 @@
+{
+  "schema_version": "1.0.0",
+  "source": "review_loop/semantic_ir.json",
+  "status": "fail",
+  "theorem_map": "review_loop/lean/theorem_map.json",
+  "verdicts": [
+    {
+      "claim_id": "InterpolatingAJ_tex:thm:19154",
+      "emitted_statement": "theorem InterpolatingAJ_tex_thm_19154 (\\cN : Nat) (n : Nat) : (is_braid_group_representation rho_cN_n B_n Aut_Li_cN_V_cN_otimes_n) ∧ (is_braid_group_representation widetilde_rho_cN_n B_n Aut_widetilde_Li_cN_widetilde_V_cN_otimes_n) := by",
+      "lean_declaration": "InterpolatingAJ_tex_thm_19154",
+      "proof_status": "FAILED",
+      "statement": "The generic braid group action $\\hat\\rho_n$ descends to braid group representations on the quotient modules: $\\rho_{\\cN,n}:B_n\\to\\Aut_{\\Li_\\cN}(V_\\cN^{\\otimes n})$ over the interpolation ring, and $\\widetilde\\rho_{\\cN,n}:B_n\\to\\Aut_{\\widetilde\\Li_\\cN}(\\widetilde V_\\cN^{\\otimes n})$ over the maximal ring.",
+      "theorem_id": "theorem_InterpolatingAJ_tex_thm_19154",
+      "verdict": "OVERCLAIMED",
+      "verified_statement": "theorem InterpolatingAJ_tex_thm_19154 (\\cN : Nat) (n : Nat) : (is_braid_group_representation rho_cN_n B_n Aut_Li_cN_V_cN_otimes_n) ∧ (is_braid_group_representation widetilde_rho_cN_n B_n Aut_widetilde_Li_cN_widetilde_V_cN_otimes_n) := by"
+    },
+    {
+      "claim_id": "InterpolatingAJ_tex:thm:20726",
+      "emitted_statement": "theorem InterpolatingAJ_tex_thm_20726 (\\cN : Nat) (n : Nat) : ∃ (\\qptr_{\\widetilde{V}_\\cN^{\\otimes n}} : quantum_partial_trace_End_widetilde_V_cN_otimes_n_1_to_End_widetilde_V_cN_otimes_n), (is_unique_quantum_trace_up_to_scalar qptr_widetilde_V_cN_otimes_n) ∧ (coefficients_satisfy g_j_q_s_g_0_q_s_q_2j) := by",
+      "lean_declaration": "InterpolatingAJ_tex_thm_20726",
+      "proof_status": "FAILED",
+      "statement": "There exists a unique quantum trace, up to a scalar, on the tensor powers of the maximal module, $\\qptr_{\\widetilde V_\\cN^{\\otimes n}}:\\End(\\widetilde V_\\cN^{\\otimes(n+1)})\\to\\End(\\widetilde V_\\cN^{\\otimes n})$, whose coefficients satisfy $g_j(q,s)=g_0(q,s)\\,q^{-2j}$ for some non-zero $g_0(q,s)$.",
+      "theorem_id": "theorem_InterpolatingAJ_tex_thm_20726",
+      "verdict": "OVERCLAIMED",
+      "verified_statement": "theorem InterpolatingAJ_tex_thm_20726 (\\cN : Nat) (n : Nat) : ∃ (\\qptr_{\\widetilde{V}_\\cN^{\\otimes n}} : quantum_partial_trace_End_widetilde_V_cN_otimes_n_1_to_End_widetilde_V_cN_otimes_n), (is_unique_quantum_trace_up_to_scalar qptr_widetilde_V_cN_otimes_n) ∧ (coefficients_satisfy g_j_q_s_g_0_q_s_q_2j) := by"
+    },
+    {
+      "claim_id": "thm:THEOREM",
+      "emitted_statement": "theorem thm_THEOREM (\\cN : Nat) : (is_largest_quotient_giving_knot_invariant 0 0) ∧ (is_knot_invariant 0) ∧ (∀ (\\widetilde{\\Li}_{\\cN}' : quotient_ring), is_knot_invariant_in_quotient 0 0 -> factors_through 0 0) := by",
+      "lean_declaration": "thm_THEOREM",
+      "proof_status": "TYPE_ERROR",
+      "statement": "For every natural number $\\cN \\geq 2$, the ring $\\widetilde{\\Li}_{\\cN}$ is the largest quotient of the polynomial ring $\\Liq$ in which the image of the level $\\cN$ quantum trace is a knot invariant: the image $\\widetilde{\\Omega}_{\\cN}(L)(q,s) \\in \\widetilde{\\Li}_{\\cN}$ is a knot invariant, and any quotient $\\widetilde{\\Li}_{\\cN}'$ of $\\Li$ in which $\\widetilde{\\Omega}_{\\cN}(\\beta_n)$ is a knot invariant factors through $\\widetilde{\\Li}_{\\cN}$.",
+      "theorem_id": "theorem_thm_THEOREM",
+      "verdict": "OVERCLAIMED",
+      "verified_statement": "theorem thm_THEOREM (\\cN : Nat) : (is_largest_quotient_giving_knot_invariant 0 0) ∧ (is_knot_invariant 0) ∧ (∀ (\\widetilde{\\Li}_{\\cN}' : quotient_ring), is_knot_invariant_in_quotient 0 0 -> factors_through 0 0) := by"
+    },
+    {
+      "claim_id": "coro:prime",
+      "emitted_statement": "theorem coro_prime (\\cN : Nat) : (is_largest_quotient_giving_knot_invariant 0 0) ∧ (0 = 0) ∧ (is_well_defined_oriented_knot_invariant 0) ∧ (∀ (\\Li_{\\cN}' : quotient_ring), is_knot_invariant_in_quotient 0 0 -> factors_through 0 0) := by",
+      "lean_declaration": "coro_prime",
+      "proof_status": "TYPE_ERROR",
+      "statement": "If $\\cN$ is a prime natural number, then $\\Liq_{\\cN}$ is the largest quotient of the polynomial ring $\\Li$ in which the image of the quantum trace gives a knot invariant; concretely $\\Omega_{\\cN}(L)(q,s) = \\pi_{\\cN}(\\widetilde{\\Omega}_{\\cN}(\\beta_n)) \\in \\Li_{\\cN}$ is a well-defined oriented knot invariant, and any quotient $\\Li_{\\cN}'$ of $\\Li$ in which $\\Omega_{\\cN}(\\beta_n)$ is a knot invariant factors through $\\Li_{\\cN}$.",
+      "theorem_id": "theorem_coro_prime",
+      "verdict": "OVERCLAIMED",
+      "verified_statement": "theorem coro_prime (\\cN : Nat) : (is_largest_quotient_giving_knot_invariant 0 0) ∧ (0 = 0) ∧ (is_well_defined_oriented_knot_invariant 0) ∧ (∀ (\\Li_{\\cN}' : quotient_ring), is_knot_invariant_in_quotient 0 0 -> factors_through 0 0) := by"
+    },
+    {
+      "claim_id": "TINT",
+      "emitted_statement": "theorem TINT (\\cN : Nat) : (is_well_defined_oriented_knot_invariant 0) ∧ (0 = 0 + 0 - 0) := by",
+      "lean_declaration": "TINT",
+      "proof_status": "TYPE_ERROR",
+      "statement": "The level $\\cN$ unified invariant $\\Omega_{\\cN}(L)(q,s) \\in \\Li_{\\cN}$ is a well-defined oriented knot invariant that globalises the $\\cN^{th}$ coloured Jones and coloured Alexander (ADO) invariants via the identity $\\Omega_{\\cN}(L)(q,s) = J_{\\cN}(L, q) + \\Phi_{\\cN}(L, s) - \\Phi_{\\cN}(L, q^{1-\\cN})$.",
+      "theorem_id": "theorem_TINT",
+      "verdict": "OVERCLAIMED",
+      "verified_statement": "theorem TINT (\\cN : Nat) : (is_well_defined_oriented_knot_invariant 0) ∧ (0 = 0 + 0 - 0) := by"
+    },
+    {
+      "claim_id": "InterpolatingAJ_tex:prop:39883",
+      "emitted_statement": "theorem InterpolatingAJ_tex_prop_39883 (\\cN : Nat) (n : Nat) : induced_braid_action_well_defined widetilde_rho_cN_n B_n Aut_widetilde_Li_cN_widetilde_V_cN_otimes_n := by",
+      "lean_declaration": "InterpolatingAJ_tex_prop_39883",
+      "proof_status": "USES_SORRY",
+      "statement": "The braid action \\hat{\\rho}_n defined in equation (eq:action), when specialized to the level \\cN quotient ring \\widetilde{\\Li}_\\cN, descends to a well-defined induced braid group action \\widetilde{\\rho}_{\\cN,n} : B_n \\to \\Aut_{\\widetilde{\\Li}_\\cN}(\\widetilde{V}_\\cN^{\\otimes n}).",
+      "theorem_id": "theorem_InterpolatingAJ_tex_prop_39883",
+      "verdict": "OVERCLAIMED",
+      "verified_statement": "theorem InterpolatingAJ_tex_prop_39883 (\\cN : Nat) (n : Nat) : induced_braid_action_well_defined widetilde_rho_cN_n B_n Aut_widetilde_Li_cN_widetilde_V_cN_otimes_n := by"
+    },
+    {
+      "claim_id": "thm:uqtr1",
+      "emitted_statement": "theorem thm_uqtr1 (\\cN : Nat) (n : Nat) : ∃ (\\qptr_{V_\\cN^{\\otimes n}} : quantum_trace), unique_quantum_trace_up_to_scalar qptr_V_cN_otimes_n widetilde_rho_cN_n := by",
+      "lean_declaration": "thm_uqtr1",
+      "proof_status": "TYPE_ERROR",
+      "statement": "There exists a unique quantum trace \\qptr_{V_\\cN^{\\otimes n}}, up to a scalar multiple, for the level \\cN sequence of braid group representations \\{\\widetilde{\\rho}_{\\cN,n} \\mid n \\in \\N\\}. Equivalently, for any quantum trace associated to \\widetilde{V}_\\cN^{\\otimes n} there is a non-zero g_0(q,s) \\in \\Li_\\cN such that \\qptr(f) is given entrywise by \\sum_{j=0}^{\\cN-1} g_0(q,s) q^{-2i} f.",
+      "theorem_id": "theorem_thm_uqtr1",
+      "verdict": "OVERCLAIMED",
+      "verified_statement": "theorem thm_uqtr1 (\\cN : Nat) (n : Nat) : ∃ (\\qptr_{V_\\cN^{\\otimes n}} : quantum_trace), unique_quantum_trace_up_to_scalar qptr_V_cN_otimes_n widetilde_rho_cN_n := by"
+    },
+    {
+      "claim_id": "eq:sum1",
+      "emitted_statement": "theorem eq_sum1 (\\cN : Nat) (M : Nat) : 0 = 0 := by",
+      "lean_declaration": "eq_sum1",
+      "proof_status": "FAILED",
+      "statement": "For any M \\in \\{0,\\dots,\\cN-2\\}, the identity \\sum_{j=0}^{M} q^{-2j} (R_{v_{M,j}}^{v_{M,j}} - R_{v_{M+1,j}}^{v_{M+1,j}}) = q^{-2(M+1)} R_{v_{M+1,M+1}}^{v_{M+1,M+1}} holds.",
+      "theorem_id": "theorem_eq_sum1",
+      "verdict": "OVERCLAIMED",
+      "verified_statement": "theorem eq_sum1 (\\cN : Nat) (M : Nat) : 0 = 0 := by"
+    },
+    {
+      "claim_id": "thm:THEOREMG",
+      "emitted_statement": "theorem thm_THEOREMG (\\cN : Nat) : (is_largest_quotient_yielding_knot_invariant widetilde_Li_cN Liq) ∧ (is_knot_invariant widetilde_Omega_cN_L_q_s) ∧ (∀ (\\widetilde{\\Li}_\\cN' : quotient_ring_of_Li), is_knot_invariant_in_quotient widetilde_Omega_cN_beta_n widetilde_Li_cN -> quotient_factors_through widetilde_Li_cN widetilde_Li_cN) := by",
+      "lean_declaration": "thm_THEOREMG",
+      "proof_status": "TYPE_ERROR",
+      "statement": "For any \\cN \\in \\N with \\cN \\geq 2, \\widetilde{\\Li}_\\cN is the largest quotient of the polynomial ring \\Liq with the property that the image of the quantum trace in this quotient yields a knot invariant. More precisely, the image of the level \\cN quantum trace \\widetilde{\\Omega}_\\cN(L)(q,s) \\in \\widetilde{\\Li}_\\cN is a knot invariant; and if \\widetilde{\\Li}_\\cN' is any quotient of \\Li in which \\widetilde{\\Omega}_\\cN(\\beta_n) is a knot invariant, then the quotient onto \\widetilde{\\Li}_\\cN' factors through \\widetilde{\\Li}_\\cN.",
+      "theorem_id": "theorem_thm_THEOREMG",
+      "verdict": "OVERCLAIMED",
+      "verified_statement": "theorem thm_THEOREMG (\\cN : Nat) : (is_largest_quotient_yielding_knot_invariant widetilde_Li_cN Liq) ∧ (is_knot_invariant widetilde_Omega_cN_L_q_s) ∧ (∀ (\\widetilde{\\Li}_\\cN' : quotient_ring_of_Li), is_knot_invariant_in_quotient widetilde_Omega_cN_beta_n widetilde_Li_cN -> quotient_factors_through widetilde_Li_cN widetilde_Li_cN) := by"
+    },
+    {
+      "claim_id": "coro:COROLLARY",
+      "emitted_statement": "theorem coro_COROLLARY (N : Nat) (L : OrientedKnot) : (is_largest_quotient_with_knot_invariant_quantum_trace Li_N Li) ∧ (is_well_defined_oriented_knot_invariant 0) ∧ (∀ (LiNprime : QuotientRing), quantum_trace_is_knot_invariant_in_quotient LiNprime -> factors_through LiNprime Li_N) := by",
+      "lean_declaration": "coro_COROLLARY",
+      "proof_status": "TYPE_ERROR",
+      "statement": "If the level N is a prime natural number, then the ring Li_N is the largest quotient of the polynomial ring Li with the property that the image of the quantum trace in this quotient gives a knot invariant. More precisely, for any N >= 2, the element Omega_N(L)(q,s) = pi_N( tilde{Omega}_N(beta_n) ) in Li_N, where pi_N is the natural projection from the universal ring tilde{Li}_N onto Li_N, is a well-defined oriented knot invariant. Moreover, when N is prime, any quotient Li_N' of Li in which Omega_N(beta_n) is a knot invariant factors through Li_N.",
+      "theorem_id": "theorem_coro_COROLLARY",
+      "verdict": "OVERCLAIMED",
+      "verified_statement": "theorem coro_COROLLARY (N : Nat) (L : OrientedKnot) : (is_largest_quotient_with_knot_invariant_quantum_trace Li_N Li) ∧ (is_well_defined_oriented_knot_invariant 0) ∧ (∀ (LiNprime : QuotientRing), quantum_trace_is_knot_invariant_in_quotient LiNprime -> factors_through LiNprime Li_N) := by"
+    },
+    {
+      "claim_id": "JA1",
+      "emitted_statement": "theorem JA1 (N : Nat) (L : OrientedKnot) : (0 = 0) ∧ (0 = 0) := by",
+      "lean_declaration": "JA1",
+      "proof_status": "TYPE_ERROR",
+      "statement": "The level-N unified invariant Omega_N(L) recovers the coloured Jones and ADO invariants by specialisation: setting s = q^{1-N} gives the N-th coloured Jones invariant J_N(L,q), and setting q = xi_N gives the N-th coloured Alexander (ADO) invariant Phi_N(L,s).",
+      "theorem_id": "theorem_JA1",
+      "verdict": "OVERCLAIMED",
+      "verified_statement": "theorem JA1 (N : Nat) (L : OrientedKnot) : (0 = 0) ∧ (0 = 0) := by"
+    },
+    {
+      "claim_id": "InterpolatingAJ_tex:coro:57941",
+      "emitted_statement": "theorem InterpolatingAJ_tex_coro_57941 (N : Nat) (L : OrientedKnot) : (0 = 0) ∧ (0 = 0) := by",
+      "lean_declaration": "InterpolatingAJ_tex_coro_57941",
+      "proof_status": "TYPE_ERROR",
+      "statement": "The level-N universal invariant tilde{Omega}_N(L) recovers the coloured Jones and ADO invariants by specialisation: setting s = q^{1-N} gives the N-th coloured Jones invariant J_N(L,q), and setting q = xi_N gives the N-th coloured Alexander (ADO) invariant Phi_N(L,s).",
+      "theorem_id": "theorem_InterpolatingAJ_tex_coro_57941",
+      "verdict": "OVERCLAIMED",
+      "verified_statement": "theorem InterpolatingAJ_tex_coro_57941 (N : Nat) (L : OrientedKnot) : (0 = 0) ∧ (0 = 0) := by"
+    },
+    {
+      "claim_id": "JA3",
+      "emitted_statement": "theorem JA3 (N : Nat) (L : OrientedKnot) : (is_well_defined_oriented_knot_invariant 0) ∧ (0 = 0 + 0 - 0) := by",
+      "lean_declaration": "JA3",
+      "proof_status": "USES_SORRY",
+      "statement": "The element Omega_N(L)(q,s) in Li_N is a well-defined oriented knot invariant that globalises the N-th coloured Jones and coloured Alexander invariants, via Omega_N(L)(q,s) = J_N(L,q) + Phi_N(L,s) - Phi_N(L, q^{1-N}).",
+      "theorem_id": "theorem_JA3",
+      "verdict": "OVERCLAIMED",
+      "verified_statement": "theorem JA3 (N : Nat) (L : OrientedKnot) : (is_well_defined_oriented_knot_invariant 0) ∧ (0 = 0 + 0 - 0) := by"
+    },
+    {
+      "claim_id": "lem:qi",
+      "emitted_statement": "theorem lem_qi (k : Nat) (l : Nat) (d : Nat) : (congruent_modulo 0 0 0) ∨ (congruent_modulo 0 0 0) := by",
+      "lean_declaration": "lem_qi",
+      "proof_status": "FAILED",
+      "statement": "If k and l are both multiples of d, then the q-binomial coefficient [k choose l]_q is equal to [k/d choose l/d]_1 or to -[k/d choose l/d]_1 modulo Phi_d(q^2).",
+      "theorem_id": "theorem_lem_qi",
+      "verdict": "OVERCLAIMED",
+      "verified_statement": "theorem lem_qi (k : Nat) (l : Nat) (d : Nat) : (congruent_modulo 0 0 0) ∨ (congruent_modulo 0 0 0) := by"
+    },
+    {
+      "claim_id": "lem:idcy",
+      "emitted_statement": "theorem lem_idcy (\\cN : Nat) (q : Laurent_polynomial_variable) (s : Laurent_polynomial_variable) : 0 = 0 := by",
+      "lean_declaration": "lem_idcy",
+      "proof_status": "TYPE_ERROR",
+      "statement": "For a positive integer N, the ideal J̃_N is equal to the ideal Ĩ_N defined in equation (qideal); equivalently it can be described as the intersection of the principal ideal generated by φ_N(q^2)·(s^2 q^{-2N+2} − 1) with the product, over all divisors d of N with d ≠ 1 and d ≠ N, of the ideals (φ_d(q^2), (s^{2d} − 1)/(s^2 − 1)).",
+      "theorem_id": "theorem_lem_idcy",
+      "verdict": "OVERCLAIMED",
+      "verified_statement": "theorem lem_idcy (\\cN : Nat) (q : Laurent_polynomial_variable) (s : Laurent_polynomial_variable) : 0 = 0 := by"
+    },
+    {
+      "claim_id": "InterpolatingAJ_tex:lem:72872",
+      "emitted_statement": "theorem InterpolatingAJ_tex_lem_72872 (R : commutative_ring) (n : Nat) (I : indexed_family_of_ideals_of_R) : 0 = 0 := by",
+      "lean_declaration": "InterpolatingAJ_tex_lem_72872",
+      "proof_status": "PROVED",
+      "statement": "Let R be a commutative ring and let I_1, ..., I_n be ideals of R that are pairwise comaximal, i.e. I_i + I_j = R for all 1 ≤ i < j ≤ n. Then the intersection of the ideals equals their product: the intersection over i from 1 to n of I_i equals the product over i from 1 to n of I_i.",
+      "theorem_id": "theorem_InterpolatingAJ_tex_lem_72872",
+      "verdict": "NARROWED",
+      "verified_statement": "import Mathlib\n\nopen scoped BigOperators\n\nnamespace GrokRxiv\n\ntheorem InterpolatingAJ_tex_lem_72872\n    {R : Type*} [CommRing R] {n : ℕ} (I : Fin n → Ideal R)\n    (hco : ∀ i j, i ≠ j → I i ⊔ I j = ⊤) :\n    ⨅ i, I i = ∏ i, I i := by\n  -- For coprime ideals, the product equals the intersection.\n  have mul_eq_inf : ∀ J K : Ideal R, J ⊔ K = ⊤ → J * K = J ⊓ K := by\n    intro J K h\n    refine le_antisymm Ideal.mul_le_inf ?_\n    intro x hx\n    rw [Submodule.mem_inf] at hx\n    obtain ⟨hxJ, hxK⟩ := hx\n    have h1 : (1 : R) ∈ J ⊔ K := by rw [h]; exact Submodule.mem_top\n    rw [Submodule.mem_sup] at h1\n    obtain ⟨y, hy, z, hz, hyz⟩ := h1\n    have hxeq : x * y + x * z = x := by rw [← mul_add, hyz, mul_one]\n    rw [← hxeq]\n    refine add_mem ?_ ?_\n    · rw [mul_comm x y]; exact Ideal.mul_mem_mul hy hxK\n    · exact Ideal.mul_mem_mul hxJ hz\n  -- The product over any finset of pairwise-coprime ideals equals their infimum.\n  have key : ∀ s : Finset (Fin n), (∏ i ∈ s, I i) = s.inf I := by\n    intro s\n    refine Finset.induction_on s ?_ ?_\n    · simp [Ideal.one_eq_top]\n    · intro a t ha ih\n      rw [Finset.prod_insert ha, Finset.inf_insert, ih]\n      have hcop : I a ⊔ t.inf I = ⊤ := by\n        rw [← ih, ← Ideal.isCoprime_iff_sup_eq]\n        refine IsCoprime.prod_right ?_\n        intro i hi\n        rw [Ideal.isCoprime_iff_sup_eq]\n        exact hco a i (by rintro rfl; exact ha hi)\n      exact mul_eq_inf (I a) (t.inf I) hcop\n  -- Convert the type-indexed infimum into the `Finset.univ` infimum.\n  have hconv : (⨅ i, I i) = Finset.univ.inf I := by\n    refine le_antisymm ?_ ?_\n    · exact Finset.le_inf (fun i _ => iInf_le I i)\n    · exact le_iInf (fun i => Finset.inf_le (Finset.mem_univ i))\n  rw [hconv]\n  exact (key Finset.univ).symm\n\nend GrokRxiv\n"
+    },
+    {
+      "claim_id": "comax",
+      "emitted_statement": "theorem comax (d_1 : Nat) (d_2 : Nat) : (coprime 0 0) ∧ (comaximal 0 0) := by",
+      "lean_declaration": "comax",
+      "proof_status": "PROVED",
+      "statement": "If d_1 ≠ d_2, then the polynomials φ_{d_1}(q^2) and φ_{d_2}(q^2) are coprime in Q[q^{±1}], and consequently the principal ideals (φ_{d_1}(q^2)) and (φ_{d_2}(q^2)) are comaximal.",
+      "theorem_id": "theorem_comax",
+      "verdict": "NARROWED",
+      "verified_statement": "import Mathlib\n\nopen Polynomial\n\nnamespace GrokRxiv\n\n/-\nPaper lemma `comax` (InterpolatingAJ.tex, label `comax`):\n  If `d₁ ≠ d₂` then `φ_{d₁}(q²)` and `φ_{d₂}(q²)` are coprime in `ℚ[q^{±1}]`,\n  and consequently the principal ideals `(φ_{d₁}(q²))` and `(φ_{d₂}(q²))` are\n  comaximal.\n\nFormalization faithful to the Laurent ring `ℚ[q^{±1}]` (fixing the prior round,\nwhich proved only the `ℚ[X]` approximation):\n* `φ_d`  := `Polynomial.cyclotomic d ℚ`.\n* `φ_d(q²)` is the image of the polynomial `φ_d(X²) = (cyclotomic d ℚ).comp (X^2)`\n  under `Polynomial.toLaurent : ℚ[X] →+* ℚ[T;T⁻¹]`, which sends the polynomial\n  variable `X` to the Laurent unit `q = T 1`.  Hence the carrier ring is the\n  Laurent polynomial ring `LaurentPolynomial ℚ = ℚ[q^{±1}]`, exactly as the\n  paper statement requires.\n* \"comaximal ideals\" := `Ideal.span {a} ⊔ Ideal.span {b} = ⊤`.\n-/\ntheorem comax (d_1 d_2 : ℕ) (h : d_1 ≠ d_2) :\n    IsCoprime ((cyclotomic d_1 ℚ).comp (X ^ 2)).toLaurent\n        ((cyclotomic d_2 ℚ).comp (X ^ 2)).toLaurent ∧\n      Ideal.span {((cyclotomic d_1 ℚ).comp (X ^ 2)).toLaurent} ⊔\n          Ideal.span {((cyclotomic d_2 ℚ).comp (X ^ 2)).toLaurent} = ⊤ := by\n  classical\n  -- Step 1: `φ_{d₁}` and `φ_{d₂}` are coprime in `ℚ[X]`.\n  have hcop : IsCoprime (cyclotomic d_1 ℚ) (cyclotomic d_2 ℚ) := by\n    rcases Nat.eq_zero_or_pos d_1 with rfl | hp1\n    · simpa [cyclotomic_zero] using\n        (isCoprime_one_left : IsCoprime (1 : ℚ[X]) (cyclotomic d_2 ℚ))\n    rcases Nat.eq_zero_or_pos d_2 with rfl | hp2\n    · simpa [cyclotomic_zero] using\n        (isCoprime_one_right : IsCoprime (cyclotomic d_1 ℚ) (1 : ℚ[X]))\n    have hi1 : Irreducible (cyclotomic d_1 ℚ) := cyclotomic.irreducible_rat hp1\n    have hi2 : Irreducible (cyclotomic d_2 ℚ) := cyclotomic.irreducible_rat hp2\n    have hne : cyclotomic d_1 ℚ ≠ cyclotomic d_2 ℚ := fun he =>\n      h (cyclotomic_injective (R := ℚ) he)\n    have hnotdvd : ¬ cyclotomic d_1 ℚ ∣ cyclotomic d_2 ℚ := by\n      intro hdvd\n      exact hne (eq_of_monic_of_associated (cyclotomic.monic d_1 ℚ)\n        (cyclotomic.monic d_2 ℚ) (hi1.associated_of_dvd hi2 hdvd))\n    exact (hi1.coprime_iff_not_dvd).2 hnotdvd\n  -- Step 2: coprimality is preserved by the substitution `p ↦ p.comp (X²)`.\n  have hcompX : IsCoprime ((cyclotomic d_1 ℚ).comp (X ^ 2))\n      ((cyclotomic d_2 ℚ).comp (X ^ 2)) := by\n    obtain ⟨u, v, huv⟩ := hcop\n    refine ⟨u.comp (X ^ 2), v.comp (X ^ 2), ?_⟩\n    have hcongr := congrArg (fun p : ℚ[X] => p.comp (X ^ 2)) huv\n    simpa [add_comp, mul_comp, one_comp] using hcongr\n  -- Step 3: transport coprimality into the Laurent ring `ℚ[q^{±1}]` along the\n  -- ring homomorphism `Polynomial.toLaurent` (it sends `X` to the unit `q`).\n  -- Coprimality (a Bézout identity) is preserved by any ring homomorphism.\n  have hcomp : IsCoprime ((cyclotomic d_1 ℚ).comp (X ^ 2)).toLaurent\n      ((cyclotomic d_2 ℚ).comp (X ^ 2)).toLaurent :=\n    hcompX.map Polynomial.toLaurent\n  -- Step 4: coprime elements generate comaximal principal ideals.\n  refine ⟨hcomp, ?_⟩\n  rw [← Ideal.isCoprime_iff_sup_eq]\n  exact (Ideal.isCoprime_span_singleton_iff _ _).2 hcomp\n\nend GrokRxiv\n"
+    }
+  ]
+}

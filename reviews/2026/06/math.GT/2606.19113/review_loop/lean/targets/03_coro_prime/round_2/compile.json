@@ -1,0 +1,13 @@
+{
+  "command": [
+    "lake",
+    "env",
+    "lean",
+    "GrokRxiv/Proofs.lean"
+  ],
+  "duration_ms": 11339,
+  "exit_code": 1,
+  "status": "fail",
+  "stderr": "",
+  "stdout": "GrokRxiv/Proofs.lean:52:43: error: unsolved goals\ncase refine_1\nN : ℕ\nhN : Nat.Prime N\nQuotientRing : Type u_1\nKnotInvariant : Type u_2\nLi LiqN : QuotientRing\nOmegaN_L piN_tildeOmega OmegaN_beta : KnotInvariant\nis_largest_quotient_giving_knot_invariant : QuotientRing → QuotientRing → Prop\nis_well_defined_oriented_knot_invariant : KnotInvariant → Prop\nis_knot_invariant_in_quotient : KnotInvariant → QuotientRing → Prop\nfactors_through : QuotientRing → QuotientRing → Prop\n⊢ is_largest_quotient_giving_knot_invariant LiqN Li\n\ncase refine_2\nN : ℕ\nhN : Nat.Prime N\nQuotientRing : Type u_1\nKnotInvariant : Type u_2\nLi LiqN : QuotientRing\nOmegaN_L piN_tildeOmega OmegaN_beta : KnotInvariant\nis_largest_quotient_giving_knot_invariant : QuotientRing → QuotientRing → Prop\nis_well_defined_oriented_knot_invariant : KnotInvariant → Prop\nis_knot_invariant_in_quotient : KnotInvariant → QuotientRing → Prop\nfactors_through : QuotientRing → QuotientRing → Prop\n⊢ OmegaN_L = piN_tildeOmega\n\ncase refine_3\nN : ℕ\nhN : Nat.Prime N\nQuotientRing : Type u_1\nKnotInvariant : Type u_2\nLi LiqN : QuotientRing\nOmegaN_L piN_tildeOmega OmegaN_beta : KnotInvariant\nis_largest_quotient_giving_knot_invariant : QuotientRing → QuotientRing → Prop\nis_well_defined_oriented_knot_invariant : KnotInvariant → Prop\nis_knot_invariant_in_quotient : KnotInvariant → QuotientRing → Prop\nfactors_through : QuotientRing → QuotientRing → Prop\n⊢ is_well_defined_oriented_knot_invariant OmegaN_L\n\ncase refine_4\nN : ℕ\nhN : Nat.Prime N\nQuotientRing : Type u_1\nKnotInvariant : Type u_2\nLi LiqN : QuotientRing\nOmegaN_L piN_tildeOmega OmegaN_beta : KnotInvariant\nis_largest_quotient_giving_knot_invariant : QuotientRing → QuotientRing → Prop\nis_well_defined_oriented_knot_invariant : KnotInvariant → Prop\nis_knot_invariant_in_quotient : KnotInvariant → QuotientRing → Prop\nfactors_through : QuotientRing → QuotientRing → Prop\n⊢ ∀ (LiqN' : QuotientRing), is_knot_invariant_in_quotient OmegaN_beta LiqN' → factors_through LiqN' LiqN\n"
+}
