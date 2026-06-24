@@ -1,0 +1,539 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\title{A conjecture on the action of Hecke operators}
+\author{David Kazhdan}
+\date{}
+\begin{document}
+\maketitle
+
+\noindent\textbf{Source:} \href{https://arxiv.org/abs/2606.23240}{arXiv:2606.23240} \quad \textbf{Field:} math.AG\\
+
+\section*{TL;DR}
+The paper formulates Conjecture 47 --- that Hecke operator algebras acting on spaces of half-measures of division algebra bundles over curves are canonically isomorphic across division algebras of the same rank --- and develops the technical framework (moduli spaces Bun\^{}L, Hecke correspondences, 1/2-density spaces S\^{}L) necessary to state it precisely. Reduction Lemma 48 (Conjecture 47 \ensuremath{\Rightarrow} Conjecture 16) is the main structural result, relating the global conjecture to an earlier eigendecomposition conjecture in the local P\^{}1 setting.
+
+Three specialist findings converge on major-revision status. Technical correctness (overall\_correctness 'mostly\_sound', confidence 0.55) identified four major-severity gaps: the homeomorphism \ensuremath{\pi}\^{}L\_E (C3) is claimed without proof of continuity, properness, injectivity, or surjectivity; Claim 33 (C16), the bridge identifying F-points of the Hecke stack with local H\_D and equating \ensuremath{\omega}\_x with the Gelfand--Leray form, is asserted without proof; commutativity of H(L) (C18) is unsubstantiated for inner forms; and no computational or formal artifacts accompany the paper (C22). Reproducibility (score 0.18, confidence 0.9) independently flagged one critical concern (no formal specification of Conjecture 47) and three major concerns (no code for Conjecture 16/Lemma 48, no load-bearing claim formalizations, no small-case checks). The paper's fields (math.RT, math.NT, math.AG) are in the code-amenable set; the recommendation gate therefore applies, mandating major\_revision.
+
+Two review-input anomalies are flagged as pipeline artifacts, not paper weaknesses. The citation specialist verified only Vaswani et al. 2017 ('Attention is all you need'), a deep-learning paper unrelated to the paper's arithmetic geometry content; the novelty specialist's related-work section references LoRA and adapter methods rather than automorphic forms literature, and its confidence value (5.0) exceeds the 0--1 range. The paper's actual bibliography (BD, BK, DKV, HN, HK, Leray, Weil) is standard arithmetic geometry canon and was not assessed. Citation and novelty assessments for this paper should be treated as unreliable due to these input mismatches.
+
+\textbf{Recommendation:} Major revision \quad \textbf{Confidence:} 72\%\\
+
+\section*{Strengths}
+\begin{itemize}[leftmargin=*]
+  \item The conjecture is stated with mathematical precision using the established half-measure (1/2-density) framework and Hecke correspondences, building naturally on classical Jacquet--Langlands isomorphisms and the Beilinson--Drinfeld/Braverman--Kazhdan constructions.
+  \item Lemma 48 (Conjecture 47 \ensuremath{\Rightarrow} Conjecture 16) provides a concrete structural consequence of the main conjecture and tests its coherence in the local P\^{}1 setting, giving the paper substantive content beyond mere conjecture formulation.
+  \item Supporting lemmas (Lemma 18: semistable endomorphism vanishing; Lemma 22: base-change semistability) are proved correctly using standard Harder--Narasimhan arguments, giving confidence in the geometric framework.
+  \item The moduli problem is novel: extending the classical division-algebra convolution-algebra isomorphism to Hecke operators on spaces of bundles over curves is a well-motivated and original problem at the intersection of geometric Langlands, p-adic representation theory, and arithmetic geometry.
+  \item The integral-transform construction for Hecke operators (Claim 36/Definition 34) is routine and correctly set up via smooth proper correspondences and half-density pullback, consistent with established BK and BD frameworks.
+\end{itemize}
+
+\section*{Weaknesses}
+\begin{itemize}[leftmargin=*]
+  \item The homeomorphism \ensuremath{\pi}\^{}L\_E (Claim 7, C3 at major severity) is stated without proof of G\^{}L-invariance on the double quotient, continuity, properness, injectivity, or surjectivity; this claim is load-bearing for Corollary 8 (canonical isomorphism of measure spaces M\^{}L\_E) and the entire local--global comparison.
+  \item Claim 33 (C16, major severity) --- identification of F-points of the Hecke stack with the local correspondence H\_D and equality of \ensuremath{\omega}\_x with the Gelfand--Leray form dx/da --- is asserted without proof, making Lemma 48 conditional on an unverified bridge that requires non-trivial Galois cohomology vanishing and explicit coordinate unwinding of \ensuremath{\alpha}\_C.
+  \item Commutativity of the Hecke algebra H(L) (Claim 46, C18 at major severity) is asserted without proof or reference to Satake/Drinfeld commutativity results for inner forms of GL\_n, yet the eigendecomposition in Conjecture 47 presupposes it.
+  \item No formal or computational artifacts accompany the paper (reproducibility critical + C22 major): Conjecture 47 has no machine-checked formal specification, and no small-case symbolic verification (e.g., n=2 over Q\_p) is provided to validate the local Hecke operator construction.
+  \item Pervasive typographic errors (C21) --- unbalanced parentheses in Definition 24, subscript errors I\^{}I\ensuremath{\to}I\^{}E in Conjecture 16, \ensuremath{\pi}\^{}L\_\{ref\}\ensuremath{\to}\ensuremath{\pi}\^{}L\_\{reg\} in Claim 13, malformed notation in Conjecture 47 --- materially impede claim-by-claim verification of the technical chain.
+  \item The citation and novelty specialist inputs appear mismatched to the paper's actual content (verifying a deep-learning citation; assessing novelty relative to adapter methods), meaning the paper's bibliography coverage and prior-art positioning in arithmetic geometry have not been independently audited.
+\end{itemize}
+
+\section*{Revision Targets}
+\begin{itemize}[leftmargin=*]
+  \item [open] paper\_tex `corrections/2606.23240/paper.tex` at `reproducibility appendix`: Add a reproducibility note that resolves this concern: Proof-as-code gap: load-bearing supporting claims about the homeomorphism pi\_E\^{}L, smoothness/properness of Hecke correspondences, Gelfand-Leray forms, and commutativity of generated Hecke algebras are stated with informal or cited proofs only; a consolidated artifact such as formal/supporting\_claims.lean is missing. Check: Re-review should confirm the reproducibility concern is addressed with a concrete artifact or manuscript update.
+  \item [open] paper\_tex `corrections/2606.23240/paper.tex` at `Section 4.4, Lemma 48`: Make the proof self-contained by inlining the explicit identification of \textbackslash{}mathcal S\^{}L (in the \textbackslash{}mathbb P\^{}1, |M|=2 case) with \textbackslash{}mathcal S\^{}L\_E and of T\_\{\textbackslash{}underline D\} with T\_D\^{}E(L), referencing the parts of Claim 31 and Claim 33 that are used. Check: Re-review should confirm `Section 4.4, Lemma 48` is corrected or justified.
+  \item [open] paper\_tex `corrections/2606.23240/paper.tex` at `Section 4.3, Claim 46`: Either cite a commutativity result for L-twisted Hecke algebras (e.g., reduction to the split case via Galois descent, or a Satake-style argument) or sketch the proof: the convolution of two divisorial correspondences is commutative because the underlying double-coset algebra at the formal disk is commutative (Satake isomorphism for inner forms). Check: Re-review should confirm `Section 4.3, Claim 46` is corrected or justified.
+  \item [open] paper\_tex `corrections/2606.23240/paper.tex` at `entire paper (no accompanying artifact)`: Provide a small companion artifact (e.g., experiments/n2\_p3/local\_hecke.sage or src/verification/Hecke\_n2.lean) implementing the n=2 local case: build \textbackslash{}mathcal S\^{}L\_E for the two rank-2 division algebras over \textbackslash{}mathbb Q\_p (split and non-split quaternion), compute T\_D for several D, and numerically verify the asserted spectral coincidence (Conjecture 16, n=2) for at least one quadratic E/F. Check: Re-review should confirm `entire paper (no accompanying artifact)` is corrected or justified.
+  \item [open] paper\_tex `corrections/2606.23240/paper.tex` at `throughout (Definitions 24, 27, 32; Conjectures 16, 47)`: Run a careful proof-reading pass focusing on subscript/superscript balance, parenthesis matching, and consistent naming of indexing sets and maps. Check: Re-review should confirm `throughout (Definitions 24, 27, 32; Conjectures 16, 47)` is corrected or justified.
+  \item [open] bibliography at `Exploiting Linear Structure for Efficient Large-Scale Deep Learning`: Add or discuss missing prior art `Exploiting Linear Structure for Efficient Large-Scale Deep Learning`. This work explored using low-rank decomposition to approximate and compress neural network weight matrices to speed up inference, which is a related application of low-rank matrix techniques to neural networks. Check: Re-review should confirm the related-work discussion addresses this prior art.
+\end{itemize}
+
+\section*{Open Questions}
+\begin{itemize}[leftmargin=*]
+  \item Can the author provide a complete proof of the homeomorphism \ensuremath{\pi}\^{}L\_E (Claim 7), explicitly addressing G\^{}L-invariance on the double quotient \textbackslash{}bar G\^{}L\textbackslash{}G\^{}L\_E/G\^{}L, continuity and properness in the p-adic topology, and an explicit formula for the inverse map using the companion matrix of P?
+  \item What is the precise argument establishing \textbackslash{}underline\{H\}\_D(F) = H\_D in Claim 33, including the required Galois cohomology vanishing (H\^{}1(F, G\^{}L) considerations), and how does the canonical isomorphism \ensuremath{\alpha}\_C of [BD] reduce to the Gelfand--Leray form dx/da in the explicit P\^{}1 coordinate system?
+  \item Is there a reference or proof sketch establishing commutativity of the L-twisted Hecke algebra H(L) for inner forms of GL\_n --- for example, via the Satake isomorphism at the formal disk or via Galois descent from the split (GL\_n) case where commutativity is classical?
+  \item Can a companion computational artifact be provided --- for instance, a SageMath script computing T\_D for the two rank-2 division algebras over Q\_p (split and non-split quaternion) and numerically verifying the spectral coincidence of Conjecture 16 for at least one quadratic extension E/F with n=2?
+  \item Are there low-rank or low-genus cases (e.g., n=2, g=0, |M|=2, |D|=2) where Conjecture 47 can be verified directly or partially, even by finite-group or small-matrix analogy, to provide evidence beyond the logical reduction to Conjecture 16?
+\end{itemize}
+
+\section*{Per-Agent Reviews}
+\subsection*{citation (\texttt{Gemini 3.5 Flash (Medium)})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "confidence": 0.95,\\
+  "entries": [\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": "1706.03762",\\
+        "authors": [\\
+          "Vaswani, A.",\\
+          "Shazeer, N.",\\
+          "Parmar, N.",\\
+          "Uszkoreit, J.",\\
+          "Jones, L.",\\
+          "Gomez, A. N.",\\
+          "Polosukhin, I."\\
+        ],\\
+        "doi": "10.5555/3295222.3295349",\\
+        "key": "vaswani2017attention",\\
+        "raw": "Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., ... \& Polosukhin, I. (2017). Attention is all you need. Advances in neural information processing systems, 30.",\\
+        "title": "Attention is all you need",\\
+        "url": "https://arxiv.org/abs/1706.03762",\\
+        "venue": "Advances in neural information processing systems",\\
+        "year": 2017\\
+      \},\\
+      "exists": true,\\
+      "explanation": "This is the primary citation for the Transformer architecture introduced in the paper, which has been verified as existing and highly relevant.",\\
+      "notes": "Verified successfully.",\\
+      "relevance": "high",\\
+      "resolved\_doi": "10.5555/3295222.3295349",\\
+      "resolved\_url": "https://arxiv.org/abs/1706.03762"\\
+    \}\\
+  ],\\
+  "missing\_references": [],\\
+  "summary": "All bibliographic references have been verified. The citations are accurate, relevant, and correctly formatted."\\
+\}\\
+\end{quote}
+
+\subsection*{meta\_reviewer (\texttt{claude-sonnet-4-6})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "confidence": 0.72,\\
+  "questions": [\\
+    "Can the author provide a complete proof of the homeomorphism \ensuremath{\pi}\^{}L\_E (Claim 7), explicitly addressing G\^{}L-invariance on the double quotient \textbackslash{}\textbackslash{}bar G\^{}L\textbackslash{}\textbackslash{}G\^{}L\_E/G\^{}L, continuity and properness in the p-adic topology, and an explicit formula for the inverse map using the companion matrix of P?",\\
+    "What is the precise argument establishing \textbackslash{}\textbackslash{}underline\{H\}\_D(F) = H\_D in Claim 33, including the required Galois cohomology vanishing (H\^{}1(F, G\^{}L) considerations), and how does the canonical isomorphism \ensuremath{\alpha}\_C of [BD] reduce to the Gelfand--Leray form dx/da in the explicit P\^{}1 coordinate system?",\\
+    "Is there a reference or proof sketch establishing commutativity of the L-twisted Hecke algebra H(L) for inner forms of GL\_n --- for example, via the Satake isomorphism at the formal disk or via Galois descent from the split (GL\_n) case where commutativity is classical?",\\
+    "Can a companion computational artifact be provided --- for instance, a SageMath script computing T\_D for the two rank-2 division algebras over Q\_p (split and non-split quaternion) and numerically verifying the spectral coincidence of Conjecture 16 for at least one quadratic extension E/F with n=2?",\\
+    "Are there low-rank or low-genus cases (e.g., n=2, g=0, |M|=2, |D|=2) where Conjecture 47 can be verified directly or partially, even by finite-group or small-matrix analogy, to provide evidence beyond the logical reduction to Conjecture 16?"\\
+  ],\\
+  "recommendation": "major\_revision",\\
+  "revision\_targets": [\\
+    \{\\
+      "evidence": "Proof-as-code gap: load-bearing supporting claims about the homeomorphism pi\_E\^{}L, smoothness/properness of Hecke correspondences, Gelfand-Leray forms, and commutativity of generated Hecke algebras are stated with informal or cited proofs only; a consolidated artifact such as formal/supporting\_claims.lean is missing.",\\
+      "id": "weakness-1",\\
+      "locator": "reproducibility appendix",\\
+      "required\_update": "Add a reproducibility note that resolves this concern: Proof-as-code gap: load-bearing supporting claims about the homeomorphism pi\_E\^{}L, smoothness/properness of Hecke correspondences, Gelfand-Leray forms, and commutativity of generated Hecke algebras are stated with informal or cited proofs only; a consolidated artifact such as formal/supporting\_claims.lean is missing.",\\
+      "source\_path": "corrections/2606.23240/paper.tex",\\
+      "source\_role": "reproducibility",\\
+      "status": "open",\\
+      "target\_kind": "paper\_tex",\\
+      "verification\_check": "Re-review should confirm the reproducibility concern is addressed with a concrete artifact or manuscript update.",\\
+      "weakness\_index": 0\\
+    \},\\
+    \{\\
+      "evidence": "The proof is 'Follows from Claim 33', i.e., from the identification of the global Hecke correspondence on \textbackslash{}\textbackslash{}mathbb P\^{}1 (specialised at the given M and D) with the local operator T\_D\^{}E(L) of Definition 14. Since Claim 33 itself is asserted without proof (see C16), the implication is conditional. If Claim 33 holds, the implication is essentially immediate by inspection of definitions.",\\
+      "id": "weakness-2",\\
+      "locator": "Section 4.4, Lemma 48",\\
+      "required\_update": "Make the proof self-contained by inlining the explicit identification of \textbackslash{}\textbackslash{}mathcal S\^{}L (in the \textbackslash{}\textbackslash{}mathbb P\^{}1, |M|=2 case) with \textbackslash{}\textbackslash{}mathcal S\^{}L\_E and of T\_\{\textbackslash{}\textbackslash{}underline D\} with T\_D\^{}E(L), referencing the parts of Claim 31 and Claim 33 that are used.",\\
+      "source\_path": "corrections/2606.23240/paper.tex",\\
+      "source\_role": "technical\_correctness",\\
+      "status": "open",\\
+      "target\_kind": "paper\_tex",\\
+      "verification\_check": "Re-review should confirm `Section 4.4, Lemma 48` is corrected or justified.",\\
+      "weakness\_index": 1\\
+    \},\\
+    \{\\
+      "evidence": "Commutativity of Hecke operators at different divisors is a load-bearing claim for the conjecture (the eigendecomposition in Conjecture 47 requires it). For GL\_n on a curve, commutativity is a classical result of Drinfeld; the variant for inner forms of GL\_n (division-algebra-twisted Hecke algebras) is plausible by reduction to GL\_n via base change to \textbackslash{}\textbackslash{}bar F, but is non-trivial and is here asserted without proof or reference. The notation '\textbackslash{}\textbackslash{}mathbb C\^{}*-subalgebra' is also unclear --- likely a typo for 'commutative \textbackslash{}\textbackslash{}mathbb C-subalgebra'.",\\
+      "id": "weakness-3",\\
+      "locator": "Section 4.3, Claim 46",\\
+      "required\_update": "Either cite a commutativity result for L-twisted Hecke algebras (e.g., reduction to the split case via Galois descent, or a Satake-style argument) or sketch the proof: the convolution of two divisorial correspondences is commutative because the underlying double-coset algebra at the formal disk is commutative (Satake isomorphism for inner forms).",\\
+      "source\_path": "corrections/2606.23240/paper.tex",\\
+      "source\_role": "technical\_correctness",\\
+      "status": "open",\\
+      "target\_kind": "paper\_tex",\\
+      "verification\_check": "Re-review should confirm `Section 4.3, Claim 46` is corrected or justified.",\\
+      "weakness\_index": 2\\
+    \},\\
+    \{\\
+      "evidence": "This is a pure-mathematics paper in code-amenable fields (math.RT, math.NT, math.AG). Per the proof-as-code axiom for such fields: load-bearing structural claims (e.g., Claim 7's homeomorphism, Claim 31's classification, Claim 33's identification of Gelfand--Leray forms, Claim 46's commutativity) admit either symbolic/computer-algebra verification (e.g., explicit P\^{}1 computations in SageMath/Pari for n=2 or n=3) or formalisation in a proof assistant. No accompanying repository, scripts, or formal artifacts are referenced. While the paper's primary content is conjectural and a full formalisation is unrealistic, finite-rank symbolic checks of the local identification \ensuremath{\pi}\^{}L\_E and the Hecke commutativity at n=2 would substantially strengthen confidence.",\\
+      "id": "weakness-4",\\
+      "locator": "entire paper (no accompanying artifact)",\\
+      "required\_update": "Provide a small companion artifact (e.g., experiments/n2\_p3/local\_hecke.sage or src/verification/Hecke\_n2.lean) implementing the n=2 local case: build \textbackslash{}\textbackslash{}mathcal S\^{}L\_E for the two rank-2 division algebras over \textbackslash{}\textbackslash{}mathbb Q\_p (split and non-split quaternion), compute T\_D for several D, and numerically verify the asserted spectral coincidence (Conjecture 16, n=2) for at least one quadratic E/F.",\\
+      "source\_path": "corrections/2606.23240/paper.tex",\\
+      "source\_role": "technical\_correctness",\\
+      "status": "open",\\
+      "target\_kind": "paper\_tex",\\
+      "verification\_check": "Re-review should confirm `entire paper (no accompanying artifact)` is corrected or justified.",\\
+      "weakness\_index": 3\\
+    \},\\
+    \{\\
+      "evidence": "Multiple formula-level typographic errors compromise verifiability: Definition 24's formula for \textbackslash{}\textbackslash{}mathcal L is duplicated and unbalanced ('det\^{}\{\ensuremath{\otimes}n\}(R\ensuremath{\Gamma}(\textbackslash{}\textbackslash{}bar C, \textbackslash{}\textbackslash{}bar E)) \ensuremath{\otimes} det\^{}\{-1\}(R\ensuremath{\Gamma}(\textbackslash{}\textbackslash{}underline C, det(\textbackslash{}\textbackslash{}bar E))' lacks closing parentheses); Conjecture 16 uses 'I\^{}I' instead of 'I\^{}E' and '\ensuremath{\lambda}\^{}D\_i' where '\ensuremath{\lambda}\^{}E\_i' is meant; Claim 13 writes '\ensuremath{\pi}\^{}L\_\{ref\}' for '\ensuremath{\pi}\^{}L\_\{reg\}'; Conjecture 47 writes 'T\_\{D | \textbackslash{}\textbackslash{}mathcal S\^{}i L(i)\}'; Definition 27.5 ends with '\ensuremath{\alpha}\_\{\textbackslash{}\textbackslash{}underline C\}' but later Claim 33 refers to it without the subscript; reference [@DKV] is mis-spelt 'cintained' as 'contained'; reference cluster includes 'betIen' (between) and 'bundled on curved' (bundles on curves). These do not invalidate the mathematics but materially impede claim-by-claim verification.",\\
+      "id": "weakness-5",\\
+      "locator": "throughout (Definitions 24, 27, 32; Conjectures 16, 47)",\\
+      "required\_update": "Run a careful proof-reading pass focusing on subscript/superscript balance, parenthesis matching, and consistent naming of indexing sets and maps.",\\
+      "source\_path": "corrections/2606.23240/paper.tex",\\
+      "source\_role": "technical\_correctness",\\
+      "status": "open",\\
+      "target\_kind": "paper\_tex",\\
+      "verification\_check": "Re-review should confirm `throughout (Definitions 24, 27, 32; Conjectures 16, 47)` is corrected or justified.",\\
+      "weakness\_index": 4\\
+    \},\\
+    \{\\
+      "evidence": "This work explored using low-rank decomposition to approximate and compress neural network weight matrices to speed up inference, which is a related application of low-rank matrix techniques to neural networks.",\\
+      "id": "weakness-6",\\
+      "locator": "Exploiting Linear Structure for Efficient Large-Scale Deep Learning",\\
+      "required\_update": "Add or discuss missing prior art `Exploiting Linear Structure for Efficient Large-Scale Deep Learning`. This work explored using low-rank decomposition to approximate and compress neural network weight matrices to speed up inference, which is a related application of low-rank matrix techniques to neural networks.",\\
+      "source\_path": null,\\
+      "source\_role": "novelty",\\
+      "status": "open",\\
+      "target\_kind": "bibliography",\\
+      "verification\_check": "Re-review should confirm the related-work discussion addresses this prior art.",\\
+      "weakness\_index": 5\\
+    \}\\
+  ],\\
+  "strengths": [\\
+    "The conjecture is stated with mathematical precision using the established half-measure (1/2-density) framework and Hecke correspondences, building naturally on classical Jacquet--Langlands isomorphisms and the Beilinson--Drinfeld/Braverman--Kazhdan constructions.",\\
+    "Lemma 48 (Conjecture 47 \ensuremath{\Rightarrow} Conjecture 16) provides a concrete structural consequence of the main conjecture and tests its coherence in the local P\^{}1 setting, giving the paper substantive content beyond mere conjecture formulation.",\\
+    "Supporting lemmas (Lemma 18: semistable endomorphism vanishing; Lemma 22: base-change semistability) are proved correctly using standard Harder--Narasimhan arguments, giving confidence in the geometric framework.",\\
+    "The moduli problem is novel: extending the classical division-algebra convolution-algebra isomorphism to Hecke operators on spaces of bundles over curves is a well-motivated and original problem at the intersection of geometric Langlands, p-adic representation theory, and arithmetic geometry.",\\
+    "The integral-transform construction for Hecke operators (Claim 36/Definition 34) is routine and correctly set up via smooth proper correspondences and half-density pullback, consistent with established BK and BD frameworks."\\
+  ],\\
+  "summary": "The paper formulates Conjecture 47 --- that Hecke operator algebras acting on spaces of half-measures of division algebra bundles over curves are canonically isomorphic across division algebras of the same rank --- and develops the technical framework (moduli spaces Bun\^{}L, Hecke correspondences, 1/2-density spaces S\^{}L) necessary to state it precisely. Reduction Lemma 48 (Conjecture 47 \ensuremath{\Rightarrow} Conjecture 16) is the main structural result, relating the global conjecture to an earlier eigendecomposition conjecture in the local P\^{}1 setting.\textbackslash{}n\textbackslash{}nThree specialist findings converge on major-revision status. Technical correctness (overall\_correctness 'mostly\_sound', confidence 0.55) identified four major-severity gaps: the homeomorphism \ensuremath{\pi}\^{}L\_E (C3) is claimed without proof of continuity, properness, injectivity, or surjectivity; Claim 33 (C16), the bridge identifying F-points of the Hecke stack with local H\_D and equating \ensuremath{\omega}\_x with the Gelfand--Leray form, is asserted without proof; commutativity of H(L) (C18) is unsubstantiated for inner forms; and no computational or formal artifacts accompany the paper (C22). Reproducibility (score 0.18, confidence 0.9) independently flagged one critical concern (no formal specification of Conjecture 47) and three major concerns (no code for Conjecture 16/Lemma 48, no load-bearing claim formalizations, no small-case checks). The paper's fields (math.RT, math.NT, math.AG) are in the code-amenable set; the recommendation gate therefore applies, mandating major\_revision.\textbackslash{}n\textbackslash{}nTwo review-input anomalies are flagged as pipeline artifacts, not paper weaknesses. The citation specialist verified only Vaswani et al. 2017 ('Attention is all you need'), a deep-learning paper unrelated to the paper's arithmetic geometry content; the novelty specialist's related-work section references LoRA and adapter methods rather than automorphic forms literature, and its confidence value (5.0) exceeds the 0--1 range. The paper's actual bibliography (BD, BK, DKV, HN, HK, Leray, Weil) is standard arithmetic geometry canon and was not assessed. Citation and novelty assessments for this paper should be treated as unreliable due to these input mismatches.",\\
+  "weaknesses": [\\
+    "The homeomorphism \ensuremath{\pi}\^{}L\_E (Claim 7, C3 at major severity) is stated without proof of G\^{}L-invariance on the double quotient, continuity, properness, injectivity, or surjectivity; this claim is load-bearing for Corollary 8 (canonical isomorphism of measure spaces M\^{}L\_E) and the entire local--global comparison.",\\
+    "Claim 33 (C16, major severity) --- identification of F-points of the Hecke stack with the local correspondence H\_D and equality of \ensuremath{\omega}\_x with the Gelfand--Leray form dx/da --- is asserted without proof, making Lemma 48 conditional on an unverified bridge that requires non-trivial Galois cohomology vanishing and explicit coordinate unwinding of \ensuremath{\alpha}\_C.",\\
+    "Commutativity of the Hecke algebra H(L) (Claim 46, C18 at major severity) is asserted without proof or reference to Satake/Drinfeld commutativity results for inner forms of GL\_n, yet the eigendecomposition in Conjecture 47 presupposes it.",\\
+    "No formal or computational artifacts accompany the paper (reproducibility critical + C22 major): Conjecture 47 has no machine-checked formal specification, and no small-case symbolic verification (e.g., n=2 over Q\_p) is provided to validate the local Hecke operator construction.",\\
+    "Pervasive typographic errors (C21) --- unbalanced parentheses in Definition 24, subscript errors I\^{}I\ensuremath{\to}I\^{}E in Conjecture 16, \ensuremath{\pi}\^{}L\_\{ref\}\ensuremath{\to}\ensuremath{\pi}\^{}L\_\{reg\} in Claim 13, malformed notation in Conjecture 47 --- materially impede claim-by-claim verification of the technical chain.",\\
+    "The citation and novelty specialist inputs appear mismatched to the paper's actual content (verifying a deep-learning citation; assessing novelty relative to adapter methods), meaning the paper's bibliography coverage and prior-art positioning in arithmetic geometry have not been independently audited."\\
+  ]\\
+\}\\
+\end{quote}
+
+\subsection*{novelty (\texttt{Gemini 3.5 Flash (High)})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "confidence": 5.0,\\
+  "missing\_prior\_art": [\\
+    \{\\
+      "reason": "This work explored using low-rank decomposition to approximate and compress neural network weight matrices to speed up inference, which is a related application of low-rank matrix techniques to neural networks.",\\
+      "title": "Exploiting Linear Structure for Efficient Large-Scale Deep Learning"\\
+    \}\\
+  ],\\
+  "novelty\_score": 0.85,\\
+  "related\_work": [\\
+    \{\\
+      "citation\_key": "houlsby2019parameter",\\
+      "delta": "LoRA performs adaptation via low-rank updates to weight matrices rather than adding sequential adapter layers, avoiding additional inference latency.",\\
+      "relation": "competing",\\
+      "title": "Parameter-Efficient Transfer Learning for NLP"\\
+    \},\\
+    \{\\
+      "citation\_key": "li2021prefix",\\
+      "delta": "LoRA adapts the weights of existing layers directly using low-rank decomposition, whereas prefix-tuning prepends trainable continuous prompts to the keys and values in attention layers, reducing the sequence length available for context.",\\
+      "relation": "competing",\\
+      "title": "Prefix-Tuning: Optimizing Continuous Prompts for Generation"\\
+    \},\\
+    \{\\
+      "citation\_key": "aghajanyan2020intrinsic",\\
+      "delta": "LoRA builds on the empirical finding that parameter updates during fine-tuning have a low intrinsic dimension by explicitly forcing the weight updates to be low-rank matrices.",\\
+      "relation": "builds\_on",\\
+      "title": "Intrinsic Dimensionality Explains the Effectiveness of Language Model Fine-Tuning"\\
+    \}\\
+  ],\\
+  "verdict": "significant"\\
+\}\\
+\end{quote}
+
+\subsection*{reproducibility (\texttt{gpt-5.5})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "code\_availability": "unspecified",\\
+  "code\_url": null,\\
+  "concerns": [\\
+    \{\\
+      "area": "code",\\
+      "description": "No source repository, license, commit, release, proof assistant project, or executable scripts are provided for reproducing the paper's mathematical constructions or operator calculations.",\\
+      "severity": "major"\\
+    \},\\
+    \{\\
+      "area": "other",\\
+      "description": "Proof-as-code gap: the headline Conjecture 47 on canonical isomorphism of Hecke subalgebras and common eigenspace decompositions has no formal specification or checked supporting artifact; an artifact such as formal/Conjecture47.lean would be needed to make the statement mechanically reproducible.",\\
+      "severity": "critical"\\
+    \},\\
+    \{\\
+      "area": "other",\\
+      "description": "Proof-as-code gap: the special-case Conjecture 16 and its reduction from Lemma 48 are not accompanied by formalized definitions or checked proof objects; artifacts such as formal/Conjecture16.lean and formal/Lemma48.lean would close this gap.",\\
+      "severity": "major"\\
+    \},\\
+    \{\\
+      "area": "other",\\
+      "description": "Proof-as-code gap: load-bearing supporting claims about the homeomorphism pi\_E\^{}L, smoothness/properness of Hecke correspondences, Gelfand-Leray forms, and commutativity of generated Hecke algebras are stated with informal or cited proofs only; a consolidated artifact such as formal/supporting\_claims.lean is missing.",\\
+      "severity": "major"\\
+    \},\\
+    \{\\
+      "area": "evaluation",\\
+      "description": "No worked computational or finite/small-rank checks are supplied for basic cases such as n=1, split E=F plus F, or explicit local fields; reproducible examples under experiments/small\_cases/ would help validate the constructions.",\\
+      "severity": "major"\\
+    \},\\
+    \{\\
+      "area": "other",\\
+      "description": "External mathematical dependencies are cited bibliographically but not pinned to theorem numbers, formal libraries, or machine-checkable dependency versions, making independent verification rely on manual literature reconstruction.",\\
+      "severity": "minor"\\
+    \}\\
+  ],\\
+  "confidence": 0.9,\\
+  "data\_availability": "unspecified",\\
+  "data\_url": null,\\
+  "environment": \{\\
+    "dependencies": [\\
+      "Local non-Archimedean field F with char(F) != 2 for the main analytic setting",\\
+      "Central division F-algebra L of rank n",\\
+      "Smooth complete absolutely irreducible F-curve C with divisors M and D",\\
+      "Cited mathematical references BD, BK, DKV, HN, HK, Leray, and Weil"\\
+    ],\\
+    "hardware": null,\\
+    "software": null\\
+  \},\\
+  "reproducibility\_score": 0.18\\
+\}\\
+\end{quote}
+
+\subsection*{summary (\texttt{claude-haiku-4-5-20251001})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "audience": "Researchers in arithmetic geometry, automorphic forms, representation theory of p-adic groups, and algebraic geometry, particularly those interested in invariants of division algebras and moduli spaces of bundles",\\
+  "key\_contributions": [\\
+    "Formulation of Conjecture 47: Hecke operator algebras on bundle measure spaces for different division algebras of the same rank are canonically isomorphic",\\
+    "Technical framework for defining Hecke operators on spaces of 1/2-measures via integration over Hecke correspondences",\\
+    "Proof that Conjecture 47 for projective lines implies an earlier conjecture (Conjecture 16) about simultaneous diagonalization of Hecke operators",\\
+    "Extension of classical isomorphism results for convolution algebras to the setting of bundles over curves"\\
+  ],\\
+  "plain\_language\_summary": "The paper studies division algebras---certain algebraic structures with properties similar to quaternions---over local non-Archimedean fields. A classical result states that convolution algebras built from different division algebras of the same rank are isomorphic in a canonical way. The author conjectures this isomorphism extends to more complex structures: algebras generated by Hecke operators acting on spaces of measures associated with bundles of division algebras over curves.\textbackslash{}n\textbackslash{}nThe main technical contribution is formulating this conjecture precisely using geometric tools from algebraic geometry, particularly the theory of principal bundles on curves and Hecke correspondences. The paper develops the necessary framework of 1/2-measures (sections of half-canonical bundles) that carry a natural Hermitian structure, and defines Hecke operators via integration along Hecke correspondences.\textbackslash{}n\textbackslash{}nThe author shows that the main conjecture has non-trivial consequences: in the special case of projective lines with specific markings, it implies an earlier conjecture (Conjecture 16) about direct sum decompositions of measure spaces that are preserved by all Hecke operators. The paper suggests the Jacquet--Rallis relative trace formula might provide a proof strategy.",\\
+  "tldr": "The paper proposes a conjecture that certain algebras of Hecke operators acting on measure spaces of division algebra bundles are canonically isomorphic, extending known results about division algebras over local fields."\\
+\}\\
+\end{quote}
+
+\subsection*{technical\_correctness (\texttt{claude-opus-4-7})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "claims": [\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "The space M\^{}L\_E of G\^{}L-invariant compactly supported measures on X\^{}L\_E carries a convolution algebra structure and embeds into End\_\{G\^{}L\_E\}(S\^{}L\_E).",\\
+      "evidence": "The claim is asserted without proof. The convolution structure presumes a compatible group/quotient structure on X\^{}L\_E = G\^{}L\_E/G\^{}L, which is plausible since \textbackslash{}\textbackslash{}bar G\^{}L\_E acts; however no construction of the multiplication or verification of associativity is provided.",\\
+      "id": "C1",\\
+      "location": "Section 1.1, Claim 2",\\
+      "severity": "minor",\\
+      "suggested\_fix": "Sketch the convolution: m\_1 * m\_2 (f)(x) = \textbackslash{}\textbackslash{}int m\_1(g) m\_2(g\^{}\{-1\} x), and verify G\^{}L-invariance and the embedding into End\_\{G\^{}L\_E\}."\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "The subset \ensuremath{\Xi} \ensuremath{\subset} \textbackslash{}\textbackslash{}hat \ensuremath{\Xi} of powers of irreducible monic polynomials together with the point at infinity is closed.",\\
+      "evidence": "No proof is given. Closedness in the one-point compactification requires that \ensuremath{\Xi}' = \ensuremath{\Xi}\textbackslash{}\textbackslash{}\{\ensuremath{\infty}\} be closed in \textbackslash{}\textbackslash{}hat \ensuremath{\Xi}' ≅ F\^{}n and that any sequence escaping every compact subset of \textbackslash{}\textbackslash{}hat \ensuremath{\Xi}' has \ensuremath{\infty} as accumulation, which is automatic. Closedness of \{P : P = Q\^{}k for some irreducible Q, k\ensuremath{\ge}1\} in F\^{}n is plausible (each stratum of fixed factorization type is constructible) but nontrivial --- it is the complement of polynomials with at least two distinct irreducible factors.",\\
+      "id": "C2",\\
+      "location": "Section 1.1, Claim 4",\\
+      "severity": "minor",\\
+      "suggested\_fix": "Provide a one-paragraph argument: show that if P\_n \ensuremath{\to} P in F\^{}n and each P\_n is a prime power, then P is a prime power (use continuity of resultants/discriminants and that the set of polynomials with at least two coprime factors of fixed degrees is open)."\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "The map \ensuremath{\pi}\^{}L\_E: \textbackslash{}\textbackslash{}bar X\^{}L\_E \ensuremath{\to} \ensuremath{\Xi}\_E sending x = l\_+ + \ensuremath{\tau}\^{}\{-1\} l\_- to N(u - l\_- l\_+\^{}\{-1\}) (or \ensuremath{\infty} if l\_+ = 0) is a homeomorphism, well-defined modulo G\^{}L on the left.",\\
+      "evidence": "The proof verifies only that P\_x(\ensuremath{\tau})P\_x(-\ensuremath{\tau}) \ensuremath{\ne} 0 (using x \ensuremath{\in} G\^{}L\_E). It does not verify (a) G\^{}L-invariance on the right (since \textbackslash{}\textbackslash{}bar X\^{}L\_E = \textbackslash{}\textbackslash{}bar G\^{}L\textbackslash{}\textbackslash{}X\^{}L\_E here \ensuremath{\pi} is defined on the double-quotient \textbackslash{}\textbackslash{}bar G\^{}L\textbackslash{}\textbackslash{}G\^{}L\_E/G\^{}L, but the formula uses the decomposition l\_+ + \ensuremath{\tau}\^{}\{-1\} l\_- which is only G\^{}L-equivariant on a specific side), (b) continuity, (c) properness/injectivity, (d) surjectivity onto \ensuremath{\Xi}\_E, nor (e) the existence of a continuous inverse. The homeomorphism statement is load-bearing because Corollary 8 (canonical isomorphism of measure spaces M\^{}L\_E for all L) is derived from it.",\\
+      "id": "C3",\\
+      "location": "Section 1.1, Lemma/Construction 6 and Claim 7",\\
+      "severity": "major",\\
+      "suggested\_fix": "Expand the proof: verify G\^{}L-invariance on the quotient \textbackslash{}\textbackslash{}bar X\^{}L\_E, show the map is proper (preimages of compacts are compact), construct the inverse explicitly using the companion matrix of P, and check both maps are continuous in the p-adic topology."\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "For a fixed quadratic E/F, the vector spaces of the algebras M\^{}L\_E for different division F-algebras L of rank n are canonically isomorphic.",\\
+      "evidence": "Follows from Claim 7 (the homeomorphism \ensuremath{\pi}\^{}L\_E: \textbackslash{}\textbackslash{}bar X\^{}L\_E \ensuremath{\to} \ensuremath{\Xi}\_E lands in a space \ensuremath{\Xi}\_E independent of L). The vector-space isomorphism is canonical at the level of spaces of measures provided pushforward of measures is well-defined under the homeomorphism. The deduction is routine once Claim 7 is established, but it is not spelled out.",\\
+      "id": "C4",\\
+      "location": "Section 1.1, Corollary 8",\\
+      "severity": "minor",\\
+      "suggested\_fix": "Add a one-line argument: pushforward along \ensuremath{\pi}\^{}L\_E identifies G\^{}L-invariant measures on X\^{}L\_E with measures on \ensuremath{\Xi}\_E, giving canonical isomorphisms M\^{}L\_E ≅ M(\ensuremath{\Xi}\_E)."\\
+    \},\\
+    \{\\
+      "assessment": "supported",\\
+      "claim": "In the split case E = F \ensuremath{\oplus} F the isomorphisms of Corollary 8 are algebra isomorphisms.",\\
+      "evidence": "Attributed to [DKV] (Deligne--Kazhdan--Vignéras 1984), a standard reference proving the local Jacquet--Langlands correspondence via the trace formula. Within the surveyed framework, the asserted attribution is accurate.",\\
+      "id": "C5",\\
+      "location": "Section 1.1, Claim 9",\\
+      "severity": "info",\\
+      "suggested\_fix": null\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "The restriction \ensuremath{\pi}\^{}L\_\{reg\} of \ensuremath{\pi}\^{}L\_E to X\^{}L\_\{E,reg\} = (\ensuremath{\pi}\^{}L\_E)\^{}\{-1\}(\ensuremath{\Xi}\_\{reg\}) is smooth.",\\
+      "evidence": "Stated without proof. Smoothness over the irreducible-polynomial locus is plausible (the fibers are conjugacy classes of regular semisimple elements with squarefree characteristic polynomial), but is asserted with no argument. Notation is also inconsistent (\textbackslash{}"\ensuremath{\pi}\^{}L\_\{ref\}\textbackslash{}" vs \textbackslash{}"\ensuremath{\pi}\^{}L\_\{reg\}\textbackslash{}", \textbackslash{}"X\_\{E,,reg\}\^{}L\textbackslash{}").",\\
+      "id": "C6",\\
+      "location": "Section 1.2, Claim 13",\\
+      "severity": "minor",\\
+      "suggested\_fix": "Either supply a tangent-space computation (Jacobian of P\_x(u) = N(u - l\_- l\_+\^{}\{-1\}) is surjective when P is separable) or cite a known smoothness result for the characteristic-polynomial map on regular semisimple loci. Fix the typo."\\
+    \},\\
+    \{\\
+      "assessment": "unsupported",\\
+      "claim": "Conjecture 16 (eigendecomposition of S\^{}L\_E under the Hecke operators T\_D\^{}E(L), with dimensions d(i) and eigenvalues \ensuremath{\lambda}\_i independent of L).",\\
+      "evidence": "Labelled as a conjecture, which is appropriate. However the statement contains transcription errors that obscure the precise claim: 'd\^{}E: I\^{}I \ensuremath{\to} \ensuremath{\mathbb{N}}' (should be I\^{}E), '\ensuremath{\lambda}\^{}D\_i' (likely \ensuremath{\lambda}\^{}E\_i), and 'D \ensuremath{\in} \textbackslash{}\textbackslash{}mathcal D' is undefined in this localised setting --- the divisors live in \ensuremath{\Xi}\_\{reg\}, not in the global \textbackslash{}\textbackslash{}mathcal D introduced later.",\\
+      "id": "C7",\\
+      "location": "Section 1.2, Conjecture 16",\\
+      "severity": "info",\\
+      "suggested\_fix": "Fix the typos (I\^{}I \ensuremath{\to} I\^{}E, \ensuremath{\lambda}\^{}D\_i \ensuremath{\to} \ensuremath{\lambda}\^{}E\_i) and clarify the domain of \ensuremath{\lambda}\_i (it should be \ensuremath{\Xi}\_\{reg\} or its measure-algebra image in the local setting)."\\
+    \},\\
+    \{\\
+      "assessment": "supported",\\
+      "claim": "Let E be semistable on \textbackslash{}\textbackslash{}underline C with endomorphism a vanishing at one point c. Then a = 0.",\\
+      "evidence": "The proof is correct and standard: a factors through E(-c), so a \ensuremath{\in} Hom(E, E(-c)); since E and E(-c) are semistable with \ensuremath{\mu}(E(-c)) = \ensuremath{\mu}(E) - deg(c) < \ensuremath{\mu}(E), Hom vanishes (Harder--Narasimhan, cited [HN]).",\\
+      "id": "C8",\\
+      "location": "Section 2.1, Lemma 18",\\
+      "severity": "info",\\
+      "suggested\_fix": null\\
+    \},\\
+    \{\\
+      "assessment": "supported",\\
+      "claim": "For any (E,i,\ensuremath{\iota}) \ensuremath{\in} \textbackslash{}\textbackslash{}underline\{Bun\}\^{}L(F), the base change E \ensuremath{\otimes}\_F \textbackslash{}\textbackslash{}bar F is semistable.",\\
+      "evidence": "Proof is correct: the Harder--Narasimhan filtration is canonical, hence Galois-stable and descends to F; it would give an L-invariant subbundle, contradicting irreducibility of the left regular L-representation on itself (L is a central division algebra, so L\_L L = L is simple).",\\
+      "id": "C9",\\
+      "location": "Section 2.2, Lemma 22",\\
+      "severity": "info",\\
+      "suggested\_fix": null\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "(Corollary 23) (a) Bun\_\{ss\}\^{}L \ensuremath{\to} Bun\^{}L is a bijection; (b) endomorphisms of (E,i,\ensuremath{\iota}) \ensuremath{\in} Bun\^{}L(F) vanishing at one point are zero; (c) if M \ensuremath{\ne} ∅, Bun\_\{ss\}\^{}L is a scheme.",\\
+      "evidence": "Parts (a) and (b) follow directly from Lemmas 18 and 22 over F (and over \textbackslash{}\textbackslash{}bar F by Lemma 22). Part (c) (representability by a scheme when level structure is added at a nonempty divisor) is a standard rigidification argument but is asserted without proof or reference; it depends on the level structure \ensuremath{\iota} rigidifying the automorphism group of (E,i).",\\
+      "id": "C10",\\
+      "location": "Section 2.2, Corollary 23",\\
+      "severity": "minor",\\
+      "suggested\_fix": "Add a citation or short argument for (c): the level structure \ensuremath{\iota} trivializes Aut(E,i)\_\{|M\}, and combined with (b) implies trivial automorphism groups, giving an algebraic-space-which-is-a-scheme statement."\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "The line bundle \textbackslash{}\textbackslash{}mathcal L on Bun\^{}L (Definition 24) is independent of \ensuremath{\phi} and defined over F.",\\
+      "evidence": "Stated without proof. Definition 24 itself is given twice (with apparent typographic corruption: 'det\^{}\{\ensuremath{\otimes}n\}(R\ensuremath{\Gamma}(\textbackslash{}\textbackslash{}bar C, \textbackslash{}\textbackslash{}bar E) \ensuremath{\otimes} det\^{}\{-1\}(R\ensuremath{\Gamma}(\textbackslash{}\textbackslash{}underline C, det(\textbackslash{}\textbackslash{}bar E)' is malformed and unbalanced). Independence of \ensuremath{\phi} is plausible because det \textbackslash{}\textbackslash{}hat E descends to F via Galois twist arguments, but no such argument is given.",\\
+      "id": "C11",\\
+      "location": "Section 2.3, Claim 25",\\
+      "severity": "minor",\\
+      "suggested\_fix": "Repair the formula in Definition 24 (balance parentheses, remove duplication) and add a one-line Galois-descent justification for independence of \ensuremath{\phi}."\\
+    \},\\
+    \{\\
+      "assessment": "supported",\\
+      "claim": "There exists a canonical isomorphism \textbackslash{}\textbackslash{}mathcal L\^{}\{\ensuremath{\otimes} 2\} \ensuremath{\to} \ensuremath{\Omega}\_\{Bun\^{}L\}.",\\
+      "evidence": "Attributed to [BD] (Beilinson--Drinfeld, Quantization of Hitchin integrable systems). This is the standard square-root-of-canonical (Pfaffian / Theta) construction for moduli stacks of bundles. Attribution is accurate within standard usage.",\\
+      "id": "C12",\\
+      "location": "Section 2.3, Claim 26",\\
+      "severity": "info",\\
+      "suggested\_fix": null\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "The Hecke projections q\_D, q\_D' from \textbackslash{}\textbackslash{}mathcal H\_D to Bun\^{}L are smooth and proper.",\\
+      "evidence": "Asserted without proof or reference. Smoothness and properness of Hecke correspondences for principal G-bundles on curves are well-known in the GL\_n case (e.g., Beilinson--Drinfeld, Frenkel--Gaitsgory); the variant for inner forms (L\^{}*) typically reduces to GL\_n after base change. No reference is supplied here.",\\
+      "id": "C13",\\
+      "location": "Section 3.1, Claim 28",\\
+      "severity": "minor",\\
+      "suggested\_fix": "Cite a Hecke-correspondence smoothness result (e.g., from [BD] or Heinloth's lectures on Bun\_G) or sketch the argument: the fiber Z\_E parametrises L-invariant locally free subsheaves with prescribed quotient, which forms a smooth proper variety (an affine Grassmannian slice)."\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "There exists a coordinate t on \textbackslash{}\textbackslash{}underline\{\textbackslash{}\textbackslash{}mathbb P\}\^{}1 such that the divisor M of cardinality 2 is the set \{\ensuremath{\pm}\ensuremath{\tau}\} with \ensuremath{\tau}\^{}2 \ensuremath{\in} F\^{}*.",\\
+      "evidence": "Stated without proof. Plausible by an F-rational Möbius transformation: any degree-2 reduced divisor on \textbackslash{}\textbackslash{}mathbb P\^{}1\_F is the vanishing locus of a monic degree-2 polynomial t\^{}2 + bt + c with discriminant a = b\^{}2 - 4c, and translation t \ensuremath{\mapsto} t + b/2 puts it in the form t\^{}2 = a/4 (after rescaling, in the form t\^{}2 = a). The argument is routine but should be stated.",\\
+      "id": "C14",\\
+      "location": "Section 3.2, Claim 29",\\
+      "severity": "minor",\\
+      "suggested\_fix": "Add: 'After an F-linear change of coordinate on \textbackslash{}\textbackslash{}mathbb P\^{}1, we may take M to be cut out by t\^{}2 - a for a \ensuremath{\in} F\^{}*; set \ensuremath{\tau} such that \ensuremath{\tau}\^{}2 = a.'"\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "(a) Any semistable \textbackslash{}\textbackslash{}underline G\^{}L bundle on \textbackslash{}\textbackslash{}mathbb P\^{}1 is isomorphic to \textbackslash{}\textbackslash{}mathcal O(r) \ensuremath{\otimes} L for some r \ensuremath{\in} \ensuremath{\mathbb{Z}}; (b) Bun\_\{ss,0\} = \textbackslash{}\textbackslash{}underline X\^{}L\_E.",\\
+      "evidence": "Part (a) is the L-twisted analogue of Grothendieck's classification of vector bundles on \textbackslash{}\textbackslash{}mathbb P\^{}1: a semistable principal G\^{}L-bundle (i.e., a vector bundle with L\^{}op-action, where L is a central division F-algebra) has vector-bundle underlying \textbackslash{}\textbackslash{}hat E that must be balanced (semistable), and L-equivariance forces all summands to coincide. Argument is standard but not given. Part (b) (the identification with the local model X\^{}L\_E) requires the trivialisation at M = \{\ensuremath{\pm}\ensuremath{\tau}\} to match up with the coset space G\^{}L\_E/G\^{}L; this is the key bridge between the local Section 1 and the global Section 2--3 setup, and is asserted without verification.",\\
+      "id": "C15",\\
+      "location": "Section 3.2, Claim 31",\\
+      "severity": "minor",\\
+      "suggested\_fix": "For (a), cite Grothendieck/Atiyah and explain how the L-action forces uniformity. For (b), exhibit the explicit map: a triple (\textbackslash{}\textbackslash{}mathcal O \ensuremath{\otimes} L, i, \ensuremath{\iota}) with \ensuremath{\iota}: L \ensuremath{\otimes} \textbackslash{}\textbackslash{}mathcal O\_M \ensuremath{\to} L \ensuremath{\times} M corresponds to an element of L\_E\^{}* / L\^{}*, recovering the definition of X\^{}L\_E."\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "(a) \textbackslash{}\textbackslash{}underline H\_D(F) = H\_D; (b) \ensuremath{\omega}\_x is the Gelfand--Leray form dx/da of Definition 14.",\\
+      "evidence": "This is the bridge claim that makes Lemma 48 (Conjecture 47 \ensuremath{\Rightarrow} Conjecture 16) work, and is asserted without proof. Identification of F-points of the Hecke stack with the local correspondence H\_D requires non-trivial Galois cohomology vanishing (H\^{}1(F, G\^{}L) considerations) and an explicit identification of fibres. Identification of \ensuremath{\omega}\_x with the Gelfand--Leray form requires unwinding the canonical isomorphism \ensuremath{\alpha}\_C of [BD] in the explicit P\^{}1 coordinate system; the section provides no such unwinding.",\\
+      "id": "C16",\\
+      "location": "Section 3.2, Claim 33",\\
+      "severity": "major",\\
+      "suggested\_fix": "Provide an explicit local computation in coordinates on \textbackslash{}\textbackslash{}mathbb P\^{}1: write down a local section of \textbackslash{}\textbackslash{}Omega\_\{q\_D\}, restrict to a fibre, and compare with dx/da via the definition of the reduced norm. Alternatively, cite a precise prior reference verifying the comparison."\\
+    \},\\
+    \{\\
+      "assessment": "supported",\\
+      "claim": "For smooth q: H \ensuremath{\to} X, q': H \ensuremath{\to} X' with compact fibres, and \ensuremath{\alpha}: q'\^{}*(\textbackslash{}\textbackslash{}mathcal L') \ensuremath{\to} \ensuremath{\Omega}\_q \ensuremath{\otimes} q\^{}*(\textbackslash{}\textbackslash{}mathcal L), there exists a unique operator T\_H: C\^{}\ensuremath{\infty}(X', |\textbackslash{}\textbackslash{}mathcal L'|) \ensuremath{\to} C\^{}\ensuremath{\infty}(X, |\textbackslash{}\textbackslash{}mathcal L|) with T\_H(|s'|)(x) = ∫\_\{Z\_x\} |\ensuremath{\alpha}(s')\_\{Z\_x\}|.",\\
+      "evidence": "This is the standard integral-transform construction for half-density Hecke operators following Beilinson--Drinfeld / Braverman--Kazhdan ([BK] is cited in Definition 34). Compactness of fibres makes the integral converge; uniqueness is by point-evaluation. The construction is routine in this framework.",\\
+      "id": "C17",\\
+      "location": "Section 4.2, Claim 36",\\
+      "severity": "info",\\
+      "suggested\_fix": null\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "The Hecke operators T\_D (D \ensuremath{\in} \textbackslash{}\textbackslash{}mathcal D) generate a commutative subalgebra \textbackslash{}\textbackslash{}mathcal H(L) of End(\textbackslash{}\textbackslash{}mathcal S\^{}L).",\\
+      "evidence": "Commutativity of Hecke operators at different divisors is a load-bearing claim for the conjecture (the eigendecomposition in Conjecture 47 requires it). For GL\_n on a curve, commutativity is a classical result of Drinfeld; the variant for inner forms of GL\_n (division-algebra-twisted Hecke algebras) is plausible by reduction to GL\_n via base change to \textbackslash{}\textbackslash{}bar F, but is non-trivial and is here asserted without proof or reference. The notation '\textbackslash{}\textbackslash{}mathbb C\^{}*-subalgebra' is also unclear --- likely a typo for 'commutative \textbackslash{}\textbackslash{}mathbb C-subalgebra'.",\\
+      "id": "C18",\\
+      "location": "Section 4.3, Claim 46",\\
+      "severity": "major",\\
+      "suggested\_fix": "Either cite a commutativity result for L-twisted Hecke algebras (e.g., reduction to the split case via Galois descent, or a Satake-style argument) or sketch the proof: the convolution of two divisorial correspondences is commutative because the underlying double-coset algebra at the formal disk is commutative (Satake isomorphism for inner forms)."\\
+    \},\\
+    \{\\
+      "assessment": "unsupported",\\
+      "claim": "Conjecture 47 (main): the Hecke subalgebras \textbackslash{}\textbackslash{}mathcal H(L) are canonically isomorphic across all division F-algebras L of rank n, with a common eigenvalue parametrisation (I, d, \ensuremath{\lambda}\_i) and joint eigendecomposition \textbackslash{}\textbackslash{}mathcal S\^{}L = \ensuremath{\oplus}\_\{i\ensuremath{\in}I\} \textbackslash{}\textbackslash{}mathcal S\^{}L(i).",\\
+      "evidence": "Labelled as a conjecture. No evidence beyond consistency with Conjecture 16 (the local case, P\^{}1, |M|=2) is provided. The reduction (Lemma 48) goes only one way: Conjecture 47 \ensuremath{\Rightarrow} Conjecture 16. The typo 'T\_\{D | \textbackslash{}\textbackslash{}mathcal S\^{}i L(i)\}' is malformed.",\\
+      "id": "C19",\\
+      "location": "Section 4.3, Conjecture 47",\\
+      "severity": "info",\\
+      "suggested\_fix": "Fix the typographic error in the eigenvalue equation. Optionally, list any low-rank or low-genus checks (e.g., n=2, g=0, |M|=2) where the conjecture can be verified directly, even partially."\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "Lemma 48: the validity of Conjecture 47 in the case (C, M, D) of Claim 29 (\textbackslash{}\textbackslash{}mathbb P\^{}1 with |M|=2, |D|=n) implies the validity of Conjecture 16.",\\
+      "evidence": "The proof is 'Follows from Claim 33', i.e., from the identification of the global Hecke correspondence on \textbackslash{}\textbackslash{}mathbb P\^{}1 (specialised at the given M and D) with the local operator T\_D\^{}E(L) of Definition 14. Since Claim 33 itself is asserted without proof (see C16), the implication is conditional. If Claim 33 holds, the implication is essentially immediate by inspection of definitions.",\\
+      "id": "C20",\\
+      "location": "Section 4.4, Lemma 48",\\
+      "severity": "minor",\\
+      "suggested\_fix": "Make the proof self-contained by inlining the explicit identification of \textbackslash{}\textbackslash{}mathcal S\^{}L (in the \textbackslash{}\textbackslash{}mathbb P\^{}1, |M|=2 case) with \textbackslash{}\textbackslash{}mathcal S\^{}L\_E and of T\_\{\textbackslash{}\textbackslash{}underline D\} with T\_D\^{}E(L), referencing the parts of Claim 31 and Claim 33 that are used."\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "Bibliographic / typographic integrity of the paper supports verifiability of the technical chain.",\\
+      "evidence": "Multiple formula-level typographic errors compromise verifiability: Definition 24's formula for \textbackslash{}\textbackslash{}mathcal L is duplicated and unbalanced ('det\^{}\{\ensuremath{\otimes}n\}(R\ensuremath{\Gamma}(\textbackslash{}\textbackslash{}bar C, \textbackslash{}\textbackslash{}bar E)) \ensuremath{\otimes} det\^{}\{-1\}(R\ensuremath{\Gamma}(\textbackslash{}\textbackslash{}underline C, det(\textbackslash{}\textbackslash{}bar E))' lacks closing parentheses); Conjecture 16 uses 'I\^{}I' instead of 'I\^{}E' and '\ensuremath{\lambda}\^{}D\_i' where '\ensuremath{\lambda}\^{}E\_i' is meant; Claim 13 writes '\ensuremath{\pi}\^{}L\_\{ref\}' for '\ensuremath{\pi}\^{}L\_\{reg\}'; Conjecture 47 writes 'T\_\{D | \textbackslash{}\textbackslash{}mathcal S\^{}i L(i)\}'; Definition 27.5 ends with '\ensuremath{\alpha}\_\{\textbackslash{}\textbackslash{}underline C\}' but later Claim 33 refers to it without the subscript; reference [@DKV] is mis-spelt 'cintained' as 'contained'; reference cluster includes 'betIen' (between) and 'bundled on curved' (bundles on curves). These do not invalidate the mathematics but materially impede claim-by-claim verification.",\\
+      "id": "C21",\\
+      "location": "throughout (Definitions 24, 27, 32; Conjectures 16, 47)",\\
+      "severity": "minor",\\
+      "suggested\_fix": "Run a careful proof-reading pass focusing on subscript/superscript balance, parenthesis matching, and consistent naming of indexing sets and maps."\\
+    \},\\
+    \{\\
+      "assessment": "unsupported",\\
+      "claim": "Computer-verifiable formalisation of the conjectures' framework (in Lean/Coq/Agda) or numerical/symbolic verification of finite-rank instances (e.g., n=2, F = \textbackslash{}\textbackslash{}mathbb Q\_p) is provided.",\\
+      "evidence": "This is a pure-mathematics paper in code-amenable fields (math.RT, math.NT, math.AG). Per the proof-as-code axiom for such fields: load-bearing structural claims (e.g., Claim 7's homeomorphism, Claim 31's classification, Claim 33's identification of Gelfand--Leray forms, Claim 46's commutativity) admit either symbolic/computer-algebra verification (e.g., explicit P\^{}1 computations in SageMath/Pari for n=2 or n=3) or formalisation in a proof assistant. No accompanying repository, scripts, or formal artifacts are referenced. While the paper's primary content is conjectural and a full formalisation is unrealistic, finite-rank symbolic checks of the local identification \ensuremath{\pi}\^{}L\_E and the Hecke commutativity at n=2 would substantially strengthen confidence.",\\
+      "id": "C22",\\
+      "location": "entire paper (no accompanying artifact)",\\
+      "severity": "major",\\
+      "suggested\_fix": "Provide a small companion artifact (e.g., experiments/n2\_p3/local\_hecke.sage or src/verification/Hecke\_n2.lean) implementing the n=2 local case: build \textbackslash{}\textbackslash{}mathcal S\^{}L\_E for the two rank-2 division algebras over \textbackslash{}\textbackslash{}mathbb Q\_p (split and non-split quaternion), compute T\_D for several D, and numerically verify the asserted spectral coincidence (Conjecture 16, n=2) for at least one quadratic E/F."\\
+    \}\\
+  ],\\
+  "confidence": 0.55,\\
+  "overall\_correctness": "mostly\_sound"\\
+\}\\
+\end{quote}
+
+\section*{Corrections}
+% corrections rendered from corrections table; empty on first publish
+No corrections have been recorded.
+
+\section*{Bibliography}
+\begin{enumerate}[leftmargin=*]
+  \item BD: A.Beilinson, V.Drinfeld \{\textbackslash{}em Quantization of Hitchin integrable systems\}
+  \item BK: A.Braverman, D.Kazhdan, \{\textbackslash{}em Automorphic functions on moduli spaces of bundled on curved over local fields: a survey\} Proceedings of the International Congress of Mathematicians 2022, EMS Press, 2023, pp. 797--823.
+  \item DKV: P.Deligne, D. Kazhdan, M.-F.Vignéras, \{\textbackslash{}em Représentations des algèbres centrales simples p-adiques\} Représentations des groupes réductifs sur un corps local, Travaux en Cours, Hermann, Paris, 1984.
+  \item HN: G.Harder, M.Narasimhan, \{\textbackslash{}em Vector Bundles on Curves, and On the Cohomology Groups of Moduli Spaces of Vector Bundles on Curves\}, Math. Ann. 212 (1975)
+  \item HK: E.Hrushovski, D.Kazhdan \{\textbackslash{}em Motivic Poisson summation\} Moscow Mathematical Journal 9 (2009), no. 3, 569--623.
+  \item L: J.Leray, \{\textbackslash{}em Le calcul différentiel et intégral sur une variété analytique complexe\} Bulletin de la Société Mathématique de France, 87, 81--180, (1959).
+  \item W: A.Weil \{\textbackslash{}em Basic Number Theory\} 1967 by Springer
+\end{enumerate}
+
+% \bibliographystyle{plain}
+% \bibliography{references}
+\end{document}
