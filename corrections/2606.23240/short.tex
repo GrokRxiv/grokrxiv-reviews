@@ -1,0 +1,704 @@
+
+\documentclass[11pt,a4paper,twoside]{amsart}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{xcolor}
+\usepackage{amscd}
+
+\usepackage{color}
+\definecolor{Red}{rgb}{0.7, 0,0}
+\newcommand{\red}[1]{{\color{Red}#1}}
+
+% --- Theorem Environments ---
+\newtheorem{theorem}{Theorem}[section]
+
+\newtheorem{lemma}[theorem]{Lemma}
+
+\newtheorem{lc}[theorem]{Lemma/Construction}
+
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{note}[theorem]{Note}
+
+% --- Custom Math Shortcuts ---
+% Blackboard Bold
+\newcommand{\mA}{\mathbb A}
+\newcommand{\mB}{\mathbb B}
+\newcommand{\mC}{\mathbb C}
+\newcommand{\mD}{\mathbb D}
+\newcommand{\mE}{\mathbb E}
+\newcommand{\mF}{\mathbb F}
+\newcommand{\mG}{\mathbb G}
+\newcommand{\mH}{\mathbb H}
+\newcommand{\mI}{\mathbb I}
+\newcommand{\mJ}{\mathbb J}
+\newcommand{\mK}{\mathbb K}
+\newcommand{\mL}{\mathbb L}
+\newcommand{\mM}{\mathbb M}
+\newcommand{\mN}{\mathbb N}
+\newcommand{\mO}{\mathbb O}
+\newcommand{\mP}{\mathbb P}
+\newcommand{\mQ}{\mathbb Q}
+\newcommand{\mR}{\mathbb R}
+\newcommand{\mS}{\mathbb S}
+\newcommand{\mT}{\mathbb T}
+\newcommand{\mU}{\mathbb U}
+\newcommand{\mV}{\mathbb V}
+\newcommand{\mW}{\mathbb W}
+\newcommand{\mX}{\mathbb X}
+\newcommand{\mY}{\mathbb Y}
+\newcommand{\mZ}{\mathbb Z}
+
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\VV}{\mathbb{V}}
+\newcommand{\XX}{\mathbb{X}}
+\newcommand{\YY}{\mathbb{Y}}
+\newcommand{\WW}{\mathbb{W}}
+\newcommand{\PP}{\mathbb{P}}
+
+% Bold Math
+\newcommand{\bA}{\mathbf A}
+\newcommand{\bF}{\mathbf F}
+\newcommand{\bK}{\mathbf K}
+\newcommand{\bP}{\mathbf P}
+\newcommand{\bU}{\mathbf U}
+\newcommand{\bV}{\mathbf V}
+\newcommand{\bW}{\mathbf W}
+\newcommand{\bX}{\mathbf X}
+\newcommand{\bY}{\mathbf Y}
+\newcommand{\bZ}{\mathbf Z}
+
+% Caligraphic
+\newcommand{\mcA}{\mathcal A}
+\newcommand{\mcB}{\mathcal B}
+\newcommand{\mcC}{\mathcal C}
+\newcommand{\mcD}{\mathcal D}
+\newcommand{\mcE}{\mathcal E}
+\newcommand{\mcF}{\mathcal F}
+\newcommand{\mcG}{\mathcal G}
+\newcommand{\mcH}{\mathcal H}
+\newcommand{\mcI}{\mathcal I}
+\newcommand{\mcJ}{\mathcal J}
+\newcommand{\mcK}{\mathcal K}
+\newcommand{\mcL}{\mathcal L}
+\newcommand{\mcM}{\mathcal M}
+\newcommand{\mcN}{\mathcal N}
+\newcommand{\mcO}{\mathcal O}
+\newcommand{\mcP}{\mathcal P}
+\newcommand{\mcQ}{\mathcal Q}
+\newcommand{\mcR}{\mathcal R}
+\newcommand{\mcS}{\mathcal S}
+\newcommand{\mcT}{\mathcal T}
+\newcommand{\mcU}{\mathcal U}
+\newcommand{\mcV}{\mathcal V}
+\newcommand{\mcW}{\mathcal W}
+\newcommand{\mcX}{\mathcal X}
+\newcommand{\mcY}{\mathcal Y} \newcommand\PGL{\operatorname{PGL}}
+\newcommand{\mcZ}{\mathcal Z}
+
+% Fraktur
+\newcommand{\fa}{\mathfrak a}
+\newcommand{\fb}{\mathfrak b}
+\newcommand{\fc}{\mathfrak c}
+\newcommand{\fd}{\mathfrak d}
+\newcommand{\fe}{\mathfrak e}
+\newcommand{\ff}{\mathfrak f}
+\newcommand{\fg}{\mathfrak g}
+\newcommand{\fh}{\mathfrak h}
+\newcommand{\fii}{\mathfrak i}
+\newcommand{\fj}{\mathfrak j}
+\newcommand{\fk}{\mathfrak k}
+\newcommand{\fl}{\mathfrak l}
+\newcommand{\fm}{\mathfrak m}
+\newcommand{\fn}{\mathfrak n}
+\newcommand{\fo}{\mathfrak o}
+\newcommand{\fp}{\mathfrak p}
+\newcommand{\fq}{\mathfrak q}
+\newcommand{\fr}{\mathfrak r}
+\newcommand{\fs}{\mathfrak s}
+\newcommand{\ft}{\mathfrak t}
+\newcommand{\fu}{\mathfrak u}
+\newcommand{\fv}{\mathfrak v}
+\newcommand{\fw}{\mathfrak w}
+\newcommand{\fx}{\mathfrak x}
+\newcommand{\fy}{\mathfrak y}
+\newcommand{\fz}{\mathfrak z}
+\newcommand{\bFr}{\mathfrak}
+
+% Greek Variances & Accents
+\newcommand{\Gg}{\gamma}
+\newcommand{\GG}{\Gamma}
+\newcommand{\bO}{\Omega}
+\newcommand{\bo}{\omega}
+\newcommand{\bl}{\lambda}
+\newcommand{\bL}{\Lambda}
+\newcommand{\bs}{\sigma}
+\newcommand{\bS}{\Sigma}
+\newcommand{\ep}{\epsilon}
+\newcommand{\D}{\Delta}
+\newcommand{\z}{\zeta}
+\newcommand{\kk}{\kappa}
+
+% Over/Underlines, Tildes, Bars
+\newcommand{\ti}{\tilde}
+\newcommand{\wt}{\widetilde}
+\newcommand{\un}{\underline}
+\newcommand{\ov}{\overline}
+\newcommand{\bd}{\bar d}
+
+% Arrows and Symbols
+\newcommand{\ho}{\hookrightarrow}
+\newcommand{\bsl}{\backslash}
+\newcommand{\va}{\vartriangleleft}
+\newcommand{\ra}{\rightarrow}   
+\newcommand{\lr}{\leftrightarrow}
+\newcommand{\emp}{\emptyset}
+\newcommand{\imp}{\Longrightarrow}
+\newcommand{\rt}{\rtimes}
+\newcommand{\sm}{\setminus} 
+
+% Limits
+\newcommand{\pl}{\varprojlim}
+\newcommand{\il}{\varinjlim}
+
+% Math Operators
+\newcommand{\sing}{\operatorname{sing}}
+\newcommand{\codim}{\operatorname{codim}}
+\newcommand{\supp}{\mathrm{supp}}
+
+% Environments and Spacing
+ 
+\newcommand{\sms}{\smallskip}
+\newcommand{\ms}{\medskip}
+
+\begin{document}\title[]{A conjecture on the action of Hecke operators }
+\author{David Kazhdan} \maketitle
+
+
+
+\begin{abstract}
+Let $F$ be a local non-archimedian field,   $L$ be a central division $F$-algebra of rank $n$ and $\mcA _n(L)$ be the convolution algebra of smooth  compactly supported $Ad$-invariant complex-valued measures on $L^\ast$. It is known that for different division $F$-algebras $L$ of rank $n$ the algebras  $\mcA _n(L)$ are canonically isomorphic. In this paper I propose a conjecture extending these isomorphisms to the algebras generated by
+of Hecke operators  on  spaces of  $1/2$-measures on the stacks of $L^\ast$-bundles on smooth complete curves over $F$.
+
+
+\end{abstract}
+
+\section{Introduction}
+The goal of this paper is the formulation of a  conjecture. In the introduction, I state  a very special case of the cojecture, but even for  a formulation of this special case 
+I have to introduce some notation. 
+
+\sms
+
+In the introduction I assume that  $F$ be a local field and $\operatorname{char}(F) \neq 2$. 
+
+\subsection{}
+
+For an algebraic $F$-variety $\un X$, we write $X = \un X(F)$ and denote by $\mcS (X)$ the space of complex-valued locally constant compactly supported functions $f$ on $X$.
+
+\sms
+
+Let $L$ be a central division $F$-algebra of rank $n$, $N : L \to F$ be the reduced norm map. I fix  $a \in F^\ast$ and write $E := F(\tau)$ where $\tau^2 = a$. So either $E = F \oplus F$ or $E/F$ is a quadratic extension. I denote by $e \to \bar e$ the automorphism of $E/F$ such that $\bar{\tau} = -\tau$.
+
+\sms
+
+Let $L_E = L \otimes_F E$. I extend the automorphism $e \to \bar e$ of $E$ to the automorphism of $L_E$ trivial on $L$. Any element $x \in L_E$ can be written uniquely as the sum $x = l_+ + \tau^{-1}l_-$ where $l_\pm \in L$.
+
+\begin{definition}\label{E}[E] \begin{enumerate}
+\item  $G^L := L^\ast$ and $\bar G^L := G^L/F^\ast $.
+\item $ G^L_E := L_E^\ast$ and $\bar G^L_E := G^L_E /F^\ast$,
+\item  $ X^L_E := G^L_E /G^L$ and $q: G^L_E \to X^L_E $ is 	 the projection. 
+\item The compact group $\bar G^L_E $ acts on $ X^L_E $ by left shifts and I write $\bar X^L_E := \bar G^L \bsl X^L_E$
+
+\item $\mcS^L_E = \mcS (X^L_E)$.
+\item $\mcM^L_E$ is  the space of complex-valued locally constant compactly supported $G^L$-invariant measures  on $ X^L_E $. 
+
+\end{enumerate}
+
+\end{definition}
+
+
+\begin{claim} The space  $\mcM^L_E$ carries the convolution algebra structure and there exists an embedding $\mcM^L_E \ho \operatorname{End}_{G^L_E}( \mcS^L_E)$. 
+\end{claim}
+
+\subsection{}  
+
+\begin{definition} 
+\begin{enumerate}
+\item $\hat \Xi '$ is the topological space of monic polynomials $P(u) \in F[u]$ of degree $n$ identified  (through coefficients) with $F^n$.
+\item $\hat \Xi = \hat \Xi ' \cup \{\infty\}$ is the one-point compactification of $\hat \Xi '$.
+\item $\Xi \subset \hat \Xi$ is the subset containing $\infty$ and polynomials which are powers of irreducible ones.
+
+\end{enumerate}
+
+\end{definition}
+
+\begin{claim} 
+The subset $\Xi \subset \hat \Xi$ is closed. 
+\end{claim}
+
+\begin{definition} 
+For an extension $E = F(\tau), \tau ^2 \in F^\ast$, I write $\Xi_E = \{P \in \Xi \mid P(\tau)P(-\tau) \neq 0\}$. 
+\end{definition}
+
+\begin{lc} 
+For any division algebra $L$, there is a canonical homeomorphism $\pi^L_E: \bar X^L_E \to \Xi_E$.
+\end{lc}
+
+\begin{proof} 
+Let $x = l_+ + \tau^{-1}l_-$. If $l_+ =0$ I write $\pi^L_E (x) = \infty$ and  uf $l_+ \neq 0$, I write $\pi^L_E (x) = P_x(u)$ where $P_x(u) := N (u - l_-l_+^{-1})$. The condition $x \in G^L_E$ implies that $P_x(\tau)P_x(-\tau) \neq 0$.
+
+\begin{claim}
+The map $\pi^L_E$ is a homeomorphism.\end{claim}
+\end{proof}
+
+\begin{corollary}\label{is1} 
+For a fixed extension $E/F$, the vector spaces of the algebras $\mcM^L_E$ for different division $F$-algebras $L$ of rank $n$ are canonically isomorphic.
+\end{corollary}
+ The following result  is cintained in  \cite{DKV}.
+
+\begin{claim}\label{D}[D]  In the case when  $E = F \oplus F$ the isomorphisms in Corollary \ref{is1} are algebra isomorphisms.
+\end{claim} 
+\begin{remark} \begin{enumerate}
+\item Proofs of  \cite{DKV} are 
+based on the trace formula. 
+\item The article  \cite{HK} lifts a proof of the Lie algebra of the analogue of Claim \ref{D} to an equality in the Grothendieck ring of definable exponential sums. \end{enumerate}
+
+
+
+\end{remark}
+
+\begin{conjecture}\label{conj1} For any quadratic extension $E/F$ the isomorphisms of Corollary \ref{is1} are algebra isomorphisms.
+
+\end{conjecture}
+
+\begin{remark} I expect that  the      Jacquet–Rallis relative trace formula could provide a proof of Conjecture \ref{conj1}.
+\end{remark}
+
+\subsection{}
+
+ The goal of this article is to formulate an extension of Conjecture \ref{conj1} related to the action of Hecke operators.
+
+\sms It will be convenient to present a 
+reformulation of Conjecture \ref{conj1}. To simplify notations I write $ \mcS ^L _E $ instead of $ \mcS (\bar X ^L _E )$.
+
+\sms
+
+Let $\Xi _{reg}\subset \Xi$ be the subset of irreducible monic polynomials, ${X_E ^L}_{reg}:= ( \pi _E^L) ^{-1}( \Xi _{reg}) \subset X^L_E $. 
+
+\begin{claim}The restriction $\pi ^L _{ref}$ of $ { \pi _E^L} $ on $ {X_{E, ,reg} }^L$ is smooth.
+\end{claim}
+
+
+\begin{definition}\label{G}[G]\begin{enumerate}
+\item  $\bO _D:= (\pi _E^L) ^{-1}(D), D \in \Xi _{reg}$.
+
+\item $H_D := \{(x',x)\in X ^L_E\times X^L_E| g'g^{-1}\in \bO _D\}$ where $g',g\in G^L_E$ are representatives of $x',x$.
+
+\item  $q',q :H_D \to  X^L_E$ are projections and  $Z_x= q^{-1}(x)\subset H_D, x\in X^L_E$.
+
+\item $|dg ^E|,|dg| $ are Haar measures on
+ $\bar G^L$  and $\bar G$ and $|dx|$ is the induced measure on $X^L_E$.
+\item $|da|$ is a Haar measure on $F^n$.
+
+
+ \item For $D \in \Xi _{reg} $ I denote by $ \mu _{D, x} $  the Gelfand-Leray measure $|dx|/|da|$ on $Z_x$.
+
+ 
+
+\item $ T_D^E(L)
+\in Aut (\mcS ^L _E))$ is the operator given by $ T_D^E(L) (f)(x) := \int _{z \in Z_x} f(q'(z)) \mu _{D, x} $ 
+
+
+
+
+\end{enumerate} \end{definition}
+
+\begin{remark} $T_D^E(L)$ is the operator of the convolution with the the Gelfand-Leray measure $\mu _D$ on $	\bO _D$.\end{remark}
+
+\begin{conjecture}\label{conj2}[conj2] For any $E/F$ as Section $1.1$ there exists  a set $I^E$, a function $d^E: I^I \to \mN$
+and distinct functions $\bl ^D_i:\mcD \to \mC ,i\in I^E$
+such for any division algebra $L$ of rank $n$ there exists a direct sum decomposition $\mcS ^L_E = \oplus _{i\in I} \mcS ^L_E(i)$ such that  
+
+\begin{enumerate}
+\item $dim ( \mcS ^L_E (i)) = d(i)$.
+\item ${T_ {\un D}}_{| \mcS ^L_E (i)}= \bl _i(\un D)Id _{   \mcS ^L_E (i)}$ for $ \un D \in \mcD$.
+\end{enumerate}
+\end{conjecture}
+\begin{remark}We do not expect the existence of a canonical isomorphism betIen vector spaces $  \mcS ^L_E (i) $ for different division algebras $L$ even in the case when $E=F\oplus F$.
+\end{remark}
+
+During the preparation of this paper, I was partially supported by
+the ERC grant no. 101142781.
+
+
+ \section{}In this section $F$ 
+is an arbitrary field, $\bar F $ the separable closure of $F$
+ and  $\un C$ is a smooth complete absolutely irreducible $F$-curve.
+For an algebraic $F$-variety $\un X$ we write $\un {\bar X}= \un X \times _{Spec F}Spec \bar F$ where $\bar F$ is a separable closure of $F$ and $X:= \un X(F)$. 
+
+\subsection{}
+
+\begin{lemma}\label{ss}[ss]
+
+\sms
+
+Let
+$ \mcE$ be a semistable vector bundle on $ {\un C}$
+and $a:  \mcE \to  \mcE $ an endomorphism such that $a_c:{\mcE_c}\to  \mcE_c$ is zero for some point $c\in \un { C} $.
+Then $a=0$.
+
+\end{lemma}
+
+\begin{proof}
+
+Since $a_c=0$, the image of $a$ is contained in the kernel of the evaluation map $\mcE \longrightarrow \mcE_c.$
+Since $\mcE$ is locally free, this kernel is equal to  $\mcE(-c)$. Hence the map  $a$ factors through the inclusion
+$\mcE(-c)\hookrightarrow \mcE$ and  therefore defines a non-zero element of $\operatorname{Hom}(\mcE,\mcE(-c)).$
+By the definition of the slope  I have  $\mu(\mcE(-c))=\mu(\mcE)-\deg(c)$.
+
+Since $\mcE$ is semistable, the bundle $\mcE(-c)$ is also semistable. So the inequality  $\mu(\mcE)>\mu(\mcE(-c))$ shows that $\operatorname{Hom}(\mcE,\mcE(-c))=0$
+(see \cite{HN}).
+
+
+\end{proof}
+\subsection{}
+
+We fix a central division algebra $L$ of rank $n$ and an isomorphism $\phi : L\otimes _F\bar F \to M_n(\bar F)$
+. Let  
+$\un G^L = Spec (F[L^\ast])$
+be the algebraic group over F representing the invertible elements of $L$. We also fix a divisor  $\un M \subset \un C$ (that is  a 0-dimensional subscheme).
+
+\begin{definition}\label{Ba}[Ba]
+
+\begin{enumerate} 
+
+\item A principal $ \un G^L $-bundle on $\un C$ is a pair $(\mcE ,i) $ where $\mcE$ is
+an $n^2$-dimensional vector bundle $\mcE$ on $\un C$  and $i$ is an embedding $ i : L^{op} \ho End ( \mcE) $.
+\item For a principal $ \un G^L $-bundle  $(\mcE ,i) $ I define the  $n$-dimensional vector bundle on $\bar {\un C}$ by $$\hat \mcE := \mcE \otimes _{L \otimes _F\bar F}\mA ^n$$ where the action of $L \otimes _F\bar F $ on $\mA ^n$
+comes from $\phi : L\otimes _F\bar F \to M_n(\bar F)$.
+\item $\delta (\mcE ,i)$ is the degree of $det (\hat \mcE)$.
+
+\end{enumerate}
+\end{definition}
+\subsection{}
+\begin{definition}\label{Ba}[Ba]
+
+\begin{enumerate} 
+
+\item $  \un {Bun}^L$ is the  stack of triples
+ $(\mcE ,i,  \iota) $ where  $\mcE$ is a $n^2$-dimensional vector bundles on $\un C, i : L^{op} \ho End ( \mcE)$ is the embedding  and $ \iota$ is an isomorphism $\iota :\mcE _{|\un M}\to L\times \un M$ of $L$-modules over $\un M$.
+
+\item $\un {Bun}_ r^L \subset  \un {Bun}^L $ is the  substack  of triples
+ $(\mcE ,i,  \iota)$ such that 
+$\delta ( \mcE)=r$.
+\item $ \un {Bun}_{ss}^L \subset \un {Bun}^L $ is the substack of triples  $ (\mcE ,i,  \iota) $ such that the vector bundle $ \mcE $ is semistable.
+\item $ \un {Bun}_ {ss,r}= \un {Bun}_r \cap  \un {Bun}_ {ss}$
+
+\end{enumerate}
+\end{definition}
+
+
+\sms
+
+
+\begin{claim}\label{V}[V] Substacks $\un {Bun}_ r^L \subset \un {Bun}^L $
+are open.
+
+
+\end{claim}
+
+\begin{lemma}\label{se}[se] For any triple
+ $(\mcE ,i,  \iota) \in \un {Bun}^L(F) $ the vector bundle $ \mcE \otimes _{Spec (F)} Spec (\bar F) $ is semistable.
+\end{lemma}
+\begin{proof}
+
+If  $  \mcE \otimes _{Spec (F)} Spec (\bar F) $  is not semi-stable then  the Harder-Narasimhan filtration on  $ \mcE \otimes _{Spec (F)} Spec (\bar F) $
+ is   non-trivial. Since this filtration is canonical it is defined over $F$ and produces a non-trival $L$-invariant subbundle of $\mcE$. But such a subbundle does not exist 
+since  the left action of $L$ on itself is irreducible.
+\end{proof}
+
+
+\begin{corollary}\label{sch}[sch] \begin{enumerate}
+\item The embedding $  {Bun}_{ss}^L \ho  {Bun}^L $ is a bijection.
+\item Let  $a$ be an endomorphism of $\mcE \in \un {Bun}^L(F) $ such that $a_c=0$ for some $c\in C$. Then $a=0$. 
+\item If $\un M \neq \emp$ then $  \un {Bun} ^L_{ss} $ is a scheme.
+
+\end{enumerate}
+
+\end{corollary}
+
+
+
+
+\subsection{} 
+
+\begin{definition} \label{bO}[bO]
+$\mcL$ is the line bundle on $\un {Bun}^L $
+such that the fiber of $\mcL$ at $(\mcE ,i,\iota)\in \un {Bun}^L$
+is equal to  
+$\det R\Gamma(\bar C,
+\bar{\mcE})^{\otimes n} 
+ \otimes \det R
+\Gamma(\bar C,\det 
+\bar{\mcE})^{-1} $
+$det ^{\otimes n} ( R\GG (\un {\bar C}, \bar \mcE )\otimes det ^{-1}(R\GG (\un C, det (\bar \mcE)$.
+
+\end{definition}
+\begin{claim} The the bundle $\mcL$ does not depend on a choice of the isomorphsm  $\phi $ and is defined over $F$.
+\end{claim}
+
+The following statement is proven in \cite{BD}.
+
+
+
+\begin{claim} There exists a canonical isomorphisms $\mcL ^{\otimes 2}\to \bO _{\un {Bun}^L} $.
+\end{claim}
+We will write $ \bO ^{1/2}_{\un {Bun}^L}$ 
+instead of $\mcL$.
+
+
+\section{The Hecke correspondence}
+\subsection{}
+
+Let $\un D \subset \un C$ be   a reduced divisor such that $\un D \cap \un M= \emp$.
+
+\begin{definition}\label{He}[He]
+\begin{enumerate}
+\item $\un {  \mcH} _{\un D} $ is the Hecke stack of pairs
+ $ ( \ti \mcE,   \mcE ')$ where $\ti \mcE = (\mcE ,i,\iota)\in \un {Bun}^L $ and $\mcE ' \subset \mcE$ is an $L$-invariant locally free subsheaf such that 
+the quotient   $\mcE / \mcE '$
+is isomorphic $\mcO _ {\un D} \otimes L$.
+
+\item $q'_ {\un D}, q_ {\un D}: \un \mcH _ {\un D}\to   \un {Bun ^L}
+$  are the  projections.
+\item $\bO _{q_ {\un D}}$ is the relative canonical bundle for the projection $q_ {\un D} $.
+\item $ Z_{ \mcE} = q_ {\un D} ^{-1} ( \mcE)$.
+\item $\alpha  _{\un C}:  {q'}_ {\un D}^\ast
+(\bO _{\un  {Bun} ^L} ^{1/2}) \to \bO _{q_D}\otimes {q^\ast _D} 
+(\bO _{\un  {Bun^L}} ^{1/2})$
+ is the canonical 
+isomorphism  defined in \cite{BD}.
+
+\end{enumerate}\end{definition}
+
+\begin{claim} Projection $q_D, q_D'  $ are smooth and proper. \end{claim}
+
+\subsection{}In this  subsection I consider the case when $\un C   = \un \mP^1, \un M \subset \un C$ is a reduced divisor such that $|\un M|=2$  
+and $\un D\subset \un C$ is a reduced divisor such that $|\un D|=n$. Let $E= \GG (\un M, \mcO _{\un M})$.
+
+\begin{claim}  \label{mP}[mP]
+There exists a coordinate $t$ on $ \un \mP^1 $ such that $\un M = \pm \tau$ where $\tau ^2 \in F^\ast$.
+
+
+\end{claim}
+
+\begin{definition} $ E = F\oplus F$ if $\tau \in F^\ast$ and $ E= F(\tau)$ otherwise. 
+
+\end{definition}
+
+\begin{claim} \begin{enumerate}
+\item Any  semistable $\un G^L$ bundle on $ \un \mP^1 $ is isomorphic $\mcO (r)\otimes L$ for $r\in \mZ$
+\item $\un {Bun}_{ss ,0} = \un X^L_E $ (see Definition \ref{E}).
+
+\end{enumerate}
+
+\end{claim}
+
+Since any semistable $\un G^L$ bundle on $ \un \mP^1 $ is 
+isomorphic $\mcO (r)\otimes L$ for $r\in \mZ$ I have 
+$\bO ^{1/2} _{\un {Bun}_{ss}} = \mcO _{\un {Bun}_{ss}} $ 
+and the isomorphism $\alpha _{\un C} $ of Definition
+\ref{He} defines an isomorphism
+$ \alpha : \mcO _{\un H_D}\to
+{\bO} _{q_{\un D}}$. 
+\begin{definition} For  $x\in \un X^L_E $ I denote by $\bo _x$ the top form on
+ $\un Z_x$ which is the restriction of $\alpha (1)$ on $\un Z_x$. \end{definition}
+
+\begin{claim}\label{top}[top] \begin{enumerate}
+\item $\un H _{\un D}(F)= H_D$.
+\item  $\bo _x$ is the Gelfand-Leray form $dx/ da$ (see Definition \ref{G} )\end{enumerate}
+\end{claim}
+
+
+ \section{} From now on I assume that $F$ is a local non-Archimedean field and $\operatorname{char}(F) \neq 2$.
+ \subsection{} 
+
+
+\begin{definition}\label{1/2}[1/2]
+\begin{enumerate} 
+\item For  a  $F$-scheme $\un X$ and a line bundle $\mcL$ on $\un X$ 
+I denote by $ |\mcL| $ the complex line bundle on $X$ as in Section $2.1$ of \cite{BK}.
+\item  $ \mC ^\infty (X, |\mcL|) $ is the space of locally constant complex valued sections of $ |\mcL|$ and 
+$\mcS (X, |\mcL|)\subset  \mC ^\infty (X, |\mcL|) $ is the subspace of  compactly supported sections.
+\item For any section $s\in \GG (\un X, \mcS)$ I denote  by $|s|\in  \mC ^\infty (X,|\mcL|) $ the corresponding section of  $ |\mcL| $. 
+\item We write $ \mcS (X) $ instead of $ \mcS (X, |\mcO _{\un X}|) $.
+\item For a smooth scheme $\un  X$ I write  $\mcM (X)$ instead 
+of $  \mcS (X, |\mcO _{\bO _{\un X}} |)$.
+
+\item For a top-form $\bo $ on a smooth scheme 
+$\un X$ I denote by $|\bo|$ the measure on $X$ as  in \cite{W}.
+
+
+\end{enumerate}
+\end{definition}
+\begin{claim}\label{ex}[ex] \begin{enumerate} 
+\item $ \mcS (X) $ is the space of compactly supported locally constant complex valued functions on $X$.
+\item $\mcM (X)$ is the space of compactly supported locally constant complex valued measures on $X$.
+\item If  $ \bO ^{1/2}_{\un X} $ is  a square root of $\bO _{\un X}$ then the 
+space $\mcS (X, | \bO ^{1/2} _{\un X }|)$ carries  a canonical positive definite Hermitian form.
+\item For a  map $\un f: \un X \to \un Y$, and a section $s$ of a  line bundle $\mcL$ on $\un Y$ I have $|\un f ^\ast (s)|= f^\ast (|s|)$ where $f:= \un f(F)$.
+\end{enumerate}
+\end{claim}
+
+\subsection{}Let \begin{enumerate} 
+\item
+$\un H, \un X ,\un X' $ be smooth $F$-varieties,
+\item  $\un q: \un H \to \un X, \un q ': \un H \to \un X' $ be smooth maps, and $Z _x = \un q^{-1}(x), x\in \un X $ be fibers of $\un q$,
+\item $\bO _q $ be  the relative canonical bundle for $\un q$,
+\item   $\mcL ,\mcL '$ be line bundles on $ \un X $ and $\un X' $ and 
+\item $\un \alpha : {\un q'}^\ast (\mcL ')\to \bO _q\otimes {\un q}^\ast (\mcL ) $ is a morphism.
+
+\end{enumerate} 
+
+\begin{claim}\label{int}[int] If fibers $Z_x$ are compact for $x\in X$ then there exists unique operator $T_{\un H}:  \mC ^\infty (X', |\mcL '|) \to  \mC ^\infty (X, |\mcL|) $ such that 
+$T_{\un H} (|s'|) (x) = \int _{Z_x} |\alpha (s)_{Z_x}|$
+\end{claim}
+
+
+
+
+\subsection{} 
+
+In the subsection I define the subspace $\mcS ^L$ of the space of smooth functions on the $Bun ^L:= \un {Bun}^L(F)$ for  arbitrary pairs $(\un C,\un M)$.   As follows from Corollary \ref{sch} that the embedding $  {Bun}_{ss}^L \ho  {Bun}^L $ is a bijection. This construction depends on a choice of a pair $(\mcK ,\nu)$ where $\mcK$ is a line bundle on $\un C$ of degree $1$ and $\nu $ is an isomorphism $\mcK _{\un D}\to \mcO _{\un D}$. 
+
+ \begin{definition} $\psi \in Aut ( Bun_{ss}^L)$ is an automorphism such that $\psi   (\mcE ,i,\iota) = (\mcE \otimes \mcK,i\otimes Id,\iota \otimes \nu) $.
+\end{definition}
+
+
+
+We first consider the case when $\un M \neq \emp$.
+ 
+
+\begin{definition} If $\un M \neq \emp$ then ( see Lemma \ref{ss}) then  the stack $\un {Bun}_{ss}^L $ is  a smooth scheme and denote by  $\mcS ^L\subset \mC ^\infty (Bun_{ss}^L) $ the subspace of sections $|s|$ of $|\bO ^{1/2}_{\un {Bun}}|$ invariant under the automorphism $\psi$ such that $|s|_{Bun _r}\in \mcS (Bun _r), r\in \mZ$. \end{definition}
+ 
+
+We now consider the case when $\un M =\emp$. 
+
+\sms
+
+Let $\un M' \subset \un C$ be an irreducible divisor of degree prime to $n, A = \GG (\un M',\mcO), L_A:= L\otimes _FA$  and $G':= L_A ^\ast$. We consider $F^\ast$ as a subgroup of $G'$ and write $\bar G':= G'/F^\ast$.
+
+\begin{claim} \begin{enumerate}
+\item $A$ is field and $L_A$ is a central division $E$-algebra.
+\item The group $\bar G'$ is compact.
+
+\end{enumerate}
+\end{claim}
+
+\begin{definition} $ \un {Bun '}^L_{ss} $ is the stack of of pairs
+ $\ti \mcE =(\mcW ,\iota ')$ where $\mcE$ is a semistable 
+principal $\un G^L$-bundle on $\un C$ and $\iota '$ is an isomorphism betIen $\mcE _{|\un M '}$ and 
+ bundle $A \otimes _{Spec F} \un M'$ defined up to a composition with a element of $F^\ast$. 
+
+\end{definition}
+
+The same arguments as in the proof of Lemma \ref{se} show that $ \un {Bun '}^L_{ss} $ is a scheme.
+
+
+\begin{claim} The compact group $\bar G' $ acts on $ {Bun '}^L_{ss} $ and $  {Bun }^L_{ss} =   {Bun '}^L_{ss} / \bar G' $.
+\end{claim}
+
+\begin{definition} $\mcS ^L :=  \mcS ^{G'}( {Bun '} ^L_{ss},  |\bO ^{1/2}_{\un {Bun '}}|)$.
+
+\end{definition}
+
+\begin{claim} The space $ \mcS ^L $ does not depend on a choice of a divisor $\un M'$.
+\end{claim}
+
+
+
+\begin{remark}As follows from Claim \ref{ex} the space $\mcS ^L $ carries  a canonical positive definite Hermitian structure.\end{remark} 
+
+\subsection{} 
+
+\begin{definition} \begin{enumerate}
+\item
+$\mcD$ is the set of reduced divisors 
+$\un D \subset \un C$ such that $\un D \cap \un M= \emp$.
+\item For $D\in \mcD$ I denote by $T_{\un D}\in End (\mcS ^L) $ the operator corresponding to the Hecke correspondence $\un H _{\un D}$ (see Definition \ref{He}) and Claim \ref{int}
+
+\end{enumerate}
+\end{definition} 
+\begin{claim} Operators $T_{\un D}$ generate a commutative $\mC ^\ast$ subalgebra $\mcH (L)$ of $ End (\mcS ^L) $.
+\end{claim}
+
+\begin{conjecture}\label{main}[main]
+\item Subalgebras  $\mcH (L)\subset  End (\mcS ^L) $ for for different division $F$-algebras $L$ of rank $n$ are canonically isomorphic. Moreover 
+here exists a set $I$, a function $d: I \to \mN$
+and distinct functions $\bl _i:\mcD \to \mC ,i\in I$ 
+such for any division algebra $L$ of rank $n$ there exists a direct sum decomposition $\mcS ^L = \oplus _{i\in I} \mcS ^L(i)$ such that  
+
+\begin{enumerate}
+\item $dim ( \mcS ^L (i)) = d(i)$.
+\item ${T_ {\un D}}_{| \mcS ^i
+L(i)}= \bl _i(\un D)Id _{  \mcS ^L (i)}$ for $ \un D \in \mcD$.
+\end{enumerate}
+\end{conjecture} 
+
+\subsection{}
+
+\begin{lemma}\label{co}[co]
+
+The validity of Conjecture \ref{main} is the case when $(\un C,\un M, \un D)$ are as in Definition \ref{mP} implies the validity of Conjecture \ref{conj2}.
+\end{lemma}
+\begin{proof}Follows from Claim \ref{top}.
+\end{proof}
+
+
+
+
+
+\begin{thebibliography}{99} 
+
+\bibitem{BD} A.Beilinson, V.Drinfeld {\em Quantization of Hitchin integrable systems}
+
+
+
+
+
+\bibitem{BK} A.Braverman, D.Kazhdan, {\em Automorphic functions on moduli spaces of bundled on curved over local fields: a survey}
+Proceedings of the International Congress of Mathematicians 2022, EMS Press, 2023, pp. 797–823.
+
+\bibitem{DKV} P.Deligne, D. Kazhdan, M.-F.Vignéras, {\em
+Représentations des algèbres centrales simples p-adiques} Représentations des groupes réductifs sur un corps local,
+Travaux en Cours, Hermann, Paris, 1984.  
+
+    \bibitem{HN} G.Harder,  M.Narasimhan, {\em Vector Bundles on Curves, and On the Cohomology Groups of Moduli Spaces of Vector Bundles on Curves}, Math. Ann. 212 (1975)
+
+  \bibitem{HK} E.Hrushovski, D.Kazhdan {\em Motivic Poisson summation} Moscow Mathematical Journal 9 (2009), no. 3, 569–623. 
+
+ \bibitem{L} J.Leray,  {\em Le calcul différentiel et intégral sur une variété analytique complexe}  Bulletin de la Société Mathématique de France, 87, 81–180,  (1959).
+
+\bibitem{W}A.Weil {\em Basic Number Theory} 1967 by Springer 
+
+
+
+
+
+\end{thebibliography}\end{document}
+
+
+
