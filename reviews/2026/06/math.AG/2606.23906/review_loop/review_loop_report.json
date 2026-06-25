@@ -1,0 +1,482 @@
+{
+  "agent_output_audits": {
+    "lean": {
+      "accepted": 0,
+      "by_role": {},
+      "rejected": 0,
+      "total": 0
+    },
+    "pr": {
+      "accepted": 0,
+      "by_role": {},
+      "rejected": 0,
+      "total": 0
+    },
+    "pr_review": {
+      "accepted": 0,
+      "by_role": {},
+      "rejected": 0,
+      "total": 0
+    }
+  },
+  "artifact_paths": {
+    "agent_outputs": "review_loop/agent_outputs",
+    "bundle_completeness": "review_loop/bundle_completeness.json",
+    "citation_adjudication": "review_loop/citation_validation_adjudication.json",
+    "citation_validation": "review_loop/citation_validation_report.json",
+    "claims": "review_loop/claims.json",
+    "knowledge_graph": "review_loop/knowledge_graph.json",
+    "lean": "review_loop/lean/results.json",
+    "lean_harness": "review_loop/lean/harness.json",
+    "lean_targets": "review_loop/lean_targets.json",
+    "lean_theorem_map": "review_loop/lean/theorem_map.json",
+    "lean_verification_report": "review_loop/lean/verification_report.json",
+    "paper_math_sources": "review_loop/paper_math_sources.json",
+    "policy_gate": "review_loop/policy_gate.json",
+    "pr_fixes": "review_loop/pr_fixes.json",
+    "pr_harness": "review_loop/fixed/harness.json",
+    "proof_obligations": "review_loop/proof_obligations.json",
+    "semantic_adequacy": "review_loop/semantic_adequacy.json",
+    "semantic_ir": "review_loop/semantic_ir.json",
+    "semantic_model": "review_loop/semantic_model.json"
+  },
+  "blocking_issues": [],
+  "bundle_completeness": {
+    "artifacts": [
+      {
+        "artifact_path": "review_loop/body.md",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/bd2244bb-3d8e-48f1-9327-e777ea3d4079/review_loop/body.md",
+        "manifest_output": "body.md",
+        "skip_reason": null,
+        "stage_id": "paper_review",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/equations.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/bd2244bb-3d8e-48f1-9327-e777ea3d4079/review_loop/equations.json",
+        "manifest_output": "equations.json",
+        "skip_reason": null,
+        "stage_id": "paper_review",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/theorem_graph.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/bd2244bb-3d8e-48f1-9327-e777ea3d4079/review_loop/theorem_graph.json",
+        "manifest_output": "theorem_graph.json",
+        "skip_reason": null,
+        "stage_id": "paper_review",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/semantic_ast.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/bd2244bb-3d8e-48f1-9327-e777ea3d4079/review_loop/semantic_ast.json",
+        "manifest_output": "semantic_ast.json",
+        "skip_reason": null,
+        "stage_id": "paper_review",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/references.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/bd2244bb-3d8e-48f1-9327-e777ea3d4079/review_loop/references.json",
+        "manifest_output": "references.json",
+        "skip_reason": null,
+        "stage_id": "paper_review",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/claims.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/bd2244bb-3d8e-48f1-9327-e777ea3d4079/review_loop/claims.json",
+        "manifest_output": "review_loop/claims.json",
+        "skip_reason": null,
+        "stage_id": "claim_extractor",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/paper_math_sources.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/bd2244bb-3d8e-48f1-9327-e777ea3d4079/review_loop/paper_math_sources.json",
+        "manifest_output": "review_loop/paper_math_sources.json",
+        "skip_reason": null,
+        "stage_id": "paper_math_source_collector",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/knowledge_graph.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/bd2244bb-3d8e-48f1-9327-e777ea3d4079/review_loop/knowledge_graph.json",
+        "manifest_output": "review_loop/knowledge_graph.json",
+        "skip_reason": null,
+        "stage_id": "knowledge_graph_builder",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/semantic_ir.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/bd2244bb-3d8e-48f1-9327-e777ea3d4079/review_loop/semantic_ir.json",
+        "manifest_output": "review_loop/semantic_ir.json",
+        "skip_reason": null,
+        "stage_id": "semantic_category_mapper",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/semantic_model.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/bd2244bb-3d8e-48f1-9327-e777ea3d4079/review_loop/semantic_model.json",
+        "manifest_output": "review_loop/semantic_model.json",
+        "skip_reason": null,
+        "stage_id": "semantic_category_mapper",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/proof_obligations.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/bd2244bb-3d8e-48f1-9327-e777ea3d4079/review_loop/proof_obligations.json",
+        "manifest_output": "review_loop/proof_obligations.json",
+        "skip_reason": null,
+        "stage_id": "proof_obligation_generator",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean_targets.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/bd2244bb-3d8e-48f1-9327-e777ea3d4079/review_loop/lean_targets.json",
+        "manifest_output": "review_loop/lean_targets.json",
+        "skip_reason": null,
+        "stage_id": "proof_obligation_generator",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean/GrokRxiv/Proofs.lean",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/bd2244bb-3d8e-48f1-9327-e777ea3d4079/review_loop/lean/GrokRxiv/Proofs.lean",
+        "manifest_output": "review_loop/lean/GrokRxiv/Proofs.lean",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean/results.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/bd2244bb-3d8e-48f1-9327-e777ea3d4079/review_loop/lean/results.json",
+        "manifest_output": "review_loop/lean/results.json",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean/fix_rounds.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/bd2244bb-3d8e-48f1-9327-e777ea3d4079/review_loop/lean/fix_rounds.json",
+        "manifest_output": "review_loop/lean/fix_rounds.json",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean/theorem_map.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/bd2244bb-3d8e-48f1-9327-e777ea3d4079/review_loop/lean/theorem_map.json",
+        "manifest_output": "review_loop/lean/theorem_map.json",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean/verification_report.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/bd2244bb-3d8e-48f1-9327-e777ea3d4079/review_loop/lean/verification_report.json",
+        "manifest_output": "review_loop/lean/verification_report.json",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/faithfulness.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/bd2244bb-3d8e-48f1-9327-e777ea3d4079/review_loop/faithfulness.json",
+        "manifest_output": "review_loop/faithfulness.json",
+        "skip_reason": null,
+        "stage_id": "lean_faithfulness_check",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/semantic_adequacy.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/bd2244bb-3d8e-48f1-9327-e777ea3d4079/review_loop/semantic_adequacy.json",
+        "manifest_output": "review_loop/semantic_adequacy.json",
+        "skip_reason": null,
+        "stage_id": "semantic_adequacy_checker",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/citation_validation_report.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/bd2244bb-3d8e-48f1-9327-e777ea3d4079/review_loop/citation_validation_report.json",
+        "manifest_output": "citation_validation_report.json",
+        "skip_reason": null,
+        "stage_id": "citation_validation",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/citation_validation_adjudication.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/bd2244bb-3d8e-48f1-9327-e777ea3d4079/review_loop/citation_validation_adjudication.json",
+        "manifest_output": "citation_validation_adjudication.json",
+        "skip_reason": "citation-validation adjudication is not materialized separately by the current review-loop runtime; citation_validation_report.json carries the deterministic citation evidence.",
+        "stage_id": "citation_validation",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/pr_fixes.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/bd2244bb-3d8e-48f1-9327-e777ea3d4079/review_loop/pr_fixes.json",
+        "manifest_output": "review_loop/pr_fixes.json",
+        "skip_reason": null,
+        "stage_id": "pr_fixer",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/fixed/review.md",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/bd2244bb-3d8e-48f1-9327-e777ea3d4079/review_loop/fixed/review.md",
+        "manifest_output": "review_loop/fixed/review.md",
+        "skip_reason": null,
+        "stage_id": "pr_fixer",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/pr_review/results.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/bd2244bb-3d8e-48f1-9327-e777ea3d4079/review_loop/pr_review/results.json",
+        "manifest_output": "review_loop/pr_review/results.json",
+        "skip_reason": null,
+        "stage_id": "pr_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/pr_review/fix_rounds.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/bd2244bb-3d8e-48f1-9327-e777ea3d4079/review_loop/pr_review/fix_rounds.json",
+        "manifest_output": "review_loop/pr_review/fix_rounds.json",
+        "skip_reason": null,
+        "stage_id": "pr_review_fix_code",
+        "status": "present"
+      }
+    ],
+    "declared_artifact_count": 25,
+    "failures": [],
+    "missing_count": 0,
+    "present_count": 25,
+    "skipped_count": 0,
+    "status": "pass"
+  },
+  "dag_type": "review-loop",
+  "deterministic_status": "pass",
+  "fix_attempts": {
+    "lean": [
+      {
+        "attempt": 0,
+        "semantic_validation": {
+          "issues": [
+            "Lean formalization runs asynchronously via the `formalize` job; queue with --with-lean."
+          ],
+          "status": "skipped"
+        },
+        "skipped": true,
+        "status": "skipped"
+      }
+    ],
+    "pr_review": []
+  },
+  "pr_evidence": {
+    "artifact_worktree": ".agenthero/artifacts/grokrxiv/reviews/bd2244bb-3d8e-48f1-9327-e777ea3d4079/review_loop/fixed",
+    "compile_review_loop": {
+      "agent_output_audit_summary": {
+        "accepted": 0,
+        "by_role": {},
+        "rejected": 0,
+        "total": 0
+      },
+      "attempts": [],
+      "filename": "review.md",
+      "final_path": ".agenthero/artifacts/grokrxiv/reviews/bd2244bb-3d8e-48f1-9327-e777ea3d4079/review_loop/fixed/review.md",
+      "harness": {
+        "branch": null,
+        "path": ".agenthero/artifacts/grokrxiv/reviews/bd2244bb-3d8e-48f1-9327-e777ea3d4079/review_loop/fixed"
+      },
+      "language": "markdown",
+      "skip_reason": "Markdown is the canonical PR review artifact; TeX/PDF exports are optional and outside the default review-loop gate.",
+      "stage": "pr_review_fix_code",
+      "status": "skipped",
+      "target": "pr"
+    },
+    "fixed_markdown": "review_loop/fixed/review.md",
+    "fixed_pdf": null,
+    "fixed_tex": null,
+    "issues": [],
+    "stage": "pr_fixer",
+    "status": "pass"
+  },
+  "publish_decision": {
+    "action": "revision_needed_pr",
+    "auto_publish": false,
+    "publisher_ready": false
+  },
+  "publishability_vector": {
+    "citation": "warn",
+    "formal": "failed",
+    "integrity": "pass",
+    "reproducibility": "not_run",
+    "safety": "pass",
+    "semantic_adequacy": "skipped"
+  },
+  "publisher_ready": false,
+  "release_tier": {
+    "lifecycle_state": "needs_update",
+    "tier": "in_review"
+  },
+  "review_id": "bd2244bb-3d8e-48f1-9327-e777ea3d4079",
+  "semantic_adequacy": {
+    "operator_status": "AWAITING_FORMALIZATION",
+    "schema_version": "1.0.0",
+    "skip_reason": "lean_not_run",
+    "source": "review_loop/semantic_ir.json",
+    "status": "skipped",
+    "theorem_map": "review_loop/lean/theorem_map.json",
+    "verdicts": []
+  },
+  "theorem_formalization": {
+    "entries": [
+      {
+        "emitted_statement": "theorem thm_5 : True := by",
+        "kind": "theorem_formalization",
+        "lean_attempt_status": "failed_typecheck",
+        "lean_declaration": "thm_5",
+        "obligation_id": "formalize_theorem_thm_5",
+        "source_claim_id": "thm-5",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "thm-5",
+          "paper_source_id": "thm-5",
+          "section_id": "sec-2-1",
+          "text_excerpt": "Proposition 4. Homeomorphic spaces have isomorphic fundamental groups. If $f:X\\rightarrow Y$ is a homeomorphism, then $f_ :\\pi_1(X,x)\\rightarrow \\pi_1(Y,f(x))$ is an isomorphism.*"
+        },
+        "statement": "Proposition 4. Homeomorphic spaces have isomorphic fundamental groups. If $f:X\\rightarrow Y$ is a homeomorphism, then $f_ :\\pi_1(X,x)\\rightarrow \\pi_1(Y,f(x))$ is an isomorphism.*",
+        "status": "FAILED",
+        "verified_statement": "theorem thm_5 : True := by"
+      },
+      {
+        "emitted_statement": "theorem thm_7 : True := by",
+        "kind": "theorem_formalization",
+        "lean_attempt_status": "failed_typecheck",
+        "lean_declaration": "thm_7",
+        "obligation_id": "formalize_theorem_thm_7",
+        "source_claim_id": "thm-7",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "thm-7",
+          "paper_source_id": "thm-7",
+          "section_id": "sec-2-1",
+          "text_excerpt": "Corollary 5. Two homotopic equivalent spaces have the same fundamental group. If $f:X\\rightarrow Y$ is a homotopy equivalence, then $f_ :\\pi_1(X,x)\\rightarrow \\pi_1(Y,f(x))$ is an isomorphism.*"
+        },
+        "statement": "Corollary 5. Two homotopic equivalent spaces have the same fundamental group. If $f:X\\rightarrow Y$ is a homotopy equivalence, then $f_ :\\pi_1(X,x)\\rightarrow \\pi_1(Y,f(x))$ is an isomorphism.*",
+        "status": "FAILED",
+        "verified_statement": "theorem thm_7 : True := by"
+      },
+      {
+        "emitted_statement": "theorem fund_grou_base_pt : True := by",
+        "kind": "theorem_formalization",
+        "lean_attempt_status": "failed_typecheck",
+        "lean_declaration": "fund_grou_base_pt",
+        "obligation_id": "formalize_theorem_fund_grou_base_pt",
+        "source_claim_id": "fund_grou_base_pt",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "fund_grou_base_pt",
+          "paper_source_id": "fund_grou_base_pt",
+          "section_id": "sec-2-1",
+          "text_excerpt": "Proposition 6. If $X$ is a path-connected topological space, then $\\pi_1(X, x_0)$ and $\\pi_1(X, x_1)$ are isomorphic for any $x_0,x_1\\in X$."
+        },
+        "statement": "Proposition 6. If $X$ is a path-connected topological space, then $\\pi_1(X, x_0)$ and $\\pi_1(X, x_1)$ are isomorphic for any $x_0,x_1\\in X$.",
+        "status": "FAILED",
+        "verified_statement": "theorem fund_grou_base_pt : True := by"
+      },
+      {
+        "emitted_statement": "theorem composition_covers : True := by",
+        "kind": "theorem_formalization",
+        "lean_attempt_status": "failed_typecheck",
+        "lean_declaration": "composition_covers",
+        "obligation_id": "formalize_theorem_composition_covers",
+        "source_claim_id": "composition_covers",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "composition_covers",
+          "paper_source_id": "composition_covers",
+          "section_id": "sec-2-2",
+          "text_excerpt": "Proposition 10. Let $q:Z \\rightarrow X$ be a connected cover and $f:Y \\rightarrow Z$ be a continuous map. If the composition $q\\circ f:Y \\rightarrow X$ is a cover, then so is $f:Y \\rightarrow X$."
+        },
+        "statement": "Proposition 10. Let $q:Z \\rightarrow X$ be a connected cover and $f:Y \\rightarrow Z$ be a continuous map. If the composition $q\\circ f:Y \\rightarrow X$ is a cover, then so is $f:Y \\rightarrow X$.",
+        "status": "FAILED",
+        "verified_statement": "theorem composition_covers : True := by"
+      },
+      {
+        "emitted_statement": "theorem unique_lift : True := by",
+        "kind": "theorem_formalization",
+        "lean_attempt_status": "failed_typecheck",
+        "lean_declaration": "unique_lift",
+        "obligation_id": "formalize_theorem_unique_lift",
+        "source_claim_id": "unique_lift",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "unique_lift",
+          "paper_source_id": "unique_lift",
+          "section_id": "sec-2-2",
+          "text_excerpt": "Lemma 11 (Lifting (Homotopy) Property). Let $p:Y\\rightarrow X$ be a cover, $y$ a point of $Y$ and $x=p(y)$. - Given a path $\\gamma:[0,1]\\rightarrow X$ starting at $x$, there is a unique lift $\\widetil..."
+        },
+        "statement": "Lemma 11 (Lifting (Homotopy) Property). Let $p:Y\\rightarrow X$ be a cover, $y$ a point of $Y$ and $x=p(y)$. - Given a path $\\gamma:[0,1]\\rightarrow X$ starting at $x$, there is a unique lift $\\widetil...",
+        "status": "FAILED",
+        "verified_statement": "theorem unique_lift : True := by"
+      },
+      {
+        "emitted_statement": "theorem lift_criterion : True := by",
+        "kind": "theorem_formalization",
+        "lean_attempt_status": "failed_typecheck",
+        "lean_declaration": "lift_criterion",
+        "obligation_id": "formalize_theorem_lift_criterion",
+        "source_claim_id": "lift_criterion",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "lift_criterion",
+          "paper_source_id": "lift_criterion",
+          "section_id": "sec-2-2",
+          "text_excerpt": "Lemma 12 (Lifting Criterion). Let $p:Y\\rightarrow X$ be a connected covering and $f:Z\\rightarrow X$ be a continuous map. Then a lift $\\widetilde{f}: Z \\rightarrow Y$ of $f$ exists if and only if $f_(\\..."
+        },
+        "statement": "Lemma 12 (Lifting Criterion). Let $p:Y\\rightarrow X$ be a connected covering and $f:Z\\rightarrow X$ be a continuous map. Then a lift $\\widetilde{f}: Z \\rightarrow Y$ of $f$ exists if and only if $f_(\\...",
+        "status": "FAILED",
+        "verified_statement": "theorem lift_criterion : True := by"
+      },
+      {
+        "emitted_statement": "theorem univ_ppty_lift : True := by",
+        "kind": "theorem_formalization",
+        "lean_attempt_status": "failed_typecheck",
+        "lean_declaration": "univ_ppty_lift",
+        "obligation_id": "formalize_theorem_univ_ppty_lift",
+        "source_claim_id": "univ_ppty_lift",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "univ_ppty_lift",
+          "paper_source_id": "univ_ppty_lift",
+          "section_id": "sec-2-2",
+          "text_excerpt": "Lemma 13. Let $X$ and $Y$ be topological spaces and $\\sim$ be an equivalence relation on $Y$. Let $p:Y\\rightarrow X$ be a continuous map such that for all $y,y'\\in Y$, $y\\sim y' \\Rightarrow p(y)=p(y')..."
+        },
+        "statement": "Lemma 13. Let $X$ and $Y$ be topological spaces and $\\sim$ be an equivalence relation on $Y$. Let $p:Y\\rightarrow X$ be a continuous map such that for all $y,y'\\in Y$, $y\\sim y' \\Rightarrow p(y)=p(y')...",
+        "status": "FAILED",
+        "verified_statement": "theorem univ_ppty_lift : True := by"
+      },
+      {
+        "emitted_statement": "theorem thm_21 : True := by",
+        "kind": "theorem_formalization",
+        "lean_attempt_status": "failed_typecheck",
+        "lean_declaration": "thm_21",
+        "obligation_id": "formalize_theorem_thm_21",
+        "source_claim_id": "thm-21",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "thm-21",
+          "paper_source_id": "thm-21",
+          "section_id": "sec-2-2",
+          "text_excerpt": "Theorem 14 (The Monodromy Action). Let $p:Y\\rightarrow X$ be a connected covering and $x\\in X$. There is a transitive left action of $\\pi_1(X,x)$ on the fibre $p^{-1}(x)$ called the monodromy action, ..."
+        },
+        "statement": "Theorem 14 (The Monodromy Action). Let $p:Y\\rightarrow X$ be a connected covering and $x\\in X$. There is a transitive left action of $\\pi_1(X,x)$ on the fibre $p^{-1}(x)$ called the monodromy action, ...",
+        "status": "FAILED",
+        "verified_statement": "theorem thm_21 : True := by"
+      }
+    ],
+    "lean_attempt_status": "failed_typecheck",
+    "lean_results": "review_loop/lean/results.json",
+    "schema_version": "1.0.0",
+    "source": "review_loop/proof_obligations.json",
+    "status": "FAILED"
+  }
+}
