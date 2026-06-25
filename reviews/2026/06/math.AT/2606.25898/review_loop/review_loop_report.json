@@ -1,0 +1,482 @@
+{
+  "agent_output_audits": {
+    "lean": {
+      "accepted": 0,
+      "by_role": {},
+      "rejected": 0,
+      "total": 0
+    },
+    "pr": {
+      "accepted": 0,
+      "by_role": {},
+      "rejected": 0,
+      "total": 0
+    },
+    "pr_review": {
+      "accepted": 0,
+      "by_role": {},
+      "rejected": 0,
+      "total": 0
+    }
+  },
+  "artifact_paths": {
+    "agent_outputs": "review_loop/agent_outputs",
+    "bundle_completeness": "review_loop/bundle_completeness.json",
+    "citation_adjudication": "review_loop/citation_validation_adjudication.json",
+    "citation_validation": "review_loop/citation_validation_report.json",
+    "claims": "review_loop/claims.json",
+    "knowledge_graph": "review_loop/knowledge_graph.json",
+    "lean": "review_loop/lean/results.json",
+    "lean_harness": "review_loop/lean/harness.json",
+    "lean_targets": "review_loop/lean_targets.json",
+    "lean_theorem_map": "review_loop/lean/theorem_map.json",
+    "lean_verification_report": "review_loop/lean/verification_report.json",
+    "paper_math_sources": "review_loop/paper_math_sources.json",
+    "policy_gate": "review_loop/policy_gate.json",
+    "pr_fixes": "review_loop/pr_fixes.json",
+    "pr_harness": "review_loop/fixed/harness.json",
+    "proof_obligations": "review_loop/proof_obligations.json",
+    "semantic_adequacy": "review_loop/semantic_adequacy.json",
+    "semantic_ir": "review_loop/semantic_ir.json",
+    "semantic_model": "review_loop/semantic_model.json"
+  },
+  "blocking_issues": [],
+  "bundle_completeness": {
+    "artifacts": [
+      {
+        "artifact_path": "review_loop/body.md",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/0c14c12c-3fc1-4b91-ab5a-97bfd4720281/review_loop/body.md",
+        "manifest_output": "body.md",
+        "skip_reason": null,
+        "stage_id": "paper_review",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/equations.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/0c14c12c-3fc1-4b91-ab5a-97bfd4720281/review_loop/equations.json",
+        "manifest_output": "equations.json",
+        "skip_reason": null,
+        "stage_id": "paper_review",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/theorem_graph.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/0c14c12c-3fc1-4b91-ab5a-97bfd4720281/review_loop/theorem_graph.json",
+        "manifest_output": "theorem_graph.json",
+        "skip_reason": null,
+        "stage_id": "paper_review",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/semantic_ast.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/0c14c12c-3fc1-4b91-ab5a-97bfd4720281/review_loop/semantic_ast.json",
+        "manifest_output": "semantic_ast.json",
+        "skip_reason": null,
+        "stage_id": "paper_review",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/references.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/0c14c12c-3fc1-4b91-ab5a-97bfd4720281/review_loop/references.json",
+        "manifest_output": "references.json",
+        "skip_reason": null,
+        "stage_id": "paper_review",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/claims.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/0c14c12c-3fc1-4b91-ab5a-97bfd4720281/review_loop/claims.json",
+        "manifest_output": "review_loop/claims.json",
+        "skip_reason": null,
+        "stage_id": "claim_extractor",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/paper_math_sources.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/0c14c12c-3fc1-4b91-ab5a-97bfd4720281/review_loop/paper_math_sources.json",
+        "manifest_output": "review_loop/paper_math_sources.json",
+        "skip_reason": null,
+        "stage_id": "paper_math_source_collector",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/knowledge_graph.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/0c14c12c-3fc1-4b91-ab5a-97bfd4720281/review_loop/knowledge_graph.json",
+        "manifest_output": "review_loop/knowledge_graph.json",
+        "skip_reason": null,
+        "stage_id": "knowledge_graph_builder",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/semantic_ir.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/0c14c12c-3fc1-4b91-ab5a-97bfd4720281/review_loop/semantic_ir.json",
+        "manifest_output": "review_loop/semantic_ir.json",
+        "skip_reason": null,
+        "stage_id": "semantic_category_mapper",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/semantic_model.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/0c14c12c-3fc1-4b91-ab5a-97bfd4720281/review_loop/semantic_model.json",
+        "manifest_output": "review_loop/semantic_model.json",
+        "skip_reason": null,
+        "stage_id": "semantic_category_mapper",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/proof_obligations.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/0c14c12c-3fc1-4b91-ab5a-97bfd4720281/review_loop/proof_obligations.json",
+        "manifest_output": "review_loop/proof_obligations.json",
+        "skip_reason": null,
+        "stage_id": "proof_obligation_generator",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean_targets.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/0c14c12c-3fc1-4b91-ab5a-97bfd4720281/review_loop/lean_targets.json",
+        "manifest_output": "review_loop/lean_targets.json",
+        "skip_reason": null,
+        "stage_id": "proof_obligation_generator",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean/GrokRxiv/Proofs.lean",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/0c14c12c-3fc1-4b91-ab5a-97bfd4720281/review_loop/lean/GrokRxiv/Proofs.lean",
+        "manifest_output": "review_loop/lean/GrokRxiv/Proofs.lean",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean/results.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/0c14c12c-3fc1-4b91-ab5a-97bfd4720281/review_loop/lean/results.json",
+        "manifest_output": "review_loop/lean/results.json",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean/fix_rounds.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/0c14c12c-3fc1-4b91-ab5a-97bfd4720281/review_loop/lean/fix_rounds.json",
+        "manifest_output": "review_loop/lean/fix_rounds.json",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean/theorem_map.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/0c14c12c-3fc1-4b91-ab5a-97bfd4720281/review_loop/lean/theorem_map.json",
+        "manifest_output": "review_loop/lean/theorem_map.json",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean/verification_report.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/0c14c12c-3fc1-4b91-ab5a-97bfd4720281/review_loop/lean/verification_report.json",
+        "manifest_output": "review_loop/lean/verification_report.json",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/faithfulness.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/0c14c12c-3fc1-4b91-ab5a-97bfd4720281/review_loop/faithfulness.json",
+        "manifest_output": "review_loop/faithfulness.json",
+        "skip_reason": null,
+        "stage_id": "lean_faithfulness_check",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/semantic_adequacy.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/0c14c12c-3fc1-4b91-ab5a-97bfd4720281/review_loop/semantic_adequacy.json",
+        "manifest_output": "review_loop/semantic_adequacy.json",
+        "skip_reason": null,
+        "stage_id": "semantic_adequacy_checker",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/citation_validation_report.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/0c14c12c-3fc1-4b91-ab5a-97bfd4720281/review_loop/citation_validation_report.json",
+        "manifest_output": "citation_validation_report.json",
+        "skip_reason": null,
+        "stage_id": "citation_validation",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/citation_validation_adjudication.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/0c14c12c-3fc1-4b91-ab5a-97bfd4720281/review_loop/citation_validation_adjudication.json",
+        "manifest_output": "citation_validation_adjudication.json",
+        "skip_reason": "citation-validation adjudication is not materialized separately by the current review-loop runtime; citation_validation_report.json carries the deterministic citation evidence.",
+        "stage_id": "citation_validation",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/pr_fixes.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/0c14c12c-3fc1-4b91-ab5a-97bfd4720281/review_loop/pr_fixes.json",
+        "manifest_output": "review_loop/pr_fixes.json",
+        "skip_reason": null,
+        "stage_id": "pr_fixer",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/fixed/review.md",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/0c14c12c-3fc1-4b91-ab5a-97bfd4720281/review_loop/fixed/review.md",
+        "manifest_output": "review_loop/fixed/review.md",
+        "skip_reason": null,
+        "stage_id": "pr_fixer",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/pr_review/results.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/0c14c12c-3fc1-4b91-ab5a-97bfd4720281/review_loop/pr_review/results.json",
+        "manifest_output": "review_loop/pr_review/results.json",
+        "skip_reason": null,
+        "stage_id": "pr_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/pr_review/fix_rounds.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/0c14c12c-3fc1-4b91-ab5a-97bfd4720281/review_loop/pr_review/fix_rounds.json",
+        "manifest_output": "review_loop/pr_review/fix_rounds.json",
+        "skip_reason": null,
+        "stage_id": "pr_review_fix_code",
+        "status": "present"
+      }
+    ],
+    "declared_artifact_count": 25,
+    "failures": [],
+    "missing_count": 0,
+    "present_count": 25,
+    "skipped_count": 0,
+    "status": "pass"
+  },
+  "dag_type": "review-loop",
+  "deterministic_status": "pass",
+  "fix_attempts": {
+    "lean": [
+      {
+        "attempt": 0,
+        "semantic_validation": {
+          "issues": [
+            "Lean formalization runs asynchronously via the `formalize` job; queue with --with-lean."
+          ],
+          "status": "skipped"
+        },
+        "skipped": true,
+        "status": "skipped"
+      }
+    ],
+    "pr_review": []
+  },
+  "pr_evidence": {
+    "artifact_worktree": ".agenthero/artifacts/grokrxiv/reviews/0c14c12c-3fc1-4b91-ab5a-97bfd4720281/review_loop/fixed",
+    "compile_review_loop": {
+      "agent_output_audit_summary": {
+        "accepted": 0,
+        "by_role": {},
+        "rejected": 0,
+        "total": 0
+      },
+      "attempts": [],
+      "filename": "review.md",
+      "final_path": ".agenthero/artifacts/grokrxiv/reviews/0c14c12c-3fc1-4b91-ab5a-97bfd4720281/review_loop/fixed/review.md",
+      "harness": {
+        "branch": null,
+        "path": ".agenthero/artifacts/grokrxiv/reviews/0c14c12c-3fc1-4b91-ab5a-97bfd4720281/review_loop/fixed"
+      },
+      "language": "markdown",
+      "skip_reason": "Markdown is the canonical PR review artifact; TeX/PDF exports are optional and outside the default review-loop gate.",
+      "stage": "pr_review_fix_code",
+      "status": "skipped",
+      "target": "pr"
+    },
+    "fixed_markdown": "review_loop/fixed/review.md",
+    "fixed_pdf": null,
+    "fixed_tex": null,
+    "issues": [],
+    "stage": "pr_fixer",
+    "status": "pass"
+  },
+  "publish_decision": {
+    "action": "revision_needed_pr",
+    "auto_publish": false,
+    "publisher_ready": false
+  },
+  "publishability_vector": {
+    "citation": "needs_remediation",
+    "formal": "failed",
+    "integrity": "pass",
+    "reproducibility": "not_run",
+    "safety": "pass",
+    "semantic_adequacy": "skipped"
+  },
+  "publisher_ready": false,
+  "release_tier": {
+    "lifecycle_state": "needs_update",
+    "tier": "in_review"
+  },
+  "review_id": "0c14c12c-3fc1-4b91-ab5a-97bfd4720281",
+  "semantic_adequacy": {
+    "operator_status": "AWAITING_FORMALIZATION",
+    "schema_version": "1.0.0",
+    "skip_reason": "lean_not_run",
+    "source": "review_loop/semantic_ir.json",
+    "status": "skipped",
+    "theorem_map": "review_loop/lean/theorem_map.json",
+    "verdicts": []
+  },
+  "theorem_formalization": {
+    "entries": [
+      {
+        "emitted_statement": "theorem construction_designer_MUR_poly : True := by",
+        "kind": "theorem_formalization",
+        "lean_attempt_status": "failed_typecheck",
+        "lean_declaration": "construction_designer_MUR_poly",
+        "obligation_id": "formalize_theorem_construction_designer_MUR_poly",
+        "source_claim_id": "construction:designer_MUR_poly",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "construction:designer_MUR_poly",
+          "paper_source_id": "construction:designer_MUR_poly",
+          "section_id": "sec-2-1",
+          "text_excerpt": "Proposition 1. The free $\\mathbb E_1$-${\\operatorname{MU}_{\\mathbb{R}}}$-algebra on a class in degree $i\\rho$, denoted by $\\textcolor{chillired}{{\\operatorname{MU}_{\\mathbb{R}}}[\\overline{x}_i]}$, adm..."
+        },
+        "statement": "Proposition 1. The free $\\mathbb E_1$-${\\operatorname{MU}_{\\mathbb{R}}}$-algebra on a class in degree $i\\rho$, denoted by $\\textcolor{chillired}{{\\operatorname{MU}_{\\mathbb{R}}}[\\overline{x}_i]}$, adm...",
+        "status": "FAILED",
+        "verified_statement": "theorem construction_designer_MUR_poly : True := by"
+      },
+      {
+        "emitted_statement": "theorem lemma_MURI : True := by",
+        "kind": "theorem_formalization",
+        "lean_attempt_status": "failed_typecheck",
+        "lean_declaration": "lemma_MURI",
+        "obligation_id": "formalize_theorem_lemma_MURI",
+        "source_claim_id": "lemma:MURI",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "lemma:MURI",
+          "paper_source_id": "lemma:MURI",
+          "section_id": "sec-2-1",
+          "text_excerpt": "Corollary 1. Let $I\\subseteq \\mathbb{Z}_{\\geq 1}$ and let $\\{\\overline{x}_i\\}_{i\\in I}$ denote a collection of classes in degrees $i\\rho$. Then, ${\\operatorname{MU}_{\\mathbb{R}}}[\\overline{x}_i : i\\in..."
+        },
+        "statement": "Corollary 1. Let $I\\subseteq \\mathbb{Z}_{\\geq 1}$ and let $\\{\\overline{x}_i\\}_{i\\in I}$ denote a collection of classes in degrees $i\\rho$. Then, ${\\operatorname{MU}_{\\mathbb{R}}}[\\overline{x}_i : i\\in...",
+        "status": "FAILED",
+        "verified_statement": "theorem lemma_MURI : True := by"
+      },
+      {
+        "emitted_statement": "theorem prop_lift : True := by",
+        "kind": "theorem_formalization",
+        "lean_attempt_status": "failed_typecheck",
+        "lean_declaration": "prop_lift",
+        "obligation_id": "formalize_theorem_prop_lift",
+        "source_claim_id": "prop:lift",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "prop:lift",
+          "paper_source_id": "prop:lift",
+          "section_id": "sec-2-1",
+          "text_excerpt": "Proposition 2. Let $E$ be a strongly even $\\mathbb E_{\\infty}^{C_2}$-spectrum and suppose that $\\pi^{C_2}_{i\\rho}(E)$ is finitely generated for each $i\\in \\mathbb{Z}$. Any $\\mathbb E_2$-map $\\Sigma_+^..."
+        },
+        "statement": "Proposition 2. Let $E$ be a strongly even $\\mathbb E_{\\infty}^{C_2}$-spectrum and suppose that $\\pi^{C_2}_{i\\rho}(E)$ is finitely generated for each $i\\in \\mathbb{Z}$. Any $\\mathbb E_2$-map $\\Sigma_+^...",
+        "status": "FAILED",
+        "verified_statement": "theorem prop_lift : True := by"
+      },
+      {
+        "emitted_statement": "theorem prop : True := by",
+        "kind": "theorem_formalization",
+        "lean_attempt_status": "failed_typecheck",
+        "lean_declaration": "prop",
+        "obligation_id": "formalize_theorem_prop",
+        "source_claim_id": "prop:",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "prop:",
+          "paper_source_id": "prop:",
+          "section_id": "sec-2-1",
+          "text_excerpt": "Corollary 2. Let $I\\subseteq \\mathbb{Z}_{\\geq 1}$ and let $\\{\\overline{x}_i\\}_{i\\in I}$ denote a collection of classes in degrees $i\\rho$. Then any $\\mathbb E_2$-map $\\Sigma^\\infty_+\\operatorname{BU}\\..."
+        },
+        "statement": "Corollary 2. Let $I\\subseteq \\mathbb{Z}_{\\geq 1}$ and let $\\{\\overline{x}_i\\}_{i\\in I}$ denote a collection of classes in degrees $i\\rho$. Then any $\\mathbb E_2$-map $\\Sigma^\\infty_+\\operatorname{BU}\\...",
+        "status": "FAILED",
+        "verified_statement": "theorem prop : True := by"
+      },
+      {
+        "emitted_statement": "theorem lemma : True := by",
+        "kind": "theorem_formalization",
+        "lean_attempt_status": "failed_typecheck",
+        "lean_declaration": "lemma",
+        "obligation_id": "formalize_theorem_lemma",
+        "source_claim_id": "lemma:",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "lemma:",
+          "paper_source_id": "lemma:",
+          "section_id": "sec-2-2",
+          "text_excerpt": "Lemma 1. Let $A$ be an $\\mathbb E_{\\infty}^G$-algebra and $I$ be an indexing set. Consider classes $x_i \\in \\pi_{V_i}^G A$ for $G$-representations $V_i$. Let $V$ be another $G$-representation. Suppose..."
+        },
+        "statement": "Lemma 1. Let $A$ be an $\\mathbb E_{\\infty}^G$-algebra and $I$ be an indexing set. Consider classes $x_i \\in \\pi_{V_i}^G A$ for $G$-representations $V_i$. Let $V$ be another $G$-representation. Suppose...",
+        "status": "FAILED",
+        "verified_statement": "theorem lemma : True := by"
+      },
+      {
+        "emitted_statement": "theorem thm_MUR_quotients : True := by",
+        "kind": "theorem_formalization",
+        "lean_attempt_status": "failed_typecheck",
+        "lean_declaration": "thm_MUR_quotients",
+        "obligation_id": "formalize_theorem_thm_MUR_quotients",
+        "source_claim_id": "thm:MUR_quotients",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "thm:MUR_quotients",
+          "paper_source_id": "thm:MUR_quotients",
+          "section_id": "sec-2-2",
+          "text_excerpt": "Theorem 1. Let $I\\subseteq \\mathbb{Z}_{\\geq 1}$ and let $\\{\\overline{x}_{i}\\}_{i\\in I}$ be a collection of classes with $\\overline{x}_i\\in \\pi^{C_2}_{i\\rho}{\\operatorname{MU}_{\\mathbb{R}}}$. Then ${\\o..."
+        },
+        "statement": "Theorem 1. Let $I\\subseteq \\mathbb{Z}_{\\geq 1}$ and let $\\{\\overline{x}_{i}\\}_{i\\in I}$ be a collection of classes with $\\overline{x}_i\\in \\pi^{C_2}_{i\\rho}{\\operatorname{MU}_{\\mathbb{R}}}$. Then ${\\o...",
+        "status": "FAILED",
+        "verified_statement": "theorem thm_MUR_quotients : True := by"
+      },
+      {
+        "emitted_statement": "theorem corollary : True := by",
+        "kind": "theorem_formalization",
+        "lean_attempt_status": "failed_typecheck",
+        "lean_declaration": "corollary",
+        "obligation_id": "formalize_theorem_corollary",
+        "source_claim_id": "corollary:",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "corollary:",
+          "paper_source_id": "corollary:",
+          "section_id": "sec-2-2",
+          "text_excerpt": "Corollary 3. Let $I\\subseteq \\mathbb{Z}_{\\geq 1}$ and let $\\{\\overline{x}_i\\}_{i\\in I}$ be a collection of elements with $\\overline{x}_i \\in \\pi^{C_2}_{i\\rho}{\\operatorname{MU}_{\\mathbb{R}}}$. Then, t..."
+        },
+        "statement": "Corollary 3. Let $I\\subseteq \\mathbb{Z}_{\\geq 1}$ and let $\\{\\overline{x}_i\\}_{i\\in I}$ be a collection of elements with $\\overline{x}_i \\in \\pi^{C_2}_{i\\rho}{\\operatorname{MU}_{\\mathbb{R}}}$. Then, t...",
+        "status": "FAILED",
+        "verified_statement": "theorem corollary : True := by"
+      },
+      {
+        "emitted_statement": "theorem lemma : True := by",
+        "kind": "theorem_formalization",
+        "lean_attempt_status": "failed_typecheck",
+        "lean_declaration": "lemma",
+        "obligation_id": "formalize_theorem_lemma",
+        "source_claim_id": "lemma:",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "lemma:",
+          "paper_source_id": "lemma:",
+          "section_id": "sec-2-3",
+          "text_excerpt": "Lemma 2. Let $A$ be an $\\mathbb E_{\\infty}^{C_2}$-algebra and $I$ be an indexing set. Consider classes $\\overline{x}_i \\in \\pi_{V_i}^{C_2} A^{( \\! ( G ) \\! )}$ for $C_2$-representations $V_i$. Let $V$..."
+        },
+        "statement": "Lemma 2. Let $A$ be an $\\mathbb E_{\\infty}^{C_2}$-algebra and $I$ be an indexing set. Consider classes $\\overline{x}_i \\in \\pi_{V_i}^{C_2} A^{( \\! ( G ) \\! )}$ for $C_2$-representations $V_i$. Let $V$...",
+        "status": "FAILED",
+        "verified_statement": "theorem lemma : True := by"
+      }
+    ],
+    "lean_attempt_status": "failed_typecheck",
+    "lean_results": "review_loop/lean/results.json",
+    "schema_version": "1.0.0",
+    "source": "review_loop/proof_obligations.json",
+    "status": "FAILED"
+  }
+}
