@@ -1,0 +1,67 @@
+{
+  "advisory": true,
+  "checked": 1,
+  "proved_targets": 1,
+  "schema_version": "1.0.0",
+  "status": "completed",
+  "verdicts": [
+    {
+      "back_translation": "The Lean declaration `GrokRxiv.prop_universal_symbol_combinatorics` has no parameters and no assumptions, and its entire conclusion is the proposition `True`.",
+      "checker_output": {
+        "back_translation": "The Lean declaration `GrokRxiv.prop_universal_symbol_combinatorics` has no parameters and no assumptions, and its entire conclusion is the proposition `True`.",
+        "conclusion_matches": {
+          "matches": false,
+          "note": "The paper proposition asserts existence and uniqueness of a subset T(n) of ordered edge-tuples of a complete graph together with a unique sign function, while the Lean statement only asserts True."
+        },
+        "confidence": 0.99,
+        "hypothesis_completeness": {
+          "complete": false,
+          "missing_hypotheses": [
+            {
+              "paper_hypothesis": "The ambient parameter n and the complete graph on the vertex set {0,1,...,n}.",
+              "reason": "The Lean statement has no binders or assumptions and does not introduce n, the vertex set, the graph, ordered edge-tuples, or any related domain."
+            }
+          ],
+          "note": "The Lean declaration contains no mathematical context from the paper proposition."
+        },
+        "issues": [
+          {
+            "message": "The Lean conclusion is the tautology True rather than the paper's existence-and-uniqueness claim.",
+            "severity": "critical"
+          },
+          {
+            "message": "The Lean statement omits the paper's mathematical objects: T(n), ordered tuples of edges of the complete graph, and the sign function.",
+            "severity": "critical"
+          },
+          {
+            "message": "The proof obligation explicitly records that the original statement was truncated and replaced by a placeholder True, so it cannot be a faithful formalization of Proposition 26.",
+            "severity": "critical"
+          }
+        ],
+        "lean_declaration": "GrokRxiv.prop_universal_symbol_combinatorics",
+        "triviality_risk": {
+          "note": "The statement is a parameter-free tautology closed by trivial, so it is a trivially true placeholder rather than the paper claim.",
+          "trivial": true
+        },
+        "verdict": "unfaithful"
+      },
+      "issues": [
+        {
+          "message": "The Lean conclusion is the tautology True rather than the paper's existence-and-uniqueness claim.",
+          "severity": "critical"
+        },
+        {
+          "message": "The Lean statement omits the paper's mathematical objects: T(n), ordered tuples of edges of the complete graph, and the sign function.",
+          "severity": "critical"
+        },
+        {
+          "message": "The proof obligation explicitly records that the original statement was truncated and replaced by a placeholder True, so it cannot be a faithful formalization of Proposition 26.",
+          "severity": "critical"
+        }
+      ],
+      "paper_text": "Proposition 26. There exists a unique subset $T(n)$ of the set of ordered tuples of edges of the complete graph with vertex set ${\\underline{n}} = \\{0,1,\\ldots,n\\}$ and a unique sign function ${\\mathr...",
+      "target": "prop_universal_symbol_combinatorics",
+      "verdict": "unfaithful"
+    }
+  ]
+}
