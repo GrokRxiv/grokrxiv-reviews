@@ -1,0 +1,305 @@
+{
+  "claims": [
+    {
+      "id": "claim_1",
+      "role": "citation",
+      "text": "Citation-use agent failed before producing a normal citation relevance review. Deterministic citation verification still runs separately; see external citation checks and verifier provenance for existence, DOI, URL, and resolver evidence. Failure: agent \"citation\" timed out after 180s at supervisor level",
+      "verifier_status": "fail"
+    },
+    {
+      "id": "claim_2",
+      "role": "meta_reviewer",
+      "text": "The paper establishes that L∞ spaces over a dg manifold form a category of fibrant objects (CFO), with the stated corollary that transitive L∞ algebroids inherit this structure via the companion paper equivalence. The technical_correctness specialist (confidence 0.70, overall: mostly_sound) found the supporting scaffolding — Lemmas 24, 43; Propositions 23, 44; Lemma 17; Lemma 41 — fully supported on detailed inspection. The headline Theorem 1/30 was assessed as partially_supported at major seve…",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_3",
+      "role": "meta_reviewer",
+      "text": "major_revision",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_4",
+      "role": "meta_reviewer",
+      "text": "The geometric-to-algebraic reduction via the global sections functor Γ is clean and rigorously supported: Proposition 18's proof correctly chains Proposition 15 and Lemma 13 to establish full faithfulness and the quasi-inverse equivalence, with the finite-rank projectivity condition doing essential work throughout.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_5",
+      "role": "meta_reviewer",
+      "text": "The homotopy transfer theorem for curved L∞ algebras over filtered cdgas (Proposition 44) is developed with explicit algebraic detail — the Berglund symmetrized tensor homotopy identity (Lemma 41) and the perturbation coalgebra-morphism argument (Lemma 43) are both independently verified correct by the technical_correctness specialist.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_6",
+      "role": "meta_reviewer",
+      "text": "Lemma 24's proof that every fibration in L∞ Alg(R)_fgp is strict up to isomorphism is a technically precise application of the fgp condition and filtration completeness, and correctly underpins Proposition 23's fiber-product construction.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_7",
+      "role": "meta_reviewer",
+      "text": "The paper clearly situates its main result as extending the Behrend–Liao–Xu and Carchedi base CFO results to the fibered category of L∞ spaces, and explicitly distinguishes its stricter contraction notion from the Amorim–Tu relaxed approach.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_8",
+      "role": "meta_reviewer",
+      "text": "The headline theorem (Theorem 1/30) ships no machine-checkable formal proof artifact; the technical_correctness specialist rated it partially_supported at major severity and the reproducibility specialist flagged it at critical severity — together triggering the math.* recommendation gate for proof-as-code.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_9",
+      "role": "meta_reviewer",
+      "text": "The abstract's corollary that transitive L∞ algebroids form a CFO is contingent on an unpublished companion paper (cattaneojiang26, 2026, no arXiv ID) that was unavailable for review; the dependency is not marked conditional in the abstract or theorem statement.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_10",
+      "role": "meta_reviewer",
+      "text": "Proposition 15's proof delegates Lemma 16 (kernel of a surjection of locally free O_M-modules is locally free) to the same unavailable companion paper (Proposition 2.6 of cattaneojiang26), leaving a gap in the verification of the [a2] fibrancy assumption.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_11",
+      "role": "meta_reviewer",
+      "text": "Three bodies of directly relevant prior art are absent from the bibliography: Q-algebroids and dg Lie algebroids (Mehta, Vaintrob, Kontsevich school), Abad–Crainic representations up to homotopy, and Nuiten's Koszul duality for Lie algebroids; their omission obscures the paper's positioning within the derived geometry literature.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_12",
+      "role": "meta_reviewer",
+      "text": "The Serre–Swan generalization to graded ringed spaces (Lemmas 12–13) applies Morye's Lemma 2.3 and Proposition 2.5 — stated for ungraded ringed spaces — to the graded setting with only a footnote asserting the extension is straightforward, without verification or a graded-setting citation.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_13",
+      "role": "meta_reviewer",
+      "text": "Can the CFO axioms for Theorem 1/30 be formalized in Lean 4 / mathlib4, or can the authors supply a detailed proof-gap analysis identifying every non-obvious step and the precise lemma in Getzler or Rogers from which it follows?",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_14",
+      "role": "meta_reviewer",
+      "text": "What is the expected public availability of cattaneojiang26, and would it be feasible to include Lemma 16 (kernel freeness) and a statement of the algebroid–space equivalence as a self-contained appendix so that this paper stands independently?",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_15",
+      "role": "meta_reviewer",
+      "text": "How does the homotopy theory developed here relate to Q-algebroids and dg Lie algebroids in the sense of Mehta and Vaintrob — are transitive L∞ algebroids over a dg manifold a special case, or does the relationship require additional structure?",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_16",
+      "role": "meta_reviewer",
+      "text": "Does the graded-ringed-space generalization of Morye's Lemma 2.3 / Proposition 2.5 involve any sign, parity, or completeness subtleties beyond the ungraded case, or is there a reference in the literature where this exact generalization is established?",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_17",
+      "role": "meta_reviewer",
+      "text": "Can the Dupont contraction anticommutation identities h_n^i h_n^j + h_n^j h_n^i = 0 and epsilon_i^n h_n^i = 0 used in Proposition 27 be verified explicitly within this paper rather than imported from Getzler 2009 Lemma 3.4 / Theorem 3.11 without reproof?",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_18",
+      "role": "novelty",
+      "text": "incremental",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_19",
+      "role": "novelty",
+      "text": "prior_art",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_20",
+      "role": "novelty",
+      "text": "Costello introduced L_∞ spaces over smooth manifolds and their weak equivalences; this paper adapts that notion and the associated homotopy theory to the strictly more general setting of dg manifolds.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_21",
+      "role": "novelty",
+      "text": "builds_on",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_22",
+      "role": "novelty",
+      "text": "This paper directly adapts Getzler's constructions—pullbacks of fibrations, simplicial frames via Dupont contraction, and the filtration-compatible treatment of curved L_∞ algebras—from the field/pro-nilpotent setting to finitely generated projective modules over filtered cdgas, which is the algebraic core needed for the dg-manifold geometry.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_23",
+      "role": "novelty",
+      "text": "prior_art",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_24",
+      "role": "novelty",
+      "text": "Getzler's foundational Lie theory for L_∞ algebras (polynomial de Rham forms, Dupont contraction side conditions) is the template that the current paper adapts to the curved, filtered-cdga setting; Lemma 25 and the Whitney-complex retract are taken directly from this source.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_25",
+      "role": "novelty",
+      "text": "builds_on",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_26",
+      "role": "novelty",
+      "text": "The symmetrized tensor homotopy (Berglund's 'h^Σ') used in the appendix HPT is cited directly; this paper re-derives it for curved L_∞ algebras over filtered cdgas and identifies it as the harmonization of L_h.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_27",
+      "role": "novelty",
+      "text": "builds_on",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_28",
+      "role": "novelty",
+      "text": "Rogers' explicit construction of path objects and pullbacks for L_∞ algebras over a field is adapted; the paper cites Rogers for the proof structure of Proposition 23 (pullbacks of fibrations).",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_29",
+      "role": "novelty",
+      "text": "prior_art",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_30",
+      "role": "novelty",
+      "text": "Rogers' homotopy theory for complete L_∞ algebras over a field supplies the foundational CFO framework that is extended here to the filtered cdga / dg-manifold setting.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_31",
+      "role": "novelty",
+      "text": "prior_art",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_32",
+      "role": "novelty",
+      "text": "Rogers-Zhu show that L_∞ groupoids in the Banach manifold setting form an *incomplete* CFO; the current paper obtains a full CFO for L_∞ spaces over a dg manifold, filling this gap.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_33",
+      "role": "novelty",
+      "text": "prior_art",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_34",
+      "role": "novelty",
+      "text": "Brown's original definition of a category of fibrant objects is the central structure this paper establishes for L_∞ spaces over dg manifolds; no modification to the axioms is made.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_35",
+      "role": "novelty",
+      "text": "prior_art",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_36",
+      "role": "novelty",
+      "text": "Behrend-Liao-Xu proved dg manifolds form a CFO; the paper situates its main theorem as extending this base-CFO result to the fibered category of L_∞ spaces over dg manifolds.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_37",
+      "role": "novelty",
+      "text": "prior_art",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_38",
+      "role": "novelty",
+      "text": "Carchedi independently proved dg manifolds form a CFO; cited alongside Behrend et al. as justification for the expectation that a total CFO structure exists.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_39",
+      "role": "novelty",
+      "text": "prior_art",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_40",
+      "role": "novelty",
+      "text": "Amorim-Tu study homotopy transfers and strong deformation retracts for curved L_∞ spaces over smooth manifolds using a relaxed side condition (dropping [h,r]=0); the current paper opts for a stricter contraction notion and works over dg manifolds, giving a complementary result.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_41",
+      "role": "novelty",
+      "text": "orthogonal",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_42",
+      "role": "novelty",
+      "text": "This is the companion paper (Part I of the same program) establishing the equivalence between transitive L_∞ algebroids and L_∞ spaces over dg manifolds; together the two papers imply the CFO result for L_∞ algebroids.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_43",
+      "role": "summary",
+      "text": "The paper proves that L∞ spaces over dg manifolds form a category of fibrant objects, extending homotopy transfer theorems for curved L∞ algebras to the filtered setting.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_44",
+      "role": "summary",
+      "text": "This paper studies the homotopy theory of L∞ spaces—geometric structures that generalize Lie algebras to allow higher-order bracket operations—over differential graded (dg) manifolds. The main result establishes that these spaces form a category of fibrant objects, meaning they have the right structure for homotopy-theoretic computations. This extends classical homotopy transfer theorems, which describe how algebraic structures can be transferred along deformation retracts, to the curved settin…",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_45",
+      "role": "summary",
+      "text": "Proves that L∞ spaces over dg manifolds form a category of fibrant objects (Theorem 1)",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_46",
+      "role": "summary",
+      "text": "Establishes that the fibrancy functor from algebroids to spaces can be interpreted as a fibrant replacement",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_47",
+      "role": "summary",
+      "text": "Develops a homotopy transfer theorem for curved L∞ algebras over filtered cdgas",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_48",
+      "role": "summary",
+      "text": "Shows that the global sections functor from L∞ spaces to curved L∞ algebras is fully faithful and establishes an equivalence with a suitable subcategory",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_49",
+      "role": "summary",
+      "text": "Provides technical machinery for comparing homotopy theories of geometric and algebraic structures via homological perturbation of curved complexes",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_50",
+      "role": "technical_correctness",
+      "text": "mostly_sound",
+      "verifier_status": "pass"
+    }
+  ],
+  "review_id": "3649bf2a-b650-4998-8986-b28f8d71c9d5"
+}
