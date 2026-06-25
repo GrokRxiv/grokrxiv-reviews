@@ -1,0 +1,621 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\title{Homotopy transfers of curved \$L\_\textbackslash{}infty\$ algebras}
+\author{Shuhan Jiang}
+\date{}
+\begin{document}
+\maketitle
+
+\noindent\textbf{Source:} \href{https://arxiv.org/abs/2606.23965}{arXiv:2606.23965} \quad \textbf{Field:} math.DG\\
+
+\section*{TL;DR}
+The technical\_correctness, reproducibility, and summary specialists consistently describe a pure mathematics paper (math.CT/math.AT) proving that L\ensuremath{\infty} spaces over dg manifolds form a category of fibrant objects and supplying a homotopy transfer theorem for curved L\ensuremath{\infty} algebras over filtered commutative dg algebras. Two specialist inputs are unusable as submitted: the citation specialist's report---referencing CHI conference papers, workplace-AI studies, and invisible-work literature in organizations---pertains to a different paper entirely, constituting a review-input mismatch rather than a paper weakness; the novelty specialist failed with a pipeline parse error and produced no usable prior-art assessment. Setting aside those corrupted inputs, the technical picture is as follows. The appendix machinery (Propositions 44, Lemmas 41, 43, 26, and Proposition 27) is detailed and internally consistent. However, three major gaps affect the load-bearing arguments for the headline Theorem 1: (i) Proposition 15 / Lemma 16 relies on an unpublished companion preprint [cattaneojiang26] for the kernel-of-surjection step, making assumption [a2] unverifiable from the submitted text; (ii) the Jacobi-identity check in Proposition 23 is compressed to a single line asserting that D\textsuperscript{2} lies in the intersection of ker CE(\ensuremath{\phi}\~{}) and ker CE(\ensuremath{\psi}\~{}) and must vanish, without establishing that this intersection is trivial on the symmetric coalgebra; (iii) no formal proof artifact exists for any of the principal theorems in a paper classified in the code-amenable field math.CT/math.AT. The reproducibility specialist assigns a score of 0.22 and flags the absence of a machine-checkable file for Theorem 1 at critical severity. Under the proof-as-code recommendation gate, the combination of a critical reproducibility finding and multiple major technical gaps in a code-amenable field mandates major\_revision. The overall correctness is assessed as mostly\_sound; no outright error was identified in the supported results.
+
+\textbf{Recommendation:} Major revision \quad \textbf{Confidence:} 72\%\\
+
+\section*{Strengths}
+\begin{itemize}[leftmargin=*]
+  \item The appendix results---Lemmas 41, 43, 26 and Proposition 44---are detailed, self-contained, and correctly extend the Berglund--Getzler HPT machinery to the curved filtered setting.
+  \item The strategy of reducing the geometric category-of-fibrant-objects problem to the algebraic setting via the global sections functor \ensuremath{\Gamma} (Proposition 18) is conceptually clean and follows well-established precedent from Getzler 2009 and 2025.
+  \item Lemma 24 (every fibration is strict up to isomorphism) and Proposition 27 (simplicial framing via Dupont contraction) are completely supported and use the standard technical toolkit correctly.
+  \item The homotopy transfer theorem for curved L\ensuremath{\infty} algebras over filtered cdgas (Proposition 44) fills a gap needed for the companion work on transitive L\ensuremath{\infty} algebroids and is proved at the right level of generality.
+\end{itemize}
+
+\section*{Weaknesses}
+\begin{itemize}[leftmargin=*]
+  \item Lemma 16---that the kernel of a surjection of locally free graded O\_M-modules is locally free---is invoked from the unpublished companion preprint [cattaneojiang26] without an inline proof or publicly available substitute, leaving assumption [a2] and hence Proposition 15 unverifiable from the submitted manuscript alone.
+  \item The critical Jacobi-identity step in Proposition 23 rests on a one-line assertion that D\textsuperscript{2} vanishes because it lies in ker CE(\ensuremath{\phi}\~{}) ∩ ker CE(\ensuremath{\psi}\~{}), without establishing that this joint kernel is trivial on Sym((k\ensuremath{\oplus}n)[1]); this is the load-bearing check for the fiber-product curved L\ensuremath{\infty} structure that feeds directly into Theorem 1.
+  \item No formal proof artifact (Lean 4, Coq, Agda, or equivalent) is provided for any CFO axiom, the homotopy transfer theorem, or the Berglund Green's operator formula, in a paper whose field (math.CT/math.AT) is code-amenable under the proof-as-code requirement; reproducibility score is 0.22 with a critical-severity finding against Theorem 1.
+  \item The citation and novelty specialist inputs were produced from a different paper (an HCI/workplace-AI study) and a pipeline failure respectively; bibliographic quality and prior-art coverage of the mathematics manuscript are therefore entirely unreviewed.
+\end{itemize}
+
+\section*{Revision Targets}
+\begin{itemize}[leftmargin=*]
+  \item [open] paper\_tex at `Section 2, Proposition 15 with supporting Lemma 17.`: Add a short proof of Lemma 17 making the 'locally an isomorphism' step explicit (e.g. by trivializing in a chart and inverting the filtered automorphism degree by degree), and either inline Lemma 16 or replace the reference with a publicly available source. Check: Re-review should confirm `Section 2, Proposition 15 with supporting Lemma 17.` is corrected or justified.
+  \item [open] paper\_tex at `Whole paper; no artifact repository, no formalization URL.`: Provide a companion Lean4/mathlib formalization of (a) the CFO axioms for L\_infty Alg(R)\_fgp (e.g. src/proofs/CFOLInfty.lean), (b) the explicit Berglund formula for the Green's operator (src/proofs/BerglundGreen.lean), and (c) the homotopy transfer theorem Proposition 44 (src/proofs/HTTCurvedLInfty.lean). Alternatively, supply a numerical/symbolic computer-algebra check (e.g. SageMath script experiments/hpt\_check.sage) verifying the strong-homotopy Jacobi identities on the fiber product for small n, which would dramatically strengthen the load-bearing Proposition 23. Check: Re-review should confirm `Whole paper; no artifact repository, no formalization URL.` is corrected or justified.
+  \item [open] paper\_tex at `Whole paper; no artifact repository, no formalization URL.`: Provide a companion Lean4/mathlib formalization of (a) the CFO axioms for L\_infty Alg(R)\_fgp (e.g. src/proofs/CFOLInfty.lean), (b) the explicit Berglund formula for the Green's operator (src/proofs/BerglundGreen.lean), and (c) the homotopy transfer theorem Proposition 44 (src/proofs/HTTCurvedLInfty.lean). Alternatively, supply a numerical/symbolic computer-algebra check (e.g. SageMath script experiments/hpt\_check.sage) verifying the strong-homotopy Jacobi identities on the fiber product for small n, which would dramatically strengthen the load-bearing Proposition 23. Check: Re-review should confirm `Whole paper; no artifact repository, no formalization URL.` is corrected or justified.
+  \item [open] bibliography at `Novelty reviewer unavailable`: Add or discuss missing prior art `Novelty reviewer unavailable`. Automated novelty review failed before producing a normal prior-art assessment. Failure: CliRunner parse/validate failure after corrective retry for role novelty: first=schema validation failed: Additional properties are not allowed ('entries', 'missing\_references', 'summary' were unexpected); "novelty\_score" is a required prop... Check: Re-review should confirm the related-work discussion addresses this prior art.
+\end{itemize}
+
+\section*{Open Questions}
+\begin{itemize}[leftmargin=*]
+  \item Can the authors either supply a self-contained proof of Lemma 16 within the manuscript or post [cattaneojiang26] to arXiv (or another public preprint server) prior to final acceptance, so that assumption [a2] and its downstream consequences can be independently verified?
+  \item What is the argument that the joint kernel of CE(\ensuremath{\phi}\~{}) and CE(\ensuremath{\psi}\~{}) on Sym((k\ensuremath{\oplus}n)[1]) is trivial, thereby completing the D\textsuperscript{2} = 0 step in Proposition 23? The splitting g[1] = k[1] \ensuremath{\oplus} s(m[1]) used earlier in the proof suggests a route; can the authors make this explicit?
+  \item Would the authors consider providing a Lean 4/mathlib or Coq/HoTT formalization of at least the CFO axiom verification (Proposition 14 / Theorem 30) and the homotopy transfer theorem (Proposition 44), given the code-amenable classification of the paper?
+  \item The Lemma 17 argument ('locally an isomorphism, hence an isomorphism') relies on completeness of the filtration without explicit verification; can a short chart-level computation be added to make the step rigorous?
+\end{itemize}
+
+\section*{Per-Agent Reviews}
+\subsection*{citation (\texttt{Gemini 3.5 Flash (Medium)})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "confidence": 0.95,\\
+  "entries": [\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "Abbas, T.",\\
+          "Rathore, S. A.",\\
+          "Turki, A.",\\
+          "Khan, S.",\\
+          "Alghushairy, O.",\\
+          "Daud, A."\\
+        ],\\
+        "doi": null,\\
+        "key": "1",\\
+        "raw": "Abbas, T.; Rathore, S. A.; Turki, A.; Khan, S.; Alghushairy,\textbackslash{}nO.; and Daud, A. 2025. Enhancing Software Engineering\textbackslash{}nWith AI: Innovations, Challenges, and Future Directions.\textbackslash{}nIET Software, 2025(1): 5691460.\textbackslash{}nAlam, A. 2023. Harnessing the power of AI to create intelligent tutoring systems for enhanced classroom experience\textbackslash{}nand improved learning outcomes. In Intelligent communication technologies and virtual mobile networks, 571--591.\textbackslash{}nSpringer.\textbackslash{}nAllen, T. J. 1977. Managing the flow of technology: technology transfer and the dissemination of technological information within the R and D organization. Massachusetts\textbackslash{}nInstitute of Technology,Cambridge, MA.\textbackslash{}nBakker, A. B.; and Demerouti, E. 2017. Job demands--\textbackslash{}nresources theory: Taking stock and looking forward. Journal\textbackslash{}nof occupational health psychology, 22(3): 273.\textbackslash{}nBaksa, M.; and Branyiczki, I. 2023. Invisible Foundations of\textbackslash{}nCollaboration in the Workplace: A Multiplex Network Approach to Advice Seeking and Knowledge Sharing. Central\textbackslash{}nEuropean Business Review, 12(2).\textbackslash{}nBarke, S.; James, M. B.; and Polikarpova, N. 2023.\textbackslash{}nGrounded copilot: How programmers interact with codegenerating models. Proceedings of the ACM on Programming Languages, 7(OOPSLA1): 85--111.\textbackslash{}nBhat, A.; Aubin Le Qu´er´e, M.; Naaman, M.; and Jakesch, M.",\\
+        "title": "Enhancing Software Engineering With AI: Innovations, Challenges, and Future Directions",\\
+        "url": null,\\
+        "venue": "IET Software",\\
+        "year": 2025\\
+      \},\\
+      "exists": null,\\
+      "explanation": "The first citation in this concatenated block, Abbas et al. 2025, is highly relevant as it provides background on how AI adoption transforms software engineering tasks and productivity, which the paper builds on to analyze invisible work.",\\
+      "notes": "This bibliography entry concatenates multiple unrelated references (Abbas et al. 2025, Alam 2023, Allen 1977, Bakker \& Demerouti 2017, Baksa \& Branyiczki 2023, Barke et al. 2023) and truncates the last reference (Bhat et al. 2026), containing only its authors.",\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": "2510.00762",\\
+        "authors": [\\
+          "Bhat, A.",\\
+          "Aubin Le Qu´er´e, M.",\\
+          "Naaman, M.",\\
+          "Jakesch, M."\\
+        ],\\
+        "doi": null,\\
+        "key": "2",\\
+        "raw": "Reactive Writers: How Co-Writing with AI Changes\textbackslash{}nHow We Engage with Ideas. In Proceedings of the 2026 CHI\textbackslash{}nConference on Human Factors in Computing Systems, 1--21.\textbackslash{}nBorgatti; and Cross. 2003. A Relational View of Information\textbackslash{}nSeeking and Learning in Social Networks. 49.\textbackslash{}nBrown, J. S.; and Duguid, P. 1991. Organizational Learning and Communities-of-Practice: Toward a Unified View of\textbackslash{}nWorking, Learning, and Innovation. Organization Science,\textbackslash{}n2(1): 40--57.\textbackslash{}nBrynjolfsson, E.; Li, D.; and Raymond, L. 2025. Generative\textbackslash{}nAI at work. The Quarterly Journal of Economics, 140(2):\textbackslash{}n889--942.\textbackslash{}nButler, J.; Suh, J.; Haniyur, S.; and Hadley, C. 2025. Dear\textbackslash{}nDiary: A randomized controlled trial of Generative AI coding tools in the workplace. In 2025 IEEE/ACM 47th International Conference on Software Engineering: Software\textbackslash{}nEngineering in Practice (ICSE-SEIP), 319--329. IEEE.\textbackslash{}nCampbell, B. 2021. Alone Together: Why We Expect More\textbackslash{}nfrom Technology and Less from Each Other. Journal of Interdisciplinary Studies, 33(1-2): 196--199.\textbackslash{}nChang, P.-C.; Zhang, W.; Cai, Q.; and Guo, H. 2024. Does\textbackslash{}nAI-driven technostress promote or hinder employees’ artificial intelligence adoption intention? A moderated mediation\textbackslash{}nmodel of affective reactions and technical self-efficacy. Psychology Research and Behavior Management, 413--427.\textbackslash{}nCheng, M.; Lee, C.; Khadpe, P.; Yu, S.; Han, D.; and Jurafsky, D. 2026. Sycophantic AI decreases prosocial intentions\textbackslash{}nand promotes dependence. Science, 391(6792): eaec8352.\textbackslash{}nChoudhuri, R.; Badea, C.; Bird, C.; Butler, J.; DeLine, R.;\textbackslash{}nand Houck, B. 2025. AI Where It Matters: Where, Why,\textbackslash{}nand How Developers Want AI Support in Daily Work. arXiv\textbackslash{}npreprint arXiv:2510.00762.\textbackslash{}nCohen, S.; and Wills, T. A. 1985. Stress, social support, and\textbackslash{}nthe buffering hypothesis. Psychological bulletin, 98(2): 310.\textbackslash{}nCranefield, J.; Yoong, P.; and Huff, S. L. 2015. Rethinking lurking: Invisible leading and following in a knowledge\textbackslash{}ntransfer ecosystem. Journal of the Association for Information Systems, 16(4): 3.\textbackslash{}nCross, R.; Borgatti, S. P.; and Parker, A. 2002. Making invisible work visible: Using social network analysis to support strategic collaboration. California management review,\textbackslash{}n44(2): 25--46.\textbackslash{}nCross, R. L.; and Parker, A. 2004. The hidden power of\textbackslash{}nsocial networks: Understanding how work really gets done\textbackslash{}nin organizations. Harvard Business Press.\textbackslash{}nDaniels, A. K. 1987. Invisible Work. Social Problems,\textbackslash{}n34(5): 403--415.\textbackslash{}nDe Laat, M.; and Schreurs, B. 2013. Visualizing informal professional development networks: Building a case for\textbackslash{}nlearning analytics in the workplace. American Behavioral\textbackslash{}nScientist, 57(10): 1421--1438.\textbackslash{}nDemerouti, E.; Bakker, A. B.; Nachreiner, F.; and Schaufeli,\textbackslash{}nW. B. 2001. The job demands-resources model of burnout.\textbackslash{}nJournal of Applied psychology, 86(3): 499.\textbackslash{}nEhsan, U.; Passi, S.; Saha, K.; McNutt, T.; Riedl, M. O.; and\textbackslash{}nAlcorn, S. 2026. From Future of Work to Future of Workers: Addressing Asymptomatic AI Harms to Foster Dignified Human-AI Interaction. In Proceedings of the 2026 CHI\textbackslash{}nConference on Human Factors in Computing Systems, 1--21.\textbackslash{}nFarmer, N. 2017. The invisible organization: How informal\textbackslash{}nnetworks can lead organizational change. Routledge.\textbackslash{}nFawzy, A.; Tahir, A.; and Blincoe, K. 2025. Vibe Coding in\textbackslash{}nPractice: Motivations, Challenges, and a Future Outlook--a\textbackslash{}nGrey Literature Review. arXiv preprint arXiv:2510.00328.",\\
+        "title": "Reactive Writers: How Co-Writing with AI Changes How We Engage with Ideas",\\
+        "url": null,\\
+        "venue": "Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems",\\
+        "year": 2026\\
+      \},\\
+      "exists": null,\\
+      "explanation": "The first citation in this block, Bhat et al. 2026 ('Reactive Writers'), is highly relevant to the paper as it discusses how co-writing with AI changes writing processes, which is cited in the context of role changes and tool adoption.",\\
+      "notes": "This bibliography entry concatenates multiple unrelated references and starts with the title/venue of Bhat et al. 2026 ('Reactive Writers') whose authors are placed in the previous bibliography entry.",\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "Fr¨og´eli, E.",\\
+          "Jenner, B.",\\
+          "Gustavsson, P."\\
+        ],\\
+        "doi": null,\\
+        "key": "3",\\
+        "raw": "Fr¨og´eli, E.; Jenner, B.; and Gustavsson, P. 2023. Effectiveness of formal onboarding for facilitating organizational socialization: A systematic review. PloS one, 18(2): e0281823.\textbackslash{}nGil-Garcia, J. R.; Guler, A.; Pardo, T. A.; and Burke, G. B.",\\
+        "title": "Effectiveness of formal onboarding for facilitating organizational socialization: A systematic review",\\
+        "url": null,\\
+        "venue": "PloS one",\\
+        "year": 2023\\
+      \},\\
+      "exists": null,\\
+      "explanation": "The first citation, Fr¨og´eli et al. 2023, is highly relevant as it reviews the effectiveness of onboarding programs, which supports the paper's discussion on how AI affects informal onboarding and socialization.",\\
+      "notes": "This bibliography entry concatenates Fr¨og´eli et al. 2023 and the authors of Gil-Garcia et al. 2019, whose title and venue are placed in the next entry.",\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "Gil-Garcia, J. R.",\\
+          "Guler, A.",\\
+          "Pardo, T. A.",\\
+          "Burke, G. B."\\
+        ],\\
+        "doi": null,\\
+        "key": "4",\\
+        "raw": "Characterizing the importance of clarity of roles and\textbackslash{}nresponsibilities in government inter-organizational collaboration and information sharing initiatives. Government Information Quarterly, 36(4): 101393.\textbackslash{}nGoerisch, D.; Basiliere, J.; Rosener, A.; McKee, K.; Hunt,\textbackslash{}nJ.; and Parker, T. M. 2019. Mentoring with: reimagining\textbackslash{}nmentoring across the university. Gender, Place \& Culture,\textbackslash{}n26(12): 1740--1758.\textbackslash{}nGranovetter, M. S. 1973. The Strength of Weak Ties. American Journal of Sociology, 78(6): 1360--1380.\textbackslash{}nGunasekaran, T. S.; Lim, S.; Gupta, K.; Bai, H.; Pai, Y. S.;\textbackslash{}nand Billinghurst, M. 2026. Cognitive Bridge: AI-Generated\textbackslash{}nBoundary Objects for Cross-Functional Collaboration. In\textbackslash{}nProceedings of the 2026 CHI Conference on Human Factors\textbackslash{}nin Computing Systems, 1--35.\textbackslash{}nHadley, C. N.; and Wright, S. L. 2024. We’re Still Lonely at\textbackslash{}nWork. Harvard Business Review, 103(11-12): 68--77.\textbackslash{}nHadley, C. N.; and Wright, S. L. 2026. Employees Are Relying on AI for Personal Support. That’s Risky. Harvard\textbackslash{}nBusiness Review.\textbackslash{}nHarris, J. I.; Winskowski, A. M.; and Engdahl, B. E. 2007.\textbackslash{}nTypes of workplace social support in the prediction of job\textbackslash{}nsatisfaction. The career development quarterly, 56(2): 150--",\\
+        "title": "Characterizing the importance of clarity of roles and responsibilities in government inter-organizational collaboration and information sharing initiatives",\\
+        "url": null,\\
+        "venue": "Government Information Quarterly",\\
+        "year": 2019\\
+      \},\\
+      "exists": null,\\
+      "explanation": "The first citation, Gil-Garcia et al. 2019, is highly relevant as it characterizes the importance of role clarity and responsibilities in collaborations, supporting the paper's section on how AI blurs role boundaries.",\\
+      "notes": "This bibliography entry concatenates multiple unrelated references, starting with the title and venue of Gil-Garcia et al. 2019 whose authors are in the previous entry.",\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "Hatton, E."\\
+        ],\\
+        "doi": null,\\
+        "key": "5",\\
+        "raw": "Hatton, E. 2017. Mechanisms of invisibility: rethinking the\textbackslash{}nconcept of invisible work. Work, employment and society,\textbackslash{}n31(2): 336--351.\textbackslash{}nHiggins, M. C.; and Kram, K. E. 2001. Reconceptualizing\textbackslash{}nmentoring at work: A developmental network perspective.\textbackslash{}nAcademy of management review, 26(2): 264--288.\textbackslash{}nHohn, C.; and Loydl, K. 2026. Vibe Coding: intention instead of implementation: How UX professionals build, evaluate, and hand over functional prototypes with AI. i-com,\textbackslash{}n(0).\textbackslash{}nHouse, J.; and Kahn, R. 1985. Measures and concepts of\textbackslash{}nsocial support. Cohen, S. Syme, S.L. (Eds.) Social support\textbackslash{}nand health, 83--108.\textbackslash{}nHouse, J. S. 1983. Work stress and social support. Addison-\textbackslash{}nWesley series on occupational stress.\textbackslash{}nKahn, W. A. 1990. Psychological conditions of personal\textbackslash{}nengagement and disengagement at work. Academy of management journal, 33(4): 692--724.\textbackslash{}nKommers, C.; Duede, E.; Gordon, J.; Holtzman, A.; Mc-\textbackslash{}nNulty, T.; Stewart, S.; Thomas, L.; Jean So, R.; and Long,\textbackslash{}nH. 2026. Why slop matters. ACM AI Letters, 1(1): 1--6.\textbackslash{}nKrackhardt, D.; and Hanson, J. R. 1993. Informal networks.\textbackslash{}nHarvard business review, 71(4): 104--111.\textbackslash{}nKwon, H.; Oh, J.; Lee, S.; Lee, S.; and Lee, S. 2026. Investigating AI-induced Technostress and Coping Strategies of\textbackslash{}nProfessionals. In Proceedings of the 2026 CHI Conference\textbackslash{}non Human Factors in Computing Systems, 1--16.\textbackslash{}nLaird, M. D.; Perryman, A. A.; Hochwarter, W. A.; Ferris,\textbackslash{}nG. R.; and Zinko, R. 2009. The moderating effects of personal reputation on accountability-strain relationships. Journal of occupational health psychology, 14(1): 70.\textbackslash{}nLi, C.; Zhang, Y.; Niu, X.; Chen, F.; and Zhou, H. 2023.\textbackslash{}nDoes artificial intelligence promote or inhibit on-the-job\textbackslash{}nlearning? Human reactions to AI at work. Systems, 11(3):",\\
+        "title": "Mechanisms of invisibility: rethinking the concept of invisible work",\\
+        "url": null,\\
+        "venue": "Work, employment and society",\\
+        "year": 2017\\
+      \},\\
+      "exists": null,\\
+      "explanation": "The first citation, Hatton 2017, is highly relevant as it discusses the mechanisms of invisible work in employment, providing the core theoretical foundation for the paper's focus on invisible work.",\\
+      "notes": "This bibliography entry concatenates multiple unrelated references.",\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "Mendel, T.",\\
+          "Mandal, S.",\\
+          "Nov, O.",\\
+          "Wiesenfeld, B. M."\\
+        ],\\
+        "doi": null,\\
+        "key": "6",\\
+        "raw": "Mendel, T.; Mandal, S.; Nov, O.; and Wiesenfeld, B. M.",\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "This entry only contains author names for Mendel et al. 2025, so its citation context is incomplete within this entry.",\\
+      "notes": "This entry contains only the authors of Mendel et al. 2025, while the title and venue are in the next entry.",\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "7",\\
+        "raw": "Who is Responsible, the Advisor or the AI? Understanding the Effects of Advisors Disclosing Their AI Use on\textbackslash{}nTheir Perceived Responsibility and AI Reliance. Proc. ACM\textbackslash{}nHum.-Comput. Interact., 9(7).\textbackslash{}nMeske, C.; Hermanns, T.; Von der Weiden, E.; Loser, K.-U.;\textbackslash{}nand Berger, T. 2025. Vibe coding as a reconfiguration of\textbackslash{}nintent mediation in software development: Definition, implications, and research agenda. IEEE Access, 13: 213242--",\\
+        "title": "Who is Responsible, the Advisor or the AI? Understanding the Effects of Advisors Disclosing Their AI Use on Their Perceived Responsibility and AI Reliance",\\
+        "url": null,\\
+        "venue": "Proc. ACM Hum.-Comput. Interact.",\\
+        "year": 2025\\
+      \},\\
+      "exists": null,\\
+      "explanation": "The first citation, Mendel et al. 2025, is highly relevant as it investigates accountability and perceived responsibility when advisors disclose AI use, supporting the paper's section on accountability and reputation.",\\
+      "notes": "This entry contains the title/venue of Mendel et al. 2025 (whose authors are in the previous entry) and the reference Meske et al. 2025.",\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "Mitschelen, A.",\\
+          "Kauffeld, S."\\
+        ],\\
+        "doi": null,\\
+        "key": "8",\\
+        "raw": "Mitschelen, A.; and Kauffeld, S. 2025. Workplace learning\textbackslash{}nduring organizational onboarding: integrating formal, informal, and self-regulated workplace learning. Frontiers in Organizational Psychology, 3: 1569098.\textbackslash{}nMoreland, R. L. 1996. Socially shared cognition at work\textbackslash{}n: Transactive memory and group performance. What’s So\textbackslash{}nSocial About Social Cognition? : Social Cognition Research\textbackslash{}nin Small Groups, 57--84.\textbackslash{}nNahar, N.; K¨astner, C.; Butler, J.; Parnin, C.; Zimmermann,\textbackslash{}nT.; and Bird, C. 2025. Beyond the comfort zone: Emerging solutions to overcome challenges in integrating llms into\textbackslash{}nsoftware products. In 2025 IEEE/ACM 47th International\textbackslash{}nConference on Software Engineering: Software Engineering\textbackslash{}nin Practice (ICSE-SEIP), 516--527. IEEE.\textbackslash{}nNass, C.; and Moon, Y. 2000. Machines and mindlessness:\textbackslash{}nSocial responses to computers. Journal of social issues,\textbackslash{}n56(1): 81--103.\textbackslash{}nNg, T. W.; and Sorensen, K. L. 2008. Toward a further understanding of the relationships between perceptions of support and work attitudes: A meta-analysis. Group \& Organization Management, 33(3): 243--268.\textbackslash{}nNiederhoffer, K.; Kellerman, G. R.; Lee, A.; Liebscher, A.;\textbackslash{}nRapuano, K.; and Hancock, J. T. 2025. AI-generated “workslop” is destroying productivity. Harvard Business Review.\textbackslash{}nNwana, H. S. 1990. Intelligent tutoring systems: an\textbackslash{}noverview. Artificial Intelligence Review, 4(4): 251--277.\textbackslash{}nOliveira, P.; Carvalho, J. M. S.; and Faria, S. 2025. AI Integration in Organisational Workflows: A Case Study on Job\textbackslash{}nReconfiguration, Efficiency, and Workforce Adaptation. Information, 16(9).\textbackslash{}nPark, Y. S.; Arvi, N. A. P.; Kim, S.; and Kim, J. 2026. Authorship Drift: How Self-Efficacy and Trust Evolve During\textbackslash{}nLLM-Assisted Writing. In Proceedings of the 2026 CHI\textbackslash{}nConference on Human Factors in Computing Systems, 1--18.\textbackslash{}nPelau, C.; Dabija, D.-C.; and Ene, I. 2021. What makes an\textbackslash{}nAI device human-like? The role of interaction quality, empathy and perceived psychological anthropomorphic characteristics in the acceptance of artificial intelligence in the service\textbackslash{}nindustry. Computers in Human Behavior, 122: 106855.",\\
+        "title": "Workplace learning during organizational onboarding: integrating formal, informal, and self-regulated workplace learning",\\
+        "url": null,\\
+        "venue": "Frontiers in Organizational Psychology",\\
+        "year": 2025\\
+      \},\\
+      "exists": null,\\
+      "explanation": "The first citation, Mitschelen \& Kauffeld 2025, is highly relevant as it integrates formal and informal learning during onboarding, which supports the paper's discussion on how AI impacts on-the-job learning.",\\
+      "notes": "This bibliography entry concatenates multiple unrelated references.",\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "Pereira, V.",\\
+          "Hadjielias, E.",\\
+          "Christofi, M.",\\
+          "Vrontis, D."\\
+        ],\\
+        "doi": null,\\
+        "key": "9",\\
+        "raw": "Pereira, V.; Hadjielias, E.; Christofi, M.; and Vrontis, D.",\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "This entry only contains author names for Pereira et al. 2023, so its citation context is incomplete within this entry.",\\
+      "notes": "This entry contains only the authors of Pereira et al. 2023, while the title and venue are in the next entry.",\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "10",\\
+        "raw": "A systematic literature review on the impact of artificial intelligence on workplace outcomes: A multi-process\textbackslash{}nperspective. Human Resource Management Review, 33(1):",\\
+        "title": "A systematic literature review on the impact of artificial intelligence on workplace outcomes: A multi-process perspective",\\
+        "url": null,\\
+        "venue": "Human Resource Management Review",\\
+        "year": 2023\\
+      \},\\
+      "exists": null,\\
+      "explanation": "The citation, Pereira et al. 2023, is highly relevant as it provides a systematic review of the impact of AI on workplace outcomes, which directly aligns with the paper's investigation.",\\
+      "notes": "This entry contains only the title and venue of Pereira et al. 2023, whose authors are in the previous entry.",\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": "2510.22780",\\
+        "authors": [\\
+          "Poquet, O.",\\
+          "De Laat, M."\\
+        ],\\
+        "doi": null,\\
+        "key": "11",\\
+        "raw": "Poquet, O.; and De Laat, M. 2021. Developing capabilities:\textbackslash{}nLifelong learning in the age of AI. British Journal of Educational Technology, 52(4): 1695--1708.\textbackslash{}nPost, C.; De Lia, E.; DiTomaso, N.; Tirpak, T. M.; and Borwankar, R. 2009. Capitalizing on thought diversity for innovation. Research-Technology Management, 52(6): 14--25.\textbackslash{}nRanganathan, A.; and Ye, X. M. 2026. AI doesn’t reduce\textbackslash{}nwork---it intensifies it. Harvard Bus. Rev.\textbackslash{}nRanjit, J.; Zhou, K.; Swayamdipta, S.; and Quercia, D. 2026.\textbackslash{}nAre We Automating the Joy Out of Work? Designing AI to\textbackslash{}nAugment Work, Not Meaning. In Proceedings of the 2026\textbackslash{}nCHI Conference on Human Factors in Computing Systems,\textbackslash{}n1--46.\textbackslash{}nReif, J. A.; Larrick, R. P.; and Soll, J. B. 2025. Evidence of\textbackslash{}na social evaluation penalty for using AI. Proceedings of the\textbackslash{}nNational Academy of Sciences, 122(19): e2426766122.\textbackslash{}nSalas, E.; Prince, C.; Baker, D. P.; and Shrestha, L. 1995.\textbackslash{}nSituation awareness in team performance: Implications for\textbackslash{}nmeasurement and training. Human Factors, 37(1): 123--136.\textbackslash{}nSzulanski, G. 1996. Exploring internal stickiness: Impediments to the transfer of best practice within the firm. Strategic Management Journal, 17(S2): 27--43.\textbackslash{}nTime. 2023. How to end the unfairness of invisible work.\textbackslash{}nVallance, C. 2023. AI could replace equivalent of 300 million jobs. BBC News.\textbackslash{}nViswesvaran, C.; Sanchez, J. I.; and Fisher, J. 1999. The\textbackslash{}nrole of social support in the process of work stress: A metaanalysis. Journal of vocational behavior, 54(2): 314--334.\textbackslash{}nWang, D.; Waldman, D. A.; and Ashforth, B. E. 2019. Building relationships through accountability: An expanded idea\textbackslash{}nof accountability. Organizational Psychology Review, 9(2-\textbackslash{}n3): 184--206.\textbackslash{}nWang, Z. Z.; Shao, Y.; Shaikh, O.; Fried, D.; Neubig, G.;\textbackslash{}nand Yang, D. 2025. How Do AI Agents Do Human Work?\textbackslash{}nComparing AI and Human Workflows Across Diverse Occupations. arXiv:2510.22780.\textbackslash{}nWebster, J.; Brown, G.; Zweig, D.; Connelly, C. E.; Brodt,\textbackslash{}nS.; and Sitkin, S. 2008. Beyond knowledge sharing: Withholding knowledge at work. Research in Personnel and Human Resources Management, 27: 1--37.\textbackslash{}nWells, J. E.; and MacAulay, D. ???? What ’Invisible Work’\textbackslash{}nLooks Like in the 21st Century.\textbackslash{}nWolfe, D. A.; Choe, A.; and Kidd, F. 2025. The Architecture of AI Transformation: Four Strategic Patterns and an\textbackslash{}nEmerging Frontier. arXiv preprint arXiv:2509.02853.\textbackslash{}nWoodruff, A.; Shelby, R.; Kelley, P. G.; Rousso-Schindler,\textbackslash{}nS.; Smith-Loud, J.; and Wilcox, L. 2024. How knowledge\textbackslash{}nworkers think generative ai will (not) transform their industries. In Proceedings of the 2024 CHI Conference on Human\textbackslash{}nFactors in Computing Systems, 1--26.\textbackslash{}nZabbo, E. Feb 3 2026. Invisible labor at\textbackslash{}nwork: what it is and how to address it.\textbackslash{}nhttps://www.circles.com/resources/invisible-labor-atwork-what-it-is-and-how-to-address-it.\textbackslash{}nZhang, S.; Zhang, T.; Cheng, J.; and Zhou, S. 2025a. Who\textbackslash{}nis to Blame: A Comprehensive Review of Challenges and\textbackslash{}nOpportunities in Designer-Developer Collaboration. Proceedings of the ACM on Human-Computer Interaction, 9(2):\textbackslash{}n1--32.\textbackslash{}nZhang, X.; De Pablos, P. O.; and Zhou, Z. 2013. Effect of\textbackslash{}nknowledge sharing visibility on incentive-based relationship\textbackslash{}nin Electronic Knowledge Management Systems: An empirical investigation. Computers in Human Behavior, 29(2):\textbackslash{}n307--313.\textbackslash{}nZhang, X.; Subramonyam, H.; Sarkar, A.; Drosos, I.; Wang,\textbackslash{}nZ.; Lee, K.; Pimenova, V.; Chen, X.; and Lukoff, K.",\\
+        "title": "Developing capabilities: Lifelong learning in the age of AI",\\
+        "url": null,\\
+        "venue": "British Journal of Educational Technology",\\
+        "year": 2021\\
+      \},\\
+      "exists": null,\\
+      "explanation": "The first citation, Poquet \& De Laat 2021, is highly relevant as it discusses lifelong learning capabilities in the age of AI, supporting the paper's findings on on-the-job learning.",\\
+      "notes": "This bibliography entry concatenates multiple unrelated references and ends with the authors of Zhang et al. 2026, whose title and venue are in the next entry.",\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": "2506.12605",\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "12",\\
+        "raw": "Generative Design and Vibe Coding: Rethinking The\textbackslash{}nDesign-Development Divide for UI Prototyping. In Proceedings of the Extended Abstracts of the 2026 CHI Conference on Human Factors in Computing Systems, 1--3.\textbackslash{}nZhang, Y.; Zhao, D.; Hancock, J. T.; Kraut, R.; and Yang,\textbackslash{}nD. 2025b. The rise of AI companions: how humanchatbot relationships influence well-being. arXiv preprint\textbackslash{}narXiv:2506.12605.\textbackslash{}nZhou, X.; Chen, C.; Li, W.; Yao, Y.; Cai, F.; Xu, J.; and Qin,\textbackslash{}nX. 2025. How Do Coworkers Interpret Employee AI Usage:\textbackslash{}nCoworkers’ Perceived Morality and Helping as Responses to\textbackslash{}nEmployee AI Usage. Human Resource Management, 64(4):\textbackslash{}n1077--1097.",\\
+        "title": "Generative Design and Vibe Coding: Rethinking The Design-Development Divide for UI Prototyping",\\
+        "url": null,\\
+        "venue": "Proceedings of the Extended Abstracts of the 2026 CHI Conference on Human Factors in Computing Systems",\\
+        "year": 2026\\
+      \},\\
+      "exists": null,\\
+      "explanation": "The first citation, Zhang et al. 2026 ('Generative Design and Vibe Coding'), is highly relevant as it discusses vibe coding and rethinking the design-development divide, which supports the paper's findings on vibe coding and cross-discipline communication.",\\
+      "notes": "This entry starts with the title/venue of Zhang et al. 2026 (whose authors are in the previous entry) and contains Zhang et al. 2025b and Zhou et al. 2025.",\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \}\\
+  ],\\
+  "missing\_references": [\\
+    \{\\
+      "reason": "This seminal paper in Computer-Supported Cooperative Work (CSCW) defines and conceptualizes how systems and technologies create and depend on invisible labor. Given the paper's focus on how AI systems shift and hide professional work, referencing Star's foundational CSCW framework would significantly strengthen the theoretical grounding.",\\
+      "title": "Invisible Work and System Design"\\
+    \},\\
+    \{\\
+      "reason": "This foundational paper discusses the tension between representation of work in systems (like org charts or workflow tools) and the actual, informal practices of workers. It is highly relevant to the paper's proposal of making invisible work visible to managers and organization leaders.",\\
+      "title": "Making Work Visible: Representation of Work"\\
+    \}\\
+  ],\\
+  "summary": "The bibliography has severe formatting and structural issues, with most entries containing concatenations of multiple unrelated papers due to incorrect citation boundary detection. Additionally, several citations (such as Bhat et al., Gil-Garcia et al., Mendel et al., and Pereira et al.) are split across separate bibliography entries, isolating author lists from their titles, venues, and publication years."\\
+\}\\
+\end{quote}
+
+\subsection*{meta\_reviewer (\texttt{claude-sonnet-4-6})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "confidence": 0.72,\\
+  "questions": [\\
+    "Can the authors either supply a self-contained proof of Lemma 16 within the manuscript or post [cattaneojiang26] to arXiv (or another public preprint server) prior to final acceptance, so that assumption [a2] and its downstream consequences can be independently verified?",\\
+    "What is the argument that the joint kernel of CE(\ensuremath{\phi}\~{}) and CE(\ensuremath{\psi}\~{}) on Sym((k\ensuremath{\oplus}n)[1]) is trivial, thereby completing the D\textsuperscript{2} = 0 step in Proposition 23? The splitting g[1] = k[1] \ensuremath{\oplus} s(m[1]) used earlier in the proof suggests a route; can the authors make this explicit?",\\
+    "Would the authors consider providing a Lean 4/mathlib or Coq/HoTT formalization of at least the CFO axiom verification (Proposition 14 / Theorem 30) and the homotopy transfer theorem (Proposition 44), given the code-amenable classification of the paper?",\\
+    "The Lemma 17 argument ('locally an isomorphism, hence an isomorphism') relies on completeness of the filtration without explicit verification; can a short chart-level computation be added to make the step rigorous?"\\
+  ],\\
+  "recommendation": "major\_revision",\\
+  "revision\_targets": [\\
+    \{\\
+      "evidence": "Assumption [a1] is established by the splitting theorem for graded manifolds plus the C\^{}infty\_M-module structure on Omega-hat\_M. Assumption [a2] is reduced via Lemma 17 (locally free Omega-hat\_M-modules of finite rank lift to Omega-hat\_M tensor E for some locally free O\_M-module E) to Lemma 16 of the companion paper [cattaneojiang26], which is invoked but not proved. The Lemma 17 splitting argument itself ('locally an isomorphism, hence an isomorphism') is brief and relies on completeness without explicit verification.",\\
+      "id": "weakness-1",\\
+      "locator": "Section 2, Proposition 15 with supporting Lemma 17.",\\
+      "required\_update": "Add a short proof of Lemma 17 making the 'locally an isomorphism' step explicit (e.g. by trivializing in a chart and inverting the filtered automorphism degree by degree), and either inline Lemma 16 or replace the reference with a publicly available source.",\\
+      "source\_path": null,\\
+      "source\_role": "technical\_correctness",\\
+      "status": "open",\\
+      "target\_kind": "paper\_tex",\\
+      "verification\_check": "Re-review should confirm `Section 2, Proposition 15 with supporting Lemma 17.` is corrected or justified.",\\
+      "weakness\_index": 0\\
+    \},\\
+    \{\\
+      "evidence": "This is a paper in math.CT/math.AT (code-amenable field per the proof-as-code axiom). The principal theorems (Theorem 1 / Theorem 30, Propositions 14, 18, 23, 27, 28, 44 and the supporting CFO / HPT machinery) are exactly the kind of categorical and homotopical statements that mathlib/Lean4 or Coq-HoTT can express. The paper ships no executable artifact verifying any of the above; it relies entirely on prose-level proofs, several of which depend on an unpublished companion paper [cattaneojiang26].",\\
+      "id": "weakness-2",\\
+      "locator": "Whole paper; no artifact repository, no formalization URL.",\\
+      "required\_update": "Provide a companion Lean4/mathlib formalization of (a) the CFO axioms for L\_infty Alg(R)\_fgp (e.g. src/proofs/CFOLInfty.lean), (b) the explicit Berglund formula for the Green's operator (src/proofs/BerglundGreen.lean), and (c) the homotopy transfer theorem Proposition 44 (src/proofs/HTTCurvedLInfty.lean). Alternatively, supply a numerical/symbolic computer-algebra check (e.g. SageMath script experiments/hpt\_check.sage) verifying the strong-homotopy Jacobi identities on the fiber product for small n, which would dramatically strengthen the load-bearing Proposition 23.",\\
+      "source\_path": null,\\
+      "source\_role": "technical\_correctness",\\
+      "status": "open",\\
+      "target\_kind": "paper\_tex",\\
+      "verification\_check": "Re-review should confirm `Whole paper; no artifact repository, no formalization URL.` is corrected or justified.",\\
+      "weakness\_index": 1\\
+    \},\\
+    \{\\
+      "evidence": "This is a paper in math.CT/math.AT (code-amenable field per the proof-as-code axiom). The principal theorems (Theorem 1 / Theorem 30, Propositions 14, 18, 23, 27, 28, 44 and the supporting CFO / HPT machinery) are exactly the kind of categorical and homotopical statements that mathlib/Lean4 or Coq-HoTT can express. The paper ships no executable artifact verifying any of the above; it relies entirely on prose-level proofs, several of which depend on an unpublished companion paper [cattaneojiang26].",\\
+      "id": "weakness-3",\\
+      "locator": "Whole paper; no artifact repository, no formalization URL.",\\
+      "required\_update": "Provide a companion Lean4/mathlib formalization of (a) the CFO axioms for L\_infty Alg(R)\_fgp (e.g. src/proofs/CFOLInfty.lean), (b) the explicit Berglund formula for the Green's operator (src/proofs/BerglundGreen.lean), and (c) the homotopy transfer theorem Proposition 44 (src/proofs/HTTCurvedLInfty.lean). Alternatively, supply a numerical/symbolic computer-algebra check (e.g. SageMath script experiments/hpt\_check.sage) verifying the strong-homotopy Jacobi identities on the fiber product for small n, which would dramatically strengthen the load-bearing Proposition 23.",\\
+      "source\_path": null,\\
+      "source\_role": "technical\_correctness",\\
+      "status": "open",\\
+      "target\_kind": "paper\_tex",\\
+      "verification\_check": "Re-review should confirm `Whole paper; no artifact repository, no formalization URL.` is corrected or justified.",\\
+      "weakness\_index": 2\\
+    \},\\
+    \{\\
+      "evidence": "Automated novelty review failed before producing a normal prior-art assessment. Failure: CliRunner parse/validate failure after corrective retry for role novelty: first=schema validation failed: Additional properties are not allowed ('entries', 'missing\_references', 'summary' were unexpected); \textbackslash{}"novelty\_score\textbackslash{}" is a required prop...",\\
+      "id": "weakness-4",\\
+      "locator": "Novelty reviewer unavailable",\\
+      "required\_update": "Add or discuss missing prior art `Novelty reviewer unavailable`. Automated novelty review failed before producing a normal prior-art assessment. Failure: CliRunner parse/validate failure after corrective retry for role novelty: first=schema validation failed: Additional properties are not allowed ('entries', 'missing\_references', 'summary' were unexpected); \textbackslash{}"novelty\_score\textbackslash{}" is a required prop...",\\
+      "source\_path": null,\\
+      "source\_role": "novelty",\\
+      "status": "open",\\
+      "target\_kind": "bibliography",\\
+      "verification\_check": "Re-review should confirm the related-work discussion addresses this prior art.",\\
+      "weakness\_index": 3\\
+    \}\\
+  ],\\
+  "strengths": [\\
+    "The appendix results---Lemmas 41, 43, 26 and Proposition 44---are detailed, self-contained, and correctly extend the Berglund--Getzler HPT machinery to the curved filtered setting.",\\
+    "The strategy of reducing the geometric category-of-fibrant-objects problem to the algebraic setting via the global sections functor \ensuremath{\Gamma} (Proposition 18) is conceptually clean and follows well-established precedent from Getzler 2009 and 2025.",\\
+    "Lemma 24 (every fibration is strict up to isomorphism) and Proposition 27 (simplicial framing via Dupont contraction) are completely supported and use the standard technical toolkit correctly.",\\
+    "The homotopy transfer theorem for curved L\ensuremath{\infty} algebras over filtered cdgas (Proposition 44) fills a gap needed for the companion work on transitive L\ensuremath{\infty} algebroids and is proved at the right level of generality."\\
+  ],\\
+  "summary": "The technical\_correctness, reproducibility, and summary specialists consistently describe a pure mathematics paper (math.CT/math.AT) proving that L\ensuremath{\infty} spaces over dg manifolds form a category of fibrant objects and supplying a homotopy transfer theorem for curved L\ensuremath{\infty} algebras over filtered commutative dg algebras. Two specialist inputs are unusable as submitted: the citation specialist's report---referencing CHI conference papers, workplace-AI studies, and invisible-work literature in organizations---pertains to a different paper entirely, constituting a review-input mismatch rather than a paper weakness; the novelty specialist failed with a pipeline parse error and produced no usable prior-art assessment. Setting aside those corrupted inputs, the technical picture is as follows. The appendix machinery (Propositions 44, Lemmas 41, 43, 26, and Proposition 27) is detailed and internally consistent. However, three major gaps affect the load-bearing arguments for the headline Theorem 1: (i) Proposition 15 / Lemma 16 relies on an unpublished companion preprint [cattaneojiang26] for the kernel-of-surjection step, making assumption [a2] unverifiable from the submitted text; (ii) the Jacobi-identity check in Proposition 23 is compressed to a single line asserting that D\textsuperscript{2} lies in the intersection of ker CE(\ensuremath{\phi}\~{}) and ker CE(\ensuremath{\psi}\~{}) and must vanish, without establishing that this intersection is trivial on the symmetric coalgebra; (iii) no formal proof artifact exists for any of the principal theorems in a paper classified in the code-amenable field math.CT/math.AT. The reproducibility specialist assigns a score of 0.22 and flags the absence of a machine-checkable file for Theorem 1 at critical severity. Under the proof-as-code recommendation gate, the combination of a critical reproducibility finding and multiple major technical gaps in a code-amenable field mandates major\_revision. The overall correctness is assessed as mostly\_sound; no outright error was identified in the supported results.",\\
+  "weaknesses": [\\
+    "Lemma 16---that the kernel of a surjection of locally free graded O\_M-modules is locally free---is invoked from the unpublished companion preprint [cattaneojiang26] without an inline proof or publicly available substitute, leaving assumption [a2] and hence Proposition 15 unverifiable from the submitted manuscript alone.",\\
+    "The critical Jacobi-identity step in Proposition 23 rests on a one-line assertion that D\textsuperscript{2} vanishes because it lies in ker CE(\ensuremath{\phi}\~{}) ∩ ker CE(\ensuremath{\psi}\~{}), without establishing that this joint kernel is trivial on Sym((k\ensuremath{\oplus}n)[1]); this is the load-bearing check for the fiber-product curved L\ensuremath{\infty} structure that feeds directly into Theorem 1.",\\
+    "No formal proof artifact (Lean 4, Coq, Agda, or equivalent) is provided for any CFO axiom, the homotopy transfer theorem, or the Berglund Green's operator formula, in a paper whose field (math.CT/math.AT) is code-amenable under the proof-as-code requirement; reproducibility score is 0.22 with a critical-severity finding against Theorem 1.",\\
+    "The citation and novelty specialist inputs were produced from a different paper (an HCI/workplace-AI study) and a pipeline failure respectively; bibliographic quality and prior-art coverage of the mathematics manuscript are therefore entirely unreviewed."\\
+  ]\\
+\}\\
+\end{quote}
+
+\subsection*{novelty (\texttt{Gemini 3.5 Flash (High)})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "confidence": 0.0,\\
+  "missing\_prior\_art": [\\
+    \{\\
+      "reason": "Automated novelty review failed before producing a normal prior-art assessment. Failure: CliRunner parse/validate failure after corrective retry for role novelty: first=schema validation failed: Additional properties are not allowed ('entries', 'missing\_references', 'summary' were unexpected); \textbackslash{}"novelty\_score\textbackslash{}" is a required prop...",\\
+      "title": "Novelty reviewer unavailable"\\
+    \}\\
+  ],\\
+  "novelty\_score": 0.0,\\
+  "related\_work": [],\\
+  "verdict": "marginal"\\
+\}\\
+\end{quote}
+
+\subsection*{reproducibility (\texttt{gpt-5.5})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "code\_availability": "unspecified",\\
+  "code\_url": null,\\
+  "concerns": [\\
+    \{\\
+      "area": "code",\\
+      "description": "No formal proof artifact accompanies the headline Theorem 1 that L\_infty spaces over a dg manifold form a category of fibrant objects; a machine-checkable file such as formalization/Lean/HomotopyTransfers/CFO.lean would be needed to reproduce the central theorem under the proof-as-code requirement.",\\
+      "severity": "critical"\\
+    \},\\
+    \{\\
+      "area": "code",\\
+      "description": "The appendical homotopy transfer results for curved L\_infty algebras over filtered cdgas are given only as prose mathematics; a proof artifact such as formalization/Lean/HomotopyTransfers/CurvedTransfer.lean covering the curved complex perturbation lemmas and induced L\_infty morphisms would close this gap.",\\
+      "severity": "major"\\
+    \},\\
+    \{\\
+      "area": "code",\\
+      "description": "No repository, commit, license, or release is provided for any supplementary verification scripts or formalization sources, so independent reproduction cannot pin the artifact state.",\\
+      "severity": "major"\\
+    \},\\
+    \{\\
+      "area": "other",\\
+      "description": "The paper does not specify a proof-assistant environment, library versions, or dependency stack for independently checking the load-bearing formal statements.",\\
+      "severity": "major"\\
+    \}\\
+  ],\\
+  "confidence": 0.87,\\
+  "data\_availability": "unspecified",\\
+  "data\_url": null,\\
+  "environment": null,\\
+  "reproducibility\_score": 0.22\\
+\}\\
+\end{quote}
+
+\subsection*{summary (\texttt{claude-haiku-4-5-20251001})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "audience": "Researchers in derived algebraic geometry, homotopy theory, higher algebra, and mathematical physics working with L\ensuremath{\infty}-algebroids, differential graded manifolds, and categorical approaches to algebraic structures",\\
+  "key\_contributions": [\\
+    "Proves that L\ensuremath{\infty} spaces over a dg manifold form a category of fibrant objects",\\
+    "Establishes that the Fib functor can be interpreted as a fibrant replacement functor detecting weak equivalences",\\
+    "Provides a homotopy transfer theorem for curved L\ensuremath{\infty} algebras over filtered commutative differential graded algebras"\\
+  ],\\
+  "plain\_language\_summary": "This paper studies algebraic structures called L\ensuremath{\infty} spaces, which generalize Lie algebras and can be defined over differential graded manifolds---manifolds equipped with additional algebraic structure. The author proves these spaces satisfy important homotopy-theoretic properties called 'being a category of fibrant objects,' which allows mathematicians to apply powerful tools from homotopy theory. The key insight is that a geometric problem can be translated into a purely algebraic one using the global sections functor, and then classical techniques for relating algebraic structures at different complexity levels (homotopy transfer theorems) can be adapted to this filtered setting. A companion paper shows that even more geometric objects called transitive L\ensuremath{\infty} algebroids possess the same properties.",\\
+  "tldr": "The paper proves that L\ensuremath{\infty} spaces over differential graded manifolds form a category of fibrant objects, establishing good homotopy-theoretic properties for these algebraic structures."\\
+\}\\
+\end{quote}
+
+\subsection*{technical\_correctness (\texttt{claude-opus-4-7})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "claims": [\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "L\_infty spaces over a dg manifold form a category of fibrant objects (Theorem 1).",\\
+      "evidence": "The proof reduces the statement to the algebraic side via the global sections functor (Prop 18) and then uses Prop 23 (pullbacks of fibrations), Prop 27 (simplicial frame via Dupont contraction + HPT), and Prop 28. Each individual step is plausible and follows the strategy of Getzler 2009 and Getzler 2025 adapted to filtered cdgas. However, two load-bearing inputs are not self-contained: (i) Lemma 16 (kernel of a surjection of locally free graded O\_M-modules is locally free) is cited from the unpublished companion preprint [cattaneojiang26] dated 2026, and (ii) the verification that the multi-brackets on the fiber product g x\_m n satisfy the strong-homotopy Jacobi identities is compressed into a one-line argument ('D\^{}2 lies in the kernels of both CE(phi-tilde) and CE(psi-tilde), and hence must vanish') without checking that the intersection of these kernels is trivial. Together these leave the headline theorem only partially verified from the text actually supplied.",\\
+      "id": "T1",\\
+      "location": "Section 1, Theorem 1; full proof assembled in Theorem 30, Section 4.",\\
+      "severity": "major",\\
+      "suggested\_fix": "Either inline a self-contained proof of Lemma 16 (or replace the citation with a published reference), or upgrade the companion preprint to a public arXiv post; expand the D\^{}2 = 0 step of Prop 23 to argue why the intersection of ker CE(phi-tilde) and ker CE(psi-tilde) on the relevant subspace is trivial (e.g. via the splitting g[1] = k[1] + s(m[1]) used earlier in the proof)."\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "For phi: g -> m a fibration and psi: n -> m, the fiber product of curved L\_infty algebras exists; if phi is a trivial fibration so is the induced phi-tilde (Proposition 23).",\\
+      "evidence": "The construction of the underlying module k + n, the explicit formulas (l1), (solpsi), (compphi), (pullback-morphism) and the universal property are written out clearly. The Leibniz rule and the universal property are verified. However the proof that the strong-homotopy Jacobi identities hold rests entirely on the assertion that D\^{}2 lands inside ker CE(phi-tilde) ∩ ker CE(psi-tilde) and must therefore vanish; the paper does not justify why this intersection is zero on the symmetric-coalgebra component where D\^{}2 lives. The trivial-fibration part is supported by the upper-triangular form of Gr l\_1, which is correct modulo the same Jacobi-identity gap.",\\
+      "id": "P23",\\
+      "location": "Section 3, Proposition 23, with proof spanning the discussion after Lemma 24 through the matrix presentation of Gr l\_1.",\\
+      "severity": "major",\\
+      "suggested\_fix": "Spell out why the joint kernel of CE(phi-tilde) and CE(psi-tilde) on Sym((k+n)[1]) is zero, e.g. by showing that the Taylor coefficients of these morphisms together separate points on the symmetric coalgebra, or by computing the bracket identities directly along the lines of Getzler 2025."\\
+    \},\\
+    \{\\
+      "assessment": "supported",\\
+      "claim": "Every fibration in L\_infty Alg(R)\_fgp is strict up to isomorphism (Lemma 24).",\\
+      "evidence": "Projectivity of m gives a splitting s of phi\_1; the coalgebra automorphism Psi (with Taylor coefficients id in degree 1 and s o phi\_n in other degrees) is invertible by completeness of the convolution filtration on Sym-hat, and the identity CE(phi) = Phi o Psi is checked directly. The argument is the standard one used in Getzler 2025 and Rogers 2020 and is reproduced correctly here.",\\
+      "id": "L24",\\
+      "location": "Section 3, Lemma 24 with explicit Phi, Psi.",\\
+      "severity": "info",\\
+      "suggested\_fix": null\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "The graded ringed space (M, Omega-hat\_M) satisfies assumptions [a1] (fine sheaf on a manifold) and [a2] (kernels of surjections in Vec(X) stay in Vec(X)) (Proposition 15).",\\
+      "evidence": "Assumption [a1] is established by the splitting theorem for graded manifolds plus the C\^{}infty\_M-module structure on Omega-hat\_M. Assumption [a2] is reduced via Lemma 17 (locally free Omega-hat\_M-modules of finite rank lift to Omega-hat\_M tensor E for some locally free O\_M-module E) to Lemma 16 of the companion paper [cattaneojiang26], which is invoked but not proved. The Lemma 17 splitting argument itself ('locally an isomorphism, hence an isomorphism') is brief and relies on completeness without explicit verification.",\\
+      "id": "P15",\\
+      "location": "Section 2, Proposition 15 with supporting Lemma 17.",\\
+      "severity": "major",\\
+      "suggested\_fix": "Add a short proof of Lemma 17 making the 'locally an isomorphism' step explicit (e.g. by trivializing in a chart and inverting the filtered automorphism degree by degree), and either inline Lemma 16 or replace the reference with a publicly available source."\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "For a graded ringed space (X, O\_X) satisfying [a1] and [a2], the global sections functor Gamma is fully faithful, S(Gamma(E)) is canonically isomorphic to E for every O\_X-module E, and Gamma(Vec(X)) lies inside Fgp(A) (Lemma 13).",\\
+      "evidence": "The fully-faithful and S o Gamma = id statements are deferred to Lemma 2.3 and Proposition 2.5 of [morye2013note]. The author claims these results carry over to the graded ringed setting because the proofs only use [a1], but does not reproduce the verification. The second part of Lemma 13 (image of Gamma lies in Fgp(A)) uses Sardanashvily's partition-of-unity argument and is written out, but the refinement step that produces a disjoint countable cover U\_\{beta i\} per finite-index beta is asserted without proof.",\\
+      "id": "L13",\\
+      "location": "Section 2, Lemma 13.",\\
+      "severity": "minor",\\
+      "suggested\_fix": "Add a short paragraph confirming that Morye's two results extend to graded rings of degree-bounded type (or cite a graded version), and either cite or sketch the standard 'disjoint countable refinement of an open cover of a manifold' result."\\
+    \},\\
+    \{\\
+      "assessment": "supported",\\
+      "claim": "For each n >= 0, the curved L\_infty algebra g\_n = W\_n\^{}sharp tensor g together with the maps from g and to g\^{}\{(n+1)\} provides a factorization l\_n g -> g\_n ->> r\_n g of the diagonal that is a weak equivalence followed by a fibration and an isomorphism in degree 0 (Proposition 27).",\\
+      "evidence": "The argument uses Dupont's contraction s\_n, Whitney's projection p\_n, and the standard side conditions (Lemma 25, cited from Getzler 2009). HPT for curved L\_infty algebras (Proposition 44 in the appendix) gives morphisms (i\_mu)\_n and (p\_mu)\_n that are weak equivalences and whose composition with the canonical inclusion and vertex evaluation produces the factorization. The surjectivity of the linear component of the composite onto g\^{}\{(n+1)\} is correctly identified with evaluation on W\_n\^{}sharp at the vertices. The commutativity of the diagram is checked via (i\_mu)\_n (p\_mu)\_n = id - [D\_n, (s\_mu)\_n] and the vanishing of s\_n on the inclusion and of ev\_n on s\_n.",\\
+      "id": "P27",\\
+      "location": "Section 3, Proposition 27 with input Lemmas 25, 26 and the appendices.",\\
+      "severity": "info",\\
+      "suggested\_fix": null\\
+    \},\\
+    \{\\
+      "assessment": "supported",\\
+      "claim": "Berglund's explicit formula for the Green's operator G of [d, L\_h] on Sym\^{}n(g[1]) is the symmetrized tensor expression in Lemma 41.",\\
+      "evidence": "The proof reduces the claim to checking that the displayed combination yields id\^{}\{otimes n\} - (ip)\^{}\{otimes n\}. The coefficient identity c\_\{|epsilon|\} = (n - |epsilon|) / C(n-1, |epsilon|) - |epsilon| / C(n-1, |epsilon|-1) is shown to vanish for 0 < |epsilon| < n and to equal +/-1 at the extremes. The combinatorics matches Berglund 2014 Proposition 5.1, and the algebraic identity [d, L\_h] = L\_\{[l\_1, h]\} (equation (ll1h)) follows from the assumption h(l\_0) = 0.",\\
+      "id": "L41",\\
+      "location": "Section 6 (appendix), Lemma 41.",\\
+      "severity": "info",\\
+      "suggested\_fix": null\\
+    \},\\
+    \{\\
+      "assessment": "supported",\\
+      "claim": "p\_mu and i\_mu are morphisms of filtered graded cocommutative coalgebras over R\^{}sharp, and D\_h = delta + p\_mu mu i is a coderivation compatible with D\_R (Lemma 43).",\\
+      "evidence": "The proof verifies (p\_mu tensor p\_mu) Delta = Delta p\_mu by combining the side conditions h\^{}2 = ph = hi = 0, the identity [D\_g, h] = id - ip + [mu, h], and invertibility of id + mu h. The dual identity for i\_mu uses the combinatorial identity sum over epsilon with epsilon\_1 = 0 of C(m-1, |epsilon|)\^{}\{-1\} = m. The closing remark that D\_h is a coderivation compatible with D\_R is immediate. The argument mirrors and correctly extends Berglund 2014 and Getzler 2025 Theorem 4.1.",\\
+      "id": "L43",\\
+      "location": "Section 6 (appendix), Lemma 43.",\\
+      "severity": "info",\\
+      "suggested\_fix": null\\
+    \},\\
+    \{\\
+      "assessment": "supported",\\
+      "claim": "A contraction h of g induces a curved L\_infty algebra structure on h with curvature p(l\_0) and unary bracket p l\_1 i, and the induced maps p\_mu: g -> h and i\_mu: h -> g are weak equivalences of curved L\_infty algebras (Proposition 44, homotopy transfer theorem).",\\
+      "evidence": "By Lemma 43 the perturbed differentials lift to coderivations, so h carries a curved L\_infty structure. The zeroth and first Taylor coefficients (p\_mu)\_0 = 0, (i\_mu)\_0 = 0, (p\_mu)\_1 = p, (i\_mu)\_1 = i follow by inspection. Weak equivalence reduces to the associated graded statement, where (Gr p, Gr i, Gr h) is a strong deformation retract of complexes from (Gr g, Gr l\_1) to (Gr h, Gr p l\_1 i); the unary bracket on h is then a quasi-isomorphism by the standard fact that a strong deformation retract induces an iso on cohomology.",\\
+      "id": "P44",\\
+      "location": "Section 6 (appendix), Proposition 44.",\\
+      "severity": "info",\\
+      "suggested\_fix": null\\
+    \},\\
+    \{\\
+      "assessment": "supported",\\
+      "claim": "s\_n tensor id defines a contraction of the curved L\_infty algebra Omega\_n\^{}sharp tensor-hat g over R (Lemma 26).",\\
+      "evidence": "The proof verifies (s\_n tensor id)(d tensor id + id tensor l\_1)(s\_n tensor id) = s\_n tensor id using s\_n d s\_n = s\_n and s\_n\^{}2 = 0 from Lemma 25, and shows [s\_n tensor id, (d tensor id + id tensor l\_1)\^{}2] = [s\_n tensor id, id tensor l\_1\^{}2] = 0 using R\^{}sharp-linearity of s\_n. Finally (s\_n tensor id)(1 tensor l\_0) = 0 because s\_n vanishes on constants (h\_n\^{}i(1) = 0).",\\
+      "id": "L26",\\
+      "location": "Section 3, Lemma 26.",\\
+      "severity": "info",\\
+      "suggested\_fix": null\\
+    \},\\
+    \{\\
+      "assessment": "unsupported",\\
+      "claim": "All categorical/structural claims (CFO axioms, fully faithful exact functors, framing existence) are not accompanied by any formal-proof artifact in Lean, Coq, Agda or Isabelle.",\\
+      "evidence": "This is a paper in math.CT/math.AT (code-amenable field per the proof-as-code axiom). The principal theorems (Theorem 1 / Theorem 30, Propositions 14, 18, 23, 27, 28, 44 and the supporting CFO / HPT machinery) are exactly the kind of categorical and homotopical statements that mathlib/Lean4 or Coq-HoTT can express. The paper ships no executable artifact verifying any of the above; it relies entirely on prose-level proofs, several of which depend on an unpublished companion paper [cattaneojiang26].",\\
+      "id": "PAC",\\
+      "location": "Whole paper; no artifact repository, no formalization URL.",\\
+      "severity": "major",\\
+      "suggested\_fix": "Provide a companion Lean4/mathlib formalization of (a) the CFO axioms for L\_infty Alg(R)\_fgp (e.g. src/proofs/CFOLInfty.lean), (b) the explicit Berglund formula for the Green's operator (src/proofs/BerglundGreen.lean), and (c) the homotopy transfer theorem Proposition 44 (src/proofs/HTTCurvedLInfty.lean). Alternatively, supply a numerical/symbolic computer-algebra check (e.g. SageMath script experiments/hpt\_check.sage) verifying the strong-homotopy Jacobi identities on the fiber product for small n, which would dramatically strengthen the load-bearing Proposition 23."\\
+    \}\\
+  ],\\
+  "confidence": 0.7,\\
+  "overall\_correctness": "mostly\_sound"\\
+\}\\
+\end{quote}
+
+\section*{Corrections}
+% corrections rendered from corrections table; empty on first publish
+No corrections have been recorded.
+
+\section*{Bibliography}
+\begin{enumerate}[leftmargin=*]
+  \item Behrend2020thx: author=Behrend, Kai, author=Liao, Hsuan-Yi, author=Xu, Ping, title=Derived Differentiable Manifolds, date=2020, eprint=2006.01376, \href{https://arxiv.org/abs/2006.01376}{arXiv:2006.01376}
+  \item amorim2022inverse: title=The inverse function theorem for curved L-infinity spaces., author=Amorim, Lino, author=Tu, Junwu, journal=Journal of Noncommutative Geometry, volume=16, number=4, date=2022
+  \item berglund2014homological: title=Homological perturbation theory for algebras over operads, author=Berglund, Alexander, journal=Algebraic \textbackslash{}\& Geometric Topology, volume=14, number=5, pages=2511--2548, date=2014, publisher=Mathematical Sciences Publishers
+  \item brown1973abstract: title=Abstract homotopy theory and generalized sheaf cohomology, author=Brown, Kenneth S., journal=Transactions of the American Mathematical Society, volume=186, pages=419--458, date=1973
+  \item carchedi2023derivedmanifoldsdifferentialgraded: author=Carchedi, David, title=Derived Manifolds as Differential Graded Manifolds, date=2023, eprint=2303.11140, \href{https://arxiv.org/abs/2303.11140}{arXiv:2303.11140}
+  \item cattaneojiang26: author = Cattaneo, Alberto S., author = Jiang, Shuhan, title = From \$L\_\textbackslash{}infty\$ algebroids to \$L\_\textbackslash{}infty\$ spaces: Part I, date = 2026,
+  \item costello2011geometric: author=Costello, Kevin, title=A geometric construction of the Witten genus, II, date=2011, eprint=1112.0816, \href{https://arxiv.org/abs/1112.0816}{arXiv:1112.0816}
+  \item dupont1976simplicial: title=Simplicial de Rham cohomology and characteristic classes of flat bundles, author=Dupont, Johan L, journal=Topology, volume=15, number=3, pages=233--245, date=1976, publisher=Pergamon
+  \item getzler2009: author=Getzler, Ezra, title=Lie theory for nilpotent \$L\_\textbackslash{}infty\$-algebras, journal=Annals of Mathematics, volume=170, number=1, date=2009, pages=271--301,
+  \item getzler2025higherholonomycurvedlinftyalgebras: author=Getzler, Ezra, title=Higher holonomy for curved \$L\_\textbackslash{}infty\$-algebras 1: simplicial methods, date=2025, eprint=2408.11157, \href{https://arxiv.org/abs/2408.11157}{arXiv:2408.11157}
+  \item hovey2007model: title=Model Categories, author=Hovey, Mark, number=63, date=2007, publisher=American Mathematical Soc.,
+  \item morye2013note: title=Note on the Serre-Swan theorem, author=Morye, Archana S, journal=Mathematische Nachrichten, volume=286, number=2-3, pages=272--278, date=2013, publisher=Wiley Online Library
+  \item rogers2020explicit: title=An explicit model for the homotopy theory of finite-type Lie n--algebras, author=Rogers, Christopher L, journal=Algebraic \textbackslash{}\& Geometric Topology, volume=20, number=3, pages=1371--1429, date=2020, publisher=Mathematical Sciences Publishers
+  \item rogers2020homotopy: title=On the homotopy theory for Lie\ensuremath{\infty}--groupoids, with an application to integrating L\ensuremath{\infty}--algebras, author=Rogers, Christopher L, author=Zhu, Chenchang, journal=Algebraic \textbackslash{}\& Geometric Topology, volume=20, number=3, pages=1127--1219, date=2020, publisher=Mathematical Sciences Publishers,
+  \item rogers2023complete: title=Complete \$L\_\textbackslash{}infty\$-algebras and their homotopy theory, author=Rogers, Christopher L, journal=Journal of Pure and Applied Algebra, volume=227, number=10, pages=107403, date=2023, publisher=Elsevier,
+  \item sardanashvily2001remark: title=Remark on the Serre-Swan theorem for non-compact manifolds, author=Sardanashvily, G, eprint=math-ph/0102016, date=2001 \href{https://arxiv.org/abs/math-ph/0102016}{arXiv:math-ph/0102016}
+\end{enumerate}
+
+% \bibliographystyle{plain}
+% \bibliography{references}
+\end{document}
