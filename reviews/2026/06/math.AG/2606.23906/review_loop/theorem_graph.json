@@ -1,0 +1,4030 @@
+{
+  "arxiv_id": "2606.23906",
+  "nodes": [
+    {
+      "depends_on": [],
+      "id": "thm-1",
+      "section_id": "sec-2-1",
+      "statement": "Definition 1. A homotopy of paths in $X$ starting at $x_0$ and ending at $x_1$ is a family of paths $\\gamma_t:[0,1]\\rightarrow X$ indexed by $I$ such that - the endpoints are fixed : $\\gamma_t(0) = x_...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-2",
+      "section_id": "sec-2-1",
+      "statement": "Definition 2. A continuous map $f:X\\rightarrow Y$ is called a homotopy equivalence if there exists a continuous map $g:Y\\rightarrow X$ such that $g\\circ f \\simeq \\mathop{\\mathrm{id}}_X$ and $f\\circ g\\...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-3",
+      "section_id": "sec-2-1",
+      "statement": "Definition 3. The fundamental group of $X$ based at $x$, denoted by $\\pi_1(X,x)$, is the set of homotopic classes of loops based at $x$.",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-4",
+      "section_id": "sec-2-1",
+      "statement": "Remark 1. Let $f:(X,x)\\rightarrow (Y,y)$ be a continuous map between pointed topological spaces such that $f(x)=y$, then we denote by $f_:\\pi_1(X,x)\\rightarrow\\pi_1(Y,y)$ the induced homomorphism, obt...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-5",
+      "section_id": "sec-2-1",
+      "statement": "Proposition 4. Homeomorphic spaces have isomorphic fundamental groups. If $f:X\\rightarrow Y$ is a homeomorphism, then $f_ :\\pi_1(X,x)\\rightarrow \\pi_1(Y,f(x))$ is an isomorphism.*",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-6",
+      "section_id": "sec-2-1",
+      "statement": "Proof. If $f$ is a homeomorphism, then $(f^{-1})_\\circ f_ = (f^{-1}\\circ f)_ = (id_X)_ = id_{\\pi_1(X,x)}$. Similarly, $f_ \\circ (f^{-1})_$ is the identity on $\\pi_1(Y,f(x))$. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-7",
+      "section_id": "sec-2-1",
+      "statement": "Corollary 5. Two homotopic equivalent spaces have the same fundamental group. If $f:X\\rightarrow Y$ is a homotopy equivalence, then $f_ :\\pi_1(X,x)\\rightarrow \\pi_1(Y,f(x))$ is an isomorphism.*",
+      "type": "corollary"
+    },
+    {
+      "depends_on": [],
+      "id": "fund_grou_base_pt",
+      "section_id": "sec-2-1",
+      "statement": "Proposition 6. If $X$ is a path-connected topological space, then $\\pi_1(X, x_0)$ and $\\pi_1(X, x_1)$ are isomorphic for any $x_0,x_1\\in X$.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-9",
+      "section_id": "sec-2-1",
+      "statement": "Proof. Since two points $x_0$ and $x_1$ may be joined by a path $\\gamma$ starting at $x_0$ and ending at $x_1$, $\\pi_1(X,x_0)$ is non-canonically isomorphic to $\\pi_1(X,x_1)$ via $\\delta \\mapsto \\gamm...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-10",
+      "section_id": "sec-2-1",
+      "statement": "Example 7. Of course, since $\\mathbb{R}^n$ is contractible, any loop is homotopic to the constant loop, so $\\pi_1(\\mathbb{R}^n,x) = \\{1\\}$ for any base point $x\\in\\mathbb{R}^n$.",
+      "type": "example"
+    },
+    {
+      "depends_on": [],
+      "id": "def_cover",
+      "section_id": "sec-2-2",
+      "statement": "Definition 8. A covering of a topological space $X$ consists of a topological space $Y$ and a map $p:Y\\rightarrow X$ with the following property : for any $x\\in X$ there exists a neighbourhood $U$ of ...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "connected_constant_sheets",
+      "section_id": "sec-2-2",
+      "statement": "Remark 2. In the following, we will assume that $X$ is (path)-connected, otherwise we can simply consider coverings of connected components individually. The definition yields that each fibre $p^{-1}(...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "composition_covers",
+      "section_id": "sec-2-2",
+      "statement": "Proposition 10. Let $q:Z \\rightarrow X$ be a connected cover and $f:Y \\rightarrow Z$ be a continuous map. If the composition $q\\circ f:Y \\rightarrow X$ is a cover, then so is $f:Y \\rightarrow X$.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-14",
+      "section_id": "sec-2-2",
+      "statement": "Proof. We first show that for any open neighbourhood $V$ of $z\\in Z$, its preimage by $f$ is a disjoint union of open sets such that each of them map homeomorphically onto $V$.\\ Let $x= q(z)$ and $U$ ...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "unique_lift",
+      "section_id": "sec-2-2",
+      "statement": "Lemma 11 (Lifting (Homotopy) Property). Let $p:Y\\rightarrow X$ be a cover, $y$ a point of $Y$ and $x=p(y)$. - Given a path $\\gamma:[0,1]\\rightarrow X$ starting at $x$, there is a unique lift $\\widetil...",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-16",
+      "section_id": "sec-2-2",
+      "statement": "Proof. See [@Hartshorne] (Prop.1.30 and 1.34). ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "lift_criterion",
+      "section_id": "sec-2-2",
+      "statement": "Lemma 12 (Lifting Criterion). Let $p:Y\\rightarrow X$ be a connected covering and $f:Z\\rightarrow X$ be a continuous map. Then a lift $\\widetilde{f}: Z \\rightarrow Y$ of $f$ exists if and only if $f_(\\...",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-18",
+      "section_id": "sec-2-2",
+      "statement": "Proof. See [@Hartshorne](Prop. 1.33). ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "univ_ppty_lift",
+      "section_id": "sec-2-2",
+      "statement": "Lemma 13. Let $X$ and $Y$ be topological spaces and $\\sim$ be an equivalence relation on $Y$. Let $p:Y\\rightarrow X$ be a continuous map such that for all $y,y'\\in Y$, $y\\sim y' \\Rightarrow p(y)=p(y')...",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-20",
+      "section_id": "sec-2-2",
+      "statement": "Proof. See [@munkrs], Theorem $II.\\:22.2$. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-21",
+      "section_id": "sec-2-2",
+      "statement": "Theorem 14 (The Monodromy Action). Let $p:Y\\rightarrow X$ be a connected covering and $x\\in X$. There is a transitive left action of $\\pi_1(X,x)$ on the fibre $p^{-1}(x)$ called the monodromy action, ...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-22",
+      "section_id": "sec-2-2",
+      "statement": "Proof. Let any $y\\in p^{-1}(x)$, then the path-lifting property [11](#unique_lift){reference-type=\"ref\" reference=\"unique_lift\"} associates to every loop $\\gamma$ based at $x$ in $X$ a unique lift whi...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "property_morphism_covers",
+      "section_id": "sec-2-2",
+      "statement": "Theorem 15. Let $p:Y\\rightarrow X$ and $q:Z\\rightarrow X$ be two coverings. - If two morphism of coverings from $p$ to $q$ agree at one point of $Y$, then they are equal. - Fixing $x\\in X$, any morphi...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-24",
+      "section_id": "sec-2-2",
+      "statement": "Proof. A morphism $\\varphi:Y\\rightarrow Z$ of covers can also be seen as a lift of $p:Y\\rightarrow X$. Thus uniqueness follows from uniqueness of the lifting property proving $a)$.\\ Suppose $\\varphi:Y...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "properly_discontinuous",
+      "section_id": "sec-2-2",
+      "statement": "Definition 16. A group $G$ acting on a topological space $X$ by homeomorphisms (here we may understand by automorphisms) is said to act properly discontinuously if for each $x\\in X$, there exist an op...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "quotient_cover",
+      "section_id": "sec-2-2",
+      "statement": "Proposition 17. Let $Y$ be a connected topological space and let $G$ act on $Y$ properly discontinuously. Then the quotient map $p_G : Y \\rightarrow Y/G$ is a covering.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-27",
+      "section_id": "sec-2-2",
+      "statement": "Proof. The map $p_G$ is surjective and moreover each $x\\in Y/G$ has an open neighbourhood of the form $U = p_G(V)$ with $V$ such that $V\\cap (g\\cdot V)=\\emptyset$ for all $g\\in G$ with $g\\neq 1$. And ...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-28",
+      "section_id": "sec-2-2",
+      "statement": "Definition 18. Let $p:Y\\rightarrow X$ be a covering. A deck transformation is a homeomorphism $d:Y\\rightarrow Y$ such that the following diagram commutes. $$\\begin{tikzcd}[column sep=small] Y \\arrow[r...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "corollary_property_morphism_covers",
+      "section_id": "sec-2-2",
+      "statement": "Corollary 19. A homeomorphism $d\\in \\mathop{\\mathrm{Aut}}(Y|X)$ of a connected covering $p:Y\\rightarrow X$ having a fixed point must be trivial.",
+      "type": "corollary"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-30",
+      "section_id": "sec-2-2",
+      "statement": "Proof. This is immediate from Theorem [15](#property_morphism_covers){reference-type=\"ref\" reference=\"property_morphism_covers\"} if we take one (auto)morphism of covers to be the deck transformation $...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-31",
+      "section_id": "sec-2-2",
+      "statement": "Proposition 20. If $p:Y\\rightarrow X$ is a connected covering, the action of $\\mathop{\\mathrm{Aut}}(Y|X)$ on $Y$ is properly discontinuous.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-32",
+      "section_id": "sec-2-2",
+      "statement": "Proof. Let $y\\in Y$ and set $x = p(y)$. Let $U$ be a connected open neighbourhood of $x$ such that $p^{-1}(U)$ is a disjoint union of open sets $V_i$ as in the Definition [8](#def_cover){reference-typ...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "G_is_aut_group",
+      "section_id": "sec-2-2",
+      "statement": "Proposition 21. If $G$ is a group acting properly discontinuously on a connected space $Y$, the automorphism group of the covering $p_G:Y\\rightarrow Y/G$ is precisely $G$.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-34",
+      "section_id": "sec-2-2",
+      "statement": "Proof. Since $G$ acts by homeomorphism on $Y$ and $p$ sends any $y\\in Y$ to $p(y)\\in Y/G$, then $p(y) = p(g\\cdot y)$ by properly discontinuity of the action of $G$ onto $Y$, therefore $G$ is a subgrou...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-35",
+      "section_id": "sec-2-2",
+      "statement": "Definition 22. We say that a covering $p:Y\\rightarrow X$ is Galois or Normal if $Y$ is connected and if the map $\\overline{p}$ defined above is a homeomorphism.",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "Galois_free",
+      "section_id": "sec-2-2",
+      "statement": "Remark 3. If $Y$ is a connected Galois covering of $X$, then $\\mathop{\\mathrm{Aut}}(Y|X)$ acts freely on $p^{-1}(x)$ for any $x\\in X$. This follows by Corollary [19](#corollary_property_morphism_cover...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "induced_subgroup",
+      "section_id": "sec-2-2",
+      "statement": "Lemma 23. Let $p:Y\\rightarrow X$ be a connected covering and $x\\in X$. For each $y\\in p^{-1}(x)$, the stabiliser of $y$ under the monodromy action is $p_(\\pi_1(Y,y)) \\leq \\pi_1(X,x)$. And as $y$ varie...",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-38",
+      "section_id": "sec-2-2",
+      "statement": "Proof. Let $y\\in p^{-1}(x)$ be arbitrary, and suppose that $[\\gamma]$ is in the stabiliser of $y$. This means that $\\widetilde{\\gamma}_y(1) = [\\gamma]\\cdot y = y$ (by the monodromy action), hence $\\wi...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "isomorphism_conjugate",
+      "section_id": "sec-2-2",
+      "statement": "Lemma 24. Let $p:Y\\rightarrow X$ and $q:Z\\rightarrow X$ be two connected coverings.\\ $Y$ and $Z$ are isomorphic if and only if, for some $x\\in X$ the conjugacy classes of subgroups of $\\pi_1(X,x)$ ind...",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-40",
+      "section_id": "sec-2-2",
+      "statement": "Proof. First assume that $Y$ and $Z$ are isomorphic. For any $x\\in X$, this isomorphism restrict to a $\\pi_1(X,x)$-equivariant bijection from $p^{-1}(x)$ to $q^{-1}(x)$ as in Theorem [15](#property_mo...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "caracterize_Galois_cov",
+      "section_id": "sec-2-2",
+      "statement": "Theorem 25. Let $p:Y\\rightarrow X$ be a connected covering.\\ The following conditions are equivalent : - $p$ is a Galois covering. - $Y$ is connected and $\\mathop{\\mathrm{Aut}}(Y|X)$ acts transitively...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-42",
+      "section_id": "sec-2-2",
+      "statement": "Proof. $a) \\Leftrightarrow b)$ ; by definition, the underlying set of $Y/\\mathop{\\mathrm{Aut}}(Y|X)$ is the $\\mathop{\\mathrm{Aut}}(Y|X)$-orbits of $Y$. So the map $\\overline{p}$ is one to one precisel...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "clasification_of_covers",
+      "section_id": "sec-2-2",
+      "statement": "Theorem 26 (Main Classification of Coverings). Let $X$ be a connected topological space, $p:Y\\rightarrow X$ be a Galois cover and $G$ the group automorphisms of $p$. If $q:Z\\rightarrow X$ is a connect...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-44",
+      "section_id": "sec-2-2",
+      "statement": "Proof. By hypothesis, the map $p$ factors as the composite $\\overline{p}\\circ p_H$ with $\\overline{p}= Y/H\\rightarrow X$ and $p_H:Y\\rightarrow Y/H$ for $H$ a subgroup of $G$. Since $p$ and $p_H$ are c...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "th_link_aut_fund",
+      "section_id": "sec-2-2",
+      "statement": "Theorem 27. Let $p:Y\\rightarrow X$ be a covering map and fix $y\\in Y$ and $x = p(y)$. Then we have the following isomorphism $$\\mathop{\\mathrm{Aut}}(Y|X) \\cong \\frac{N_{\\pi_1(X,x)}(p_(\\pi_1(Y,y)))}{p_...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-46",
+      "section_id": "sec-2-2",
+      "statement": "Proof. See [@Intro_manifolds], Theorem $12.7$ ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "co_link_aut_fund",
+      "section_id": "sec-2-2",
+      "statement": "Corollary 28. For $X$, $Y$, $x$ and $y$ as in Theorem [27](#th_link_aut_fund){reference-type=\"ref\" reference=\"th_link_aut_fund\"}. If the covering $p:Y\\rightarrow X$ is a Galois covering, then $$\\matho...",
+      "type": "corollary"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-48",
+      "section_id": "sec-2-2",
+      "statement": "Proof. Follows from Theorem [27](#th_link_aut_fund){reference-type=\"ref\" reference=\"th_link_aut_fund\"} since $p_*(\\pi_1(Y,y))$ is a normal subgroup of $\\pi_1(X,x)$ (Theorem [25](#caracterize_Galois_co...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-49",
+      "section_id": "sec-2-2",
+      "statement": "Remark 4. - Recall from Theorem [27](#th_link_aut_fund){reference-type=\"ref\" reference=\"th_link_aut_fund\"} and Corollary [28](#co_link_aut_fund){reference-type=\"ref\" reference=\"co_link_aut_fund\"} that...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-50",
+      "section_id": "sec-2-3",
+      "statement": "Definition 29. Let $X$ be a path-connected, locally simply-connected topological space and pick a base point $x\\in X$. The covering $q: \\widetilde{X}_x \\rightarrow X$ is called an universal cover if $...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-51",
+      "section_id": "sec-2-3",
+      "statement": "Construction 30. For $X$ path-connected and locally simply-connected, there is a way to construct a simply-connected cover $\\widetilde{X}_x$ of $X$.\\ The points of $\\widetilde{X}_x$ are homotopy class...",
+      "type": "construction"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-52",
+      "section_id": "sec-2-3",
+      "statement": "Definition 31. Let $X$ be a topological space and $x\\in X$. We define the fibre functor $\\mathop{\\mathrm{Fib}}_x$ from the category of coverings spaces $\\mathop{\\mathrm{\\bf{Cov}}}(X)$ of $X$ to the ca...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "representable_fibre_functor",
+      "section_id": "sec-2-3",
+      "statement": "Proposition 32. Let $X$ be a path-connected, locally simply-connected topological space and pick a base point $x\\in X$. The functor $\\mathop{\\mathrm{Fib}}_x :\\mathop{\\mathrm{\\bf{Cov}}}(X) \\rightarrow ...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-54",
+      "section_id": "sec-2-3",
+      "statement": "Proof. We want to show that for a cover $p:Y\\rightarrow X$, each point $y\\in p^{-1}(x)$ corresponds to a morphism $\\varphi_y :\\widetilde{X}_x\\rightarrow Y$ of covers. We define the map $\\varphi_y$ as ...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "unive_cov_galois",
+      "section_id": "sec-2-3",
+      "statement": "Proposition 33. The universal cover $q : \\widetilde{X}_x\\rightarrow X$ is a Galois cover.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-56",
+      "section_id": "sec-2-3",
+      "statement": "Proof. Since $\\widetilde{X}_x$ is connected, by Theorem [25](#caracterize_Galois_cov){reference-type=\"ref\" reference=\"caracterize_Galois_cov\"} it is enough to prove that the group $\\mathop{\\mathrm{Aut...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "aut_iso_fund",
+      "section_id": "sec-2-3-1",
+      "statement": "Theorem 34. There is a natural isomorphism between $\\mathop{\\mathrm{Aut}}(\\widetilde{X}_x|X)^{op}$ and $\\pi_1(X,x)$.",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-58",
+      "section_id": "sec-2-3-1",
+      "statement": "Proof. Let's endow $\\widetilde{X}_x$ with the following right $\\pi_1(X,x)$-action : let $\\widetilde{y}\\in \\widetilde{X}_x$ and $[\\gamma]\\in\\pi_1(X,x)$ with $f$ the representative of $\\widetilde{y}$. W...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "free_action_universal",
+      "section_id": "sec-2-3-1",
+      "statement": "Corollary 35. The fundamental group $\\pi_1(X,x)$ acts freely on the universal covering $\\widetilde{X}$ of $X$.",
+      "type": "corollary"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-60",
+      "section_id": "sec-2-3-1",
+      "statement": "Proof. Indeed, since $\\mathop{\\mathrm{Aut}}(\\widetilde{X}_x|X)^{op}$ and $\\pi_1(X,x)$ and since two automorphisms of $\\mathop{\\mathrm{Aut}}(\\widetilde{X}_x|X)$ agreeing at one point being identical by...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "fibre_univ_cov",
+      "section_id": "sec-2-3-1",
+      "statement": "Corollary 36. Let $X$ be a path-connected locally simply-connected topological space, and $q:\\widetilde{X}\\rightarrow X$ the universal cover. Then $\\mathop{\\mathrm{Fib}}_x(\\widetilde{X}) = \\pi_1(X,x)^...",
+      "type": "corollary"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-62",
+      "section_id": "sec-2-3-1",
+      "statement": "Proof. By Proposition [32](#representable_fibre_functor){reference-type=\"ref\" reference=\"representable_fibre_functor\"}, $q^{-1}(x)$ is in one-to-one correspondence with $\\mathop{\\mathrm{Aut}}(\\widetil...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-63",
+      "section_id": "sec-2-3-1",
+      "statement": "Theorem 37. $\\pi_1(S^1) \\cong \\mathbb{Z}$",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-64",
+      "section_id": "sec-2-3-1",
+      "statement": "Proof. $p:\\mathbb{R}\\rightarrow S^1: t\\mapsto e^{2\\pi i t}$ for $t\\in[0,1]$ is clearly the universal cover since $\\mathbb{R}$ is simply-connected. Notice that for any $x\\in S^1$, we have that the fibr...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-65",
+      "section_id": "sec-2-3-1",
+      "statement": "Proposition 38. A compact manifold is homotopy equivalent to a CW complex.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-66",
+      "section_id": "sec-2-3-1",
+      "statement": "Proof. See [@Hatcher], Corollary $A.12$. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-67",
+      "section_id": "sec-2-3-1",
+      "statement": "Theorem 39. The fundamental group of a CW complex is finitely presented.",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-68",
+      "section_id": "sec-2-3-1",
+      "statement": "Proof. See [@Hatcher], Chapter $1.2$, Applications to Cell Complexes. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "galois_finite_field",
+      "section_id": "sec-2-4",
+      "statement": "Theorem 40 (Main Theorem of Galois Theory). Let $L|k$ be a finite Galois extension with Galois group $G$. The maps $H\\mapsto L^{H}$ and $M \\mapsto \\mathop{\\mathrm{Gal}}(L|M)$ yield an inclusion-revers...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-70",
+      "section_id": "sec-2-4",
+      "statement": "Proof. The material needed and the proof itself of the main theorem of Galois can be found in [@Lang_algebra] (Chapter $VI.$ $1$) . ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "embed_finite_subextension",
+      "section_id": "sec-2-4",
+      "statement": "Lemma 41. Let $K|k$ be a Galois field extension (possibly infinite). Then each finite subextension of $K|k$ can be embedded in a finite Galois subextension of $K|k$ called the Galois closure.",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-72",
+      "section_id": "sec-2-4",
+      "statement": "Proof. By the theorem of the primitive element, each finite subextension is simple (of the form $k(\\alpha)$) and we may embed $k(\\alpha)$ into the splitting field of a the minimal polynomial of $\\alph...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-73",
+      "section_id": "sec-2-4-1",
+      "statement": "Definition 42. We say that an action of a topological group $G$ on a topological space $X$ is a continuous group action if the map $m :G\\times X\\rightarrow X ; (g,x) \\mapsto g\\cdot x$ is a continuous ...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "continuous_open_stabiliser",
+      "section_id": "sec-2-4-1",
+      "statement": "Lemma 43. Let $X$ be a discrete topological space, and $G$ a topological group acting on $X$. We say that $G$ has a continuous action on $X$ if and only if for each $x\\in X$, the stabiliser $G_x$ is o...",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-75",
+      "section_id": "sec-2-4-1",
+      "statement": "Proof. Suppose that $G_x$ is open. Since $X$ has the discrete topology, every $x$ is open and\\ $U_x = \\{(g,y)\\in G\\times X \\mid gy=x\\}$ is their preimage by our action. And $$\\begin{equation} U_x = \\b...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-76",
+      "section_id": "sec-2-4-1",
+      "statement": "Definition 44. A profinite group is a group that is isomorphic to the inverse limit of an inverse system of discrete finite groups. An inverse system consists of a directed set $(I, \\leq)$, an indexed...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "prof_are_top",
+      "section_id": "sec-2-4-1",
+      "statement": "Remark 5. We can endow a profinite group with a natural topology as follows: let $G$ be an inverse limit of the system of finite groups $(G_{\\alpha} , \\phi_{\\alpha\\beta})$ and endow $G_{\\alpha}$ with ...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "profinite_groups_other",
+      "section_id": "sec-2-4-1",
+      "statement": "Theorem 45. Profinite group are equivalently groups for which the underlying set is compact, totally disconnected and Hausdorff.",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-79",
+      "section_id": "sec-2-4-1",
+      "statement": "Proof. See [@Ribes] (Theorem $2.1.3$) ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "closed_profinite_subgroup",
+      "section_id": "sec-2-4-1",
+      "statement": "Corollary 46. Closed subgroups of profinite groups are again profinite.",
+      "type": "corollary"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-81",
+      "section_id": "sec-2-4-1",
+      "statement": "Proof. Since closed subsets of a compact Hausdorff space are precisely the compact subsets and subsets of totally disconnected Hausdorff spaces are again totally disconnected and Hausdorff. Closed sub...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "open_subgroup_profinite",
+      "section_id": "sec-2-4-1",
+      "statement": "Corollary 47. A subgroup of a profinite groups is open if and only if it is closed and of finite index.",
+      "type": "corollary"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-83",
+      "section_id": "sec-2-4-1",
+      "statement": "Proof. Every open subgroup $U$ in a topological group is closed. Indeed, for topological groups, translations are homeomorphisms, so $U\\mapsto gU$ is a homeomorphism and since the complement of $U$ is...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "trivial_intersection_normal_subgroups",
+      "section_id": "sec-2-4-1",
+      "statement": "Lemma 48. Let $G$ be a profinite group. Then the intersection of all open normal subgroups of $G$ is trivial.",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-85",
+      "section_id": "sec-2-4-1",
+      "statement": "Proof. Since $G$ is Hausdorff, for any element $g\\in G$, there exist two open sets $U$ and $V$ in $G$ with $1\\in U$ and $g\\in V$ such that $U\\cap V = \\emptyset$. But since $U$ contains $1$, from the b...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "lemma_profinite",
+      "section_id": "sec-2-4-1",
+      "statement": "Lemma 49. Let $G$ be a profinite group, and $H\\subset G$ a closed subgroup. - The intersection of the open subgroups of $G$ containing $H$ is exactly $H$. - Given an open subgroup $V'\\subset H$, there...",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-87",
+      "section_id": "sec-2-4-1",
+      "statement": "Proof. For the first statement, given $g\\in G\\backslash H$, we shall find an open subgroup of $G$ containing $H$ but not $g$. Since $H$ is closed, and $G$ is Hausdorff, there exists an open neighbourh...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-88",
+      "section_id": "sec-2-4-1",
+      "statement": "Definition 50. Given an arbitrary group $G$, the profinite completion $\\hat{G}$ of $G$ is defined as the inverse limit of the groups $G/N$, where $N$ runs through the normal subgroups in $G$ of finite...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "finite_generated_prof_grp",
+      "section_id": "sec-2-4-1",
+      "statement": "Remark 6. While it is not always the case that the profinite completion of a finitely presented group is finitely presented, it is the case that the profinite completion of a finitely generated group ...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "Galois_groups_are_profinite",
+      "section_id": "sec-2-4-1",
+      "statement": "Proposition 51. Let $K|k$ be a Galois field extension (possibly infinite). The Galois groups of finite Galois subextensions of $K|k$ together with the homomorphisms $\\phi_{ML}:\\mathop{\\mathrm{Gal}}(M|...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-91",
+      "section_id": "sec-2-4-1",
+      "statement": "Proof. By the main theorem of Galois theory, we can quickly check that the above data forms an inverse system, $\\phi_{ML}$ are the canonical surjections and we have $\\phi_{NL}=\\phi_{ML}\\circ\\phi_{NM}$...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-92",
+      "section_id": "sec-2-4-1",
+      "statement": "Theorem 52 (Krull). Let $K|k$ be a Galois extension (possibly infinite) with Galois group $G$. If $L$ is a subextension of $K|k$, then $\\mathop{\\mathrm{Gal}}(K|L)$ is a closed group of $G$. The maps $...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-93",
+      "section_id": "sec-2-4-1",
+      "statement": "Proof. Let $L|k$ be a finite separable extension in $K|k$. By Lemma [41](#embed_finite_subextension){reference-type=\"ref\" reference=\"embed_finite_subextension\"}, we can embed $L|k$ in a finite Galois ...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "separable_closure",
+      "section_id": "sec-2-4-1",
+      "statement": "Definition 53. We define the separable closure of $k$ in $\\overline{k}$ as the compositum of all separable extensions of $k$. And we call $\\mathop{\\mathrm{Gal}}(k)=\\mathop{\\mathrm{Gal}}(k_s|k)$ the ab...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-95",
+      "section_id": "sec-2-4-1",
+      "statement": "Remark 7. It is quite standard to show that the separable closure $k_s$ is a separable extension of $k$. Indeed, if $M$ and $L$ are two separable extensions, we have that $LM = M(\\alpha_1,...,\\alpha_n...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-96",
+      "section_id": "sec-2-4-1",
+      "statement": "Corollary 54. The action of $\\mathop{\\mathrm{Gal}}(k)$ on $\\mathop{\\mathrm{Hom}}_k(L,k_s)$ as above is continuous and transitive.",
+      "type": "corollary"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-97",
+      "section_id": "sec-2-4-1",
+      "statement": "Proof. The stabiliser $U$ of an element $\\phi\\in\\mathop{\\mathrm{Hom}}_k(L,k_s)$ consists of the elements of $\\mathop{\\mathrm{Gal}}(k)$ fixing $\\phi(L)$. And by the main theorem of Galois for infinite ...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "Galois_normal_reformulation",
+      "section_id": "sec-2-4-1",
+      "statement": "Corollary 55. Let $L|k$ be a finite separable extension, then $\\mathop{\\mathrm{Hom}}_k(L,k_s)$ as a $\\mathop{\\mathrm{Gal}}(k)$-set is isomorphic to the left coset space of some open subgroup in $\\math...",
+      "type": "corollary"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-99",
+      "section_id": "sec-2-4-1",
+      "statement": "Proof. The first statement is immediate from the above corollary and Theorem [264](#Cameron_1_3){reference-type=\"ref\" reference=\"Cameron_1_3\"} $a)$ with the open subgroup being the stabiliser $U$ of a...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "Grot_reformulation_Galois",
+      "section_id": "sec-2-4-1",
+      "statement": "Theorem 56 (Reformulation of Galois Theory). Let $k$ be a field with separable closure $k_s$. The above contravariant functor $\\mathop{\\mathrm{Hom}}_k(\\_,k_s)$ gives an anti-equivalence of categories ...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-101",
+      "section_id": "sec-2-4-1",
+      "statement": "Proof. We show that any continuous transitive finite left $\\mathop{\\mathrm{Gal}}(k)$-set $T$ is isomorphic to some $\\mathop{\\mathrm{Hom}}_k(L,k_s)$ for $L$ a finite separable extension of $k$. Let $t\\...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-102",
+      "section_id": "sec-2-4-2",
+      "statement": "Definition 57. A finite-dimensional commutative $k$-algebra $A$ is said to be étale (over $k$) if it is isomorphic to a finite direct product of separable extensions of $k$.",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-103",
+      "section_id": "sec-2-4-2",
+      "statement": "Remark 8. Morphisms of finite étale $k$-algebras are simply morphisms of $k$-algebras. From this we can consider the category of finite étale $k$-algebras $\\mathop{\\mathrm{\\bf{F\\acute{e}Al}}}_k$. And ...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "equivalence_catgory_etale_algebra",
+      "section_id": "sec-2-4-2",
+      "statement": "Theorem 58. Let $k$ be a field with separable closure $k_s$. Then above functor $\\mathop{\\mathrm{Hom}}_k( , k_s)$ mapping a finite étale $k$-algebra $A$ to the finite set $\\mathop{\\mathrm{Hom}}_k(A,k_...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-105",
+      "section_id": "sec-2-4-2",
+      "statement": "Proof. This theorem follows from the previous one by noticing that, given a finite decomposition $A = \\prod_i L_i$ into a product of fields and an element $\\phi \\in \\mathop{\\mathrm{Hom}}_k(A,k_s)$, th...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "finite_dimensional_direct_sum_reduced",
+      "section_id": "sec-2-4-2",
+      "statement": "Lemma 59. A finite-dimensional commutative algebra $A$ over a field $k$ is isomorphic to a direct sum of finite field extensions of $k$ if and only if $A$ is reduced.",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-107",
+      "section_id": "sec-2-4-2",
+      "statement": "Proof. The ''only if\\\" part is obvious, one just has to notice that fields are already reduced.\\ To prove the other direction, by decomposing $A$ into a finite direct product of indecomposable $k$-alg...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "etale_algebras",
+      "section_id": "sec-2-4-2",
+      "statement": "Theorem 60. Let $A$ be a finite-dimensional commutative $k$-algebra. Then the following are equivalent : - $A$ is étale - $A\\otimes_k \\overline{k} \\cong \\overline{k}^{\\oplus^n}$ - $A\\otimes_k\\overline...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-109",
+      "section_id": "sec-2-4-2",
+      "statement": "Proof. Let us first show that $a)\\Rightarrow b)$:\\ We may restrict to finite separable extensions $L$ of $k$. Then of course, we have $L = k[x]/(f)$ for some polynomial $f(x)=\\prod_i(x-\\alpha_i)$ in $...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-110",
+      "section_id": "sec-2-4-2",
+      "statement": "Definition 61. An algebra $A$ over a field $k$ is called separable if there exists a map $\\Delta : A\\otimes_k A\\rightarrow A$ with $m(\\Delta(a))=a$ and $a\\Delta(b) = \\Delta(ab) = \\Delta(a)b$, for $a,b...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "commut_separable_is_etale",
+      "section_id": "sec-2-4-2",
+      "statement": "Proposition 62. Commutative separable algebras and finite étale algebras coincide over fields.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-112",
+      "section_id": "sec-2-4-2",
+      "statement": "Proof. Corollary $4.5.8$ in [@Sep_al] says that such a commutative $k$-algebra $A$ is a separable algebra if and only if $A$ is isomorphic to a finite direct sum of fields $L_1 \\oplus ... \\oplus L_n$ ...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "lemma_splitting_exact_sequence_separable",
+      "section_id": "sec-2-4-2",
+      "statement": "Lemma 63. An algebra $A$ over a commutative ring is separable if and only if this short exact sequence of $A$,$A$-bimodules splits $$0\\xrightarrow[]{} I \\xrightarrow[]{i} A\\otimes_kA \\xrightarrow[]{m}...",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-114",
+      "section_id": "sec-2-4-2",
+      "statement": "Proof. We use the splitting lemma (in [@Lang_algebra], Proposition $3.2$). We can define a map $\\Delta: A\\rightarrow A\\otimes A$ so that $m\\circ \\Delta = \\mathop{\\mathrm{id}}_A$. And $\\Delta$ is an $A...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "covering_reformulation_1",
+      "section_id": "sec-2-5",
+      "statement": "Theorem 64. Let $X$ be a connect topological space and $x\\in X$ a base point. The fibre functor $\\mathop{\\mathrm{Fib}}_x$ induces an equivalence of the categories between $\\mathop{\\mathrm{\\bf{Cov}}}(X...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-116",
+      "section_id": "sec-2-5",
+      "statement": "Proof. We check that $\\mathop{\\mathrm{Fib}}_x$ is fully faithful and essentially surjective.\\ Let $p:Y\\rightarrow X$ and $q:Z\\rightarrow X$ be two covers of $X$. We can assume that $Y$ and $Z$ are con...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-117",
+      "section_id": "sec-2-5",
+      "statement": "Remark 9. Earlier, we have shown that Galois groups of Galois extensions are profinite, however fundamental groups of topological spaces are generally not profinite; a prime example of this is the fun...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-118",
+      "section_id": "sec-2-5",
+      "statement": "Definition 65. We say that a covering space $p:Y\\rightarrow X$ is $\\textbf{finite}$ if it has finite fibres. For a connected topological space, these fibres have the same cardinality, called the degre...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-119",
+      "section_id": "sec-2-5",
+      "statement": "Lemma 66. Let $G$ be a group and $H$ a subgroup of finite index. Then there exists a normal subgroup $N$ of $G$ contained in $H$",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-120",
+      "section_id": "sec-2-5",
+      "statement": "Proof. Suppose the index of $H$ in $G$ is $[G:H]=n$, and consider the representation of $G$ on the left coset space of $H$, so $\\rho:G\\rightarrow \\mathop{\\mathrm{Sym}}(G/H) = S_n$ is a group homomorph...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "covering_reformulation_2",
+      "section_id": "sec-2-5",
+      "statement": "Theorem 67. Let $X$ be a connect topological space and $x\\in X$ a base point. The functor $\\mathop{\\mathrm{Fib}}_x$ induces an equivalence between the category of finite covers of $X$ and the category...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-122",
+      "section_id": "sec-2-5",
+      "statement": "Proof. First, notice that for a finite connected cover $p:Y\\rightarrow X$, from the classification of coverings, the action of $\\pi_1(X,x)$ on $p^{-1}(x)$ factors through finite quotients, so $\\wideha...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-123",
+      "section_id": "sec-2-6",
+      "statement": "Definition 68. Let $X$ be a topological space and $S$ be a discrete set. We define a sheaf of sets $\\mathcal{F}_S$ on $X$ by taking $\\mathcal{F}_S(U)$ to be the set of continuous functions $U\\rightarr...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-124",
+      "section_id": "sec-2-6",
+      "statement": "Construction 69. Given a morphism of topological spaces $p:Y\\rightarrow X$, we define the presheaf $\\mathcal{F}_Y$ of sets on $X$, called the presheaf of sections of $p$ as follows: - for any open sub...",
+      "type": "construction"
+    },
+    {
+      "depends_on": [],
+      "id": "fibres_are_stalks",
+      "section_id": "sec-2-6",
+      "statement": "Remark 10. A first interesting fact is that for sheaves of sections of covering maps, fibres and stalks at a point $x\\in X$ are the same. Indeed let $\\phi: \\mathcal{F}_{Y,x}\\rightarrow p^{-1}(x)$ be t...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "sheaf_of_sections_if_of_cover",
+      "section_id": "sec-2-6",
+      "statement": "Proposition 70. The presheaf $\\mathcal{F}_Y$ of sections of $p$ is indeed a sheaf. Moreover, if $p:Y \\rightarrow X$ is a covering, then $\\mathcal{F}_Y$ is a locally constant sheaf. $\\mathcal{F}_Y$ is ...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-127",
+      "section_id": "sec-2-6",
+      "statement": "Proof. Since sections are continuous maps over an open $U\\subset X$, the glueing property of sheaves is immediately verified. Suppose now that $p:Y\\rightarrow X$ is a covering. For any $x\\in X$ take a...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "etale_space",
+      "section_id": "sec-2-6",
+      "statement": "Definition 71. Let $\\mathcal{F}$ be a presheaf on a topological space $X$. The étale space of $\\mathcal{F}$ is the disjoint union of its stalks over $X$, denoted $X_{\\mathcal{F}} = \\bigsqcup_{x\\in X}\\...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "Sheaves_X_equiv_etale_X",
+      "section_id": "sec-2-6",
+      "statement": "Remark 11. Sheaf theory is quite vast. The knowledgeable reader might recognise the connection above with the theory of bundles and overcategories. A standard reference is [@sheaves_geometry_logic], w...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "morphism_of_etal_space",
+      "section_id": "sec-2-6",
+      "statement": "Lemma 72. Let $\\mathcal{F}$ be a locally constant sheaf on $X$,the above map $\\phi : X_{\\mathcal{F}} \\rightarrow X_{\\mathcal{G}}$ is a morphism of coverings of $X$.",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-131",
+      "section_id": "sec-2-6",
+      "statement": "Proof. It is straightforward to see that $\\phi$ is compatible with the projections $p:Y\\rightarrow X$ and $q:Z\\rightarrow X$. And we show that $\\phi$ is continuous for the étale topology: pick an open...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "LCS_equiv_Cov",
+      "section_id": "sec-2-6",
+      "statement": "Theorem 73. The categories of covering spaces of $X$ and the category of locally constant sheaves on $X$ are equivalent. Moreover, trivial coverings correspond to constant sheaves.",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-133",
+      "section_id": "sec-2-6",
+      "statement": "Proof. Let $F: \\mathop{\\mathrm{\\bf{LCS}}}(X) \\rightarrow \\mathop{\\mathrm{\\bf{Cov}}}(X)$ and $G:\\mathop{\\mathrm{\\bf{Cov}}}(X)\\rightarrow\\mathop{\\mathrm{\\bf{LCS}}}(X)$ be functors as above. In order to ...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-134",
+      "section_id": "sec-2-6",
+      "statement": "Corollary 74. The category of locally constant sheaves on $X$ is equivalent to the category of sets endowed with a left-action of $\\pi_1(X,x)$.",
+      "type": "corollary"
+    },
+    {
+      "depends_on": [],
+      "id": "equi_R_mod_loc_cst_sh",
+      "section_id": "sec-2-6",
+      "statement": "Theorem 75. Let $X$ be a connected and locally simply-connected topological space, with $x\\in X$. There is an equivalence between the category of locally constant sheaves of $R$-modules on $X$, $\\math...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-136",
+      "section_id": "sec-2-6",
+      "statement": "Proof. Let $\\mathcal{F}$ be a locally constant sheaf of $R$-modules on $X$. Then $\\forall x\\in X$, $\\mathcal{F}_x$ is also a $R$-module since it is a direct limit of $R$-modules (see Theorem [280](#di...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-137",
+      "section_id": "sec-2-6",
+      "statement": "Theorem 76. Let $k$ be a field. The category of $k[G]$-modules and the category of representations of $G$ are isomorphic.",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-138",
+      "section_id": "sec-2-6",
+      "statement": "Proof. Given a $G$-representation over $k$, $(V,\\rho)$, we can define a $k[G]$-module structure on $V$ by $u_g\\cdot v := \\rho(g)(v)$ for all $v\\in V$ and $g\\in G$ (so $V$ becomes a free vector space o...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "corollary_Rpi_mod",
+      "section_id": "sec-2-6",
+      "statement": "Corollary 77. Let $k$ be a field. The category of locally constant sheave of $k$-modules $\\mathop{\\mathrm{\\bf{LCS}}}_k$ is equivalent to the category of representations of $\\pi_1(X,x)$ over $k$.",
+      "type": "corollary"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-140",
+      "section_id": "sec-2-6",
+      "statement": "Definition 78. A complex local system on $X$ is a locally constant sheaf of finite-dimensional complex vector spaces. If $X$ is connected, all stalks must have the same dimension, which is called the ...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "local_systems_representations",
+      "section_id": "sec-2-6",
+      "statement": "Corollary 79. Let $X$ be a connected an locally simply-connected topological space with $x\\in X$. The category of complex local systems on $X$ is equivalent to the category of finite-dimensional repre...",
+      "type": "corollary"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-142",
+      "section_id": "sec-2-6",
+      "statement": "Proof. Follows from Theorem [75](#equi_R_mod_loc_cst_sh){reference-type=\"ref\" reference=\"equi_R_mod_loc_cst_sh\"} and Corollary [77](#corollary_Rpi_mod){reference-type=\"ref\" reference=\"corollary_Rpi_mo...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-143",
+      "section_id": "sec-2-6",
+      "statement": "Example 80. Let $D\\subset \\mathbb{C}$ be a connected open disc. Consider over $D$ homogeneous $n$-th order linear differential equation $$y^{(n)} +f_1y^{(n-1)} +\\:...+ f_{n-1}y'+f_ny = 0$$ where the $...",
+      "type": "example"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-144",
+      "section_id": "sec-2-6",
+      "statement": "Remark 12. But local systems have a deeper connection to differential geometry. Notably, the Riemann-Hilbert correspondence says that the category of holomorphic flat connections on a complex manifold...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-145",
+      "section_id": "sec-3-1",
+      "statement": "Theorem 81 (Grothendieck's vanishing theorem). If $X$ is an irreducible topological space, then $H^r(X,\\mathcal{F}) = 0$ for all constant sheaves and all $r>0$.",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-146",
+      "section_id": "sec-3-1",
+      "statement": "Proof. See [@milneEtCoH], Theorem $1.1$. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-147",
+      "section_id": "sec-3-1",
+      "statement": "Definition 82. Let $X$ be a topological space. A cofinite subset of a set $X$ is a subset $A$ whose complement is a finite set. The cofinite topology is a topology whose open subsets are precisely all...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-148",
+      "section_id": "sec-3-1",
+      "statement": "Lemma 83. Let $X$ be a set of cardinality at least $2^{\\aleph_0}$ endowed with the cofinite topology. Then $X$ is contractible.",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-149",
+      "section_id": "sec-3-1",
+      "statement": "Proof. The assumption is introduced simply to require that $\\lvert X \\rvert = \\lvert [0,1]\\rvert$ (in fact this forces $X$ to be path-connected). Now from [@set_theory] $\\S 10.35$ , we have the follow...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-150",
+      "section_id": "sec-3-1",
+      "statement": "Remark 13. Notice that it is not enough to assume that $X$ is infinite. For example, the set of rational numbers $\\mathbb{Q}$ with the cofinite topology is not path-connected, which then implies that ...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "irreducible_generic_point",
+      "section_id": "sec-3-1",
+      "statement": "Lemma 84. Let $X$ be an irreducible scheme. Then $X$ has a unique generic point.",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-152",
+      "section_id": "sec-3-1",
+      "statement": "Proof. If $X=\\mathop{\\mathrm{Spec}}\\:R$, then the nilradical of $R$ ($\\sqrt{(0)}$) is the generic point. Indeed $\\mathop{\\mathrm{Spec}}\\:R$ is irreducible if and only if $\\sqrt{(0)}$ is a prime ideal ...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-153",
+      "section_id": "sec-3-1",
+      "statement": "Lemma 85. Every irreducible scheme is contractible.",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-154",
+      "section_id": "sec-3-1",
+      "statement": "Proof. Let $X$ be an irreducible scheme and denote by $\\eta$ its unique generic point. Then we have the following homotopy $$\\begin{equation} H(x,t)= \\begin{cases} x, & t=0\\\\ \\eta, & t \\neq 0 \\end{cas...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "def_etale_covering",
+      "section_id": "sec-3-1",
+      "statement": "Definition 86. Let $X$ be a scheme. We call an étale covering of $X$ a family of morphisms $\\{f_i:X_i\\rightarrow X\\}_{i\\in I}$ of schemes such that $f_i$ is étale for all $i\\in I$ and $X = \\cup_i f_i(...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-156",
+      "section_id": "sec-3-1",
+      "statement": "Theorem 87. For every coherent sheaf $\\mathcal{F}$ on $X$ a projective scheme and for all $r \\in \\mathbb{N}$, the following homomorphism is a bijection $$\\varepsilon : H^r(X,\\mathcal{F}) \\rightarrow H...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-157",
+      "section_id": "sec-3-2-1",
+      "statement": "Definition 88. We say that a morphism of schemes $f:X\\rightarrow Y$ is locally of finite type if $Y$ has an affine open covering $\\{V_i = \\mathop{\\mathrm{Spec}}\\:B_i\\}$ so that $f^{-1}(V_i)$ has itsel...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "loc_finite_pres_loc_finite_type_noetherian",
+      "section_id": "sec-3-2-1",
+      "statement": "Remark 14. Usually it is require that smooth or étale morphism are not only locally of finite type, but locally of finite presentation. A ring $A$ is said to be a finitely presented $B$-algebra if $$A...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "base_change_locally_finite",
+      "section_id": "sec-3-2-1",
+      "statement": "Proposition 90 (Base change). Let $f:X\\rightarrow Y$ be a morphism of schemes, locally of finite type. And consider the following fibre product diagram for any morphism $g:Y'\\rightarrow Y$with $X'= X\\...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-160",
+      "section_id": "sec-3-2-1",
+      "statement": "Proof. Let $\\{V'_i = \\mathop{\\mathrm{Spec}}\\:B'_i\\}$ be an affine open covering of $Y'$, which maps into some open affine covering $V_i = \\mathop{\\mathrm{Spec}}\\:B_i$ of $Y$. Since $f$ is locally of f...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "composition_locally_finite_type",
+      "section_id": "sec-3-2-1",
+      "statement": "Proposition 91 (Composition). If $f:X\\rightarrow Y$ and $g:Y\\rightarrow Z$ are morphisms of schemes locally of finite type, then $g\\circ f :X\\rightarrow Z$ is again locally of finite type.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-162",
+      "section_id": "sec-3-2-1",
+      "statement": "Proof. Follows by transitivity of finite generation; if $A$ is a finitely generated $B$- algebra and $B$ is a finitely generated $C$-algebra, then $A$ is a finitely generated $C$-algebra. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-163",
+      "section_id": "sec-3-2-1",
+      "statement": "Lemma 92. In the Noetherian setting, schemes of finite type over a field are of finite dimension.",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-164",
+      "section_id": "sec-3-2-1",
+      "statement": "Proof. Let $X$ be a scheme of finite type over $k$, then $X$ can be covered by affine sets $\\mathop{\\mathrm{Spec}}\\: A_i$ where the $A_i$ are finitely generated $k$-algebras. This means that each chai...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-165",
+      "section_id": "sec-3-2-1",
+      "statement": "Proposition 93. Let $f:X\\rightarrow Y$ be a morphism of schemes of finite type. Then for all $q\\in Y$, the fibre scheme $X_y$ has finite dimension.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-166",
+      "section_id": "sec-3-2-1",
+      "statement": "Proof. By base change, the fibre of a morphism of schemes of finite type is again of finite type over the base change, which is now the residue field. Hence by the above lemma, its fibres at any point...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "finite_is_closed",
+      "section_id": "sec-3-2-1",
+      "statement": "Proposition 94. Let $f:X\\rightarrow Y$ be a finite morphism of Noetherian schemes. Then $f$ is closed.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-168",
+      "section_id": "sec-3-2-1",
+      "statement": "Proof. Since $f$ is finite, locally, consider $Y = \\mathop{\\mathrm{Spec}}\\:B$ and $X=\\mathop{\\mathrm{Spec}}\\:A$ with $A$ a finitely generated $B$-algebra. Pick generators $a_1,...,a_n \\in A$ and defin...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "closed_is_finite",
+      "section_id": "sec-3-2-1",
+      "statement": "Proposition 95. Closed immersions are finite",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-170",
+      "section_id": "sec-3-2-1",
+      "statement": "Proof. Let $f:X\\rightarrow Y$ be a closed immersion. Then locally, it looks like $\\mathop{\\mathrm{Spec}}\\: A/I \\rightarrow \\mathop{\\mathrm{Spec}}A$. Since $A/I$ is finitely generated as an $A$-module,...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-171",
+      "section_id": "sec-3-2-2",
+      "statement": "Definition 96. An $R$-module $M$ is called flat if tensoring with $M$ over $R$ as a functor :\\ $-\\otimes_RM:Mod_R\\rightarrow Mod_{R'}$ is an exact functor. A morphism of rings $f: B \\rightarrow A$ is ...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "restriction_on_showing_exactness",
+      "section_id": "sec-3-2-2",
+      "statement": "Remark 15. Note that the functor $-\\otimes_RM:Mod_R \\rightarrow Mod_R$ is always right exact; the extension of scalar functor is a left adjoint of the restriction of scalar functor. Left adjoint funct...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-173",
+      "section_id": "sec-3-2-2",
+      "statement": "Proposition 97. Projective modules are flat.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-174",
+      "section_id": "sec-3-2-2",
+      "statement": "Proof. Consider an injective morphism $g: N \\rightarrow N'$ of $R$-modules and $P$ a projective $R$-module. We want to show that $P\\otimes_R g:P\\otimes_R N'\\rightarrow P\\otimes_R N'$ is injective.\\ Le...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "free_modules_are_flat",
+      "section_id": "sec-3-2-2",
+      "statement": "Corollary 98. Free modules $($which are projective$)$ are flat modules.",
+      "type": "corollary"
+    },
+    {
+      "depends_on": [],
+      "id": "transitivity_flatness",
+      "section_id": "sec-3-2-2",
+      "statement": "Proposition 99. If $M$ is a flat $A$-module and $N$ is a flat $M$-module, then $N$ is also a flat $A$-module.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-177",
+      "section_id": "sec-3-2-2",
+      "statement": "Proof. This follows from the following natural isomorphism for any $N$-modules $P$, $$N\\otimes_A P \\cong N\\otimes_M (M\\otimes_A P).$$ ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "bas_change_flat_mod",
+      "section_id": "sec-3-2-2",
+      "statement": "Proposition 100 (Base change). Let $A\\rightarrow B$ be a ring map and $M$ be a flat $A$-module. Then the base change, $M\\otimes_AB$, a $B$-modules is also flat.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-179",
+      "section_id": "sec-3-2-2",
+      "statement": "Proof. Suppose we have the following exact sequence of $B$-modules $...\\rightarrow N\\rightarrow N' \\rightarrow N' \\rightarrow ...$. Since $M\\otimes_AB\\otimes_B N = M\\otimes_A N$ for all modules in the...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "localization_as_tensor",
+      "section_id": "sec-3-2-2",
+      "statement": "Proposition 101. Let $S$ be a multiplicative closed subset in $R$ and $M$ and $R$-module. Then $S^{-1}M \\cong M\\otimes_R S^{-1}R$.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-181",
+      "section_id": "sec-3-2-2",
+      "statement": "Proof. Consider the $R$-module homomorphism $\\varphi :S^{-1}M\\rightarrow M\\otimes_R S^{-1}R$ which sends an element $\\frac{m}{s} \\mapsto m\\otimes\\frac{1}{s}$. We can verify that since for $m'\\in M$ an...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "flatness_at_all_localizations",
+      "section_id": "sec-3-2-2",
+      "statement": "Proposition 102 (Localisation). An $R$-module $M$ is flat if and only if $M_\\mathfrak{p}$ is flat as an $R_\\mathfrak{p}$-module for all $\\mathfrak{p}\\in R$.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-183",
+      "section_id": "sec-3-2-2",
+      "statement": "Proof. Suppose that $M$ is a flat $R$-module and let $$0\\rightarrow N\\rightarrow N'\\rightarrow N''\\rightarrow 0$$ be any short exact sequence of $R_{\\mathfrak{p}}$-modules.\\ Since $R_{\\mathfrak{p}}$-m...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-184",
+      "section_id": "sec-3-2-2",
+      "statement": "Definition 103. A quasi-coherent sheaf $\\mathcal{F}$ on a scheme $X$ is said to be flat at $p\\in X$ if $\\mathcal{F}_p$ is a flat $\\mathcal{O}_{X,p}$-module. It is flat over $X$ if it is flat at all $p...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-185",
+      "section_id": "sec-3-2-2",
+      "statement": "Remark 16. Any scheme $X$ over a field $k$ is flat. If $k$ is a field, then any $k$-module is actually a free module, hence a flat module. Schematically, we have that $X$ is flat at a point $x$ if $\\m...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "base_change_flat_morphism",
+      "section_id": "sec-3-2-2",
+      "statement": "Proposition 104 (Base change). Let $f: X\\rightarrow Y$ be a morphism of schemes and let $\\mathcal{F}$ be an $\\mathcal{O}_X$-module which is flat over $Y$. And consider the following fibre product diag...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-187",
+      "section_id": "sec-3-2-2",
+      "statement": "Proof. Recall that the pull-back sheaf is defined as $\\pi_X^\\mathcal{F} = \\pi_X^{-1}\\mathcal{F}\\:\\otimes_{\\pi_X^{-1}\\mathcal{O}_X}\\:\\mathcal{O}_{X\\times_YY'}$, and that from Appendix [6.2](#Annexe_sch...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "composition_flat",
+      "section_id": "sec-3-2-2",
+      "statement": "Proposition 105 (Composition). Let $f:X\\rightarrow Y$ and $g:Y\\rightarrow Z$ be morphisms such that $X$ is flat over $Y$ and $Y$ is flat over $Z$. Then $X$ is flat over $Z$.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-189",
+      "section_id": "sec-3-2-2",
+      "statement": "Proof. Follows from Proposition [99](#transitivity_flatness){reference-type=\"ref\" reference=\"transitivity_flatness\"} ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "flat_is_open",
+      "section_id": "sec-3-2-2",
+      "statement": "Proposition 106. Let $f:Y\\rightarrow Y$ be flat morphism of schemes locally of finite type. Then $f$ is universally open and in particular it is open.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-191",
+      "section_id": "sec-3-2-2",
+      "statement": "Proof. See [@EGA], Théorème $2.4.6$. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-192",
+      "section_id": "sec-3-2-2",
+      "statement": "Example 107. Open embeddings are flat:\\ Let $f:X\\rightarrow Y$ be an open embedding of schemes. This means that $X$ is isomorphic to an open subscheme $U$ of $Y$ (that $X$ and $U$ are homeomorphic and...",
+      "type": "example"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-193",
+      "section_id": "sec-3-2-2",
+      "statement": "Definition 108. A morphism $f:X\\rightarrow Y$ is said to be locally free if the direct image sheaf $f_*\\mathcal{O}_X$ is a locally free as an $\\mathcal{O}_Y$-module.",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "locally_free_are_flat_in_noetherian",
+      "section_id": "sec-3-2-2",
+      "statement": "Remark 17. It is easy and useful to see that locally free morphisms are flat. Indeed if $f_\\mathcal{O}_X$ is locally free as an $\\mathcal{O}_Y$-module, then locally on $Y$, $f_\\mathcal{O}_X$ is free, ...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-195",
+      "section_id": "sec-3-2-2",
+      "statement": "Proposition 109 (Composition). The composition of two locally free morphisms of schemes is again locally free.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-196",
+      "section_id": "sec-3-2-2",
+      "statement": "Proof. Let $f:X\\rightarrow Y$ and $g:Y\\rightarrow Z$ be locally free morphisms. Then $f_\\mathcal{O}_X$ is locally free as a $\\mathcal{O}_Y$-module. And again $g_(f_*\\mathcal{O}_X)$ is a locally free $...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-197",
+      "section_id": "sec-3-2-2",
+      "statement": "Corollary 110. Soient $Y$ un préschéma localement noethérien, $f:X\\rightarrow Y$ un morphisme propre, $y\\in Y$ un point tel que $f$ soit ouvert en tous les points de $f^{-1}(y)$. Alors la fonction $z\\...",
+      "type": "corollary"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-198",
+      "section_id": "sec-3-2-2",
+      "statement": "Proof. See [@EGA], Corollaire $14.2.5$. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-199",
+      "section_id": "sec-3-2-2",
+      "statement": "Theorem 111. Let $f:X\\rightarrow Y$ be a proper, flat morphism of schemes locally of finite type. Then for $y\\in Y$, the map $y\\mapsto dim(X_y)$ is locally constant.",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-200",
+      "section_id": "sec-3-2-3",
+      "statement": "Definition 112. Suppose $A$ is a $B$-algebra. We define a $B$-linear derivation on $A$ to be a $B$-module homomorphism $d:A \\rightarrow M$ to an $A$-module $M$ satisfying the Leibniz rule : $d(fg) = f...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-201",
+      "section_id": "sec-3-2-3",
+      "statement": "Definition 113. The module of Kähler differentials is defined to be the $A$-module $\\Omega_{A/B}$ for which there is a universal derivation $d:A\\rightarrow \\Omega_{A/B}$. The composition with $d$ prov...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-202",
+      "section_id": "sec-3-2-3",
+      "statement": "Lemma 115. If a finitely generated ideal $I$ in a commutative ring $R$ has $I^2= I$, then $I = pR$ for $p\\in R$ an idempotent.",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-203",
+      "section_id": "sec-3-2-3",
+      "statement": "Proof. The lemma is almost immediate following Nakayama's Lemma [256](#Nakayama_lemma){reference-type=\"ref\" reference=\"Nakayama_lemma\"}. We apply it to $M = I$ and we get that there exist $i\\in I$ suc...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-204",
+      "section_id": "sec-3-2-3",
+      "statement": "Proposition 116. Let $A$ be a commutative $k$-algebra. If $\\Omega_{A/k} = 0$ then $A$ is a separable $k$-algebra.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-205",
+      "section_id": "sec-3-2-3",
+      "statement": "Proof. We show this later on (Theorem [122](#second_def_Kalher){reference-type=\"ref\" reference=\"second_def_Kalher\"}) but, $\\Omega_{A/k} = 0$ implies that $I = I^2$ for $I$ the kernel of $\\delta$ which...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "separable_zero_kahler",
+      "section_id": "sec-3-2-3",
+      "statement": "Theorem 117. If $L|k$ is finite algebraic field extension, then $\\Omega_{L,k}=0$ if and only if $L|k$ is separable.",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "Base_change_kahler_module",
+      "section_id": "sec-3-2-3",
+      "statement": "Proposition 118 (Base change). Let $B\\rightarrow B'$ be any ring map and let the base change of $f$ by $B\\rightarrow B'$ be the ring map $B'\\rightarrow A\\otimes_B B'$ (we often write $A' = A\\otimes_B ...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-208",
+      "section_id": "sec-3-2-3",
+      "statement": "Proof. See [@Hartshorne], Proposition $II.\\: 8.2A$. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "localization_kahler_module",
+      "section_id": "sec-3-2-3",
+      "statement": "Proposition 119 (Localisation). Let $S$ be a multiplicative closed subset of $A$, then $\\Omega_{S^{-1}A/B} = S^{-1}\\Omega_{A/B}$.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-210",
+      "section_id": "sec-3-2-3",
+      "statement": "Proof. See [@Hartshorne], Proposition $II.\\: 8.2A$. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "exact_seq_differential_module",
+      "section_id": "sec-3-2-3",
+      "statement": "Proposition 120. Let $C\\rightarrow B \\rightarrow A$ be homomorphisms of rings. Then there is a natural exact sequence of $A$-modules $$\\Omega_{B/C} \\otimes_B A \\xrightarrow{a\\otimes db\\:\\mapsto\\: adb}...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-212",
+      "section_id": "sec-3-2-3",
+      "statement": "Proof. See [@Hartshorne], Proposition $II.\\: 8.3A$. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "construction_tangent_space_differential",
+      "section_id": "sec-3-2-3",
+      "statement": "Construction 121. Recall that the tangent space at a point $p$ of an algebraic variety can be thought of as assigning to a polynomial $f$ its linear term in the Taylor expansion at $p$. Since the deri...",
+      "type": "construction"
+    },
+    {
+      "depends_on": [],
+      "id": "second_def_Kalher",
+      "section_id": "sec-3-2-3",
+      "statement": "Theorem 122. $I/I^2$ inherits a structure of $A$-modules. Define a map $d:A\\rightarrow I/I^2$ by $da = 1\\otimes a-a\\otimes 1$. Then $I/I^2 \\cong \\Omega_{A/B}$ as $A$-modules",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-215",
+      "section_id": "sec-3-2-3",
+      "statement": "Proof. First note that $A\\otimes_B A$ is an $A$-algebra in two ways (by multiplication on the left and right factor), so $I$ is an $A$-submodule. The ideal $I$ is generated by elements of the form $1\\...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-216",
+      "section_id": "sec-3-2-3",
+      "statement": "Definition 123. We define the sheaf of Kähler differentials $\\Omega_{X/Y}$ of $X$ over $Y$ as the pull-back $\\Delta^*(\\mathcal{I}/\\mathcal{I}^2)$ on $X$.",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "open_embeddings_zero_kahler",
+      "section_id": "sec-3-2-3",
+      "statement": "Example 124. Let $U\\hookrightarrow X$ be an open embedding of schemes, then $\\Omega_{U/X} = 0$\\ Indeed, we can check locally, take an affine open $V=\\mathop{\\mathrm{Spec}}\\:A\\subset X$ and suppose tha...",
+      "type": "example"
+    },
+    {
+      "depends_on": [],
+      "id": "base_change_Kahler_sheaf",
+      "section_id": "sec-3-2-3",
+      "statement": "Proposition 125 (Base change). Let $f:X\\rightarrow Y$ be a morphism of schemes and consider the following fibre product diagram for any morphism $g:Y'\\rightarrow Y$ with $X' = X\\times_Y Y'$, $$\\begin{...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-219",
+      "section_id": "sec-3-2-3",
+      "statement": "Proof. Follows from Proposition [118](#Base_change_kahler_module){reference-type=\"ref\" reference=\"Base_change_kahler_module\"}. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "exact_seq_sheaves_differential",
+      "section_id": "sec-3-2-3",
+      "statement": "Proposition 126. Let $f:X\\rightarrow Y$ and $g:Y\\rightarrow Z$ be morphisms of schemes. Then there is an exact sequence of sheaves on $X$, $$f^\\Omega_{Y/Z} \\rightarrow \\Omega_{X/Z} \\rightarrow \\Omega_...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-221",
+      "section_id": "sec-3-2-3",
+      "statement": "Proof. Follows from Proposition [120](#exact_seq_differential_module){reference-type=\"ref\" reference=\"exact_seq_differential_module\"}. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-222",
+      "section_id": "sec-3-2-4",
+      "statement": "Definition 127. The Zariski cotangent space of a local ring $(A,\\mathfrak{m})$ is the vector space $\\mathfrak{m}/{\\mathfrak{m^2}}$ over the residue field $A/\\mathfrak{m}$ and its dual is the *Zariski ...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-223",
+      "section_id": "sec-3-2-4",
+      "statement": "Construction 128. Since we have defined tangent spaces on varieties, let $X$ be a variety and $p=0$ be the origin in $X$ corresponding to the maximal ideal $\\mathfrak{m} \\trianglelefteq A(X)$. Conside...",
+      "type": "construction"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-224",
+      "section_id": "sec-3-2-4",
+      "statement": "Definition 129. We say that a local ring $(R,\\mathfrak{m})$ is regular if the dimension of the local ring is equal to the dimension of the Zariski cotangent space, i.e. $dim\\:R = dim_\\kappa\\: \\mathfra...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "regularity_kahler",
+      "section_id": "sec-3-2-4",
+      "statement": "Proposition 130. Let $X$ be an irreducible scheme of finite type over $k$ an algebraically closed scheme. Then $\\Omega_{X/k}$ is a locally free sheaf of rank $n$ if and only if $X$ is a regular scheme...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-226",
+      "section_id": "sec-3-2-4",
+      "statement": "Proof. See [@Hartshorne] Theorem $8.15$. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-227",
+      "section_id": "sec-3-2-4",
+      "statement": "Theorem 131 (Auslander--Buchsbaum). Any regular local ring is a unique factorisation domain (UFD).",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-228",
+      "section_id": "sec-3-2-4",
+      "statement": "Proof. See [@Auslander_Buchsbaum]. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "normal_regular",
+      "section_id": "sec-3-2-4",
+      "statement": "Remark 18. From commutative algebra (Proposition $4.20$ in [@Eisenbud]), we have that UFD's are normal rings. So for a scheme $X$, regularity at $P$ implies normality, i.e. we say that a scheme $X$ is...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-230",
+      "section_id": "sec-3-2-4",
+      "statement": "Definition 132. A morphism of schemes $f:X\\rightarrow Y$ is smooth of relative dimension $n$ if it is flat, locally of finite type and $\\Omega_{X/Y}$ is locally free of rank $n$.",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "base_change_smooth",
+      "section_id": "sec-3-2-4",
+      "statement": "Proposition 133 (Base change). Let $f:X\\rightarrow Y$ be a smooth morphisms of schemes of relative dimension $n$ and consider the following fibre product diagram for any morphism $g:Y'\\rightarrow Y$ w...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-232",
+      "section_id": "sec-3-2-4",
+      "statement": "Proof. By Proposition [104](#base_change_flat_morphism){reference-type=\"ref\" reference=\"base_change_flat_morphism\"}, [90](#base_change_locally_finite){reference-type=\"ref\" reference=\"base_change_local...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "composition_smooth",
+      "section_id": "sec-3-2-4",
+      "statement": "Proposition 134 (Composition). If $f:X\\rightarrow Y$ is smooth of relative dimension $n$, and $g:Y\\rightarrow Z$ is smooth of relative dimension $m$, then $g\\circ f :X\\rightarrow Z$ is smooth of relat...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-234",
+      "section_id": "sec-3-2-4",
+      "statement": "Proof. See [@Hartshorne], Proposition $10.1.\\: (c)$. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-235",
+      "section_id": "sec-3-2-4",
+      "statement": "Remark 19. A nice way to see that smooth morphisms are indeed linked to submersions is by reasoning as follows, let $f:X\\rightarrow Y$ be a smooth morphism of regular schemes of relative dimension $n=...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-236",
+      "section_id": "sec-3-2-5",
+      "statement": "Definition 135. A morphism of schemes $f: X\\rightarrow Y$ is said to be étale if it is flat, locally of finite type and $\\Omega_{X/Y}=0$.",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-237",
+      "section_id": "sec-3-2-5",
+      "statement": "Definition 136. Let $f:X\\rightarrow Y$ be a morphism of schemes locally of finite type, and $P\\in X$. $f$ is said to be unramified at $P$ if the residue field of $X$ at $P$ is a separable field extens...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "unramified_carac",
+      "section_id": "sec-3-2-5",
+      "statement": "Proposition 137. Let $f: X\\rightarrow Y$ be a morphisms of finite type, then the following are equivalent: - $f$ is unramified - for all $Q\\in Y$, the fibre $X_Q \\rightarrow \\mathop{\\mathrm{Spec}}\\:\\k...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-239",
+      "section_id": "sec-3-2-5",
+      "statement": "Proof. See [@milneEtCoH], Proposition $3.2$. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-240",
+      "section_id": "sec-3-2-5",
+      "statement": "Proposition 138. A morphism of schemes $f:X\\rightarrow Y$ locally of finite type is said to be unramified at $P\\in X$ if and only $\\Omega_{X/Y} = 0$ at $P$.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-241",
+      "section_id": "sec-3-2-5",
+      "statement": "Proof. See [@milneEtCoH] Proosition $3.5$. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "etale=flat+unramified",
+      "section_id": "sec-3-2-5",
+      "statement": "Definition 139. A morphism of schemes $f:X\\rightarrow Y$ is said to be étale if it is equivalently flat and unramified.",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "base_change_etale",
+      "section_id": "sec-3-2-5",
+      "statement": "Proposition 141 (Base change). Let $f: X\\rightarrow Y$ be an étale morphism of schemes and consider $f' : X' \\rightarrow Y'$ the base change of $f$. Then $f'$ is étale again.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-244",
+      "section_id": "sec-3-2-5",
+      "statement": "Proof. Since smooth morphisms are stable under base change ([133](#base_change_smooth){reference-type=\"ref\" reference=\"base_change_smooth\"}), we need to show that unramified morphisms are stable under...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "composition_etale",
+      "section_id": "sec-3-2-5",
+      "statement": "Proposition 142 (Composition). Let $f:X\\rightarrow Y$ and $g:Y \\rightarrow Z$ be two étale morphisms of schemes. Then $g\\circ f:X\\rightarrow Z$ is also étale.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-246",
+      "section_id": "sec-3-2-5",
+      "statement": "Proof. By Propositions [91](#composition_locally_finite_type){reference-type=\"ref\" reference=\"composition_locally_finite_type\"}, [105](#composition_flat){reference-type=\"ref\" reference=\"composition_fl...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "clopen_immersion",
+      "section_id": "sec-3-2-5",
+      "statement": "Proposition 143. Let $f:X\\rightarrow Y$ be a finite étale morphism,. Then the diagonal morphism $\\Delta : X\\rightarrow X\\times_YX$ coming from $f$ is an open and closed immersion (in particular $\\Delt...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-248",
+      "section_id": "sec-3-2-5",
+      "statement": "Proof. Since $f$ is finite, it is separated and hence the diagonal morphism $\\Delta : X\\rightarrow X\\times_YX$ is a closed immersion, it is left to show that it is an open map. Consider $U$ an open su...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-249",
+      "section_id": "sec-3-2-5",
+      "statement": "Example 144. A morphism of affine schemes $\\mathop{\\mathrm{Spec}}\\:B \\rightarrow \\mathop{\\mathrm{Spec}}\\: A$ is finite étale if and only if $B$ is a finite projective $A$-module and for every point $P...",
+      "type": "example"
+    },
+    {
+      "depends_on": [],
+      "id": "example_etale_over_field",
+      "section_id": "sec-3-2-5",
+      "statement": "Example 145. Let $k$ be a field. A scheme $X=\\mathop{\\mathrm{Spec}}\\:A$ over $k$ is finite étale if and only if $A$ is a finite étale $k$-algebra. Since $X$ is an affine scheme over $k$ it is automati...",
+      "type": "example"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-251",
+      "section_id": "sec-3-3",
+      "statement": "Construction 146. Let $f:X\\rightarrow S$ be a finite étale morphism of schemes. A geometric point $\\overline{s}$ on $S$ is a morphism of schemes $\\overline{s}:\\mathop{\\mathrm{Spec}}\\:\\Lambda \\rightarr...",
+      "type": "construction"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-252",
+      "section_id": "sec-3-3",
+      "statement": "Definition 147. A finite morphisms of schemes $f:X\\rightarrow S$ is said to be finite étale if it is locally free (flat) and if each fibre $X_s$ of $f$ is the spectrum of a finite étale $\\kappa(s)$-al...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-253",
+      "section_id": "sec-3-3",
+      "statement": "Remark 20. Resuming our discussion over geometric fibres, we get from Theorem [60](#etale_algebras){reference-type=\"ref\" reference=\"etale_algebras\"} that the fibres $X_s$ are spectra of a finite étale...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-254",
+      "section_id": "sec-3-3-1",
+      "statement": "Definition 148. A morphism $f:X\\rightarrow S$ of schemes is a finite étale cover if $f$ is a surjective finite étale morphism. And $f$ is called a trivial finite étale cover if $X$ as a scheme over $S...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-255",
+      "section_id": "sec-3-3-1",
+      "statement": "Example 149. The simplest case would be to check how finite étale coverings would look like over $S=\\mathop{\\mathrm{Spec}}\\:k$ for $k$ an algebraically closed field. Let us consider $X$ any finite éta...",
+      "type": "example"
+    },
+    {
+      "depends_on": [],
+      "id": "etale_cover_locally_trivial",
+      "section_id": "sec-3-3-1",
+      "statement": "Proposition 150. Let $f:X\\rightarrow S$ be an affine surjective morphism of schemes with $S$ connected. Then $f$ is a finite étale cover if and only if, there is a finite, locally free and surjective ...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-257",
+      "section_id": "sec-3-3-1",
+      "statement": "Proof. Suppose that $g$ is finite, locally free and surjective and $X\\times_SY$ is a trivial cover of $Y$. As $g$ is locally free, each point in $S$ is contained in an affine open subset $U=\\mathop{\\m...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-258",
+      "section_id": "sec-3-3-1",
+      "statement": "Definition 151. We can actually build a category whose objects consists of finite étale covering $X\\rightarrow S$ over a base scheme $S$ and whose morphisms are morphisms of schemes that are compatibl...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "reduced_carry_above",
+      "section_id": "sec-3-3-1",
+      "statement": "Proposition 152. Let $S$ be a connected scheme and $p:X\\rightarrow S$ is a morphisms in $\\mathop{\\mathrm{\\bf{F\\acute{e}t}}}_S$. If $S$ is a reduced scheme, then $X$ is a reduced scheme as well.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-260",
+      "section_id": "sec-3-3-1",
+      "statement": "Proof. We may assume that $X= \\mathop{\\mathrm{Spec}}\\: B$ and $S= \\mathop{\\mathrm{Spec}}\\:A$. Let $P$ be a point of $S$ (a prime ideal). By assumption, the localisation $A_P$ has no nilpotents and we ...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "etale_between_composition",
+      "section_id": "sec-3-3-1",
+      "statement": "Lemma 153. Let $f:X\\rightarrow Y$ and $g:Z\\rightarrow X$ be morphisms of schemes. If $f\\circ g$ and $f$ are finite étale, then so is $g$.",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-262",
+      "section_id": "sec-3-3-1",
+      "statement": "Proof. By Proposition [143](#clopen_immersion){reference-type=\"ref\" reference=\"clopen_immersion\"}, the diagonal map $X\\rightarrow X\\times_S X$ is finite as it is a closed immersion and since $X$ is is...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "sections_etale_cover",
+      "section_id": "sec-3-3-1",
+      "statement": "Proposition 154. Let $f:X\\rightarrow S$ be a morphism in $\\mathop{\\mathrm{\\bf{F\\acute{e}t}}}_S$, and $s: S\\rightarrow X$ be a section of $f$. Then $s$ induces an isomorphism of $S$ with an open and cl...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-264",
+      "section_id": "sec-3-3-1",
+      "statement": "Proof. By Lemma [153](#etale_between_composition){reference-type=\"ref\" reference=\"etale_between_composition\"}, $s$ is a finite étale morphism. Now since $s$ is finite, it is closed ([94](#finite_is_cl...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "proporty_mono_etale_cover",
+      "section_id": "sec-3-3-1",
+      "statement": "Proposition 155. Let $g:Z\\rightarrow S$ be a morphism of schemes with $S$ a connected scheme and $h_1,h_2: Z \\rightarrow X$ are two morphisms of schemes over $S$, with $f:X\\rightarrow S$ an étale morp...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-266",
+      "section_id": "sec-3-3-1",
+      "statement": "Proof. Consider the fibre product $Z\\times_SX$, since étaleness is preserved under base change, we may assume that $Z=S$. Now, morphisms $h_1$ and $h_2$ become sections of $f$, so it is enough to chec...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "no_fixed_points",
+      "section_id": "sec-3-3-1",
+      "statement": "Corollary 156. Let $f: X\\rightarrow S \\in \\mathop{\\mathrm{\\bf{F\\acute{e}t}}}_S$. Then the nontrivial elements of $\\mathop{\\mathrm{Aut}}(X|S)$ act without fixed points on each geometric fibre. Hence $\\...",
+      "type": "corollary"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-268",
+      "section_id": "sec-3-3-1",
+      "statement": "Proof. Just as in the proof of Corollary [19](#corollary_property_morphism_covers){reference-type=\"ref\" reference=\"corollary_property_morphism_covers\"}, the first statement is immediate from Propositi...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-269",
+      "section_id": "sec-3-3-1",
+      "statement": "Construction 157. Let $f: X\\rightarrow S$ be an affine surjective morphism of schemes, and $G\\leq \\mathop{\\mathrm{Aut}}(X|S)$ a finite subgroup. We define the ringed space $X/G$ for which the underlyi...",
+      "type": "construction"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-270",
+      "section_id": "sec-3-3-1",
+      "statement": "Proposition 158. The ringed space $X/G$ above is indeed a scheme, the morphism $p$ is affine and surjective, and $f:X\\rightarrow S$ factors as $f = g\\circ p$ for $g:X/G \\rightarrow S$ an affine morphi...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-271",
+      "section_id": "sec-3-3-1",
+      "statement": "Proof. Using the affine assumption on $f$, we may assume that $S=\\mathop{\\mathrm{Spec}}\\:A$ and $X=\\mathop{\\mathrm{Spec}}\\:B$ and $f$ comes from a ring homomorphism $\\lambda: A\\rightarrow B$. It is th...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "quotient_finite_etale_cover",
+      "section_id": "sec-3-3-1",
+      "statement": "Proposition 159. Let $f: X\\rightarrow S \\in \\mathop{\\mathrm{\\bf{F\\acute{e}t}}}_S$, with $X$ being connected, and $G\\leq \\mathop{\\mathrm{Aut}}(X|S)$ a finite subgroup. Then $p:X\\rightarrow X/G$ and $g:...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-273",
+      "section_id": "sec-3-3-1",
+      "statement": "Proof. Using Lemma [153](#etale_between_composition){reference-type=\"ref\" reference=\"etale_between_composition\"} it is sufficient to only prove that $g:X/G\\rightarrow S$ is a finite étale cover. We ap...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-274",
+      "section_id": "sec-3-3-1",
+      "statement": "Definition 160. A connected object $f:X\\rightarrow S \\in \\mathop{\\mathrm{\\bf{F\\acute{e}t}}}_S$ is said to be a finite étale Galois cover or a Galois object if $\\mathop{\\mathrm{Aut}}(X|S)$ acts transit...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "remark_Galois",
+      "section_id": "sec-3-3-1",
+      "statement": "Remark 21. - Notice that $X\\rightarrow S$ is a finite étale Galois cover if and only if the canonical morphism $X/\\mathop{\\mathrm{Aut}}(X|S) \\rightarrow S$ is an isomorphism. This ties in well with th...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "Galois_correpondance_etale_cov",
+      "section_id": "sec-3-3-1",
+      "statement": "Theorem 161. Let $f:X\\rightarrow S$ be a finite étale Galois cover. If $g: Z\\rightarrow S$ is a connected finite étale cover such that $f = g \\circ h$ for $h:X\\rightarrow Z$, then $h$ is a finite étal...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-277",
+      "section_id": "sec-3-3-1",
+      "statement": "Proof. This proof is similar to that of Theorem [26](#clasification_of_covers){reference-type=\"ref\" reference=\"clasification_of_covers\"}. Here, Lemma [153](#etale_between_composition){reference-type=\"...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "etale_cover_closure_come_from_extension",
+      "section_id": "sec-3-3-1",
+      "statement": "Lemma 162. Given a finite étale cover $\\overline{f}:\\hat{Y}\\rightarrow \\overline{X}$ with $X$ a quasi-compact scheme over $k$, there is a finite extension $L|k$ contained in $k_s$ and a finite étale c...",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-279",
+      "section_id": "sec-3-3-1",
+      "statement": "Proof. Since $X$ is quasi-compact, it has a finite covering by open affine subschemes. Let $\\{U_i\\mid 1\\leq i\\leq n\\}$ be a finite open covering of $X$ such that $U_i=\\mathop{\\mathrm{Spec}}\\:A_i$.\\ Fo...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "Galois_embed_etale_cover",
+      "section_id": "sec-3-3-1",
+      "statement": "Proposition 163. Let $f:X\\rightarrow S\\in \\mathop{\\mathrm{\\bf{F\\acute{e}t}}}_S$, with $X$ being connected. There is a morphism $p:Y\\rightarrow X$ such that $f\\circ p : Y\\rightarrow S$ is a Galois obje...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-281",
+      "section_id": "sec-3-3-1",
+      "statement": "Proof. First we fix a geometric point $\\overline{s}:\\mathop{\\mathrm{Spec}}\\:\\Lambda\\rightarrow S$ and let $F=\\{\\overline{x}_1,...,\\overline{x}_n\\}$ be the finite set of $\\mathop{\\mathrm{Spec}}\\:\\Lambd...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "group_scheme_def_1",
+      "section_id": "sec-3-3-2",
+      "statement": "Definition 164. Let $S$ be a scheme. A group scheme over $S$ is a morphism of schemes $p:G\\rightarrow S$ that has a section $e:S\\rightarrow G$, together with multiplication $m:G\\times_SG\\rightarrow G$...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-283",
+      "section_id": "sec-3-3-2",
+      "statement": "Example 165. - We can put a group scheme structure on the general linear group $\\mathop{\\mathrm{GL}}_n$.\\ By considering the affine space $\\mathbb{A}^{2n+1}$, with coordinates $(x_{ij},t)$ where $x_{i...",
+      "type": "example"
+    },
+    {
+      "depends_on": [],
+      "id": "Hopf_algebra_group_scheme",
+      "section_id": "sec-3-3-2",
+      "statement": "Remark 22. The case of affine group schemes is even more interesting, in the following we show an anti-equivalence between the category of affine group schemes over $k$ and that of commutative Hopf al...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-285",
+      "section_id": "sec-3-3-2",
+      "statement": "Construction 166. Suppose we have a scheme $X$ over $S$. The notion of points of $X$ is not as transparent as in the case of sets or topological spaces. If $T$ is a scheme over $S$, then we define a $...",
+      "type": "construction"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-286",
+      "section_id": "sec-3-3-2",
+      "statement": "Definition 167. A functor $F:\\mathcal{C}\\rightarrow \\mathop{\\mathrm{\\bf{Grp}}}$ is said to be a representable group-valued functor if and only if the functor $U\\circ F :\\mathcal{C}\\rightarrow \\mathop{...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "group_scheme_are_representable_functors",
+      "section_id": "sec-3-3-2",
+      "statement": "Proposition 168. There is an equivalence between the category of group schemes over $S$ and the category $[\\mathop{\\mathrm{\\textbf{Sch}}}_S, \\mathop{\\mathrm{\\bf{Grp}}}]$ of representable group-valued ...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-288",
+      "section_id": "sec-3-3-2",
+      "statement": "Proof. Consider the category $\\mathop{\\mathrm{\\textbf{Sch}}}_S$ of schemes over $S$ and write $\\mathcal{C} = \\mathop{\\mathrm{\\bf{Fun}}}(\\mathop{\\mathrm{\\textbf{Sch}}}_S, \\mathop{\\mathrm{\\bf{Set}}})$ t...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "affine_group_schemes_as_functors",
+      "section_id": "sec-3-3-2",
+      "statement": "Remark 23. Since the category of affine schemes is anti-equivalent to that of commutative $k$-algebras via the $\\mathop{\\mathrm{Spec}}$ functor, from the above proposition, an affine group schemes $G$...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-290",
+      "section_id": "sec-3-3-2",
+      "statement": "Example 169. Let $\\Gamma$ be a finite group of order $n$. We define the constant group scheme over $S$, denoted $\\Gamma_S\\rightarrow S$, to be the disjoint union of $n$ copies of $S$ indexed by $\\Gamm...",
+      "type": "example"
+    },
+    {
+      "depends_on": [],
+      "id": "descent_argument",
+      "section_id": "sec-3-3-2",
+      "statement": "Lemma 170. Let $L|k$ be a Galois extension with Galois group $G=\\mathop{\\mathrm{Gal}}(L|k)$. Given a relative Galois representation $V$ $$V \\cong L \\otimes V^G$$",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-292",
+      "section_id": "sec-3-3-2",
+      "statement": "Proof. See [@galois_descent_Szamuely], Lemma $2.3.8$. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-293",
+      "section_id": "sec-3-3-2",
+      "statement": "Proposition 171. The category of finite étale group schemes over $k$ is equivalent to the category of finite groups carrying a continuous $\\mathop{\\mathrm{Gal}}(k)$-action.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-294",
+      "section_id": "sec-3-3-2",
+      "statement": "Proof. Assume the base field $S = \\mathop{\\mathrm{Spec}}\\:k$ for $k$ a field. Then by Theorem [60](#etale_algebras){reference-type=\"ref\" reference=\"etale_algebras\"}, a finite étale group scheme $G\\rig...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "constant_group_scheme_etale",
+      "section_id": "sec-3-3-2",
+      "statement": "Remark 24. The previous proposition actually tells us more. Consider $G$ a finite étale group scheme over $k$, and $\\Gamma = G(k_s)$ the group of $k_s$-valued points of $G$. Then we can consider the c...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-296",
+      "section_id": "sec-3-3-2",
+      "statement": "Definition 172. Let $S$ be a connected scheme, and $G\\rightarrow S$ a finite flat group scheme. $X$ is a (left) $G$-torsor or $G$-principal homogeneous space over $S$ is a finite locally free surjecti...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "other_charac_torsors",
+      "section_id": "sec-3-3-2",
+      "statement": "Lemma 173. Let $S$ be a connected scheme, $G\\rightarrow S$ a finite flat group scheme, and $X\\rightarrow S$ a scheme over $S$ equipped with an action $\\rho: G\\times_SX \\rightarrow X$ (on the left). Th...",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-298",
+      "section_id": "sec-3-3-2",
+      "statement": "Proof. Suppose such data define a $G$-torsor. By assumption, the $G$-torsor $X\\rightarrow S$ is a finite locally free surjective morphism, and $X\\times_SX\\rightarrow X$ is isomorphic to $G\\times_SX\\ri...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-299",
+      "section_id": "sec-3-3-2",
+      "statement": "Theorem 174. Let $S$ be a connected scheme, and $G$ a finite étale group scheme over $S$. - If $G$ is a constant group scheme $\\Gamma_S$, then a $G$-torsor is the same as a finite Galois étale cover w...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-300",
+      "section_id": "sec-3-3-2",
+      "statement": "Proof. The first statement follows by combining Proposition [150](#etale_cover_locally_trivial){reference-type=\"ref\" reference=\"etale_cover_locally_trivial\"} and Lemma [173](#other_charac_torsors){ref...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-301",
+      "section_id": "sec-3-3-3",
+      "statement": "Construction 175. Let $S$ be a scheme, and consider the category $\\mathop{\\mathrm{\\bf{F\\acute{e}t}}}_S$. For the rest of the construction, we fix a geometric point $\\overline{s}:\\mathop{\\mathrm{Spec}}...",
+      "type": "construction"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-302",
+      "section_id": "sec-3-3-3",
+      "statement": "Definition 176. Given a scheme $S$ and a geometric point $\\overline{s}:\\mathop{\\mathrm{Spec}}\\:\\Lambda\\rightarrow S$, we define the étale fundamental group $\\pi_1^e(S,\\overline{s})$ as the automorphis...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-303",
+      "section_id": "sec-3-3-3",
+      "statement": "Remark 25. This obviously implies that $\\pi_1^e(S,\\overline{s})$ acts naturally on $\\mathop{\\mathrm{Fib}}_{\\overline{s}}(X)$ for any $X$ being a finite étale cover of $S$, so $\\mathop{\\mathrm{Fib}}_{\\...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-304",
+      "section_id": "sec-3-3-3",
+      "statement": "Definition 177. Let $S$ be a connected scheme and $\\overline{s}$ a geometric point. We define the cofiltered category $\\mathcal{J}$ by - Objects of $\\mathcal{J}$ are pairs $(Y_i,\\overline{y}_i)$ where...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "making_Galois_cofinal",
+      "section_id": "sec-3-3-3",
+      "statement": "Lemma 178. Let $S$ be a connected scheme and $\\overline{s}$ a geometric point. Let $f:X\\rightarrow S$ be in $\\mathop{\\mathrm{\\bf{F\\acute{e}t}}}_S$ with a fixed geometric point $\\overline{x}\\in \\mathop...",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-306",
+      "section_id": "sec-3-3-3",
+      "statement": "Proof. Let $Z$ be the connected component $\\overline{f}:Z\\rightarrow X$ that lies over $\\overline{x}$. From Proposition [163](#Galois_embed_etale_cover){reference-type=\"ref\" reference=\"Galois_embed_et...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "direct_system_fibre",
+      "section_id": "sec-3-3-3",
+      "statement": "Lemma 179. There is a covariant functor $F:\\mathcal{J}\\rightarrow \\mathop{\\mathrm{\\bf{F\\acute{e}t}}}_S$ with direct system $(Y_i,f_{ij})$ for $Y_i$ objects $\\mathcal{J}$ and $f_{ij}$ morphisms in $\\ma...",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-308",
+      "section_id": "sec-3-3-3",
+      "statement": "Proof. Since $\\mathcal{J}$ is a cofiltered category its underlying set is clearly partially ordered. We now show that it is also directed. Let $Y_i,Y_j\\in \\mathcal{J}$, then $f:Y_i\\times_S Y_j \\righta...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "inverse_system_Galois",
+      "section_id": "sec-3-3-3",
+      "statement": "Lemma 180. Let $\\mathcal{K}$ be the subcategory of $\\mathcal{J}$ restricting to the objects $Y_i$ that are Galois covers. $\\mathcal{K}$ is then a cofinal set and we have $$\\varinjlim_{Y_i\\in\\mathcal{J...",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-310",
+      "section_id": "sec-3-3-3",
+      "statement": "Proof. For any $Y_i\\in \\mathcal{J}$, by Lemma [178](#making_Galois_cofinal){reference-type=\"ref\" reference=\"making_Galois_cofinal\"}, we can find $Y_k\\in \\mathcal{K}$ such that $Y_i\\leq Y_k$. Uniquenes...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-311",
+      "section_id": "sec-3-3-3",
+      "statement": "Definition 181. A functor $F: \\mathcal{C} \\rightarrow Set$ is said to be pro-representable if there exist an inverse system $(Y_\\alpha, f_{\\alpha\\beta})$ of objects of $\\mathcal{C}$ indexed by a parti...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "fib_pro_representable",
+      "section_id": "sec-3-3-3",
+      "statement": "Proposition 182. Let $S$ be a connected scheme and $\\overline{s}:\\mathop{\\mathrm{Spec}}\\:\\Lambda \\rightarrow S$ a geometric point. The functor $\\mathop{\\mathrm{Fib}}_{\\overline{s}}$ is pro-representab...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-313",
+      "section_id": "sec-3-3-3",
+      "statement": "Proof. We have already shown in Lemmas [179](#direct_system_fibre){reference-type=\"ref\" reference=\"direct_system_fibre\"} and [180](#inverse_system_Galois){reference-type=\"ref\" reference=\"inverse_syste...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-314",
+      "section_id": "sec-3-3-3",
+      "statement": "Theorem 183. The étale fundamental group of a connected scheme $S$ with geometric point $\\overline{s}:\\mathop{\\mathrm{Spec}}\\:\\Lambda\\rightarrow S$ is a profinite group with isomorphism $$\\pi_1^e(S,\\o...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-315",
+      "section_id": "sec-3-3-3",
+      "statement": "Proof. By Corollary [19](#corollary_property_morphism_covers){reference-type=\"ref\" reference=\"corollary_property_morphism_covers\"}, the groups $\\mathop{\\mathrm{Aut}}(Y_k|S)$ are all finite for all $Y_...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "main_theorem_etale_fundamental_group",
+      "section_id": "sec-3-3-3",
+      "statement": "Theorem 184. Let $S$ be a connected scheme, and $\\overline{s}:\\mathop{\\mathrm{Spec}}\\: \\Lambda \\rightarrow S$ a geometric point and $G = \\pi_1^e(S,\\overline{s})$ the étale fundamental group. The funct...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-317",
+      "section_id": "sec-3-3-3",
+      "statement": "Proof. Our goal will be to prove that the functor $\\mathop{\\mathrm{Fib}}_{\\overline{s}}$ is fully faithful and essentially surjective similar to the proof of theorem [56](#Grot_reformulation_Galois){r...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-318",
+      "section_id": "sec-3-3-3",
+      "statement": "Remark 26. Recall that a permutation representation of a group $G$ on a finite set $X$ is a homomorphism $\\rho:G\\rightarrow \\mathop{\\mathrm{Sym}}(X)$. There is an equivalence of categories between fin...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "corollary_representation",
+      "section_id": "sec-3-3-3",
+      "statement": "Corollary 185. For $S$ a connected scheme with a geometric point $\\overline{s}$, we have an equivalence of categories between finite étale covers of $S$ and finite continuous permutations representati...",
+      "type": "corollary"
+    },
+    {
+      "depends_on": [],
+      "id": "fundamental_group_over_field",
+      "section_id": "sec-3-3-3",
+      "statement": "Example 186. Let $S=\\mathop{\\mathrm{Spec}}\\:k$ for $k$ a field and $\\overline{s}:\\mathop{\\mathrm{Spec}}\\Lambda \\rightarrow S$ a geometric point with $k_s\\subseteq \\Lambda$. From Example [145](#example...",
+      "type": "example"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-321",
+      "section_id": "sec-3-3-3",
+      "statement": "Remark 27. Using the above example, we can justify our initial assumption: that the fibre functor is not representable. We may think that if $\\mathop{\\mathrm{Fib}}_{\\overline{s}}$ over $\\mathop{\\mathr...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-322",
+      "section_id": "sec-3-3-3",
+      "statement": "Example 187. Let $\\mathbb{F}_q$ be a finite field with $q$ elements and denote $\\overline{\\mathbb{F}}_q$ its closure. From Galois theory we know that each extension of $\\mathbb{F}_q$ is of the form $\\...",
+      "type": "example"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-323",
+      "section_id": "sec-3-4",
+      "statement": "Theorem 188 (Chow). Let $\\chi$ be a compact analytic subspace of the complex manifold $\\mathbb{P}^n_{\\mathbb{C}}$. Then there is a subscheme $X\\subset \\mathbb{P}^n$ with $X^{an} = \\chi$. Furthermore, ...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-324",
+      "section_id": "sec-3-4",
+      "statement": "Proof. See [@Chow] Theorem $V$. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-325",
+      "section_id": "sec-3-4-1",
+      "statement": "Definition 189. A Riemann surfaces $X$ is a $1$-dimensional complex manifold. That is, $X$ is a Hausdorff topological space with an open covering $\\{U_i\\mid i\\in I\\}$, together with maps $f_i:U_i\\righ...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-326",
+      "section_id": "sec-3-4-1",
+      "statement": "Definition 190. A holomorphic (or analytic) map $\\varphi$ between two Riemann surfaces $X$ and $Y$ is a continuous map such for each pair of open subsets $U\\subset X$, $V\\subset Y$ satisfying $f(U)\\su...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-327",
+      "section_id": "sec-3-4-1",
+      "statement": "Remark 28. Since compact Riemann surfaces are obviously topological spaces, one can apply our theory of topological covering spaces to them. But notice that we obtain much more information on these co...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "holo_are_locally_ramified",
+      "section_id": "sec-3-4-1",
+      "statement": "Proposition 191. Let $\\varphi:Y\\rightarrow X$ be a holomorphic map of Riemann surfaces. For each point $y\\in Y$, there is a unique integer $k=k_y\\ge 1$ such that we can find complex charts around $y$ ...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-329",
+      "section_id": "sec-3-4-1",
+      "statement": "Proof. See Proposition $3$ of Chapter $4$ in [@Donaldson]. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-330",
+      "section_id": "sec-3-4-1",
+      "statement": "Definition 192. The above integer $k_y$ is called the ramification index of the map $\\varphi$ at $y$. And the points $y$ with $k_y> 1$ are called branch points, we call the set of branch points of $\\v...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-331",
+      "section_id": "sec-3-4-1",
+      "statement": "Proposition 193. Let $\\varphi: Y\\rightarrow Y$ be a holomorphic map of Riemann surfaces. Then the set of branch points $B_{\\varphi}$ is finite.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-332",
+      "section_id": "sec-3-4-1",
+      "statement": "Proof. See Proposition $4$ of Chapter $4$ from [@Donaldson]. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "proper_map_closed",
+      "section_id": "sec-3-4-1",
+      "statement": "Lemma 194. A proper map $f:Y\\rightarrow X$ to a compactly generated Hausdorff space is a closed map (a space $X$ is called compactly generated if any subset $A$ of $X$ is closed when $A\\cap K$ is clos...",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-334",
+      "section_id": "sec-3-4-1",
+      "statement": "Proof. Let $C\\subset Y$ be closed, and let $K$ be a compact subspace of $X$. Then $f^{-1}(K)$ is compact and so is $f^{-1}(K) \\cap C$ that we denote as $B$. Then $f(B) = K\\cap f(C)$ which is compact, ...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-335",
+      "section_id": "sec-3-4-1",
+      "statement": "Proposition 195. Let $X$ be a Riemann surface (connected), and $\\varphi:Y\\rightarrow X$ a proper holomorphic map. The map $\\varphi$ is surjective with finite fibres, and its restriction to $Y\\:\\backsl...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-336",
+      "section_id": "sec-3-4-1",
+      "statement": "Proof. Finiteness of fibres follows from the above discussion. And surjectivity follows from the fact that the image $\\varphi(Y)$ is open and closed (proper maps are open and closed by Lemma [194](#pr...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-337",
+      "section_id": "sec-3-4-1",
+      "statement": "Definition 196. We call a proper surjective map of locally compact Hausdorff spaces that restricts to a cover outside a discrete closed subset a finite branched cover.",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-338",
+      "section_id": "sec-3-4-1",
+      "statement": "Theorem 197. Every compact Riemann surface is homeomorphic to a torus with $g$ holes",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-339",
+      "section_id": "sec-3-4-1",
+      "statement": "Proof. See $\\cite{Donaldson}$ Theorem $3$ in Chapter $6$. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-340",
+      "section_id": "sec-3-4-1",
+      "statement": "Theorem 198. The fundamental group of a compact Riemann surface $X$ of genus $g$ has a finite presentation of the form $\\pi_1(X,x) = \\langle a,b,c,d,...\\mid [a,b][c,d]... = 1\\rangle$, where the bracke...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-341",
+      "section_id": "sec-3-4-1",
+      "statement": "Proof. The proof is an application of Van Kampen's theorem to cell complexes, see [@Hatcher] Chapter $1.2$ ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-342",
+      "section_id": "sec-3-4-2",
+      "statement": "Construction 199. Let $X\\subset \\mathbb{CP}^n$ be a smooth projective curve over $\\mathbb{C}$ given by $r$ homogeneous polynomials (with $r\\geq n-1$). Consider $\\{U_i \\mid i\\in I\\}$ an affine covering...",
+      "type": "construction"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-343",
+      "section_id": "sec-3-4-2",
+      "statement": "Remark 30. We have established that (non-constant) finite branched coverings with zero ramification locus (so finite topological covering spaces) are the same as finite étale coverings over compact Ri...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-344",
+      "section_id": "sec-3-4-2",
+      "statement": "Theorem 200. Let $X$ be a scheme over $\\mathbb{C}$ locally of finite type and $X^{an}$ the analytical space associated to $X$. The analytification functor which to any finite étale cover $Y$ associate...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-345",
+      "section_id": "sec-3-4-2",
+      "statement": "Proof. See [@SGA], Théorèm $XII.\\:5.1$ ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-346",
+      "section_id": "sec-3-4-2",
+      "statement": "Corollary 201. Let $X$ be a connected scheme over $\\mathbb{C}$ locally of finite type, $x'$ a point in $X^{an}$ and $\\overline{x}$ its corresponding point in $X$. We have the following canonical isomo...",
+      "type": "corollary"
+    },
+    {
+      "depends_on": [],
+      "id": "etale_fund_grp_fin_gen",
+      "section_id": "sec-3-4-2",
+      "statement": "Remark 31. - One might guess that such a result is quite powerful. An immediate application is that every smooth projective scheme over $\\mathbb{C}$ has a topologically finitely generated étale fundam...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "fiber_isomorphism",
+      "section_id": "sec-3-5",
+      "statement": "Lemma 202. Let $S$ be a connected scheme. Give, two geometric points $\\overline{s}:\\mathop{\\mathrm{Spec}}\\:\\Lambda\\rightarrow S$ and $s':\\mathop{\\mathrm{Spec}}\\:\\Lambda'\\rightarrow S$, there exists an...",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-349",
+      "section_id": "sec-3-5",
+      "statement": "Proof. By proposition [182](#fib_pro_representable){reference-type=\"ref\" reference=\"fib_pro_representable\"}, both fibre functors are pro-representable. And from our discussion on the étale fundamental...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-350",
+      "section_id": "sec-3-5",
+      "statement": "Proposition 203. Let $S$ be a connected scheme. For any two geometric points $\\overline{s}:\\mathop{\\mathrm{Spec}}\\:\\Lambda\\rightarrow S$ and $\\overline{s}':\\mathop{\\mathrm{Spec}}\\:\\Lambda'\\rightarrow ...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-351",
+      "section_id": "sec-3-5",
+      "statement": "Proof. From Lemma [202](#fiber_isomorphism){reference-type=\"ref\" reference=\"fiber_isomorphism\"}, we have an isomorphism $\\varphi : \\mathop{\\mathrm{Fib}}_{\\overline{s}}\\xrightarrow{\\sim}\\mathop{\\mathrm...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-352",
+      "section_id": "sec-3-5-1",
+      "statement": "Construction 204. Let $S$ and $S'$ be two connected schemes, equipped with the geometric points $\\overline{s}:\\mathop{\\mathrm{Spec}}\\:\\Lambda\\rightarrow S$ and $\\overline{s}':\\mathop{\\mathrm{Spec}}\\:\\...",
+      "type": "construction"
+    },
+    {
+      "depends_on": [],
+      "id": "image_base_change_induce",
+      "section_id": "sec-3-5-1",
+      "statement": "Proposition 205. - The map $\\phi_$ is trivial if and only if for every connected finite étale cover $X\\rightarrow S$, the base change $\\mathop{\\mathrm{Bc}}_{S,S'}(X)$ is a trivial cover. - The map $\\p...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-354",
+      "section_id": "sec-3-5-1",
+      "statement": "Proof. - Suppose the map $\\phi_$ is trivial. We have, for any finite étale connected cover $X$ of $S$ a corresponding finite $\\pi^e_1(S,\\overline{s})$-set, $F:= \\mathop{\\mathrm{Fib}}_{\\overline{s}}(X)...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "subgroup_stabiliser_etale",
+      "section_id": "sec-3-5-1",
+      "statement": "Remark 32. Observe that by Theorem [184](#main_theorem_etale_fundamental_group){reference-type=\"ref\" reference=\"main_theorem_etale_fundamental_group\"}, identifying a finite continuous transitive $\\pi^...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "base_chage_image_last",
+      "section_id": "sec-3-5-1",
+      "statement": "Proposition 206. Let $U\\subset \\pi^e_1(S,\\overline{s})$ be an open subgroup, and let $X$ be the connected finite étale cover corresponding to the coset $\\pi^e_1(S,\\overline{s})/U$, let it have the bas...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-357",
+      "section_id": "sec-3-5-1",
+      "statement": "Proof. We have $\\mathop{\\mathrm{im}}\\phi_\\subset U$ if and only if $\\pi^e_1(S',\\overline{s}')$ acts trivially on $\\overline{x}$ via $\\phi_$ (by the previous Proposition [205](#image_base_change_induce...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "base_change_kernel",
+      "section_id": "sec-3-5-1",
+      "statement": "Proposition 207. Let $U'\\subset \\pi^e_1(S',\\overline{s})$ be an open subgroup, and let $X'$ be the finite étale cover of $S'$ corresponding to the coset space $\\pi^e_1(S',\\overline{s}')/U'$.\\ The subg...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-359",
+      "section_id": "sec-3-5-1",
+      "statement": "Proof. Suppose there exists an étale cover $X$ of $S$ and a morphism $X_i\\rightarrow X'$ as above, and let $U\\subset \\pi^e_1(S,\\overline{s})$ be an open subgroup such that $X\\cong \\pi^e_1(S,\\overline{...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "criteria_injective_morphism_fund_group",
+      "section_id": "sec-3-5-1",
+      "statement": "Corollary 208. The map $\\phi_$ is injective if and only if for every connected finite étale cover $X'$ of $S$, there exists a finite étale cover $X$ of $S$ and a morphism $X_i\\rightarrow X'$ over $S'$...",
+      "type": "corollary"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-361",
+      "section_id": "sec-3-5-1",
+      "statement": "Proof. By Lemma [48](#trivial_intersection_normal_subgroups){reference-type=\"ref\" reference=\"trivial_intersection_normal_subgroups\"}, the intersection of every normal open subgroup of $\\pi^e_1(S',\\ove...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "exact_sequence_middle",
+      "section_id": "sec-3-5-1",
+      "statement": "Corollary 209. Let $S''\\xrightarrow{\\psi} S'\\xrightarrow{\\phi}$ be a sequence of morphisms of connected schemes, and let $\\overline{s}$, $\\overline{s}'$ and $\\overline{s}''$ be geometric points of $S$...",
+      "type": "corollary"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-363",
+      "section_id": "sec-3-5-1",
+      "statement": "Proof. This is a direct consequence of the previous, Proposition [205](#image_base_change_induce){reference-type=\"ref\" reference=\"image_base_change_induce\"} $a)$, Proposition [206](#base_chage_image_l...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "first_homotopy_exact_sequence",
+      "section_id": "sec-3-5-2",
+      "statement": "Theorem 210 (Homotopy Exact Sequence). Let $X$ be a quasi-compact and geometrically integral scheme over a field $k$. Fix an algebraic closure $\\overline{k}$ of $k$, and let $k_s$ be the separable clo...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-365",
+      "section_id": "sec-3-5-2",
+      "statement": "Proof. Injectivity of the first map $\\pi^e_1(\\overline{X}, \\overline{x}')\\rightarrow \\pi^e_1(X,\\overline{x})$ is given by the Corollary [208](#criteria_injective_morphism_fund_group){reference-type=\"r...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-366",
+      "section_id": "sec-3-5-2",
+      "statement": "Theorem 211. Let $S$ be a Noetherian integral scheme, and $\\phi : X\\rightarrow S$ a proper, flat morphism with geometrically integral fibres. Let $\\overline{s}:\\mathop{\\mathrm{Spec}}\\:k\\rightarrow S$ ...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-367",
+      "section_id": "sec-3-5-2",
+      "statement": "Proof. A proof of this theorem can be found in [@Szamuely] (Proposition $5.6.4$), it use the Stein factorisation. Another proof can be found in [@SGA], (Théorème $IX.\\: 6.1$) and it uses effective des...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-368",
+      "section_id": "sec-3-5-2",
+      "statement": "Corollary 212. Let $k$ be an algebraically closed field and $X$ and $Y$ Noetherian connected schemes over $k$. Assume moreover that $X$ is proper and geometrically integral, and choose geometric point...",
+      "type": "corollary"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-369",
+      "section_id": "sec-3-5-2",
+      "statement": "Proof. We can insert the above natural morphism in the following commutative diagram of exact sequences, $$\\begin{tikzcd} 1\\arrow[r] & \\pi^e_1(X,\\overline{x})\\arrow[r]\\arrow[d] & \\pi^e_1(X\\times Y, (\\...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "invariant_under_field_extension",
+      "section_id": "sec-3-5-2",
+      "statement": "Proposition 213. Let $L$ be an extension of an algebraically closed field $k$ and $X$ be a proper integral scheme over $k$. The natural map $\\pi^e_1(X_L,\\overline{x}_L)\\rightarrow \\pi^e_1(X,\\overline{...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-371",
+      "section_id": "sec-3-5-2",
+      "statement": "Proof. If $Y\\rightarrow X$ is a connected finite étale cover, then $Y$ is reduced by Proposition [152](#reduced_carry_above){reference-type=\"ref\" reference=\"reduced_carry_above\"} since $X$ is also red...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "lats_thm",
+      "section_id": "sec-3-5-2",
+      "statement": "Corollary 214. Let $k$ be an algebraically closed field of characteristic $0$, and let $X$ be a smooth connected projective scheme over $k$. For every geometric base point $\\overline{x}$ the étale fun...",
+      "type": "corollary"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-373",
+      "section_id": "sec-3-5-3",
+      "statement": "Example 215. Let $k$ be an arbitrary field of characteristic $0$ and $X = \\mathbb{P}^1_k$ the projective line over $k$. One way to compute the étale fundamental group of $X$ at a geometric point $\\ove...",
+      "type": "example"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-374",
+      "section_id": "sec-4-1",
+      "statement": "Definition 217. A coalgebra is a $k$-vector space $C$ endowed with a $k$-linear comultiplication : $\\Delta:C\\rightarrow C\\otimes_k C$ and a $k$-linear counit : $\\epsilon : C\\rightarrow k$ satisfying t...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "dualize_algebra_coalgebra",
+      "section_id": "sec-4-1",
+      "statement": "Proposition 218. The contravariant dualisation functor $A\\mapsto A^$ induces an anti-equivalence between the category of finite-dimensional $k$-coalgebras and that of finite-dimensional $k$-algebras.*",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-376",
+      "section_id": "sec-4-1",
+      "statement": "Proof. Given a $k$-coalgebra $A$, the $k$-linear dual $A^ = \\mathop{\\mathrm{Hom}}_k(A,k)$ of the underlying finite-dimensional $k$-vector space carries additional structure. The comultiplication $\\Del...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "dual_algebara_no_coalgebra",
+      "section_id": "sec-4-1",
+      "statement": "Remark 33. The above equivalence restricts to the finite-dimensional case, because whereas it is true that arbitrary $k$-coalgebras dualise into algebras, the converse is false for infinite-dimensiona...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-378",
+      "section_id": "sec-4-1",
+      "statement": "Definition 219. A bialgebra $H$ is a vector space that is at the same time an algebra with multiplication $m$ and unit $u$ and a coalgebra with comultiplication $\\Delta$ and counit $\\epsilon$, such th...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "def_hopf_alg",
+      "section_id": "sec-4-1",
+      "statement": "Definition 220. Let $C$ be a $k$-coalgebra. A (right) comodule for $C$ is a vectorspace $M$ endowed with a linear map (a coaction) $\\rho:M\\rightarrow M \\otimes C$ such that the following diagrams comm...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-380",
+      "section_id": "sec-4-1",
+      "statement": "Remark 34. Similarly to Proposition [218](#dualize_algebra_coalgebra){reference-type=\"ref\" reference=\"dualize_algebra_coalgebra\"}, there is an equivalence between (left) finite-dimensional $C$-comodul...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "fundamental_theorem_comodule",
+      "section_id": "sec-4-1",
+      "statement": "Theorem 221. Let $C$ be a $k$-coalgebra and $M$ a right $C$-comodule. The any element $m\\in M$ is contained in a $C$-subcomodule that is finite-dimensional over $k$. Consequently, any finite-dimension...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-382",
+      "section_id": "sec-4-1",
+      "statement": "Proof. See [@Milne_alg_group], Proposition $4.7$, where the statement can be generalised to $\\mathcal{O}(G)$ an arbitrary $k$-coalgebra ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "representation_of_group_as_functor",
+      "section_id": "sec-4-1",
+      "statement": "Remark 35. Recall that in the last chapter, we identified group schemes with group-valued representable functors (Proposition [168](#group_scheme_are_representable_functors){reference-type=\"ref\" refer...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "representations_iso_comodules",
+      "section_id": "sec-4-1",
+      "statement": "Proposition 222. There is a bijection between right comodules over the commutative Hopf algebra $A$ and left representations of the corresponding affine group scheme.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-385",
+      "section_id": "sec-4-1",
+      "statement": "Proof. Let $M$ be an $A$-comodule where $A$ is a commutative Hopf algebra. Given a $k$-algebra $R$, an element of $G(R)$ corresponds to a $k$-algebra homomorphism $g: A\\rightarrow R$. The composite ma...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-386",
+      "section_id": "sec-4-1",
+      "statement": "Lemma 223. Let $\\omega$ and $\\omega^f$ be fibre functors as above, then $$\\mathop{\\mathrm{Hom}}(\\omega,\\omega) =\\mathop{\\mathrm{Hom}}(\\omega^f,\\omega^f)$$",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-387",
+      "section_id": "sec-4-1",
+      "statement": "Proof. Let $M$ be a $C$-comodule and let $N$ be a subcomodule of $M$ via the inclusion $\\iota :N \\hookrightarrow M$. Then, for $\\lambda\\in\\mathop{\\mathrm{End}}(\\omega)$, by naturality, the restriction...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-388",
+      "section_id": "sec-4-1",
+      "statement": "Remark 36. In light of Proposition [222](#representations_iso_comodules){reference-type=\"ref\" reference=\"representations_iso_comodules\"}, the previous lemma states that in order to study arbitrary rep...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "useful_lemma_underlying_coalgebra",
+      "section_id": "sec-4-1",
+      "statement": "Lemma 224. Let $A$ be a $k$-coalgebra and $\\omega^f$ the fibre functor as above. The underlying $k$-vector space of $A$ represents the functor $V\\mapsto \\mathop{\\mathrm{Hom}}(\\omega, \\omega\\otimes V)$...",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-390",
+      "section_id": "sec-4-1",
+      "statement": "Proof. See [@Schauenburg], Lemma $2.2.1$. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-391",
+      "section_id": "sec-4-1",
+      "statement": "Corollary 225. A $k$-coalgebra $C$ is determined up to unique isomorphism by the category of $\\mathop{\\mathrm{\\bf{CoMod}}}^{\\text{f.d.}}_C$ and the functor $\\omega$.",
+      "type": "corollary"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-392",
+      "section_id": "sec-4-1",
+      "statement": "Proof. By the previous proposition, the underlying vector space of $C$ is uniquely determined up to isomorphism as the representing object of the functor $V\\mapsto \\mathop{\\mathrm{Hom}}(\\omega, \\omega...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "remark_abelian_category",
+      "section_id": "sec-4-1",
+      "statement": "Remark 37. In the literature, it is often shown that the coalgebra $C$ is recovered as the vector space of coendomorphisms of the fibre functor $\\omega$, with a coalgebra structure (see [@Schauenburg]...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "useful_lemma_underlying_coalgebra_2",
+      "section_id": "sec-4-1",
+      "statement": "Lemma 226. The underlying $k$-vector space of $C\\otimes_kC$ represents the functor $V\\mapsto \\mathop{\\mathrm{Hom}}_{\\mathop{\\mathrm{\\bf{Vect}}}_k}(\\omega\\otimes\\omega, \\omega\\otimes\\omega\\otimes V)$. ...",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-395",
+      "section_id": "sec-4-1",
+      "statement": "Proof. Since we have just seen that each $k$-linear map $C\\otimes_k C\\rightarrow V$ induces a $k$-linear map $\\omega(M)\\otimes_k \\omega(N) \\rightarrow \\omega(M)\\otimes_k \\omega(N)\\otimes_k V$ for each...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-396",
+      "section_id": "sec-4-2",
+      "statement": "Monoidal categories, also often called *tensor categories*, can be seen as the generalisation of categories carrying a tensor product, such as the categories of vector spaces, abelian groups, $R$-modu...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-397",
+      "section_id": "sec-4-2-1",
+      "statement": "Definition 227. A monoidal category is a category $\\mathcal{C}$ together with a bifunctor $\\_\\otimes\\_:\\mathcal{C}\\times \\mathcal{C}\\rightarrow \\mathcal{C}$ called the tensor product, a unit object $1...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-398",
+      "section_id": "sec-4-2-1",
+      "statement": "Remark 38. A consequence of Mac Lane's coherence theorem is that everything that can be proven in a strict monoidal category is also valid in a monoidal category. For that reason, we will usually deno...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-399",
+      "section_id": "sec-4-2-1",
+      "statement": "Definition 229. A monoidal category $(\\mathcal{C}, \\otimes, I)$ is called braided if there exists an isomorphism $\\gamma$ of functors from $\\mathcal{C}\\times \\mathcal{C}$ to $\\mathcal{C}$ given on a p...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-400",
+      "section_id": "sec-4-2-1",
+      "statement": "Definition 230. We say that a symmetric monoidal category $(\\mathcal{C},\\otimes,I)$ is left rigid if each object $X$ in $\\mathcal{C}$ is left rigid. And we say that an object $X$ is left rigid if ther...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-401",
+      "section_id": "sec-4-2-1",
+      "statement": "Remark 39. - In a rigid monoidal category, the dual of $(X\\otimes Y)$ is $Y^\\otimes X^$.\\ The evaluation and coevaluation maps are respectively given by the composites\\ $(X\\otimes Y) \\otimes (Y^ \\otim...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-402",
+      "section_id": "sec-4-2-1",
+      "statement": "Definition 232. Let $(\\mathcal{C}, \\otimes, I)$ and $(\\mathcal{D}, \\boxtimes, J)$ be monoidal categories. A monoidal functor from $\\mathcal{C}$ to $\\mathcal{D}$ is a functor $F$ together with a natura...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-403",
+      "section_id": "sec-4-2-1",
+      "statement": "Example 233. - Let $G$ be a group. The forgetful functor $U:\\mathop{\\mathrm{\\bf{Rep}}}_k^{\\text{f.d.}}(G)\\rightarrow \\mathop{\\mathrm{\\bf{Vect}}}_k$ is monoidal.\\ And the maps $\\Omega_{V,W}: U(V\\otimes...",
+      "type": "example"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-404",
+      "section_id": "sec-4-2-1",
+      "statement": "Definition 234. Let $(F,\\Omega)$ and $(G, \\Lambda)$ be monoidal functors from $(\\mathcal{C},\\otimes,I)$ to $(\\mathcal{D},\\boxtimes,J)$. A monoidal natural transformation $\\alpha:F\\rightarrow G$ is a n...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-405",
+      "section_id": "sec-4-2-1",
+      "statement": "Remark 40. If a monoidal functor is an equivalence of categories, then it is automatically a strong monoidal functor",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "Mac_Lane_coherence",
+      "section_id": "sec-4-2-1",
+      "statement": "Theorem 235. Any monoidal category is monoidally equivalent to a strict monoidal category.",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-407",
+      "section_id": "sec-4-2-1",
+      "statement": "Proposition 236. Strong monoidal functors between rigid monoidal categories preserve duals.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-408",
+      "section_id": "sec-4-2-1",
+      "statement": "Proof. Let $(F,\\Omega_{\\_,\\_},\\Omega_0) : (\\mathcal{C},\\otimes, I) \\rightarrow (\\mathcal{D},\\boxtimes, J)$ be a strong monoidal functor between rigid categories. Due to Mac Lane's coherence theorem, w...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "rigid_monoidal_are_iso",
+      "section_id": "sec-4-2-1",
+      "statement": "Proposition 237. A natural transformation of strong monoidal functors between rigid monoidal categories is always an isomorphism.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-410",
+      "section_id": "sec-4-2-1",
+      "statement": "Proof. Let $F$ and $G$ be two strong monoidal functors as in the previous proof, then we have $F(X^)\\cong F(X)^$ and $G(X^)\\cong G(X)^$ for every $X\\in\\mathcal{C}$. Consider $\\alpha : F\\rightarrow G$ ...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "automorphism_fibre_functor",
+      "section_id": "sec-4-2-1",
+      "statement": "Definition 238. We define three set-valued functors, $\\mathop{\\mathrm{End}}(\\omega): \\mathop{\\mathrm{\\bf{Alg}}}_k\\rightarrow \\mathop{\\mathrm{\\bf{Set}}}$ sending $k$-algebras $R$ to the sets of $R$-lin...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-412",
+      "section_id": "sec-4-2-1",
+      "statement": "Remark 41. Notice that $\\mathop{\\mathrm{Isom}}^{\\otimes}_R(\\omega\\otimes R,\\omega\\otimes R)$ is actually carrying a group structure, making $\\mathop{\\mathrm{Aut}}^{\\otimes}(\\omega)$ a group-valued fun...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "automorphism_group_scheme",
+      "section_id": "sec-4-2-1",
+      "statement": "Proposition 239. Let $G$ be an affine group scheme. Then there is a canonical isomorphism of group-valued functors $G\\xrightarrow{\\sim} \\mathop{\\mathrm{Aut}}^{\\otimes}(\\omega)$. Consequently, $\\mathop...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-414",
+      "section_id": "sec-4-2-1",
+      "statement": "Proof. We first check that we have $\\mathop{\\mathrm{End}}(\\omega)(R)\\cong\\mathop{\\mathrm{Hom}}_{\\mathop{\\mathrm{\\bf{Mod}}}_R}(A\\otimes_kR,R)$ functorially in $R$, for $A$ the coordinate ring of $G$. N...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "Tannaka_duality",
+      "section_id": "sec-4-2-2",
+      "statement": "Theorem 240 (Tannaka Duality). Let $C$ be a $k$-coalgebra for $k$ a field and $\\omega:\\mathop{\\mathrm{\\bf{CoMod}}}^{\\text{f.d.}}_C\\rightarrow \\mathop{\\mathrm{\\bf{Vect}}}^{\\text{f.d.}}_k$ the fibre fun...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-416",
+      "section_id": "sec-4-2-2",
+      "statement": "Proof. See [@Schauenburg] Chapter $2.3$ and $2.4$.\\ ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-417",
+      "section_id": "sec-4-3",
+      "statement": "Definition 241. A neutral Tannakian category over a field $k$ is a rigid, $k$-linear, abelian, symmetric monoidal category $\\mathcal{C}$ whose unit $1$ satisfies $\\mathop{\\mathrm{End}}(1) \\cong k$, an...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-418",
+      "section_id": "sec-4-3",
+      "statement": "Example 242. Let $G$ be an affine group scheme over $k$. The category $\\mathop{\\mathrm{\\bf{Rep}}}^{\\text{f.d.}}(G)$ of finite-dimensional representations of $G$ with its usual tensor product and the f...",
+      "type": "example"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-419",
+      "section_id": "sec-4-3",
+      "statement": "Theorem 243. Neutral Tannakian categories over $k$ are equivalent to categories of finite-dimensional representations of an affine group schemes over $k$.",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-420",
+      "section_id": "sec-4-3",
+      "statement": "Proof. This is a direct application of Theorem [240](#Tannaka_duality){reference-type=\"ref\" reference=\"Tannaka_duality\"} and Proposition [222](#representations_iso_comodules){reference-type=\"ref\" refe...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-421",
+      "section_id": "sec-4-3",
+      "statement": "Definition 244. Consider $(\\mathcal{C},\\omega)$ a Tannakian category. The associated functor $\\mathop{\\mathrm{Aut}}^{\\otimes}(\\omega)$ is called the Tannakian fundamental group of $(\\mathcal{C},\\omega...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "construction_algebraic_hull",
+      "section_id": "sec-4-3",
+      "statement": "Construction 245. Let $G$ be an arbitrary group and $k$ a field. Then the category of finite-dimensional representations of such an arbitrary group is still a neutral Tannakian with its usual forgetfu...",
+      "type": "construction"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-423",
+      "section_id": "sec-4-3",
+      "statement": "Construction 246. Given a Tannakian category $(\\mathcal{C},\\omega)$ and an object $X\\in \\mathcal{C}$, we denote $\\langle X\\rangle_{\\otimes}$ the smallest full Tannakian subcategory of $\\mathcal{C}$ co...",
+      "type": "construction"
+    },
+    {
+      "depends_on": [],
+      "id": "Tannaka_subcat_Zariski_closure",
+      "section_id": "sec-4-3",
+      "statement": "Proposition 247. Let $G$ be an arbitrary group, $k$ a field and $(V,\\rho)$ finite-dimensional representation of $G$ over $k$. Then the Tannakian fundamental group of the full Tannakian subcategory $\\l...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-425",
+      "section_id": "sec-4-3",
+      "statement": "Theorem 248 (Waterhouse). Let $k$ be a field and $G$ a closed subgroup scheme of $\\mathop{\\mathrm{GL}}_n$. Every finite-dimensional representation of $G$ can be reconstructed from its original represe...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-426",
+      "section_id": "sec-4-3",
+      "statement": "Proof. See [@waterhouse] Chapter $3.5$. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-427",
+      "section_id": "sec-4-3",
+      "statement": "Corollary 249. Let $k$ be a field and $G$ a closed subgroup scheme of $\\mathop{\\mathrm{GL}}_n$ over $k$. Denote by $X$ the $n$-dimensional representation of $G$ corresponding to its action on $k^n$ vi...",
+      "type": "corollary"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-428",
+      "section_id": "sec-4-3",
+      "statement": "Proof. Since Tannakian categories are rigid monoidal and abelian, they are closed under taking the tensor product, dual, direct sum and taking quotients and subrepresentations since both last are inst...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-429",
+      "section_id": "sec-4-3",
+      "statement": "Proof of Proposition [247](#Tannaka_subcat_Zariski_closure){reference-type=\"ref\" reference=\"Tannaka_subcat_Zariski_closure\"}. Denote $G$ the affine group scheme over $k$ defined by $\\overline{\\mathop{...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-430",
+      "section_id": "sec-4-3",
+      "statement": "Example 250. One interesting example of Tannakian categories, is that of complex local systems. Consider $X$ a connected and locally simply-connected topological space and fix $x\\in X$ a base point. T...",
+      "type": "example"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-431",
+      "section_id": "sec-4-3-1",
+      "statement": "Definition 251. For $S$ and $s$ as above, we define the *Nori fundamental group scheme of $S$ at the base point $s$ to be the Tannakian fundamental group of the neutral Tannakian category $(\\mathop{\\m...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "Nori_invers_limit",
+      "section_id": "sec-4-3-1",
+      "statement": "Proposition 252. The fundamental group scheme $\\pi_1^N(S,s)$ is an inverse limit of finite $k$-group schemes.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-433",
+      "section_id": "sec-4-3-1",
+      "statement": "Proof. See [@Nori], Conclusion $I.\\:3.$ ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-434",
+      "section_id": "sec-4-3-1",
+      "statement": "Corollary 253. When $k$ is an algebraically closed field of characteristic $0$. For $S$ a proper integral scheme over $k$ and $s:\\mathop{\\mathrm{Spec}}\\:k \\rightarrow S$ a $k$-rational point, there is...",
+      "type": "corollary"
+    },
+    {
+      "depends_on": [],
+      "id": "Lang_1_10",
+      "section_id": "sec-5",
+      "statement": "Theorem 254. Let $A$be a subring of $B$, let $\\mathfrak{p}$ be a prime ideal in $A$ and assume that $B$ is integral over $A$. Then $\\mathfrak{p}B\\neq B$ and there exists a prime ideal $\\mathfrak{q}$ i...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-436",
+      "section_id": "sec-5",
+      "statement": "Proof. See Proposition $1.10$ in Chapter $VII, \\S1$ of [@Lang_algebra]. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "Nakayama_first_lemma",
+      "section_id": "sec-5",
+      "statement": "Lemma 255 (Nakayama). Let $I$ be an ideal in $R$, and $M$ a finitely generated module over $R$. If $IM=M$, then there exists $r\\in R$ with $r\\equiv 1 \\mod{I}$ such that $rM=0$.",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "Nakayama_lemma",
+      "section_id": "sec-5",
+      "statement": "Lemma 256 (Nakayama). Let $I$ be an ideal in $R$, and $M$ a finitely generated $R$-module. If $I=IM$, then there exists an $i\\in I$ such that $im = m$ for all $m\\in M$.",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-439",
+      "section_id": "sec-5-1",
+      "statement": "Definition 257. The Krull dimension of a commutative ring $R$ is the supremum of the lengths of all increasing chain of prime ideals in $R$",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-440",
+      "section_id": "sec-5-1",
+      "statement": "Definition 258. A ring $R$ is called Noetherian if there is no infinite increasing sequence of ideals $I_1\\subsetneq I_2 \\subsetneq \\dots\\subsetneq I_n \\subsetneq \\dots$, while it is called Artinian i...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "f_d_k_alg_artinian",
+      "section_id": "sec-5-1",
+      "statement": "Example 259. - Let $k$ be a field, then finite-dimensional $k$-algebras are Artinian. - The ring of polynomials with finite variables over a field, such as $k[x_1,\\dots , x_n]$ is Noetherian.",
+      "type": "example"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-442",
+      "section_id": "sec-5-1",
+      "statement": "Lemma 260. Let $A$ be an Artinian ring which is also an integral domain. Then $A$ is a field.",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-443",
+      "section_id": "sec-5-1",
+      "statement": "Proof. Let $x\\in A$ be non-zero. We hae a descending chain $1\\supseteq (x) \\supseteq (x^2) ...$, which must stabilise, so $(x^n) = (x^{n+1})$ for some $n$. This implies that $x^n = yx^{n+1}$ for some ...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-444",
+      "section_id": "sec-5-1",
+      "statement": "Lemma 261. In an Artinian ring, every prime ideal is maximal.",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-445",
+      "section_id": "sec-5-1",
+      "statement": "Proof. If $A$ is Artinian and $\\mathfrak{p}\\subset A$ is a prime ideal, then $A/\\mathfrak{p}$ is still Artinian. Since $A/\\mathfrak{p}$ is an integral domain, by the previous lemma it is a field, so $...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-446",
+      "section_id": "sec-5-1",
+      "statement": "Proposition 262. A ring $A$ has Krull dimension zero if and only if every prime ideal is maximal.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-447",
+      "section_id": "sec-5-1",
+      "statement": "Proof. If $\\mathfrak{p}\\subset A$ is a non-maximal prime ideal, then there is some maximal ideal $\\mathfrak{m}$ with $\\mathfrak{p}\\subsetneq\\mathfrak{m}$, giving a chain of length $1$, and so $\\dim A ...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "Artin_zero_dim",
+      "section_id": "sec-5-1",
+      "statement": "Corollary 263. Artinian rings have zero Krull dimension.",
+      "type": "corollary"
+    },
+    {
+      "depends_on": [],
+      "id": "Cameron_1_3",
+      "section_id": "sec-5-2",
+      "statement": "Theorem 264. - Let $\\Omega$ be a transitive $G$-space. Then $\\Omega$ is isomorphic to the coset space $G/H$ where $H = G_{\\alpha}$, the stabiliser for $\\alpha\\in\\Omega$. - Two coset spaces $G/H$ and $...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-450",
+      "section_id": "sec-5-2",
+      "statement": "Proof. See Theorem $1.3$ of [@Cameron_groups].\\ ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-451",
+      "section_id": "sec-6-1",
+      "statement": "Definition 265. A category consists of the following data: - a class $|\\mathcal{C}|= ob(\\mathcal{C}) = \\mathcal{C}$ of objects, denoted by $X,Y,Z,...$, - for any two objects $X,Y$, a set $\\mathop{\\mat...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-452",
+      "section_id": "sec-6-1",
+      "statement": "Definition 266. A (covariant) functor $F$ between two categories $\\mathcal{C}$ and $\\mathcal{D}$ consists of a rule $X \\mapsto F(X)$ on objects and a map on sets of morphisms $\\mathop{\\mathrm{Hom}}_{\\...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-453",
+      "section_id": "sec-6-1",
+      "statement": "Definition 267. Let $F,G : \\mathcal{C} \\rightarrow\\mathcal{D}$ be two functors. A natural transformation or morphism of functors $\\alpha : F \\rightarrow G$ $($sometimes denoted by $\\alpha : F \\Rightar...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-454",
+      "section_id": "sec-6-1",
+      "statement": "Definition 268. A subcategory $\\mathcal{D}$ of a category $\\mathcal{C}$ consists of: - a subclass $\\mathcal{D}$ of the class of objects of $\\mathcal{C}$, and - for every pair $X, X'\\in\\mathcal{D}$, we...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-455",
+      "section_id": "sec-6-1",
+      "statement": "Definition 269. Consider a functor $F : \\mathcal{C}\\rightarrow\\mathcal{D}$. For any two objects $X,Y\\in\\mathcal{C}$ consider the map of sets $F_{XY} : \\mathop{\\mathrm{Hom}}_{\\mathcal{C}} (X,Y) \\righta...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "(pro)_representable",
+      "section_id": "sec-6-1",
+      "statement": "Definition 270. A functor $F:\\mathcal{C}\\rightarrow Set$ is said to be representable if there is an object $X\\in\\mathcal{C}$ and an isomorphism of functors $F\\simeq \\mathop{\\mathrm{Hom}}_{\\mathcal{C}}...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-457",
+      "section_id": "sec-6-1",
+      "statement": "Lemma 271 (Yoneda). If $F$ and $G$ are functors $\\mathcal{C}\\rightarrow \\textbf{Sets}$ represented by objects $X\\in\\mathcal{C}$ and $Y\\in\\mathcal{D}$, respectively $($so $F\\simeq \\mathop{\\mathrm{Hom}}...",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-458",
+      "section_id": "sec-6-1",
+      "statement": "Proof. See [@McLane_Sau], chapter $III. \\: 2.$ ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-459",
+      "section_id": "sec-6-1",
+      "statement": "Definition 272. Let $\\mathcal{C}$ be a small category. Denote $\\mathop{\\mathrm{\\bf{Fun}}}(\\mathcal{C},\\mathop{\\mathrm{\\bf{Set}}})$ the category of covariant functors from $\\mathcal{C}$ to $\\mathop{\\ma...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "yoneda_embeddings",
+      "section_id": "sec-6-1",
+      "statement": "Proposition 273. The Yoneda embedding functors are full and faithful.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-461",
+      "section_id": "sec-6-1",
+      "statement": "Proof. See [@McLane_Sau], chapter $III. \\: 2.$ ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-462",
+      "section_id": "sec-6-2",
+      "statement": "Definition 274. Let $F : \\mathcal{Z} \\rightarrow\\mathcal{C}$ be a covariant functor. A cone on $F$ is couple $(M,\\mu)$, where $M\\in \\mathcal{C}$ and $\\mu_Z \\in \\mathop{\\mathrm{Hom}}_{\\mathcal{C}}(M, F...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-463",
+      "section_id": "sec-6-2",
+      "statement": "Definition 275. Let $F : \\mathcal{Z}\\rightarrow\\mathcal{C}$ be a covariant functor. A limit of $F$ is a cone $(L,\\lambda)$ on $F$, such that for any (other) cone $(T,\\tau)$ on $F$, there exists a uniq...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-464",
+      "section_id": "sec-6-2",
+      "statement": "Theorem 276. If $(L,\\lambda)$ and $(L',\\lambda')$ are two limits of a functor $F : \\mathcal{Z}\\rightarrow\\mathcal{C}$, then $(L,\\lambda)\\cong(L,\\lambda')$ as cones. In other words, if the limit of a f...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-465",
+      "section_id": "sec-6-2",
+      "statement": "Proof. See [@McLane_Sau] ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "lemma_joost_direct_limit",
+      "section_id": "sec-6-2-1",
+      "statement": "Lemma 277. Let $\\mathcal{Z}$ be the category associated to the directed set $(I,\\leq)$ and $\\mathcal{C}$ be any category. There is a bijective correspondence between covariant functors $F : \\mathcal{Z...",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "def_direct_inverse_limit",
+      "section_id": "sec-6-2-1",
+      "statement": "Definition 278. Thus the direct limit of a covariant functor $F : \\mathcal{Z}\\rightarrow \\mathcal{C}$ with corresponding direct system $(C_i, f_{ij})$ is the following colimit $(C, c_i:C_i\\rightarrow ...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "compact_inverse_system",
+      "section_id": "sec-6-2-1",
+      "statement": "Proposition 279. An inverse system $(C_i,f_{ij})$ of non-empty compact topological spaces is non-empty",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-469",
+      "section_id": "sec-6-2-1",
+      "statement": "Proof. Consider the subsets $C_{\\alpha\\beta} \\subset \\prod C_{i}$ consisting of sequences $(c_i)$ satisfying $f_{\\alpha\\beta}(c_{\\beta}) = c_{\\alpha}$ for a fixed pair $\\alpha\\leq \\beta$. These are cl...",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "direct_limit_modules",
+      "section_id": "sec-6-2-1",
+      "statement": "Remark 42. Direct and inverse limits are usually referred to as filtered colimit/limit respectively. Often filtered (co)limits preserve a lot of structure, notably, taking the direct limit of $R$-modu...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "direct_limit_R_module",
+      "section_id": "sec-6-2-1",
+      "statement": "Theorem 280. Let $R$ be a ring and let $\\{M_i, f_{ij}\\}$ be a directed system of $R$-modules over some directed set $(I\\leq)$. Let $M=\\bigoplus_{i\\in I}M_i$ and for every $i\\in I$, let $\\rho_i:M_i\\rig...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-472",
+      "section_id": "sec-6-2-1",
+      "statement": "Proof. See [@Lang_algebra], Theorem $III.\\:10.1$ ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "profinite_group",
+      "section_id": "sec-6-2-1",
+      "statement": "Definition 281. A profinite group is defined to be an inverse limit of a system of finite groups.",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "pro_representable",
+      "section_id": "sec-6-2-1",
+      "statement": "Definition 282. Let $\\mathcal{C}$ be a category, and $F$ a set-valued functor on $\\mathcal{C}$. We say that $F$ is pro-representable if there exists an direct system $(C_i , f_{ij})$ of objects and mo...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-475",
+      "section_id": "sec-6-2-1",
+      "statement": "Definition 283. A category $\\mathcal{J}$ is said to be filtered when it is non-empty, for every two objects $J$ and $J'$ in $\\mathcal{J}$, there exists an object $K$ and two morphisms $f:J\\rightarrow ...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "cofinal_identic_colim",
+      "section_id": "sec-6-2-1",
+      "statement": "Theorem 284. Let $\\mathcal{K}$ be a subcatecory of a filtered category $\\mathcal{J}$ such that it is a cofinal set. Suppose that the functors $F:\\mathcal{J}\\rightarrow \\mathcal{C}$ and $F':\\mathcal{K}...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-477",
+      "section_id": "sec-6-2-1",
+      "statement": "Proof. See [@McLane_Sau], Theorem $IX.3.1$ ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-478",
+      "section_id": "sec-6-2-4",
+      "statement": "Proposition 285. Let $\\mathcal{Z} = \\emptyset$ be the empty category, and let $F : \\mathcal{Z}\\rightarrow \\mathcal{C}$ be the unique functor. Then - the limit of $F$ is an object $T$ in $\\mathcal{C}$ ...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-479",
+      "section_id": "sec-6-3",
+      "statement": "Definition 286. Let $\\mathcal{C}$ and $\\mathcal{D}$ be categories; let $L : \\mathcal{C}\\rightarrow\\mathcal{D}$ and $R : \\mathcal{D}\\rightarrow\\mathcal{C}$ be functors. We say that $(L,R)$ is a pair of...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-480",
+      "section_id": "sec-6-3",
+      "statement": "Theorem 288. Consider the functor $L:\\mathcal{C}\\rightarrow \\mathcal{D}$ and $R:\\mathcal{D}\\rightarrow \\mathcal{C}$. Then there is a bijective correspondence between the natural isomorphism $\\theta_{C...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-481",
+      "section_id": "sec-6-3",
+      "statement": "Proof. See [@McLane_Sau]. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-482",
+      "section_id": "sec-6-3",
+      "statement": "Theorem 289. Let $(L,R) : \\mathcal{C}\\rightleftarrows \\mathcal{D}$ be an adjoint pair of functors. Then $R$ preserves all limits that exist in $\\mathcal{D}$; $L$ preserves all colimits that exist in $...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-483",
+      "section_id": "sec-6-3",
+      "statement": "Proof. See [@McLane_Sau], Theorem $V.\\:5.1$.\\ ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-484",
+      "section_id": "sec-6-4",
+      "statement": "Definition 290. A category is preadditive if every $\\mathop{\\mathrm{Hom}}_{\\mathcal{C}}$-sets are abelian groups and the composition of morphisms is bilinear.\\ A preadditive category is additive if ev...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-485",
+      "section_id": "sec-6-4",
+      "statement": "Definition 291. A functor $F:\\mathcal{C}\\rightarrow\\mathcal{D}$ between two preadditive categories is called additive if $F(f+g) = F(f)+F(g)$ for any two object $A,B\\in\\mathcal{C}$ and any two morphis...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "comodules_abelian",
+      "section_id": "sec-6-4",
+      "statement": "Proposition 293. Let $C$ be a coalgebra over a field $k$. Then the category of finite-dimensional $C$-comodules is $k$-linear and abelian.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-487",
+      "section_id": "sec-6-4",
+      "statement": "Proof. See [@DNR] Corollary $2.1.19$.\\ ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-488",
+      "section_id": "sec-6-5",
+      "statement": "Definition 294. Two categories $\\mathcal{C}$ and $\\mathcal{D}$ are equivalent if there exist two functors $F : \\mathcal{C}\\rightarrow\\mathcal{D}$ and $G: \\mathcal{D}\\rightarrow\\mathcal{C}$, and two na...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-489",
+      "section_id": "sec-6-5",
+      "statement": "Theorem 295. The following properties of a functor $F:\\mathcal{C}\\rightarrow \\mathcal{D}$ are equivalent : - $F$ is an equivalence of categories, - $F$ is part of an adjoint equivalence $\\mathcal{C}\\r...",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-490",
+      "section_id": "sec-6-5",
+      "statement": "Proof. See [@McLane_Sau], Theorem $IV.\\:4.1.$ ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-491",
+      "section_id": "sec-6-6",
+      "statement": "Definition 296. A Grothendieck topology $\\mathcal{G}$ on a category $\\mathcal{C}$ is a collection of maps $\\mathcal{G}(X) = \\{(U_i\\rightarrow X)_{i\\in I}\\}$ for all $X\\in \\mathcal{C}$ called coverings...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-492",
+      "section_id": "sec-6-6",
+      "statement": "Definition 297. A site is a pair $(\\mathcal{C},\\mathcal{G})$, such that $\\mathcal{C}$ is a category and $\\mathcal{G}$ is a Grothendieck topology on $\\mathcal{C}$.",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-493",
+      "section_id": "sec-6-6",
+      "statement": "Remark 43. As it is the case for topological spaces, categories can be endowed with many different Grothendieck topologies. The category of schemes is of particular interest to us here.\\ The category ...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-494",
+      "section_id": "sec-7-1",
+      "statement": "Definition 298. A presheaf $\\mathcal{F}$ of sets $($resp. rings, abelian groups, $R$-modules, \\...$)$ on a topological space $X$ consists of the following data: - for every open set $U \\subset X$, a s...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-495",
+      "section_id": "sec-7-1",
+      "statement": "Definition 299. Now a presheaf $\\mathcal{F}$ is a called a sheaf if it satisfies the following glueing property :\\ For $U\\subset X$ a non-empty open subset, $\\{U_i : i\\in I\\}$ a non-empty open cover o...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-496",
+      "section_id": "sec-7-1",
+      "statement": "Definition 300. Let $\\mathcal{F}$ be a presheaf on $X$, and let $U \\subset X$ be an open subset. Then the restriction of $\\mathcal{F}$ to $U$ is defined to be the presheaf $\\mathcal{F}\\vert_U$ on $U$ ...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-497",
+      "section_id": "sec-7-1",
+      "statement": "Definition 302. If $\\mathcal{F}$ and $\\mathcal{G}$ are presheaves on $X$, a morphism of presheaves $\\varphi : \\mathcal{F}\\rightarrow\\mathcal{G}$ consists of a morphism of sets (resp. rings, abelian gr...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-498",
+      "section_id": "sec-7-1",
+      "statement": "Definition 303. Let $\\mathcal{F}$ be a presheaf of sets (resp. rings, abelian groups, $R$-modules, \\...) on $X$ and $x\\in X$. The stalk $\\mathcal{F}_x$ of $\\mathcal{F}$ at $x$ is defined as the direct...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-499",
+      "section_id": "sec-7-1",
+      "statement": "Remark 44. An element of $\\mathcal{F}_x$ is represented by a pair $(U,s)$, where $U$ is an open neighbourhood of $x$ and $s\\in\\mathcal{F}(U)$. And two such elements $(U,s)$ and $(U',s')$ are equivalen...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-500",
+      "section_id": "sec-7-1",
+      "statement": "Definition 304. Let $f:X\\rightarrow Y$ be a continuous map of topological spaces. For any sheaf $\\mathcal{F}$ on $X$, we define the direct image sheaf or push forward sheaf $f_{}\\mathcal{F}$ on $Y$ by...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "almost_pullback_sheaf",
+      "section_id": "sec-7-1",
+      "statement": "Construction 305. For $f: X\\rightarrow Y$ a continuous map of topological spaces, the direct image functor $f_* : \\mathop{\\mathrm{\\textbf{Sh}}}(X) \\rightarrow \\mathop{\\mathrm{\\textbf{Sh}}}(Y)$ has an ...",
+      "type": "construction"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-502",
+      "section_id": "sec-7-2",
+      "statement": "Definition 306. Let $R$ be a ring. The set of all prime ideals of $R$ is called the spectrum of $R$ or the affine scheme associated to $R$, and is denoted by $\\mathop{\\mathrm{Spec}}\\:R$.",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-503",
+      "section_id": "sec-7-2",
+      "statement": "Definition 307. Let $R$ be a ring and $P\\in\\mathop{\\mathrm{Spec}}\\:R$ a prime ideal of $R$ (a point in the corresponding affine scheme). - We denote $\\kappa(P)$ the quotient field of the integral doma...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-504",
+      "section_id": "sec-7-2",
+      "statement": "Definition 308. An affine scheme $\\mathop{\\mathrm{Spec}}\\: R$ is called integral if it is non-empty and the ring $R$ is an integral domain.",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-505",
+      "section_id": "sec-7-2",
+      "statement": "Definition 309. An affine scheme $\\mathop{\\mathrm{Spec}}\\: R$ is called reduced if the ring $R$ is also reduced, i.e. it contains no nilpotent elements.",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-506",
+      "section_id": "sec-7-2",
+      "statement": "Definition 310. We define the Zariski topology on an affine scheme $\\mathop{\\mathrm{Spec}}\\:R$ to be the topology whose closed sets are exactly the sets of the form $V(S)$ for some $S\\subset R$.",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-507",
+      "section_id": "sec-7-2",
+      "statement": "Proposition 311. Let $R$ be a ring. $a)$ For any closed subset $X\\subset \\mathop{\\mathrm{Spec}}\\:R$, we have $V(I(X))=X$. $b)$ For any ideal $J\\trianglelefteq R$, we have $I(V(J))=\\sqrt{J}$.\\ In parti...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-508",
+      "section_id": "sec-7-2",
+      "statement": "Proof. See [@Eisenbud], Theorem $I.\\:1.6$. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-509",
+      "section_id": "sec-7-2",
+      "statement": "Remark 45. A particular property of schemes is that it allows points that are not necessarily closed, meaning that their closure is a bigger subscheme containing that point. We call non-closed point $...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-510",
+      "section_id": "sec-7-2",
+      "statement": "Definition 312. A topological space $X$ is called reducible if it can be written as $X = X_1 \\cup X_2$, for closed subsets $X_1,X_2 \\subsetneq X$. Otherwise it is called irreducible.",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-511",
+      "section_id": "sec-7-2",
+      "statement": "Proposition 313. An affine variety $\\mathop{\\mathrm{Spec}}\\: R$ is irreducible if and only if $R$ is an integral domain.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "integral_iff_irr_red",
+      "section_id": "sec-7-2",
+      "statement": "Proposition 314. An affine scheme $X$ is said to be integral if and only if it is irreducible and reduced.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-513",
+      "section_id": "sec-7-2",
+      "statement": "Definition 315. An affine scheme $X$ is called disconnected if it can be written as $X=X_1\\cup X_2$ for closed subsets $X_1,X_2\\subsetneq X$ with $X_1\\cap X_2 = \\emptyset$. Otherwise it is called conn...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-514",
+      "section_id": "sec-7-2",
+      "statement": "Definition 316. A topological space is called Noetherian if there is no infinite strictly decreasing chain of closed subsets.",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-515",
+      "section_id": "sec-7-2",
+      "statement": "Definition 317. The dimension $\\dim X\\in \\mathbb{N}\\cup \\{\\infty\\}$ of a non-empty topological space $X$ is the supremum of the length of chains of strictly increasing irreducible closed subsets of $X...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-516",
+      "section_id": "sec-7-2",
+      "statement": "Proposition 318. For a ring $R$ and an element $f\\in R$, we call $D(f) := \\mathop{\\mathrm{Spec}}\\:R \\backslash V(f)$ the distinguished open subset of $f$ in $\\mathop{\\mathrm{Spec}}\\: R$.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-517",
+      "section_id": "sec-7-2",
+      "statement": "Remark 46. The distinguish open sets form a basis of the Zariski topology of an affine scheme $\\mathop{\\mathrm{Spec}}\\:R$ in the sense that every open subset $U\\subset \\mathop{\\mathrm{Spec}}\\:R$ is an...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-518",
+      "section_id": "sec-7-2",
+      "statement": "Definition 319. A locally ringed space is a ringed space $(X,\\mathcal{O}_X)$ such that each stalk $\\mathcal{O}_{X,P}$ for $P\\in X$ is a local ring. A morphism of locally ringed spaces from $(X,\\mathca...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-519",
+      "section_id": "sec-7-2",
+      "statement": "Definition 320. A scheme is a locally ringed space that has an open cover by affine schemes. Morphisms of schemes are just morphisms as locally ringed spaces. This makes a category of schemes denoted ...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-520",
+      "section_id": "sec-7-2",
+      "statement": "Remark 47. All the above topological concepts defined for affine schemes immediately apply to schemes.",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-521",
+      "section_id": "sec-7-2",
+      "statement": "Construction 321. Let $X$ be a scheme. We say that $Y$ is a *open subscheme of $Y$ whose underlying space is the subspace $Y$ of $X$ together with an isomorphism of structure sheaf $\\mathcal{O}_Y$ wit...",
+      "type": "construction"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-522",
+      "section_id": "sec-7-2",
+      "statement": "Construction 322. Let $R$ be a commutative graded ring, where $R = \\oplus_{d\\ge 0} R_d$ is its gradation. The elements of $R_d\\backslash \\{0\\}$ are said to be homogeneous of degree $d$. An ideal in a ...",
+      "type": "construction"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-523",
+      "section_id": "sec-7-2",
+      "statement": "Definition 323. Let $X$ be a scheme. The ring of rational functions on $X$ is the ring $R(X)$ whose elements are rational functions of $X$.",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-524",
+      "section_id": "sec-7-2",
+      "statement": "Remark 48. We can also define the residue field $\\kappa(P)$ for $P$ a point of a locally ringed space $(X,\\mathcal{O}_X)$. It is defined as follows $\\kappa(P) := \\mathcal{O}_{X,P}/\\mathfrak{m}_P$ wher...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "function_field_residue_field",
+      "section_id": "sec-7-2",
+      "statement": "Lemma 324. Let $X$ be an integral scheme, then the function field $k(X) = \\mathcal{O}_{X,\\eta} = \\kappa(\\eta)$ for $\\eta$ the unique generic point of $X$ (see Lemma $\\ref{irreducible_generic_point}$).",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-526",
+      "section_id": "sec-7-2",
+      "statement": "Proof. See [@Stacks][(Tag 01RV)](https://stacks.math.columbia.edu/tag/01RV). ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-527",
+      "section_id": "sec-7-2",
+      "statement": "Definition 325. Let $X$ be an integral scheme. The function field or field of rational functions of $X$ is the field $R(X)$, that we now denote $k(X)$.",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-528",
+      "section_id": "sec-7-2",
+      "statement": "Definition 326. A morphism of schemes $f:X\\rightarrow Y$ is said to be quasi-compact if $Y$ can be covered by open affine subschemes $(V_i)_{i\\in I}$ such that the pre-images $f^{-1}(V_i)$ are compact...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-529",
+      "section_id": "sec-7-2",
+      "statement": "Definition 327. A morphisms $f:X\\rightarrow Y$ of schemes is called proper if it is (separated) of finite type and universally closed.",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-530",
+      "section_id": "sec-7-2",
+      "statement": "Definition 328. Let $X$ and $Y'$ be schemes over a scheme $Y$, we define the fibre product of $X$ and $Y'$ over $Y$ to be the scheme $X\\times_YY'$ such that the following diagram commutes: $$\\begin{ti...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-531",
+      "section_id": "sec-7-2",
+      "statement": "Remark 49. The disjoint union distributes over the fibre product of a scheme, meaning that for any schemes $X_i$ and $Y$ over a base scheme $Z$, there is an isomorphism of schemes : $$(\\bigsqcup_i X_i...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "geometrically_integral",
+      "section_id": "sec-7-2",
+      "statement": "Definition 329. A scheme $X$ over a field $k$ is said to be geometrically integral if for all field extension $L|k$, $X\\times_k \\mathop{\\mathrm{Spec}}\\: L$ is integral, then of course $X\\times_k \\math...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-533",
+      "section_id": "sec-7-2",
+      "statement": "Definition 330. Let $f:X\\rightarrow Y$ be a morphism of schemes, let $y\\in Y$ and $\\kappa(y)$ the residue field of $y$ with the inclusion morphism being $\\iota: \\mathop{\\mathrm{Spec}}\\:\\kappa(y)\\right...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-534",
+      "section_id": "sec-7-3",
+      "statement": "Definition 331. Let $X$ be a scheme and $\\mathcal{O}_X$ its structure sheaf. A sheaf of modules on $X$, also called a sheaf of $\\mathcal{O}_X$-modules is a sheaf $\\mathcal{F}$ on $X$ such that $\\mathc...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "exact_at_level_of_stalk",
+      "section_id": "sec-7-3",
+      "statement": "Lemma 333. Let $(X, \\mathcal{O}_X)$ be a ringed space. The category $\\mathop{\\mathrm{\\bf{Mod}}}(\\mathcal{O}_X)$ is an abelian category. Moreover a complex $\\dots \\rightarrow\\mathcal{F}_1\\rightarrow \\m...",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-536",
+      "section_id": "sec-7-3",
+      "statement": "Proof. See [@Stacks] [(Tag 01AG)](https://stacks.math.columbia.edu/tag/01AG) ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-537",
+      "section_id": "sec-7-3",
+      "statement": "Definition 334. Let $X=\\mathop{\\mathrm{Spec}}\\: R$ be an affine scheme, and let $M$ be an $R$-module. For any open subset $U\\subset X$, we set $$\\begin{equation} \\begin{split} \\widetilde{M}(U) := \\{\\v...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-538",
+      "section_id": "sec-7-3",
+      "statement": "Proposition 335. Let $R$ be a ring, let $M$ be an $R$-module, and let $\\widetilde{M}$ be the sheaf on $X : \\mathop{\\mathrm{Spec}}\\: R$ associated to $M$. Then : - $\\widetilde{M}$ is an $\\mathcal{O}_X$...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-539",
+      "section_id": "sec-7-3",
+      "statement": "Proof. See [@Hartshorne] Proposition $5.1$. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-540",
+      "section_id": "sec-7-3",
+      "statement": "Definition 336. A sheaf of modules $\\mathcal{F}$ on a scheme $X$ is said to be locally free if there is an affine open cover $\\{U_i |i\\in I\\}$ of $X$ such that on every open $U_i = \\mathop{\\mathrm{Spe...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-541",
+      "section_id": "sec-7-3",
+      "statement": "Definition 337. A sheaf of modules $\\mathcal{F}$ on a scheme $X$ is called quasi-coherent if there is an affine cover $\\{ U_i |i\\in I\\}$ of $X$ such that on every open $U_i=\\mathop{\\mathrm{Spec}}\\:R_i...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-542",
+      "section_id": "sec-7-3",
+      "statement": "Example 338. The structure sheaf $\\mathcal{O}_X$ is quasi-coherent on any scheme $X$, since for any open subset $U=\\mathop{\\mathrm{Spec}}\\:R\\subset X$ is in fact of the form $\\mathcal{F}\\vert_U \\cong ...",
+      "type": "example"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-543",
+      "section_id": "sec-7-3",
+      "statement": "Proposition 339. Let $f:X\\rightarrow Y$ be a morphism of schemes with $X$ a Noetherian scheme. Then is $\\mathcal{F}$ is a quasi-coherent sheaf of $\\mathcal{O}_X$-modules, then its direct image $f_\\mat...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-544",
+      "section_id": "sec-7-3",
+      "statement": "Proof. See [@Hartshorne], Proposition $II.\\:5.8$. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-545",
+      "section_id": "sec-7-3",
+      "statement": "Definition 340. Let $f:(X,\\mathcal{O}_X)\\rightarrow (Y,\\mathcal{O}_Y)$ be a morphism of ringed spaces and $\\mathcal{G}$ a sheaf on $Y$. We define the pull-back sheaf $f^*\\mathcal{G}$ to be the tenor p...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-546",
+      "section_id": "sec-7-3",
+      "statement": "Construction 341. Let $\\mathcal{F}$ be a sheaf on a scheme $X$. For a closed point $P\\in X$ and the inclusion map $i:P\\rightarrow X$, the sheaf pull-back sheaf $i^\\mathcal{F}$ on $P$ has only one non-...",
+      "type": "construction"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-547",
+      "section_id": "sec-7-3",
+      "statement": "Theorem 342. The category of quasi-coherent sheaves on schemes is an abelian category.",
+      "type": "theorem"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-548",
+      "section_id": "sec-7-3",
+      "statement": "Proof. See [@Hartshorne], $III.\\: 1.0.5$. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-549",
+      "section_id": "sec-7-3",
+      "statement": "Proposition 343. If $0\\rightarrow\\mathcal{F}_1\\rightarrow \\mathcal{F}_2 \\rightarrow \\mathcal{F}_3\\rightarrow 0$ is a short exact sequence of quasi-coherent sheaf on an affine scheme scheme $X$, then $...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-550",
+      "section_id": "sec-7-3",
+      "statement": "Proof. See [@Hartshorne], Proposition $5.6$. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-551",
+      "section_id": "sec-7-3",
+      "statement": "Proposition 344. Let $(X,\\mathcal{O}_S$ be a ringed space. Then the category of sheaves of $\\mathcal{O}_X$-modules has enough injectives.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-552",
+      "section_id": "sec-7-3",
+      "statement": "Proof. [@Hartshorne] Proposition $III.\\: 2.2$. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-553",
+      "section_id": "sec-7-3",
+      "statement": "Corollary 345 (Coherent Nakayama). If the stalk of a coherent sheaf is zero at a point $P$, then the sheaf restricts to zero in an open neighbourhood of $P$.",
+      "type": "corollary"
+    },
+    {
+      "depends_on": [],
+      "id": "ideal_sheaf",
+      "section_id": "sec-7-3",
+      "statement": "Lemma 346. Let $i: X \\rightarrow Y$ be a closed embedding. Then - If $\\mathcal{F}$ is a quasi-coherent sheaf on $X$, then the direct image $i_\\mathcal{F}$ is a quasi-coherent sheaf on $Y$. - $0 \\right...",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-555",
+      "section_id": "sec-7-3",
+      "statement": "Proof. See [@Hartshorne], Proposition $5.9$. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "affine_morph_quasi_coherent",
+      "section_id": "sec-7-3",
+      "statement": "Proposition 347. There is an anti-equivalence between the category of affine morphisms $X\\rightarrow Y$ and the category of quasi-coherent sheaves of $\\mathcal{O}_X$-algebras.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-557",
+      "section_id": "sec-7-3",
+      "statement": "Proof. See [@Stacks] [(Tag 01SA)](https://stacks.math.columbia.edu/tag/01SA).\\ ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-558",
+      "section_id": "sec-7-4",
+      "statement": "Definition 348. Let $\\mathcal{F}$ be a quasi-coherent sheaf on $X$ and $\\{U_1,...,U_n\\}$ an affine open cover of $X$. - For all $p\\in \\mathbb{N}$, we define the sets $$C^p(\\mathcal{F}) = \\bigoplus_{i_...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-559",
+      "section_id": "sec-7-4",
+      "statement": "Lemma 349. The composition of two consecutive boundary maps is $0$.",
+      "type": "lemma"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-560",
+      "section_id": "sec-7-4",
+      "statement": "Proof. This is a straight up computation. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-561",
+      "section_id": "sec-7-4",
+      "statement": "Definition 350. Let $\\mathcal{F}$ be a coherent sheaf on a scheme $X$ and let $r\\in \\mathbb{N}$. - The following chain complex is called the $\\check{\\textbf{C}}$ech complex (the fact that it is a comp...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-562",
+      "section_id": "sec-7-4",
+      "statement": "Proposition 351. Let $\\mathcal{F}$ be a quasi-coherent sheaf on a scheme $X$. Then - $H^0(X,\\mathcal{F}) = \\mathcal{F}(X)$, - if $X$ is affine, then $H^r(X,\\mathcal{F}) = 0$ for all $r> 0$.",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-563",
+      "section_id": "sec-7-4",
+      "statement": "Proof. See [@Hartshorne], for $a)$, Lemma $III.\\: 4.1$ and for $b)$, ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-564",
+      "section_id": "sec-7-4",
+      "statement": "Proposition 352. Let $0\\rightarrow \\mathcal{F}_1\\rightarrow\\mathcal{F}_2\\rightarrow\\mathcal{F}_3\\rightarrow 0$ be a short exact sequence of quasi-coherent sheaves on a scheme $X$. Then there exists a ...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-565",
+      "section_id": "sec-7-4",
+      "statement": "Proof. See [@Vakil] Chapter $18.1$, $(iii)$.\\ ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-566",
+      "section_id": "sec-7-5",
+      "statement": "Definition 353. Let $U\\subset \\mathbb{C}^n$ be the Cartesian product of open discs : $\\{|z_i| <1 \\mid i=1,...,n\\}$, let $f_1,...,f_m$ be holomorphic functions on $U$ and let $Y\\subset U$ be the closed...",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-567",
+      "section_id": "sec-7-5",
+      "statement": "Remark 50. Theses spaces are called analytic because the topology on them is the topology induced from the usual one on $\\mathbb{C}^n$ open sets are small, and compatible with analysis (limits, contin...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-568",
+      "section_id": "sec-7-5",
+      "statement": "Definition 354. If $X$ and $Y$ are complex analytical spaces, a morphism $\\varphi:X\\rightarrow Y$ of locally $\\mathbb{C}$-ringed spaces is called a holomorphic map.",
+      "type": "definition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-569",
+      "section_id": "sec-7-5",
+      "statement": "Construction 355. Let $X$ be a scheme of finite type over $\\mathbb{C}$. Consider a covering of $X$ by affine open subsets $Y_i=\\mathop{\\mathrm{Spec}}\\:A_i$, recall that for all $i$, $A_i$ is of finite...",
+      "type": "construction"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-570",
+      "section_id": "sec-7-5",
+      "statement": "Remark 51. Notice that the above construction is functorial thus we obtain a functor $\\_^{an}$ from the category of finite schemes over $\\mathbb{C}$ to the category of complex analytical spaces. There...",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "analytification_space",
+      "section_id": "sec-7-5",
+      "statement": "Proposition 356. Let $X$ be a scheme over $\\mathbb{C}$, locally of finite type and $X^{an}$ the associated analytical space. Then the scheme $X$ is - non-empty, - discrete, - regular, - normal, - redu...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-572",
+      "section_id": "sec-7-5",
+      "statement": "Proof. See [@SGA], Proposition $XII.\\:2.1$. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "analytification_morphisms",
+      "section_id": "sec-7-5",
+      "statement": "Proposition 357. Let $X$ and $Y$ be two schemes over $\\mathbb{C}$ locally of finite type, $f:X\\rightarrow Y$ a morphism of finite type and $f^{an}: X^{an}\\rightarrow Y^{an}$ the associated analytical ...",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-574",
+      "section_id": "sec-7-5",
+      "statement": "Proof. See [@SGA], Proposition $XII.\\:3.2$. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-575",
+      "section_id": "sec-7-5",
+      "statement": "Remark 52. It is interesting to note that in [@Serre], for $X$ a projective scheme over $\\mathbb{C}$, Serre also showed that the analytification functor yields an equivalence of categories between coh...",
+      "type": "remark"
+    }
+  ]
+}
