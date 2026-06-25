@@ -1,0 +1,1340 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\title{The Goncharov Lie coalgebra of a field}
+\author{Alexander Kupers \and Daniil Rudenko \and Ismael Sierra}
+\date{}
+\begin{document}
+\maketitle
+
+\noindent\textbf{Source:} \href{https://arxiv.org/abs/2606.23863}{arXiv:2606.23863} \quad \textbf{Field:} math.KT\\
+
+\section*{TL;DR}
+The paper introduces the Goncharov Lie coalgebra of a field F as the critical-line entries of the E\ensuremath{\infty}-homology of BGL(F)\_Q, presents it via correlators with an explicit Lie cobracket formula, identifies G\_n(F) with classical objects for n\ensuremath{\le}3, constructs motivic and Hodge realisation functors, and proves K₄⁽\textsuperscript{3}⁾(F)\_Q ≅ H\textsuperscript{2}(G(F))₃ for all fields. All five specialists concur that the mathematical programme is coherent, the contributions are significant (novelty score 0.78, verdict 'significant'), and the overall technical posture is 'mostly\_sound'. The central disagreement is between the novelty and summary specialists, who assess the scope positively, and the reproducibility and technical-correctness specialists, who flag serious gaps in verifiable artifacts. These gaps are not in tension: the mathematics may be correct while still being unverifiable. Two technical-correctness items are marked 'unsupported' at severity 'major' (TC-12, TC-13), both arising from missing computational artifacts rather than identified mathematical errors. Reproducibility flags four 'critical' concerns: no public code, no machine-checkable proof of the headline presentation (Lean or equivalent), no machine-checkable proof of the cobracket identities, and no machine-checkable proof of the weight-3 K-theory isomorphism. The paper explicitly acknowledges computer-assisted computation in Section 7.3.3 (Acknowledgments credit Steven Charlton) but publishes no artifact. This combination --- math.KT field, critical/major missing proof-as-code artifacts for headline claims, computer-assisted results without published scripts --- triggers the recommendation gate: major\_revision is required. Beyond reproducibility, the introduction delegates the entire Rognes rank spectral sequence argument to Theorem 150 in the body without even a pointer-annotated sketch, making the logical chain from definitions to Theorem 1 opaque. Bibliography issues are minor: the CMRR/CMRR24 duplicate should be resolved, the BPW second-author spelling should be verified against MathSciNet MR4798648, and the original Zagier (1991) conjecture paper and Milnor (1970) paper may be absent despite being foundational to the paper's central motivation.
+
+\textbf{Recommendation:} Major revision \quad \textbf{Confidence:} 78\%\\
+
+\section*{Strengths}
+\begin{itemize}[leftmargin=*]
+  \item The Goncharov Lie coalgebra is given a complete presentation via correlators with explicit cobracket formulas, resolving a problem that had been open in the motivic cohomology literature for decades.
+  \item The proof of K₄⁽\textsuperscript{3}⁾(F)\_Q ≅ H\textsuperscript{2}(G(F))₃ for all fields independently confirms Bolbachan's [Bol24] result via a different spectral-sequence method, with the alternative proof providing a meaningful cross-check.
+  \item The unified framework connecting E\ensuremath{\infty}-homology, Steinberg modules, Koszul duality of Arnold algebras, and multiple polylogarithms is conceptually powerful and provides a clear roadmap for the stated sequel (KRS2).
+  \item The identifications G\_n(F) ≅ F\^{}\ensuremath{\times}\_Q (n=1), B\_2(F)\_Q (n=2), and B\_3(F)\_Q (n=3) ground the abstract construction in concrete, independently understood algebraic objects, enabling immediate comparison with classical results of Suslin, Bloch, and Goncharov.
+  \item Motivic and Hodge realisation functors from Comod\^{}fd\_\{G(F)\} are constructed explicitly, connecting the abstract Lie coalgebra to geometric and analytic structures and establishing the factorisation G(F) \ensuremath{\to} L\^{}f(F) \ensuremath{\to} L\^{}MTM(F).
+\end{itemize}
+
+\section*{Weaknesses}
+\begin{itemize}[leftmargin=*]
+  \item Section 7.3.3 relies on computer-assisted computations credited to Steven Charlton in the Acknowledgments, but no Sage worksheet, Mathematica notebook, or script is published, making the load-bearing n=3 identification G\_3(F) ≅ B\_3(F) in Theorem polyl-identification unverifiable by readers.
+  \item The explicit decomposition operator D\^{}FC\_h and its key properties --- that the only relations among h-normalized correlators are shuffle relations, and that the resulting cobracket satisfies co-Jacobi --- lack any machine-checkable verification despite being directly amenable to symbolic computation for small n.
+  \item The Rognes rank spectral sequence argument underpinning Theorem 1 is entirely bundled into Theorem 150 in the body with no pointer-annotated sketch in the introduction, leaving the logical chain from the slope-2 vanishing line and duality eigenspace decomposition to the stated K-theory isomorphisms opaque.
+  \item A key categorical foundation (Blans-Blom-Kupers, 'Naturality of \ensuremath{\infty}-categorical bar-cobar duality') is cited as a paper in preparation by a co-author; the results it supplies are inaccessible to referees and readers and cannot be independently verified.
+  \item The bibliography lists CMRR and CMRR24 as separate entries for the same paper at preprint and journal stages respectively; these should be consolidated, and the preprint entry should at minimum include its arXiv identifier, while the BPW second-author name ('K. I. Pitman') should be verified against MathSciNet MR4798648 for a potential transcription error ('K. I. Piterman').
+  \item Milnor K-theory K\^{}M\_n(F) and Zagier's original 1991 conjecture paper appear to be absent from the visible bibliography despite being invoked from the abstract onward; the Matsumoto-Milnor result is attributed only through Suslin [Sus84] without a primary source.
+\end{itemize}
+
+\section*{Revision Targets}
+\begin{itemize}[leftmargin=*]
+  \item [open] paper\_tex at `Section 7.3.3 (referenced in Acknowledgments), supports Theorem polyl-identification at n=3`: Publish the computer-assisted verification as a reproducible artifact (Sage worksheet, Mathematica notebook, or Python/Julia script) at code/trilogarithm\_section\_7\_3\_3/ and reference it from Section 7.3.3 of the paper with a DOI or a Zenodo/GitHub link. Include the input relations, the search procedure, and the output certificate. Check: Re-review should confirm `Section 7.3.3 (referenced in Acknowledgments), supports Theorem polyl-identification at n=3` is corrected or justified.
+  \item [open] paper\_tex at `Theorem polyl-presentation-additive, Section 1.3 (Steinberg module presentation); proven via the projective resolution in Section 1.3.1 (and full proof in Sections 2--4 of the body).`: Provide, in the introduction or an appendix, the explicit verification that the differentials in (eqn:dec-resolution) square to zero and that the complex is acyclic in positive degrees (only its 0-th homology is St\^{}\ensuremath{\infty}). Cite a precise lemma in [CharltonRadchenkoRudenko] for the 'shuffle is the only relation among h-normalized correlators' claim, since this is load-bearing for the resolution. Check: Re-review should confirm `Theorem polyl-presentation-additive, Section 1.3 (Steinberg module presentation); proven via the projective resolution in Section 1.3.1 (and full proof in Sections 2--4 of the body).` is corrected or justified.
+  \item [open] paper\_tex at `Theorem 1, item (i), Section 1.1.3 / 1.4`: In the introduction, explicitly state which lemmas/theorems of the body are invoked at each step of the sketch (vanishing line, duality eigenspace decomposition, discarding K\^{}M\_3, identification of E\^{}2\_\{1,4\}) so a reader can audit the chain without scanning the entire 4000-line paper. Verify the E\^{}2-page diagrams (Figures 5--6) against the cited entries (Theorem 150) and tag them in the body. Check: Re-review should confirm `Theorem 1, item (i), Section 1.1.3 / 1.4` is corrected or justified.
+  \item [open] bibliography at `BlansBlomKupers`: Verify `BlansBlomKupers` against an authoritative source; replace it with a resolvable relevant citation or remove it. Check: Re-review should confirm the citation resolves and is relevant.
+  \item [open] bibliography at `Milnor, Algebraic K-theory and quadratic forms (1970)`: Add a bibliography entry for `Milnor, Algebraic K-theory and quadratic forms (1970)` and cite it where the affected method or claim is introduced, or explicitly justify its omission. Check: Re-review should confirm the bibliography and citation context address this reference.
+  \item [open] bibliography at `Milnor, Algebraic K-theory and quadratic forms (1970)`: Add a bibliography entry for `Milnor, Algebraic K-theory and quadratic forms (1970)` and cite it where the affected method or claim is introduced, or explicitly justify its omission. Check: Re-review should confirm the bibliography and citation context address this reference.
+\end{itemize}
+
+\section*{Open Questions}
+\begin{itemize}[leftmargin=*]
+  \item Can the authors publish the computer-assisted computations from Section 7.3.3 as a reproducible artifact (Sage worksheet, Mathematica notebook, or Python script) with a DOI-linked Zenodo or GitHub repository referenced from that section?
+  \item What is the current status of Blans-Blom-Kupers (in preparation), and can the specific results it provides be stated and proved as a self-contained lemma or appendix in the present paper to remove the dependency?
+  \item For the decomposition operator D\^{}FC\_h, can a self-contained proof or computer-verified certificate of co-Jacobi for the cobracket be provided for at least the n=2 and n=3 cases, ideally as a symbolic computation accompanying the paper?
+  \item Is the original Milnor (1970) paper 'Algebraic K-theory and quadratic forms' present in the bibliography? Its absence from all visible citation contexts is notable given that Milnor K-theory is invoked from the abstract through the proof of Theorem 1.
+  \item Can the introduction be augmented with explicit theorem numbers from the body at each step of the Rognes spectral sequence argument (slope-2 vanishing, duality eigenspace decomposition, discarding K\^{}M contributions, E\textsuperscript{2}-page identification) so that the derivation of Theorem 1 can be audited without traversing the full paper?
+\end{itemize}
+
+\section*{Per-Agent Reviews}
+\subsection*{citation (\texttt{claude-sonnet-4-6})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "confidence": 0.68,\\
+  "entries": [\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "A. Alekseev",\\
+          "N. Kawazumi",\\
+          "Y. Kuno",\\
+          "F. Naef"\\
+        ],\\
+        "doi": null,\\
+        "key": "AKKN",\\
+        "raw": "A. Alekseev, N. Kawazumi, Y. Kuno, and F. Naef, \textbackslash{}\textbackslash{}emph\{The \{G\}oldman-\{T\}uraev \{L\}ie bialgebra in genus zero and the \{K\}ashiwara-\{V\}ergne problem\}, Adv. Math. 326 (2018), 1--53. \textbackslash{}\textbackslash{}MR\{3758425\}",\\
+        "title": "The Goldman-Turaev Lie bialgebra in genus zero and the Kashiwara-Vergne problem",\\
+        "url": null,\\
+        "venue": "Advances in Mathematics",\\
+        "year": 2018\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited in the higher-apartments section for the tangential-derivation framework and tree algebras used to build the commutative higher apartments. The paper's approach to special derivations is imported to identify the higher apartments with representations of Arnold algebras.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": "2404.13776",\\
+        "authors": [\\
+          "A. Ash",\\
+          "J. Miller",\\
+          "P. Patzt"\\
+        ],\\
+        "doi": null,\\
+        "key": "AMP",\\
+        "raw": "A. Ash, J. Miller, and P. Patzt, \textbackslash{}\textbackslash{}emph\{Hopf algebras, \{S\}teinberg modules, and the unstable cohomology of \$\{SL\}\_n(\textbackslash{}\textbackslash{}mathbb\{Z\})\$ and \$\{GL\}\_n(\textbackslash{}\textbackslash{}mathbb\{Z\})\$\}, 2024, arXiv:2404.13776.",\\
+        "title": "Hopf algebras, Steinberg modules, and the unstable cohomology of SL\_n(Z) and GL\_n(Z)",\\
+        "url": null,\\
+        "venue": null,\\
+        "year": 2024\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited alongside BCGP in the introduction for developing similar Hopf-algebraic structures on Steinberg modules, and again in the Steinberg-modules section for product and coproduct formulas. Provides parallel work whose algebraic structures resemble those introduced here.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "M. Aguiar",\\
+          "S. Mahajan"\\
+        ],\\
+        "doi": null,\\
+        "key": "AguiarMahajan",\\
+        "raw": "M. Aguiar and S. Mahajan, \textbackslash{}\textbackslash{}emph\{Monoidal functors, species and \{H\}opf algebras\}, CRM Monograph Series, vol. 29, American Mathematical Society, Providence, RI, 2010. \textbackslash{}\textbackslash{}MR\{2724388\}",\\
+        "title": "Monoidal functors, species and Hopf algebras",\\
+        "url": null,\\
+        "venue": "CRM Monograph Series, vol. 29, American Mathematical Society",\\
+        "year": 2010\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Used in the E\ensuremath{\infty}-algebraic and operadic foundations sections for the theory of monoidal functors and Day convolution, which underlie the symmetric monoidal structures on functor categories employed throughout the paper.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "A. Alekseev",\\
+          "C. Torossian"\\
+        ],\\
+        "doi": null,\\
+        "key": "AlekseevTorossian",\\
+        "raw": "\textbackslash{}\textbackslash{}bysame, \textbackslash{}\textbackslash{}emph\{The \{K\}ashiwara-\{V\}ergne conjecture and \{D\}rinfeld's associators\}, Ann. of Math. (2) 175 (2012), no. 2, 415--463. \textbackslash{}\textbackslash{}MR\{2877064\}",\\
+        "title": "The Kashiwara-Vergne conjecture and Drinfeld's associators",\\
+        "url": null,\\
+        "venue": "Annals of Mathematics (2)",\\
+        "year": 2012\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited in the higher-apartments section for the Lie variant of tangential derivations and special derivation algebras used in the commutative higher-apartments construction connecting to the Goncharov Lie coalgebra.",\\
+      "notes": "The raw entry begins with \textbackslash{}\textbackslash{}bysame; based on the companion AlekseevTorossianNote entry listing full names, the authors are A. Alekseev and C. Torossian.",\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "A. Alekseev",\\
+          "C. Torossian"\\
+        ],\\
+        "doi": null,\\
+        "key": "AlekseevTorossianNote",\\
+        "raw": "A. Alekseev and C. Torossian, Flat connections and trivalent graphs, \textbackslash{}\textbackslash{}url\{https://web.archive.org/web/20211028202354/https://webusers.imj-prg.fr/\~{}charles.torossian/publication/trivalent.pdf\}, 2009.",\\
+        "title": "Flat connections and trivalent graphs",\\
+        "url": "https://web.archive.org/web/20211028202354/https://webusers.imj-prg.fr/\~{}charles.torossian/publication/trivalent.pdf",\\
+        "venue": null,\\
+        "year": 2009\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited once in the higher-apartments section for a construction relating universal traces to the special derivation algebra. Plays a supporting technical role, not central to the main arithmetic results.",\\
+      "notes": "Unpublished note available only via a web-archive URL with no DOI or arXiv identifier; long-term accessibility is not guaranteed.",\\
+      "relevance": "low",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "V. I. Arnold"\\
+        ],\\
+        "doi": null,\\
+        "key": "Arnold",\\
+        "raw": "V. I. Arnold, The cohomology ring of the group of dyed braids, Mat. Zametki 5 (1969), 227--231. \textbackslash{}\textbackslash{}MR\{242196\}",\\
+        "title": "The cohomology ring of the group of dyed braids",\\
+        "url": null,\\
+        "venue": "Matematicheskie Zametki",\\
+        "year": 1969\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited for the Arnold algebra (cohomology ring of the pure braid group / configuration space), whose PBW basis and Koszulity are exploited in the higher-apartments construction linking the Goncharov Lie coalgebra to representation theory.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "M. Aubry",\\
+          "D. Chataur"\\
+        ],\\
+        "doi": null,\\
+        "key": "AubryChataur",\\
+        "raw": "M. Aubry and D. Chataur, Cooperads and coalgebras as closed model categories, J. Pure Appl. Algebra 180 (2003), no. 1-2, 1--23. \textbackslash{}\textbackslash{}MR\{1966520\}",\\
+        "title": "Cooperads and coalgebras as closed model categories",\\
+        "url": null,\\
+        "venue": "Journal of Pure and Applied Algebra",\\
+        "year": 2003\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Provides model-category foundations for cooperads used in the operadic-foundations section. Supporting infrastructure rather than a direct source for the main polylogarithmic results.",\\
+      "notes": null,\\
+      "relevance": "low",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": "2405.11528",\\
+        "authors": [\\
+          "F. Brown",\\
+          "M. Chan",\\
+          "S. Galatius",\\
+          "S. Payne"\\
+        ],\\
+        "doi": null,\\
+        "key": "BCGP",\\
+        "raw": "F. Brown, M. Chan, S. Galatius, and S. Payne, \textbackslash{}\textbackslash{}emph\{Hopf algebras in the cohomology of \$A\_g\$, \$GL\_n(\textbackslash{}\textbackslash{}mathbb\{Z\})\$, and \$SL\_n(\textbackslash{}\textbackslash{}mathbb\{Z\})\$\}, 2024, arXiv:2405.11528.",\\
+        "title": "Hopf algebras in the cohomology of A\_g, GL\_n(Z), and SL\_n(Z)",\\
+        "url": null,\\
+        "venue": null,\\
+        "year": 2024\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited alongside AMP for developing analogous Hopf-algebraic structures on Steinberg modules in recent parallel work, contextualising the algebraic structures studied in this paper.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "D. L. B. Brantner",\\
+          "R. Campos",\\
+          "J. Nuiten"\\
+        ],\\
+        "doi": null,\\
+        "key": "BCN",\\
+        "raw": "D. L. B. Brantner, R. Campos, and J. Nuiten, \textbackslash{}\textbackslash{}emph\{P\{D\} operads and explicit partition \{L\}ie algebras\}, Mem. Amer. Math. Soc. 315 (2025), no. 1597, v+125. \textbackslash{}\textbackslash{}MR\{5003477\}",\\
+        "title": "PD operads and explicit partition Lie algebras",\\
+        "url": null,\\
+        "venue": "Memoirs of the American Mathematical Society",\\
+        "year": 2025\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Used in the operadic-foundations section for PD operads and partition Lie algebras, which provide the categorical framework for the Koszul-duality computations that extract the Goncharov Lie coalgebra from E\ensuremath{\infty}-homology.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "A. Beilinson",\\
+          "P. Deligne"\\
+        ],\\
+        "doi": null,\\
+        "key": "BD94",\\
+        "raw": "A. Beilinson and P. Deligne, \textbackslash{}\textbackslash{}emph\{Interpr\textbackslash{}\textbackslash{}'\{e\}tation motivique de la conjecture de \{Z\}agier reliant polylogarithmes et r\textbackslash{}\textbackslash{}'\{e\}gulateurs\}, Motives (\{S\}eattle, \{WA\}, 1991), Proc. Sympos. Pure Math., vol. 55, Amer. Math. Soc., Providence, RI, 1994, pp. 97--121. \textbackslash{}\textbackslash{}MR\{1265552\}",\\
+        "title": "Interprétation motivique de la conjecture de Zagier reliant polylogarithmes et régulateurs",\\
+        "url": null,\\
+        "venue": "Proceedings of Symposia in Pure Mathematics, vol. 55",\\
+        "year": 1994\\
+      \},\\
+      "exists": null,\\
+      "explanation": "The primary reference for the motivic programme connecting polylogarithms to K-theory. Cited three times in the introduction: for the mixed-Tate-motives category over a number field, for conjecturing that category over a general field, and for Beilinson's formula expressing K-groups as Ext-groups in the motivic category. Central to the paper's motivation and main conjecture.",\\
+      "notes": null,\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "N. Berry",\\
+          "A. Dubickas",\\
+          "N. D. Elkies",\\
+          "B. Poonen",\\
+          "C. Smyth"\\
+        ],\\
+        "doi": null,\\
+        "key": "BDEPS",\\
+        "raw": "N. Berry, A. Dubickas, N. D. Elkies, B. Poonen, and C. Smyth, The conjugate dimension of algebraic numbers, Q. J. Math. 55 (2004), no. 3, 237--252. \textbackslash{}\textbackslash{}MR\{2082091\}",\\
+        "title": "The conjugate dimension of algebraic numbers",\\
+        "url": null,\\
+        "venue": "Quarterly Journal of Mathematics",\\
+        "year": 2004\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Not cited in any visible portion of the text. The topic is peripheral to the paper's central concerns with Lie coalgebras, K-theory, and multiple polylogarithms.",\\
+      "notes": "This reference on conjugate dimensions of algebraic numbers does not appear in any visible citation context. Its connection to the paper's main themes of E\ensuremath{\infty}-homology and polylogarithms is not apparent; it may be invoked for a specific computation in an omitted section, possibly involving algebraic numbers in weight-3 calculations.",\\
+      "relevance": "low",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "C. Barwick",\\
+          "S. Glasman",\\
+          "J. Shah"\\
+        ],\\
+        "doi": null,\\
+        "key": "BGSII",\\
+        "raw": "C. Barwick, S. Glasman, and J. Shah, \textbackslash{}\textbackslash{}emph\{Spectral \{M\}ackey functors and equivariant algebraic \{\$K\$\}-theory, \{II\}\}, Tunis. J. Math. 2 (2020), no. 1, 97--146. \textbackslash{}\textbackslash{}MR\{3933393\}",\\
+        "title": "Spectral Mackey functors and equivariant algebraic K-theory, II",\\
+        "url": null,\\
+        "venue": "Tunisian Journal of Mathematics",\\
+        "year": 2020\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Provides categorical K-theory foundations. Not cited in the visible introduction or main mathematical sections; likely invoked in the categorical-foundations sections for background on the K-theory spectrum.",\\
+      "notes": null,\\
+      "relevance": "low",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "A. Beilinson",\\
+          "A. Varchenko",\\
+          "A. Goncharov",\\
+          "V. Shekhtman"\\
+        ],\\
+        "doi": null,\\
+        "key": "BGSV90",\\
+        "raw": "A. Beilinson, A. Varchenko, A. Goncharov, and V. Shekhtman, \textbackslash{}\textbackslash{}emph\{Projective geometry and \{\$K\$\}-theory\}, Algebra i Analiz 2 (1990), no. 3, 78--130. \textbackslash{}\textbackslash{}MR\{1073210\}",\\
+        "title": "Projective geometry and K-theory",\\
+        "url": null,\\
+        "venue": "Algebra i Analiz",\\
+        "year": 1990\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited in the introduction as the source of the Hopf algebra of Aomoto polylogarithms, one of the competing candidates for the Lie coalgebra of mixed Tate motives that the authors plan to compare with the Goncharov Lie coalgebra in future work. Directly relevant to the central objects of the paper.",\\
+      "notes": null,\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "M. Bökstedt",\\
+          "W. C. Hsiang",\\
+          "I. Madsen"\\
+        ],\\
+        "doi": null,\\
+        "key": "BHM",\\
+        "raw": "M. B\textbackslash{}\textbackslash{}\textbackslash{}"okstedt, W. C. Hsiang, and I. Madsen, \textbackslash{}\textbackslash{}emph\{The cyclotomic trace and algebraic \{\$K\$\}-theory of spaces\}, Invent. Math. 111 (1993), no. 3, 465--539. \textbackslash{}\textbackslash{}MR\{1202133\}",\\
+        "title": "The cyclotomic trace and algebraic K-theory of spaces",\\
+        "url": null,\\
+        "venue": "Inventiones Mathematicae",\\
+        "year": 1993\\
+      \},\\
+      "exists": null,\\
+      "explanation": "A foundational K-theory reference not cited in the visible introduction or main mathematical sections; likely invoked in the categorical-foundations sections for background on the K-theory spectrum.",\\
+      "notes": null,\\
+      "relevance": "low",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "B. Brück",\\
+          "K. I. Pitman",\\
+          "V. Welker"\\
+        ],\\
+        "doi": null,\\
+        "key": "BPW",\\
+        "raw": "B. Br\textbackslash{}\textbackslash{}\textbackslash{}"uck, K. I. Pitman, and V. Welker, The common basis complex and the partial decomposition poset, Int. Math. Res. Not. IMRN (2024), no. 18, 12746--12760. \textbackslash{}\textbackslash{}MR\{4798648\}",\\
+        "title": "The common basis complex and the partial decomposition poset",\\
+        "url": null,\\
+        "venue": "International Mathematics Research Notices",\\
+        "year": 2024\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited in the introduction as an alternative combinatorial source for infinite Steinberg modules via the partial decomposition poset, complementing the common-basis-complex construction from Rognes.",\\
+      "notes": "The second author is listed as 'K. I. Pitman'; MathSciNet record MR4798648 may list the name as 'K. I. Piterman'. Authors should verify the spelling.",\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "M. Barr"\\
+        ],\\
+        "doi": null,\\
+        "key": "Barr1968HarrisonHH",\\
+        "raw": "M. Barr, Harrison homology, hochschild homology and triples, Journal of Algebra 8 (1968), 314--323.",\\
+        "title": "Harrison homology, Hochschild homology and triples",\\
+        "url": null,\\
+        "venue": "Journal of Algebra",\\
+        "year": 1968\\
+      \},\\
+      "exists": null,\\
+      "explanation": "The E\ensuremath{\infty}-indecomposables of BGL(F)\_Q are computed via Harrison homology in the rational setting, as stated in the introduction. This is the foundational reference for that computation.",\\
+      "notes": "The raw entry does not capitalise 'Hochschild', a proper noun; this appears to be a transcription error.",\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "M. Batanin",\\
+          "M. Markl"\\
+        ],\\
+        "doi": null,\\
+        "key": "BataninMarkl",\\
+        "raw": "M. Batanin and M. Markl, Centers and homotopy centers in enriched monoidal categories, Adv. Math. 230 (2012), no. 4-6, 1811--1858. \textbackslash{}\textbackslash{}MR\{2927355\}",\\
+        "title": "Centers and homotopy centers in enriched monoidal categories",\\
+        "url": null,\\
+        "venue": "Advances in Mathematics",\\
+        "year": 2012\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited in the Steinberg-modules section for the notion of lax functor of produoidal (E\ensuremath{\infty}, E1)-categories. Provides categorical infrastructure for the duoidal structure but is not central to the main arithmetic results.",\\
+      "notes": null,\\
+      "relevance": "low",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "S. Ben-Moshe",\\
+          "T. M. Schlank"\\
+        ],\\
+        "doi": null,\\
+        "key": "BenMosheSchlank",\\
+        "raw": "S. Ben-Moshe and T. M. Schlank, \textbackslash{}\textbackslash{}emph\{Higher semiadditive algebraic \{K\}-theory and redshift\}, Compos. Math. 160 (2024), no. 2, 237--287. \textbackslash{}\textbackslash{}MR\{4679205\}",\\
+        "title": "Higher semiadditive algebraic K-theory and redshift",\\
+        "url": null,\\
+        "venue": "Compositio Mathematica",\\
+        "year": 2024\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Not cited in any visible citation context. Its relevance to the paper's main results is not apparent from the rendered sections; likely cited for a categorical fact in the foundations sections.",\\
+      "notes": null,\\
+      "relevance": "low",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "A. Berglund"\\
+        ],\\
+        "doi": null,\\
+        "key": "BerglundKoszul",\\
+        "raw": "A. Berglund, Koszul spaces, Trans. Amer. Math. Soc. 366 (2014), no. 9, 4551--4569. \textbackslash{}\textbackslash{}MR\{3217692\}",\\
+        "title": "Koszul spaces",\\
+        "url": null,\\
+        "venue": "Transactions of the American Mathematical Society",\\
+        "year": 2014\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited in the higher-apartments section for an example of Koszul spaces relevant to the configuration-space computations. Supporting background for the Koszulity arguments.",\\
+      "notes": null,\\
+      "relevance": "low",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "R. Bezrukavnikov"\\
+        ],\\
+        "doi": null,\\
+        "key": "Bezrukavnikov",\\
+        "raw": "R. Bezrukavnikov, \textbackslash{}\textbackslash{}emph\{Koszul \{DG\}-algebras arising from configuration spaces\}, Geom. Funct. Anal. 4 (1994), no. 2, 119--135. \textbackslash{}\textbackslash{}MR\{1262702\}",\\
+        "title": "Koszul DG-algebras arising from configuration spaces",\\
+        "url": null,\\
+        "venue": "Geometric and Functional Analysis",\\
+        "year": 1994\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited in the higher-apartments section for Koszulity of DG-algebras from configuration spaces, used to establish Koszulity of the Arnold algebra and hence the indecomposable description of higher apartments.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": "2410.20504",\\
+        "authors": [\\
+          "M. Blans",\\
+          "T. Blom"\\
+        ],\\
+        "doi": null,\\
+        "key": "BlansBlom",\\
+        "raw": "M. Blans and T. Blom, \textbackslash{}\textbackslash{}emph\{On the chain rule in \{G\}oodwillie calculus\}, 2024, arXiv:2410.20504.",\\
+        "title": "On the chain rule in Goodwillie calculus",\\
+        "url": null,\\
+        "venue": null,\\
+        "year": 2024\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited for a chain rule in Goodwillie calculus used in the E\ensuremath{\infty}-algebraic foundations. Provides supporting technical infrastructure; not directly relevant to the main polylogarithmic results.",\\
+      "notes": null,\\
+      "relevance": "low",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "M. Blans",\\
+          "T. Blom",\\
+          "A. Kupers"\\
+        ],\\
+        "doi": null,\\
+        "key": "BlansBlomKupers",\\
+        "raw": "M. Blans, T. Blom, and A. Kupers, Naturality of \$\textbackslash{}\textbackslash{}infty\$-categorical bar-cobar duality, in preparation.",\\
+        "title": "Naturality of \ensuremath{\infty}-categorical bar-cobar duality",\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited for the naturality of \ensuremath{\infty}-categorical bar-cobar duality, providing a categorical foundation for the Koszul duality arguments. Its in-preparation status means the dependency cannot be independently checked.",\\
+      "notes": "Paper in preparation by one of the present paper's authors (A. Kupers). The results it supplies cannot be independently verified or accessed by readers; standard practice for self-citation of in-progress work.",\\
+      "relevance": "low",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "S. J. Bloch"\\
+        ],\\
+        "doi": null,\\
+        "key": "Bloch",\\
+        "raw": "S. J. Bloch, \textbackslash{}\textbackslash{}emph\{Higher regulators, algebraic \{\$K\$\}-theory, and zeta functions of elliptic curves\}, CRM Monograph Series, vol. 11, American Mathematical Society, Providence, RI, 2000. \textbackslash{}\textbackslash{}MR\{1760901\}",\\
+        "title": "Higher regulators, algebraic K-theory, and zeta functions of elliptic curves",\\
+        "url": null,\\
+        "venue": "CRM Monograph Series, vol. 11, American Mathematical Society",\\
+        "year": 2000\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited in the introduction as the source for the Bloch group B\_2(F) (called the pre-Bloch group by Bloch), which is identified with G\_2(F) in the paper's central identification theorem. A primary predecessor for the weight-2 case.",\\
+      "notes": null,\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "S. Bloch",\\
+          "I. Křiž"\\
+        ],\\
+        "doi": null,\\
+        "key": "BlochKriz",\\
+        "raw": "S. Bloch and I. K\textbackslash{}\textbackslash{}v\{r\}\textbackslash{}\textbackslash{}'\textbackslash{}\textbackslash{}i\textbackslash{}\textbackslash{}v\{z\}, \textbackslash{}\textbackslash{}emph\{Mixed \{T\}ate motives\}, Ann. of Math. (2) 140 (1994), no. 3, 557--605. \textbackslash{}\textbackslash{}MR\{1307897\}",\\
+        "title": "Mixed Tate motives",\\
+        "url": null,\\
+        "venue": "Annals of Mathematics (2)",\\
+        "year": 1994\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited in the introduction as the source of the 1-minimal model candidate for the Lie coalgebra of mixed Tate motives. Directly relevant to the central objects and programme of the paper.",\\
+      "notes": null,\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "J. M. Boardman"\\
+        ],\\
+        "doi": null,\\
+        "key": "BoardmanSS",\\
+        "raw": "J. M. Boardman, Conditionally convergent spectral sequences, Homotopy invariant algebraic structures (\{B\}altimore, \{MD\}, 1998), Contemp. Math., vol. 239, Amer. Math. Soc., Providence, RI, 1999, pp. 49--84. \textbackslash{}\textbackslash{}MR\{1718076\}",\\
+        "title": "Conditionally convergent spectral sequences",\\
+        "url": null,\\
+        "venue": "Contemporary Mathematics, vol. 239",\\
+        "year": 1999\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Provides convergence theory for conditionally convergent spectral sequences, required for the rigorous analysis of the Rognes rank spectral sequence whose E\textsuperscript{2}-page yields the paper's main K-theory isomorphisms.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": "2404.06271",\\
+        "authors": [\\
+          "V. Bolbachan"\\
+        ],\\
+        "doi": null,\\
+        "key": "Bol24",\\
+        "raw": "V. Bolbachan, \textbackslash{}\textbackslash{}emph\{On the \{G\}oncharov's conjecture in degree \$m\{-\}1\$ and weight \$m\$\}, 2024, arXiv:2404.06271.",\\
+        "title": "On the Goncharov's conjecture in degree m-1 and weight m",\\
+        "url": null,\\
+        "venue": null,\\
+        "year": 2024\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited prominently in the introduction for proving the i = n-1, n \ensuremath{\ge} 1 case of the main conjecture and as providing a prior (different) proof of part (1) of Theorem 1. A direct predecessor result that the current paper extends.",\\
+      "notes": null,\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "A. Borel"\\
+        ],\\
+        "doi": null,\\
+        "key": "BorelStable",\\
+        "raw": "A. Borel, Stable real cohomology of arithmetic groups, Ann. Sci. \textbackslash{}\textbackslash{}'\{E\}cole Norm. Sup. (4) 7 (1974), 235--272 (1975). \textbackslash{}\textbackslash{}MR\{387496\}",\\
+        "title": "Stable real cohomology of arithmetic groups",\\
+        "url": null,\\
+        "venue": "Annales Scientifiques de l'École Normale Supérieure (4)",\\
+        "year": 1974\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Borel's computation of stable real cohomology of arithmetic groups underpins the Borel regulator, which the sequel KRS2 will use in a novel cocycle construction. Foundational for the rational K-theory computations.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "F. Brown"\\
+        ],\\
+        "doi": null,\\
+        "key": "Bro12",\\
+        "raw": "F. Brown, \textbackslash{}\textbackslash{}emph\{Mixed \{T\}ate motives over \{\$\textbackslash{}\textbackslash{}Bbb Z\$\}\}, Ann. of Math. (2) 175 (2012), no. 2, 949--976. \textbackslash{}\textbackslash{}MR\{2993755\}",\\
+        "title": "Mixed Tate motives over Z",\\
+        "url": null,\\
+        "venue": "Annals of Mathematics (2)",\\
+        "year": 2012\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited in the introduction as the analogue result---universality of multiple polylogarithms for mixed Tate motives over Z---that the paper's main theorem generalises to number fields. A key comparison and motivation.",\\
+      "notes": null,\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "K. S. Brown"\\
+        ],\\
+        "doi": null,\\
+        "key": "Brown",\\
+        "raw": "K. S. Brown, Cohomology of groups, Graduate Texts in Mathematics, vol. 87, Springer-Verlag, New York, 1994, Corrected reprint of the 1982 original. \textbackslash{}\textbackslash{}MR\{1324339\}",\\
+        "title": "Cohomology of groups",\\
+        "url": null,\\
+        "venue": "Graduate Texts in Mathematics, vol. 87, Springer-Verlag",\\
+        "year": 1994\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Standard graduate textbook on group cohomology, likely cited for background facts about GL\_n(F) homology. Not central to the main results.",\\
+      "notes": null,\\
+      "relevance": "low",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "S. Charlton",\\
+          "A. Matveiakin",\\
+          "D. Radchenko",\\
+          "D. Rudenko"\\
+        ],\\
+        "doi": null,\\
+        "key": "CMRR",\\
+        "raw": "S. Charlton, A. Matveiakin, D. Radchenko, and D. Rudenko, \textbackslash{}\textbackslash{}emph\{The \{H\}opf algebra of formal multiple polylogarithms\}, 2024.",\\
+        "title": "The Hopf algebra of formal multiple polylogarithms",\\
+        "url": null,\\
+        "venue": null,\\
+        "year": 2024\\
+      \},\\
+      "exists": null,\\
+      "explanation": "The Charlton-Matveiakin-Radchenko-Rudenko construction of the formal multiple polylogarithm Lie coalgebra is used extensively throughout the paper for the Steinberg-module presentation and formal realisation. Among the closest predecessors to the constructions introduced here.",\\
+      "notes": "This entry appears to be the preprint version of CMRR24 (same title, same authors, published in IMRN 2026). Having both entries in the bibliography is a minor redundancy; authors should consolidate them or clarify the distinction. No arXiv identifier is provided for the preprint, which is unusual.",\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "S. Charlton",\\
+          "A. Matveiakin",\\
+          "D. Radchenko",\\
+          "D. Rudenko"\\
+        ],\\
+        "doi": null,\\
+        "key": "CMRR24",\\
+        "raw": "\textbackslash{}\textbackslash{}bysame, \textbackslash{}\textbackslash{}emph\{The \{H\}opf algebra of formal multiple polylogarithms\}, Int. Math. Res. Not. IMRN (2026), no. 2, Paper No. rnaf361, 29. \textbackslash{}\textbackslash{}MR\{5013247\}",\\
+        "title": "The Hopf algebra of formal multiple polylogarithms",\\
+        "url": null,\\
+        "venue": "International Mathematics Research Notices",\\
+        "year": 2026\\
+      \},\\
+      "exists": null,\\
+      "explanation": "The published version of CMRR, cited in the introduction for the formal correlator construction and L\^{}f(F). Directly relevant as the closest published predecessor to the paper's main constructions.",\\
+      "notes": "Published year 2026 with MR number MR5013247 indicates advance-of-print publication. The raw entry opens with \textbackslash{}\textbackslash{}bysame, denoting the same authors as CMRR. This is the same paper as CMRR at a later publication stage; the dual listing is a citation-hygiene concern.",\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "J. A. Campbell",\\
+          "I. Zakharevich"\\
+        ],\\
+        "doi": null,\\
+        "key": "CampbellZakharevich",\\
+        "raw": "J. A. Campbell and I. Zakharevich, \textbackslash{}\textbackslash{}emph\{Hilbert's third problem and a conjecture of \{G\}oncharov\}, Adv. Math. 451 (2024), Paper No. 109757, 57. \textbackslash{}\textbackslash{}MR\{4759410\}",\\
+        "title": "Hilbert's third problem and a conjecture of Goncharov",\\
+        "url": null,\\
+        "venue": "Advances in Mathematics",\\
+        "year": 2024\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Related to the scissors-congruence Hopf algebra and Goncharov's conjecture, one of the alternative candidates for the Lie coalgebra of mixed Tate motives discussed in the introduction. Contextualises the paper's central objects within the scissors-congruence programme.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \}\\
+  ],\\
+  "missing\_references": [\\
+    \{\\
+      "reason": "Milnor K-theory K\^{}M\_n(F) is a central concept throughout the paper---invoked in the abstract, repeatedly in the introduction, and in the statement of Theorem 1---yet no citation to Milnor's 1970 Inventiones paper introducing it appears in any visible citation context. The foundational result that K\_n\^{}(n)(F)\_Q equals rationalised Milnor K-theory is attributed only via Suslin [@Sus84], and the 'Matsumoto--Milnor' result is mentioned without a primary source. With 90 bibliography entries omitted from this prompt the reference may be present, but its absence from visible contexts is notable for a paper whose main theorem is framed as a generalisation of the Matsumoto-Milnor computation.",\\
+      "title": "Milnor, Algebraic K-theory and quadratic forms (1970)"\\
+    \}\\
+  ],\\
+  "summary": "The 32 visible bibliography entries reflect careful citation practice: the primary motivic references (Beilinson-Deligne, Goncharov's various papers, Bloch, Bloch-Kriz, Brown) are cited at the correct primary sources, and recent directly relevant work (Bolbachan, GKRW series, Charlton-Matveiakin-Radchenko-Rudenko) is cited at precise theorem locations. Two citation-hygiene issues warrant attention: (1) CMRR and CMRR24 are duplicate entries for the same paper at preprint and published stages respectively; they should be consolidated or the preprint entry should at minimum include its arXiv identifier; (2) the bibliography entry BPW lists the second author as 'K. I. Pitman', which may be a transcription error for 'K. I. Piterman' per MathSciNet MR4798648. The entry BDEPS (conjugate dimension of algebraic numbers) does not appear in any visible citation context, and its connection to the paper's core themes is opaque without seeing its actual use site."\\
+\}\\
+\end{quote}
+
+\subsection*{meta\_reviewer (\texttt{claude-sonnet-4-6})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "confidence": 0.78,\\
+  "questions": [\\
+    "Can the authors publish the computer-assisted computations from Section 7.3.3 as a reproducible artifact (Sage worksheet, Mathematica notebook, or Python script) with a DOI-linked Zenodo or GitHub repository referenced from that section?",\\
+    "What is the current status of Blans-Blom-Kupers (in preparation), and can the specific results it provides be stated and proved as a self-contained lemma or appendix in the present paper to remove the dependency?",\\
+    "For the decomposition operator D\^{}FC\_h, can a self-contained proof or computer-verified certificate of co-Jacobi for the cobracket be provided for at least the n=2 and n=3 cases, ideally as a symbolic computation accompanying the paper?",\\
+    "Is the original Milnor (1970) paper 'Algebraic K-theory and quadratic forms' present in the bibliography? Its absence from all visible citation contexts is notable given that Milnor K-theory is invoked from the abstract through the proof of Theorem 1.",\\
+    "Can the introduction be augmented with explicit theorem numbers from the body at each step of the Rognes spectral sequence argument (slope-2 vanishing, duality eigenspace decomposition, discarding K\^{}M contributions, E\textsuperscript{2}-page identification) so that the derivation of Theorem 1 can be audited without traversing the full paper?"\\
+  ],\\
+  "recommendation": "major\_revision",\\
+  "revision\_targets": [\\
+    \{\\
+      "evidence": "The Acknowledgments explicitly state: 'We would like to thank Steven Charlton for helping us to establish the results of Section 7.3.3 with computer-assisted methods.' This is a direct admission that the proof relies on computational verification, but the paper does not publish, link, or describe the verification artifact. The reader cannot reproduce or audit the computer-assisted step. Per the Proof-as-Code Axiom for math.KT, this is exactly the situation where a verifiable artifact is mandatory.",\\
+      "id": "weakness-1",\\
+      "locator": "Section 7.3.3 (referenced in Acknowledgments), supports Theorem polyl-identification at n=3",\\
+      "required\_update": "Publish the computer-assisted verification as a reproducible artifact (Sage worksheet, Mathematica notebook, or Python/Julia script) at code/trilogarithm\_section\_7\_3\_3/ and reference it from Section 7.3.3 of the paper with a DOI or a Zenodo/GitHub link. Include the input relations, the search procedure, and the output certificate.",\\
+      "source\_path": null,\\
+      "source\_role": "technical\_correctness",\\
+      "status": "open",\\
+      "target\_kind": "paper\_tex",\\
+      "verification\_check": "Re-review should confirm `Section 7.3.3 (referenced in Acknowledgments), supports Theorem polyl-identification at n=3` is corrected or justified.",\\
+      "weakness\_index": 0\\
+    \},\\
+    \{\\
+      "evidence": "The argument is outlined: (a) identify G\_n(F) with H\_1(GL\_n(F); St\^{}\ensuremath{\infty}\_n(F)) using GKRW20 equation (eqn:he1-st-heinfty-stl); (b) build a projective resolution of St\^{}\ensuremath{\infty} in terms of FC and decomposition operators (eqn:dec-resolution); (c) take coinvariants and read off generators/relations. Step (a) is cited to GKRW20 [§6]; the user-supplied excerpt does not re-derive it. Step (b) hinges on the 'almost basis' claim attributed to [CharltonRadchenkoRudenko §3.9] together with the assertion that the only relations among normalized correlators with fixed h are the shuffle relations --- this is asserted but not proved in the introduction excerpt. The combinatorial set T(n) and sign function (Proposition 26) are deferred to the body.",\\
+      "id": "weakness-2",\\
+      "locator": "Theorem polyl-presentation-additive, Section 1.3 (Steinberg module presentation); proven via the projective resolution in Section 1.3.1 (and full proof in Sections 2--4 of the body).",\\
+      "required\_update": "Provide, in the introduction or an appendix, the explicit verification that the differentials in (eqn:dec-resolution) square to zero and that the complex is acyclic in positive degrees (only its 0-th homology is St\^{}\ensuremath{\infty}). Cite a precise lemma in [CharltonRadchenkoRudenko] for the 'shuffle is the only relation among h-normalized correlators' claim, since this is load-bearing for the resolution.",\\
+      "source\_path": null,\\
+      "source\_role": "technical\_correctness",\\
+      "status": "open",\\
+      "target\_kind": "paper\_tex",\\
+      "verification\_check": "Re-review should confirm `Theorem polyl-presentation-additive, Section 1.3 (Steinberg module presentation); proven via the projective resolution in Section 1.3.1 (and full proof in Sections 2--4 of the body).` is corrected or justified.",\\
+      "weakness\_index": 1\\
+    \},\\
+    \{\\
+      "evidence": "The introduction derives this from the Rognes rank spectral sequence by taking the (-1)-eigenspace of duality on the E\^{}2-page in row d=4, after discarding the Milnor K-theory contribution (Section 1.4). The argument is sketched and relies on (a) the slope-2 vanishing line of GKRW20 [cited], (b) the Koszul-duality identification G(F) = H\_1(GL\_n(F); St\^{}\ensuremath{\infty}\_n(F)), (c) the duality involution acting by (-1)\^{}n on G\_n(F) (Theorem 145, deferred to body), and (d) the omnibus rank-SS analysis of Theorem 150. None of (a)--(d) are reproven in the introduction; the proof is delegated to Sections 5--8 of the paper, which are not included in the bounded context provided here. The argument is plausible and consistent with the cited results (and with [Bol24], whose alternative proof the authors cite as an instance).",\\
+      "id": "weakness-3",\\
+      "locator": "Theorem 1, item (i), Section 1.1.3 / 1.4",\\
+      "required\_update": "In the introduction, explicitly state which lemmas/theorems of the body are invoked at each step of the sketch (vanishing line, duality eigenspace decomposition, discarding K\^{}M\_3, identification of E\^{}2\_\{1,4\}) so a reader can audit the chain without scanning the entire 4000-line paper. Verify the E\^{}2-page diagrams (Figures 5--6) against the cited entries (Theorem 150) and tag them in the body.",\\
+      "source\_path": null,\\
+      "source\_role": "technical\_correctness",\\
+      "status": "open",\\
+      "target\_kind": "paper\_tex",\\
+      "verification\_check": "Re-review should confirm `Theorem 1, item (i), Section 1.1.3 / 1.4` is corrected or justified.",\\
+      "weakness\_index": 2\\
+    \},\\
+    \{\\
+      "evidence": "Paper in preparation by one of the present paper's authors (A. Kupers). The results it supplies cannot be independently verified or accessed by readers; standard practice for self-citation of in-progress work.",\\
+      "id": "weakness-4",\\
+      "locator": "BlansBlomKupers",\\
+      "required\_update": "Verify `BlansBlomKupers` against an authoritative source; replace it with a resolvable relevant citation or remove it.",\\
+      "source\_path": null,\\
+      "source\_role": "citation",\\
+      "status": "open",\\
+      "target\_kind": "bibliography",\\
+      "verification\_check": "Re-review should confirm the citation resolves and is relevant.",\\
+      "weakness\_index": 3\\
+    \},\\
+    \{\\
+      "evidence": "Milnor K-theory K\^{}M\_n(F) is a central concept throughout the paper---invoked in the abstract, repeatedly in the introduction, and in the statement of Theorem 1---yet no citation to Milnor's 1970 Inventiones paper introducing it appears in any visible citation context. The foundational result that K\_n\^{}(n)(F)\_Q equals rationalised Milnor K-theory is attributed only via Suslin [@Sus84], and the 'Matsumoto--Milnor' result is mentioned without a primary source. With 90 bibliography entries omitted from this prompt the reference may be present, but its absence from visible contexts is notable for a paper whose main theorem is framed as a generalisation of the Matsumoto-Milnor computation.",\\
+      "id": "weakness-5",\\
+      "locator": "Milnor, Algebraic K-theory and quadratic forms (1970)",\\
+      "required\_update": "Add a bibliography entry for `Milnor, Algebraic K-theory and quadratic forms (1970)` and cite it where the affected method or claim is introduced, or explicitly justify its omission.",\\
+      "source\_path": null,\\
+      "source\_role": "citation",\\
+      "status": "open",\\
+      "target\_kind": "bibliography",\\
+      "verification\_check": "Re-review should confirm the bibliography and citation context address this reference.",\\
+      "weakness\_index": 4\\
+    \},\\
+    \{\\
+      "evidence": "Milnor K-theory K\^{}M\_n(F) is a central concept throughout the paper---invoked in the abstract, repeatedly in the introduction, and in the statement of Theorem 1---yet no citation to Milnor's 1970 Inventiones paper introducing it appears in any visible citation context. The foundational result that K\_n\^{}(n)(F)\_Q equals rationalised Milnor K-theory is attributed only via Suslin [@Sus84], and the 'Matsumoto--Milnor' result is mentioned without a primary source. With 90 bibliography entries omitted from this prompt the reference may be present, but its absence from visible contexts is notable for a paper whose main theorem is framed as a generalisation of the Matsumoto-Milnor computation.",\\
+      "id": "weakness-6",\\
+      "locator": "Milnor, Algebraic K-theory and quadratic forms (1970)",\\
+      "required\_update": "Add a bibliography entry for `Milnor, Algebraic K-theory and quadratic forms (1970)` and cite it where the affected method or claim is introduced, or explicitly justify its omission.",\\
+      "source\_path": null,\\
+      "source\_role": "citation",\\
+      "status": "open",\\
+      "target\_kind": "bibliography",\\
+      "verification\_check": "Re-review should confirm the bibliography and citation context address this reference.",\\
+      "weakness\_index": 5\\
+    \}\\
+  ],\\
+  "strengths": [\\
+    "The Goncharov Lie coalgebra is given a complete presentation via correlators with explicit cobracket formulas, resolving a problem that had been open in the motivic cohomology literature for decades.",\\
+    "The proof of K₄⁽\textsuperscript{3}⁾(F)\_Q ≅ H\textsuperscript{2}(G(F))₃ for all fields independently confirms Bolbachan's [Bol24] result via a different spectral-sequence method, with the alternative proof providing a meaningful cross-check.",\\
+    "The unified framework connecting E\ensuremath{\infty}-homology, Steinberg modules, Koszul duality of Arnold algebras, and multiple polylogarithms is conceptually powerful and provides a clear roadmap for the stated sequel (KRS2).",\\
+    "The identifications G\_n(F) ≅ F\^{}\ensuremath{\times}\_Q (n=1), B\_2(F)\_Q (n=2), and B\_3(F)\_Q (n=3) ground the abstract construction in concrete, independently understood algebraic objects, enabling immediate comparison with classical results of Suslin, Bloch, and Goncharov.",\\
+    "Motivic and Hodge realisation functors from Comod\^{}fd\_\{G(F)\} are constructed explicitly, connecting the abstract Lie coalgebra to geometric and analytic structures and establishing the factorisation G(F) \ensuremath{\to} L\^{}f(F) \ensuremath{\to} L\^{}MTM(F)."\\
+  ],\\
+  "summary": "The paper introduces the Goncharov Lie coalgebra of a field F as the critical-line entries of the E\ensuremath{\infty}-homology of BGL(F)\_Q, presents it via correlators with an explicit Lie cobracket formula, identifies G\_n(F) with classical objects for n\ensuremath{\le}3, constructs motivic and Hodge realisation functors, and proves K₄⁽\textsuperscript{3}⁾(F)\_Q ≅ H\textsuperscript{2}(G(F))₃ for all fields. All five specialists concur that the mathematical programme is coherent, the contributions are significant (novelty score 0.78, verdict 'significant'), and the overall technical posture is 'mostly\_sound'. The central disagreement is between the novelty and summary specialists, who assess the scope positively, and the reproducibility and technical-correctness specialists, who flag serious gaps in verifiable artifacts. These gaps are not in tension: the mathematics may be correct while still being unverifiable. Two technical-correctness items are marked 'unsupported' at severity 'major' (TC-12, TC-13), both arising from missing computational artifacts rather than identified mathematical errors. Reproducibility flags four 'critical' concerns: no public code, no machine-checkable proof of the headline presentation (Lean or equivalent), no machine-checkable proof of the cobracket identities, and no machine-checkable proof of the weight-3 K-theory isomorphism. The paper explicitly acknowledges computer-assisted computation in Section 7.3.3 (Acknowledgments credit Steven Charlton) but publishes no artifact. This combination --- math.KT field, critical/major missing proof-as-code artifacts for headline claims, computer-assisted results without published scripts --- triggers the recommendation gate: major\_revision is required. Beyond reproducibility, the introduction delegates the entire Rognes rank spectral sequence argument to Theorem 150 in the body without even a pointer-annotated sketch, making the logical chain from definitions to Theorem 1 opaque. Bibliography issues are minor: the CMRR/CMRR24 duplicate should be resolved, the BPW second-author spelling should be verified against MathSciNet MR4798648, and the original Zagier (1991) conjecture paper and Milnor (1970) paper may be absent despite being foundational to the paper's central motivation.",\\
+  "weaknesses": [\\
+    "Section 7.3.3 relies on computer-assisted computations credited to Steven Charlton in the Acknowledgments, but no Sage worksheet, Mathematica notebook, or script is published, making the load-bearing n=3 identification G\_3(F) ≅ B\_3(F) in Theorem polyl-identification unverifiable by readers.",\\
+    "The explicit decomposition operator D\^{}FC\_h and its key properties --- that the only relations among h-normalized correlators are shuffle relations, and that the resulting cobracket satisfies co-Jacobi --- lack any machine-checkable verification despite being directly amenable to symbolic computation for small n.",\\
+    "The Rognes rank spectral sequence argument underpinning Theorem 1 is entirely bundled into Theorem 150 in the body with no pointer-annotated sketch in the introduction, leaving the logical chain from the slope-2 vanishing line and duality eigenspace decomposition to the stated K-theory isomorphisms opaque.",\\
+    "A key categorical foundation (Blans-Blom-Kupers, 'Naturality of \ensuremath{\infty}-categorical bar-cobar duality') is cited as a paper in preparation by a co-author; the results it supplies are inaccessible to referees and readers and cannot be independently verified.",\\
+    "The bibliography lists CMRR and CMRR24 as separate entries for the same paper at preprint and journal stages respectively; these should be consolidated, and the preprint entry should at minimum include its arXiv identifier, while the BPW second-author name ('K. I. Pitman') should be verified against MathSciNet MR4798648 for a potential transcription error ('K. I. Piterman').",\\
+    "Milnor K-theory K\^{}M\_n(F) and Zagier's original 1991 conjecture paper appear to be absent from the visible bibliography despite being invoked from the abstract onward; the Matsumoto-Milnor result is attributed only through Suslin [Sus84] without a primary source."\\
+  ]\\
+\}\\
+\end{quote}
+
+\subsection*{novelty (\texttt{claude-sonnet-4-6})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "confidence": 0.7,\\
+  "missing\_prior\_art": [\\
+    \{\\
+      "reason": "Section 1.7 identifies the decomposition relation as the universal functional equation for correlators and discusses weight-3 functional equations at length. Gangl's explicit work on functional equations for the trilogarithm and their use in checking the Bloch group \$B\_3(F)\$ is closely related and is referenced indirectly via the Bourbaki survey [Dup20] but not cited directly.",\\
+      "title": "H. Gangl, Functional equations of higher logarithms (and related works on explicit functional equations for the trilogarithm)"\\
+    \},\\
+    \{\\
+      "reason": "Zagier's conjecture connecting special values of Dedekind zeta functions to algebraic K-theory via polylogarithms is a central motivation, but only the dilogarithm survey [Zagier 2007] is cited; the original 1991 conjecture paper where the relationship to \$K\_\{2n-1\}(F)\$ and \$\textbackslash{}\textbackslash{}mathrm\{Li\}\_n\$ was first stated appears to be absent from the bibliography.",\\
+      "title": "D. Zagier, Polylogarithms, Dedekind zeta functions and the algebraic K-theory of fields (original formulation of Zagier's conjecture, 1991)"\\
+    \}\\
+  ],\\
+  "novelty\_score": 0.78,\\
+  "related\_work": [\\
+    \{\\
+      "citation\_key": "GKRW20",\\
+      "delta": "Establishes the \$E\_\textbackslash{}\textbackslash{}infty\$-homology framework for \$\textbackslash{}\textbackslash{}mathbf\{BGL\}(F)\_\textbackslash{}\textbackslash{}mathbb\{Q\}\$, proves the slope-2 vanishing line confirming Rognes' conjecture, and identifies \$E\_k\$-homology groups with homology of \$\textbackslash{}\textbackslash{}mathrm\{GL\}\_n(F)\$ with Steinberg module coefficients. These are the foundational inputs enabling the definition and key properties of the Goncharov Lie coalgebra.",\\
+      "relation": "prior\_art",\\
+      "title": "\$E\_\textbackslash{}\textbackslash{}infty\$-cells and general linear groups of infinite fields"\\
+    \},\\
+    \{\\
+      "citation\_key": "CharltonRadchenkoRudenko",\\
+      "delta": "Supplies the presentation of infinite Steinberg modules \$\textbackslash{}\textbackslash{}mathrm\{St\}\^{}\textbackslash{}\textbackslash{}infty\_n(F)\$ via Steinberg correlators and the explicit cobracket formula. This paper lifts those results via coinvariants to the presentation of \$\textbackslash{}\textbackslash{}mathscr\{G\}(F)\$ and derives the Lie cobracket formula for correlators.",\\
+      "relation": "builds\_on",\\
+      "title": "Multiple polylogarithms and the Steinberg module"\\
+    \},\\
+    \{\\
+      "citation\_key": "CMRR24",\\
+      "delta": "Constructs the formal Lie coalgebra \$\textbackslash{}\textbackslash{}mathscr\{L\}\^{}\{\textbackslash{}\textbackslash{}mathrm\{f\}\}(F)\$ with formal correlators satisfying the same relations as in the Goncharov Lie coalgebra. This paper uses it to define the formal realisation map \$r\^{}\{\textbackslash{}\textbackslash{}mathrm\{f\}\}:\textbackslash{}\textbackslash{}mathscr\{G\}(F)\textbackslash{}\textbackslash{}to\textbackslash{}\textbackslash{}mathscr\{L\}\^{}\{\textbackslash{}\textbackslash{}mathrm\{f\}\}(F)\$ through which both the motivic and Hodge realisations factor.",\\
+      "relation": "builds\_on",\\
+      "title": "The Hopf algebra of formal multiple polylogarithms"\\
+    \},\\
+    \{\\
+      "citation\_key": "Gon95b",\\
+      "delta": "Introduces the Bloch group \$B\_3(F)\$, the weight-3 polylogarithmic complex \$\textbackslash{}\textbackslash{}Gamma\_3(F)\$, and conjectures that its homology computes \$K\_5\^{}\{(3)\}(F)\$, \$K\_4\^{}\{(3)\}(F)\$, and \$K\_3\^{}M(F)\$ respectively. The main theorem of the present paper verifies a variant of this conjecture, with Goncharov's complex identified as the Chevalley--Eilenberg complex of \$\textbackslash{}\textbackslash{}mathscr\{G\}(F)\$ in weight 3.",\\
+      "relation": "prior\_art",\\
+      "title": "Geometry of configurations, polylogarithms, and motivic cohomology"\\
+    \},\\
+    \{\\
+      "citation\_key": "Gon19",\\
+      "delta": "Provides the motivic Lie coalgebra \$\textbackslash{}\textbackslash{}mathscr\{L\}\^{}\{\textbackslash{}\textbackslash{}mathrm\{MTM\}\}(F)\$, motivic correlators, and Hodge correlators used in this paper to construct the motivic and Hodge realisation functors from the category of comodules over \$\textbackslash{}\textbackslash{}mathscr\{G\}(F)\$.",\\
+      "relation": "builds\_on",\\
+      "title": "Hodge correlators"\\
+    \},\\
+    \{\\
+      "citation\_key": "BD94",\\
+      "delta": "Formulates the Beilinson--Deligne conjecture expressing Adams eigenspaces of algebraic K-theory as Ext groups in the category of mixed Tate motives. This is the primary motivating framework for the paper's approach and the source of the prediction that \$K\_\{2n-i\}\^{}\{(n)\}(F)\textbackslash{}\textbackslash{}cong H\^{}i(\textbackslash{}\textbackslash{}mathscr\{G\}(F))\_n\$.",\\
+      "relation": "prior\_art",\\
+      "title": "Interprétation motivique de la conjecture de Zagier reliant polylogarithmes et régulateurs"\\
+    \},\\
+    \{\\
+      "citation\_key": "Rognes",\\
+      "delta": "Constructs the rank filtration of the algebraic K-theory spectrum and the associated spectral sequence, which the paper uses (together with properties of \$\textbackslash{}\textbackslash{}mathscr\{G\}(F)\$) to derive the symbolic descriptions of \$K\_4\^{}\{(3)\}(F)\$ and the indecomposable part of \$K\_5\^{}\{(3)\}(F)\$.",\\
+      "relation": "prior\_art",\\
+      "title": "A spectrum level rank filtration in algebraic K-theory"\\
+    \},\\
+    \{\\
+      "citation\_key": "Sus90",\\
+      "delta": "Proves the exactness of the Bloch group sequence computing \$K\_3\^{}\{(2)\}(F)\$ and \$K\_2\^{}\{(2)\}(F)\$, providing the weight-2 precursor and verification framework for the weight-3 results of the present paper. Suslin's pre-Bloch group is identified with \$\textbackslash{}\textbackslash{}mathscr\{G\}\_2(F)\$.",\\
+      "relation": "prior\_art",\\
+      "title": "\$K\_3\$ of a field, and the Bloch group"\\
+    \},\\
+    \{\\
+      "citation\_key": "Bol24",\\
+      "delta": "Independently proves the Goncharov conjecture \$K\_\{2n-(n-1)\}\^{}\{(n)\}(F)\textbackslash{}\textbackslash{}cong H\^{}\{n-1\}(\textbackslash{}\textbackslash{}mathscr\{G\}(F))\_n\$ for all weights \$n\$ by a different method. The weight-3 case overlaps with Theorem 1(i) of this paper; both proofs are cited as independent.",\\
+      "relation": "competing",\\
+      "title": "On the Goncharov's conjecture in degree \$m-1\$ and weight \$m\$"\\
+    \},\\
+    \{\\
+      "citation\_key": "MPW23",\\
+      "delta": "Studies rank filtrations and Steinberg modules and proves related vanishing results independently. Provides the equivalence between the stable building \$D\^{}\textbackslash{}\textbackslash{}infty\$ and Rognes' common basis complex used in the paper, but does not construct or present the Goncharov Lie coalgebra.",\\
+      "relation": "orthogonal",\\
+      "title": "On rank filtrations of algebraic K-theory and Steinberg modules"\\
+    \},\\
+    \{\\
+      "citation\_key": "NesterenkoSuslin",\\
+      "delta": "Establishes the Nesterenko--Suslin isomorphism comparing the two monoidal structures (\$\textbackslash{}\textbackslash{}boxplus\$ and \$\textbackslash{}\textbackslash{}boxbackslash\$) on \$\textbackslash{}\textbackslash{}mathbf\{BGL\}(F)\$, a key step in identifying \$E\_1\$-indecomposables with GL-homology with Steinberg module coefficients.",\\
+      "relation": "prior\_art",\\
+      "title": "Homology of the general linear group over a local ring, and Milnor's K-theory"\\
+    \}\\
+  ],\\
+  "verdict": "significant"\\
+\}\\
+\end{quote}
+
+\subsection*{reproducibility (\texttt{gpt-5.5})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "code\_availability": "unspecified",\\
+  "code\_url": null,\\
+  "concerns": [\\
+    \{\\
+      "area": "code",\\
+      "description": "No public code, proof repository, license, or pinned release is provided for reproducing the claimed constructions and computations.",\\
+      "severity": "critical"\\
+    \},\\
+    \{\\
+      "area": "code",\\
+      "description": "The headline presentation of the Goncharov Lie coalgebra and its relations lacks a machine-checkable proof artifact such as formal/GoncharovLieCoalgebra/Presentation.lean.",\\
+      "severity": "critical"\\
+    \},\\
+    \{\\
+      "area": "code",\\
+      "description": "The explicit Lie cobracket formula and its coalgebra identities lack a machine-checkable proof artifact such as formal/GoncharovLieCoalgebra/Cobracket.lean.",\\
+      "severity": "critical"\\
+    \},\\
+    \{\\
+      "area": "code",\\
+      "description": "The motivic and Hodge realisation constructions lack formal proof artifacts such as formal/Realisations/MotivicHodge.lean.",\\
+      "severity": "major"\\
+    \},\\
+    \{\\
+      "area": "code",\\
+      "description": "The Rognes rank spectral sequence argument yielding the weight-3 K-theory isomorphism and exact sequence lacks a machine-checkable proof artifact such as formal/KTheory/Weight3.lean.",\\
+      "severity": "critical"\\
+    \},\\
+    \{\\
+      "area": "code",\\
+      "description": "Results in Section 7.3.3 are acknowledged as using computer-assisted methods, but no scripts, inputs, outputs, or reproducible notebook are supplied; an artifact such as computations/trilog/verify\_relations.sage would be needed.",\\
+      "severity": "major"\\
+    \},\\
+    \{\\
+      "area": "compute",\\
+      "description": "No software versions, proof assistant version, CAS version, dependency lockfile, hardware notes, or deterministic run instructions are specified for the computer-assisted or formal-verification-relevant parts.",\\
+      "severity": "major"\\
+    \},\\
+    \{\\
+      "area": "evaluation",\\
+      "description": "No independent verification target, test suite, or acceptance checklist is provided to check the stated presentations, cobracket formulas, realisations, and K-theory consequences against the paper.",\\
+      "severity": "major"\\
+    \},\\
+    \{\\
+      "area": "other",\\
+      "description": "Verifier could not reach `https://web.archive.org/web/20211028202354/https://webusers.imj-prg.fr/` (status=network\_error)",\\
+      "severity": "minor"\\
+    \}\\
+  ],\\
+  "confidence": 0.86,\\
+  "data\_availability": "unspecified",\\
+  "data\_url": null,\\
+  "environment": null,\\
+  "reproducibility\_score": 0.15\\
+\}\\
+\end{quote}
+
+\subsection*{summary (\texttt{claude-haiku-4-5})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "audience": "Algebraic topologists, K-theory specialists, and researchers in motivic geometry and polylogarithms; secondary audience includes those studying Hopf algebras, operadic structures, and higher algebra",\\
+  "key\_contributions": [\\
+    "Definition of the Goncharov Lie coalgebra as the critical-line entries of E\ensuremath{\infty}-homology groups of BGL(F)",\\
+    "Complete presentation of the Goncharov Lie coalgebra using correlators, with explicit formulas for the Lie cobracket",\\
+    "Identification of G\_n(F) for n \ensuremath{\le} 3 with classical objects (Milnor K-theory, Bloch group, and Goncharov's B\_3)",\\
+    "Construction of motivic and Hodge realisations connecting the coalgebra to mixed Tate motives",\\
+    "Proof that K₄⁽\textsuperscript{3}⁾(F) ≅ H\textsuperscript{2}(G(F))\_3 for all fields, affirming Goncharov's weight 3 conjecture",\\
+    "Exact sequence relating K₅⁽\textsuperscript{3}⁾(F) to homology of the Goncharov Lie coalgebra",\\
+    "Application of the Rognes rank spectral sequence to compute K-theory groups",\\
+    "Derivation of functional equations for multiple polylogarithms from relations in infinite Steinberg modules"\\
+  ],\\
+  "plain\_language\_summary": "The paper develops a new mathematical object called the Goncharov Lie coalgebra, which bridges two important areas of mathematics: algebraic K-theory (which measures algebraic structure of fields) and polylogarithms (special multivalued functions studied in number theory). The authors define this coalgebra using advanced homotopy-theoretic tools (E\ensuremath{\infty}-homology) and give it a complete presentation using \textbackslash{}"correlators\textbackslash{}"---formal expressions involving elements from a field. They show that the cobracket (a key structural feature of the coalgebra) can be explicitly computed and provide interpretations through motivic geometry and Hodge theory.\textbackslash{}n\textbackslash{}nThe paper proves a major result relating these structures to algebraic K-theory at weight 3, giving symbolic descriptions of otherwise mysterious K-groups. Specifically, they express K₄⁽\textsuperscript{3}⁾(F) in terms of the second cohomology of the Goncharov Lie coalgebra and characterize part of K₅⁽\textsuperscript{3}⁾(F) via homological algebra. These results support a longstanding conjecture of Goncharov predicting an isomorphism between K-theory groups and cohomology of polylogarithmic complexes. The authors also derive functional equations for multiple polylogarithms as consequences of their structural results about Steinberg modules.",\\
+  "tldr": "This paper introduces the Goncharov Lie coalgebra of a field, a new algebraic structure derived from the E\ensuremath{\infty}-homology of general linear groups that connects algebraic K-theory to polylogarithms."\\
+\}\\
+\end{quote}
+
+\subsection*{technical\_correctness (\texttt{claude-opus-4-7})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "claims": [\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "Theorem 1(i): For any field F, there is an isomorphism K\_4\^{}\{(3)\}(F)\_Q ≅ H\^{}2(G(F))\_3.",\\
+      "evidence": "The introduction derives this from the Rognes rank spectral sequence by taking the (-1)-eigenspace of duality on the E\^{}2-page in row d=4, after discarding the Milnor K-theory contribution (Section 1.4). The argument is sketched and relies on (a) the slope-2 vanishing line of GKRW20 [cited], (b) the Koszul-duality identification G(F) = H\_1(GL\_n(F); St\^{}\ensuremath{\infty}\_n(F)), (c) the duality involution acting by (-1)\^{}n on G\_n(F) (Theorem 145, deferred to body), and (d) the omnibus rank-SS analysis of Theorem 150. None of (a)--(d) are reproven in the introduction; the proof is delegated to Sections 5--8 of the paper, which are not included in the bounded context provided here. The argument is plausible and consistent with the cited results (and with [Bol24], whose alternative proof the authors cite as an instance).",\\
+      "id": "TC-1",\\
+      "location": "Theorem 1, item (i), Section 1.1.3 / 1.4",\\
+      "severity": "minor",\\
+      "suggested\_fix": "In the introduction, explicitly state which lemmas/theorems of the body are invoked at each step of the sketch (vanishing line, duality eigenspace decomposition, discarding K\^{}M\_3, identification of E\^{}2\_\{1,4\}) so a reader can audit the chain without scanning the entire 4000-line paper. Verify the E\^{}2-page diagrams (Figures 5--6) against the cited entries (Theorem 150) and tag them in the body."\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "Theorem 1(ii): For any field F, there is an exact sequence K\_4\^{}\{(2)\}(F)\_Q \ensuremath{\otimes} F\^{}\ensuremath{\times}\_Q \ensuremath{\to} K\_5\^{}\{(3)\}(F)\_Q \ensuremath{\to} H\^{}1(G(F))\_3 \ensuremath{\to} 0.",\\
+      "evidence": "Derived in the introduction from the row d=5 of the duality-(-1)-eigenspace E\^{}2-page of the Rognes rank spectral sequence. The derivation again rests on the omnibus rank-SS theorem (Theorem 150) and on the identification of E\^{}1-entries via Theorem polyl-identification. The full proof is in the body sections not contained in the audit excerpt. The conditional converse (Corollary 169: equivalence with the Beilinson--Soulé instance K\_4\^{}\{(2)\}(E)\_Q = 0) is internally consistent and is a meaningful sanity check.",\\
+      "id": "TC-2",\\
+      "location": "Theorem 1, item (ii), Section 1.1.3 / 1.4",\\
+      "severity": "minor",\\
+      "suggested\_fix": "Annotate the introduction sketch with pointers to the precise auxiliary statements used at each step (e.g. which weight-bounds are invoked to terminate the SS, which duality eigenspace decomposition is used). Ensure that the discarded summands above weight 3 are explicitly accounted for, since the exact sequence's left term arises from a non-collapsed differential."\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "Theorem polyl-presentation-additive: G(F) is generated as a Q-vector space by correlators Cor\^{}G(x\_0,…,x\_n) subject to homogeneity, cyclic symmetry, shuffle, and decomposition relations.",\\
+      "evidence": "The argument is outlined: (a) identify G\_n(F) with H\_1(GL\_n(F); St\^{}\ensuremath{\infty}\_n(F)) using GKRW20 equation (eqn:he1-st-heinfty-stl); (b) build a projective resolution of St\^{}\ensuremath{\infty} in terms of FC and decomposition operators (eqn:dec-resolution); (c) take coinvariants and read off generators/relations. Step (a) is cited to GKRW20 [§6]; the user-supplied excerpt does not re-derive it. Step (b) hinges on the 'almost basis' claim attributed to [CharltonRadchenkoRudenko §3.9] together with the assertion that the only relations among normalized correlators with fixed h are the shuffle relations --- this is asserted but not proved in the introduction excerpt. The combinatorial set T(n) and sign function (Proposition 26) are deferred to the body.",\\
+      "id": "TC-3",\\
+      "location": "Theorem polyl-presentation-additive, Section 1.3 (Steinberg module presentation); proven via the projective resolution in Section 1.3.1 (and full proof in Sections 2--4 of the body).",\\
+      "severity": "minor",\\
+      "suggested\_fix": "Provide, in the introduction or an appendix, the explicit verification that the differentials in (eqn:dec-resolution) square to zero and that the complex is acyclic in positive degrees (only its 0-th homology is St\^{}\ensuremath{\infty}). Cite a precise lemma in [CharltonRadchenkoRudenko] for the 'shuffle is the only relation among h-normalized correlators' claim, since this is load-bearing for the resolution."\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "Theorem polyl-presentation-cobracket: The cobracket on G(F) is \ensuremath{\delta}(Cor\^{}G(x\_0,…,x\_n)) = \ensuremath{\Sigma}\_\{j,i\} Cor\^{}G(x\_j,…,x\_\{j+i\}) \ensuremath{\wedge} Cor\^{}G(x\_j,x\_\{j+i+1\},…,x\_\{j+n\}) when x\_0,…,x\_n are distinct.",\\
+      "evidence": "The introduction explains that the cobracket arises from a secondary operation obtained via the duoidal Eckmann--Hilton/Dunn--Lurie additivity argument (cited to LurieHA 5.1.2.2) and is computed by lifting the bar zigzag [St\^{}\ensuremath{\infty}\ensuremath{\to}0] \ensuremath{\leftarrow} [St\^{}\ensuremath{\infty}\ensuremath{\to}\ensuremath{\Lambda}\^{}2 St\^{}\ensuremath{\infty}] \ensuremath{\to} [0\ensuremath{\to}St\^{}\ensuremath{\infty} ⊠ St\^{}\ensuremath{\infty}] along formal-correlator resolutions. The choice of lift is acknowledged as 'a subtlety' deferred to Section 5.3.1. The formula matches the cobracket on St\^{}\ensuremath{\infty} given by Charlton--Radchenko--Rudenko, which is a non-trivial sanity check.",\\
+      "id": "TC-4",\\
+      "location": "Theorem polyl-presentation-cobracket, Section 1.3.3 / Section 5.3",\\
+      "severity": "minor",\\
+      "suggested\_fix": "Make the lifting argument in Section 5.3.1 self-contained or provide a worked example (e.g. n=2 reduced to the 5-term relation, n=3) verifying co-Jacobi by direct computation. A symbolic computer-algebra verification (Sage/Mathematica) of co-Jacobi for n\ensuremath{\le}4 generic inputs would strengthen the argument and could be shipped per the proof-as-code axiom; see TC-12."\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "Theorem polyl-identification: F\^{}\ensuremath{\times}\_Q ≅ G\_1(F), B\_2(F)\_Q ≅ G\_2(F), B\_3(F)\_Q ≅ G\_3(F) with explicit correlator formulas.",\\
+      "evidence": "For n=1 the identification with F\^{}\ensuremath{\times} is essentially tautological (H\_1 of GL\_1 with trivial coefficients twisted by St\^{}\ensuremath{\infty}\_1 = Q). For n=2 the equivalence with the Bloch (pre-Bloch) group B\_2 reduces by Example 2 to the classical 5-term relation, which the introduction shows arises as the n=2 decomposition relation. For n=3, the identification with B\_3 (Goncharov [Gon95b]) is cited to follow from comparing relations; the proof is deferred to the body. The n=3 case is the load-bearing one and is the basis for Theorem 1.",\\
+      "id": "TC-5",\\
+      "location": "Theorem polyl-identification, Section 1.3",\\
+      "severity": "minor",\\
+      "suggested\_fix": "State explicitly in Section 1.3 the bijection between (i) the decomposition relations at n=3 and (ii) the relations defining B\_3(F) (Goncharov's 22-term and related identities). A direct table or appendix matching generators/relations would aid verification."\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "Theorem motivic-realisation: For a number field F, there is a unique Tannakian functor R\^{}MTM : Comod\^{}fd\_G(F) \ensuremath{\to} MTM\_Q(F) such that r\^{}MTM(Cor\^{}G(x\_0,…,x\_n)) = Cor\^{}MTM(x\_0,…,x\_n).",\\
+      "evidence": "The construction factors through the 'formal' Lie coalgebra L\^{}f(F) of Charlton--Matveiakin--Radchenko--Rudenko [CMRR24]: G(F) \ensuremath{\to} L\^{}f(F) \ensuremath{\to} L\^{}MTM(F). The well-definedness of the first map follows because motivic correlators are stated (citing Gon19 §10.4.1) to satisfy the same homogeneity/cyclic/shuffle/decomposition relations. The introduction does not re-verify that motivic correlators satisfy the decomposition relation --- it cites Proposition 139 ('formal realization') in the body. The uniqueness claim relies on Cor\^{}G generating G(F), which is established in Theorem polyl-presentation-additive (TC-3).",\\
+      "id": "TC-6",\\
+      "location": "Theorem thm:motivic-realisation, Section 1.5",\\
+      "severity": "minor",\\
+      "suggested\_fix": "Explicitly cite the lemma in [CMRR24] or [Gon19] establishing that motivic correlators satisfy the decomposition relation (rather than merely the standard shuffle/cyclic relations), since the decomposition relation is the most substantive of the four and is the key obstruction to well-definedness."\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "Theorem hodge-realisation: For an embedding \ensuremath{\sigma} : F ↪ C, there is a unique Tannakian functor R\^{}Hod\_\ensuremath{\sigma} : Comod\^{}fd\_G(F) \ensuremath{\to} MHTS\_Q sending correlators to Hodge correlators.",\\
+      "evidence": "Analogous to TC-6 but with target the Lie coalgebra of framed Hodge--Tate structures. The Hodge correlators are cited to [Gon19 §3.2]. As for the motivic realization, the load-bearing verification is that Hodge correlators satisfy the decomposition relation --- this is again deferred to the formal-realization Proposition 139 in the body.",\\
+      "id": "TC-7",\\
+      "location": "Theorem thm:hodge-realisation, Section 1.5",\\
+      "severity": "minor",\\
+      "suggested\_fix": "Same as TC-6: cite the exact source/equation establishing that Hodge correlators satisfy the decomposition relation. The downstream consequence (G\_n(C) uncountable for n\ensuremath{\ge}1, used in the sequel KRS2) depends on this."\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "Theorem polyl-relations-from-stl-relations (Theorem 2): Every Q-linear relation among Steinberg correlators in St\^{}\ensuremath{\infty}(V) yields a functional equation in G\_n(F) by evaluation against any linear functional h \ensuremath{\in} V\^{}\ensuremath{\vee}, with the resulting sum independent of h.",\\
+      "evidence": "This is essentially a corollary of the resolution of TC-3: the projection \ensuremath{\pi} : St\^{}\ensuremath{\infty} \ensuremath{\to} G\_n descends from St\^{}\ensuremath{\infty}(V) and, by the resolution, the dependence on h drops to coinvariants. The introduction states the result cleanly but defers the rigorous justification (commutation of taking GL(V)-coinvariants with the projection, h-independence) to the body. The decomposition relation is correctly identified as a special case (taking the elementary linear relation in St\^{}\ensuremath{\infty} that defines the cobracket structure).",\\
+      "id": "TC-8",\\
+      "location": "Theorem 2 (thm:polyl-relations-from-stl-relations), Section 1.6",\\
+      "severity": "minor",\\
+      "suggested\_fix": "Provide a one-line proof in Section 1.6 reducing to the exact sequence at the end of Section 1.3.2 to make the corollary character explicit; this would let the reader verify the result without traversing later sections."\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "Reduction G\_n(F) = H\_1(GL\_n(F); St\^{}\ensuremath{\infty}\_n(F)) (eqn:he1-st-heinfty-stl, bottom row).",\\
+      "evidence": "Stated to follow from GKRW20 §6 by combining (i) E\_1-indecomposables of underline-Q\_\{>0\} w.r.t. flag-sum giving Steinberg modules, (ii) Nesterenko--Suslin's observation that applying dim\_! to the comparison map ⊞ \ensuremath{\to} \textbackslash{}\textbackslash{}\textbackslash{}\textbackslash{}backslash is an isomorphism, and (iii) E\_\ensuremath{\infty}-indecomposables w.r.t. ⊞ giving the infinite Steinberg modules. The chain of three identifications is cited but not reproduced. This identification is foundational for every downstream claim.",\\
+      "id": "TC-9",\\
+      "location": "Section 1.2.2, equation eqn:he1-st-heinfty-stl",\\
+      "severity": "minor",\\
+      "suggested\_fix": "Add a 'sketch of proof' paragraph for this isomorphism in the introduction, with precise citations to GKRW20 (theorem numbers) and to Nesterenko--Suslin §1. The reader cannot evaluate Theorem 1 without trusting this black box."\\
+    \},\\
+    \{\\
+      "assessment": "supported",\\
+      "claim": "Conjecture (main gamma) is equivalent in weight n=3 to Goncharov's conjecture [Gon95b 1.15] on the weight-3 polylogarithmic complex \ensuremath{\Gamma}\_3(F;Q).",\\
+      "evidence": "This is a direct consequence of Theorem polyl-identification (TC-5): under the identifications G\_1=F\^{}\ensuremath{\times}\_Q, G\_2=B\_2\_Q, G\_3=B\_3\_Q, the weight-3 part of the Chevalley--Eilenberg complex (eqn:polyl-ce) literally becomes B\_3(F)\_Q \ensuremath{\to} B\_2(F)\_Q \ensuremath{\otimes} F\^{}\ensuremath{\times}\_Q \ensuremath{\to} \ensuremath{\Lambda}\^{}3 F\^{}\ensuremath{\times}\_Q, which is \ensuremath{\Gamma}\_3(F;Q). The equivalence statement is therefore a tautology given TC-5; only the H\^{}0 = K\^{}M\_3 part depends on Matsumoto--Milnor (cited).",\\
+      "id": "TC-10",\\
+      "location": "Section 1.1.4, paragraph following Theorem 1",\\
+      "severity": "info",\\
+      "suggested\_fix": null\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "Convergence and structural properties of the Rognes rank spectral sequence: E\^{}1\_\{n,d\} ≅ H\^{}\{E\_\ensuremath{\infty}\}\_\{n,d\}(BGL(F)\_Q) \ensuremath{\Rightarrow} K\_d(F)\_Q, with d\^{}r-differential of bidegree (-r,-1), compatible with scaling splitting and duality involution, and d\^{}1 determined by the \ensuremath{\sigma}-component of the Lie cobracket.",\\
+      "evidence": "The existence and convergence are attributed to Rognes [Rognes] and GKRW18 §13.8 (cited). The four enumerated structural properties (scaling splitting, duality compatibility, d\^{}1 formula, \ensuremath{\sigma}-component computability) are bundled into 'Theorem 150' (rank-ss-omnibus) which is in the body. The downstream weight-3 calculation (TC-1, TC-2) depends entirely on items (i)--(iv), so any gap there propagates. The introduction does not derive these; it asserts them.",\\
+      "id": "TC-11",\\
+      "location": "Section 1.4, items (i)--(iv); referencing Theorem 150 (omnibus) and Section 6 (sigma-component)",\\
+      "severity": "minor",\\
+      "suggested\_fix": "In the introduction, expand item (iii) with the precise definition of the \ensuremath{\sigma}-component (the cited definition only appears later via §6). At minimum, state under what hypotheses item (iv) reduces \ensuremath{\delta}\_\ensuremath{\sigma} on the critical line to the Lie cobracket --- this reduction is the workhorse for the weight-3 computation."\\
+    \},\\
+    \{\\
+      "assessment": "unsupported",\\
+      "claim": "Existence of a well-defined decomposition operator D\^{}FC\_h : FC(V) \ensuremath{\to} FC(V) and validity of the explicit formula in Example 1 / Section 2.6.",\\
+      "evidence": "The construction depends on the 'almost-basis' property of St\^{}\ensuremath{\infty} ([CRR §3.9]) and on the assertion that for fixed h the only relations among normalized correlators C[0:v\_1:…:v\_n] with h(v\_i)=1 are the shuffle relations. This is a combinatorial/algebraic claim that is highly amenable to symbolic verification (Sage, Macaulay2, or a direct Python/SymPy script) for small n. The paper acknowledges (Acknowledgments) that some n=3 trilogarithm results were obtained by computer-assisted methods (thanks to Steven Charlton), but the paper ships no public artifact (no Sage notebook, no Lean/Coq formalization, no Python script). Per the Proof-as-Code Axiom for math.* fields, an executable artifact verifying (a) closure of the decomposition relation under co-Jacobi, (b) the explicit formula for D\^{}FC\_h in V=F\^{}2 and V=F\^{}3, and (c) the shuffle-only relation claim for the h-normalized basis is appropriate and absent.",\\
+      "id": "TC-12",\\
+      "location": "Section 1.3.1, Example 1 (V=F\^{}2), and general formula via Proposition 26.",\\
+      "severity": "major",\\
+      "suggested\_fix": "Ship a computational artifact at e.g. code/decomposition\_operator.py (or src/proofs/Decomposition.lean / experiments/cobracket\_verify/sage\_notebook.ipynb) that (i) generates D\^{}FC\_h symbolically for n=2,3,4, (ii) verifies the alternating-sign cancellation pattern on T(n) for small n, and (iii) checks co-Jacobi for the cobracket of Theorem polyl-presentation-cobracket on randomly sampled affine bases. A companion repository (cf. GitHub) referenced from the arXiv abstract would discharge this."\\
+    \},\\
+    \{\\
+      "assessment": "unsupported",\\
+      "claim": "The weight-3 trilogarithm computations in Section 7.3.3 (relied upon for, among other things, the relations defining B\_3 and the identification G\_3 ≅ B\_3 of Theorem polyl-identification) are correct.",\\
+      "evidence": "The Acknowledgments explicitly state: 'We would like to thank Steven Charlton for helping us to establish the results of Section 7.3.3 with computer-assisted methods.' This is a direct admission that the proof relies on computational verification, but the paper does not publish, link, or describe the verification artifact. The reader cannot reproduce or audit the computer-assisted step. Per the Proof-as-Code Axiom for math.KT, this is exactly the situation where a verifiable artifact is mandatory.",\\
+      "id": "TC-13",\\
+      "location": "Section 7.3.3 (referenced in Acknowledgments), supports Theorem polyl-identification at n=3",\\
+      "severity": "major",\\
+      "suggested\_fix": "Publish the computer-assisted verification as a reproducible artifact (Sage worksheet, Mathematica notebook, or Python/Julia script) at code/trilogarithm\_section\_7\_3\_3/ and reference it from Section 7.3.3 of the paper with a DOI or a Zenodo/GitHub link. Include the input relations, the search procedure, and the output certificate."\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "Koszul property of the commutative algebra of Steinberg modules St under ⊞, with Koszul dual the infinite Steinberg modules St\^{}\ensuremath{\infty}.",\\
+      "evidence": "Cited to [MNP], [MPW23], and [CharltonRadchenkoRudenko]. The introduction does not reprove the Koszulity but uses it as a black box. The three cited works are independent recent papers that converge on this result, lending strong credibility. Marking partially\_supported because the audit cannot independently verify the cited proofs from the bounded context.",\\
+      "id": "TC-14",\\
+      "location": "Section 1.2.1 (paragraph 'A crucial property…') and Section 2",\\
+      "severity": "info",\\
+      "suggested\_fix": "In the body, briefly indicate which of the three cited proofs of Koszulity is being used (they may have slightly different hypotheses or conventions, e.g. integral vs rational coefficients)."\\
+    \},\\
+    \{\\
+      "assessment": "supported",\\
+      "claim": "Slope-2 vanishing line: H\^{}\{E\_\ensuremath{\infty}\}\_\{n,d\}(BGL(F)\_Q) vanishes for d \ensuremath{\le} 2n-2 with the exception of (n,d)=(1,0).",\\
+      "evidence": "This is the main theorem of [GKRW20] (Galatius--Kupers--Randal-Williams, 'E\_\ensuremath{\infty}-cells and general linear groups of infinite fields', Duke 2025) and is cited correctly. Two of the three authors are Kupers (this paper) and the cited work is the immediate predecessor in the same research program. The result is established peer-reviewed mathematics.",\\
+      "id": "TC-15",\\
+      "location": "Section 1.2.1, Figure 1 (fig:gltable1)",\\
+      "severity": "info",\\
+      "suggested\_fix": null\\
+    \}\\
+  ],\\
+  "confidence": 0.55,\\
+  "overall\_correctness": "mostly\_sound"\\
+\}\\
+\end{quote}
+
+\section*{Corrections}
+% corrections rendered from corrections table; empty on first publish
+No corrections have been recorded.
+
+\section*{Bibliography}
+\begin{enumerate}[leftmargin=*]
+  \item AKKN: A. Alekseev, N. Kawazumi, Y. Kuno, and F. Naef, \textbackslash{}emph\{The \{G\}oldman-\{T\}uraev \{L\}ie bialgebra in genus zero and the \{K\}ashiwara-\{V\}ergne problem\}, Adv. Math. 326 (2018), 1--53. \textbackslash{}MR\{3758425\}
+  \item AMP: A. Ash, J. Miller, and P. Patzt, \textbackslash{}emph\{Hopf algebras, \{S\}teinberg modules, and the unstable cohomology of \$\{SL\}\_n(\textbackslash{}mathbb \{Z\})\$ and \$\{GL\}\_n(\textbackslash{}mathbb \{Z\})\$\}, 2024, arXiv:2404.13776. \href{https://arxiv.org/abs/2404.13776}{arXiv:2404.13776}
+  \item AguiarMahajan: M. Aguiar and S. Mahajan, \textbackslash{}emph\{Monoidal functors, species and \{H\}opf algebras\}, CRM Monograph Series, vol. 29, American Mathematical Society, Providence, RI, 2010, With forewords by Kenneth Brown and Stephen Chase and Andr\textbackslash{}'\{e\} Joyal. \textbackslash{}MR\{2724388\}
+  \item AlekseevTorossian: \textbackslash{}bysame, \textbackslash{}emph\{The \{K\}ashiwara-\{V\}ergne conjecture and \{D\}rinfeld's associators\}, Ann. of Math. (2) 175 (2012), no. 2, 415--463. \textbackslash{}MR\{2877064\}
+  \item AlekseevTorossianNote: A. Alekseev and C. Torossian, Flat connections and trivalent graphs, \textbackslash{}url\{https://web.archive.org/web/20211028202354/https://webusers.imj-prg.fr/ charles.torossian/publication/trivalent.pdf\}, 2009.
+  \item Arnold: V. I. Arnold, The cohomology ring of the group of dyed braids, Mat. Zametki 5 (1969), 227--231. \textbackslash{}MR\{242196\}
+  \item AubryChataur: M. Aubry and D. Chataur, Cooperads and coalgebras as closed model categories, J. Pure Appl. Algebra 180 (2003), no. 1-2, 1--23. \textbackslash{}MR\{1966520\}
+  \item BCGP: F. Brown, M. Chan, S. Galatius, and S. Payne, \textbackslash{}emph\{Hopf algebras in the cohomology of \$A\_g\$, \$GL\_n(\textbackslash{}mathbb\{Z\})\$, and \$SL\_n(\textbackslash{}mathbb\{Z\})\$\}, 2024, arXiv:2405.11528. \href{https://arxiv.org/abs/2405.11528}{arXiv:2405.11528}
+  \item BCN: D. L. B. Brantner, R. Campos, and J. Nuiten, \textbackslash{}emph\{P\{D\} operads and explicit partition \{L\}ie algebras\}, Mem. Amer. Math. Soc. 315 (2025), no. 1597, v+125. \textbackslash{}MR\{5003477\}
+  \item BD94: A. Beilinson and P. Deligne, \textbackslash{}emph\{Interpr\textbackslash{}'\{e\}tation motivique de la conjecture de \{Z\}agier reliant polylogarithmes et r\textbackslash{}'\{e\}gulateurs\}, Motives (\{S\}eattle, \{WA\}, 1991), Proc. Sympos. Pure Math., vol. 55, Amer. Math. Soc., Providence, RI, 1994, pp. 97--121. \textbackslash{}MR\{1265552\}
+  \item BDEPS: N. Berry, A. Dubickas, N. D. Elkies, B. Poonen, and C. Smyth, The conjugate dimension of algebraic numbers, Q. J. Math. 55 (2004), no. 3, 237--252. \textbackslash{}MR\{2082091\}
+  \item BGSII: C. Barwick, S. Glasman, and J. Shah, \textbackslash{}emph\{Spectral \{M\}ackey functors and equivariant algebraic \{\$K\$\}-theory, \{II\}\}, Tunis. J. Math. 2 (2020), no. 1, 97--146. \textbackslash{}MR\{3933393\}
+  \item BGSV90: A. Beilinson, A. Varchenko, A. Goncharov, and V. Shekhtman, \textbackslash{}emph\{Projective geometry and \{\$K\$\}-theory\}, Algebra i Analiz 2 (1990), no. 3, 78--130. \textbackslash{}MR\{1073210\}
+  \item BHM: M. B\textbackslash{}"\{o\}kstedt, W. C. Hsiang, and I. Madsen, \textbackslash{}emph\{The cyclotomic trace and algebraic \{\$K\$\}-theory of spaces\}, Invent. Math. 111 (1993), no. 3, 465--539. \textbackslash{}MR\{1202133\}
+  \item BPW: B. Br\textbackslash{}"\{u\}ck, K. I. Piterman, and V. Welker, The common basis complex and the partial decomposition poset, Int. Math. Res. Not. IMRN (2024), no. 18, 12746--12760. \textbackslash{}MR\{4798648\}
+  \item Barr1968HarrisonHH: M. Barr, Harrison homology, hochschild homology and triples, Journal of Algebra 8 (1968), 314--323.
+  \item BataninMarkl: M. Batanin and M. Markl, Centers and homotopy centers in enriched monoidal categories, Adv. Math. 230 (2012), no. 4-6, 1811--1858. \textbackslash{}MR\{2927355\}
+  \item BenMosheSchlank: S. Ben-Moshe and T. M. Schlank, \textbackslash{}emph\{Higher semiadditive algebraic \{K\}-theory and redshift\}, Compos. Math. 160 (2024), no. 2, 237--287. \textbackslash{}MR\{4679205\}
+  \item BerglundKoszul: A. Berglund, Koszul spaces, Trans. Amer. Math. Soc. 366 (2014), no. 9, 4551--4569. \textbackslash{}MR\{3217692\}
+  \item Bezrukavnikov: R. Bezrukavnikov, \textbackslash{}emph\{Koszul \{DG\}-algebras arising from configuration spaces\}, Geom. Funct. Anal. 4 (1994), no. 2, 119--135. \textbackslash{}MR\{1262702\}
+  \item BlansBlom: M. Blans and T. Blom, \textbackslash{}emph\{On the chain rule in \{G\}oodwillie calculus\}, 2024, arXiv:2410.20504. \href{https://arxiv.org/abs/2410.20504}{arXiv:2410.20504}
+  \item BlansBlomKupers: M. Blans, T. Blom, and A. Kupers, Naturality of \$\textbackslash{}infty\$-categorical bar-cobar duality, in preparation.
+  \item Bloch: S. J. Bloch, \textbackslash{}emph\{Higher regulators, algebraic \{\$K\$\}-theory, and zeta functions of elliptic curves\}, CRM Monograph Series, vol. 11, American Mathematical Society, Providence, RI, 2000. \textbackslash{}MR\{1760901\}
+  \item BlochKriz: S. Bloch and I. K\textbackslash{}v\{r\}\textbackslash{}'\{\textbackslash{}i\}\textbackslash{}v\{z\}, \textbackslash{}emph\{Mixed \{T\}ate motives\}, Ann. of Math. (2) 140 (1994), no. 3, 557--605. \textbackslash{}MR\{1307897\}
+  \item BoardmanSS: J. M. Boardman, Conditionally convergent spectral sequences, Homotopy invariant algebraic structures (\{B\}altimore, \{MD\}, 1998), Contemp. Math., vol. 239, Amer. Math. Soc., Providence, RI, 1999, pp. 49--84. \textbackslash{}MR\{1718076\}
+  \item Bol24: V. Bolbachan, \textbackslash{}emph\{On the \{G\}oncharov's conjecture in degree \$m\{-\}1\$ and weight \$m\$\}, 2024, arXiv:2404.06271. \href{https://arxiv.org/abs/2404.06271}{arXiv:2404.06271}
+  \item BorelStable: A. Borel, Stable real cohomology of arithmetic groups, Ann. Sci. \textbackslash{}'\{E\}cole Norm. Sup. (4) 7 (1974), 235--272 (1975). \textbackslash{}MR\{387496\}
+  \item Bro12: F. Brown, \textbackslash{}emph\{Mixed \{T\}ate motives over \{\$\textbackslash{}Bbb Z\$\}\}, Ann. of Math. (2) 175 (2012), no. 2, 949--976. \textbackslash{}MR\{2993755\}
+  \item Brown: K. S. Brown, Cohomology of groups, Graduate Texts in Mathematics, vol. 87, Springer-Verlag, New York, 1994, Corrected reprint of the 1982 original. \textbackslash{}MR\{1324339\}
+  \item CMRR: S. Charlton, A. Matveiakin, D. Radchenko, and D. Rudenko, \textbackslash{}emph\{The \{H\}opf algebra of formal multiple polylogarithms\}, 2024.
+  \item CMRR24: \textbackslash{}bysame, \textbackslash{}emph\{The \{H\}opf algebra of formal multiple polylogarithms\}, Int. Math. Res. Not. IMRN (2026), no. 2, Paper No. rnaf361, 29. \textbackslash{}MR\{5013247\}
+  \item CampbellZakharevich: J. A. Campbell and I. Zakharevich, \textbackslash{}emph\{Hilbert's third problem and a conjecture of \{G\}oncharov\}, Adv. Math. 451 (2024), Paper No. 109757, 57. \textbackslash{}MR\{4759410\}
+  \item Cartier: P. Cartier, \textbackslash{}emph\{A primer of \{H\}opf algebras\}, Frontiers in number theory, physics, and geometry. \{II\}, Springer, Berlin, 2007, pp. 537--615. \textbackslash{}MR\{2290769\}
+  \item Cathelineau: J.-L. Cathelineau, \textbackslash{}emph\{Homologie du groupe lin\textbackslash{}'\{e\}aire et polylogarithmes (d'apr\textbackslash{}`es \{A\}. \{B\}. \{G\}oncharov et d'autres)\}, Ast\textbackslash{}'\{e\}risque (1993), no. 216, Exp. No. 772, 5, 311--341, S\textbackslash{}'\{e\}minaire Bourbaki, Vol. 1992/93. \textbackslash{}MR\{1246402\}
+  \item CharltonRadchenkoRudenko: S. Charlton, D. Radchenko, and D. Rudenko, \textbackslash{}emph\{Multiple polylogarithms and the \{S\}teinberg module\}, 2025.
+  \item ChingSalvatore: M. Ching and P. Salvatore, \textbackslash{}emph\{Koszul duality for topological \{\$E\_n\$\}-operads\}, Proc. Lond. Math. Soc. (3) 125 (2022), no. 1, 1--60. \textbackslash{}MR\{4456966\}
+  \item Cohen: F. R. Cohen, \textbackslash{}emph\{On configuration spaces, their homology, and \{L\}ie algebras\}, J. Pure Appl. Algebra 100 (1995), no. 1-3, 19--42. \textbackslash{}MR\{1344842\}
+  \item ConantVogtmann: J. Conant and K. Vogtmann, \textbackslash{}emph\{On a theorem of \{K\}ontsevich\}, Algebr. Geom. Topol. 3 (2003), 1167--1224. \textbackslash{}MR\{2026331\}
+  \item DG05: P. Deligne and A. B. Goncharov, \textbackslash{}emph\{Groupes fondamentaux motiviques de \{T\}ate mixte\}, Ann. Sci. \textbackslash{}'\{E\}cole Norm. Sup. (4) 38 (2005), no. 1, 1--56. \textbackslash{}MR\{2136480\}
+  \item Day: B. Day, On closed categories of functors, Reports of the \{M\}idwest \{C\}ategory \{S\}eminar, \{IV\}, Lecture Notes in Math., Vol. 137, Springer, Berlin-New York, 1970, pp. 1--38. \textbackslash{}MR\{272852\}
+  \item Del71b: P. Deligne, \textbackslash{}emph\{Th\textbackslash{}'\{e\}orie de \{H\}odge. \{II\}\}, Inst. Hautes \textbackslash{}'\{E\}tudes Sci. Publ. Math. (1971), no. 40, 5--57. \textbackslash{}MR\{498551\}
+  \item Drinfeld: V. G. \{Drinfeld\}, \textbackslash{}emph\{On quasitriangular quasi-\{H\}opf algebras and on a group that is closely connected with \{\$\{\textbackslash{}rm Gal\}(\textbackslash{}overline\{\textbackslash{}bf Q\}/\{\textbackslash{}bf Q\})\$\}\}, Algebra i Analiz 2 (1990), no. 4, 149--181, translated in Leningrad Math. J. 2 (1991), no. 4, 829--860. \textbackslash{}MR\{1080203\}
+  \item Dup20: C. Dupont, \textbackslash{}emph\{Progr\{\textbackslash{}`e\}s rec\{\textbackslash{}'e\}nts sur la conjecture de \{Z\}agier et le programme de \{G\}oncharov [d'apr\{\textbackslash{}`e\}s \{G\}oncharov, \{R\}udenko, \{G\}angl, ...]\}, S\{\textbackslash{}'e\}minaire Bourbaki \textbackslash{}textbf\{73\{\textbackslash{}`e\}me ann\{\textbackslash{}'e\}e\} (2021), no. 1176.
+  \item Felder: M. Felder, \textbackslash{}emph\{Internally connected graphs and the \{K\}ashiwara-\{V\}ergne \{L\}ie algebra\}, Lett. Math. Phys. 108 (2018), no. 6, 1407--1441. \textbackslash{}MR\{3797752\}
+  \item FengGalatiusVenkatesh: T. Feng, S. Galatius, and A. Venkatesh, \textbackslash{}emph\{The \{G\}alois action on symplectic \{K\}-theory\}, Invent. Math. 230 (2022), no. 1, 225--319. \textbackslash{}MR\{4480148\}
+  \item GKRW18: \textbackslash{}bysame, \textbackslash{}emph\{Cellular \{\$E\_k\$\}-algebras\}, Ast\textbackslash{}'\{e\}risque (2025), no. 460, x+299. \textbackslash{}MR\{4987221\}
+  \item GKRW19: S. Galatius, A. Kupers, and O. Randal-Williams, \textbackslash{}emph\{\{\$E\_\textbackslash{}infty\$\}-cells and general linear groups of finite fields\}, Ann. Sci. \textbackslash{}'\{E\}c. Norm. Sup\textbackslash{}'\{e\}r. (4) 57 (2024), no. 6, 1845--1882. \textbackslash{}MR\{4862505\}
+  \item GKRW20: \textbackslash{}bysame, \textbackslash{}emph\{\{\$E\_\textbackslash{}infty\$\}-cells and general linear groups of infinite fields\}, Duke Math. J. 174 (2025), no. 14, 2927--3046. \textbackslash{}MR\{4974473\}
+  \item GarnerLopezFranco: R. Garner and I. L\textbackslash{}'\{o\}pez Franco, Commutativity, J. Pure Appl. Algebra 220 (2016), no. 5, 1707--1751. \textbackslash{}MR\{3437265\}
+  \item GepnerHaugsengNikolaus: D. Gepner, R. Haugseng, and T. Nikolaus, \textbackslash{}emph\{Lax colimits and free fibrations in \{\$\textbackslash{}infty\$\}-categories\}, Doc. Math. 22 (2017), 1225--1266. \textbackslash{}MR\{3690268\}
+  \item GetzlerJones: E. Getzler and J. D. S. Jones, Operads, homotopy algebra and iterated integrals for double loop spaces, 1994, arXiv:hep-th/9403055.
+  \item GetzlerKapranov: E. Getzler and M. M. Kapranov, Cyclic operads and cyclic homology, Geometry, topology, \textbackslash{}\& physics, Conf. Proc. Lecture Notes Geom. Topology, IV, Int. Press, Cambridge, MA, 1995, pp. 167--201. \textbackslash{}MR\{1358617\}
+  \item Gon01: A. Goncharov, \textbackslash{}emph\{Multiple polylogarithms and mixed \{T\}ate motives\}, arXiv:math/0103059 [math.AG], 2001.
+  \item Gon19: A. Goncharov, Hodge correlators, J. Reine Angew. Math. 748 (2019), 1--138. \textbackslash{}MR\{3918430\}
+  \item Gon95: \textbackslash{}bysame, Polylogarithms in arithmetic and geometry, Proceedings of the \{I\}nternational \{C\}ongress of \{M\}athematicians, \{V\}ol. 1, 2 (\{Z\}\textbackslash{}"\{u\}rich, 1994), Birkh\textbackslash{}"\{a\}user, Basel, 1995, pp. 374--387. \textbackslash{}MR\{1403938\}
+  \item Gon95b: A. Goncharov, Geometry of configurations, polylogarithms, and motivic cohomology, Adv. Math. 114 (1995), no. 2, 197--318. \textbackslash{}MR\{1348706\}
+  \item Gon99: Alexander Goncharov, \textbackslash{}emph\{Volumes of hyperbolic manifolds and mixed \{T\}ate motives\}, J. Amer. Math. Soc. 12 (1999), no. 2, 569--618. \textbackslash{}MR\{1649192\}
+  \item Goncharov01: A. B. Goncharov, \textbackslash{}emph\{The dihedral \{L\}ie algebras and \{G\}alois symmetries of \{\$\textbackslash{}pi\_1\^{}\{(l)\}(\textbackslash{}Bbb P\^{}1-(\textbackslash{}\{0,\textbackslash{}infty\textbackslash{}\}\textbackslash{}cup\textbackslash{}mu\_N))\$\}\}, Duke Math. J. 110 (2001), no. 3, 397--487. \textbackslash{}MR\{1869113\}
+  \item GoncharovEuler: \textbackslash{}bysame, Euler complexes and geometry of modular varieties, Geom. Funct. Anal. 17 (2008), no. 6, 1872--1914. \textbackslash{}MR\{2399086\}
+  \item GrinbergReiner: D. Grinberg and V. Reiner, Hopf algebras in combinatorics, 2014, arXiv:1409.8356. \href{https://arxiv.org/abs/1409.8356}{arXiv:1409.8356}
+  \item HHLN: R. Haugseng, F. Hebestreit, S. Linskens, and J. Nuiten, Lax monoidal adjunctions, two-variable fibrations and the calculus of mates, Proc. Lond. Math. Soc. (3) 127 (2023), no. 4, 889--957. \textbackslash{}MR\{4655344\}
+  \item HHS: P. Hanlon, P. Hersh, and J. Shareshian, \textbackslash{}emph\{A \$\{G\}l\_n(q)\$ analogue of the partition lattice\}, arXiv:2505.02202, 2025. \href{https://arxiv.org/abs/2505.02202}{arXiv:2505.02202}
+  \item HainClassical: \textbackslash{}bysame, Classical polylogarithms, Motives (\{S\}eattle, \{WA\}, 1991), Proc. Sympos. Pure Math., vol. 55, Amer. Math. Soc., Providence, RI, 1994, pp. 3--42. \textbackslash{}MR\{1265550\}
+  \item HainIndec: R. M. Hain, On the indecomposable elements of the bar construction, Proc. Amer. Math. Soc. 98 (1986), no. 2, 312--316. \textbackslash{}MR\{854039\}
+  \item Harder: G. Harder, \textbackslash{}emph\{Die \{K\}ohomologie \{\$S\$\}-arithmetischer \{G\}ruppen \textbackslash{}"\{u\}ber \{F\}unktionenk\textbackslash{}"\{o\}rpern\}, Invent. Math. 42 (1977), 135--175. \textbackslash{}MR\{473102\}
+  \item HaugsengMonads: R. Haugseng, \textbackslash{}emph\{On lax transformations, adjunctions, and monads in \{\$(\textbackslash{}infty,2)\$\}-categories\}, High. Struct. 5 (2021), no. 1, 244--281. \textbackslash{}MR\{4367222\}
+  \item HaugsengSS: \textbackslash{}bysame, \textbackslash{}emph\{\{\$\textbackslash{}infty\$\}-operads via symmetric sequences\}, Math. Z. 301 (2022), no. 1, 115--171. \textbackslash{}MR\{4405646\}
+  \item Heine: H. Heine, A monadicity theorem for higher algebraic structures, 2017, arXiv:1712.00555. \href{https://arxiv.org/abs/1712.00555}{arXiv:1712.00555}
+  \item HeineMM: \textbackslash{}bysame, \textbackslash{}emph\{A derived \{M\}ilnor-\{M\}oore theorem\}, Selecta Math. (N.S.) 32 (2026), no. 2, Paper No. 39. \textbackslash{}MR\{5060174\}
+  \item HeutsKoszul: G. Heuts, \textbackslash{}emph\{Koszul duality and a conjecture of \{F\}rancis--\{G\}aitsgory\}, 2024, arXiv:2408.06173. \href{https://arxiv.org/abs/2408.06173}{arXiv:2408.06173}
+  \item HeutsLand: G. S. K. S. Heuts and M. Land, \textbackslash{}emph\{Koszul duality of \$\{E\}\_n\$-algebras and \$\{E\}\_n\$-operads\}, in preparation.
+  \item HeutsLandFormality: \textbackslash{}bysame, \textbackslash{}emph\{Formality of \$\textbackslash{}mathbb\{E\}\_n\$-algebras and cochains on spheres\}, 2024, arXiv:2407.00790. \href{https://arxiv.org/abs/2407.00790}{arXiv:2407.00790}
+  \item Hinich: \textbackslash{}bysame, \textbackslash{}emph\{Yoneda lemma for enriched \{\$\textbackslash{}infty\$\}-categories\}, Adv. Math. 367 (2020), 107129, 119. \textbackslash{}MR\{4080581\}
+  \item HinichRectification: V. Hinich, Rectification of algebras and modules, Doc. Math. 20 (2015), 879--926. \textbackslash{}MR\{3404213\}
+  \item KKMMW: I. Klang, J. Kuijper, C. Malkiewich, D. Mehrle, and T. Wittich, \textbackslash{}emph\{Higher spherical scissors congruence \{I\}: \{H\}opf algebra\}, arxiv:2509.18009. \href{https://arxiv.org/abs/2509.18009}{arXiv:2509.18009}
+  \item KRS2: A. Kupers, D. Rudenko, and I. Sierra, Mixed tate motives over number fields, 2026, in preparation.
+  \item KahnSun: B. Kahn and F. Sun, On universal modular symbols, 2014, arXiv:1407.0475. \href{https://arxiv.org/abs/1407.0475}{arXiv:1407.0475}
+  \item KontsevichFormal: M. Kontsevich, Formal (non)commutative symplectic geometry, The \{G\}elfand \{M\}athematical \{S\}eminars, 1990--1992, Birkh\textbackslash{}"\{a\}user Boston, Boston, MA, 1993, pp. 173--187. \textbackslash{}MR\{1247289\}
+  \item Levine: M. Levine, \textbackslash{}emph\{Tate motives and the vanishing conjectures for algebraic \{\$K\$\}-theory\}, Algebraic \{\$K\$\}-theory and algebraic topology (\{L\}ake \{L\}ouise, \{AB\}, 1991), NATO Adv. Sci. Inst. Ser. C: Math. Phys. Sci., vol. 407, Kluwer Acad. Publ., Dordrecht, 1993, pp. 167--188. \textbackslash{}MR\{1367296\}
+  \item LevineBloch: \textbackslash{}bysame, \textbackslash{}emph\{Bloch's higher \{C\}how groups revisited\}, no. 226, 1994, \$K\$-theory (Strasbourg, 1992), pp. 10, 235--320. \textbackslash{}MR\{1317122\}
+  \item LinskensNardinPol: S. Linskens, D. Nardin, and L. Pol, Global homotopy theory via partially lax limits, Geom. Topol. 29 (2025), no. 3, 1345--1440. \textbackslash{}MR\{4918109\}
+  \item LodayCyclic: J.-L. Loday, Cyclic homology, second ed., Grundlehren der mathematischen Wissenschaften [Fundamental Principles of Mathematical Sciences], vol. 301, Springer-Verlag, Berlin, 1998, Appendix E by Mar\textbackslash{}'\{\textbackslash{}i\}a O. Ronco, Chapter 13 by the author in collaboration with Teimuraz Pirashvili. \textbackslash{}MR\{1600246\}
+  \item LodayVallette: J.-L. Loday and B. Vallette, Algebraic operads, Grundlehren der mathematischen Wissenschaften [Fundamental Principles of Mathematical Sciences], vol. 346, Springer, Heidelberg, 2012. \textbackslash{}MR\{2954392\}
+  \item LurieHA: \textbackslash{}bysame, \textbackslash{}emph\{\{Higher algebra\}\}, September 2017 version (2017).
+  \item LurieHTT: J. Lurie, Higher topos theory, Annals of Mathematics Studies, vol. 170, Princeton University Press, 2009. \textbackslash{}MR\{2522659\}
+  \item MNP: J. Miller, R. Nagpal, and P. Patzt, Stability in the high-dimensional cohomology of congruence subgroups, Compos. Math. 156 (2020), no. 4, 822--861. \textbackslash{}MR\{4079629\}
+  \item MPPII: J. Miller, P. Patzt, and A. Putman, \textbackslash{}emph\{Homological vanishing for the \{S\}teinberg representation \{II\}: reductive groups and integral conjectures\}, 2025, arXiv:2509.01559. \href{https://arxiv.org/abs/2509.01559}{arXiv:2509.01559}
+  \item MPW23: J. Miller, P. Patzt, and J. C. H. Wilson, \textbackslash{}emph\{On rank filtrations of algebraic \{K\}-theory and \{S\}teinberg modules\}, 2023, arXiv:2303.00245. \href{https://arxiv.org/abs/2303.00245}{arXiv:2303.00245}
+  \item MVW: C. Mazza, V. Voevodsky, and C. Weibel, Lecture notes on motivic cohomology, Clay Mathematics Monographs, vol. 2, American Mathematical Society, Providence, RI; Clay Mathematics Institute, Cambridge, MA, 2006. \textbackslash{}MR\{2242284\}
+  \item Mal20: N. Malkin, \textbackslash{}emph\{Shuffle relations for \{H\}odge and motivic correlators\}, arXiv:2003.06521 [math.AG], 2020. \href{https://arxiv.org/abs/2003.06521}{arXiv:2003.06521}
+  \item Michaelis: W. Michaelis, Lie coalgebras, Adv. in Math. 38 (1980), no. 1, 1--54. \textbackslash{}MR\{594993\}
+  \item Mirzaii: B. Mirzaii, \textbackslash{}emph\{Bloch-\{W\}igner theorem over rings with many units\}, Math. Z. 268 (2011), no. 1-2, 329--346. \textbackslash{}MR\{2805438\}
+  \item MirzaiiErratum: \textbackslash{}bysame, \textbackslash{}emph\{Erratum to: \{B\}loch-\{W\}igner theorem over rings with many units [mr2805438]\}, Math. Z. 275 (2013), no. 1-2, 653--655. \textbackslash{}MR\{3101826\}
+  \item NardinShah: D. Nardin and J. Shah, Parametrized and equivariant higher algebra, 2022, arXiv:2203.00072. \href{https://arxiv.org/abs/2203.00072}{arXiv:2203.00072}
+  \item NesterenkoSuslin: Yu. P. Nesterenko and A. A. Suslin, \textbackslash{}emph\{Homology of the general linear group over a local ring, and \{M\}ilnor's \{\$K\$\}-theory\}, Izv. Akad. Nauk SSSR Ser. Mat. 53 (1989), no. 1, 121--146. \textbackslash{}MR\{992981\}
+  \item PRY: D. Petersen, V. Roca i Lucio, and S. Yalin, \textbackslash{}emph\{Unifying \{K\}oszul dualities via point-set models\}, 2026, arXiv:2603.29910. \href{https://arxiv.org/abs/2603.29910}{arXiv:2603.29910}
+  \item PortaTeyssier: M. Porta and J.-B. Teyssier, Day's convolution for pro-\$\textbackslash{}infty\$-categories, \textbackslash{}url\{http://jbteyssier.com/papers/jbteyssier\_day.pdf\}.
+  \item Priddy: S. B. Priddy, Koszul resolutions, Trans. Amer. Math. Soc. 152 (1970), 39--60. \textbackslash{}MR\{265437\}
+  \item QuillenFiniteGeneration: D. Quillen, \textbackslash{}emph\{Finite generation of the groups \{\$K\textbackslash{}sb\{i\}\$\} of rings of algebraic integers\}, Algebraic \{\$K\$\}-theory, \{I\}: \{H\}igher \{\$K\$\}-theories (\{P\}roc. \{C\}onf., \{B\}attelle \{M\}emorial \{I\}nst., \{S\}eattle, \{W\}ash., 1972), Lecture Notes in Math., Vol. 341, Springer, Berlin-New York, 1973, pp. 179--198. \textbackslash{}MR\{349812\}
+  \item RWchromatic: O. Randal-Williams, A chromatic approach to homological stability, 2025, arXiv:2508.20629. \href{https://arxiv.org/abs/2508.20629}{arXiv:2508.20629}
+  \item Ramakrishnan: D. Ramakrishnan, On the monodromy of higher logarithms, Proc. Amer. Math. Soc. 85 (1982), no. 4, 596--599. \textbackslash{}MR\{660611\}
+  \item Robinson: A. Robinson, Partition complexes, duality and integral tree representations, Algebr. Geom. Topol. 4 (2004), 943--960. \textbackslash{}MR\{2100687\}
+  \item Rognes: J. Rognes, \textbackslash{}emph\{A spectrum level rank filtration in algebraic \{\$K\$\}-theory\}, Topology 31 (1992), no. 4, 813--845. \textbackslash{}MR\{1191383\}
+  \item RognesMotivic: \textbackslash{}bysame, Motivic complexes from the stable rank filtration, 2010, \textbackslash{}url\{https://www.mn.uio.no/math/personer/vit/rognes/papers/bergen10.pdf\}.
+  \item RognesWeight: \textbackslash{}bysame, The weight and rank filtrations, 2021, arXiv:2110.12264. \href{https://arxiv.org/abs/2110.12264}{arXiv:2110.12264}
+  \item SegalConfiguration: G. Segal, Configuration-spaces and iterated loop-spaces, Invent. Math. 21 (1973), 213--221. \textbackslash{}MR\{331377\}
+  \item SeveraWillwacher: P. \{\textbackslash{}v\{S\}\}evera and T. Willwacher, Equivalence of formalities of the little discs operad, Duke Math. J. 160 (2011), no. 1, 175--206. \textbackslash{}MR\{2838354\}
+  \item Sinha: D. P. Sinha, The (non-equivariant) homology of the little disks operad, O\{PERADS\} 2009, S\textbackslash{}'\{e\}min. Congr., vol. 26, Soc. Math. France, Paris, 2013, pp. 253--279. \textbackslash{}MR\{3203375\}
+  \item Souderes: I. Soud\textbackslash{}`eres, \textbackslash{}emph\{A relative basis for mixed \{T\}ate motives over the projective line minus three points\}, Commun. Number Theory Phys. 10 (2016), no. 1, 87--131. \textbackslash{}MR\{3521910\}
+  \item Soule: Christophe Soul\textbackslash{}'e, \textbackslash{}emph\{Op\textbackslash{}'erations en \{\$K\$\}-th\textbackslash{}'eorie alg\textbackslash{}'ebrique\}, Canad. J. Math. 37 (1985), no. 3, 488--550. \textbackslash{}MR\{787114\}
+  \item Sun: F. Sun, \textbackslash{}emph\{Algebraic \{K\}-theory and modular symbols\}, 2016, arXiv:1604.04700. \href{https://arxiv.org/abs/1604.04700}{arXiv:1604.04700}
+  \item Sus84: A. Suslin, \textbackslash{}emph\{Homology of \{\$\{\textbackslash{}rm GL\}\_\{n\}\$\}, characteristic classes and \{M\}ilnor \{\$K\$\}-theory\}, vol. 165, 1984, Algebraic geometry and its applications, pp. 188--204. \textbackslash{}MR\{752941\}
+  \item Sus90: \textbackslash{}bysame, \textbackslash{}emph\{\{\$K\_3\$\} of a field, and the \{B\}loch group\}, vol. 183, 1990, Translated in Proc. Steklov Inst. Math. \{1991\}, no. 4, 217--239, Galois theory, rings, algebraic groups and their applications (Russian), pp. 180--199, 229. \textbackslash{}MR\{1092031\}
+  \item ToriiDuoidal: \textbackslash{}bysame, \textbackslash{}emph\{On duoidal \{\$\textbackslash{}infty\$\}-categories\}, J. Homotopy Relat. Struct. 20 (2025), no. 1, 125--162. \textbackslash{}MR\{4868047\}
+  \item ToriiHigher: T. Torii, On higher monoidal \$\textbackslash{}infty\$-categories, 2021, arXiv:2111.00158. \href{https://arxiv.org/abs/2111.00158}{arXiv:2111.00158}
+  \item ToriiMult: \textbackslash{}bysame, Multiplicative structures on comodules in higher categories, 2025.
+  \item Weibel: C.A. Weibel, \textbackslash{}emph\{The \{\$K\$\}-book\}, Graduate Studies in Mathematics, vol. 145, American Mathematical Society, Providence, RI, 2013, An introduction to algebraic \$K\$-theory. \textbackslash{}MR\{3076731\}
+  \item Whitehouse: S. Whitehouse, The integral tree representation of the symmetric group, J. Algebraic Combin. 13 (2001), no. 3, 317--326. \textbackslash{}MR\{1836907\}
+  \item Wojtkowiak: Z. Wojtkowiak, The basic structure of polylogarithmic functional equations, Structural properties of polylogarithms, Math. Surveys Monogr., vol. 37, Amer. Math. Soc., Providence, RI, 1991, pp. 205--231. \textbackslash{}MR\{1148381\}
+  \item Wu: H. Wu, \textbackslash{}emph\{A \{H\}opf algebra model for \{D\}wyer's tame spaces\}, Ph.D. thesis, EFPL, 2023, \textbackslash{}url\{https://infoscience.epfl.ch/entities/publication/89700c3d-c155-4cd1-8ac6-0973ca4ee813\}.
+  \item Zagier: D. Zagier, The dilogarithm function, Frontiers in number theory, physics, and geometry. \{II\}, Springer, Berlin, 2007, pp. 3--65. \textbackslash{}MR\{2290758\}
+  \item deJeu: R. De Jeu, A remark on the rank conjecture, \$K\$-Theory 25 (2002), no. 3, 215--231. \textbackslash{}MR\{1909867\}
+\end{enumerate}
+
+% \bibliographystyle{plain}
+% \bibliography{references}
+\end{document}
