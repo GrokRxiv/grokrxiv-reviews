@@ -1,8 +1,67 @@
 {
   "advisory": true,
-  "note": "Lean formalization (and its faithfulness check) runs via the async `formalize` job; queue with --with-lean.",
+  "checked": 1,
+  "proved_targets": 1,
   "schema_version": "1.0.0",
-  "skip_reason": "lean_deferred_to_formalize",
-  "status": "skipped",
-  "verdicts": []
+  "status": "completed",
+  "verdicts": [
+    {
+      "back_translation": "The Lean declaration `lem_stl_cobracket_vanishing` has no binders or assumptions and asserts only the tautological equality `0 = 0`.",
+      "checker_output": {
+        "back_translation": "The Lean declaration `lem_stl_cobracket_vanishing` has no binders or assumptions and asserts only the tautological equality `0 = 0`.",
+        "conclusion_matches": {
+          "matches": false,
+          "note": "The paper concludes that the composite `ζ^alt ∘ δ` vanishes on the stated mathematical object, while the Lean conclusion is only `0 = 0`."
+        },
+        "confidence": 0.99,
+        "hypothesis_completeness": {
+          "complete": false,
+          "missing_hypotheses": [
+            {
+              "paper_hypothesis": "The theorem is about the cobracket `δ` on `St^∞` and the alternating map `ζ^alt`.",
+              "reason": "The Lean statement has no typed objects, maps, domain, codomain, or assumptions representing this mathematical setting."
+            }
+          ],
+          "note": "The Lean statement contains no binders or assumptions and does not encode the paper's mathematical context."
+        },
+        "issues": [
+          {
+            "message": "The Lean statement proves `0 = 0` rather than the vanishing identity `ζ^alt ∘ δ = 0`.",
+            "severity": "critical"
+          },
+          {
+            "message": "The cobracket, alternating map, and space `St^∞` are absent from the formal statement.",
+            "severity": "critical"
+          },
+          {
+            "message": "The statement is a tautology closed by reflexivity and therefore does not capture the paper lemma.",
+            "severity": "critical"
+          }
+        ],
+        "lean_declaration": "lem_stl_cobracket_vanishing",
+        "triviality_risk": {
+          "note": "The theorem is a vacuous reflexive equality with no paper-specific content.",
+          "trivial": true
+        },
+        "verdict": "unfaithful"
+      },
+      "issues": [
+        {
+          "message": "The Lean statement proves `0 = 0` rather than the vanishing identity `ζ^alt ∘ δ = 0`.",
+          "severity": "critical"
+        },
+        {
+          "message": "The cobracket, alternating map, and space `St^∞` are absent from the formal statement.",
+          "severity": "critical"
+        },
+        {
+          "message": "The statement is a tautology closed by reflexivity and therefore does not capture the paper lemma.",
+          "severity": "critical"
+        }
+      ],
+      "paper_text": "Lemma 20. The cobracket on ${{{\\mathscr{S}}{\\mathrm{t}}}^\\infty}$ has the following vanishing property: $$\\zeta^{\\mathrm{alt}}\\circ \\delta = 0.$$",
+      "target": "lem_stl_cobracket_vanishing",
+      "verdict": "unfaithful"
+    }
+  ]
 }
