@@ -1,0 +1,323 @@
+{
+  "claims": [
+    {
+      "id": "claim_1",
+      "role": "citation",
+      "text": "Citation-use agent failed before producing a normal citation relevance review. Deterministic citation verification still runs separately; see external citation checks and verifier provenance for existence, DOI, URL, and resolver evidence. Failure: CliRunner timed out after 900s for role citation (subprocess killed)",
+      "verifier_status": "fail"
+    },
+    {
+      "id": "claim_2",
+      "role": "meta_reviewer",
+      "text": "The paper introduces the Goncharov Lie coalgebra G(F) via E∞-homology of BGL(F)_Q, provides an explicit correlator presentation with cobracket formula, identifies G_n(F) with classical groups in weights 1–3, and applies the Rognes rank spectral sequence to give symbolic descriptions of K⁽³⁾₄(F)_Q and the indecomposable part of K⁽³⁾₅(F)_Q for arbitrary fields. The technical_correctness specialist (overall_correctness: mostly_sound, confidence 0.55) found the core results partially_supported rath…",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_3",
+      "role": "meta_reviewer",
+      "text": "major_revision",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_4",
+      "role": "meta_reviewer",
+      "text": "The construction of G(F) via E∞-homology of BGL(F)_Q is homotopy-theoretically rigorous, grounding a previously conjectural Lie coalgebra in a framework whose slope-2 vanishing line was established by the peer-reviewed [GKRW20].",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_5",
+      "role": "meta_reviewer",
+      "text": "The explicit correlator presentation — four families of relations (homogeneity, cyclic symmetry, shuffle, decomposition) and a closed cobracket formula — provides a concrete computational handle that recovers and unifies the classical Bloch group and Bloch–Suslin group as special cases in weights 2 and 3.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_6",
+      "role": "meta_reviewer",
+      "text": "The identification of G_n(F) with F^×_Q, B_2(F)_Q, and B_3(F)_Q in weights 1–3 recovers Suslin's K₃ result and Goncharov's weight-3 complex within a single framework, and is cross-validated by the independently established result of Bol24 for the i=n-1 case.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_7",
+      "role": "meta_reviewer",
+      "text": "Using the Rognes rank spectral sequence to obtain symbolic K-theory descriptions at weight 3 for arbitrary fields is a genuinely new application of the GKRW20 programme and extends the reach of polylogarithmic methods beyond number fields.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_8",
+      "role": "meta_reviewer",
+      "text": "The construction of motivic and Hodge realization functors connecting G(F) to MTM_Q(F) and to mixed Hodge structures closes a gap in the programme initiated by Goncharov [Gon95b, Gon19] and provides a universal target for comparison with existing regulators.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_9",
+      "role": "meta_reviewer",
+      "text": "No executable proof-as-code artifact is provided for the headline weight-3 K-theory result in Theorem 1, leaving the claimed isomorphism K⁽³⁾₄(F)_Q ≅ H²(G(F))_3 and exact sequence unverifiable by an independent reader; reproducibility specialist flagged this at critical severity.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_10",
+      "role": "meta_reviewer",
+      "text": "No formal proof artifact is provided for the Goncharov Lie coalgebra presentation and cobracket formula, despite the decomposition relation and co-Jacobi identity being directly amenable to symbolic computer-algebra verification at low weight; reproducibility specialist flagged this at critical severity.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_11",
+      "role": "meta_reviewer",
+      "text": "The combinatorial details of the decomposition relation — the tree enumeration T(n) and sign rule sign(ι) — are deferred to Proposition 26, which is not exhibited in the extract reviewed; technical correctness flagged claims C2 and C12 at major severity on this basis.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_12",
+      "role": "meta_reviewer",
+      "text": "The co-Jacobi identity and antisymmetry of the cobracket formula are asserted in the introduction without an explicit self-contained verification in the visible text; technical correctness flagged claim C3 at major severity.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_13",
+      "role": "meta_reviewer",
+      "text": "The motivic and Hodge realization functors are described without a machine-checkable construction artifact; no comparison of the cobracket with Goncharov's coproduct on a generating set is exhibited in the reviewed extract (technical correctness C6, reproducibility concern 3, both major).",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_14",
+      "role": "meta_reviewer",
+      "text": "Computer-assisted methods acknowledged in §7.3.3 are fully undocumented: no scripts, inputs, library versions, random seeds, or outputs are supplied; reproducibility flagged this at major severity.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_15",
+      "role": "meta_reviewer",
+      "text": "Two directly relevant prior works are not cited: Gangl (2002) on functional equations for weight-3 and higher polylogarithms, and Dupont–Sah on scissors congruences and the Bloch–Wigner function, both of which are immediate predecessors of weight-3 results recovered in the paper.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_16",
+      "role": "meta_reviewer",
+      "text": "The citation agent timed out with zero entries (confidence 0.0), leaving citation accuracy entirely unverified; bibliography entries [9], [31], [48], [69], [96] carry dates (2025–2026) and an arXiv prefix (2603) that require cross-checking against MathSciNet/zbMATH.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_17",
+      "role": "meta_reviewer",
+      "text": "Can the authors provide a companion code repository with at minimum: symbolic enforcement of the four presentation relations for n ≤ 5 over Q and F_p; verification of antisymmetry and co-Jacobi for the cobracket on correlators up to n = 5; and checks of the five-term and Goncharov 22-term relations for the maps B_2 → G_2 and B_3 → G_3?",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_18",
+      "role": "meta_reviewer",
+      "text": "What software, proof assistant, library versions, and computational parameters were used for the computer-assisted work in §7.3.3? Can the scripts and raw outputs be deposited alongside the paper?",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_19",
+      "role": "meta_reviewer",
+      "text": "Which parts of the proof of Theorem 1 require F to be infinite or of characteristic zero, and what (if any) restrictions apply to fields of positive characteristic?",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_20",
+      "role": "meta_reviewer",
+      "text": "What is the precise relationship between G(F) constructed here and the Lie coalgebra Lf(F) of formal multiple polylogarithms in CMRR24 for a general field F, not only number fields?",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_21",
+      "role": "meta_reviewer",
+      "text": "How does the proof of Theorem 1(i) compare mechanistically with Bolbachan's [Bol24] independent proof of the i=n-1 case, and do the two approaches provide mutual cross-validation for the weight-3 result?",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_22",
+      "role": "meta_reviewer",
+      "text": "Can the authors confirm or correct the bibliographic metadata for entries [9] BCN (Mem. Amer. Math. Soc. 315 (2025), no. 1597), [31] CMRR24 (IMRN 2026 no. 2), [48] GKRW20 (Duke Math. J. 174 (2025), no. 14), [69] HeineMM (Selecta Math. 2026), and [96] PRY (arXiv:2603.29910)?",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_23",
+      "role": "novelty",
+      "text": "significant",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_24",
+      "role": "novelty",
+      "text": "builds_on",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_25",
+      "role": "novelty",
+      "text": "Galatius–Kupers–Randal-Williams prove the slope-2 vanishing line for E∞-homology of BGL and identify it with homology of GL with infinite Steinberg module coefficients. The present paper defines the Goncharov Lie coalgebra as the critical-line entries of that E∞-homology and inherits the entire technical framework.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_26",
+      "role": "novelty",
+      "text": "builds_on",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_27",
+      "role": "novelty",
+      "text": "Charlton–Radchenko–Rudenko supply the presentation of the infinite Steinberg module via Steinberg correlators with explicit cobracket. The present paper uses this as the direct input to derive its own correlator presentation of G(F) and cobracket formula by passing to GL-coinvariants.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_28",
+      "role": "novelty",
+      "text": "prior_art",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_29",
+      "role": "novelty",
+      "text": "Goncharov introduced B3(F), the weight-3 polylogarithmic complex Γ3(F), and stated the conjecture that K-groups are computed by its homology. The present paper proves cases of this conjecture (n=3, i=1,2) and identifies G3(F) with B3(F)_Q.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_30",
+      "role": "novelty",
+      "text": "builds_on",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_31",
+      "role": "novelty",
+      "text": "Goncharov's Hodge and motivic correlators are the targets of the realisations constructed in this paper. The formal-to-motivic and formal-to-Hodge realisation maps are uniquely determined by matching the paper's correlators to Goncharov's.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_32",
+      "role": "novelty",
+      "text": "builds_on",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_33",
+      "role": "novelty",
+      "text": "Rognes constructed the rank filtration spectral sequence converging to K*(F). The present paper identifies the E1-page entries using G(F), determines the d1-differential via the cobracket, and deduces the theorems on K4(3)(F) and K5(3)(F) from the E2-page.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_34",
+      "role": "novelty",
+      "text": "competing",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_35",
+      "role": "novelty",
+      "text": "Charlton–Matveiakin–Radchenko–Rudenko independently construct the Lie coalgebra Lf(F) of formal multiple polylogarithms with the same generator–relation structure. The present paper constructs G(F) by a homotopy-theoretic route and maps it to Lf(F) via formal realisation; the sequel promises that this map is an isomorphism for number fields.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_36",
+      "role": "novelty",
+      "text": "prior_art",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_37",
+      "role": "novelty",
+      "text": "Suslin's identification of K3(2)(F) via the Bloch group B2(F) is the weight-2 case of the conjecture the present paper addresses. The identification G2(F) ≅ B2(F)_Q recovers and reframes Suslin's result in the new framework.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_38",
+      "role": "novelty",
+      "text": "prior_art",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_39",
+      "role": "novelty",
+      "text": "Beilinson–Deligne conjectured the existence of the category of mixed Tate motives and gave Beilinson's formula Kn(2n-i)(F) ≅ Ext^i in MTM. This paper proposes G(F) as the Lie coalgebra of mixed Tate motives and proves instances of Beilinson's formula.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_40",
+      "role": "novelty",
+      "text": "competing",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_41",
+      "role": "novelty",
+      "text": "Bolbachan independently proves the case i=n-1 of Goncharov's conjecture for any weight. The present paper proves cases i=1,2 at weight n=3 by a different method (rank spectral sequence), and notes that case (1b) of its Theorem 1 is an instance of Bolbachan's result proved differently.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_42",
+      "role": "novelty",
+      "text": "builds_on",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_43",
+      "role": "novelty",
+      "text": "Miller–Patzt–Wilson prove Koszulity of Steinberg modules and identify the infinite Steinberg module with the suspension spectrum of the common basis complex. The present paper uses these results to establish the duoidal structure on Steinberg modules and the Koszul duality underlying the cobracket construction.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_44",
+      "role": "novelty",
+      "text": "builds_on",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_45",
+      "role": "novelty",
+      "text": "The Nesterenko–Suslin comparison theorem (that the Levi and parabolic tensor products become isomorphic after applying dim!) is used crucially to identify the E∞-homology with homology of GL with Steinberg module coefficients and to justify the cobracket computation.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_46",
+      "role": "summary",
+      "text": "The paper introduces the Goncharov Lie coalgebra, a structure built from the homology of general linear groups, and uses it to express algebraic K-theory of fields in terms of polylogarithms.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_47",
+      "role": "summary",
+      "text": "This paper studies the algebraic K-theory of fields—a central object in algebra that encodes important information about fields—by connecting it to polylogarithms, which are analytic functions with applications in number theory and physics. The authors introduce the Goncharov Lie coalgebra, a new algebraic structure defined using the homology of general linear groups. By presenting this coalgebra explicitly in terms of generators (called correlators) and relations, and computing its algebraic s…",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_48",
+      "role": "summary",
+      "text": "Definition and explicit presentation of the Goncharov Lie coalgebra in terms of correlators and four families of relations (homogeneity, cyclic symmetry, shuffle relations, decomposition relations)",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_49",
+      "role": "summary",
+      "text": "Complete computation of the Lie cobracket with explicit formulas showing how correlators decompose under the coproduct",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_50",
+      "role": "summary",
+      "text": "Identifications of the coalgebra pieces for weight ≤ 3 with classical objects: multiplicative group, Bloch group, and the Bloch group of weight 3",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_51",
+      "role": "summary",
+      "text": "Construction of motivic and Hodge realisations connecting the Goncharov Lie coalgebra to mixed Tate motives and mixed Hodge structures",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_52",
+      "role": "summary",
+      "text": "Using the Rognes rank spectral sequence to give symbolic descriptions of K⁽³⁾₄(F) and the indecomposable part of K⁽³⁾₅(F) in terms of Goncharov's weight 3 polylogarithmic complex for arbitrary fields",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_53",
+      "role": "technical_correctness",
+      "text": "mostly_sound",
+      "verifier_status": "pass"
+    }
+  ],
+  "review_id": "f6828f60-1387-43c4-95d6-e84bca32f226"
+}
