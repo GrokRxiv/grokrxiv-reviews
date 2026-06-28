@@ -1,0 +1,1293 @@
+# Profinite Borel completeness and smooth Artin motives
+
+GrokRxiv review of [arXiv:2606.25943](https://arxiv.org/abs/2606.25943) · `math.AT`
+
+_Authors_: Yorick Fuhrmann
+
+## TL;DR
+
+The five specialist reviewers converge on a picture of a mathematically significant but reproducibility-deficient paper. The novelty reviewer rates the contribution as significant (0.75), crediting a genuine generalization of Voevodsky's field-level equivalence of Artin motives with permutation modules to arbitrary connected noetherian schemes of finite Krull dimension, and an extension of Borel completeness theory from finite to profinite groups with a conceptually precise two-notion framework (levelwise vs. hypercomplete). The summary and citation reviews corroborate the paper's technical ambition and mostly strong bibliographic practice. The tension in the specialist panel is between the technical correctness reviewer (confidence 0.58, overall 'mostly_sound') and the reproducibility reviewer (confidence 0.86, score 0.22): both flag the same gap — Theorems 1, 2, and 3, the three headline results, carry no machine-checkable proof artifacts, with the technical reviewer rating all three as 'unsupported' at major severity and the reproducibility reviewer rating the corresponding absences at critical severity. Per the recommendation gate for a paper in the math.* (code-amenable) field where both technical_correctness and reproducibility independently flagged major or critical missing proof-as-code artifacts for the headline claims, the default is major_revision. The missing artifacts do not indicate the proofs are incorrect — the technical reviewer calls the arguments 'mathematically sound' and 'internally consistent and plausible' — but load-bearing steps (the pushforward-degree identity in Theorem 1, the acyclic-orthogonality argument in Theorem 2, full commutativity of the 3×3 diagram in Theorem 3) remain unverified by any formal or computational check. One subsidiary issue is the disclosed non-hypercomplete étale gap (C10, minor): one cell of Theorem 3 is explicitly deferred with no machine-verifiable treatment. Citation practice is strong; the one flagged concern (bcn25 cited for a Mackey functor example in a PD-operads paper) warrants author verification but is plausibly a citation-key collision rather than an error in reasoning.
+
+_Recommendation_: **Major revision** · _Confidence_: 72%
+
+## Strengths
+
+- The profinite Borel completeness theory is a technically demanding and conceptually clean generalization of Mathew–Naumann–Noel's finite-group results: two distinct notions are introduced (levelwise and hypercomplete Borel completeness), their relationship via hypercompletion is made precise, and conditions for coincidence (finite virtual cohomological dimension, per Clausen–Mathew) are correctly identified.
+- Theorem 1 extends Voevodsky's classical equivalence of smooth Artin motives with permutation G-modules from fields to arbitrary connected noetherian schemes of finite Krull dimension, using the étale fundamental group as the profinite group; this is a genuine and non-trivial advance over Balmer–Gallauer's field-level framework.
+- The commutative 3×3 diagram of Theorem 3 unifies derived permutation modules, equivariant module spectra, Borel and levelwise-Borel complete categories, and Nisnevich/étale/hyper-étale sheaves with transfers into a single coherent structural picture, providing substantial organizational and computational leverage.
+- Citation hygiene across 147 references is strong and reflects thorough engagement with foundational literature in equivariant homotopy theory, motivic cohomology, and ∞-category theory; the most heavily cited foundational sources (Barwick, Barwick–Glasman–Shah, Balmer–Gallauer, Cisinski–Déglise, Clausen–Mathew) are credited appropriately and their results are applied with evident familiarity.
+- The paper transparently discloses the one remaining gap (the non-hypercomplete étale row of the motivic diagram), correctly identifies what computation is needed to close it, and does not overstate what is established.
+
+## Weaknesses
+
+- Theorems 1, 2, and 3 — the three headline results — each lack machine-checkable proof artifacts: the load-bearing pushforward-degree identity and cohomological-ideal vanishing in Theorem 1 (C1, major), the acyclic-orthogonality hypercompletion argument in Theorem 2 (C2, major), and the full square-by-square commutativity of the 3×3 diagram in Theorem 3 (C3, major) are presented as human proofs only; in a code-amenable math.* field this leaves the central claims formally unverified.
+- Reproducibility infrastructure is absent: no public repository, no formal proof environment specification, no proof-check commands, and no dependency lockfile are provided, yielding a reproducibility score of 0.22; all three main theorem gaps are rated critical severity by the reproducibility reviewer.
+- The non-hypercomplete étale row of Theorem 3's diagram — the identification of a third row with DAM_ét(S;R) — is explicitly deferred because the required mapping-space computation in effective motives was not carried out, leaving one cell of the main structural theorem unestablished (C10, minor).
+- Citation entry bcn25 (Brantner–Campos–Nuiten, 'PD operads and explicit partition Lie algebras') is cited for a spectral Mackey functor description (Example 2.15), a topically unexpected use that may reflect a citation-key collision; the mismatch between the paper's primary subject and its cited function warrants author verification.
+- The literature review does not address any ∞-categorical treatments of profinite group actions on spectra in the 2008–2024 window between Fausk and bbb24, nor does it explicitly assert the absence of such work; the related-work picture for the profinite equivariant homotopy theory part of the paper is therefore incomplete.
+
+## Revision Targets
+
+- [ ] **Manuscript: Introduction (Theorem 1) and §5, proof of thm:damnisasmodunderlr**
+  - Location: `Introduction (Theorem 1) and §5, proof of thm:damnisasmodunderlr`
+  - Evidence: The §5 proof is detailed and well-cited (Barr–Beck–Lurie via mnn17 Prop. 5.29; the pushforward cycle/length computation via cd19 9.1.1, Thm 11.2.14, stacks 10.52.13, gw10 Prop. 12.21, gw23 Prop. 20.89; perm-category identification via bg23 Prop. 4.17). The argument reads as mathematically sound, but no machine-checkable artifact is shipped. The load-bearing pushforward-degree identity ((π^H̄_K̄)_*⟨X/K̄⟩ = [H:K]·⟨X/H̄⟩) and the vanishing of the cohomological ideal I(G) under Ψ are concrete, code-verifiable computations left unbacked by a formal proof or symbolic check.
+  - Required change: Ship a machine-checkable artifact for the load-bearing steps, e.g. a Lean/Agda formalization at src/proofs/ThmDamNis.lean and/or a symbolic verification of the cohomological-ideal generator vanishing and the length/degree identity at experiments/artin_motives/cohideal_check.py.
+  - Verification: Re-review should confirm `Introduction (Theorem 1) and §5, proof of thm:damnisasmodunderlr` is corrected or justified.
+- [ ] **Code release and entrypoints**
+  - Location: code/reproducibility artifacts: `code release and execution entrypoints`
+  - Evidence: No public repository, license, pinned release, or proof-check command is provided for the paper's reproducibility artifacts.
+  - Required change: Release the source code, scripts, model configuration, and execution entrypoints needed to regenerate the reported tables, or document why those artifacts cannot be released.
+  - Verification: Re-review should confirm runnable code or a documented non-release justification is present.
+- [ ] **Manuscript: Introduction, paragraph following Theorem 3 (~lines 322–325)**
+  - Location: `Introduction, paragraph following Theorem 3 (~lines 322–325)`
+  - Evidence: The authors explicitly state that 'an analogous statement would require the computation of certain mapping spaces in the corresponding category of effective motives, and we will refrain from doing those.' This is a transparently disclosed scope limitation, not an error, but it leaves one cell of the motivic picture unestablished.
+  - Required change: Carry out (or defer to future work with explicit framing) the mapping-space computation in DM_é$t^eff$(S;R); a symbolic/numeric check could be staged at experiments/etale_mapping_spaces/compute.py.
+  - Verification: Re-review should confirm `Introduction, paragraph following Theorem 3 (~lines 322–325)` is corrected or justified.
+- [ ] **Bibliography: gre92**
+  - Location: bibliography entry: `gre92`
+  - Evidence: Not cited in any visible citation context. Projective Mackey functors are foundational background for Mackey functor theory but are peripheral to the paper's main use of spectral Mackey functors; likely cited for a specific algebraic comparison in the truncated sections.
+  - Required change: Verify `gre92` against an authoritative source; replace it with a resolvable relevant citation or remove it.
+  - Verification: Re-review should confirm the citation resolves and is relevant.
+- [ ] **Bibliography: Earlier ∞-categorical treatments of profinite group actions on spectra (pre-2024)**
+  - Location: bibliography entry: `Earlier ∞-categorical treatments of profinite group actions on spectra (pre-2024)`
+  - Evidence: The paper's profinite Borel completeness theory develops new infrastructure that overlaps with equivariant pro-spectra literature (e.g., Fausk 2008, which is cited but predates the ∞-categorical language). A comparison with or citation of any intervening ∞-categorical accounts of profinite group representations in spectra between Fausk and bbb24 would strengthen the literature review.
+  - Required change: Add or discuss missing prior art `Earlier ∞-categorical treatments of profinite group actions on spectra (pre-2024)`. The paper's profinite Borel completeness theory develops new infrastructure that overlaps with equivariant pro-spectra literature (e.g., Fausk 2008, which is cited but predates the ∞-categorical language). A comparison with or citation of any intervening ∞-categorical accounts of profinite group representations in spectra between Fausk and bbb24 would strengthen the literature review.
+  - Verification: Re-review should confirm the related-work discussion addresses this prior art.
+
+## Open Questions
+
+- Can the authors provide machine-checkable proof artifacts (Lean, Agda, or equivalent) for the load-bearing steps identified in C1–C3 — specifically the pushforward-degree identity and cohomological-ideal vanishing (Theorem 1), the acyclic-orthogonality argument (Theorem 2), and square-by-square commutativity (Theorem 3) — or supply a detailed justification for why formalization is not feasible for this work?
+- Is the citation to bcn25 (Brantner–Campos–Nuiten, 'PD operads and explicit partition Lie algebras') for Example 2.15 in the spectral Mackey functor description intended, and if so, can the authors confirm that the cited example content appears in that paper? If not, which citation key was intended?
+- What is the status of the mapping-space computation needed to establish the non-hypercomplete étale row DAM_ét(S;R) in Theorem 3's diagram — is this result expected to appear in a companion paper, and if so, can a more precise statement of the open problem and its expected difficulty be added?
+- The t-structure on $Sp^G_lwBorel$ (Proposition 6) is load-bearing for Theorem 2 via the acyclic-orthogonality argument; can the authors make the verification of t-structure axioms and right-completeness fully explicit in the proof, or provide a pointer to the precise location in the text where these are verified?
+- Are there ∞-categorical treatments of profinite group actions on spectra from the period 2008–2024 (between Fausk and bbb24) that the authors considered and chose not to cite, or does the literature genuinely contain no intervening accounts that would bear on the paper's profinite Borel completeness theory?
+
+## Per-Agent Reviews
+
+### citation (`sonnet[1m]`) — status: `warn`
+
+```json
+{
+  "confidence": 0.62,
+  "entries": [
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Greenlees, John P. C."
+        ],
+        "doi": null,
+        "key": "gre92",
+        "raw": "AUTHOR = Greenlees, John P. C., TITLE = Some remarks on projective Mackey functors, JOURNAL = J. Pure Appl. Algebra, VOLUME = 81, YEAR = 1992, NUMBER = 1, PAGES = 17--38",
+        "title": "Some remarks on projective Mackey functors",
+        "url": null,
+        "venue": "J. Pure Appl. Algebra",
+        "year": 1992
+      },
+      "exists": null,
+      "explanation": "Not cited in any visible citation context. Projective Mackey functors are foundational background for Mackey functor theory but are peripheral to the paper's main use of spectral Mackey functors; likely cited for a specific algebraic comparison in the truncated sections.",
+      "notes": null,
+      "relevance": "low",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Ayoub, Joseph",
+          "Gallauer, Martin",
+          "Vezzani, Alberto"
+        ],
+        "doi": null,
+        "key": "agv22",
+        "raw": "AUTHOR = Ayoub, Joseph and Gallauer, Martin and Vezzani, Alberto, TITLE = The six-functor formalism for rigid analytic motives, JOURNAL = Forum Math. Sigma, VOLUME = 10, YEAR = 2022, PAGES = Paper No. e61, 182",
+        "title": "The six-functor formalism for rigid analytic motives",
+        "url": null,
+        "venue": "Forum Math. Sigma",
+        "year": 2022
+      },
+      "exists": null,
+      "explanation": "Cited multiple times in the profinite groups section for technical lemmas (Lemma 3.6, Remark 2.X) about colimit and limit decompositions of presentable symmetric monoidal stable ∞-categories. The rigid analytic setting is not the paper's focus, but the categorical machinery transfers directly.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "1812.01526",
+        "authors": [
+          "Antieau, Benjamin"
+        ],
+        "doi": null,
+        "key": "ant21",
+        "raw": "title=On the uniqueness of infinity-categorical enhancements of triangulated categories, author=Benjamin Antieau, year=2021, eprint=1812.01526, archivePrefix=arXiv",
+        "title": "On the uniqueness of infinity-categorical enhancements of triangulated categories",
+        "url": null,
+        "venue": null,
+        "year": 2021
+      },
+      "exists": null,
+      "explanation": "Not cited in the visible citation contexts. The paper works throughout with ∞-categories rather than triangulated categories with enhancements, so this reference is peripheral; likely cited for a comparison remark in the truncated sections.",
+      "notes": null,
+      "relevance": "low",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Aoki, Ko"
+        ],
+        "doi": null,
+        "key": "aok20",
+        "raw": "AUTHOR = Aoki, Ko, TITLE = The weight complex functor is symmetric monoidal, JOURNAL = Adv. Math., VOLUME = 368, YEAR = 2020, PAGES = 107145, 10",
+        "title": "The weight complex functor is symmetric monoidal",
+        "url": null,
+        "venue": "Adv. Math.",
+        "year": 2020
+      },
+      "exists": null,
+      "explanation": "Not cited in the visible citation contexts. The weight complex and weight filtration are not primary tools in this paper; likely cited for a specific symmetric monoidal fact in the truncated sections.",
+      "notes": null,
+      "relevance": "low",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Ayoub, Joseph"
+        ],
+        "doi": null,
+        "key": "ayo14a",
+        "raw": "AUTHOR = Ayoub, Joseph, TITLE = L'algèbre de Hopf et le groupe de Galois motiviques d'un corps de caractéristique nulle, I, JOURNAL = J. Reine Angew. Math., VOLUME = 693, YEAR = 2014, PAGES = 1--149",
+        "title": "L'algèbre de Hopf et le groupe de Galois motiviques d'un corps de caractéristique nulle, I",
+        "url": null,
+        "venue": "J. Reine Angew. Math.",
+        "year": 2014
+      },
+      "exists": null,
+      "explanation": "Not cited in the visible citation contexts, but Ayoub's work on motivic Galois groups over fields of characteristic zero provides foundational context for the paper's study of Artin motives; likely cited in the truncated motives section.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Ayoub, Joseph"
+        ],
+        "doi": null,
+        "key": "ayo14b",
+        "raw": "AUTHOR = Ayoub, Joseph, TITLE = La réalisation étale et les opérations de Grothendieck, JOURNAL = Ann. Sci. Éc. Norm. Supér. (4), VOLUME = 47, YEAR = 2014, NUMBER = 1, PAGES = 1--145",
+        "title": "La réalisation étale et les opérations de Grothendieck",
+        "url": null,
+        "venue": "Ann. Sci. Éc. Norm. Supér. (4)",
+        "year": 2014
+      },
+      "exists": null,
+      "explanation": "Not cited in the visible citation contexts, but Ayoub's work on étale realization and Grothendieck operations is closely related to the paper's treatment of étale Voevodsky motives; likely cited in the truncated motives section.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Ayoub, Joseph",
+          "Zucker, Steven"
+        ],
+        "doi": null,
+        "key": "az12",
+        "raw": "AUTHOR = Ayoub, Joseph and Zucker, Steven, TITLE = Relative Artin motives and the reductive Borel-Serre compactification of a locally symmetric variety, JOURNAL = Invent. Math., VOLUME = 188, YEAR = 2012, NUMBER = 2, PAGES = 277--427",
+        "title": "Relative Artin motives and the reductive Borel-Serre compactification of a locally symmetric variety",
+        "url": null,
+        "venue": "Invent. Math.",
+        "year": 2012
+      },
+      "exists": null,
+      "explanation": "Cited in the Introduction and Smooth Artin motives section as prior work on étale Artin motives without correspondences. Directly relevant because the paper extends and complements Ayoub–Zucker's approach by working with transfers in the sheaf-with-transfers formalism.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Bachmann, Tom"
+        ],
+        "doi": null,
+        "key": "bac16",
+        "raw": "title=Invertible objects in motivic homotopy theory, author=Tom Bachmann, year=2016, note = PhD thesis",
+        "title": "Invertible objects in motivic homotopy theory",
+        "url": null,
+        "venue": "PhD thesis",
+        "year": 2016
+      },
+      "exists": null,
+      "explanation": "Not cited in the visible citation contexts. Invertible objects in motivic homotopy theory are not a central tool here; likely cited for a specific motivic background fact in the truncated sections.",
+      "notes": null,
+      "relevance": "low",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Balmer, Paul"
+        ],
+        "doi": null,
+        "key": "bal05",
+        "raw": "AUTHOR = Balmer, Paul, TITLE = The spectrum of prime ideals in tensor triangulated categories, JOURNAL = J. Reine Angew. Math., VOLUME = 588, YEAR = 2005, PAGES = 149--168",
+        "title": "The spectrum of prime ideals in tensor triangulated categories",
+        "url": null,
+        "venue": "J. Reine Angew. Math.",
+        "year": 2005
+      },
+      "exists": null,
+      "explanation": "Not cited explicitly in the visible contexts, but the paper prominently mentions the Balmer spectrum of compact parts of derived permutation module categories as an application of Theorem 1. This foundational paper defines the Balmer spectrum and is presumably cited in the truncated sections.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Barwick, Clark"
+        ],
+        "doi": null,
+        "key": "bar17",
+        "raw": "AUTHOR = Barwick, Clark, TITLE = Spectral Mackey functors and equivariant algebraic K-theory (I), JOURNAL = Adv. Math., VOLUME = 304, YEAR = 2017, PAGES = 646--727",
+        "title": "Spectral Mackey functors and equivariant algebraic K-theory (I)",
+        "url": null,
+        "venue": "Adv. Math.",
+        "year": 2017
+      },
+      "exists": null,
+      "explanation": "Heavily cited throughout the paper for the spectral Mackey functor model of G-spectra, the effective Burnside ∞-category Span(G), inflation/fixed-point adjunctions, and the description of Borel completion as evaluation at G/1. One of the primary technical frameworks for the equivariant part of the paper.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2109.08135",
+        "authors": [
+          "Barthel, Tobias"
+        ],
+        "doi": null,
+        "key": "bar21",
+        "raw": "title=Stratifying integral representations of finite groups, author=Tobias Barthel, year=2021, eprint=2109.08135, archivePrefix=arXiv",
+        "title": "Stratifying integral representations of finite groups",
+        "url": null,
+        "venue": null,
+        "year": 2021
+      },
+      "exists": null,
+      "explanation": "Cited in the Sheaves and representations section for Theorem 3.7 identifying modules over the Borel completion with the homotopy category of injective modules when G is finite and R is regular Noetherian. Supports the comparison between equivariant and purely algebraic descriptions.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "1305.0086",
+        "authors": [
+          "Batanin, Michael",
+          "Berger, Clemens"
+        ],
+        "doi": null,
+        "key": "bb17",
+        "raw": "title=Homotopy theory for algebras over polynomial monads, author=Michael Batanin and Clemens Berger, year=2017, eprint=1305.0086, archivePrefix=arXiv",
+        "title": "Homotopy theory for algebras over polynomial monads",
+        "url": null,
+        "venue": null,
+        "year": 2017
+      },
+      "exists": null,
+      "explanation": "Not cited in the visible citation contexts. Polynomial monads are not a primary tool in this paper; likely cited for a specific categorical background fact in the truncated sections.",
+      "notes": null,
+      "relevance": "low",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2401.01878",
+        "authors": [
+          "Balchin, Scott",
+          "Barnes, David",
+          "Barthel, Tobias"
+        ],
+        "doi": null,
+        "key": "bbb24",
+        "raw": "title=Profinite equivariant spectra and their tensor-triangular geometry, author=Scott Balchin and David Barnes and Tobias Barthel, year=2024, eprint=2401.01878, archivePrefix=arXiv",
+        "title": "Profinite equivariant spectra and their tensor-triangular geometry",
+        "url": null,
+        "venue": null,
+        "year": 2024
+      },
+      "exists": null,
+      "explanation": "Cited multiple times for the equivalence of models for profinite G-spectra (Appendix A) and the limit description of Sp^G along categorical fixed points (§6). This paper treats the same objects as the present work and is a central technical reference for the profinite equivariant homotopy theory.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Beilinson, Alexander A.",
+          "Bernstein, Joseph",
+          "Deligne, Pierre"
+        ],
+        "doi": null,
+        "key": "bbd81",
+        "raw": "AUTHOR = Beilinson, Alexander A. and Bernstein, Joseph and Deligne, Pierre, TITLE = Faisceaux pervers, SERIES = Astérisque, VOLUME = 100, PAGES = 5--171, YEAR = 1982",
+        "title": "Faisceaux pervers",
+        "url": null,
+        "venue": "Astérisque",
+        "year": 1982
+      },
+      "exists": null,
+      "explanation": "Cited for the notion of a recollement (Proposition 1.X.X in BBD), which the paper uses to describe the Borel complete subcategory as part of a recollement structure on equivariant module spectra. A classical foundational reference invoked in a focused and appropriate way.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Barthel, Tobias",
+          "Castellana, Natàlia",
+          "Heard, Drew",
+          "Naumann, Niko",
+          "Pol, Luca"
+        ],
+        "doi": null,
+        "key": "bchnl25",
+        "raw": "AUTHOR = Barthel, Tobias and Castellana, Natàlia and Heard, Drew and Naumann, Niko and Pol, Luca, TITLE = Quillen stratification in equivariant homotopy theory, JOURNAL = Invent. Math., VOLUME = 239, YEAR = 2025, NUMBER = 1, PAGES = 219--285",
+        "title": "Quillen stratification in equivariant homotopy theory",
+        "url": null,
+        "venue": "Invent. Math.",
+        "year": 2025
+      },
+      "exists": null,
+      "explanation": "Cited multiple times for key technical results on Borel completeness (Lemma 3.X, Proposition 3.X) used in both the finite and profinite group sections. An important contemporary companion reference in equivariant homotopy theory whose results are directly applied.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "1911.02338",
+        "authors": [
+          "Bunke, Ulrich",
+          "Cisinski, Denis-Charles",
+          "Kasprowski, Daniel",
+          "Winges, Christoph"
+        ],
+        "doi": null,
+        "key": "bckw24",
+        "raw": "title=Controlled objects in left-exact ∞-categories and the Novikov conjecture, author=Ulrich Bunke and Denis-Charles Cisinski and Daniel Kasprowski and Christoph Winges, year=2024, eprint=1911.02338, archivePrefix=arXiv",
+        "title": "Controlled objects in left-exact ∞-categories and the Novikov conjecture",
+        "url": null,
+        "venue": null,
+        "year": 2024
+      },
+      "exists": null,
+      "explanation": "Not cited in the visible citation contexts. The Novikov conjecture setting is quite distant from this paper's core topics; likely cited for a specific categorical technique in the truncated sections.",
+      "notes": null,
+      "relevance": "low",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Brantner, Lukas",
+          "Campos, Ricardo",
+          "Nuiten, Joost"
+        ],
+        "doi": null,
+        "key": "bcn25",
+        "raw": "AUTHOR = Brantner, Lukas and Campos, Ricardo and Nuiten, Joost, TITLE = PD operads and explicit partition Lie algebras, JOURNAL = Mem. Amer. Math. Soc., VOLUME = 315, YEAR = 2025, NUMBER = 1597, PAGES = v+125",
+        "title": "PD operads and explicit partition Lie algebras",
+        "url": null,
+        "venue": "Mem. Amer. Math. Soc.",
+        "year": 2025
+      },
+      "exists": null,
+      "explanation": "Cited alongside fuh25 for the spectral Mackey functor description of Mod_{underline{R}}(Sp^G). The subject mismatch between PD operads and equivariant homotopy theory warrants verification that the cited example is correctly identified.",
+      "notes": "This paper's primary subject (PD operads, partition Lie algebras) appears unrelated to spectral Mackey functors or equivariant spectra. The citation to Example 2.15 for the spectral Mackey functor description of modules over the Bredon cohomology spectrum is topically unexpected; it may refer to an incidental example in the paper, or there may be a citation-key confusion with another preprint by the same authors.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Balmer, Paul",
+          "Dell'Ambrogio, Ivo"
+        ],
+        "doi": null,
+        "key": "bd20",
+        "raw": "AUTHOR = Balmer, Paul and Dell'Ambrogio, Ivo, TITLE = Mackey 2-functors and Mackey 2-motives, SERIES = EMS Monographs in Mathematics, YEAR = 2020",
+        "title": "Mackey 2-functors and Mackey 2-motives",
+        "url": null,
+        "venue": "EMS Monographs in Mathematics",
+        "year": 2020
+      },
+      "exists": null,
+      "explanation": "Not cited in the visible citation contexts. Mackey 2-functors provide higher categorical Mackey structure related to the paper's topic but are not a direct tool here; likely cited for context in truncated sections.",
+      "notes": null,
+      "relevance": "low",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Bárcenas, Noé",
+          "Degrijse, Dieter",
+          "Patchkoria, Irakli"
+        ],
+        "doi": null,
+        "key": "bdp17",
+        "raw": "AUTHOR = Bárcenas, Noé and Degrijse, Dieter and Patchkoria, Irakli, TITLE = Stable finiteness properties of infinite discrete groups, JOURNAL = J. Topol., VOLUME = 10, YEAR = 2017, NUMBER = 4, PAGES = 1169--1196",
+        "title": "Stable finiteness properties of infinite discrete groups",
+        "url": null,
+        "venue": "J. Topol.",
+        "year": 2017
+      },
+      "exists": null,
+      "explanation": "Not cited in the visible citation contexts. Stable finiteness properties of discrete groups is not a direct tool in this paper, which focuses on profinite groups; likely cited for a comparison remark in the truncated sections.",
+      "notes": null,
+      "relevance": "low",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Balmer, Paul",
+          "Dell'Ambrogio, Ivo",
+          "Sanders, Beren"
+        ],
+        "doi": null,
+        "key": "bds15",
+        "raw": "AUTHOR = Balmer, Paul and Dell'Ambrogio, Ivo and Sanders, Beren, TITLE = Restriction to finite-index subgroups as étale extensions in topology, KK-theory and geometry, JOURNAL = Algebr. Geom. Topol., VOLUME = 15, YEAR = 2015, NUMBER = 5, PAGES = 3025--3047",
+        "title": "Restriction to finite-index subgroups as étale extensions in topology, KK-theory and geometry",
+        "url": null,
+        "venue": "Algebr. Geom. Topol.",
+        "year": 2015
+      },
+      "exists": null,
+      "explanation": "Cited in the Borel completeness for finite groups section for Theorem 1.1 on restriction to finite-index subgroups as étale extensions. Provides relevant background on the étale extension structure of restriction functors, closely related to the paper's comparison of Borel completeness and sheaf conditions.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Balmer, Paul",
+          "Dell'Ambrogio, Ivo",
+          "Sanders, Beren"
+        ],
+        "doi": null,
+        "key": "bds16",
+        "raw": "AUTHOR = Balmer, Paul and Dell'Ambrogio, Ivo and Sanders, Beren, TITLE = Grothendieck-Neeman duality and the Wirthmüller isomorphism, JOURNAL = Compos. Math., VOLUME = 152, YEAR = 2016, NUMBER = 8, PAGES = 1740--1776",
+        "title": "Grothendieck-Neeman duality and the Wirthmüller isomorphism",
+        "url": null,
+        "venue": "Compos. Math.",
+        "year": 2016
+      },
+      "exists": null,
+      "explanation": "Cited in the profinite groups section for Theorem 1.X on Grothendieck-Neeman duality. Relevant as a technical tool for handling induction/coinduction adjunctions, which appear prominently in the paper's equivariant constructions.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Beke, Tibor"
+        ],
+        "doi": null,
+        "key": "bek00",
+        "raw": "AUTHOR = Beke, Tibor, TITLE = Sheafifiable homotopy model categories, JOURNAL = Math. Proc. Cambridge Philos. Soc., VOLUME = 129, YEAR = 2000, NUMBER = 3, PAGES = 447--475",
+        "title": "Sheafifiable homotopy model categories",
+        "url": null,
+        "venue": "Math. Proc. Cambridge Philos. Soc.",
+        "year": 2000
+      },
+      "exists": null,
+      "explanation": "Not cited in the visible citation contexts. Beke's sheafifiable model categories framework predates the ∞-categorical language used throughout this paper; likely cited for a historical or technical comparison in the truncated sections.",
+      "notes": null,
+      "relevance": "low",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Balmer, Paul",
+          "Gallauer, Martin"
+        ],
+        "doi": null,
+        "key": "bg22a",
+        "raw": "AUTHOR = Balmer, Paul and Gallauer, Martin, TITLE = Permutation modules and cohomological singularity, JOURNAL = Comment. Math. Helv., VOLUME = 97, YEAR = 2022, NUMBER = 3, PAGES = 413--430",
+        "title": "Permutation modules and cohomological singularity",
+        "url": null,
+        "venue": "Comment. Math. Helv.",
+        "year": 2022
+      },
+      "exists": null,
+      "explanation": "Cited in the Introduction as the source of the category D(Perm(G;R)) of derived permutation modules, which is one of the two sides of the paper's main equivalence theorem. A foundational reference for the algebraic half of the paper's central construction.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Balmer, Paul",
+          "Gallauer, Martin"
+        ],
+        "doi": null,
+        "key": "bg23",
+        "raw": "AUTHOR = Balmer, Paul and Gallauer, Martin, TITLE = Permutation modules, Mackey functors, and Artin motives, SERIES = EMS Ser. Congr. Rep., PAGES = 37--75, YEAR = 2023",
+        "title": "Permutation modules, Mackey functors, and Artin motives",
+        "url": null,
+        "venue": "EMS Ser. Congr. Rep.",
+        "year": 2023
+      },
+      "exists": null,
+      "explanation": "Cited multiple times: in the Introduction for the symmetric monoidal equivalence of Artin motives with derived permutation modules over a field (§7), and in the Smooth Artin motives section for permutation modules (§2) and the cohomological ideal (§4). This is the most directly foundational paper that the present work generalizes from fields to general base schemes.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Balmer, Paul",
+          "Gallauer, Martin"
+        ],
+        "doi": null,
+        "key": "bg25a",
+        "raw": "title=The geometry of permutation modules, author=Paul Balmer and Martin Gallauer, year=2025, volume=241, journal=Invent. math., pages = 841–928",
+        "title": "The geometry of permutation modules",
+        "url": null,
+        "venue": "Invent. Math.",
+        "year": 2025
+      },
+      "exists": null,
+      "explanation": "Cited in the Introduction for the determination of the Balmer spectrum of the compact part of D(Perm(G;R)) for any profinite G and field R. This result is directly applicable via Theorem 1 to give the Balmer spectrum of geometric smooth Artin motives.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Balmer, Paul",
+          "Gallauer, Martin"
+        ],
+        "doi": null,
+        "key": "bg25b",
+        "raw": "AUTHOR = Balmer, Paul and Gallauer, Martin, TITLE = The spectrum of Artin motives, JOURNAL = Trans. Amer. Math. Soc., VOLUME = 378, YEAR = 2025, NUMBER = 3, PAGES = 1733--1754",
+        "title": "The spectrum of Artin motives",
+        "url": null,
+        "venue": "Trans. Amer. Math. Soc.",
+        "year": 2025
+      },
+      "exists": null,
+      "explanation": "Cited alongside bg25a in the Introduction for results on the Balmer spectrum of Artin motives. A companion paper whose tt-geometric results on Artin motives are direct consequences of the present paper's main equivalence theorem.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Blumberg, Andrew J.",
+          "Gerhardt, Teena",
+          "Hill, Michael A.",
+          "Lawson, Tyler"
+        ],
+        "doi": null,
+        "key": "bghl19",
+        "raw": "AUTHOR = Blumberg, Andrew J. and Gerhardt, Teena and Hill, Michael A. and Lawson, Tyler, TITLE = The Witt vectors for Green functors, JOURNAL = J. Algebra, VOLUME = 537, YEAR = 2019, PAGES = 197--244",
+        "title": "The Witt vectors for Green functors",
+        "url": null,
+        "venue": "J. Algebra",
+        "year": 2019
+      },
+      "exists": null,
+      "explanation": "Not cited in the visible citation contexts. Witt vectors for Green functors are not a primary tool in this paper; likely cited for algebraic context in the truncated sections.",
+      "notes": null,
+      "relevance": "low",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Barwick, Clark",
+          "Glasman, Saul",
+          "Shah, Jay"
+        ],
+        "doi": null,
+        "key": "bgs20",
+        "raw": "author = Barwick, Clark and Glasman, Saul and Shah, Jay, year = 2020, pages = 97-146, title = Spectral Mackey functors and equivariant algebraic K-theory (II), volume = 2, journal = Tunisian Journal of Mathematics",
+        "title": "Spectral Mackey functors and equivariant algebraic K-theory (II)",
+        "url": null,
+        "venue": "Tunisian Journal of Mathematics",
+        "year": 2020
+      },
+      "exists": null,
+      "explanation": "Cited multiple times for the description of Borel completion as right Kan extension (§8) and for the t-structure on functor categories of Mackey functors (§6). A key technical reference alongside bar17 providing the spectral Mackey functor machinery used throughout the paper.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Blumberg, Andrew J.",
+          "Gepner, David",
+          "Tabuada, Gonçalo"
+        ],
+        "doi": null,
+        "key": "bgt13",
+        "raw": "AUTHOR = Blumberg, Andrew J. and Gepner, David and Tabuada, Gonçalo, TITLE = A universal characterization of higher algebraic K-theory, JOURNAL = Geom. Topol., VOLUME = 17, YEAR = 2013, NUMBER = 2, PAGES = 733--838",
+        "title": "A universal characterization of higher algebraic K-theory",
+        "url": null,
+        "venue": "Geom. Topol.",
+        "year": 2013
+      },
+      "exists": null,
+      "explanation": "Not cited in the visible citation contexts. The universal characterization of algebraic K-theory is not a primary tool in this paper; likely cited as categorical background in the truncated sections.",
+      "notes": null,
+      "relevance": "low",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Binda, Federico",
+          "Gallauer, Martin",
+          "Vezzani, Alberto"
+        ],
+        "doi": null,
+        "key": "bgv25",
+        "raw": "title=Motivic monodromy and p-adic cohomology theories, author=Federico Binda and Martin Gallauer and Alberto Vezzani, year=2025, journal= J. Eur. Math. Soc., volume=published online first",
+        "title": "Motivic monodromy and p-adic cohomology theories",
+        "url": null,
+        "venue": "J. Eur. Math. Soc.",
+        "year": 2025
+      },
+      "exists": null,
+      "explanation": "Not cited in the visible citation contexts but closely related to the paper's study of motivic categories over general base schemes. Likely cited in the truncated motives section for p-adic and motivic monodromy aspects.",
+      "notes": "The volume field records 'published online first' rather than a volume number; a proper volume/issue citation would be preferable for archival accuracy, though this is a common placeholder for recently published work.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Bachmann, Tom",
+          "Hoyois, Marc"
+        ],
+        "doi": null,
+        "key": "bh21",
+        "raw": "AUTHOR = Bachmann, Tom and Hoyois, Marc, TITLE = Norms in motivic homotopy theory, JOURNAL = Astérisque, NUMBER = 425, YEAR = 2021, PAGES = ix+207",
+        "title": "Norms in motivic homotopy theory",
+        "url": null,
+        "venue": "Astérisque",
+        "year": 2021
+      },
+      "exists": null,
+      "explanation": "Cited in the Smooth Artin motives section (Remark 14.X) and in the Borel completeness for finite groups section for a duality result. Norms in motivic homotopy theory provide symmetric monoidal and duality tools applicable in both the equivariant and motivic portions of the paper.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2010.10325",
+        "authors": [
+          "Burklund, Robert",
+          "Hahn, Jeremy",
+          "Senger, Andrew"
+        ],
+        "doi": null,
+        "key": "bhs22",
+        "raw": "title=Galois reconstruction of Artin-Tate R-motivic spectra, author=Robert Burklund and Jeremy Hahn and Andrew Senger, year=2022, eprint=2010.10325, archivePrefix=arXiv",
+        "title": "Galois reconstruction of Artin-Tate R-motivic spectra",
+        "url": null,
+        "venue": null,
+        "year": 2022
+      },
+      "exists": null,
+      "explanation": "Not cited in the visible citation contexts. Galois reconstruction of Artin-Tate motivic spectra is thematically related—recovering motivic categories from Galois-equivariant data—and is likely cited in the truncated motives section for comparison.",
+      "notes": null,
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    }
+  ],
+  "missing_references": [],
+  "summary": "The paper's citation hygiene is overall strong: 147 references reflect thorough engagement with equivariant homotopy theory, motivic cohomology, and ∞-category theory, and the bibliography consistently credits foundational sources alongside recent companion papers by Balmer–Gallauer, Barwick, Clausen–Mathew, and Cisinski–Déglise. One entry warrants scrutiny: bcn25 (Brantner–Campos–Nuiten, 'PD operads and explicit partition Lie algebras') is cited for a spectral Mackey functor description (Example 2.15), a topically unexpected use that may reflect a citation-key error or an incidental example in an otherwise unrelated paper. The bgv25 entry records 'published online first' as a volume field, a minor bibliographic imprecision. Only 32 of 147 entries were available for review; the most heavily cited references (Lurie HTT/HA/SAG, Mathew–Naumann–Noel, Clausen–Mathew, Cisinski–Déglise, SGA1, Voevodsky) fall in the omitted 115 and could not be assessed."
+}
+```
+
+### meta_reviewer (`sonnet[1m]`) — status: `pass`
+
+```json
+{
+  "confidence": 0.72,
+  "questions": [
+    "Can the authors provide machine-checkable proof artifacts (Lean, Agda, or equivalent) for the load-bearing steps identified in C1–C3 — specifically the pushforward-degree identity and cohomological-ideal vanishing (Theorem 1), the acyclic-orthogonality argument (Theorem 2), and square-by-square commutativity (Theorem 3) — or supply a detailed justification for why formalization is not feasible for this work?",
+    "Is the citation to bcn25 (Brantner–Campos–Nuiten, 'PD operads and explicit partition Lie algebras') for Example 2.15 in the spectral Mackey functor description intended, and if so, can the authors confirm that the cited example content appears in that paper? If not, which citation key was intended?",
+    "What is the status of the mapping-space computation needed to establish the non-hypercomplete étale row DAM_ét(S;R) in Theorem 3's diagram — is this result expected to appear in a companion paper, and if so, can a more precise statement of the open problem and its expected difficulty be added?",
+    "The t-structure on Sp^G_lwBorel (Proposition 6) is load-bearing for Theorem 2 via the acyclic-orthogonality argument; can the authors make the verification of t-structure axioms and right-completeness fully explicit in the proof, or provide a pointer to the precise location in the text where these are verified?",
+    "Are there ∞-categorical treatments of profinite group actions on spectra from the period 2008–2024 (between Fausk and bbb24) that the authors considered and chose not to cite, or does the literature genuinely contain no intervening accounts that would bear on the paper's profinite Borel completeness theory?"
+  ],
+  "recommendation": "major_revision",
+  "revision_targets": [
+    {
+      "evidence": "The §5 proof is detailed and well-cited (Barr–Beck–Lurie via mnn17 Prop. 5.29; the pushforward cycle/length computation via cd19 9.1.1, Thm 11.2.14, stacks 10.52.13, gw10 Prop. 12.21, gw23 Prop. 20.89; perm-category identification via bg23 Prop. 4.17). The argument reads as mathematically sound, but no machine-checkable artifact is shipped. The load-bearing pushforward-degree identity ((π^H̄_K̄)_*⟨X/K̄⟩ = [H:K]·⟨X/H̄⟩) and the vanishing of the cohomological ideal I(G) under Ψ are concrete, code-verifiable computations left unbacked by a formal proof or symbolic check.",
+      "id": "weakness-1",
+      "locator": "Introduction (Theorem 1) and §5, proof of thm:damnisasmodunderlr",
+      "required_update": "Ship a machine-checkable artifact for the load-bearing steps, e.g. a Lean/Agda formalization at src/proofs/ThmDamNis.lean and/or a symbolic verification of the cohomological-ideal generator vanishing and the length/degree identity at experiments/artin_motives/cohideal_check.py.",
+      "source_path": null,
+      "source_role": "technical_correctness",
+      "status": "open",
+      "target_kind": "paper_tex",
+      "verification_check": "Re-review should confirm `Introduction (Theorem 1) and §5, proof of thm:damnisasmodunderlr` is corrected or justified.",
+      "weakness_index": 0
+    },
+    {
+      "evidence": "No public repository, license, pinned release, or proof-check command is provided for the paper's reproducibility artifacts.",
+      "id": "weakness-2",
+      "locator": "code release and execution entrypoints",
+      "required_update": "Release the source code, scripts, model configuration, and execution entrypoints needed to regenerate the reported tables, or document why those artifacts cannot be released.",
+      "source_path": null,
+      "source_role": "reproducibility",
+      "status": "open",
+      "target_kind": "code",
+      "verification_check": "Re-review should confirm runnable code or a documented non-release justification is present.",
+      "weakness_index": 1
+    },
+    {
+      "evidence": "The authors explicitly state that 'an analogous statement would require the computation of certain mapping spaces in the corresponding category of effective motives, and we will refrain from doing those.' This is a transparently disclosed scope limitation, not an error, but it leaves one cell of the motivic picture unestablished.",
+      "id": "weakness-3",
+      "locator": "Introduction, paragraph following Theorem 3 (~lines 322–325)",
+      "required_update": "Carry out (or defer to future work with explicit framing) the mapping-space computation in DM_ét^eff(S;R); a symbolic/numeric check could be staged at experiments/etale_mapping_spaces/compute.py.",
+      "source_path": null,
+      "source_role": "technical_correctness",
+      "status": "open",
+      "target_kind": "paper_tex",
+      "verification_check": "Re-review should confirm `Introduction, paragraph following Theorem 3 (~lines 322–325)` is corrected or justified.",
+      "weakness_index": 2
+    },
+    {
+      "evidence": "Not cited in any visible citation context. Projective Mackey functors are foundational background for Mackey functor theory but are peripheral to the paper's main use of spectral Mackey functors; likely cited for a specific algebraic comparison in the truncated sections.",
+      "id": "weakness-4",
+      "locator": "gre92",
+      "required_update": "Verify `gre92` against an authoritative source; replace it with a resolvable relevant citation or remove it.",
+      "source_path": null,
+      "source_role": "citation",
+      "status": "open",
+      "target_kind": "bibliography",
+      "verification_check": "Re-review should confirm the citation resolves and is relevant.",
+      "weakness_index": 3
+    },
+    {
+      "evidence": "The paper's profinite Borel completeness theory develops new infrastructure that overlaps with equivariant pro-spectra literature (e.g., Fausk 2008, which is cited but predates the ∞-categorical language). A comparison with or citation of any intervening ∞-categorical accounts of profinite group representations in spectra between Fausk and bbb24 would strengthen the literature review.",
+      "id": "weakness-5",
+      "locator": "Earlier ∞-categorical treatments of profinite group actions on spectra (pre-2024)",
+      "required_update": "Add or discuss missing prior art `Earlier ∞-categorical treatments of profinite group actions on spectra (pre-2024)`. The paper's profinite Borel completeness theory develops new infrastructure that overlaps with equivariant pro-spectra literature (e.g., Fausk 2008, which is cited but predates the ∞-categorical language). A comparison with or citation of any intervening ∞-categorical accounts of profinite group representations in spectra between Fausk and bbb24 would strengthen the literature review.",
+      "source_path": null,
+      "source_role": "novelty",
+      "status": "open",
+      "target_kind": "bibliography",
+      "verification_check": "Re-review should confirm the related-work discussion addresses this prior art.",
+      "weakness_index": 4
+    }
+  ],
+  "strengths": [
+    "The profinite Borel completeness theory is a technically demanding and conceptually clean generalization of Mathew–Naumann–Noel's finite-group results: two distinct notions are introduced (levelwise and hypercomplete Borel completeness), their relationship via hypercompletion is made precise, and conditions for coincidence (finite virtual cohomological dimension, per Clausen–Mathew) are correctly identified.",
+    "Theorem 1 extends Voevodsky's classical equivalence of smooth Artin motives with permutation G-modules from fields to arbitrary connected noetherian schemes of finite Krull dimension, using the étale fundamental group as the profinite group; this is a genuine and non-trivial advance over Balmer–Gallauer's field-level framework.",
+    "The commutative 3×3 diagram of Theorem 3 unifies derived permutation modules, equivariant module spectra, Borel and levelwise-Borel complete categories, and Nisnevich/étale/hyper-étale sheaves with transfers into a single coherent structural picture, providing substantial organizational and computational leverage.",
+    "Citation hygiene across 147 references is strong and reflects thorough engagement with foundational literature in equivariant homotopy theory, motivic cohomology, and ∞-category theory; the most heavily cited foundational sources (Barwick, Barwick–Glasman–Shah, Balmer–Gallauer, Cisinski–Déglise, Clausen–Mathew) are credited appropriately and their results are applied with evident familiarity.",
+    "The paper transparently discloses the one remaining gap (the non-hypercomplete étale row of the motivic diagram), correctly identifies what computation is needed to close it, and does not overstate what is established."
+  ],
+  "summary": "The five specialist reviewers converge on a picture of a mathematically significant but reproducibility-deficient paper. The novelty reviewer rates the contribution as significant (0.75), crediting a genuine generalization of Voevodsky's field-level equivalence of Artin motives with permutation modules to arbitrary connected noetherian schemes of finite Krull dimension, and an extension of Borel completeness theory from finite to profinite groups with a conceptually precise two-notion framework (levelwise vs. hypercomplete). The summary and citation reviews corroborate the paper's technical ambition and mostly strong bibliographic practice. The tension in the specialist panel is between the technical correctness reviewer (confidence 0.58, overall 'mostly_sound') and the reproducibility reviewer (confidence 0.86, score 0.22): both flag the same gap — Theorems 1, 2, and 3, the three headline results, carry no machine-checkable proof artifacts, with the technical reviewer rating all three as 'unsupported' at major severity and the reproducibility reviewer rating the corresponding absences at critical severity. Per the recommendation gate for a paper in the math.* (code-amenable) field where both technical_correctness and reproducibility independently flagged major or critical missing proof-as-code artifacts for the headline claims, the default is major_revision. The missing artifacts do not indicate the proofs are incorrect — the technical reviewer calls the arguments 'mathematically sound' and 'internally consistent and plausible' — but load-bearing steps (the pushforward-degree identity in Theorem 1, the acyclic-orthogonality argument in Theorem 2, full commutativity of the 3×3 diagram in Theorem 3) remain unverified by any formal or computational check. One subsidiary issue is the disclosed non-hypercomplete étale gap (C10, minor): one cell of Theorem 3 is explicitly deferred with no machine-verifiable treatment. Citation practice is strong; the one flagged concern (bcn25 cited for a Mackey functor example in a PD-operads paper) warrants author verification but is plausibly a citation-key collision rather than an error in reasoning.",
+  "weaknesses": [
+    "Theorems 1, 2, and 3 — the three headline results — each lack machine-checkable proof artifacts: the load-bearing pushforward-degree identity and cohomological-ideal vanishing in Theorem 1 (C1, major), the acyclic-orthogonality hypercompletion argument in Theorem 2 (C2, major), and the full square-by-square commutativity of the 3×3 diagram in Theorem 3 (C3, major) are presented as human proofs only; in a code-amenable math.* field this leaves the central claims formally unverified.",
+    "Reproducibility infrastructure is absent: no public repository, no formal proof environment specification, no proof-check commands, and no dependency lockfile are provided, yielding a reproducibility score of 0.22; all three main theorem gaps are rated critical severity by the reproducibility reviewer.",
+    "The non-hypercomplete étale row of Theorem 3's diagram — the identification of a third row with DAM_ét(S;R) — is explicitly deferred because the required mapping-space computation in effective motives was not carried out, leaving one cell of the main structural theorem unestablished (C10, minor).",
+    "Citation entry bcn25 (Brantner–Campos–Nuiten, 'PD operads and explicit partition Lie algebras') is cited for a spectral Mackey functor description (Example 2.15), a topically unexpected use that may reflect a citation-key collision; the mismatch between the paper's primary subject and its cited function warrants author verification.",
+    "The literature review does not address any ∞-categorical treatments of profinite group actions on spectra in the 2008–2024 window between Fausk and bbb24, nor does it explicitly assert the absence of such work; the related-work picture for the profinite equivariant homotopy theory part of the paper is therefore incomplete."
+  ]
+}
+```
+
+### novelty (`sonnet[1m]`) — status: `pass`
+
+```json
+{
+  "confidence": 0.72,
+  "missing_prior_art": [
+    {
+      "reason": "The paper's profinite Borel completeness theory develops new infrastructure that overlaps with equivariant pro-spectra literature (e.g., Fausk 2008, which is cited but predates the ∞-categorical language). A comparison with or citation of any intervening ∞-categorical accounts of profinite group representations in spectra between Fausk and bbb24 would strengthen the literature review.",
+      "title": "Earlier ∞-categorical treatments of profinite group actions on spectra (pre-2024)"
+    },
+    {
+      "reason": "The paper's motivic theorem can be seen as a categorical enrichment of Galois descent. Explicit comparison with descent-theoretic approaches to motivic categories (e.g., work of Hoyois on motivic Galois theory or Bachmann on involutions in motivic homotopy theory beyond bac16) would contextualize the novelty of using equivariant spectra rather than descent data directly.",
+      "title": "Work on Galois descent for motivic categories over non-algebraically-closed fields"
+    }
+  ],
+  "novelty_score": 0.75,
+  "related_work": [
+    {
+      "citation_key": "mnn17",
+      "delta": "This paper extends MNN's Borel completeness theory from finite groups to profinite groups. It adds a coefficients version throughout, introduces two new notions (levelwise Borel completeness and its hypercompletion), and identifies the latter with full Borel completeness — results that have no analogue in MNN for finite groups.",
+      "relation": "builds_on",
+      "title": "Nilpotence and descent in equivariant stable homotopy theory"
+    },
+    {
+      "citation_key": "voe00",
+      "delta": "Voevodsky identified Artin motives over a field with permutation modules for the absolute Galois group. This paper extends that equivalence to arbitrary connected noetherian schemes of finite Krull dimension, replacing the Galois group by the profinite étale fundamental group and using the new profinite Borel completeness machinery to do so.",
+      "relation": "builds_on",
+      "title": "Triangulated categories of motives over a field"
+    },
+    {
+      "citation_key": "bg23",
+      "delta": "Balmer–Gallauer revisited Voevodsky's field-level equivalence using derived permutation modules. This paper uses their framework as the target of the extended equivalence over general base schemes and draws on their category D-Perm(G;R) as the algebraic avatar of smooth Artin motives.",
+      "relation": "builds_on",
+      "title": "Permutation modules, Mackey functors, and Artin motives"
+    },
+    {
+      "citation_key": "cd16",
+      "delta": "Cisinski–Déglise's theorem that étale sheaves on finite étale schemes automatically have transfers is used as a key input. The paper gives an independent equivariant proof of this result and uses their six-functor formalism to handle the étale/hypercomplete distinction in motives.",
+      "relation": "builds_on",
+      "title": "Étale motives"
+    },
+    {
+      "citation_key": "cd19",
+      "delta": "Provides the theory of finite correspondences with coefficients used to define Voevodsky motives over a general base scheme S with R-coefficients, which is essential for formulating the main motivic theorem.",
+      "relation": "builds_on",
+      "title": "Triangulated categories of mixed motives"
+    },
+    {
+      "citation_key": "cm21",
+      "delta": "Clausen–Mathew's result that both rows of the main commutative diagram agree when the virtual cohomological dimension of G is finite is invoked to give conditions under which levelwise and full Borel completeness coincide, collapsing the two distinct notions.",
+      "relation": "builds_on",
+      "title": "Hyperdescent and étale K-theory"
+    },
+    {
+      "citation_key": "az12",
+      "delta": "Ayoub–Zucker study étale Artin motives over general bases without transfers. This paper handles the same setting with transfers, yielding a richer equivariant and representation-theoretic description not available in their approach.",
+      "relation": "prior_art",
+      "title": "Relative Artin motives and the reductive Borel–Serre compactification of a locally symmetric variety"
+    },
+    {
+      "citation_key": "rui25a",
+      "delta": "Ruimy studies integral étale Artin motives without transfers. This paper's approach using equivariant spectra with transfers provides a complementary and more structured description via Borel complete G-spectra, valid under the appropriate torsion/characteristic hypotheses.",
+      "relation": "competing",
+      "title": "Integral Artin motives I: Smooth objects and the ordinary t-structure"
+    },
+    {
+      "citation_key": "bbb24",
+      "delta": "Provides foundational models for Sp^G for profinite G and develops their tensor-triangular geometry. This paper uses those models as input but develops different structural results — levelwise vs. full Borel completeness and connections to motives — not addressed by Balchin–Barnes–Barthel.",
+      "relation": "orthogonal",
+      "title": "Profinite equivariant spectra and their tensor-triangular geometry"
+    },
+    {
+      "citation_key": "fuh25",
+      "delta": "Fuhrmann's identification of D-Perm(G;R) with Mod_{underline{R}}(Sp^G) (modules over the Bredon cohomology spectrum) is cited as a key ingredient in the equivariant description of smooth Artin motives in the proof of the main theorem.",
+      "relation": "builds_on",
+      "title": "Modular fixed points in equivariant homotopy theory"
+    },
+    {
+      "citation_key": "bt26",
+      "delta": "Barnes–Taggart's colimit description of Sp^G for profinite G as a filtered colimit of Sp^{G_i} is used as the foundational recollection from which the levelwise Borel complete category is constructed.",
+      "relation": "builds_on",
+      "title": "Deconstructing span categories for profinite groups"
+    }
+  ],
+  "verdict": "significant"
+}
+```
+
+### reproducibility (`gpt-5.5`) — status: `pass`
+
+```json
+{
+  "code_availability": "unspecified",
+  "code_url": null,
+  "concerns": [
+    {
+      "area": "code",
+      "description": "No public repository, license, pinned release, or proof-check command is provided for the paper's reproducibility artifacts.",
+      "severity": "major"
+    },
+    {
+      "area": "code",
+      "description": "Theorem 1, the symmetric monoidal equivalence for Nisnevich smooth Artin motives, has no machine-checkable proof artifact; a file such as formalization/Theorem1_DAM_Nis_equivalence.lean would close this gap.",
+      "severity": "critical"
+    },
+    {
+      "area": "code",
+      "description": "Theorem 2, identifying profinite Borel completion with hypercompletion of levelwise Borel complete spectra, has no formal proof or numerical verification artifact; a file such as formalization/Theorem2_Borel_hypercompletion.lean would close this gap.",
+      "severity": "critical"
+    },
+    {
+      "area": "code",
+      "description": "Theorem 3, the commutative diagram of equivalences among representation, equivariant, and sheaf-theoretic categories, lacks a machine-checkable proof artifact; a file such as formalization/Theorem3_big_diagram.lean would close this gap.",
+      "severity": "critical"
+    },
+    {
+      "area": "compute",
+      "description": "No reproducible formal environment is specified, such as Lean/Coq/Agda version, dependency lockfile, or build instructions for checking the load-bearing categorical and motivic arguments.",
+      "severity": "major"
+    },
+    {
+      "area": "other",
+      "description": "Verifier could not reach `https://people.math.rochester.edu/faculty/doug/otherpapers/Lewis-Green.pdf` (status=network_error)",
+      "severity": "minor"
+    }
+  ],
+  "confidence": 0.86,
+  "data_availability": "unspecified",
+  "data_url": null,
+  "environment": {
+    "dependencies": [],
+    "hardware": null,
+    "software": null
+  },
+  "reproducibility_score": 0.22
+}
+```
+
+### summary (`claude-haiku-4-5`) — status: `pass`
+
+```json
+{
+  "audience": "Researchers in algebraic topology, homotopy theory, and algebraic geometry, particularly those working with equivariant stable homotopy theory, motivic cohomology, or Galois-equivariant phenomena in arithmetic geometry.",
+  "key_contributions": [
+    "Extended Borel completeness theory from finite to profinite groups with coefficients, and identified two notions (levelwise and hypercomplete) with the hypercomplete objects forming the Borel complete category",
+    "Defined smooth Artin motives over general base schemes with coefficients and proved they are equivalent to modules over Bredon cohomology spectra of the étale fundamental group",
+    "Established a commutative diagram relating permutation modules, equivariant spectra, Borel complete spectra, representations, and étale sheaves with transfers",
+    "Proved that étale smooth Artin motives admit descriptions in terms of Borel complete equivariant spectra, with the sheaf/hypersheaf distinction corresponding to levelwise/hypercomplete Borel completeness"
+  ],
+  "plain_language_summary": "This paper bridges equivariant homotopy theory and algebraic geometry by studying how certain categorical structures behave when controlled by infinite Galois groups. The main result shows that smooth Artin motives—geometric objects tracking finite étale covers of a scheme—can be understood as representations of the étale fundamental group, extending a classical theorem of Voevodsky from fields to arbitrary schemes.\n\nThe paper is organized in two parts. First, the authors develop the theory of Borel complete equivariant spectra for profinite groups, introducing two distinct notions (levelwise and hypercomplete) and proving they are related by hypercompletion. Second, they apply this equivariant machinery to construct smooth Artin motives and identify them with derived modules over group-theoretic objects called Bredon cohomology spectra. In the étale topology case, they clarify how the distinction between sheaves and hypersheaves corresponds exactly to their two notions of Borel completeness.",
+  "tldr": "The paper develops a theory of Borel complete equivariant spectra for profinite groups and identifies smooth Artin motives over general base schemes with modules over Bredon cohomology spectra."
+}
+```
+
+### technical_correctness (`opus[1m]`) — status: `pass`
+
+```json
+{
+  "claims": [
+    {
+      "assessment": "unsupported",
+      "claim": "Theorem 1 (thm:damnisasmodunderlr): for a connected, noetherian scheme S of finite Krull dimension there is a symmetric monoidal equivalence DAM_Nis(S;R) ≃ DPerm(π1^ét(S,s);R), equivalently Mod_R̲(Sp^G) ≃ DAM_Nis(S;R).",
+      "evidence": "The §5 proof is detailed and well-cited (Barr–Beck–Lurie via mnn17 Prop. 5.29; the pushforward cycle/length computation via cd19 9.1.1, Thm 11.2.14, stacks 10.52.13, gw10 Prop. 12.21, gw23 Prop. 20.89; perm-category identification via bg23 Prop. 4.17). The argument reads as mathematically sound, but no machine-checkable artifact is shipped. The load-bearing pushforward-degree identity ((π^H̄_K̄)_*⟨X/K̄⟩ = [H:K]·⟨X/H̄⟩) and the vanishing of the cohomological ideal I(G) under Ψ are concrete, code-verifiable computations left unbacked by a formal proof or symbolic check.",
+      "id": "C1",
+      "location": "Introduction (Theorem 1) and §5, proof of thm:damnisasmodunderlr",
+      "severity": "major",
+      "suggested_fix": "Ship a machine-checkable artifact for the load-bearing steps, e.g. a Lean/Agda formalization at src/proofs/ThmDamNis.lean and/or a symbolic verification of the cohomological-ideal generator vanishing and the length/degree identity at experiments/artin_motives/cohideal_check.py."
+    },
+    {
+      "assessment": "unsupported",
+      "claim": "Theorem 2 (thm:borelandhyperlewelwise): there is a symmetric monoidal equivalence Sp^G_Borel ≃ (Sp^G_lwBorel)^h; i.e. profinite Borel completeness is the hypercompletion of levelwise Borel completeness.",
+      "evidence": "The proof shows both sit as the same full subcategory of Mod_{R_G}(Sp^G) via a mapping-space orthogonality argument resting on prop:noneqcontractibleprofinite and the t-structure of prop:tstructureonlevelwiseborelcomplete. The reasoning is internally consistent and plausible, but this load-bearing structural equivalence carries no accompanying machine-checkable proof.",
+      "id": "C2",
+      "location": "Introduction (Theorem 2) and §3 (thm:borelandhyperlewelwise, proof at lines ~1979–2018)",
+      "severity": "major",
+      "suggested_fix": "Provide a formal-proof artifact, e.g. src/proofs/ThmBorelHypercompletion.lean (or Agda/Isabelle), capturing the acyclic-orthogonality and hypercompletion argument."
+    },
+    {
+      "assessment": "unsupported",
+      "claim": "Theorem 3 (thm:bigdiagram): for discrete R and G = π1^ét(S) there is a commutative 3×3 diagram of left adjoints whose horizontal functors are all equivalences, linking DPerm / derived module categories, Borel and levelwise-Borel equivariant modules, and Nisnevich / étale / hyper-étale sheaves with transfers.",
+      "evidence": "The diagram is assembled from Proposition 1 (sheaves vs. Borel completeness), the étale-transfers theorem, and the Nisnevich identification (Theorem 1). Each square is individually motivated, but full commutativity together with the equivalence of every horizontal arrow is not exhaustively verified in the bounded text and no executable/formal artifact certifies the assembled diagram.",
+      "id": "C3",
+      "location": "Introduction (Theorem 3) and §5 (thm:bigdiagram)",
+      "severity": "major",
+      "suggested_fix": "Add a formal artifact verifying commutativity of each square and the equivalence of all horizontal functors, e.g. src/proofs/ThmBigDiagram.lean."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Corollary (cor:dametassheaves): if R has positive characteristic n and the residue characteristics of S are prime to n, the hypercomplete étale row coincides with DAM_ét^∧(S;R), as a special form of the rigidity theorem.",
+      "evidence": "The hypotheses (char n>0, residue characteristics prime to n) are explicitly stated and the claim is framed as an instance of an established rigidity theorem; supporting mapping-space arguments are referenced rather than fully reproduced in the excerpt, and the non-hypercomplete étale analogue is explicitly deferred.",
+      "id": "C4",
+      "location": "Introduction (discussion after Theorem 3); §5 (Lemma at line ~3231 and cor:dametassheaves at ~3254)",
+      "severity": "minor",
+      "suggested_fix": "Reproduce or precisely cite the rigidity mapping-space computations under the stated hypotheses; optionally back the finite-characteristic comparison with a computational check."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Theorem (thm:etaletransfers): étale (hyper)sheaves with transfers on FétCor(S;R) agree with étale (hyper)sheaves on Fét_S, i.e. Sh_ét^(∧)(FétCor(S;R);Sp) ≃ Sh_ét^(∧)(Fét_S;R).",
+      "evidence": "Described as well known (cd16 Prop. 3.1.4) with an independent proof claimed that avoids cd16's hom-set identifications. The result is credible and standard, but the independent proof is not fully reverifiable from the bounded excerpt.",
+      "id": "C5",
+      "location": "Introduction (displayed equivalence near cd16 Prop. 3.1.4); §5 (thm:etaletransfers)",
+      "severity": "minor",
+      "suggested_fix": "None required for correctness; optionally cross-check the independent proof against cd16 or add a formal artifact for the transfer construction."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Proposition (prop:tstructureonlevelwiseborelcomplete): there is a right-complete t-structure on Sp^G_lwBorel, with respect to which hypercomplete objects are the right orthogonal of the acyclics.",
+      "evidence": "The t-structure is constructed levelwise and right-completeness is asserted with supporting argument. The construction is standard in form and plausible, but its completeness properties are not exhaustively verified in the excerpt. This proposition is load-bearing for Theorem 2, so its full verification matters.",
+      "id": "C6",
+      "location": "§3 (prop:tstructureonlevelwiseborelcomplete, ~line 1325)",
+      "severity": "minor",
+      "suggested_fix": "Make the verification of the t-structure axioms and right-completeness fully explicit in the proof, or supply a formal artifact."
+    },
+    {
+      "assessment": "supported",
+      "claim": "Proposition 1 (Clausen–Mathew comparison): the two rows of the sheaves-vs-representations diagram agree when the virtual cohomological dimension of G is finite (R discrete), with analogues for connective R.",
+      "evidence": "Attributed to Clausen–Mathew [cm21 §4.1] with an explicit finite-vcd hypothesis consistent with the cited literature; the finiteness condition correctly delimits when the hypercomplete and non-hypercomplete rows coincide.",
+      "id": "C7",
+      "location": "§4 (Proposition at lines ~2310 and ~2392; Corollary at ~2505)",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "supported",
+      "claim": "Recollement/Recollection 1: foundational properties of module ∞-categories Mod_A(C) — presentable symmetric monoidal stability, free–forgetful adjunction, compact/dualisable/rigid generation, and base change of algebras along symmetric monoidal functors.",
+      "evidence": "Each assertion is sourced to Lurie HA (Thm 3.4.4.2, Cor. 4.2.3.7/4.2.4.8, Thm 4.5.2.1, §4.5.3, Cor. 4.2.3.5/4.2.3.3) and erg22 Rem. 1.1.11; these are standard, well-established results applied correctly.",
+      "id": "C8",
+      "location": "§2 (Recollection 1, ~lines 394–437)",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Displayed definition of levelwise Borel completeness: Sp^G_lwBorel := lim_i Sp^{G_i}_Borel ⊆ Sp^G.",
+      "evidence": "The intended definition is correct, but the displayed formula in the provided text writes 'Spec^{G_i}_Borel' where 'Sp^{G_i}_Borel' is meant. This is likely a rendering/transcription artifact rather than a source error and does not affect the mathematics.",
+      "id": "C9",
+      "location": "Introduction, displayed definition of Sp^G_lwBorel (~line 157)",
+      "severity": "info",
+      "suggested_fix": "If present in the source, correct 'Spec' to 'Sp' in the limit defining Sp^G_lwBorel."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "In the non-hypercomplete étale case, the identification of the corresponding row with smooth Artin motives DAM_ét(S;R) is left unproven, requiring computation of certain mapping spaces in effective motives.",
+      "evidence": "The authors explicitly state that 'an analogous statement would require the computation of certain mapping spaces in the corresponding category of effective motives, and we will refrain from doing those.' This is a transparently disclosed scope limitation, not an error, but it leaves one cell of the motivic picture unestablished.",
+      "id": "C10",
+      "location": "Introduction, paragraph following Theorem 3 (~lines 322–325)",
+      "severity": "minor",
+      "suggested_fix": "Carry out (or defer to future work with explicit framing) the mapping-space computation in DM_ét^eff(S;R); a symbolic/numeric check could be staged at experiments/etale_mapping_spaces/compute.py."
+    }
+  ],
+  "confidence": 0.58,
+  "overall_correctness": "mostly_sound"
+}
+```
+
+## Corrections
+
+<!-- corrections-section: rendered from corrections table; empty on first publish -->
+_No corrections have been recorded._
+
+## Bibliography
+
+1. Gre92: AUTHOR = Greenlees, John P. C., TITLE = Some remarks on projective Mackey functors, JOURNAL = J. Pure Appl. Algebra, FJOURNAL = Journal of Pure and Applied Algebra, VOLUME = 81, YEAR = 1992, NUMBER = 1, PAGES = 17--38, MRCLASS = 18G05 (18G20 19A49 19J05 55N91 57Q12 57Q91), MRNUMBER = 1173821, MRREVIEWER = Steven\ R.\ Costenoble,
+2. agv22: AUTHOR = Ayoub, Joseph and Gallauer, Martin and Vezzani, Alberto, TITLE = The six-functor formalism for rigid analytic motives, JOURNAL = Forum Math. Sigma, FJOURNAL = Forum of Mathematics. Sigma, VOLUME = 10, YEAR = 2022, PAGES = Paper No. e61, 182, MRCLASS = 14F42 (14C15 14G22 18N60), MRNUMBER = 4466640, MRREVIEWER = Matthias\ Wendt
+3. ant21: title=On the uniqueness of infinity-categorical enhancements of triangulated categories, author=Benjamin Antieau, year=2021, eprint=1812.01526, archivePrefix=arXiv arXiv:[1812.01526](https://arxiv.org/abs/1812.01526)
+4. aok20: AUTHOR = Aoki, Ko, TITLE = The weight complex functor is symmetric monoidal, JOURNAL = Adv. Math., FJOURNAL = Advances in Mathematics, VOLUME = 368, YEAR = 2020, PAGES = 107145, 10, MRCLASS = 18M05 (14A30 18N60), MRNUMBER = 4082495,
+5. ayo14a: AUTHOR = Ayoub, Joseph, TITLE = L'alg\`ebre de Hopf et le groupe de Galois motiviques d'un corps de caract\'eristique nulle, I, JOURNAL = J. Reine Angew. Math., FJOURNAL = Journal f\"ur die Reine und Angewandte Mathematik. [Crelle's Journal], VOLUME = 693, YEAR = 2014, PAGES = 1--149, MRCLASS = 14F42 (11R32 14C15 18D10 18E30), MRNUMBER = 3259031, MRREVIEWER = Florence\ Lecomte
+6. ayo14b: AUTHOR = Ayoub, Joseph, TITLE = La r\'ealisation \'etale et les op\'erations de Grothendieck, JOURNAL = Ann. Sci. \'Ec. Norm. Sup\'er. (4), FJOURNAL = Annales Scientifiques de l'\'Ecole Normale Sup\'erieure. Quatri\`eme S\'erie, VOLUME = 47, YEAR = 2014, NUMBER = 1, PAGES = 1--145, MRCLASS = 14C15 (14F05 14F20 14F42 18G55), MRNUMBER = 3205601, MRREVIEWER = C.\ A. M. Peters
+7. az12: AUTHOR = Ayoub, Joseph and Zucker, Steven, TITLE = Relative Artin motives and the reductive Borel-Serre compactification of a locally symmetric variety, JOURNAL = Invent. Math., FJOURNAL = Inventiones Mathematicae, VOLUME = 188, YEAR = 2012, NUMBER = 2, PAGES = 277--427, MRCLASS = 14C15 (14M27 32M99), MRNUMBER = 2909768, MRREVIEWER = Dmitry\ A.\ Timash\"ev
+8. bac16: title=Invertible objects in motivic homotopy theory, author=Tom Bachmann, year=2016, note = PhD thesis
+9. bal05: AUTHOR = Balmer, Paul, TITLE = The spectrum of prime ideals in tensor triangulated categories, JOURNAL = J. Reine Angew. Math., FJOURNAL = Journal f\"ur die Reine und Angewandte Mathematik. [Crelle's Journal], VOLUME = 588, YEAR = 2005, PAGES = 149--168, ISSN = 0075-4102,1435-5345, MRCLASS = 18E30 (55P99), MRNUMBER = 2196732, MRREVIEWER = Amnon\ Neeman
+10. bar17: AUTHOR = Barwick, Clark, TITLE = Spectral Mackey functors and equivariant algebraic $K$-theory (I), JOURNAL = Adv. Math., FJOURNAL = Advances in Mathematics, VOLUME = 304, YEAR = 2017, PAGES = 646--727, MRCLASS = 19L47 (19D99 55P91), MRNUMBER = 3558219, MRREVIEWER = Anna\ Marie\ Bohmann,
+11. bar21: title=Stratifying integral representations of finite groups, author=Tobias Barthel, year=2021, eprint=2109.08135, archivePrefix=arXiv arXiv:[2109.08135](https://arxiv.org/abs/2109.08135)
+12. bb17: title=Homotopy theory for algebras over polynomial monads, author=Michael Batanin and Clemens Berger, year=2017, eprint=1305.0086, archivePrefix=arXiv, arXiv:[1305.0086](https://arxiv.org/abs/1305.0086)
+13. bbb24: title=Profinite equivariant spectra and their tensor-triangular geometry, author=Scott Balchin and David Barnes and Tobias Barthel, year=2024, eprint=2401.01878, archivePrefix=arXiv, arXiv:[2401.01878](https://arxiv.org/abs/2401.01878)
+14. bbd81: AUTHOR = Be\u ilinson, Alexander A. and Bernstein, Joseph and Deligne, Pierre, TITLE = Faisceaux pervers, BOOKTITLE = Analysis and topology on singular spaces, I (Luminy, 1981), SERIES = Ast\'erisque, VOLUME = 100, PAGES = 5--171, PUBLISHER = Soc. Math. France, Paris, YEAR = 1982, MRCLASS = 32C38, MRNUMBER = 751966, MRREVIEWER = Zoghman\ Mebkhout,
+15. bchnl25: AUTHOR = Barthel, Tobias and Castellana, Nat\`alia and Heard, Drew and Naumann, Niko and Pol, Luca, TITLE = Quillen stratification in equivariant homotopy theory, JOURNAL = Invent. Math., FJOURNAL = Inventiones Mathematicae, VOLUME = 239, YEAR = 2025, NUMBER = 1, PAGES = 219--285, MRCLASS = 55P91 (18F99 55P42 55U35), MRNUMBER = 4841779, MRREVIEWER = Andr\'e\ G.\ Henriques
+16. bckw24: title=Controlled objects in left-exact $\infty$-categories and the Novikov conjecture, author=Ulrich Bunke and Denis-Charles Cisinski and Daniel Kasprowski and Christoph Winges, year=2024, eprint=1911.02338, archivePrefix=arXiv, arXiv:[1911.02338](https://arxiv.org/abs/1911.02338)
+17. bcn25: AUTHOR = Brantner, Lukas and Campos, Ricardo and Nuiten, Joost, TITLE = PD operads and explicit partition Lie algebras, JOURNAL = Mem. Amer. Math. Soc., FJOURNAL = Memoirs of the American Mathematical Society, VOLUME = 315, YEAR = 2025, NUMBER = 1597, PAGES = v+125, MRCLASS = 18M70 (14A30 14D23 14F08 17B55 18N70), MRNUMBER = 5003477
+18. bd20: AUTHOR = Balmer, Paul and Dell'Ambrogio, Ivo, TITLE = Mackey 2-functors and Mackey 2-motives, SERIES = EMS Monographs in Mathematics, PUBLISHER = European Mathematical Society (EMS), Z\"urich, YEAR = [2020] \copyright2020, PAGES = viii+227, MRCLASS = 18Nxx (18B40 18M30 19A22 20J05 55P91), MRNUMBER = 4192744, MRREVIEWER = R.\ H.\ Street,
+19. bdp17: AUTHOR = B\'arcenas, No\'e and Degrijse, Dieter and Patchkoria, Irakli, TITLE = Stable finiteness properties of infinite discrete groups, JOURNAL = J. Topol., FJOURNAL = Journal of Topology, VOLUME = 10, YEAR = 2017, NUMBER = 4, PAGES = 1169--1196, MRCLASS = 55P91 (20J05 55P42), MRNUMBER = 3743073, MRREVIEWER = Samik\ Basu,
+20. bds15: AUTHOR = Balmer, Paul and Dell'Ambrogio, Ivo and Sanders, Beren, TITLE = Restriction to finite-index subgroups as \'etale extensions in topology, KK-theory and geometry, JOURNAL = Algebr. Geom. Topol., FJOURNAL = Algebraic \& Geometric Topology, VOLUME = 15, YEAR = 2015, NUMBER = 5, PAGES = 3025--3047, MRCLASS = 55P91 (13D09 14F05 19K35 19L47), MRNUMBER = 3426702, MRREVIEWER = Andr\'e\ G.\ Henriques
+21. bds16: AUTHOR = Balmer, Paul and Dell'Ambrogio, Ivo and Sanders, Beren, TITLE = Grothendieck-Neeman duality and the Wirthm\"uller isomorphism, JOURNAL = Compos. Math., FJOURNAL = Compositio Mathematica, VOLUME = 152, YEAR = 2016, NUMBER = 8, PAGES = 1740--1776, MRCLASS = 18E30 (14F05 55U35), MRNUMBER = 3542492, MRREVIEWER = Martin\ Frankland
+22. bek00: AUTHOR = Beke, Tibor, TITLE = Sheafifiable homotopy model categories, JOURNAL = Math. Proc. Cambridge Philos. Soc., FJOURNAL = Mathematical Proceedings of the Cambridge Philosophical Society, VOLUME = 129, YEAR = 2000, NUMBER = 3, PAGES = 447--475, MRCLASS = 18D15 (03C95 18F20 18G55), MRNUMBER = 1780498, MRREVIEWER = Masahiko\ Niwa,
+23. bg22a: AUTHOR = Balmer, Paul and Gallauer, Martin, TITLE = Permutation modules and cohomological singularity, JOURNAL = Comment. Math. Helv., FJOURNAL = Commentarii Mathematici Helvetici. A Journal of the Swiss Mathematical Society, VOLUME = 97, YEAR = 2022, NUMBER = 3, PAGES = 413--430, MRCLASS = 20C20 (16E20 16E30 16E35 18G80 20J06), MRNUMBER = 4468990, MRREVIEWER = David\ Benson,
+24. bg23: AUTHOR = Balmer, Paul and Gallauer, Martin, TITLE = Permutation modules, Mackey functors, and Artin motives, BOOKTITLE = Representations of algebras and related structures, SERIES = EMS Ser. Congr. Rep., PAGES = 37--75, PUBLISHER = EMS Press, Berlin, YEAR = 2023, MRCLASS = 14F08 (12F10 14C15 18G80 20C20), MRNUMBER = 4693637,
+25. bg25a: title=The geometry of permutation modules, author=Paul Balmer and Martin Gallauer, year=2025, volume=241, journal=Invent. math., fjournal=Inventiones mathematicae, pages = 841–928
+26. bg25b: AUTHOR = Balmer, Paul and Gallauer, Martin, TITLE = The spectrum of Artin motives, JOURNAL = Trans. Amer. Math. Soc., FJOURNAL = Transactions of the American Mathematical Society, VOLUME = 378, YEAR = 2025, NUMBER = 3, PAGES = 1733--1754, MRCLASS = 14F42 (18F99 18G90 20C20), MRNUMBER = 4866349
+27. bghl19: AUTHOR = Blumberg, Andrew J. and Gerhardt, Teena and Hill, Michael A. and Lawson, Tyler, TITLE = The Witt vectors for Green functors, JOURNAL = J. Algebra, FJOURNAL = Journal of Algebra, VOLUME = 537, YEAR = 2019, PAGES = 197--244, MRCLASS = 55P42 (19D55 55N91), MRNUMBER = 3990042, MRREVIEWER = Andrew\ J.\ Baker,
+28. bgs20: author = Barwick, Clark and Glasman, Saul and Shah, Jay, year = 2020, month = 01, pages = 97-146, title = Spectral Mackey functors and equivariant algebraic $K$-theory (II), volume = 2, journal = Tunisian Journal of Mathematics,
+29. bgt13: AUTHOR = Blumberg, Andrew J. and Gepner, David and Tabuada, Gon\c calo, TITLE = A universal characterization of higher algebraic $K$-theory, JOURNAL = Geom. Topol., FJOURNAL = Geometry \& Topology, VOLUME = 17, YEAR = 2013, NUMBER = 2, PAGES = 733--838, MRCLASS = 19D10 (18D20 19D25 19D55 55N15 55U40), MRNUMBER = 3070515, MRREVIEWER = Ross\ Staffeldt,
+30. bgv25: title=Motivic monodromy and p-adic cohomology theories, author=Federico Binda and Martin Gallauer and Alberto Vezzani, year=2025, journal= J. Eur. Math. Soc., volume=published online first
+31. bh21: AUTHOR = Bachmann, Tom and Hoyois, Marc, TITLE = Norms in motivic homotopy theory, JOURNAL = Ast\'erisque, FJOURNAL = Ast\'erisque, NUMBER = 425, YEAR = 2021, PAGES = ix+207, MRCLASS = 14F42 (19E15), MRNUMBER = 4288071, MRREVIEWER = Jon\ Eivind\ Vatne
+32. bhs22: title=Galois reconstruction of Artin-Tate $\mathbbR$-motivic spectra, author=Robert Burklund and Jeremy Hahn and Andrew Senger, year=2022, eprint=2010.10325, archivePrefix=arXiv arXiv:[2010.10325](https://arxiv.org/abs/2010.10325)
+33. bhs23: AUTHOR = Barthel, Tobias and Heard, Drew and Sanders, Beren, TITLE = Stratification in tensor triangular geometry with applications to spectral Mackey functors, JOURNAL = Camb. J. Math., FJOURNAL = Cambridge Journal of Mathematics, VOLUME = 11, YEAR = 2023, NUMBER = 4, PAGES = 829--915, MRCLASS = 18G80 (14F08 18F99 55P42 55P91 55U35), MRNUMBER = 4650265
+34. bikp24: AUTHOR = Benson, David John and Iyengar, Srikanth B. and Krause, Henning and Pevtsova, Julia, TITLE = Fibrewise stratification of group representations, JOURNAL = Ann. Represent. Theory, FJOURNAL = Annals of Representation Theory, VOLUME = 1, YEAR = 2024, NUMBER = 1, PAGES = 97--124, MRCLASS = 16G30 (18G80 20C10 20J06), MRNUMBER = 4877095,
+35. bon10: AUTHOR = Bondarko, Mikhail V., TITLE = Weight structures vs. $t$-structures; weight filtrations, spectral sequences, and complexes (for motives and in general), JOURNAL = J. K-Theory, FJOURNAL = Journal of K-Theory. K-Theory and its Applications in Algebra, Geometry, Analysis \& Topology, VOLUME = 6, YEAR = 2010, NUMBER = 3, PAGES = 387--504, MRCLASS = 18E30 (14C15 18G40 19E08 19E15), MRNUMBER = 2746283, MRREVIEWER = Florence\ Lecomte,
+36. bou97: AUTHOR = Bouc, Serge, TITLE = Green functors and $G$-sets, SERIES = Lecture Notes in Mathematics, VOLUME = 1671, PUBLISHER = Springer-Verlag, Berlin, YEAR = 1997, PAGES = viii+342, MRCLASS = 20C99 (19A22), MRNUMBER = 1483069, MRREVIEWER = Jacques\ Th\'evenaz,
+37. bro85: AUTHOR = Brou\'e, Michel, TITLE = On Scott modules and $p$-permutation modules: an approach through the Brauer morphism, JOURNAL = Proc. Amer. Math. Soc., FJOURNAL = Proceedings of the American Mathematical Society, VOLUME = 93, YEAR = 1985, NUMBER = 3, PAGES = 401--408, MRCLASS = 20C11 (20C05), MRNUMBER = 773988, MRREVIEWER = Peter\ W.\ Donovan
+38. bs17: AUTHOR = Balmer, Paul and Sanders, Beren, TITLE = The spectrum of the equivariant stable homotopy category of a finite group, JOURNAL = Invent. Math., FJOURNAL = Inventiones Mathematicae, VOLUME = 208, YEAR = 2017, NUMBER = 1, PAGES = 283--326, MRCLASS = 18E30 (55P42 55U35), MRNUMBER = 3621837, MRREVIEWER = Geoffrey\ M. L. Powell,
+39. bs20: AUTHOR = Behrens, Mark and Shah, Jay, TITLE = $C_2$-equivariant stable homotopy from real motivic stable homotopy, JOURNAL = Ann. K-Theory, FJOURNAL = Annals of K-Theory, VOLUME = 5, YEAR = 2020, NUMBER = 3, PAGES = 411--464, MRCLASS = 14F42 (55N91 55P91 55Q91), MRNUMBER = 4132743, MRREVIEWER = Stephen\ McKean
+40. bs24: AUTHOR = Ben-Moshe, Shay and Schlank, Tomer M., TITLE = Higher semiadditive algebraic K-theory and redshift, JOURNAL = Compos. Math., FJOURNAL = Compositio Mathematica, VOLUME = 160, YEAR = 2024, NUMBER = 2, PAGES = 237--287, MRCLASS = 19D55 (18N60 55P42), MRNUMBER = 4679205
+41. bt26: title=Deconstructing span categories for profinite groups, author=David Barnes and Niall Taggart, year=2026, eprint=2601.09544, archivePrefix=arXiv arXiv:[2601.09544](https://arxiv.org/abs/2601.09544)
+42. by07: title = Borel–Smith functions and the Dade group, journal = Journal of Algebra, volume = 311, number = 2, pages = 821-839, year = 2007, author = Serge Bouc and Ergün Yalçın,
+43. cd16: AUTHOR = Cisinski, Denis-Charles and D\'eglise, Fr\'ed\'eric, TITLE = \'Etale motives, JOURNAL = Compos. Math., FJOURNAL = Compositio Mathematica, VOLUME = 152, YEAR = 2016, NUMBER = 3, PAGES = 556--666, MRCLASS = 14F20 (14F42), MRNUMBER = 3477640, MRREVIEWER = Matthias\ Wendt,
+44. cd19: AUTHOR = Cisinski, Denis-Charles and D\'eglise, Fr\'ed\'eric, TITLE = Triangulated categories of mixed motives, SERIES = Springer Monographs in Mathematics, PUBLISHER = Springer, Cham, YEAR = 2019, PAGES = xlii+406, MRCLASS = 14F42 (14C15 14C35 18G80 19D55), MRNUMBER = 3971240, MRREVIEWER = Igor\ A.\ Rapinchuk,
+45. cdn23: AUTHOR = Cavicchi, M. and D\'eglise, F. and Nagel, J., TITLE = Motivic decompositions of families with Tate fibers: smooth and singular cases, JOURNAL = Int. Math. Res. Not. IMRN, FJOURNAL = International Mathematics Research Notices. IMRN, YEAR = 2023, NUMBER = 16, PAGES = 14239--14289, ISSN = 1073-7928,1687-0247, MRCLASS = 14F42, MRNUMBER = 4631432, MRREVIEWER = Geoffrey\ M. L. Powell
+46. chll24: title=Normed equivariant ring spectra and higher Tambara functors, author=Bastiaan Cnossen and Rune Haugseng and Tobias Lenz and Sil Linskens, year=2024, eprint=2407.08399, archivePrefix=arXiv, arXiv:[2407.08399](https://arxiv.org/abs/2407.08399)
+47. cm21: AUTHOR = Clausen, Dustin and Mathew, Akhil, TITLE = Hyperdescent and \'etale $K$-theory, JOURNAL = Invent. Math., FJOURNAL = Inventiones Mathematicae, VOLUME = 225, YEAR = 2021, NUMBER = 3, PAGES = 981--1076, MRCLASS = 18F25 (14F20 55N15), MRNUMBER = 4296353, MRREVIEWER = Barry\ H.\ Dayton
+48. cmnn24: AUTHOR = Clausen, Dustin and Mathew, Akhil and Naumann, Niko and Noel, Justin, TITLE = Descent and vanishing in chromatic algebraic $K$-theory via group actions, JOURNAL = Ann. Sci. \'Ec. Norm. Sup\'er. (4), FJOURNAL = Annales Scientifiques de l'\'Ecole Normale Sup\'erieure. Quatri\`eme S\'erie, VOLUME = 57, YEAR = 2024, NUMBER = 4, PAGES = 1135--1190, MRCLASS = 18N60 (19D10 19L47), MRNUMBER = 4773302
+49. cs24: AUTHOR = \v Cesnavi\v cius, Kęstutis and Scholze, Peter, TITLE = Purity for flat cohomology, JOURNAL = Ann. of Math. (2), FJOURNAL = Annals of Mathematics. Second Series, VOLUME = 199, YEAR = 2024, NUMBER = 1, PAGES = 51--180, MRCLASS = 14F20 (14F22 14F30 14H20 18G90), MRNUMBER = 4681144
+50. dad78: author = Everett C. Dade, journal = Annals of Mathematics, number = 3, pages = 459--494, title = Endo-Permutation Modules over p-groups, I, volume = 107, year = 1978
+51. dagv: author = Jacob Lurie, title = Derived Algebraic Geometry V: Structured spaces, year = 2011, note = \urlhttps://www.math.ias.edu/ lurie/
+52. dagvii: author = Jacob Lurie, title = Derived Algebraic Geometry VII: Spectral Schemes, year = 2011, note = \urlhttps://www.math.ias.edu/ lurie/
+53. dagxi: author = Jacob Lurie, title = Derived Algebraic Geometry XI: Descent Theorems, year = 2011, note = \urlhttps://www.math.ias.edu/ lurie/
+54. den88: AUTHOR = Deninger, Ch., TITLE = A proper base change theorem for nontorsion sheaves in \'etale cohomology, JOURNAL = J. Pure Appl. Algebra, FJOURNAL = Journal of Pure and Applied Algebra, VOLUME = 50, YEAR = 1988, NUMBER = 3, PAGES = 231--235, MRCLASS = 14F20, MRNUMBER = 938616, MRREVIEWER = Boulahia\ Nejib
+55. dg22: AUTHOR = Drew, Brad and Gallauer, Martin, TITLE = The universal six-functor formalism, JOURNAL = Ann. K-Theory, FJOURNAL = Annals of K-Theory, VOLUME = 7, YEAR = 2022, NUMBER = 4, PAGES = 599--649, MRCLASS = 14F42 (14F20 18N60), MRNUMBER = 4560376
+56. dg25: title=The Balmer spectrum of integral permutation modules, author=Umesh V. Dubey and Juan Omar Gómez, year=2025, eprint=2507.05892, archivePrefix=arXiv arXiv:[2507.05892](https://arxiv.org/abs/2507.05892)
+57. dhi04: AUTHOR = Dugger, Daniel and Hollander, Sharon and Isaksen, Daniel C., TITLE = Hypercovers and simplicial presheaves, JOURNAL = Math. Proc. Cambridge Philos. Soc., FJOURNAL = Mathematical Proceedings of the Cambridge Philosophical Society, VOLUME = 136, YEAR = 2004, NUMBER = 1, PAGES = 9--51, MRCLASS = 18F20 (55U35), MRNUMBER = 2034012, MRREVIEWER = Manuel\ Bullejos Lorenzo
+58. dk84: AUTHOR = Dwyer, William G. and Kan, Daniel M., TITLE = Singular functors and realization functors, JOURNAL = Nederl. Akad. Wetensch. Indag. Math., FJOURNAL = Koninklijke Nederlandse Akademie van Wetenschappen. Indagationes Mathematicae, VOLUME = 46, YEAR = 1984, NUMBER = 2, PAGES = 147--153, MRCLASS = 55P15 (55U35), MRNUMBER = 749528, MRREVIEWER = J.\ P.\ May,
+59. dre15: title=Verdier quotients of stable quasi-categories are localizations, author=Brad Drew, year=2015, eprint=1511.08287, archivePrefix=arXiv, arXiv:[1511.08287](https://arxiv.org/abs/1511.08287)
+60. dre18: title=Motivic Hodge modules, author=Brad Drew, year=2018, eprint=1801.10129, archivePrefix=arXiv arXiv:[1801.10129](https://arxiv.org/abs/1801.10129)
+61. ega4.4: AUTHOR = Alexander Grothendieck, TITLE = \'El\'ements de g\'eom\'etrie alg\'ebrique. IV. \'Etude locale des sch\'emas et des morphismes de sch\'emas IV, JOURNAL = Inst. Hautes \'Etudes Sci. Publ. Math., FJOURNAL = Institut des Hautes \'Etudes Scientifiques. Publications Math\'ematiques, NUMBER = 32, YEAR = 1967, PAGES = 361, MRCLASS = 14.55, MRNUMBER = 238860, MRREVIEWER = J.\ P.\ Murre, shorthand = EGA4.4
+62. ek20: AUTHOR = Elmanto, Elden and Kolderup, H\aa kon, TITLE = On modules over motivic ring spectra, JOURNAL = Ann. K-Theory, FJOURNAL = Annals of K-Theory, VOLUME = 5, YEAR = 2020, NUMBER = 2, PAGES = 327--355, MRCLASS = 14F42 (14F40 19E15 55P42 55P43 55U35), MRNUMBER = 4113773, MRREVIEWER = David\ A.\ Blanc
+63. erg22: title=Hopf algebras and Hopf–Galois extensions in $\infty$-categories, author=Aras Ergus, year=2022, note = PhD thesis
+64. fau08: AUTHOR = Fausk, Halvard, TITLE = Equivariant homotopy theory for pro-spectra, JOURNAL = Geom. Topol., FJOURNAL = Geometry \& Topology, VOLUME = 12, YEAR = 2008, NUMBER = 1, PAGES = 103--176, MRNUMBER = 2377247, MRREVIEWER = J.\ P. C. Greenlees,
+65. for17: AUTHOR = Ford, Timothy J., TITLE = Separable algebras, SERIES = Graduate Studies in Mathematics, VOLUME = 183, PUBLISHER = American Mathematical Society, Providence, RI, YEAR = 2017, PAGES = xxi+637, MRCLASS = 16-01 (13-01 13C20 16H05), MRNUMBER = 3618889, MRREVIEWER = Wolfgang\ Rump,
+66. fuh25: title=Modular fixed points in equivariant homotopy theory, author=Yorick Fuhrmann, year=2025, eprint=2506.21413, archivePrefix=arXiv arXiv:[2506.21413](https://arxiv.org/abs/2506.21413)
+67. ggn15: AUTHOR = Gepner, David and Groth, Moritz and Nikolaus, Thomas, TITLE = Universality of multiplicative infinite loop space machines, JOURNAL = Algebr. Geom. Topol., FJOURNAL = Algebraic \& Geometric Topology, VOLUME = 15, YEAR = 2015, NUMBER = 6, PAGES = 3107--3153, MRCLASS = 55P48 (19D23 55P43), MRNUMBER = 3450758, MRREVIEWER = John\ A.\ Lind
+68. gla16: AUTHOR = Glasman, Saul, TITLE = A spectrum-level Hodge filtration on topological Hochschild homology, JOURNAL = Selecta Math. (N.S.), FJOURNAL = Selecta Mathematica. New Series, VOLUME = 22, YEAR = 2016, NUMBER = 3, PAGES = 1583--1612, MRCLASS = 18F25 (16E40 55P43), MRNUMBER = 3518559, MRREVIEWER = Markus\ Szymik
+69. gm20: AUTHOR = Gepner, David and Meier, Lennart, TITLE = On equivariant topological modular forms, JOURNAL = Compos. Math., FJOURNAL = Compositio Mathematica, VOLUME = 159, YEAR = 2023, NUMBER = 12, PAGES = 2638--2693, MRCLASS = 55N34 (14A30 55P91), MRNUMBER = 4664814,
+70. gm24: AUTHOR = Guillou, Bertrand J. and May, J. Peter, TITLE = Models of G--spectra as presheaves of spectra, JOURNAL = Algebr. Geom. Topol., FJOURNAL = Algebraic \& Geometric Topology, VOLUME = 24, YEAR = 2024, NUMBER = 3, PAGES = 1225--1275, MRCLASS = 55P42 (55P48 55P91 55P92), MRNUMBER = 4767872,
+71. gm95: AUTHOR = Greenlees, John P. C. and May, J. Peter, TITLE = Equivariant stable homotopy theory, BOOKTITLE = Handbook of algebraic topology, PAGES = 277--323, PUBLISHER = North-Holland, Amsterdam, YEAR = 1995, MRCLASS = 55P91 (55N91 55P42 55P60), MRNUMBER = 1361893, MRREVIEWER = Haruo\ Minami,
+72. gs14: AUTHOR = Greenlees, John P. C. and Shipley, Brooke, TITLE = Fixed point adjunctions for equivariant module spectra, JOURNAL = Algebr. Geom. Topol., FJOURNAL = Algebraic \& Geometric Topology, VOLUME = 14, YEAR = 2014, NUMBER = 3, PAGES = 1779--1799, MRCLASS = 55P43 (55N91 55P91 55T20), MRNUMBER = 3212584, MRREVIEWER = William\ Cole\ Abram,
+73. gw10: AUTHOR = G\"ortz, Ulrich and Wedhorn, Torsten, TITLE = Algebraic geometry I, SERIES = Advanced Lectures in Mathematics, NOTE = Schemes with examples and exercises, PUBLISHER = Vieweg + Teubner, Wiesbaden, YEAR = 2010, PAGES = viii+615, MRCLASS = 14-01, MRNUMBER = 2675155, MRREVIEWER = C\'icero\ Carvalho,
+74. gw23: AUTHOR = G\"ortz, Ulrich and Wedhorn, Torsten, TITLE = Algebraic geometry II: Cohomology of schemes---with examples and exercises, SERIES = Springer Studium Mathematik---Master, PUBLISHER = Springer Spektrum, Wiesbaden, YEAR = 2023, PAGES = vii+869, MRCLASS = 14-01 (14F06 14F08), MRNUMBER = 4704076,
+75. har77: AUTHOR = Hartshorne, Robin, TITLE = Algebraic geometry, SERIES = Graduate Texts in Mathematics, VOLUME = No. 52, PUBLISHER = Springer-Verlag, New York-Heidelberg, YEAR = 1977, PAGES = xvi+496, MRCLASS = 14-01, MRNUMBER = 463157, MRREVIEWER = Robert\ Speiser,
+76. hau24: author = Markus Hausmann, title = Extended lecture notes: Equivariant Homotopy Theory at EAST, year = 2024, note = \urlhttps://www.math.uni-bonn.de/people/hausmann/EAST.pdf
+77. hhr16: AUTHOR = Hill, Michael A. and Hopkins, Michael J. and Ravenel, Douglas C., TITLE = On the nonexistence of elements of Kervaire invariant one, JOURNAL = Ann. of Math. (2), FJOURNAL = Annals of Mathematics. Second Series, VOLUME = 184, YEAR = 2016, NUMBER = 1, PAGES = 1--262, MRCLASS = 55P91 (55N22 55P42 55Q45 55T15 55U35 57R15), MRNUMBER = 3505179, MRREVIEWER = Paul\ G.\ Goerss,
+78. hin16: AUTHOR = Hinich, Vladimir, TITLE = Dwyer-Kan localization revisited, JOURNAL = Homology Homotopy Appl., FJOURNAL = Homology, Homotopy and Applications, VOLUME = 18, YEAR = 2016, NUMBER = 1, PAGES = 27--48, MRCLASS = 55U35 (18D20), MRNUMBER = 3460765, MRREVIEWER = Philippe\ Gaucher
+79. hmq23: AUTHOR = Hill, Michael A. and Mehrle, David and Quigley, James D., TITLE = Free incomplete Tambara functors are almost never flat, JOURNAL = Int. Math. Res. Not., FJOURNAL = International Mathematics Research Notices, YEAR = 2023, NUMBER = 5, PAGES = 4225--4291, MRCLASS = 55N25 (16S10 18Gxx), MRNUMBER = 4565666, MRREVIEWER = David\ Barnes,
+80. ho16: AUTHOR = Heller, Jeremiah and Ormsby, Kyle, TITLE = Galois equivariance and stable motivic homotopy theory, JOURNAL = Trans. Amer. Math. Soc., FJOURNAL = Transactions of the American Mathematical Society, VOLUME = 368, YEAR = 2016, NUMBER = 11, PAGES = 8047--8077, MRCLASS = 14F42 (11E81 19E15 55P91), MRNUMBER = 3546793, MRREVIEWER = Daniel\ Isaksen
+81. ho18: AUTHOR = Heller, Jeremiah and Ormsby, Kyle, TITLE = The stable Galois correspondence for real closed fields, BOOKTITLE = New directions in homotopy theory, SERIES = Contemp. Math., VOLUME = 707, PAGES = 1--9, PUBLISHER = Amer. Math. Soc., YEAR = 2018, MRCLASS = 14F42 (11E81 19E15 55P91), MRNUMBER = 3807738, MRREVIEWER = Serge\ A.\ Yagunov
+82. hov98: title=Monoidal model categories, author=Mark Hovey, year=1998, eprint=math/9803002, archivePrefix=arXiv, primaryClass=math.AT, arXiv:[math/9803002](https://arxiv.org/abs/math/9803002)
+83. hov99: AUTHOR = Hovey, Mark, TITLE = Model categories, SERIES = Mathematical Surveys and Monographs, VOLUME = 63, PUBLISHER = American Mathematical Society, Providence, RI, YEAR = 1999, PAGES = xii+209, MRCLASS = 55U35 (18D15 18G30 18G55), MRNUMBER = 1650134, MRREVIEWER = Teimuraz\ Pirashvili,
+84. hp25: author = Hornbostel, Jens and Park, Doosung, title = Real topological Hochschild homology of perfectoid rings, journal = Journal of Topology, volume = 18, number = 3, pages = e70032, year = 2025
+85. jar97: AUTHOR = Jardine, John F., TITLE = Generalized \'etale cohomology theories, SERIES = Progress in Mathematics, VOLUME = 146, PUBLISHER = Birkh\"auser Verlag, Basel, YEAR = 1997, PAGES = x+317, MRCLASS = 55P42 (18F20 18F25 19F27), MRNUMBER = 1437604, MRREVIEWER = V.\ P.\ Snaith
+86. kal11: author = Kaledin, Dmitry, title = Derived Mackey functors, journal = Mosc. Math. J., year = 2011, volume = 11, number = 4, pages = 723--803
+87. kerodon: author = Jacob Lurie, title = Kerodon, howpublished = \urlhttps://kerodon.net, year = 2026, shorthand = Kerodon
+88. kra05: AUTHOR = Krause, Henning, TITLE = The stable derived category of a Noetherian scheme, JOURNAL = Compos. Math., FJOURNAL = Compositio Mathematica, VOLUME = 141, YEAR = 2005, NUMBER = 5, PAGES = 1128--1162, MRCLASS = 18E30 (14F05 16E30 16E65 55U35), MRNUMBER = 2157133, MRREVIEWER = J.\ P. C. Greenlees
+89. kra15: AUTHOR = Krause, Henning, TITLE = Deriving Auslander's formula, JOURNAL = Doc. Math., FJOURNAL = Documenta Mathematica, VOLUME = 20, YEAR = 2015, PAGES = 669--688, MRCLASS = 18E30 (18E15), MRNUMBER = 3398723, MRREVIEWER = Matan\ Prasma
+90. ks86: AUTHOR = Kato, Kazuya and Saito, Shuji, TITLE = Global class field theory of arithmetic schemes, BOOKTITLE = Applications of algebraic $K$-theory to algebraic geometry and number theory, Part I, II (Boulder, Colo., 1983), SERIES = Contemp. Math., VOLUME = 55, PAGES = 255--331, PUBLISHER = Amer. Math. Soc., Providence, RI, YEAR = 1986, MRCLASS = 11G45 (14C35 18F25 19D45 19F05), MRNUMBER = 862639, MRREVIEWER = Gerd\ Faltings
+91. lev14: AUTHOR = Levine, Marc, TITLE = A comparison of motivic and classical stable homotopy theories, JOURNAL = J. Topol., FJOURNAL = Journal of Topology, VOLUME = 7, YEAR = 2014, NUMBER = 2, PAGES = 327--362, MRCLASS = 14C25 (14F42 19E08 19E15 55P42), MRNUMBER = 3217623, MRREVIEWER = Niko\ Naumann
+92. lew81: author = Lewis, Gaunce, title = The Theory of Green functors, year = 1981, note = Unpublished notes available at \urlhttps://people.math.rochester.edu/faculty/doug/otherpapers/Lewis-Green.pdf
+93. lew99: author = Lewis, Gaunce, journal = Theory and Applications of Categories, pages = 202-250, publisher = Mount Allison University, Department of Mathematics and Computer Science, Sackville, title = When projective does not imply flat, and other homological anomalies, url = http://eudml.org/doc/120098, volume = 5, year = 1999,
+94. lin18: AUTHOR = Linckelmann, Markus, TITLE = The block theory of finite group algebras. Vol. I, SERIES = London Mathematical Society Student Texts, VOLUME = 91, PUBLISHER = Cambridge University Press, Cambridge, YEAR = 2018, PAGES = x+515, MRNUMBER = 3821516, MRREVIEWER = Burkhard\ K\"ulshammer,
+95. lms86: AUTHOR = Lewis, L. Gaunce and May, J. Peter and Steinberger, Mark and McClure, James E., TITLE = Equivariant stable homotopy theory, SERIES = Lecture Notes in Mathematics, VOLUME = 1213, PUBLISHER = Springer-Verlag, Berlin, YEAR = 1986, PAGES = x+538, MRCLASS = 55-02 (55Nxx 55Pxx 57S99), MRNUMBER = 866482, MRREVIEWER = T.\ tom Dieck,
+96. lnp25: AUTHOR = Linskens, Sil and Nardin, Denis and Pol, Luca, TITLE = Global homotopy theory via partially lax limits, JOURNAL = Geom. Topol., FJOURNAL = Geometry \& Topology, VOLUME = 29, YEAR = 2025, NUMBER = 3, PAGES = 1345--1440, MRCLASS = 55N91 (18N70 55P91), MRNUMBER = 4918109
+97. lue05: AUTHOR = L\"uck, Wolfgang, TITLE = Survey on classifying spaces for families of subgroups, BOOKTITLE = Infinite groups: geometric, combinatorial and dynamical aspects, SERIES = Progr. Math., VOLUME = 248, PAGES = 269--322, PUBLISHER = Birkh\"auser, Basel, YEAR = 2005, MRCLASS = 55R35 (19D55 19G24 20F65 57S25), MRNUMBER = 2195456, MRREVIEWER = R.\ M.\ Vogt,
+98. lur09: AUTHOR = Lurie, Jacob, TITLE = Higher topos theory, SERIES = Annals of Mathematics Studies, VOLUME = 170, PUBLISHER = Princeton University Press, Princeton, NJ, YEAR = 2009, PAGES = xviii+925, MRCLASS = 18-02 (18B25 18E35 18G30 18G55 55U40), MRNUMBER = 2522659, MRREVIEWER = Mark\ Hovey,
+99. lur17: author = Jacob Lurie, title = Higher Algebra, year = 2017, note = \urlhttps://www.math.ias.edu/ lurie/
+100. lur18: author = Jacob Lurie, title = Spectral Algebraic Geometry, year = 2018, note = \urlhttps://www.math.ias.edu/ lurie/
+101. mar25: title=On the Hermitian K-theory of the stable envelope, author=Dan Marlowe, year=2025, note = PhD thesis
+102. mat24: title=Unstable $p$-completion in motivic homotopy theory, author=Klaus Mattis, year=2024, eprint=2401.17848, archivePrefix=arXiv arXiv:[2401.17848](https://arxiv.org/abs/2401.17848)
+103. may03: AUTHOR = May, J. Peter, TITLE = The Wirthm\"uller isomorphism revisited, JOURNAL = Theory Appl. Categ., FJOURNAL = Theory and Applications of Categories, VOLUME = 11, YEAR = 2003, PAGES = No. 5, 132--142, MRCLASS = 55P42 (55P91), MRNUMBER = 1988073,
+104. mil24: AUTHOR = Miller, Sam K., TITLE = Endotrivial complexes, JOURNAL = J. Algebra, FJOURNAL = Journal of Algebra, VOLUME = 650, YEAR = 2024, PAGES = 173--218, MRCLASS = 20J05 (19A22 20C05 20C20), MRNUMBER = 4733838,
+105. mil25a: AUTHOR = Miller, Sam K., TITLE = Relatively endotrivial complexes, JOURNAL = J. Pure Appl. Algebra, FJOURNAL = Journal of Pure and Applied Algebra, VOLUME = 229, YEAR = 2025, NUMBER = 2, PAGES = paper no. 107867, MRCLASS = 20J05 (20C05 20C20), MRNUMBER = 4851931
+106. mil25b: AUTHOR = Miller, Sam K., TITLE = The classification of endotrivial complexes, JOURNAL = Adv. Math., FJOURNAL = Advances in Mathematics, VOLUME = 478, YEAR = 2025, PAGES = paper no. 110404, MRCLASS = 20J05 (19A22 20C05 20C20), MRNUMBER = 4919668
+107. mm02: AUTHOR = Mandell, M. A. and May, J. P., TITLE = Equivariant orthogonal spectra and $S$-modules, JOURNAL = Mem. Amer. Math. Soc., FJOURNAL = Memoirs of the American Mathematical Society, VOLUME = 159, YEAR = 2002, NUMBER = 755, PAGES = x+108, MRCLASS = 55P91 (18E30 55P42 55P43 55P48), MRNUMBER = 1922205, MRREVIEWER = J.\ P. C. Greenlees
+108. mnn17: AUTHOR = Mathew, Akhil and Naumann, Niko and Noel, Justin, TITLE = Nilpotence and descent in equivariant stable homotopy theory, JOURNAL = Adv. Math., FJOURNAL = Advances in Mathematics, VOLUME = 305, YEAR = 2017, PAGES = 994--1084, MRCLASS = 55P91 (55P42), MRNUMBER = 3570153, MRREVIEWER = Gregory\ Z.\ Arone,
+109. mnn19: AUTHOR = Mathew, Akhil and Naumann, Niko and Noel, Justin, TITLE = Derived induction and restriction theory, JOURNAL = Geom. Topol., FJOURNAL = Geometry \& Topology, VOLUME = 23, YEAR = 2019, NUMBER = 2, PAGES = 541--636, MRCLASS = 19A22 (18G40 19L47 20J06 55N34 55N91 55P42 55P91), MRNUMBER = 3939042, MRREVIEWER = Jose\ Cantarero
+110. mpn06: AUTHOR = Martinez-P\'erez, Conchita and Nucinkis, Brita E. A., TITLE = Cohomological dimension of Mackey functors for infinite groups, JOURNAL = J. London Math. Soc. (2), FJOURNAL = Journal of the London Mathematical Society. Second Series, VOLUME = 74, YEAR = 2006, NUMBER = 2, PAGES = 379--396, MRCLASS = 20J05 (18G20 55N25), MRNUMBER = 2269585, MRREVIEWER = Jos\'e\ Manuel\ Casas Mir\'as,
+111. mvw06: AUTHOR = Mazza, Carlo and Voevodsky, Vladimir and Weibel, Charles, TITLE = Lecture notes on motivic cohomology, SERIES = Clay Mathematics Monographs, VOLUME = 2, PUBLISHER = American Mathematical Society, Providence, RI; Clay Mathematics Institute, Cambridge, MA, YEAR = 2006, PAGES = xiv+216, MRCLASS = 14F42 (19E15), MRNUMBER = 2242284, MRREVIEWER = Thomas\ Geisser,
+112. nar16: title=Parametrized higher category theory and higher algebra: Expos\'e IV -- Stability with respect to an orbital $\infty$-category, author=Denis Nardin, year=2016, eprint=1608.07704, archivePrefix=arXiv arXiv:[1608.07704](https://arxiv.org/abs/1608.07704)
+113. nar17: AUTHOR = Nardin, Denis, TITLE = Stability and distributivity over orbital $\infty$-categories, NOTE = PhD thesis, PUBLISHER = ProQuest LLC, Ann Arbor, MI, YEAR = 2017, PAGES = (no paging), MRCLASS = 99-05, MRNUMBER = 3781929,
+114. nee92: AUTHOR = Neeman, Amnon, TITLE = The connection between the $K$-theory localization theorem of Thomason, Trobaugh and Yao and the smashing subcategories of Bousfield and Ravenel, JOURNAL = Ann. Sci. \'Ecole Norm. Sup. (4), FJOURNAL = Annales Scientifiques de l'\'Ecole Normale Sup\'erieure. Quatri\`eme S\'erie, VOLUME = 25, YEAR = 1992, NUMBER = 5, PAGES = 547--566, MRCLASS = 18E30 (19D10 19E08), MRNUMBER = 1191736, MRREVIEWER = Steven\ E.\ Landsburg,
+115. nik16: title=Stable $\infty$-Operads and the multiplicative Yoneda lemma, author=Thomas Nikolaus, year=2016, eprint=1608.02901, archivePrefix=arXiv arXiv:[1608.02901](https://arxiv.org/abs/1608.02901)
+116. npr24: title=A symmetric monoidal fracture square, author=Niko Naumann and Luca Pol and Maxime Ramzi, year=2024, eprint=2411.05467, archivePrefix=arXiv arXiv:[2411.05467](https://arxiv.org/abs/2411.05467)
+117. ns18: AUTHOR = Nikolaus, Thomas and Scholze, Peter, TITLE = On topological cyclic homology, JOURNAL = Acta Math., FJOURNAL = Acta Mathematica, VOLUME = 221, YEAR = 2018, NUMBER = 2, PAGES = 203--409, MRCLASS = 55U35 (16E40 18E30 19D99), MRNUMBER = 3904731, MRREVIEWER = Geoffrey\ M. L. Powell,
+118. nw25: title=The presentable stable envelope of an exact category, author=Marius Nielsen and Christoph Winges, year=2025, eprint=2506.02598, archivePrefix=arXiv arXiv:[2506.02598](https://arxiv.org/abs/2506.02598)
+119. pst23: author = Piotr Pstrągowski, title = Synthetic spectra and the cellular motivic category, journal = Inventiones mathematicae, year = 2023, pages = 553–-681, volume = 232
+120. psw22: AUTHOR = Patchkoria, Irakli and Sanders, Beren and Wimmer, Christian, TITLE = The spectrum of derived Mackey functors, JOURNAL = Trans. Amer. Math. Soc., FJOURNAL = Transactions of the American Mathematical Society, VOLUME = 375, YEAR = 2022, NUMBER = 6, PAGES = 4057--4105, MRCLASS = 18G80 (19A99 55P91 55U35), MRNUMBER = 4419053, MRREVIEWER = J.\ D.\ Quigley,
+121. ro08: AUTHOR = R\"ondigs, Oliver and \O stv\ae r, Paul Arne, TITLE = Modules over motivic cohomology, JOURNAL = Adv. Math., FJOURNAL = Advances in Mathematics, VOLUME = 219, YEAR = 2008, NUMBER = 2, PAGES = 689--727, MRCLASS = 14F42 (55U35), MRNUMBER = 2435654, MRREVIEWER = Christian\ Haesemeyer
+122. rob15: AUTHOR = Robalo, Marco, TITLE = $K$-theory and the bridge from motives to noncommutative motives, JOURNAL = Adv. Math., FJOURNAL = Advances in Mathematics, VOLUME = 269, YEAR = 2015, PAGES = 399--550, MRCLASS = 14F42 (14A22 18D10 19E15), MRNUMBER = 3281141, MRREVIEWER = Jens\ Hornbostel,
+123. rs20: AUTHOR = Richarz, Timo and Scholbach, Jakob, TITLE = The intersection motive of the moduli stack of shtukas, JOURNAL = Forum Math. Sigma, FJOURNAL = Forum of Mathematics. Sigma, VOLUME = 8, YEAR = 2020, PAGES = Paper No. e8, 99, MRCLASS = 20G05 (14D23 14F42 19E15), MRNUMBER = 4061978, MRREVIEWER = Ilya\ Karzhemanov
+124. rui25a: title=Integral Artin motives I: Smooth objects and the ordinary t-structure, author=Raphaël Ruimy, year=2025, eprint=2211.02505, archivePrefix=arXiv arXiv:[2211.02505](https://arxiv.org/abs/2211.02505)
+125. rui25b: title=Integral Artin motives II: Perverse motives and Artin Vanishing Theorem, author=Raphaël Ruimy, year=2025, eprint=2504.15732, archivePrefix=arXiv arXiv:[2504.15732](https://arxiv.org/abs/2504.15732)
+126. sch18: AUTHOR = Schwede, Stefan, TITLE = Global homotopy theory, SERIES = New Mathematical Monographs, VOLUME = 34, PUBLISHER = Cambridge University Press, Cambridge, YEAR = 2018, PAGES = xviii+828, MRCLASS = 55P42 (18G55 19D99 55P91 55U35), MRNUMBER = 3838307, MRREVIEWER = Gregory\ Z.\ Arone,
+127. ser03: AUTHOR = Serp\'e, Christian, TITLE = Resolution of unbounded complexes in Grothendieck categories, JOURNAL = J. Pure Appl. Algebra, FJOURNAL = Journal of Pure and Applied Algebra, VOLUME = 177, YEAR = 2003, NUMBER = 1, PAGES = 103--112, MRCLASS = 18E15 (18E25 18G20), MRNUMBER = 1948842, MRREVIEWER = Luca\ Barbieri Viale,
+128. sga1: TITLE = Rev\^etements \'etales et groupe fondamental, SERIES = Lecture Notes in Mathematics, VOLUME = 224, PUBLISHER = Springer-Verlag, Berlin-New York, YEAR = 1971, PAGES = xxii+447, MRCLASS = 14-06 (14E20), MRNUMBER = 354651, shorthand = SGA1,
+129. sga4.1: TITLE = Th\'eorie des topos et cohomologie \'etale des sch\'emas. Tome 1: Th\'eorie des topos, SERIES = Lecture Notes in Mathematics, VOLUME = 269, PUBLISHER = Springer-Verlag, Berlin-New York, YEAR = 1972, PAGES = xix+525, MRCLASS = 14-06, MRNUMBER = 354652, shorthand = SGA4.1
+130. sga4.2: TITLE = Th\'eorie des topos et cohomologie \'etale des sch\'emas. Tome 2, SERIES = Lecture Notes in Mathematics, VOLUME = Vol. 270, PUBLISHER = Springer-Verlag, Berlin-New York, YEAR = 1972, PAGES = iv+418, MRCLASS = 14-06, MRNUMBER = 354653, shorthand = SGA4.2
+131. shi07: author = Brooke Shipley, journal = American Journal of Mathematics, number = 2, pages = 351--379, publisher = Johns Hopkins University Press, title = $H\bZ$-Algebra Spectra Are Differential Graded Algebras, volume = 129, year = 2007,
+132. sos19: AUTHOR = Sosnilo, Vladimir, TITLE = Theorem of the heart in negative K-theory for weight structures, JOURNAL = Doc. Math., FJOURNAL = Documenta Mathematica, VOLUME = 24, YEAR = 2019, PAGES = 2137--2158, MRCLASS = 18E05 (14F42 18G80 19D35 19E99), MRNUMBER = 4033821, MRREVIEWER = Jens\ Hornbostel,
+133. ss00: AUTHOR = Schwede, Stefan and Shipley, Brooke E., TITLE = Algebras and modules in monoidal model categories, JOURNAL = Proc. London Math. Soc. (3), FJOURNAL = Proceedings of the London Mathematical Society. Third Series, VOLUME = 80, YEAR = 2000, NUMBER = 2, PAGES = 491--511, MRCLASS = 18D10 (18D50 55P48 55U35), MRNUMBER = 1734325, MRREVIEWER = Mark\ Hovey,
+134. ss03: AUTHOR = Schwede, Stefan and Shipley, Brooke, TITLE = Stable model categories are categories of modules, JOURNAL = Topology, FJOURNAL = Topology. An International Journal of Mathematics, VOLUME = 42, YEAR = 2003, NUMBER = 1, PAGES = 103--153, MRCLASS = 55U35 (18G55 55P42 55P43), MRNUMBER = 1928647, MRREVIEWER = Mark\ Hovey,
+135. stacks: author = The Stacks project authors, title = The Stacks project, howpublished = \urlhttps://stacks.math.columbia.edu, year = 2024, shorthand = Stacks
+136. str20: title=Is $D$ symmetric monoidal?, author=Neil Strickland, year=2020, eprint=2001.07404, archivePrefix=arXiv, arXiv:[2001.07404](https://arxiv.org/abs/2001.07404)
+137. sv00: AUTHOR = Suslin, Andrei and Voevodsky, Vladimir, TITLE = Relative cycles and Chow sheaves, BOOKTITLE = Cycles, transfers, and motivic homology theories, SERIES = Ann. of Math. Stud., VOLUME = 143, PAGES = 10--86, PUBLISHER = Princeton Univ. Press, Princeton, NJ, YEAR = 2000, MRCLASS = 14C25, MRNUMBER = 1764199,
+138. sw25: title=On exact categories and their stable envelopes, author=Victor Saunier and Christoph Winges, year=2025, eprint=2502.03408, archivePrefix=arXiv arXiv:[2502.03408](https://arxiv.org/abs/2502.03408)
+139. tam94: AUTHOR = Tamme, G\"unter, TITLE = Introduction to \'etale cohomology, SERIES = Universitext, NOTE = Translated from the German by Manfred Kolster, PUBLISHER = Springer-Verlag, Berlin, YEAR = 1994, PAGES = x+186, MRCLASS = 14F20, MRNUMBER = 1317816
+140. td87: AUTHOR = tom Dieck, Tammo, TITLE = Transformation groups, SERIES = De Gruyter Studies in Mathematics, VOLUME = 8, PUBLISHER = Walter de Gruyter \& Co., Berlin, YEAR = 1987, PAGES = x+312, MRCLASS = 57Sxx (57-02), MRNUMBER = 889050, MRREVIEWER = Shmuel\ Weinberger,
+141. tre15: title=Representations of finite groups on modules over K-theory (with an appendix by Akhil Mathew), author=David Treumann, year=2015, eprint=1503.02477, archivePrefix=arXiv arXiv:[1503.02477](https://arxiv.org/abs/1503.02477)
+142. tv03: title=Segal topoi and stacks over Segal categories, author=Bertrand Toen and Gabriele Vezzosi, year=2003, eprint=math/0212330, archivePrefix=arXiv arXiv:[math/0212330](https://arxiv.org/abs/math/0212330)
+143. tw95: AUTHOR = Th\'evenaz, Jacques and Webb, Peter, TITLE = The structure of Mackey functors, JOURNAL = Trans. Amer. Math. Soc., FJOURNAL = Transactions of the American Mathematical Society, VOLUME = 347, YEAR = 1995, NUMBER = 6, PAGES = 1865--1961, MRCLASS = 20C20 (20J05), MRNUMBER = 1261590, MRREVIEWER = J.\ L.\ Alperin,
+144. voe00: AUTHOR = Voevodsky, Vladimir, TITLE = Triangulated categories of motives over a field, BOOKTITLE = Cycles, transfers, and motivic homology theories, SERIES = Ann. of Math. Stud., VOLUME = 143, PAGES = 188--238, PUBLISHER = Princeton Univ. Press, Princeton, NJ, YEAR = 2000, MRCLASS = 14F42 (14C25), MRNUMBER = 1764202,
+145. voe10: AUTHOR = Voevodsky, Vladimir, TITLE = Cancellation theorem, JOURNAL = Doc. Math., FJOURNAL = Documenta Mathematica, YEAR = 2010, PAGES = 671--685, MRCLASS = 14F42 (19E15), MRNUMBER = 2804268, MRREVIEWER = Oliver\ R\"ondigs,
+146. vsf00: AUTHOR = Voevodsky, Vladimir and Suslin, Andrei and Friedlander, Eric M., TITLE = Cycles, transfers, and motivic homology theories, SERIES = Annals of Mathematics Studies, VOLUME = 143, PUBLISHER = Princeton University Press, Princeton, NJ, YEAR = 2000, PAGES = vi+254, MRCLASS = 14F42 (14C25 19E15), MRNUMBER = 1764197, MRREVIEWER = Spencer\ J.\ Bloch,
+147. zen18: title=Equivariant Eilenberg-Mac Lane spectra in cyclic $p$-groups, author=Mingcong Zeng, year=2018, eprint=1710.01769, archivePrefix=arXiv, arXiv:[1710.01769](https://arxiv.org/abs/1710.01769)
+
