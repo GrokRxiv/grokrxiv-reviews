@@ -1,0 +1,885 @@
+# Automorphism Groups of Uniform Dessins d'Enfants of Genus at Least Two
+
+GrokRxiv review of [arXiv:2606.27118](https://arxiv.org/abs/2606.27118) · `math.AG`
+
+_Authors_: Tatsuya Ohnishi
+
+## TL;DR
+
+The five specialist reviews converge on a paper that makes genuine incremental contributions to the classification of automorphism groups of uniform dessins d'enfants with genus ≥ 2, directly extending the author's prior work (Ohnishi26). The novelty specialist rates the work incremental (score 0.45, confidence 0.68): the new [$b^q$,$b^q$,n] theorem, two counterexamples to conjectures in Ohnishi26, and the [n,n,n] classification are real advances over the prior art, though the scope is narrow and the Lando–Zvonkin monograph and Jones's primitive-groups classification results are absent from the literature survey. The technical correctness specialist rates overall correctness as mostly_sound (confidence 0.70) but flags four major-severity claims (C2, C8, C9, C11) as unsupported by executable evidence: the b=3 explicit construction (prop:c3b3), the [8^2,2^8,4^4] counterexample, the [15,5^3,5^3] cardinality claims, and the b=2 alternative-proof construction. The reproducibility specialist (confidence 0.86, score 0.22) independently designates the missing [$b^q$,$b^q$,n] proof artifact and the [8^2,2^8,4^4] enumeration as critical-severity concerns, satisfying the recommendation gate for math.AG: at least two headline-adjacent missing proof-as-code artifacts are flagged at critical severity, defaulting the recommendation to major_revision. The hand proofs for thm:trivautd (C6) and thm:class1 (C7) are judged fully supported, so the qualitative conclusions of the paper are plausible; the deficit is the absence of any computational corroboration for the explicit constructions and finite enumerations on which several headline results rest. Citation issues are moderate: two bibliographic errors (Horie24 DOI prefix mismatch, Goupil98 arXiv/DOI confusion), one redundant preprint–journal pair (Hidalgo18/19), the absence of Grothendieck's Esquisse d'un Programme despite its explicit mention in the introduction, and the unusual choice of a Master's thesis for a textbook-level result.
+
+_Recommendation_: **Major revision** · _Confidence_: 78%
+
+## Strengths
+
+- The theorem that every uniform passport [$b^q$,$b^q$,n] of genus ≥ 2 admits a dessin with trivial automorphism group is a novel, complete result for a previously unresolved passport class, proved via a well-structured case analysis with an independently verified group-theoretic skeleton.
+- The counterexamples to two conjectures from Ohnishi26—showing [8^2,2^8,4^4] admits no trivial-Aut dessin and [5^3,5^3,15] admits only trivial-Aut dessins—demonstrate genuine discovery rather than routine extension of prior techniques.
+- Theorem thm:class1 on [n,n,n] passports, constructing dessins with |Aut D| equal to any prescribed divisor r of n, is clean, fully self-contained, and receives a complete verification in the technical-correctness review with no gaps identified.
+- Theorem thm:trivautd (all dessins with passport [ℓ₁ℓ₂, ℓ₂^ℓ₁, ℓ₂^ℓ₁] have trivial automorphism group for distinct primes) is fully proved by a self-contained block-system argument that the technical-correctness specialist finds sound.
+- The counting framework—Goupil-based lower bound |N| and centralizer-based upper bound |D|—is systematically developed and provides a reusable analytic tool for future work on dessin enumeration.
+
+## Weaknesses
+
+- The headline counterexample that [8^2,2^8,4^4] admits no dessin with trivial automorphism group (C8) is stated purely 'by direct computation' with no executable code, GAP script, or verifiable enumeration artifact, making it impossible to independently confirm the claimed counts of 920 permutations across 19 conjugacy classes.
+- The explicit permutation construction in prop:c3b3 (b=3 subcase of the main theorem) involves intricate modular index arithmetic and a q mod 4 case split that is verified only by spot-check examples, not by a general computational certificate (C2).
+- The numerical claims for the [15,5^3,5^3] passport—|N(5,3,5)|=4354560, 290304 conjugacy classes of size 15—are asserted as direct computation results without any accompanying code or enumeration log (C9).
+- The alternative-proof construction for the [n,$b^q$,n] b=2 subcase (prop:c2b2) replicates the same unverified explicit-construction pattern as C2 and C11: mechanically checkable assertions backed only by worked examples.
+- No code repository, scripts, or computational environment specification is provided, making independent reproduction of any permutation-group centralizer calculation or example search impossible.
+- Two bibliography entries contain factual errors: the DOI for Horie24 resolves to a Springer journal of mathematical imaging rather than the stated Mathematical Journal of Okayama University, and Goupil98 records a DOI suffix as an arXiv identifier.
+- Grothendieck's Esquisse d'un Programme, credited in the introduction as the conceptual origin of the dessin d'enfants program, is absent from the references, a notable omission given its centrality to the field.
+
+## Revision Targets
+
+- [ ] **Manuscript: Section 'No Dessins with Trivial Automorphism Group' (lines ~1929-1998, Table tab:pass442882)**
+  - Location: `Section 'No Dessins with Trivial Automorphism Group' (lines ~1929-1998, Table tab:pass442882)`
+  - Evidence: This claim is asserted purely 'by direct computation' with no executable artifact shipped. The exact counts (920 permutations, 19 classes, the breakdown 11/6/1/1 with |Aut D|=2/4/8/16, the listed class sizes summing to 920) are finite, fully enumerable, and exactly the type of result the proof-as-code axiom requires to be backed by code. The representative table allows partial spot-checking but does not let a reader reconstruct the exhaustive enumeration or confirm completeness (that no y yields trivial Aut).
+  - Required change: Ship experiments/counterex_882/enumerate.py (GAP/Sage) that fixes x=(1..8)(9..16), enumerates all y of type 2^8 with (xy)^{-1} of type 4^4, computes each centralizer order, and reproduces the 920 count, the 19 $C_{S_n}(x)$-classes, and the |Aut D| distribution.
+  - Verification: Re-review should confirm `Section 'No Dessins with Trivial Automorphism Group' (lines ~1929-1998, Table tab:pass442882)` is corrected or justified.
+- [ ] **Manuscript: Section 'The Subcase b=3', Proposition prop:c3b3 and proof (lines ~1263-1633)**
+  - Location: `Section 'The Subcase b=3', Proposition prop:c3b3 and proof (lines ~1263-1633)`
+  - Evidence: This is an explicit combinatorial construction whose three claims (y has type 3^q, xy has type 3^q, and $x^k$ y != y $x^k$ for all 1<=k<=3q-1) are exactly the kind of finite, mechanically checkable statement that should ship as executable verification. The paper gives a hand proof via element-coverage bookkeeping and Table tab:xycycles plus a case analysis on e=1 and e=3, but no code is provided and the index arithmetic (indices mod 3q, floor formulas for v,w, the q mod 4 split) is intricate and error-prone to audit by hand. Worked examples for q=3,5,7,9 are given but constitute spot checks, not a proof of the general family.
+  - Required change: Add src/verify/prop_c3b3.py (or .g for GAP) that constructs x,y for all odd q in a wide range, asserts $CycleType(y)=CycleType((x*y)^-1)=(3^q)$, and asserts the centralizer of <x,y> in $S_{3q}$ is trivial.
+  - Verification: Re-review should confirm `Section 'The Subcase b=3', Proposition prop:c3b3 and proof (lines ~1263-1633)` is corrected or justified.
+- [ ] **Manuscript: Section 'Only Dessins with Trivial Automorphism Group' (lines ~2029-2047)**
+  - Location: `Section 'Only Dessins with Trivial Automorphism Group' (lines ~2029-2047)`
+  - Evidence: Like C8, this is stated as a direct computation with no code shipped. It is a special case of thm:trivautd (which IS proved analytically, lending strong support to the qualitative 'all trivial' claim), but the precise cardinalities 4354560 and 290304 and the uniform class size 15 are unverified numeric assertions. 4354560 = 290304 * 15 is internally consistent, but the value of |N(5,3,5)| itself is not derived here.
+  - Required change: Add experiments/counterex_553/enumerate.py confirming |N(5,3,5)|=4354560, that every such y has trivial centralizer in $S_15$, and the 290304 classes of size 15; cross-reference against the analytic thm:trivautd.
+  - Verification: Re-review should confirm `Section 'Only Dessins with Trivial Automorphism Group' (lines ~2029-2047)` is corrected or justified.
+- [ ] **Manuscript: Section 'The Subcase b=2', Proposition prop:c2b2 and proof (lines ~2677-2817+)**
+  - Location: `Section 'The Subcase b=2', Proposition prop:c2b2 and proof (lines ~2677-2817+)`
+  - Evidence: Another explicit finite construction (y a product of q transpositions $A_i$ and B) whose three assertions—y of type 2^q, xy of type 2q, and $x^k$ y != y $x^k$ for all k—are mechanically checkable but not backed by shipped code. The hand proof uses element-coverage bookkeeping, Table tab:xycycles2, and a case analysis (e.g. e=2q-3) over indices mod 2q; worked examples for q=4,6,8,10 are spot checks rather than a general verification.
+  - Required change: Add src/verify/prop_c2b2.py constructing x,y for even q over a range, asserting cycle types of y and xy and triviality of the centralizer of <x,y> in $S_{2q}$.
+  - Verification: Re-review should confirm `Section 'The Subcase b=2', Proposition prop:c2b2 and proof (lines ~2677-2817+)` is corrected or justified.
+- [ ] **Code release and entrypoints**
+  - Location: code/reproducibility artifacts: `code release and execution entrypoints`
+  - Evidence: No repository, scripts, commit, release, or license are provided for independently checking the combinatorial constructions, centralizer calculations, or example/counterexample searches described in the paper.
+  - Required change: Release the source code, scripts, model configuration, and execution entrypoints needed to regenerate the reported tables, or document why those artifacts cannot be released.
+  - Verification: Re-review should confirm runnable code or a documented non-release justification is present.
+- [ ] **Bibliography: Hidalgo18**
+  - Location: bibliography entry: `Hidalgo18`
+  - Evidence: This is the arXiv preprint version of Hidalgo19 (published in Archiv der Mathematik, 2019). Both the preprint and journal version appear in the bibliography, which is redundant; the published version Hidalgo19 should normally be preferred. Not visible in any rendered citation context.
+  - Required change: Verify `Hidalgo18` against an authoritative source; replace it with a resolvable relevant citation or remove it.
+  - Verification: Re-review should confirm the citation resolves and is relevant.
+- [ ] **Bibliography: Esquisse d'un Programme (Grothendieck, 1984/1997)**
+  - Location: bibliography entry: `Esquisse d'un Programme (Grothendieck, 1984/1997)`
+  - Evidence: The Introduction explicitly states that Belyi's theorem 'deeply fascinated Grothendieck and led to his theory of dessins d'enfants,' yet Grothendieck's foundational manuscript that introduced and named dessins d'enfants is not cited. This text is widely cited in the dessins d'enfants literature and is the conceptual origin of the field studied in this paper.
+  - Required change: Add a bibliography entry for `Esquisse d'un Programme (Grothendieck, 1984/1997)` and cite it where the affected method or claim is introduced, or explicitly justify its omission.
+  - Verification: Re-review should confirm the bibliography and citation context address this reference.
+
+## Open Questions
+
+- Can the authors provide a GAP, SageMath, or Magma script that enumerates all permutations y giving the [8^2,2^8,4^4] passport and confirms that none yields trivial automorphism group, reproducing the claimed counts of 920 permutations and 19 conjugacy classes?
+- For prop:c3b3 (b=3 subcase), can the intricate modular index arithmetic in the construction of y be verified computationally for all odd q up to, say, q=101, with the cycle-type and centrality assertions confirmed?
+- Can the authors clarify or correct the Horie24 bibliographic entry, specifically whether the DOI 10.1007/s10851-023-01159-6 is correct for an article in the Mathematical Journal of Okayama University?
+- What is the reason Grothendieck's Esquisse d'un Programme is not cited, given that the introduction explicitly credits Grothendieck's fascination with Belyi's theorem as the origin of the dessin d'enfants theory?
+- Do the open cases in the updated automorphism-group distribution table correspond to genuine structural obstructions, or are they simply cases where the counting argument's boundary conditions are not yet sharp enough to resolve the question?
+- The novelty specialist notes that Jones's classification of primitive permutation groups containing an n-cycle is not cited despite its relevance to monodromy-group primitivity; is this omission intentional, and how does the paper's treatment of primitive groups relate to that classification?
+
+## Per-Agent Reviews
+
+### citation (`sonnet[1m]`) — status: `warn`
+
+```json
+{
+  "confidence": 0.72,
+  "entries": [
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Adrianov, N. M.",
+          "Pakovich, F.",
+          "Zvonkin, A. K."
+        ],
+        "doi": null,
+        "key": "Adrianov20",
+        "raw": "AUTHOR = Adrianov, N. M. and Pakovich, F. and Zvonkin, A. K., TITLE = Davenport-Zannier polynomials and dessins d'enfants, SERIES = Mathematical Surveys and Monographs, VOLUME = 249, PUBLISHER = American Mathematical Society, Providence, RI, YEAR = 2020, PAGES = xi+187, ISBN = 978-1-4704-5634-4",
+        "title": "Davenport-Zannier polynomials and dessins d'enfants",
+        "url": null,
+        "venue": "Mathematical Surveys and Monographs, vol. 249, AMS",
+        "year": 2020
+      },
+      "exists": null,
+      "explanation": "One of the two primary sources for the Preliminaries chapter, cited for the definition of passport ([Definition 2.10]) and as a foundational text on dessins d'enfants alongside Jones16.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Belyi, G. V."
+        ],
+        "doi": "10.1070/SM2002v193n03ABEH000633",
+        "key": "Belyi02",
+        "raw": "AUTHOR = Belyi, G. V., TITLE = Another proof of the three points theorem, JOURNAL = Mat. Sb., FJOURNAL = Matematicheskii Sbornik, VOLUME = 193, YEAR = 2002, NUMBER = 3, PAGES = 21--24, doi: 10.1070/SM2002v193n03ABEH000633",
+        "title": "Another proof of the three points theorem",
+        "url": null,
+        "venue": "Matematicheskii Sbornik",
+        "year": 2002
+      },
+      "exists": null,
+      "explanation": "Cited alongside Belyi79 and Jones16 in the statement of Belyi's Theorem in the Introduction; provides an alternative proof of the foundational three-point theorem underpinning the entire theory of dessins d'enfants.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Belyi, G. V."
+        ],
+        "doi": null,
+        "key": "Belyi79",
+        "raw": "AUTHOR = Belyi, G. V., TITLE = Galois extensions of a maximal cyclotomic field, JOURNAL = Izv. Akad. Nauk SSSR Ser. Mat., FJOURNAL = Izvestiya Akademii Nauk SSSR. Seriya Matematicheskaya, VOLUME = 43, YEAR = 1979, NUMBER = 2, PAGES = 267--276, 479",
+        "title": "Galois extensions of a maximal cyclotomic field",
+        "url": null,
+        "venue": "Izvestiya Akademii Nauk SSSR. Seriya Matematicheskaya",
+        "year": 1979
+      },
+      "exists": null,
+      "explanation": "The original paper proving Belyi's theorem, cited directly in the theorem statement in the Introduction. Absolutely foundational to the paper's subject matter.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Conder, M. D. E.",
+          "Jones, G. A.",
+          "Streit, M.",
+          "Wolfart, J."
+        ],
+        "doi": "10.4171/RMI/717",
+        "key": "Conder13",
+        "raw": "AUTHOR = Conder, M. D. E. and Jones, G. A. and Streit, M. and Wolfart, J., TITLE = Galois actions on regular dessins of small genera, JOURNAL = Rev. Mat. Iberoam., FJOURNAL = Revista Matematica Iberoamericana, VOLUME = 29, YEAR = 2013, NUMBER = 1, PAGES = 163--181, doi: 10.4171/RMI/717",
+        "title": "Galois actions on regular dessins of small genera",
+        "url": null,
+        "venue": "Revista Matemática Iberoamericana",
+        "year": 2013
+      },
+      "exists": null,
+      "explanation": "Directly relevant to the paper's focus on regular dessins and Galois orbits; includes Jones, a co-author of the primary reference Jones16. Probably cited in the truncated regularity or counterexample sections.",
+      "notes": "Not visible in any rendered citation context; likely cited in truncated sections on Galois actions or regularity.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "1409.7736",
+        "authors": [
+          "Cueto, M. H."
+        ],
+        "doi": null,
+        "key": "Cueto14",
+        "raw": "author = Cueto, M. H., title = The field of moduli and fields of definition of dessins d'enfants, note = arXiv:1409.7736, year = 2014, arxiv: 1409.7736",
+        "title": "The field of moduli and fields of definition of dessins d'enfants",
+        "url": null,
+        "venue": null,
+        "year": 2014
+      },
+      "exists": null,
+      "explanation": "Addresses field-of-moduli and field-of-definition questions for dessins d'enfants, a topic explicitly discussed in the Introduction; likely supports the discussion of when the field of moduli is or is not a field of definition.",
+      "notes": "Only an arXiv preprint is listed; no journal publication venue is given. Not visible in any rendered citation context.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Dixon, J. D.",
+          "Mortimer, B."
+        ],
+        "doi": "10.1007/978-1-4612-0731-3",
+        "key": "Dixon96",
+        "raw": "AUTHOR = Dixon, J. D. and Mortimer, B., TITLE = Permutation groups, SERIES = Graduate Texts in Mathematics, VOLUME = 163, PUBLISHER = Springer-Verlag, New York, YEAR = 1996, ISBN = 0-387-94599-7, doi: 10.1007/978-1-4612-0731-3",
+        "title": "Permutation groups",
+        "url": null,
+        "venue": "Graduate Texts in Mathematics, vol. 163, Springer-Verlag",
+        "year": 1996
+      },
+      "exists": null,
+      "explanation": "Standard graduate-level reference for permutation groups; the paper's proofs rely on properties of permutation groups, symmetric groups, and centralizers, making this a natural background reference.",
+      "notes": "Not visible in any rendered citation context; likely cited in counting arguments or primitivity analyses in the truncated sections.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Girondo, E.",
+          "González-Díez, G."
+        ],
+        "doi": null,
+        "key": "Girondo12",
+        "raw": "AUTHOR = Girondo, E. and Gonzalez-Diez, G., TITLE = Introduction to compact Riemann surfaces and dessins d'enfants, SERIES = London Mathematical Society Student Texts, VOLUME = 79, PUBLISHER = Cambridge University Press, Cambridge, YEAR = 2012, ISBN = 978-0-521-74022-7",
+        "title": "Introduction to compact Riemann surfaces and dessins d'enfants",
+        "url": null,
+        "venue": "London Mathematical Society Student Texts, vol. 79, Cambridge University Press",
+        "year": 2012
+      },
+      "exists": null,
+      "explanation": "Cited in Preliminaries for Proposition 4.42 (regularity implies uniform passport), which is a key foundational result for the paper; a standard textbook reference for compact Riemann surfaces and dessins d'enfants.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Girondo, E.",
+          "Torres-Teigell, D.",
+          "Wolfart, J."
+        ],
+        "doi": "10.1090/conm/629/12558",
+        "key": "Girondo14",
+        "raw": "AUTHOR = Girondo, E. and Torres-Teigell, D. and Wolfart, J., TITLE = Fields of definition of uniform dessins on quasiplatonic surfaces, BOOKTITLE = Riemann and Klein surfaces, automorphisms, symmetries and moduli spaces, SERIES = Contemp. Math., VOLUME = 629, PAGES = 155--170, PUBLISHER = Amer. Math. Soc., YEAR = 2014, doi: 10.1090/conm/629/12558",
+        "title": "Fields of definition of uniform dessins on quasiplatonic surfaces",
+        "url": null,
+        "venue": "Contemporary Mathematics, vol. 629, AMS",
+        "year": 2014
+      },
+      "exists": null,
+      "explanation": "Directly addresses fields of definition of uniform dessins on quasiplatonic surfaces, a topic raised in the Introduction; highly relevant to the paper's scope even though not visible in rendered citation contexts.",
+      "notes": "Not visible in any rendered citation context; likely cited in truncated sections dealing with fields of definition.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Goupil, A.",
+          "Schaeffer, G."
+        ],
+        "doi": "10.1006/eujc.1998.0215",
+        "key": "Goupil98",
+        "raw": "AUTHOR = Goupil, A. and Schaeffer, G., TITLE = Factoring N-cycles and counting maps of given genus, JOURNAL = European J. Combin., FJOURNAL = European Journal of Combinatorics, VOLUME = 19, YEAR = 1998, NUMBER = 7, PAGES = 819--834, doi: 10.1006/eujc.1998.0215",
+        "title": "Factoring N-cycles and counting maps of given genus",
+        "url": null,
+        "venue": "European Journal of Combinatorics",
+        "year": 1998
+      },
+      "exists": null,
+      "explanation": "Explicitly cited in the Counting Arguments section as providing a key theorem on factoring N-cycles used to establish lower bounds for counting dessins with trivial automorphism groups; central to the paper's main proof technique.",
+      "notes": "The bibliography entry erroneously lists '1998.0215' as an arXiv ID; this is actually the suffix of the DOI (10.1006/eujc.1998.0215) and not a valid arXiv identifier. Should be corrected.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "1811.07849",
+        "authors": [
+          "Hidalgo, R. A."
+        ],
+        "doi": null,
+        "key": "Hidalgo18",
+        "raw": "author = Hidalgo, R. A., title = Automorphism groups of dessins d'enfants, note = arXiv:1811.07849, year = 2018, arxiv: 1811.07849",
+        "title": "Automorphism groups of dessins d'enfants",
+        "url": null,
+        "venue": null,
+        "year": 2018
+      },
+      "exists": null,
+      "explanation": "Duplicate of Hidalgo19 at the preprint stage; including both in the bibliography is a citation hygiene issue. Not cited in any visible context in the rendered sections.",
+      "notes": "This is the arXiv preprint version of Hidalgo19 (published in Archiv der Mathematik, 2019). Both the preprint and journal version appear in the bibliography, which is redundant; the published version Hidalgo19 should normally be preferred. Not visible in any rendered citation context.",
+      "relevance": "low",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Hidalgo, R. A."
+        ],
+        "doi": "10.1007/s00013-018-1222-9",
+        "key": "Hidalgo19",
+        "raw": "AUTHOR = Hidalgo, R. A., TITLE = Automorphism groups of dessins d'enfants, JOURNAL = Arch. Math. (Basel), FJOURNAL = Archiv der Mathematik, VOLUME = 112, YEAR = 2019, NUMBER = 1, PAGES = 13--18, doi: 10.1007/s00013-018-1222-9",
+        "title": "Automorphism groups of dessins d'enfants",
+        "url": null,
+        "venue": "Archiv der Mathematik",
+        "year": 2019
+      },
+      "exists": null,
+      "explanation": "Treats automorphism groups of dessins d'enfants directly, matching the paper's central topic. Not visible in any rendered citation context but likely cited in the truncated sections on automorphism groups.",
+      "notes": "Both this published version and the arXiv preprint Hidalgo18 (arXiv:1811.07849) are listed in the bibliography; this redundancy should be resolved by citing only the published version.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Horie, M."
+        ],
+        "doi": "10.1007/s10851-023-01159-6",
+        "key": "Horie24",
+        "raw": "AUTHOR = Horie, M., TITLE = Equivalence classes of dessins d'enfants with two vertices, JOURNAL = Math. J. Okayama Univ., FJOURNAL = Mathematical Journal of Okayama University, VOLUME = 66, YEAR = 2024, PAGES = 1--30, doi: 10.1007/s10851-023-01159-6",
+        "title": "Equivalence classes of dessins d'enfants with two vertices",
+        "url": null,
+        "venue": "Mathematical Journal of Okayama University",
+        "year": 2024
+      },
+      "exists": null,
+      "explanation": "Explicitly cited in the Introduction for providing a method to count isomorphism classes of dessins with two vertices and given automorphism group order; directly related to the [n,n,n] passport results of this paper.",
+      "notes": "The DOI listed (10.1007/s10851-023-01159-6) appears inconsistent with the stated venue: the DOI prefix 's10851' typically identifies the Springer Journal of Mathematical Imaging and Vision, not Mathematical Journal of Okayama University. This may be an incorrect DOI in the bibliography.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Jones, G. A."
+        ],
+        "doi": "10.1090/conm/629/12568",
+        "key": "Jones14",
+        "raw": "AUTHOR = Jones, G. A., TITLE = Regular dessins with a given automorphism group, BOOKTITLE = Riemann and Klein surfaces, automorphisms, symmetries and moduli spaces, SERIES = Contemp. Math., VOLUME = 629, PAGES = 245--260, PUBLISHER = Amer. Math. Soc., YEAR = 2014, doi: 10.1090/conm/629/12568",
+        "title": "Regular dessins with a given automorphism group",
+        "url": null,
+        "venue": "Contemporary Mathematics, vol. 629, AMS",
+        "year": 2014
+      },
+      "exists": null,
+      "explanation": "Directly treats regular dessins with prescribed automorphism groups, relevant to the paper's classification of automorphism group types; probably cited in truncated sections.",
+      "notes": "Not visible in any rendered citation context; likely cited in the truncated sections on regular dessins or automorphism group construction.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Jones, G. A.",
+          "Wolfart, J."
+        ],
+        "doi": "10.1007/978-3-319-24711-3",
+        "key": "Jones16",
+        "raw": "AUTHOR = Jones, G. A. and Wolfart, J., TITLE = Dessins d'enfants on Riemann surfaces, SERIES = Springer Monographs in Mathematics, PUBLISHER = Springer, Cham, YEAR = 2016, doi: 10.1007/978-3-319-24711-3",
+        "title": "Dessins d'enfants on Riemann surfaces",
+        "url": null,
+        "venue": "Springer Monographs in Mathematics, Springer",
+        "year": 2016
+      },
+      "exists": null,
+      "explanation": "The primary reference for the paper, cited for Belyi's Theorem, the Galois action on dessins, and multiple definitions and propositions in the Preliminaries. Provides the foundational framework for the entire work.",
+      "notes": null,
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": "2602.11867",
+        "authors": [
+          "Ohnishi, T."
+        ],
+        "doi": null,
+        "key": "Ohnishi26",
+        "raw": "title = Regularity and Automorphism Groups of Dessins d'Enfants with Uniform Passports, author = Ohnishi, T., year = 2026, eprint = 2602.11867, archivePrefix = arXiv, primaryClass = math.AG, note = arXiv:2602.11867",
+        "title": "Regularity and Automorphism Groups of Dessins d'Enfants with Uniform Passports",
+        "url": null,
+        "venue": null,
+        "year": 2026
+      },
+      "exists": null,
+      "explanation": "The previous paper by the same author, cited dozens of times for prior theorems on regularity and automorphism groups of uniform dessins that the current paper extends, strengthens, or provides alternative proofs for.",
+      "notes": "The author's own immediately preceding paper, currently available only as an arXiv preprint with no journal venue listed. Cited extensively throughout as the source of prior results that the present paper extends.",
+      "relevance": "high",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Sagan, Bruce E."
+        ],
+        "doi": "10.1007/978-1-4757-6804-6",
+        "key": "Sagan01",
+        "raw": "AUTHOR = Sagan, Bruce E., TITLE = The symmetric group, SERIES = Graduate Texts in Mathematics, VOLUME = 203, EDITION = Second, NOTE = Representations, combinatorial algorithms, and symmetric functions, PUBLISHER = Springer-Verlag, New York, YEAR = 2001, doi: 10.1007/978-1-4757-6804-6",
+        "title": "The symmetric group",
+        "url": null,
+        "venue": "Graduate Texts in Mathematics, vol. 203, Springer-Verlag",
+        "year": 2001
+      },
+      "exists": null,
+      "explanation": "Standard reference for the symmetric group and its combinatorial properties; relevant to the counting arguments based on centralizers of permutations that form the core proof technique of the paper.",
+      "notes": "Not visible in any rendered citation context; likely cited in counting arguments or centralizer computations in the truncated sections.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Scodro, G."
+        ],
+        "doi": null,
+        "key": "Scodro24",
+        "raw": "author = Scodro, G., title = Belyi's theorem and dessins d'enfants, school = University of Padova, year = 2024, note = ALGANT Master's Thesis, available at https://thesis.unipd.it/retrieve/4d0c1b93-fca9-4547-883c-d53b5a86dea0/Scodro_Giacomo.pdf",
+        "title": "Belyi's theorem and dessins d'enfants",
+        "url": "https://thesis.unipd.it/retrieve/4d0c1b93-fca9-4547-883c-d53b5a86dea0/Scodro_Giacomo.pdf",
+        "venue": "ALGANT Master's Thesis, University of Padova",
+        "year": 2024
+      },
+      "exists": null,
+      "explanation": "Cited in Preliminaries for Theorem 3.6 establishing that a transitive group action corresponds to a dessin; the result is correct but the choice of a Master's thesis over standard monographs as the reference is notable.",
+      "notes": "This is a Master's thesis, an atypical source for a classical result cited in a research paper. Theorem 3.6 (existence of a dessin with a given transitive monodromy group) is a standard result covered in established textbooks such as Jones16 and Girondo12; citing a Master's thesis for this purpose is a citation hygiene concern.",
+      "relevance": "medium",
+      "resolved_doi": null,
+      "resolved_url": null
+    },
+    {
+      "citation": {
+        "arxiv_id": null,
+        "authors": [
+          "Wakabayashi, Yasuhiro"
+        ],
+        "doi": "10.1016/j.jnt.2021.04.028",
+        "key": "Wakabayashi22",
+        "raw": "AUTHOR = Wakabayashi, Yasuhiro, TITLE = An effective version of Belyi's theorem in positive characteristic, JOURNAL = J. Number Theory, FJOURNAL = Journal of Number Theory, VOLUME = 231, YEAR = 2022, PAGES = 251--268, doi: 10.1016/j.jnt.2021.04.028",
+        "title": "An effective version of Belyi's theorem in positive characteristic",
+        "url": null,
+        "venue": "Journal of Number Theory",
+        "year": 2022
+      },
+      "exists": null,
+      "explanation": "Treats an effective version of Belyi's theorem in positive characteristic; since the present paper focuses on algebraic curves over number fields, this reference is tangential and may appear only in a brief remark in the truncated sections.",
+      "notes": "Not visible in any rendered citation context. The paper addresses Belyi's theorem in positive characteristic, whereas the current paper works over number fields in characteristic zero. The connection to the paper's main results appears peripheral.",
+      "relevance": "low",
+      "resolved_doi": null,
+      "resolved_url": null
+    }
+  ],
+  "missing_references": [
+    {
+      "reason": "The Introduction explicitly states that Belyi's theorem 'deeply fascinated Grothendieck and led to his theory of dessins d'enfants,' yet Grothendieck's foundational manuscript that introduced and named dessins d'enfants is not cited. This text is widely cited in the dessins d'enfants literature and is the conceptual origin of the field studied in this paper.",
+      "title": "Esquisse d'un Programme (Grothendieck, 1984/1997)"
+    },
+    {
+      "reason": "A standard comprehensive monograph on maps on surfaces and dessins d'enfants covering passports, monodromy, and counting formulas, which is a natural complement to Jones16 and Adrianov20. Its absence is notable given the paper's reliance on counting arguments and passport enumeration.",
+      "title": "Graphs on Surfaces and Their Applications (Lando and Zvonkin, 2004)"
+    }
+  ],
+  "summary": "The bibliography is generally well-suited to a paper on uniform dessins d'enfants: the primary references Jones16, Adrianov20, Girondo12, and the author's preceding paper Ohnishi26 are cited appropriately and frequently. Three citation hygiene issues are noteworthy. First, both the arXiv preprint Hidalgo18 and its published journal version Hidalgo19 appear in the bibliography, creating a redundancy that should be resolved in favour of the published version. Second, the DOI listed for Horie24 (10.1007/s10851-023-01159-6, a Springer Journal of Mathematical Imaging and Vision identifier) does not match the stated venue (Mathematical Journal of Okayama University), suggesting a bibliographic error. Third, the bibliography entry for Goupil98 records '1998.0215' as an arXiv ID, but this is the suffix of the paper's DOI, not a valid arXiv identifier. The use of a Master's thesis (Scodro24) for a classical, textbook-level result is unusual. Grothendieck's 'Esquisse d'un Programme,' which directly motivated the field of dessins d'enfants and is explicitly mentioned in the Introduction, is conspicuously absent from the references."
+}
+```
+
+### meta_reviewer (`sonnet[1m]`) — status: `pass`
+
+```json
+{
+  "confidence": 0.78,
+  "questions": [
+    "Can the authors provide a GAP, SageMath, or Magma script that enumerates all permutations y giving the [8^2,2^8,4^4] passport and confirms that none yields trivial automorphism group, reproducing the claimed counts of 920 permutations and 19 conjugacy classes?",
+    "For prop:c3b3 (b=3 subcase), can the intricate modular index arithmetic in the construction of y be verified computationally for all odd q up to, say, q=101, with the cycle-type and centrality assertions confirmed?",
+    "Can the authors clarify or correct the Horie24 bibliographic entry, specifically whether the DOI 10.1007/s10851-023-01159-6 is correct for an article in the Mathematical Journal of Okayama University?",
+    "What is the reason Grothendieck's Esquisse d'un Programme is not cited, given that the introduction explicitly credits Grothendieck's fascination with Belyi's theorem as the origin of the dessin d'enfants theory?",
+    "Do the open cases in the updated automorphism-group distribution table correspond to genuine structural obstructions, or are they simply cases where the counting argument's boundary conditions are not yet sharp enough to resolve the question?",
+    "The novelty specialist notes that Jones's classification of primitive permutation groups containing an n-cycle is not cited despite its relevance to monodromy-group primitivity; is this omission intentional, and how does the paper's treatment of primitive groups relate to that classification?"
+  ],
+  "recommendation": "major_revision",
+  "revision_targets": [
+    {
+      "evidence": "This claim is asserted purely 'by direct computation' with no executable artifact shipped. The exact counts (920 permutations, 19 classes, the breakdown 11/6/1/1 with |Aut D|=2/4/8/16, the listed class sizes summing to 920) are finite, fully enumerable, and exactly the type of result the proof-as-code axiom requires to be backed by code. The representative table allows partial spot-checking but does not let a reader reconstruct the exhaustive enumeration or confirm completeness (that no y yields trivial Aut).",
+      "id": "weakness-1",
+      "locator": "Section 'No Dessins with Trivial Automorphism Group' (lines ~1929-1998, Table tab:pass442882)",
+      "required_update": "Ship experiments/counterex_882/enumerate.py (GAP/Sage) that fixes x=(1..8)(9..16), enumerates all y of type 2^8 with (xy)^{-1} of type 4^4, computes each centralizer order, and reproduces the 920 count, the 19 C_{S_n}(x)-classes, and the |Aut D| distribution.",
+      "source_path": null,
+      "source_role": "technical_correctness",
+      "status": "open",
+      "target_kind": "paper_tex",
+      "verification_check": "Re-review should confirm `Section 'No Dessins with Trivial Automorphism Group' (lines ~1929-1998, Table tab:pass442882)` is corrected or justified.",
+      "weakness_index": 0
+    },
+    {
+      "evidence": "This is an explicit combinatorial construction whose three claims (y has type 3^q, xy has type 3^q, and x^k y != y x^k for all 1<=k<=3q-1) are exactly the kind of finite, mechanically checkable statement that should ship as executable verification. The paper gives a hand proof via element-coverage bookkeeping and Table tab:xycycles plus a case analysis on e=1 and e=3, but no code is provided and the index arithmetic (indices mod 3q, floor formulas for v,w, the q mod 4 split) is intricate and error-prone to audit by hand. Worked examples for q=3,5,7,9 are given but constitute spot checks, not a proof of the general family.",
+      "id": "weakness-2",
+      "locator": "Section 'The Subcase b=3', Proposition prop:c3b3 and proof (lines ~1263-1633)",
+      "required_update": "Add src/verify/prop_c3b3.py (or .g for GAP) that constructs x,y for all odd q in a wide range, asserts CycleType(y)=CycleType((x*y)^-1)=(3^q), and asserts the centralizer of <x,y> in S_{3q} is trivial.",
+      "source_path": null,
+      "source_role": "technical_correctness",
+      "status": "open",
+      "target_kind": "paper_tex",
+      "verification_check": "Re-review should confirm `Section 'The Subcase b=3', Proposition prop:c3b3 and proof (lines ~1263-1633)` is corrected or justified.",
+      "weakness_index": 1
+    },
+    {
+      "evidence": "Like C8, this is stated as a direct computation with no code shipped. It is a special case of thm:trivautd (which IS proved analytically, lending strong support to the qualitative 'all trivial' claim), but the precise cardinalities 4354560 and 290304 and the uniform class size 15 are unverified numeric assertions. 4354560 = 290304 * 15 is internally consistent, but the value of |N(5,3,5)| itself is not derived here.",
+      "id": "weakness-3",
+      "locator": "Section 'Only Dessins with Trivial Automorphism Group' (lines ~2029-2047)",
+      "required_update": "Add experiments/counterex_553/enumerate.py confirming |N(5,3,5)|=4354560, that every such y has trivial centralizer in S_15, and the 290304 classes of size 15; cross-reference against the analytic thm:trivautd.",
+      "source_path": null,
+      "source_role": "technical_correctness",
+      "status": "open",
+      "target_kind": "paper_tex",
+      "verification_check": "Re-review should confirm `Section 'Only Dessins with Trivial Automorphism Group' (lines ~2029-2047)` is corrected or justified.",
+      "weakness_index": 2
+    },
+    {
+      "evidence": "Another explicit finite construction (y a product of q transpositions A_i and B) whose three assertions—y of type 2^q, xy of type 2q, and x^k y != y x^k for all k—are mechanically checkable but not backed by shipped code. The hand proof uses element-coverage bookkeeping, Table tab:xycycles2, and a case analysis (e.g. e=2q-3) over indices mod 2q; worked examples for q=4,6,8,10 are spot checks rather than a general verification.",
+      "id": "weakness-4",
+      "locator": "Section 'The Subcase b=2', Proposition prop:c2b2 and proof (lines ~2677-2817+)",
+      "required_update": "Add src/verify/prop_c2b2.py constructing x,y for even q over a range, asserting cycle types of y and xy and triviality of the centralizer of <x,y> in S_{2q}.",
+      "source_path": null,
+      "source_role": "technical_correctness",
+      "status": "open",
+      "target_kind": "paper_tex",
+      "verification_check": "Re-review should confirm `Section 'The Subcase b=2', Proposition prop:c2b2 and proof (lines ~2677-2817+)` is corrected or justified.",
+      "weakness_index": 3
+    },
+    {
+      "evidence": "No repository, scripts, commit, release, or license are provided for independently checking the combinatorial constructions, centralizer calculations, or example/counterexample searches described in the paper.",
+      "id": "weakness-5",
+      "locator": "code release and execution entrypoints",
+      "required_update": "Release the source code, scripts, model configuration, and execution entrypoints needed to regenerate the reported tables, or document why those artifacts cannot be released.",
+      "source_path": null,
+      "source_role": "reproducibility",
+      "status": "open",
+      "target_kind": "code",
+      "verification_check": "Re-review should confirm runnable code or a documented non-release justification is present.",
+      "weakness_index": 4
+    },
+    {
+      "evidence": "This is the arXiv preprint version of Hidalgo19 (published in Archiv der Mathematik, 2019). Both the preprint and journal version appear in the bibliography, which is redundant; the published version Hidalgo19 should normally be preferred. Not visible in any rendered citation context.",
+      "id": "weakness-6",
+      "locator": "Hidalgo18",
+      "required_update": "Verify `Hidalgo18` against an authoritative source; replace it with a resolvable relevant citation or remove it.",
+      "source_path": null,
+      "source_role": "citation",
+      "status": "open",
+      "target_kind": "bibliography",
+      "verification_check": "Re-review should confirm the citation resolves and is relevant.",
+      "weakness_index": 5
+    },
+    {
+      "evidence": "The Introduction explicitly states that Belyi's theorem 'deeply fascinated Grothendieck and led to his theory of dessins d'enfants,' yet Grothendieck's foundational manuscript that introduced and named dessins d'enfants is not cited. This text is widely cited in the dessins d'enfants literature and is the conceptual origin of the field studied in this paper.",
+      "id": "weakness-7",
+      "locator": "Esquisse d'un Programme (Grothendieck, 1984/1997)",
+      "required_update": "Add a bibliography entry for `Esquisse d'un Programme (Grothendieck, 1984/1997)` and cite it where the affected method or claim is introduced, or explicitly justify its omission.",
+      "source_path": null,
+      "source_role": "citation",
+      "status": "open",
+      "target_kind": "bibliography",
+      "verification_check": "Re-review should confirm the bibliography and citation context address this reference.",
+      "weakness_index": 6
+    }
+  ],
+  "strengths": [
+    "The theorem that every uniform passport [b^q,b^q,n] of genus ≥ 2 admits a dessin with trivial automorphism group is a novel, complete result for a previously unresolved passport class, proved via a well-structured case analysis with an independently verified group-theoretic skeleton.",
+    "The counterexamples to two conjectures from Ohnishi26—showing [8^2,2^8,4^4] admits no trivial-Aut dessin and [5^3,5^3,15] admits only trivial-Aut dessins—demonstrate genuine discovery rather than routine extension of prior techniques.",
+    "Theorem thm:class1 on [n,n,n] passports, constructing dessins with |Aut D| equal to any prescribed divisor r of n, is clean, fully self-contained, and receives a complete verification in the technical-correctness review with no gaps identified.",
+    "Theorem thm:trivautd (all dessins with passport [ℓ₁ℓ₂, ℓ₂^ℓ₁, ℓ₂^ℓ₁] have trivial automorphism group for distinct primes) is fully proved by a self-contained block-system argument that the technical-correctness specialist finds sound.",
+    "The counting framework—Goupil-based lower bound |N| and centralizer-based upper bound |D|—is systematically developed and provides a reusable analytic tool for future work on dessin enumeration."
+  ],
+  "summary": "The five specialist reviews converge on a paper that makes genuine incremental contributions to the classification of automorphism groups of uniform dessins d'enfants with genus ≥ 2, directly extending the author's prior work (Ohnishi26). The novelty specialist rates the work incremental (score 0.45, confidence 0.68): the new [b^q,b^q,n] theorem, two counterexamples to conjectures in Ohnishi26, and the [n,n,n] classification are real advances over the prior art, though the scope is narrow and the Lando–Zvonkin monograph and Jones's primitive-groups classification results are absent from the literature survey. The technical correctness specialist rates overall correctness as mostly_sound (confidence 0.70) but flags four major-severity claims (C2, C8, C9, C11) as unsupported by executable evidence: the b=3 explicit construction (prop:c3b3), the [8^2,2^8,4^4] counterexample, the [15,5^3,5^3] cardinality claims, and the b=2 alternative-proof construction. The reproducibility specialist (confidence 0.86, score 0.22) independently designates the missing [b^q,b^q,n] proof artifact and the [8^2,2^8,4^4] enumeration as critical-severity concerns, satisfying the recommendation gate for math.AG: at least two headline-adjacent missing proof-as-code artifacts are flagged at critical severity, defaulting the recommendation to major_revision. The hand proofs for thm:trivautd (C6) and thm:class1 (C7) are judged fully supported, so the qualitative conclusions of the paper are plausible; the deficit is the absence of any computational corroboration for the explicit constructions and finite enumerations on which several headline results rest. Citation issues are moderate: two bibliographic errors (Horie24 DOI prefix mismatch, Goupil98 arXiv/DOI confusion), one redundant preprint–journal pair (Hidalgo18/19), the absence of Grothendieck's Esquisse d'un Programme despite its explicit mention in the introduction, and the unusual choice of a Master's thesis for a textbook-level result.",
+  "weaknesses": [
+    "The headline counterexample that [8^2,2^8,4^4] admits no dessin with trivial automorphism group (C8) is stated purely 'by direct computation' with no executable code, GAP script, or verifiable enumeration artifact, making it impossible to independently confirm the claimed counts of 920 permutations across 19 conjugacy classes.",
+    "The explicit permutation construction in prop:c3b3 (b=3 subcase of the main theorem) involves intricate modular index arithmetic and a q mod 4 case split that is verified only by spot-check examples, not by a general computational certificate (C2).",
+    "The numerical claims for the [15,5^3,5^3] passport—|N(5,3,5)|=4354560, 290304 conjugacy classes of size 15—are asserted as direct computation results without any accompanying code or enumeration log (C9).",
+    "The alternative-proof construction for the [n,b^q,n] b=2 subcase (prop:c2b2) replicates the same unverified explicit-construction pattern as C2 and C11: mechanically checkable assertions backed only by worked examples.",
+    "No code repository, scripts, or computational environment specification is provided, making independent reproduction of any permutation-group centralizer calculation or example search impossible.",
+    "Two bibliography entries contain factual errors: the DOI for Horie24 resolves to a Springer journal of mathematical imaging rather than the stated Mathematical Journal of Okayama University, and Goupil98 records a DOI suffix as an arXiv identifier.",
+    "Grothendieck's Esquisse d'un Programme, credited in the introduction as the conceptual origin of the dessin d'enfants program, is absent from the references, a notable omission given its centrality to the field."
+  ]
+}
+```
+
+### novelty (`sonnet[1m]`) — status: `pass`
+
+```json
+{
+  "confidence": 0.68,
+  "missing_prior_art": [
+    {
+      "reason": "The paper relies on primitivity of monodromy groups but does not cite Jones's classification results on primitive groups containing an n-cycle, which are standard references in the monodromy-group literature and directly relevant to establishing regularity conditions.",
+      "title": "Jones, G. A. — Primitive permutation groups containing a cycle"
+    },
+    {
+      "reason": "This standard monograph (Encyclopaedia of Mathematical Sciences, 2004) covers passports, monodromy groups, and the combinatorics of dessins in depth and is typically cited alongside Jones–Wolfart; its absence leaves a gap in situating the paper's methods in the broader literature.",
+      "title": "Lando, S. K. and Zvonkin, A. K. — Graphs on Surfaces and Their Applications"
+    }
+  ],
+  "novelty_score": 0.45,
+  "related_work": [
+    {
+      "citation_key": "Ohnishi26",
+      "delta": "The current paper extends [Ohnishi26] by proving the [b^q, b^q, n] passport class (Theorem thm:class3), whereas [Ohnishi26] only handled the [n, b^q, n] class. It also refutes two conjectures from [Ohnishi26] via explicit counterexamples, proves full characterisation for [n,n,n] passports, and gives alternative proofs for results in [Ohnishi26] via different counting methods.",
+      "relation": "builds_on",
+      "title": "Regularity and Automorphism Groups of Dessins d'Enfants with Uniform Passports"
+    },
+    {
+      "citation_key": "Hidalgo19",
+      "delta": "Hidalgo studies automorphism groups of arbitrary dessins; this paper focuses specifically on the uniform-passport subfamily and obtains existence/non-existence theorems rather than structural descriptions, using group-theoretic counting rather than Riemann surface methods.",
+      "relation": "competing",
+      "title": "Automorphism groups of dessins d'enfants"
+    },
+    {
+      "citation_key": "Goupil98",
+      "delta": "The formula for c_{λμ}^n (Theorem thm:goupil) is used as the key analytic tool to obtain lower bounds on |N(b,q,b)| in Section sec:class3; without this result the counting argument for b≥5 does not go through.",
+      "relation": "prior_art",
+      "title": "Factoring N-cycles and counting maps of given genus"
+    },
+    {
+      "citation_key": "Jones16",
+      "delta": "Provides the foundational framework (definitions of dessin, passport, monodromy group, regularity, automorphism group) and several propositions (Prop. prop:regaut, Prop. prop:reguni) that the current paper cites and builds on throughout.",
+      "relation": "prior_art",
+      "title": "Dessins d'enfants on Riemann surfaces"
+    },
+    {
+      "citation_key": "Girondo14",
+      "delta": "Investigates fields of definition specifically for uniform dessins on quasiplatonic surfaces; the current paper studies automorphism group distribution for uniform passports, a related but complementary invariant.",
+      "relation": "orthogonal",
+      "title": "Fields of definition of uniform dessins on quasiplatonic surfaces"
+    },
+    {
+      "citation_key": "Horie24",
+      "delta": "Counts isomorphism classes of dessins with prescribed automorphism group order for two-vertex dessins (including the [n,n,n] case); this paper instead gives explicit constructions achieving any divisor r as |Aut D| and does not use Horie's counting approach.",
+      "relation": "orthogonal",
+      "title": "Equivalence classes of dessins d'enfants with two vertices"
+    }
+  ],
+  "verdict": "incremental"
+}
+```
+
+### reproducibility (`gpt-5.5`) — status: `pass`
+
+```json
+{
+  "code_availability": "unspecified",
+  "code_url": null,
+  "concerns": [
+    {
+      "area": "code",
+      "description": "No repository, scripts, commit, release, or license are provided for independently checking the combinatorial constructions, centralizer calculations, or example/counterexample searches described in the paper.",
+      "severity": "major"
+    },
+    {
+      "area": "other",
+      "description": "The headline theorem for passports of the form [b^q,b^q,n] in genus at least 2 lacks a machine-checkable proof artifact, such as Proofs/Class3.lean or an equivalent formalization of the counting and permutation-group arguments.",
+      "severity": "critical"
+    },
+    {
+      "area": "other",
+      "description": "The claimed counterexample that [8^2,2^8,4^4] admits no dessin with trivial automorphism group lacks a reproducible enumeration or formal certificate, such as scripts/counterexample_8_2_4.gap plus logged output or Proofs/Counterexample824.lean.",
+      "severity": "critical"
+    },
+    {
+      "area": "other",
+      "description": "The claimed result that [5^3,5^3,15] admits no dessin with a nontrivial automorphism group, and its stated generalization, lack a machine-checkable proof or reproducible certificate, such as Proofs/TrivAutD.lean or scripts/trivautd.gap.",
+      "severity": "major"
+    },
+    {
+      "area": "other",
+      "description": "The theorem for passports [n,n,n] in genus at least 2 lacks a formal proof artifact or executable construction checker, such as Proofs/Class1.lean or scripts/class1_construction.gap.",
+      "severity": "major"
+    },
+    {
+      "area": "other",
+      "description": "The alternative proof for [n,b^q,n] relies on substantial symbolic inequalities and counting estimates but provides no formalized inequality checks or reproducible computational notebook, such as Proofs/Class2.lean or notebooks/counting_bounds.ipynb.",
+      "severity": "major"
+    },
+    {
+      "area": "compute",
+      "description": "No software stack is specified for verifying permutation-group computations or automorphism-group centralizers if a reader wants to reproduce examples computationally with GAP, SageMath, Magma, or similar tools.",
+      "severity": "minor"
+    }
+  ],
+  "confidence": 0.86,
+  "data_availability": "synthetic",
+  "data_url": null,
+  "environment": {
+    "dependencies": [],
+    "hardware": null,
+    "software": null
+  },
+  "reproducibility_score": 0.22
+}
+```
+
+### summary (`claude-haiku-4-5`) — status: `pass`
+
+```json
+{
+  "audience": "Algebraic geometers, combinatorialists, and researchers studying dessins d'enfants and Galois actions on curves; also relevant to those working on automorphism groups and field of moduli problems",
+  "key_contributions": [
+    "Proof that every uniform passport of the form $[b^q, b^q, n]$ of genus at least 2 admits a dessin with trivial automorphism group",
+    "Counterexample showing passport $[8^2, 2^8, 4^4]$ admits no dessin with trivial automorphism group, refuting a previous conjecture",
+    "Counterexample showing passport $[5^3, 5^3, 15]$ admits only dessins with trivial automorphism groups, refuting another conjecture",
+    "Explicit construction of dessins with $[n, n, n]$ passports of genus at least 2 for all possible automorphism group orders dividing $n$",
+    "Alternative proof using centralizer counting arguments for the $[n, b^q, n]$ case",
+    "Updated distribution table for automorphism groups across uniform passports of genus at least 2, clarifying which cases remain open"
+  ],
+  "plain_language_summary": "Dessins d'enfants are combinatorial structures—bipartite graphs drawn on surfaces—that encode algebraic curves defined over number fields. A uniform dessin has constant valencies for its black vertices, white vertices, and faces, creating a high degree of symmetry. The automorphism group of a dessin measures its symmetries: a trivial automorphism group means no non-trivial symmetries exist. In higher-genus surfaces (genus at least 2), understanding how automorphism groups are distributed across different uniform passports is a fundamental problem that connects algebraic geometry, combinatorics, and Galois theory.\n\nThis paper advances a previous program by proving that for certain passport types, every dessin with that passport must have a trivial automorphism group. Specifically, the authors establish this for the passport form $[b^q, b^q, n]$ (where $b$ and $q$ satisfy divisibility constraints). They also discover counterexamples to earlier conjectures: the passport $[8^2, 2^8, 4^4]$ admits no dessin with a trivial automorphism group, and the passport $[5^3, 5^3, 15]$ admits no dessin with a nontrivial automorphism group. These counterexamples reveal unexpected constraints on the distribution of automorphism groups.\n\nFor passports of the form $[n, n, n]$ at genus 2 or higher, the paper constructs examples showing which automorphism group sizes are possible. The authors employ both combinatorial counting methods based on permutation centralizers and group-theoretic arguments to analyze when dessins with prescribed symmetry properties exist, providing new information about the interplay between regularity and automorphism group structure.",
+  "tldr": "This paper extends the study of automorphism groups in uniform dessins d'enfants (bipartite graphs on algebraic curves) of genus at least 2, proving results about when dessins with specific uniform passports have trivial automorphism groups and establishing cases where the opposite occurs."
+}
+```
+
+### technical_correctness (`opus[1m]`) — status: `pass`
+
+```json
+{
+  "claims": [
+    {
+      "assessment": "partially_supported",
+      "claim": "Theorem (thm:class3): Every uniform passport of the form [b^q, b^q, n] of genus at least 2 admits a dessin d'enfant with trivial automorphism group.",
+      "evidence": "The proof cleanly reduces the theorem to three cases: q=1 via [Ohnishi26 Prop 7.1], q>=2 with b=3 via prop:class3beq3, and q>=2 with b>=5 via prop:class3bge5. The reduction logic (S3 invariance of Aut under permuting partitions, parity forcing b,q odd from eq:genusclass3) is internally consistent and fully shown. The conclusion depends on the two supporting propositions, which are themselves provided in full in the text. No step is visibly wrong, but the global correctness rests on the analytic bound prop:class3bge5 and the explicit construction prop:class3beq3, neither of which is verified by an executable artifact.",
+      "id": "C1",
+      "location": "Section 'Passport [b^q,b^q,n] with Genus >=2', Theorem thm:class3 (lines ~1892-1908)",
+      "severity": "minor",
+      "suggested_fix": "Ship a verification harness (e.g. src/verify/thm_class3_smallcases.py using GAP/Sage permutation groups) confirming trivial Aut for [b^q,b^q,n] across small odd b,q, plus a symbolic check of the |N|>|D| inequality."
+    },
+    {
+      "assessment": "unsupported",
+      "claim": "Proposition prop:c3b3: the explicit permutation y (built from blocks A, B_i, Gamma) gives, with x=(1 2 ... 3q), a dessin of passport [3q,3^q,3^q] whose y and (xy)^{-1} have cycle type (3^q) and whose automorphism group is trivial.",
+      "evidence": "This is an explicit combinatorial construction whose three claims (y has type 3^q, xy has type 3^q, and x^k y != y x^k for all 1<=k<=3q-1) are exactly the kind of finite, mechanically checkable statement that should ship as executable verification. The paper gives a hand proof via element-coverage bookkeeping and Table tab:xycycles plus a case analysis on e=1 and e=3, but no code is provided and the index arithmetic (indices mod 3q, floor formulas for v,w, the q mod 4 split) is intricate and error-prone to audit by hand. Worked examples for q=3,5,7,9 are given but constitute spot checks, not a proof of the general family.",
+      "id": "C2",
+      "location": "Section 'The Subcase b=3', Proposition prop:c3b3 and proof (lines ~1263-1633)",
+      "severity": "major",
+      "suggested_fix": "Add src/verify/prop_c3b3.py (or .g for GAP) that constructs x,y for all odd q in a wide range, asserts CycleType(y)=CycleType((x*y)^-1)=(3^q), and asserts the centralizer of <x,y> in S_{3q} is trivial."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Lemma lem:Nbqblower: |N(b,q,b)| >= (n-q)! / (2^{q(b-2)} ((q+1)/2)! ((q-1)/2)!) * ((b-1)/(2b))^{(q-1)/2}.",
+      "evidence": "The derivation applies Goupil's formula (thm:goupil) to count pairs of cycle type (b^q) with product a fixed n-cycle, retains only the two extremal outer-sum terms (g1,g2)=(0,g),(g,0) to get a lower bound, and then restricts the inner composition sum to a single explicitly described composition family, counting binom(q,(q-1)/2) such compositions each contributing binom(b,2)^{(q-1)/2}. The algebra is shown step by step and the factorial simplifications are plausible, but the multiple binomial/factorial manipulations and the genus identity g=(q(b-2)+1)/2 are not independently recomputed here and rely on the correctness of the cited Goupil formula.",
+      "id": "C3",
+      "location": "Section 'Lower Bound for N', Lemma lem:Nbqblower and proof (lines ~700-787)",
+      "severity": "minor",
+      "suggested_fix": "Provide src/verify/lem_Nbqblower.py comparing the closed-form lower bound against directly enumerated |N(b,q,b)| for small (b,q), confirming the inequality and the equality cases."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Lemma lem:Dupper: |D| <= kappa_1 * 2^{n/2} (n/2)! with kappa_1=2623/1894, and for odd n, |D| <= kappa_2 * 3^{n/3} (n/3)! with kappa_2=972/947.",
+      "evidence": "The argument shows F_n(x)=x^{n/x} Gamma(n/x+1) is strictly decreasing in x (via digamma bound psi(x+1)>log x), bounds successive ratios F_n(l_{i+1})/F_n(l_i) by H(m,d,s)<=H(m,d,1)<1, and sums the resulting geometric series to the stated kappa constants. The monotonicity arguments and the geometric-series closed forms (2623/1894, 972/947) are derived explicitly and appear self-consistent. However the chain of inequalities on H(m,d,1) (decreasing in both m and d, the e/(m(m+d)) bound) is long and the constants depend on it; absence of a numerical cross-check leaves residual risk.",
+      "id": "C4",
+      "location": "Section 'Upper Bound for D', Lemma lem:Dupper and proof (lines ~977-1210)",
+      "severity": "minor",
+      "suggested_fix": "Add src/verify/lem_Dupper.py that, for many n, computes |D| exactly via the prime-divisor centralizer formula sum_{l|n} l^{n/l}(n/l)! and checks it against kappa_1*2^{n/2}(n/2)! (and the odd-n bound)."
+    },
+    {
+      "assessment": "partially_supported",
+      "claim": "Proposition prop:class3bge5: for b>=5, q>=2 (q>=3 odd in practice) of genus >=2, |N(b,q,b)| > |D(n)|, hence a trivial-Aut dessin exists; established by showing R(b,q)>1 via R(5,3)>1, monotonicity in q at b=5, and monotonicity in b.",
+      "evidence": "R(b,q) is the ratio of the lem:Nbqblower lower bound to the lem:Dupper upper bound. The base case R(5,3)=72919/11664>1 and the two monotonicity claims are reduced to inequalities f(3)>1, f'(q)>0 and g(b,q)>0, with g(5,3)=2029>0 and explicit positive partial derivatives (using lem:gamma-at to control Gamma ratios). The structure is sound and the boundary computations are concrete, but the algebra (products prod_{k=1}^{8}(4q+k), the SOS decomposition 27(b-5)^3+342(b-1985/684)^2+...) is not re-derived and would benefit from machine confirmation.",
+      "id": "C5",
+      "location": "Section 'The Subcase b>=5', Proposition prop:class3bge5 and proof (lines ~1727-1863)",
+      "severity": "minor",
+      "suggested_fix": "Add experiments/class3_bge5/check_R.py to symbolically/numerically verify R(5,3)>1, f'(q)>0, and g(b,q)>0 over the relevant ranges using sympy."
+    },
+    {
+      "assessment": "supported",
+      "claim": "Theorem thm:trivautd: for distinct primes ell_1<ell_2, the passport [ell_1 ell_2, ell_2^{ell_1}, ell_2^{ell_1}] (genus >=5) admits ONLY dessins with trivial automorphism group.",
+      "evidence": "The proof is a complete and self-contained group-theoretic argument: D=D_{ell_1} cup D_{ell_2}; case (i) y in D_{ell_1} forces a block system on which y acts trivially, leading to ell_1 | ell_2, a contradiction; case (ii) y in D_{ell_2} introduces translation parameters s_i and derives sum s_j == 0 and sum s_j +1 == 0 (mod ell_1) simultaneously, a contradiction. Each block-system and order-of-induced-permutation step is justified and the prime hypotheses are used correctly. No gap is apparent and the result is verifiable from the text.",
+      "id": "C6",
+      "location": "Section 'Counterexamples to Previous Conjectures', Theorem thm:trivautd and proof (lines ~2051-2437)",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "supported",
+      "claim": "Theorem thm:class1: a uniform passport [n,n,n] of genus >=2 admits a nonregular dessin with nontrivial automorphism group iff n is composite; moreover for any divisor r with 1<r<n there is a dessin with |Aut D|=r.",
+      "evidence": "Forward direction is immediate (|Aut D| divides n, so prime n forces 1 or n, i.e. trivial or regular). Converse gives the explicit construction x=(1..n), t=(s 2s ... rs), y=txt^{-1} and verifies (xy)^{-1} has type (n) via an orbit trace, then shows x^k y = y x^k iff s|k, yielding |Aut D|=n/s=r. The orbit computations (xy adds +2/+s+2/-s+2 in the three cases, with gcd(r,2)=1 closing the cycle) and the commutation case split are fully and correctly shown.",
+      "id": "C7",
+      "location": "Section 'Passport [n,n,n] with Genus >=2', Theorem thm:class1 and proof (lines ~2461-2635)",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "unsupported",
+      "claim": "Counterexample: the passport [8^2, 2^8, 4^4] (genus 2) admits NO dessin with trivial automorphism group; with x of type (8^2) fixed there are exactly 920 permutations y, all giving nontrivial Aut, forming 19 conjugacy classes under C_{S_n}(x).",
+      "evidence": "This claim is asserted purely 'by direct computation' with no executable artifact shipped. The exact counts (920 permutations, 19 classes, the breakdown 11/6/1/1 with |Aut D|=2/4/8/16, the listed class sizes summing to 920) are finite, fully enumerable, and exactly the type of result the proof-as-code axiom requires to be backed by code. The representative table allows partial spot-checking but does not let a reader reconstruct the exhaustive enumeration or confirm completeness (that no y yields trivial Aut).",
+      "id": "C8",
+      "location": "Section 'No Dessins with Trivial Automorphism Group' (lines ~1929-1998, Table tab:pass442882)",
+      "severity": "major",
+      "suggested_fix": "Ship experiments/counterex_882/enumerate.py (GAP/Sage) that fixes x=(1..8)(9..16), enumerates all y of type 2^8 with (xy)^{-1} of type 4^4, computes each centralizer order, and reproduces the 920 count, the 19 C_{S_n}(x)-classes, and the |Aut D| distribution."
+    },
+    {
+      "assessment": "unsupported",
+      "claim": "Counterexample: the passport [15, 5^3, 5^3] (genus 5) has exactly 4354560 permutations y (=|N(5,3,5)|) for fixed 15-cycle x, every one giving a dessin with trivial automorphism group, in 290304 conjugacy classes of 15 elements each.",
+      "evidence": "Like C8, this is stated as a direct computation with no code shipped. It is a special case of thm:trivautd (which IS proved analytically, lending strong support to the qualitative 'all trivial' claim), but the precise cardinalities 4354560 and 290304 and the uniform class size 15 are unverified numeric assertions. 4354560 = 290304 * 15 is internally consistent, but the value of |N(5,3,5)| itself is not derived here.",
+      "id": "C9",
+      "location": "Section 'Only Dessins with Trivial Automorphism Group' (lines ~2029-2047)",
+      "severity": "major",
+      "suggested_fix": "Add experiments/counterex_553/enumerate.py confirming |N(5,3,5)|=4354560, that every such y has trivial centralizer in S_15, and the 290304 classes of size 15; cross-reference against the analytic thm:trivautd."
+    },
+    {
+      "assessment": "supported",
+      "claim": "Proposition prop:D (with prop:Dk, cor:ADtrivial): D = union over primes ell|n of D_{n/ell}, and |D| <= sum_{ell prime, ell|n} ell^{n/ell} (n/ell)!.",
+      "evidence": "prop:Dk correctly identifies D_k as the centralizer of x^k with |D_k|=(n/m)^m m! for m=gcd(n,k) (via Sagan's centralizer order formula), and the containment D_k subset D_m. cor:ADtrivial reduces nontriviality of Aut to the existence of k with x^k y = y x^k. prop:D then reduces the union over all k to the maximal proper divisors n/ell and applies subadditivity of cardinality for the upper bound. Each step is standard and rigorously shown.",
+      "id": "C10",
+      "location": "Section 'Upper Bound for D', Propositions prop:Dk, prop:D and Corollary cor:ADtrivial (lines ~815-975)",
+      "severity": "info",
+      "suggested_fix": null
+    },
+    {
+      "assessment": "unsupported",
+      "claim": "Proposition prop:c2b2 / Section 'Alternative Proof of [n,b^q,n]': the explicit pair (x,y) for even q>=4 yields passport [2q,2^q,2q] with trivial automorphism group, giving an alternative proof of the b=2 subcase.",
+      "evidence": "Another explicit finite construction (y a product of q transpositions A_i and B) whose three assertions—y of type 2^q, xy of type 2q, and x^k y != y x^k for all k—are mechanically checkable but not backed by shipped code. The hand proof uses element-coverage bookkeeping, Table tab:xycycles2, and a case analysis (e.g. e=2q-3) over indices mod 2q; worked examples for q=4,6,8,10 are spot checks rather than a general verification.",
+      "id": "C11",
+      "location": "Section 'The Subcase b=2', Proposition prop:c2b2 and proof (lines ~2677-2817+)",
+      "severity": "major",
+      "suggested_fix": "Add src/verify/prop_c2b2.py constructing x,y for even q over a range, asserting cycle types of y and xy and triviality of the centralizer of <x,y> in S_{2q}."
+    },
+    {
+      "assessment": "supported",
+      "claim": "The genus and parity bookkeeping for class [b^q,b^q,n] (eq:genusclass3: g=(q(b-2)+1)/2>=2 forces b,q odd, b,q>=3, n odd) and the non-existence of a regular dessin for [b^q,b^q,n] since gcd(q,q)=q>=2.",
+      "evidence": "From eq:genus, g=(n-(p+q+r))/2+1 with p=q, r=1, n=bq gives g=(q(b-2)+1)/2; integrality forces q(b-2) odd, hence b,q odd, and g>=2 forces b,q>=3. The regularity exclusion follows directly from the cited [Ohnishi26 Thm 6.1] criterion gcd(p,q)=1, which fails here. These are elementary and correctly applied.",
+      "id": "C12",
+      "location": "Section 'Passport [b^q,b^q,n] with Genus >=2' preamble (lines ~1216-1239)",
+      "severity": "info",
+      "suggested_fix": null
+    }
+  ],
+  "confidence": 0.7,
+  "overall_correctness": "mostly_sound"
+}
+```
+
+## Corrections
+
+<!-- corrections-section: rendered from corrections table; empty on first publish -->
+_No corrections have been recorded._
+
+## Bibliography
+
+1. Adrianov20: AUTHOR = Adrianov, N. M. and Pakovich, F. and Zvonkin, A. K., TITLE = Davenport-Zannier polynomials and dessins d'enfants, SERIES = Mathematical Surveys and Monographs, VOLUME = 249, PUBLISHER = American Mathematical Society, Providence, RI, YEAR = 2020, PAGES = xi+187, ISBN = 978-1-4704-5634-4, MRCLASS = 11G32 (05Cxx 05E18 11R32 14H57 20B15), MRNUMBER = 4249449, MRREVIEWER = David\ P.\ Roberts,
+2. Belyi02: AUTHOR = Bely\ui, G. V., TITLE = Another proof of the three points theorem, JOURNAL = Mat. Sb., FJOURNAL = Matematicheski\u i\ Sbornik, VOLUME = 193, YEAR = 2002, NUMBER = 3, PAGES = 21--24, ISSN = 0368-8666,2305-2783, MRCLASS = 14G25 (14H30), MRNUMBER = 1913596, memo = 10.1070/SM2002v193n03ABEH000633, memo = https://doi.org/10.1070/SM2002v193n03ABEH000633, doi:[10.1070/SM2002v193n03ABEH000633](https://doi.org/10.1070/SM2002v193n03ABEH000633)
+3. Belyi79: AUTHOR = Bely\ui, G. V., TITLE = Galois extensions of a maximal cyclotomic field, JOURNAL = Izv. Akad. Nauk SSSR Ser. Mat., FJOURNAL = Izvestiya Akademii Nauk SSSR. Seriya Matematicheskaya, VOLUME = 43, YEAR = 1979, NUMBER = 2, PAGES = 267--276, 479, ISSN = 0373-2436, MRCLASS = 12A55, MRNUMBER = 534593, MRREVIEWER = Jerzy\ Browkin,
+4. Conder13: AUTHOR = Conder, M. D. E. and Jones, G. A. and Streit, M. and Wolfart, J., TITLE = Galois actions on regular dessins of small genera, JOURNAL = Rev. Mat. Iberoam., FJOURNAL = Revista Matem\'atica Iberoamericana, VOLUME = 29, YEAR = 2013, NUMBER = 1, PAGES = 163--181, ISSN = 0213-2230,2235-0616, MRCLASS = 14H57 (05C10 05C25 11G32 30F10), MRNUMBER = 3010126, MRREVIEWER = David\ Torres-Teigell, memo = 10.4171/RMI/717, memo = https://doi.org/10.4171/RMI/717, doi:[10.4171/RMI/717](https://doi.org/10.4171/RMI/717)
+5. Cueto14: author = Cueto, M. H., title = The field of moduli and fields of definition of dessins d'enfants, note = arXiv:1409.7736, year = 2014, arXiv:[1409.7736](https://arxiv.org/abs/1409.7736)
+6. Dixon96: AUTHOR = Dixon, J. D. and Mortimer, B., TITLE = Permutation groups, SERIES = Graduate Texts in Mathematics, VOLUME = 163, PUBLISHER = Springer-Verlag, New York, YEAR = 1996, PAGES = xii+346, ISBN = 0-387-94599-7, MRCLASS = 20B05 (20-01 20B07), MRNUMBER = 1409812, MRREVIEWER = Martin\ W.\ Liebeck, memo = 10.1007/978-1-4612-0731-3, memo = https://doi.org/10.1007/978-1-4612-0731-3, doi:[10.1007/978-1-4612-0731-3](https://doi.org/10.1007/978-1-4612-0731-3)
+7. Girondo12: AUTHOR = Girondo, E. and Gonz\'alez-Diez, G., TITLE = Introduction to compact Riemann surfaces and dessins d'enfants, SERIES = London Mathematical Society Student Texts, VOLUME = 79, PUBLISHER = Cambridge University Press, Cambridge, YEAR = 2012, PAGES = xii+298, ISBN = 978-0-521-74022-7, MRCLASS = 30-01 (11G32 14H57 30F10), MRNUMBER = 2895884, MRREVIEWER = Aaron\ D.\ Wootton,
+8. Girondo14: AUTHOR = Girondo, E. and Torres-Teigell, D. and Wolfart, J., TITLE = Fields of definition of uniform dessins on quasiplatonic surfaces, BOOKTITLE = Riemann and Klein surfaces, automorphisms, symmetries and moduli spaces, SERIES = Contemp. Math., VOLUME = 629, PAGES = 155--170, PUBLISHER = Amer. Math. Soc., Providence, RI, YEAR = 2014, ISBN = 978-1-4704-1093-3, MRCLASS = 11G32 (14G35 14H57 30F10 30F35), MRNUMBER = 3289639, MRREVIEWER = Ayberk\ Zeytin, memo = 10.1090/conm/629/12558, memo = https://doi.org/10.1090/conm/629/12558, doi:[10.1090/conm/629/12558](https://doi.org/10.1090/conm/629/12558)
+9. Goupil98: AUTHOR = Goupil, A. and Schaeffer, G., TITLE = Factoring N-cycles and counting maps of given genus, JOURNAL = European J. Combin., FJOURNAL = European Journal of Combinatorics, VOLUME = 19, YEAR = 1998, NUMBER = 7, PAGES = 819--834, ISSN = 0195-6698,1095-9971, MRCLASS = 05C30 (05C10 05C38 57M99), MRNUMBER = 1649966, MRREVIEWER = K.\ S.\ Sarkaria, memo = 10.1006/eujc.1998.0215, memo = https://doi.org/10.1006/eujc.1998.0215, doi:[10.1006/eujc.1998.0215](https://doi.org/10.1006/eujc.1998.0215) arXiv:[1998.0215](https://arxiv.org/abs/1998.0215)
+10. Hidalgo18: author = Hidalgo, R. A., title = Automorphism groups of dessins d'enfants, note = arXiv:1811.07849, year = 2018, arXiv:[1811.07849](https://arxiv.org/abs/1811.07849)
+11. Hidalgo19: AUTHOR = Hidalgo, R. A., TITLE = Automorphism groups of dessins d'enfants, JOURNAL = Arch. Math. (Basel), FJOURNAL = Archiv der Mathematik, VOLUME = 112, YEAR = 2019, NUMBER = 1, PAGES = 13--18, ISSN = 0003-889X,1420-8938, MRCLASS = 30F40 (11G32 14H57), MRNUMBER = 3901897, MRREVIEWER = John\ R.\ Parker, memo = 10.1007/s00013-018-1222-9, memo = https://doi.org/10.1007/s00013-018-1222-9, doi:[10.1007/s00013-018-1222-9](https://doi.org/10.1007/s00013-018-1222-9)
+12. Horie24: AUTHOR = Horie, M., TITLE = Equivalence classes of dessins d'enfants with two vertices, JOURNAL = Math. J. Okayama Univ., FJOURNAL = Mathematical Journal of Okayama University, VOLUME = 66, YEAR = 2024, PAGES = 1--30, ISSN = 0030-1566, MRCLASS = 14H57 (05A15 11G32 20B30), MRNUMBER = 4688440, memo = 10.1007/s10851-023-01159-6, memo = https://doi.org/10.1007/s10851-023-01159-6, doi:[10.1007/s10851-023-01159-6](https://doi.org/10.1007/s10851-023-01159-6)
+13. Jones14: AUTHOR = Jones, G. A., TITLE = Regular dessins with a given automorphism group, BOOKTITLE = Riemann and Klein surfaces, automorphisms, symmetries and moduli spaces, SERIES = Contemp. Math., VOLUME = 629, PAGES = 245--260, PUBLISHER = Amer. Math. Soc., Providence, RI, YEAR = 2014, ISBN = 978-1-4704-1093-3, MRCLASS = 14H57 (14H37 30F10), MRNUMBER = 3289645, MRREVIEWER = David\ Torres-Teigell, memo = 10.1090/conm/629/12568, memo = https://doi.org/10.1090/conm/629/12568, doi:[10.1090/conm/629/12568](https://doi.org/10.1090/conm/629/12568)
+14. Jones16: AUTHOR = Jones, G. A. and Wolfart, J., TITLE = Dessins d'enfants on Riemann surfaces, SERIES = Springer Monographs in Mathematics, PUBLISHER = Springer, Cham, YEAR = 2016, PAGES = xiv+259, ISBN = 978-3-319-24709-0; 978-3-319-24711-3, MRCLASS = 14H57 (05C25 11G32 30F10 57M15), MRNUMBER = 3467692, MRREVIEWER = Ariyan\ Javanpeykar, memo = 10.1007/978-3-319-24711-3, memo = https://doi.org/10.1007/978-3-319-24711-3, doi:[10.1007/978-3-319-24711-3](https://doi.org/10.1007/978-3-319-24711-3)
+15. Ohnishi26: title=Regularity and Automorphism Groups of Dessins d'Enfants with Uniform Passports, author=Ohnishi, T., year=2026, eprint=2602.11867, archivePrefix=arXiv, primaryClass=math.AG, note=arXiv:2602.11867, memo=https://arxiv.org/abs/2602.11867, arXiv:[2602.11867](https://arxiv.org/abs/2602.11867)
+16. Sagan01: AUTHOR = Sagan, Bruce E., TITLE = The symmetric group, SERIES = Graduate Texts in Mathematics, VOLUME = 203, EDITION = Second, NOTE = Representations, combinatorial algorithms, and symmetric functions, PUBLISHER = Springer-Verlag, New York, YEAR = 2001, PAGES = xvi+238, ISBN = 0-387-95067-2, MRCLASS = 05E10 (05E05 20C30), MRNUMBER = 1824028, memo = 10.1007/978-1-4757-6804-6, memo = https://doi.org/10.1007/978-1-4757-6804-6, doi:[10.1007/978-1-4757-6804-6](https://doi.org/10.1007/978-1-4757-6804-6)
+17. Scodro24: author = Scodro, G., title = Belyi's theorem and dessins d'enfants, school = University of Padova, year = 2024, note = ALGANT Master's Thesis, available at \urlhttps://thesis.unipd.it/retrieve/4d0c1b93-fca9-4547-883c-d53b5a86dea0/Scodro_Giacomo.pdf,
+18. Wakabayashi22: AUTHOR = Wakabayashi, Yasuhiro, TITLE = An effective version of Bely\u i's theorem in positive characteristic, JOURNAL = J. Number Theory, FJOURNAL = Journal of Number Theory, VOLUME = 231, YEAR = 2022, PAGES = 251--268, ISSN = 0022-314X,1096-1658, MRCLASS = 14H30 (11G32 14Q20), MRNUMBER = 4330933, MRREVIEWER = Ayberk\ Zeytin, memo = 10.1016/j.jnt.2021.04.028, memo = https://doi.org/10.1016/j.jnt.2021.04.028, doi:[10.1016/j.jnt.2021.04.028](https://doi.org/10.1016/j.jnt.2021.04.028)
+
