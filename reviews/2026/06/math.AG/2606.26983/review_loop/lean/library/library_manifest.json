@@ -1,9 +1,312 @@
 {
-  "artifact": "review_loop/lean/library/library_manifest.json",
-  "declarations": [],
-  "deferred_to": "formalize",
-  "files": [],
-  "schema_version": "1.0.0",
-  "skip_reason": "Lean formalization runs asynchronously via the `formalize` job; queue with --with-lean.",
-  "status": "pending"
+  "declarations": [
+    {
+      "import": "GrokRxiv/Paper/Notation.lean",
+      "kind": "notation",
+      "lean_decl": "scoped notation:max \"Z₀\" => (0)",
+      "name": "Z₀",
+      "signature": "notation Z₀ := (0)",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": null,
+          "source_tex": "Let $Z_0$ be the zero section."
+        }
+      ],
+      "source_terms": [
+        "Z_0",
+        "zero section"
+      ],
+      "trust_status": "lean_checked"
+    },
+    {
+      "import": "GrokRxiv/Paper/Definitions.lean",
+      "kind": "definition",
+      "lean_decl": "structure PaperData where MW N1 N1gen PicRig PicEta : Type ; cl : MW → N1 ; clGen : MW → N1gen ; restrict : PicRig → PicEta ; torsion : AddSubgroup MW (with AddCommGroup instance fields)",
+      "name": "PaperData",
+      "signature": "structure PaperData : Type 1",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": "main_thm",
+          "source_tex": "$$\\MW(A/C) \\to N_{1,\\gen}(A)$$ $$Z \\mapsto [Z]-[Z_0]$$"
+        },
+        {
+          "artifact": "main.tex",
+          "claim_id": "item_lift",
+          "source_tex": "the restriction $$\\Pic(A)_{\\rig} \\to \\Pic(A_\\eta)$$ is a group isomorphism."
+        }
+      ],
+      "source_terms": [
+        "MW(A/C)",
+        "N_1(A)",
+        "N_{1,gen}(A)",
+        "Pic(A)_{rig}",
+        "Pic(A_η)"
+      ],
+      "trust_status": "lean_checked"
+    },
+    {
+      "import": "GrokRxiv/Paper/Definitions.lean",
+      "kind": "definition",
+      "lean_decl": "structure KSData where Sec : Type ; zeroSection Z : Sec ; inRestrictionImage : Sec → Prop",
+      "name": "KSData",
+      "signature": "structure KSData : Type 1",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": "thm_KS",
+          "source_tex": "Let $Z \\subset J_L$ be a section whose cohomology class is contained in the image of the restriction map ... Then $Z$ is the zero section."
+        }
+      ],
+      "source_terms": [
+        "section",
+        "zero section",
+        "H^{2g}(J(S,H)) → H^{2g}(J_L)"
+      ],
+      "trust_status": "lean_checked"
+    },
+    {
+      "import": "GrokRxiv/Paper/Interfaces.lean",
+      "kind": "interface",
+      "lean_decl": "opaque paper : PaperData",
+      "name": "paper",
+      "signature": "paper : PaperData",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": "main_thm",
+          "source_tex": "Let $C$ be a geometrically connected, smooth projective curve over a field $k$, and $A/C$ a smooth commutative group scheme with connected fibres, whose generic fibre $A_\\eta$ is an abelian variety."
+        }
+      ],
+      "source_terms": [
+        "smooth commutative group scheme A/C",
+        "abelian variety generic fibre"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv/Paper/Interfaces.lean",
+      "kind": "interface",
+      "lean_decl": "opaque ksData : KSData",
+      "name": "ksData",
+      "signature": "ksData : KSData",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": "thm_KS",
+          "source_tex": "Let $p \\colon J(S, H) \\to |H|$ be the universal compactified Jacobian, $L \\subset |H|$ a general line, $J_L := p^{-1}(L)$..."
+        }
+      ],
+      "source_terms": [
+        "universal compactified Jacobian",
+        "general line L"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv/Paper/Interfaces.lean",
+      "kind": "definition",
+      "lean_decl": "noncomputable def restrictMap : paper.PicRig → paper.PicEta := paper.restrict",
+      "name": "restrictMap",
+      "signature": "restrictMap : paper.PicRig → paper.PicEta",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": "item_lift",
+          "source_tex": "the restriction $$\\Pic(A)_{\\rig} \\to \\Pic(A_\\eta)$$ is a group isomorphism."
+        }
+      ],
+      "source_terms": [
+        "restriction Pic(A)_{rig} → Pic(A_η)"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv/Paper/Interfaces.lean",
+      "kind": "definition",
+      "lean_decl": "noncomputable def phiMap (Z : paper.MW) : paper.N1 := paper.cl Z - paper.cl 0",
+      "name": "phiMap",
+      "signature": "phiMap : paper.MW → paper.N1",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": null,
+          "source_tex": "\\phi\\colon \\MW(A/C) \\to N_1(A)$$ $$Z\\mapsto [Z]-[Z_0]"
+        }
+      ],
+      "source_terms": [
+        "φ : MW(A/C) → N_1(A)",
+        "Z ↦ [Z]-[Z_0]"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv/Paper/Interfaces.lean",
+      "kind": "definition",
+      "lean_decl": "noncomputable def psiMap (Z : paper.MW) : paper.N1gen := paper.clGen Z - paper.clGen 0",
+      "name": "psiMap",
+      "signature": "psiMap : paper.MW → paper.N1gen",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": "main_thm",
+          "source_tex": "\\psi\\colon \\MW(A/C) \\to N_{1,\\gen}(A)$$ $$Z \\mapsto [Z]-[Z_0]"
+        }
+      ],
+      "source_terms": [
+        "ψ : MW(A/C) → N_{1,gen}(A)",
+        "Z ↦ [Z]-[Z_0]"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv/Paper/Statements.lean",
+      "kind": "statement",
+      "lean_decl": "def itemLiftStatement : Prop := Function.Bijective restrictMap ∧ ∀ x y : paper.PicRig, restrictMap (x + y) = restrictMap x + restrictMap y",
+      "name": "itemLiftStatement",
+      "signature": "itemLiftStatement : Prop",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": "item_lift",
+          "source_tex": "the restriction $$\\Pic(A)_{\\rig} \\to \\Pic(A_\\eta)$$ is a group isomorphism."
+        }
+      ],
+      "source_terms": [
+        "group isomorphism",
+        "Pic(A)_{rig} → Pic(A_η)"
+      ],
+      "trust_status": "blocked"
+    },
+    {
+      "import": "GrokRxiv/Paper/Statements.lean",
+      "kind": "statement",
+      "lean_decl": "def mainThmHomStatement : Prop := ∀ x y : paper.MW, psiMap (x + y) = psiMap x + psiMap y",
+      "name": "mainThmHomStatement",
+      "signature": "mainThmHomStatement : Prop",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": "main_thm",
+          "source_tex": "The map $\\psi\\colon \\MW(A/C) \\to N_{1,\\gen}(A)$ ... is a group homomorphism."
+        }
+      ],
+      "source_terms": [
+        "ψ is a group homomorphism"
+      ],
+      "trust_status": "blocked"
+    },
+    {
+      "import": "GrokRxiv/Paper/Statements.lean",
+      "kind": "statement",
+      "lean_decl": "def mainThmKerStatement : Prop := ∀ Z : paper.MW, psiMap Z = 0 ↔ Z ∈ paper.torsion",
+      "name": "mainThmKerStatement",
+      "signature": "mainThmKerStatement : Prop",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": "main_thm",
+          "source_tex": "Assume that $A_\\eta$ has no abelian subvarieties defined over $k$, then $\\ker \\psi = \\MW(A/C)_{\\tors}$."
+        }
+      ],
+      "source_terms": [
+        "ker ψ = MW(A/C)_{tors}",
+        "no abelian subvarieties defined over k"
+      ],
+      "trust_status": "blocked"
+    },
+    {
+      "import": "GrokRxiv/Paper/Statements.lean",
+      "kind": "statement",
+      "lean_decl": "def thmKSStatement : Prop := ksData.inRestrictionImage ksData.Z → ksData.Z = ksData.zeroSection",
+      "name": "thmKSStatement",
+      "signature": "thmKSStatement : Prop",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": "thm_KS",
+          "source_tex": "Let $Z \\subset J_L$ be a section whose cohomology class is contained in the image of the restriction map ... Then $Z$ is the zero section."
+        }
+      ],
+      "source_terms": [
+        "cohomology class in image of restriction map",
+        "Z is the zero section"
+      ],
+      "trust_status": "blocked"
+    },
+    {
+      "import": "GrokRxiv/Paper/Lemmas.lean",
+      "kind": "lemma",
+      "lean_decl": "theorem phiMap_zero : phiMap (0 : paper.MW) = 0 := by simp only [phiMap, sub_self]",
+      "name": "phiMap_zero",
+      "signature": "phiMap_zero : phiMap (0 : paper.MW) = 0",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": null,
+          "source_tex": "\\phi\\colon \\MW(A/C) \\to N_1(A)$$ $$Z\\mapsto [Z]-[Z_0]"
+        }
+      ],
+      "source_terms": [
+        "Z ↦ [Z]-[Z_0]"
+      ],
+      "trust_status": "lean_checked"
+    },
+    {
+      "import": "GrokRxiv/Paper/Lemmas.lean",
+      "kind": "lemma",
+      "lean_decl": "theorem psiMap_zero : psiMap (0 : paper.MW) = 0 := by simp only [psiMap, sub_self]",
+      "name": "psiMap_zero",
+      "signature": "psiMap_zero : psiMap (0 : paper.MW) = 0",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": "main_thm",
+          "source_tex": "\\psi\\colon \\MW(A/C) \\to N_{1,\\gen}(A)$$ $$Z \\mapsto [Z]-[Z_0]"
+        }
+      ],
+      "source_terms": [
+        "Z ↦ [Z]-[Z_0]"
+      ],
+      "trust_status": "lean_checked"
+    },
+    {
+      "import": "GrokRxiv/Paper/Lemmas.lean",
+      "kind": "lemma",
+      "lean_decl": "theorem psiMap_eq_zero_iff (Z : paper.MW) : psiMap Z = 0 ↔ paper.clGen Z = paper.clGen 0 := by simp only [psiMap, sub_eq_zero]",
+      "name": "psiMap_eq_zero_iff",
+      "signature": "psiMap_eq_zero_iff : ∀ Z, psiMap Z = 0 ↔ paper.clGen Z = paper.clGen 0",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": "main_thm",
+          "source_tex": "$Z \\mapsto [Z]-[Z_0]$ is a group homomorphism."
+        }
+      ],
+      "source_terms": [
+        "[Z]=[Z_0]"
+      ],
+      "trust_status": "lean_checked"
+    },
+    {
+      "import": "GrokRxiv/Paper/Lemmas.lean",
+      "kind": "lemma",
+      "lean_decl": "theorem itemLiftStatement_iff : itemLiftStatement ↔ Function.Bijective restrictMap ∧ ∀ x y : paper.PicRig, restrictMap (x + y) = restrictMap x + restrictMap y := Iff.rfl",
+      "name": "itemLiftStatement_iff",
+      "signature": "itemLiftStatement_iff : itemLiftStatement ↔ (Function.Bijective restrictMap ∧ ∀ x y, restrictMap (x+y) = restrictMap x + restrictMap y)",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": "item_lift",
+          "source_tex": "the restriction $$\\Pic(A)_{\\rig} \\to \\Pic(A_\\eta)$$ is a group isomorphism."
+        }
+      ],
+      "source_terms": [
+        "group isomorphism"
+      ],
+      "trust_status": "lean_checked"
+    }
+  ],
+  "schema_version": "1.0.0"
 }

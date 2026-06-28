@@ -1,73 +1,106 @@
 {
-  "agent_output_audit_summary": {
-    "accepted": 0,
-    "by_role": {},
-    "rejected": 0,
-    "total": 0
-  },
-  "attempts": [
-    {
-      "attempt": 0,
-      "semantic_validation": {
-        "issues": [
-          "Lean formalization runs asynchronously via the `formalize` job; queue with --with-lean."
-        ],
-        "status": "skipped"
-      },
-      "skipped": true,
-      "status": "skipped"
-    }
-  ],
-  "author_role": "lean_proof_author",
-  "deferred_outputs": [
-    {
-      "artifact": "review_loop/lean/env/env_result.json",
-      "deferred_to": "formalize",
-      "skip_reason": "Lean formalization runs asynchronously via the `formalize` job; queue with --with-lean."
-    },
-    {
-      "artifact": "review_loop/lean/library/compile.json",
-      "deferred_to": "formalize",
-      "skip_reason": "Lean formalization runs asynchronously via the `formalize` job; queue with --with-lean."
-    },
-    {
-      "artifact": "review_loop/lean/library/library_manifest.json",
-      "deferred_to": "formalize",
-      "skip_reason": "Lean formalization runs asynchronously via the `formalize` job; queue with --with-lean."
-    }
-  ],
+  "blocked_count": 3,
   "entries": [
     {
-      "emitted_statement": null,
-      "kind": "theorem_formalization",
-      "lean_attempt_status": "failed_typecheck",
-      "lean_declaration": "thm_5",
-      "obligation_id": "formalize_theorem_thm_5",
-      "source_claim_id": "thm-5",
-      "source_span": {
-        "artifact": "theorem_graph.json",
-        "claim_id": "thm-5",
-        "paper_source_id": "thm-5",
-        "section_id": "sec-3",
-        "text_excerpt": "[@KS25 Proposition 1][]{#thm_KS label=\"thm_KS\"} Let $S$ be a smooth, projective surface over $\\mathbb{C}$ such that $\\Pic(S) = \\Z[H]$, where $|H|$ is basepoint-free, and members of $|H|$ have at worst nodes in codimension 1 on $|H|$. Let $p \\colon J(S, H) \\to..."
-      },
-      "statement": "[@KS25 Proposition 1][]{#thm_KS label=\"thm_KS\"} Let $S$ be a smooth, projective surface over $\\mathbb{C}$ such that $\\Pic(S) = \\Z[H]$, where $|H|$ is basepoint-free, and members of $|H|$ have at worst nodes in codimension 1 on $|H|$. Let $p \\colon J(S, H) \\to |H|$ be the universal compactified Jacobian, $L \\subset |H|$ a general line, $J_L := p^{-1} (L)$, and $g$ the genus of the curves in $|H|$. Let $Z \\subset J_L$ be a section whose cohomology class is contained in the image of the restriction map $$H^{2g}(J(S, H), \\Z) \\to H^{2g}(J_L, \\Z).$$ Then $Z$ is the zero section.",
-      "status": "FAILED",
-      "verified_statement": null
+      "claim_status": "blocked",
+      "compile": null,
+      "failure_reason": "status=lean_compile_error | command_status=fail | exit_code=1 | stderr=error: build failed | stdout=✖ [8477/8480] Building GrokRxiv.Paper.Interfaces (11s)\ntrace: .> LEAN_PATH=/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/library/.lake/packages/Cli/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/library/.lake/packages/batteries/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/library/.lake/packages/Qq/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/library/.lake/packages/aesop/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/library/.lake/packages/pr…",
+      "library": "review_loop/lean/library/compile.json",
+      "proofs_lean": "review_loop/lean/targets/item_lift/GrokRxiv/Proofs.lean",
+      "source_claim_id": "item_lift",
+      "source_packet": "review_loop/lean/targets/item_lift/packet.json",
+      "status": "blocked_library"
+    },
+    {
+      "claim_status": "blocked",
+      "compile": null,
+      "failure_reason": "status=lean_compile_error | command_status=fail | exit_code=1 | stderr=error: build failed | stdout=✖ [8477/8480] Building GrokRxiv.Paper.Interfaces (11s)\ntrace: .> LEAN_PATH=/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/library/.lake/packages/Cli/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/library/.lake/packages/batteries/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/library/.lake/packages/Qq/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/library/.lake/packages/aesop/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/library/.lake/packages/pr…",
+      "library": "review_loop/lean/library/compile.json",
+      "proofs_lean": "review_loop/lean/targets/thm_KS/GrokRxiv/Proofs.lean",
+      "source_claim_id": "thm_KS",
+      "source_packet": "review_loop/lean/targets/thm_KS/packet.json",
+      "status": "blocked_library"
+    },
+    {
+      "claim_status": "blocked",
+      "compile": null,
+      "failure_reason": "status=lean_compile_error | command_status=fail | exit_code=1 | stderr=error: build failed | stdout=✖ [8477/8480] Building GrokRxiv.Paper.Interfaces (11s)\ntrace: .> LEAN_PATH=/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/library/.lake/packages/Cli/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/library/.lake/packages/batteries/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/library/.lake/packages/Qq/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/library/.lake/packages/aesop/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/library/.lake/packages/pr…",
+      "library": "review_loop/lean/library/compile.json",
+      "proofs_lean": "review_loop/lean/targets/main_thm/GrokRxiv/Proofs.lean",
+      "source_claim_id": "main_thm",
+      "source_packet": "review_loop/lean/targets/main_thm/packet.json",
+      "status": "blocked_library"
     }
   ],
-  "filename": "GrokRxiv/Proofs.lean",
-  "final_path": ".agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/GrokRxiv/Proofs.lean",
-  "fixer_role": "lean_code_fixer",
-  "language": "lean",
-  "lean_attempt_status": "failed_typecheck",
-  "max_attempts": 2,
-  "proof_status": "FAILED",
-  "reviewer_role": "lean_code_reviewer",
-  "skip_reason": "lean_deferred_to_formalize",
-  "skipped": true,
-  "stage": "lean_review_fix_code",
-  "status": "skipped",
-  "target": "lean",
-  "verdict": "NOT_PROVED"
+  "external_actions_enabled": true,
+  "failed_count": 0,
+  "harness": {
+    "env": {
+      "cwd": ".agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/env",
+      "mathlib_env": null,
+      "schema_version": "1.0.0",
+      "smoke": {
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "GrokRxiv/HarnessSmoke.lean"
+        ],
+        "duration_ms": 23443,
+        "exit_code": 0,
+        "status": "pass",
+        "stderr": "",
+        "stdout": "Nat : Type\nPolynomial.{u_1} (R : Type u_1) [Semiring R] : Type u_1\n"
+      },
+      "stage": "env",
+      "status": "pass"
+    },
+    "library": {
+      "compile": {
+        "command": [
+          "lake",
+          "build",
+          "GrokRxiv.Paper"
+        ],
+        "duration_ms": 13893,
+        "exit_code": 1,
+        "status": "fail",
+        "stderr": "error: build failed\n",
+        "stdout": "✖ [8477/8480] Building GrokRxiv.Paper.Interfaces (11s)\ntrace: .> LEAN_PATH=/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/library/.lake/packages/Cli/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/library/.lake/packages/batteries/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/library/.lake/packages/Qq/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/library/.lake/packages/aesop/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/library/.lake/packages/proofwidgets/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/library/.lake/packages/importGraph/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/library/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/library/.lake/packages/plausible/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps\n...[truncated 3 chars]...\nokrxiv/evals/lean/.lake/packages/mathlib/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/library/.lake/build/lib/lean /Users/mlong/.elan/toolchains/leanprover--lean4---v4.30.0/bin/lean /Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/library/GrokRxiv/Paper/Interfaces.lean -o /Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/library/.lake/build/lib/lean/GrokRxiv/Paper/Interfaces.olean -i /Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/library/.lake/build/lib/lean/GrokRxiv/Paper/Interfaces.ilean -c /Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/library/.lake/build/ir/GrokRxiv/Paper/Interfaces.c --setup /Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/library/.lake/build/ir/GrokRxiv/Paper/Interfaces.setup.json --json\nerror: GrokRxiv/Paper/Interfaces.lean:21:7: failed to compile definition, consider marking it as 'noncomputable' because it depends on 'Classical.ofNonempty', which is 'noncomputable'\nerror: GrokRxiv/Paper/Interfaces.lean:39:7: failed to compile definition, consider marking it as 'noncomputable' because it depends on 'Classical.ofNonempty', which is 'noncomputable'\nerror: Lean exited with code 1\nSome required targets logged failures:\n- GrokRxiv.Paper.Interfaces\n"
+      },
+      "compile_target": "GrokRxiv.Paper",
+      "files": [
+        "GrokRxiv/Paper/Notation.lean",
+        "GrokRxiv/Paper/Definitions.lean",
+        "GrokRxiv/Paper/Interfaces.lean",
+        "GrokRxiv/Paper/Statements.lean",
+        "GrokRxiv/Paper/Lemmas.lean"
+      ],
+      "manifest": "review_loop/lean/library/library_manifest.json",
+      "schema_version": "1.0.0",
+      "stage": "library-check",
+      "status": "lean_compile_error",
+      "upstream": {
+        "latency_ms": 96214,
+        "model": "opus[1m]",
+        "role": "lean_library_fixer",
+        "schema_version": "1.0.0",
+        "stage": "library-fix",
+        "status": "pass",
+        "validation_issues": []
+      },
+      "validation_issues": []
+    }
+  },
+  "kernel_proved_count": 0,
+  "paper_claim_proved_count": 0,
+  "proof_author_invoked_count": 0,
+  "proofs_lean_created_count": 3,
+  "schema_version": "1.0.0",
+  "selected_count": 3,
+  "source": "theorem_inventory_direct",
+  "stage": "all",
+  "statement_preflight_passed_count": 0,
+  "status": "blocked_library",
+  "theorem_proved": 0
 }
