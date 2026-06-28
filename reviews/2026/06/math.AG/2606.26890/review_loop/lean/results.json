@@ -1,0 +1,206 @@
+{
+  "blocked_count": 2,
+  "entries": [
+    {
+      "claim_status": "blocked",
+      "compile": "review_loop/lean/targets/thm_mainA/check/compile.json",
+      "compile_status": "pass",
+      "failure_reason": "status=faithfulness_failed | faithfulness_verdict=unfaithful | faithfulness_status=completed | issues=[{\"message\":\"The Lean statement is conditional on two strong abstract assumptions, germCancellation and germRigidity, whereas the paper theorem has no such assumptions.\",\"severity\":\"critical\"},{\"message\":\"The theorem proves only that these added hypotheses imply CancellationCStar; it does not prove CancellationCStar from the paper's assumptions alone.\",\"severity\":\"critical\"},{\"message\":\"SingGerm is an arbitrary relation supplied as a parameter, so the statement formalizes a reduction pattern rather than the paper's concrete cancellation theorem.\",\"severity\":\"warning\"}]",
+      "faithfulness": "review_loop/lean/targets/thm_mainA/faithfulness/faithfulness.json",
+      "faithfulness_status": "completed",
+      "faithfulness_verdict": "unfaithful",
+      "library_feedback": {
+        "reason": "parallel target execution keeps the checked paper-local library immutable during target jobs",
+        "status": "deferred_parallel_batch"
+      },
+      "library_feedback_candidate": true,
+      "parallel_target": true,
+      "proofs_lean": "review_loop/lean/targets/thm_mainA/GrokRxiv/Proofs.lean",
+      "source_claim_id": "thm:mainA",
+      "source_faithfulness_feedback": null,
+      "source_packet": "review_loop/lean/targets/thm_mainA/packet.json",
+      "status": "faithfulness_failed",
+      "target_fix_status": null
+    },
+    {
+      "claim_status": "blocked",
+      "compile": "review_loop/lean/targets/thm_mainB/check/compile.json",
+      "compile_status": "pass",
+      "failure_reason": "status=faithfulness_failed | faithfulness_verdict=unfaithful | faithfulness_status=completed | issues=[{\"message\":\"The Lean statement is conditional: it assumes the key implications (1) implies (4), (4) implies (3), (3) implies (2), and (2) implies (1), then assembles them into a TFAE. The paper theorem asserts the equivalence unconditionally.\",\"severity\":\"critical\"},{\"message\":\"The hypothesis `perm_of_prod` contains the hard cancellation/rigidity direction of the theorem as an assumption, so the kernel-checked declaration does not establish the main mathematical content.\",\"severity\":\"critical\"},{\"message\":\"The supporting geometric notions are opaque interface predicates such as `IsoOverBase`, `CStarIso`, `SchProd`, and `bpVariety`; faithfulness of those predicates to the paper's scheme-theoretic notions is not checked by this declaration.\",\"severity\":\"warning\"},{\"message\":\"Separatedness of the scheme `Z` is not visible in the displayed Lean assumptions, except possibly hidden in an opaque type or in the named proposition `CancellationBP`.\",\"severity\":\"warning\"}]",
+      "faithfulness": "review_loop/lean/targets/thm_mainB/faithfulness/faithfulness.json",
+      "faithfulness_status": "completed",
+      "faithfulness_verdict": "unfaithful",
+      "library_feedback": {
+        "reason": "parallel target execution keeps the checked paper-local library immutable during target jobs",
+        "status": "deferred_parallel_batch"
+      },
+      "library_feedback_candidate": true,
+      "parallel_target": true,
+      "proofs_lean": "review_loop/lean/targets/thm_mainB/GrokRxiv/Proofs.lean",
+      "source_claim_id": "thm:mainB",
+      "source_faithfulness_feedback": null,
+      "source_packet": "review_loop/lean/targets/thm_mainB/packet.json",
+      "status": "faithfulness_failed",
+      "target_fix_status": null
+    },
+    {
+      "claim_status": "proved",
+      "compile": "review_loop/lean/targets/thm_mainC/check/compile.json",
+      "compile_status": "pass",
+      "failure_reason": null,
+      "faithfulness": "review_loop/lean/targets/thm_mainC/faithfulness/faithfulness.json",
+      "faithfulness_status": "completed",
+      "faithfulness_verdict": "faithful",
+      "library_feedback": null,
+      "library_feedback_candidate": false,
+      "parallel_target": true,
+      "proofs_lean": "review_loop/lean/targets/thm_mainC/GrokRxiv/Proofs.lean",
+      "source_claim_id": "thm:mainC",
+      "source_faithfulness_feedback": null,
+      "source_packet": "review_loop/lean/targets/thm_mainC/packet.json",
+      "status": "pass",
+      "target_fix_status": null
+    }
+  ],
+  "external_actions_enabled": true,
+  "failed_count": 0,
+  "harness": {
+    "env": {
+      "cwd": ".agenthero/artifacts/grokrxiv/reviews/539b1d45-ba8e-426f-8563-4eb75a67a8d5/review_loop/lean/env",
+      "mathlib_env": null,
+      "schema_version": "1.0.0",
+      "smoke": {
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "GrokRxiv/HarnessSmoke.lean"
+        ],
+        "duration_ms": 22065,
+        "exit_code": 0,
+        "status": "pass",
+        "stderr": "",
+        "stdout": "Nat : Type\nPolynomial.{u_1} (R : Type u_1) [Semiring R] : Type u_1\n"
+      },
+      "stage": "env",
+      "status": "pass"
+    },
+    "library": {
+      "compile": {
+        "command": [
+          "lake",
+          "build",
+          "GrokRxiv.Paper"
+        ],
+        "duration_ms": 2217,
+        "exit_code": 0,
+        "status": "pass",
+        "stderr": "",
+        "stdout": "Build completed successfully (8480 jobs).\n"
+      },
+      "compile_target": "GrokRxiv.Paper",
+      "files": [
+        "GrokRxiv/Paper/Notation.lean",
+        "GrokRxiv/Paper/Definitions.lean",
+        "GrokRxiv/Paper/Interfaces.lean",
+        "GrokRxiv/Paper/Statements.lean",
+        "GrokRxiv/Paper/Lemmas.lean"
+      ],
+      "manifest": "review_loop/lean/library/library_manifest.json",
+      "schema_version": "1.0.0",
+      "stage": "library-check",
+      "status": "pass",
+      "upstream": {
+        "latency_ms": 157227,
+        "model": "opus[1m]",
+        "reported_output": {
+          "changed": true,
+          "confidence": 0.9,
+          "edited_files": [
+            "library_manifest.json"
+          ],
+          "language": "lean",
+          "notes": [
+            "Root cause was NOT a Lean compile error (the library already builds: `lake build GrokRxiv.Paper` -> 8480 jobs). It was a manifest-shape mismatch: the validator (orchestrator lean_audit.rs::manifest_has_source_backed_interface) reads parsed library_manifest.json and requires manifest[\"declarations\"] to be an array containing >=1 entry with kind == \"interface\" AND a NON-EMPTY ARRAY source_evidence. The prior manifest only had `opaque_interfaces` with `source_evidence` as a string, so no source-backed interface was found -> opaque_missing_source_evidence.",
+            "Fix: added a top-level `declarations` array mapping every one of the 14 `opaque` declarations in GrokRxiv/Paper/Interfaces.lean (SchemeCarrier, IsoOverBase, SchProd, HasSmoothPoint, IsGoodCStarUnique, CStarIso, bpVariety, AnGermCarrier, FormalGermCarrier, bpAnGerm, bpFormalGerm, BiholAn, BiholFormal, FormalRingIso) to an entry with kind=\"interface\" and an array-valued `source_evidence` carrying the LaTeX source citation(s). The original `opaque_interfaces`/`concrete_declarations` blocks are retained for human readability.",
+            "No Lean files were edited; no sorry/admit/axiom introduced. Bodyless opaques landing in Nonempty-carrier types (Sch/AnGerm/FormalGerm) remain `noncomputable opaque` with dependent type defs `noncomputable`, per the rules.",
+            "Verified post-edit: library_manifest.json parses and 14/14 declarations are kind=\"interface\" with non-empty source_evidence arrays, so the require_source_evidence_for_opaque check now passes.",
+            "Source/library gap unchanged and still reported (not a claim change): Theorem C(2)'s formal-completion ring iso (\\hat B_a = C[[X]]/(f_a)) stays modelled as the opaque relation FormalRingIso because the MvPowerSeries quotient algebra and its C-algebra isomorphisms are not available in usable form in Mathlib; the analytic/formal germ layer is likewise irreducibly opaque."
+          ]
+        },
+        "role": "lean_library_fixer",
+        "schema_version": "1.0.0",
+        "stage": "library-fix",
+        "status": "pass",
+        "validation_issues": []
+      },
+      "validation_issues": []
+    },
+    "parallel": {
+      "library_feedback_batch": {
+        "candidate_count": 2,
+        "candidates": [
+          {
+            "claim_status": "blocked",
+            "compile": "review_loop/lean/targets/thm_mainA/check/compile.json",
+            "compile_status": "pass",
+            "failure_reason": "status=faithfulness_failed | faithfulness_verdict=unfaithful | faithfulness_status=completed | issues=[{\"message\":\"The Lean statement is conditional on two strong abstract assumptions, germCancellation and germRigidity, whereas the paper theorem has no such assumptions.\",\"severity\":\"critical\"},{\"message\":\"The theorem proves only that these added hypotheses imply CancellationCStar; it does not prove CancellationCStar from the paper's assumptions alone.\",\"severity\":\"critical\"},{\"message\":\"SingGerm is an arbitrary relation supplied as a parameter, so the statement formalizes a reduction pattern rather than the paper's concrete cancellation theorem.\",\"severity\":\"warning\"}]",
+            "faithfulness": "review_loop/lean/targets/thm_mainA/faithfulness/faithfulness.json",
+            "faithfulness_status": "completed",
+            "faithfulness_verdict": "unfaithful",
+            "library_feedback": {
+              "reason": "parallel target execution keeps the checked paper-local library immutable during target jobs",
+              "status": "deferred_parallel_batch"
+            },
+            "library_feedback_candidate": true,
+            "parallel_target": true,
+            "proofs_lean": "review_loop/lean/targets/thm_mainA/GrokRxiv/Proofs.lean",
+            "source_claim_id": "thm:mainA",
+            "source_faithfulness_feedback": null,
+            "source_packet": "review_loop/lean/targets/thm_mainA/packet.json",
+            "status": "faithfulness_failed",
+            "target_fix_status": null
+          },
+          {
+            "claim_status": "blocked",
+            "compile": "review_loop/lean/targets/thm_mainB/check/compile.json",
+            "compile_status": "pass",
+            "failure_reason": "status=faithfulness_failed | faithfulness_verdict=unfaithful | faithfulness_status=completed | issues=[{\"message\":\"The Lean statement is conditional: it assumes the key implications (1) implies (4), (4) implies (3), (3) implies (2), and (2) implies (1), then assembles them into a TFAE. The paper theorem asserts the equivalence unconditionally.\",\"severity\":\"critical\"},{\"message\":\"The hypothesis `perm_of_prod` contains the hard cancellation/rigidity direction of the theorem as an assumption, so the kernel-checked declaration does not establish the main mathematical content.\",\"severity\":\"critical\"},{\"message\":\"The supporting geometric notions are opaque interface predicates such as `IsoOverBase`, `CStarIso`, `SchProd`, and `bpVariety`; faithfulness of those predicates to the paper's scheme-theoretic notions is not checked by this declaration.\",\"severity\":\"warning\"},{\"message\":\"Separatedness of the scheme `Z` is not visible in the displayed Lean assumptions, except possibly hidden in an opaque type or in the named proposition `CancellationBP`.\",\"severity\":\"warning\"}]",
+            "faithfulness": "review_loop/lean/targets/thm_mainB/faithfulness/faithfulness.json",
+            "faithfulness_status": "completed",
+            "faithfulness_verdict": "unfaithful",
+            "library_feedback": {
+              "reason": "parallel target execution keeps the checked paper-local library immutable during target jobs",
+              "status": "deferred_parallel_batch"
+            },
+            "library_feedback_candidate": true,
+            "parallel_target": true,
+            "proofs_lean": "review_loop/lean/targets/thm_mainB/GrokRxiv/Proofs.lean",
+            "source_claim_id": "thm:mainB",
+            "source_faithfulness_feedback": null,
+            "source_packet": "review_loop/lean/targets/thm_mainB/packet.json",
+            "status": "faithfulness_failed",
+            "target_fix_status": null
+          }
+        ],
+        "parallel_target_concurrency": 3,
+        "reason": "target jobs ran in isolated workdirs against a checked library snapshot; shared library mutation is deferred to a later batch implementation",
+        "schema_version": "1.0.0",
+        "stage": "parallel-library-feedback-batch",
+        "status": "deferred"
+      },
+      "target_concurrency": 3
+    }
+  },
+  "kernel_proved_count": 3,
+  "paper_claim_proved_count": 1,
+  "proof_author_invoked_count": 3,
+  "proofs_lean_created_count": 3,
+  "schema_version": "1.0.0",
+  "selected_count": 3,
+  "source": "theorem_inventory_direct",
+  "stage": "all",
+  "statement_preflight_passed_count": 0,
+  "status": "partial",
+  "theorem_proved": 1
+}
