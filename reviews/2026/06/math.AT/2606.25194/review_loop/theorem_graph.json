@@ -1,0 +1,69 @@
+{
+  "arxiv_id": "2606.25194",
+  "nodes": [
+    {
+      "depends_on": [],
+      "id": "thm-1",
+      "section_id": "sec-3-2",
+      "source_tex": "::: proposition\n**Proposition 1** (Hard-limit consistency of the ambient Hodge\nLaplacian). *Let $K(\\theta)\\subset K_{\\max}$ be an active subcomplex and\nlet $L_q^{\\mathrm{hard}}(\\theta)$ be the penalty-regularized hard\nambient Hodge Laplacian defined above. Then, with respect to the\northogonal decomposition $$C_q^{\\mathrm{amb}}\n=\nC_q(K(\\theta))\\oplus C_q(K(\\theta))^\\perp,$$ one has\n$$L_q^{\\mathrm{hard}}(\\theta)\n=\nL_q(K(\\theta))\\oplus \\mu I_{C_q(K(\\theta))^\\perp}.$$ Consequently,\n$$\\ker L_q^{\\mathrm{hard}}(\\theta)\n\\simeq\nH_q(K(\\theta)),\n\\qquad\n\\dim\\ker L_q^{\\mathrm{hard}}(\\theta)\n=\n\\beta_q(K(\\theta)).$$*\n:::",
+      "statement": "Proposition 1 (Hard-limit consistency of the ambient Hodge Laplacian). Let $K(\\theta)\\subset K_{\\max}$ be an active subcomplex and let $L_q^{\\mathrm{hard}}(\\theta)$ be the penalty-regularized hard ambient Hodge Laplacian defined above. Then, with respect to the orthogonal decomposition $$C_q^{\\mathrm{amb}} = C_q(K(\\theta))\\oplus C_q(K(\\theta))^\\perp,$$ one has $$L_q^{\\mathrm{hard}}(\\theta) = L_q(K(\\theta))\\oplus \\mu I_{C_q(K(\\theta))^\\perp}.$$ Consequently, $$\\ker L_q^{\\mathrm{hard}}(\\theta) \\simeq H_q(K(\\theta)), \\qquad \\dim\\ker L_q^{\\mathrm{hard}}(\\theta) = \\beta_q(K(\\theta)).$$",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-2",
+      "section_id": "sec-3-2",
+      "source_tex": "::: proof\n*Proof.* On the active subspace\n$C_q(K(\\theta))=\\operatorname{Im}\\Pi_q(\\theta)$, the projected boundary\noperators coincide with the ordinary boundary operators of the\nsubcomplex $K(\\theta)$, because $K(\\theta)$ is closed under taking\nfaces. On the inactive orthogonal complement, the projected boundary\nterms vanish and the penalty term acts as multiplication by $\\mu$. Thus\nthe operator decomposes as\n$$L_q(K(\\theta))\\oplus \\mu I_{C_q(K(\\theta))^\\perp}.$$ The statement\nfollows from the finite-dimensional Hodge decomposition, which\nidentifies $\\ker L_q(K(\\theta))$ with $H_q(K(\\theta))$. ◻\n:::",
+      "statement": "Proof. On the active subspace $C_q(K(\\theta))=\\operatorname{Im}\\Pi_q(\\theta)$, the projected boundary operators coincide with the ordinary boundary operators of the subcomplex $K(\\theta)$, because $K(\\theta)$ is closed under taking faces. On the inactive orthogonal complement, the projected boundary terms vanish and the penalty term acts as multiplication by $\\mu$. Thus the operator decomposes as $$L_q(K(\\theta))\\oplus \\mu I_{C_q(K(\\theta))^\\perp}.$$ The statement follows from the finite-dimensional Hodge decomposition, which identifies $\\ker L_q(K(\\theta))$ with $H_q(K(\\theta))$. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-3",
+      "section_id": "sec-3-3",
+      "source_tex": "::: remark\n**Remark 1** (Soft weighted boundaries). *For hard simplex indicators,\nthe projected boundary operators recover the ordinary boundary maps of\nthe active subcomplex. For soft weights, however, the matrices\n$$\\widetilde{B}_q(\\theta)\n=\nR_{q-1}(\\theta)B_qR_q(\\theta)$$ do not generally satisfy\n$$\\widetilde{B}_{q-1}(\\theta)\\widetilde{B}_q(\\theta)=0.$$ Thus, in the\nsoft regime, these matrices should not be interpreted as boundary maps\nof an exact chain complex. They are instead boundary-inspired weighted\noperators used to define a smooth Hodge-Laplacian-type spectral\nrelaxation. The exact homological interpretation is recovered in the\nhard limit.*\n:::",
+      "statement": "Remark 1 (Soft weighted boundaries). For hard simplex indicators, the projected boundary operators recover the ordinary boundary maps of the active subcomplex. For soft weights, however, the matrices $$\\widetilde{B}_q(\\theta) = R_{q-1}(\\theta)B_qR_q(\\theta)$$ do not generally satisfy $$\\widetilde{B}_{q-1}(\\theta)\\widetilde{B}_q(\\theta)=0.$$ Thus, in the soft regime, these matrices should not be interpreted as boundary maps of an exact chain complex. They are instead boundary-inspired weighted operators used to define a smooth Hodge-Laplacian-type spectral relaxation. The exact homological interpretation is recovered in the hard limit.",
+      "type": "remark"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-4",
+      "section_id": "sec-3-3",
+      "source_tex": "::: proposition\n**Proposition 2** (Convergence to the hard ambient operator). *Let\n$w_\\sigma^{(m)}\\in[0,1]$ be a sequence of simplex weights converging to\nhard activity indicators $\\chi_\\sigma\\in\\{0,1\\}$ for all simplices of\n$K_{\\max}$. Let $\\widehat{L}_q(w^{(m)})$ be the corresponding\npenalty-regularized Hodge-Laplacian-type spectral relaxation. Then\n$$\\widehat{L}_q(w^{(m)})\n\\longrightarrow\nL_q^{\\mathrm{hard}}(K)$$ in operator norm, where\n$$K=\\{\\sigma\\in K_{\\max}:\\chi_\\sigma=1\\}.$$*\n:::",
+      "statement": "Proposition 2 (Convergence to the hard ambient operator). Let $w_\\sigma^{(m)}\\in[0,1]$ be a sequence of simplex weights converging to hard activity indicators $\\chi_\\sigma\\in\\{0,1\\}$ for all simplices of $K_{\\max}$. Let $\\widehat{L}_q(w^{(m)})$ be the corresponding penalty-regularized Hodge-Laplacian-type spectral relaxation. Then $$\\widehat{L}_q(w^{(m)}) \\longrightarrow L_q^{\\mathrm{hard}}(K)$$ in operator norm, where $$K=\\{\\sigma\\in K_{\\max}:\\chi_\\sigma=1\\}.$$",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-5",
+      "section_id": "sec-3-3",
+      "source_tex": "::: proof\n*Proof.* The ambient boundary matrices $B_q$ are fixed finite matrices.\nThe diagonal matrices $W_q(w^{(m)})$ converge entrywise to $\\Pi_q$, and\nthe square-root matrices $R_q(w^{(m)})=W_q(w^{(m)})^{1/2}$ converge\nentrywise to $\\Pi_q$. Since all matrices are finite-dimensional,\nentrywise convergence implies convergence in operator norm. Therefore,\n$$R_{q-1}(w^{(m)})B_qR_q(w^{(m)})\n\\longrightarrow\n\\Pi_{q-1}B_q\\Pi_q,$$ and the corresponding lower, upper, and penalty\nterms converge to those of $L_q^{\\mathrm{hard}}(K)$. ◻\n:::",
+      "statement": "Proof. The ambient boundary matrices $B_q$ are fixed finite matrices. The diagonal matrices $W_q(w^{(m)})$ converge entrywise to $\\Pi_q$, and the square-root matrices $R_q(w^{(m)})=W_q(w^{(m)})^{1/2}$ converge entrywise to $\\Pi_q$. Since all matrices are finite-dimensional, entrywise convergence implies convergence in operator norm. Therefore, $$R_{q-1}(w^{(m)})B_qR_q(w^{(m)}) \\longrightarrow \\Pi_{q-1}B_q\\Pi_q,$$ and the corresponding lower, upper, and penalty terms converge to those of $L_q^{\\mathrm{hard}}(K)$. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-6",
+      "section_id": "sec-4-3",
+      "source_tex": "::: proposition\n**Proposition 3** (Trace approximation of Betti numbers). *Let $K$ be a\nfinite simplicial complex and let the eigenvalues of the ordinary Hodge\nLaplacian $L_q(K)$ be $$0=\\lambda_1=\\cdots=\\lambda_{\\beta_q}\n<\n\\lambda_{\\beta_q+1}\n\\le \\cdots \\le\n\\lambda_N.$$ Let $f:\\mathbb{R}_{\\ge0}\\to\\mathbb{R}$ satisfy $f(0)=1$,\nand define $$\\varepsilon_f\n=\n\\max_{i>\\beta_q}|f(\\lambda_i)|.$$ Then $$\\left|\n\\operatorname{Tr}f(L_q(K))-\\beta_q(K)\n\\right|\n\\le\n(N-\\beta_q)\\varepsilon_f.$$*\n:::",
+      "statement": "Proposition 3 (Trace approximation of Betti numbers). Let $K$ be a finite simplicial complex and let the eigenvalues of the ordinary Hodge Laplacian $L_q(K)$ be $$0=\\lambda_1=\\cdots=\\lambda_{\\beta_q} < \\lambda_{\\beta_q+1} \\le \\cdots \\le \\lambda_N.$$ Let $f:\\mathbb{R}_{\\ge0}\\to\\mathbb{R}$ satisfy $f(0)=1$, and define $$\\varepsilon_f = \\max_{i>\\beta_q}|f(\\lambda_i)|.$$ Then $$\\left| \\operatorname{Tr}f(L_q(K))-\\beta_q(K) \\right| \\le (N-\\beta_q)\\varepsilon_f.$$",
+      "type": "proposition"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-7",
+      "section_id": "sec-4-3",
+      "source_tex": "::: proof\n*Proof.* Since $f(L_q(K))$ has eigenvalues $f(\\lambda_i)$, we have\n$$\\operatorname{Tr}f(L_q(K))\n=\n\\sum_{i=1}^{N}f(\\lambda_i)\n=\n\\beta_q(K)\n+\n\\sum_{i=\\beta_q+1}^{N}f(\\lambda_i).$$ Taking absolute values gives the\nstated bound. ◻\n:::",
+      "statement": "Proof. Since $f(L_q(K))$ has eigenvalues $f(\\lambda_i)$, we have $$\\operatorname{Tr}f(L_q(K)) = \\sum_{i=1}^{N}f(\\lambda_i) = \\beta_q(K) + \\sum_{i=\\beta_q+1}^{N}f(\\lambda_i).$$ Taking absolute values gives the stated bound. ◻",
+      "type": "proof"
+    },
+    {
+      "depends_on": [],
+      "id": "thm-8",
+      "section_id": "sec-6-3",
+      "source_tex": "::: lemma\n**Lemma 4** (Ambient-to-ordinary reduction for polynomial moments).\n*Suppose that, in the hard limit, the ambient operator decomposes as\n$$\\widehat{L}_q\n=\nL_q(K)\\oplus \\mu I_{\\mathrm{inactive}}.$$ Let\n$f_d(\\lambda)=(1-\\alpha\\lambda)^d$. Then\n$$\\operatorname{Tr}f_d(\\widehat{L}_q)\n=\n\\operatorname{Tr}f_d(L_q(K))\n+\nN_q^{\\mathrm{inactive}}(1-\\alpha\\mu)^d.$$ Moreover, $$f_d'(\\mu)\n=\n-\\alpha d(1-\\alpha\\mu)^{d-1}.$$ Thus, if $|1-\\alpha\\mu|^d$ and\n$|1-\\alpha\\mu|^{d-1}$ are small, both the forward moment contribution\nand the local filter derivative associated with the inactive block are\nnegligible. In this regime, the polynomial moment of the ambient\noperator reduces to the ordinary-complex moment up to a negligible\ninactive-block contribution.*\n:::",
+      "statement": "Lemma 4 (Ambient-to-ordinary reduction for polynomial moments). Suppose that, in the hard limit, the ambient operator decomposes as $$\\widehat{L}_q = L_q(K)\\oplus \\mu I_{\\mathrm{inactive}}.$$ Let $f_d(\\lambda)=(1-\\alpha\\lambda)^d$. Then $$\\operatorname{Tr}f_d(\\widehat{L}_q) = \\operatorname{Tr}f_d(L_q(K)) + N_q^{\\mathrm{inactive}}(1-\\alpha\\mu)^d.$$ Moreover, $$f_d'(\\mu) = -\\alpha d(1-\\alpha\\mu)^{d-1}.$$ Thus, if $|1-\\alpha\\mu|^d$ and $|1-\\alpha\\mu|^{d-1}$ are small, both the forward moment contribution and the local filter derivative associated with the inactive block are negligible. In this regime, the polynomial moment of the ambient operator reduces to the ordinary-complex moment up to a negligible inactive-block contribution.",
+      "type": "lemma"
+    }
+  ]
+}

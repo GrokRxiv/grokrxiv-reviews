@@ -1,0 +1,440 @@
+{
+  "agent_output_audits": {
+    "lean": {
+      "accepted": 0,
+      "by_role": {},
+      "rejected": 0,
+      "total": 0
+    },
+    "pr": {
+      "accepted": 0,
+      "by_role": {},
+      "rejected": 0,
+      "total": 0
+    },
+    "pr_review": {
+      "accepted": 0,
+      "by_role": {},
+      "rejected": 0,
+      "total": 0
+    }
+  },
+  "artifact_paths": {
+    "agent_outputs": "review_loop/agent_outputs",
+    "bundle_completeness": "review_loop/bundle_completeness.json",
+    "citation_adjudication": "review_loop/citation_validation_adjudication.json",
+    "citation_validation": "review_loop/citation_validation_report.json",
+    "claims": "review_loop/claims.json",
+    "knowledge_graph": "review_loop/knowledge_graph.json",
+    "lean": "review_loop/lean/results.json",
+    "lean_harness": "review_loop/lean/harness.json",
+    "lean_targets": "review_loop/lean_targets.json",
+    "lean_theorem_map": "review_loop/lean/theorem_map.json",
+    "lean_verification_report": "review_loop/lean/verification_report.json",
+    "paper_math_sources": "review_loop/paper_math_sources.json",
+    "policy_gate": "review_loop/policy_gate.json",
+    "pr_fixes": "review_loop/pr_fixes.json",
+    "pr_harness": "review_loop/fixed/harness.json",
+    "proof_obligations": "review_loop/proof_obligations.json",
+    "semantic_adequacy": "review_loop/semantic_adequacy.json",
+    "semantic_ir": "review_loop/semantic_ir.json",
+    "semantic_model": "review_loop/semantic_model.json"
+  },
+  "blocking_issues": [
+    "Review-loop bundle completeness failed: declared artifact `review_loop/lean/env/env_result.json` is missing and has no skip_reason"
+  ],
+  "bundle_completeness": {
+    "artifacts": [
+      {
+        "artifact_path": "review_loop/body.md",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/94ca8016-3adb-4475-af86-96a02a732fc9/review_loop/body.md",
+        "manifest_output": "body.md",
+        "skip_reason": null,
+        "stage_id": "paper_review",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/equations.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/94ca8016-3adb-4475-af86-96a02a732fc9/review_loop/equations.json",
+        "manifest_output": "equations.json",
+        "skip_reason": null,
+        "stage_id": "paper_review",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/theorem_graph.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/94ca8016-3adb-4475-af86-96a02a732fc9/review_loop/theorem_graph.json",
+        "manifest_output": "theorem_graph.json",
+        "skip_reason": null,
+        "stage_id": "paper_review",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/semantic_ast.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/94ca8016-3adb-4475-af86-96a02a732fc9/review_loop/semantic_ast.json",
+        "manifest_output": "semantic_ast.json",
+        "skip_reason": null,
+        "stage_id": "paper_review",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/references.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/94ca8016-3adb-4475-af86-96a02a732fc9/review_loop/references.json",
+        "manifest_output": "references.json",
+        "skip_reason": null,
+        "stage_id": "paper_review",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/claims.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/94ca8016-3adb-4475-af86-96a02a732fc9/review_loop/claims.json",
+        "manifest_output": "review_loop/claims.json",
+        "skip_reason": null,
+        "stage_id": "claim_extractor",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/paper_math_sources.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/94ca8016-3adb-4475-af86-96a02a732fc9/review_loop/paper_math_sources.json",
+        "manifest_output": "review_loop/paper_math_sources.json",
+        "skip_reason": null,
+        "stage_id": "paper_math_source_collector",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/knowledge_graph.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/94ca8016-3adb-4475-af86-96a02a732fc9/review_loop/knowledge_graph.json",
+        "manifest_output": "review_loop/knowledge_graph.json",
+        "skip_reason": null,
+        "stage_id": "knowledge_graph_builder",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/semantic_ir.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/94ca8016-3adb-4475-af86-96a02a732fc9/review_loop/semantic_ir.json",
+        "manifest_output": "review_loop/semantic_ir.json",
+        "skip_reason": null,
+        "stage_id": "semantic_category_mapper",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/semantic_model.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/94ca8016-3adb-4475-af86-96a02a732fc9/review_loop/semantic_model.json",
+        "manifest_output": "review_loop/semantic_model.json",
+        "skip_reason": null,
+        "stage_id": "semantic_category_mapper",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/proof_obligations.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/94ca8016-3adb-4475-af86-96a02a732fc9/review_loop/proof_obligations.json",
+        "manifest_output": "review_loop/proof_obligations.json",
+        "skip_reason": null,
+        "stage_id": "proof_obligation_generator",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean_targets.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/94ca8016-3adb-4475-af86-96a02a732fc9/review_loop/lean_targets.json",
+        "manifest_output": "review_loop/lean_targets.json",
+        "skip_reason": null,
+        "stage_id": "proof_obligation_generator",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean/env/env_result.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/94ca8016-3adb-4475-af86-96a02a732fc9/review_loop/lean/env/env_result.json",
+        "manifest_output": "review_loop/lean/env/env_result.json",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "missing"
+      },
+      {
+        "artifact_path": "review_loop/lean/library/library_manifest.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/94ca8016-3adb-4475-af86-96a02a732fc9/review_loop/lean/library/library_manifest.json",
+        "manifest_output": "review_loop/lean/library/library_manifest.json",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "missing"
+      },
+      {
+        "artifact_path": "review_loop/lean/library/compile.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/94ca8016-3adb-4475-af86-96a02a732fc9/review_loop/lean/library/compile.json",
+        "manifest_output": "review_loop/lean/library/compile.json",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "missing"
+      },
+      {
+        "artifact_path": "review_loop/lean/GrokRxiv/Proofs.lean",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/94ca8016-3adb-4475-af86-96a02a732fc9/review_loop/lean/GrokRxiv/Proofs.lean",
+        "manifest_output": "review_loop/lean/GrokRxiv/Proofs.lean",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean/results.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/94ca8016-3adb-4475-af86-96a02a732fc9/review_loop/lean/results.json",
+        "manifest_output": "review_loop/lean/results.json",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean/fix_rounds.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/94ca8016-3adb-4475-af86-96a02a732fc9/review_loop/lean/fix_rounds.json",
+        "manifest_output": "review_loop/lean/fix_rounds.json",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean/theorem_map.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/94ca8016-3adb-4475-af86-96a02a732fc9/review_loop/lean/theorem_map.json",
+        "manifest_output": "review_loop/lean/theorem_map.json",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean/verification_report.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/94ca8016-3adb-4475-af86-96a02a732fc9/review_loop/lean/verification_report.json",
+        "manifest_output": "review_loop/lean/verification_report.json",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/faithfulness.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/94ca8016-3adb-4475-af86-96a02a732fc9/review_loop/faithfulness.json",
+        "manifest_output": "review_loop/faithfulness.json",
+        "skip_reason": null,
+        "stage_id": "lean_faithfulness_check",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/semantic_adequacy.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/94ca8016-3adb-4475-af86-96a02a732fc9/review_loop/semantic_adequacy.json",
+        "manifest_output": "review_loop/semantic_adequacy.json",
+        "skip_reason": null,
+        "stage_id": "semantic_adequacy_checker",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/citation_validation_report.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/94ca8016-3adb-4475-af86-96a02a732fc9/review_loop/citation_validation_report.json",
+        "manifest_output": "citation_validation_report.json",
+        "skip_reason": null,
+        "stage_id": "citation_validation",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/citation_validation_adjudication.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/94ca8016-3adb-4475-af86-96a02a732fc9/review_loop/citation_validation_adjudication.json",
+        "manifest_output": "citation_validation_adjudication.json",
+        "skip_reason": "citation-validation adjudication is not materialized separately by the current review-loop runtime; citation_validation_report.json carries the deterministic citation evidence.",
+        "stage_id": "citation_validation",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/pr_fixes.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/94ca8016-3adb-4475-af86-96a02a732fc9/review_loop/pr_fixes.json",
+        "manifest_output": "review_loop/pr_fixes.json",
+        "skip_reason": null,
+        "stage_id": "pr_fixer",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/fixed/review.md",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/94ca8016-3adb-4475-af86-96a02a732fc9/review_loop/fixed/review.md",
+        "manifest_output": "review_loop/fixed/review.md",
+        "skip_reason": null,
+        "stage_id": "pr_fixer",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/pr_review/results.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/94ca8016-3adb-4475-af86-96a02a732fc9/review_loop/pr_review/results.json",
+        "manifest_output": "review_loop/pr_review/results.json",
+        "skip_reason": null,
+        "stage_id": "pr_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/pr_review/fix_rounds.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/94ca8016-3adb-4475-af86-96a02a732fc9/review_loop/pr_review/fix_rounds.json",
+        "manifest_output": "review_loop/pr_review/fix_rounds.json",
+        "skip_reason": null,
+        "stage_id": "pr_review_fix_code",
+        "status": "present"
+      }
+    ],
+    "declared_artifact_count": 28,
+    "failures": [
+      "declared artifact `review_loop/lean/env/env_result.json` is missing and has no skip_reason",
+      "declared artifact `review_loop/lean/library/library_manifest.json` is missing and has no skip_reason",
+      "declared artifact `review_loop/lean/library/compile.json` is missing and has no skip_reason"
+    ],
+    "missing_count": 3,
+    "present_count": 25,
+    "skipped_count": 0,
+    "status": "fail"
+  },
+  "dag_type": "review-loop",
+  "deterministic_status": "fail",
+  "fix_attempts": {
+    "lean": [
+      {
+        "attempt": 0,
+        "semantic_validation": {
+          "issues": [
+            "Lean formalization runs asynchronously via the `formalize` job; queue with --with-lean."
+          ],
+          "status": "skipped"
+        },
+        "skipped": true,
+        "status": "skipped"
+      }
+    ],
+    "pr_review": []
+  },
+  "pr_evidence": {
+    "artifact_worktree": ".agenthero/artifacts/grokrxiv/reviews/94ca8016-3adb-4475-af86-96a02a732fc9/review_loop/fixed",
+    "compile_review_loop": {
+      "agent_output_audit_summary": {
+        "accepted": 0,
+        "by_role": {},
+        "rejected": 0,
+        "total": 0
+      },
+      "attempts": [],
+      "filename": "review.md",
+      "final_path": ".agenthero/artifacts/grokrxiv/reviews/94ca8016-3adb-4475-af86-96a02a732fc9/review_loop/fixed/review.md",
+      "harness": {
+        "branch": null,
+        "path": ".agenthero/artifacts/grokrxiv/reviews/94ca8016-3adb-4475-af86-96a02a732fc9/review_loop/fixed"
+      },
+      "language": "markdown",
+      "skip_reason": "Markdown is the canonical PR review artifact; TeX/PDF exports are optional and outside the default review-loop gate.",
+      "stage": "pr_review_fix_code",
+      "status": "skipped",
+      "target": "pr"
+    },
+    "fixed_markdown": "review_loop/fixed/review.md",
+    "fixed_pdf": null,
+    "fixed_tex": null,
+    "issues": [],
+    "stage": "pr_fixer",
+    "status": "pass"
+  },
+  "publish_decision": {
+    "action": "revision_needed_pr",
+    "auto_publish": false,
+    "publisher_ready": false
+  },
+  "publishability_vector": {
+    "citation": "needs_remediation",
+    "formal": "failed",
+    "integrity": "fail",
+    "reproducibility": "not_run",
+    "safety": "pass",
+    "semantic_adequacy": "skipped"
+  },
+  "publisher_ready": false,
+  "release_tier": {
+    "lifecycle_state": "needs_update",
+    "tier": "in_review"
+  },
+  "review_id": "94ca8016-3adb-4475-af86-96a02a732fc9",
+  "semantic_adequacy": {
+    "operator_status": "AWAITING_FORMALIZATION",
+    "schema_version": "1.0.0",
+    "skip_reason": "lean_not_run",
+    "source": "review_loop/semantic_ir.json",
+    "status": "skipped",
+    "theorem_map": "review_loop/lean/theorem_map.json",
+    "verdicts": []
+  },
+  "theorem_formalization": {
+    "entries": [
+      {
+        "emitted_statement": null,
+        "kind": "theorem_formalization",
+        "lean_attempt_status": "failed_typecheck",
+        "lean_declaration": "thm_1",
+        "obligation_id": "formalize_theorem_thm_1",
+        "source_claim_id": "thm-1",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "thm-1",
+          "paper_source_id": "thm-1",
+          "section_id": "sec-3-2",
+          "text_excerpt": "Proposition 1 (Hard-limit consistency of the ambient Hodge Laplacian). Let $K(\\theta)\\subset K_{\\max}$ be an active subcomplex and let $L_q^{\\mathrm{hard}}(\\theta)$ be the penalty-regularized hard ambient Hodge Laplacian defined above. Then, with respect to t..."
+        },
+        "statement": "Proposition 1 (Hard-limit consistency of the ambient Hodge Laplacian). Let $K(\\theta)\\subset K_{\\max}$ be an active subcomplex and let $L_q^{\\mathrm{hard}}(\\theta)$ be the penalty-regularized hard ambient Hodge Laplacian defined above. Then, with respect to the orthogonal decomposition $$C_q^{\\mathrm{amb}} = C_q(K(\\theta))\\oplus C_q(K(\\theta))^\\perp,$$ one has $$L_q^{\\mathrm{hard}}(\\theta) = L_q(K(\\theta))\\oplus \\mu I_{C_q(K(\\theta))^\\perp}.$$ Consequently, $$\\ker L_q^{\\mathrm{hard}}(\\theta) \\simeq H_q(K(\\theta)), \\qquad \\dim\\ker L_q^{\\mathrm{hard}}(\\theta) = \\beta_q(K(\\theta)).$$",
+        "status": "FAILED",
+        "verified_statement": null
+      },
+      {
+        "emitted_statement": null,
+        "kind": "theorem_formalization",
+        "lean_attempt_status": "failed_typecheck",
+        "lean_declaration": "thm_4",
+        "obligation_id": "formalize_theorem_thm_4",
+        "source_claim_id": "thm-4",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "thm-4",
+          "paper_source_id": "thm-4",
+          "section_id": "sec-3-3",
+          "text_excerpt": "Proposition 2 (Convergence to the hard ambient operator). Let $w_\\sigma^{(m)}\\in[0,1]$ be a sequence of simplex weights converging to hard activity indicators $\\chi_\\sigma\\in\\{0,1\\}$ for all simplices of $K_{\\max}$. Let $\\widehat{L}_q(w^{(m)})$ be the corresp..."
+        },
+        "statement": "Proposition 2 (Convergence to the hard ambient operator). Let $w_\\sigma^{(m)}\\in[0,1]$ be a sequence of simplex weights converging to hard activity indicators $\\chi_\\sigma\\in\\{0,1\\}$ for all simplices of $K_{\\max}$. Let $\\widehat{L}_q(w^{(m)})$ be the corresponding penalty-regularized Hodge-Laplacian-type spectral relaxation. Then $$\\widehat{L}_q(w^{(m)}) \\longrightarrow L_q^{\\mathrm{hard}}(K)$$ in operator norm, where $$K=\\{\\sigma\\in K_{\\max}:\\chi_\\sigma=1\\}.$$",
+        "status": "FAILED",
+        "verified_statement": null
+      },
+      {
+        "emitted_statement": null,
+        "kind": "theorem_formalization",
+        "lean_attempt_status": "failed_typecheck",
+        "lean_declaration": "thm_6",
+        "obligation_id": "formalize_theorem_thm_6",
+        "source_claim_id": "thm-6",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "thm-6",
+          "paper_source_id": "thm-6",
+          "section_id": "sec-4-3",
+          "text_excerpt": "Proposition 3 (Trace approximation of Betti numbers). Let $K$ be a finite simplicial complex and let the eigenvalues of the ordinary Hodge Laplacian $L_q(K)$ be $$0=\\lambda_1=\\cdots=\\lambda_{\\beta_q} < \\lambda_{\\beta_q+1} \\le \\cdots \\le \\lambda_N.$$ Let $f:\\m..."
+        },
+        "statement": "Proposition 3 (Trace approximation of Betti numbers). Let $K$ be a finite simplicial complex and let the eigenvalues of the ordinary Hodge Laplacian $L_q(K)$ be $$0=\\lambda_1=\\cdots=\\lambda_{\\beta_q} < \\lambda_{\\beta_q+1} \\le \\cdots \\le \\lambda_N.$$ Let $f:\\mathbb{R}_{\\ge0}\\to\\mathbb{R}$ satisfy $f(0)=1$, and define $$\\varepsilon_f = \\max_{i>\\beta_q}|f(\\lambda_i)|.$$ Then $$\\left| \\operatorname{Tr}f(L_q(K))-\\beta_q(K) \\right| \\le (N-\\beta_q)\\varepsilon_f.$$",
+        "status": "FAILED",
+        "verified_statement": null
+      },
+      {
+        "emitted_statement": null,
+        "kind": "theorem_formalization",
+        "lean_attempt_status": "failed_typecheck",
+        "lean_declaration": "thm_8",
+        "obligation_id": "formalize_theorem_thm_8",
+        "source_claim_id": "thm-8",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "thm-8",
+          "paper_source_id": "thm-8",
+          "section_id": "sec-6-3",
+          "text_excerpt": "Lemma 4 (Ambient-to-ordinary reduction for polynomial moments). Suppose that, in the hard limit, the ambient operator decomposes as $$\\widehat{L}_q = L_q(K)\\oplus \\mu I_{\\mathrm{inactive}}.$$ Let $f_d(\\lambda)=(1-\\alpha\\lambda)^d$. Then $$\\operatorname{Tr}f_d..."
+        },
+        "statement": "Lemma 4 (Ambient-to-ordinary reduction for polynomial moments). Suppose that, in the hard limit, the ambient operator decomposes as $$\\widehat{L}_q = L_q(K)\\oplus \\mu I_{\\mathrm{inactive}}.$$ Let $f_d(\\lambda)=(1-\\alpha\\lambda)^d$. Then $$\\operatorname{Tr}f_d(\\widehat{L}_q) = \\operatorname{Tr}f_d(L_q(K)) + N_q^{\\mathrm{inactive}}(1-\\alpha\\mu)^d.$$ Moreover, $$f_d'(\\mu) = -\\alpha d(1-\\alpha\\mu)^{d-1}.$$ Thus, if $|1-\\alpha\\mu|^d$ and $|1-\\alpha\\mu|^{d-1}$ are small, both the forward moment contribution and the local filter derivative associated with the inactive block are negligible. In this regime, the polynomial moment of the ambient operator reduces to the ordinary-complex moment up to a negligible inactive-block contribution.",
+        "status": "FAILED",
+        "verified_statement": null
+      }
+    ],
+    "lean_attempt_status": "failed_typecheck",
+    "lean_results": "review_loop/lean/results.json",
+    "schema_version": "1.0.0",
+    "source": "review_loop/proof_obligations.json",
+    "status": "FAILED"
+  }
+}
