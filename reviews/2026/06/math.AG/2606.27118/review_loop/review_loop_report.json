@@ -1,0 +1,512 @@
+{
+  "agent_output_audits": {
+    "lean": {
+      "accepted": 0,
+      "by_role": {},
+      "rejected": 0,
+      "total": 0
+    },
+    "pr": {
+      "accepted": 0,
+      "by_role": {},
+      "rejected": 0,
+      "total": 0
+    },
+    "pr_review": {
+      "accepted": 0,
+      "by_role": {},
+      "rejected": 0,
+      "total": 0
+    }
+  },
+  "artifact_paths": {
+    "agent_outputs": "review_loop/agent_outputs",
+    "bundle_completeness": "review_loop/bundle_completeness.json",
+    "citation_adjudication": "review_loop/citation_validation_adjudication.json",
+    "citation_validation": "review_loop/citation_validation_report.json",
+    "claims": "review_loop/claims.json",
+    "knowledge_graph": "review_loop/knowledge_graph.json",
+    "lean": "review_loop/lean/results.json",
+    "lean_harness": "review_loop/lean/harness.json",
+    "lean_targets": "review_loop/lean_targets.json",
+    "lean_theorem_map": "review_loop/lean/theorem_map.json",
+    "lean_verification_report": "review_loop/lean/verification_report.json",
+    "paper_math_sources": "review_loop/paper_math_sources.json",
+    "policy_gate": "review_loop/policy_gate.json",
+    "pr_fixes": "review_loop/pr_fixes.json",
+    "pr_harness": "review_loop/fixed/harness.json",
+    "proof_obligations": "review_loop/proof_obligations.json",
+    "semantic_adequacy": "review_loop/semantic_adequacy.json",
+    "semantic_ir": "review_loop/semantic_ir.json",
+    "semantic_model": "review_loop/semantic_model.json"
+  },
+  "blocking_issues": [
+    "Review-loop bundle completeness failed: declared artifact `review_loop/lean/env/env_result.json` is missing and has no skip_reason"
+  ],
+  "bundle_completeness": {
+    "artifacts": [
+      {
+        "artifact_path": "review_loop/body.md",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/32808746-cdce-41b0-b57c-6cc3d08bbbbb/review_loop/body.md",
+        "manifest_output": "body.md",
+        "skip_reason": null,
+        "stage_id": "paper_review",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/equations.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/32808746-cdce-41b0-b57c-6cc3d08bbbbb/review_loop/equations.json",
+        "manifest_output": "equations.json",
+        "skip_reason": null,
+        "stage_id": "paper_review",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/theorem_graph.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/32808746-cdce-41b0-b57c-6cc3d08bbbbb/review_loop/theorem_graph.json",
+        "manifest_output": "theorem_graph.json",
+        "skip_reason": null,
+        "stage_id": "paper_review",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/semantic_ast.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/32808746-cdce-41b0-b57c-6cc3d08bbbbb/review_loop/semantic_ast.json",
+        "manifest_output": "semantic_ast.json",
+        "skip_reason": null,
+        "stage_id": "paper_review",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/references.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/32808746-cdce-41b0-b57c-6cc3d08bbbbb/review_loop/references.json",
+        "manifest_output": "references.json",
+        "skip_reason": null,
+        "stage_id": "paper_review",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/claims.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/32808746-cdce-41b0-b57c-6cc3d08bbbbb/review_loop/claims.json",
+        "manifest_output": "review_loop/claims.json",
+        "skip_reason": null,
+        "stage_id": "claim_extractor",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/paper_math_sources.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/32808746-cdce-41b0-b57c-6cc3d08bbbbb/review_loop/paper_math_sources.json",
+        "manifest_output": "review_loop/paper_math_sources.json",
+        "skip_reason": null,
+        "stage_id": "paper_math_source_collector",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/knowledge_graph.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/32808746-cdce-41b0-b57c-6cc3d08bbbbb/review_loop/knowledge_graph.json",
+        "manifest_output": "review_loop/knowledge_graph.json",
+        "skip_reason": null,
+        "stage_id": "knowledge_graph_builder",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/semantic_ir.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/32808746-cdce-41b0-b57c-6cc3d08bbbbb/review_loop/semantic_ir.json",
+        "manifest_output": "review_loop/semantic_ir.json",
+        "skip_reason": null,
+        "stage_id": "semantic_category_mapper",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/semantic_model.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/32808746-cdce-41b0-b57c-6cc3d08bbbbb/review_loop/semantic_model.json",
+        "manifest_output": "review_loop/semantic_model.json",
+        "skip_reason": null,
+        "stage_id": "semantic_category_mapper",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/proof_obligations.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/32808746-cdce-41b0-b57c-6cc3d08bbbbb/review_loop/proof_obligations.json",
+        "manifest_output": "review_loop/proof_obligations.json",
+        "skip_reason": null,
+        "stage_id": "proof_obligation_generator",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean_targets.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/32808746-cdce-41b0-b57c-6cc3d08bbbbb/review_loop/lean_targets.json",
+        "manifest_output": "review_loop/lean_targets.json",
+        "skip_reason": null,
+        "stage_id": "proof_obligation_generator",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean/env/env_result.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/32808746-cdce-41b0-b57c-6cc3d08bbbbb/review_loop/lean/env/env_result.json",
+        "manifest_output": "review_loop/lean/env/env_result.json",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "missing"
+      },
+      {
+        "artifact_path": "review_loop/lean/library/library_manifest.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/32808746-cdce-41b0-b57c-6cc3d08bbbbb/review_loop/lean/library/library_manifest.json",
+        "manifest_output": "review_loop/lean/library/library_manifest.json",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "missing"
+      },
+      {
+        "artifact_path": "review_loop/lean/library/compile.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/32808746-cdce-41b0-b57c-6cc3d08bbbbb/review_loop/lean/library/compile.json",
+        "manifest_output": "review_loop/lean/library/compile.json",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "missing"
+      },
+      {
+        "artifact_path": "review_loop/lean/GrokRxiv/Proofs.lean",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/32808746-cdce-41b0-b57c-6cc3d08bbbbb/review_loop/lean/GrokRxiv/Proofs.lean",
+        "manifest_output": "review_loop/lean/GrokRxiv/Proofs.lean",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean/results.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/32808746-cdce-41b0-b57c-6cc3d08bbbbb/review_loop/lean/results.json",
+        "manifest_output": "review_loop/lean/results.json",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean/fix_rounds.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/32808746-cdce-41b0-b57c-6cc3d08bbbbb/review_loop/lean/fix_rounds.json",
+        "manifest_output": "review_loop/lean/fix_rounds.json",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean/theorem_map.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/32808746-cdce-41b0-b57c-6cc3d08bbbbb/review_loop/lean/theorem_map.json",
+        "manifest_output": "review_loop/lean/theorem_map.json",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/lean/verification_report.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/32808746-cdce-41b0-b57c-6cc3d08bbbbb/review_loop/lean/verification_report.json",
+        "manifest_output": "review_loop/lean/verification_report.json",
+        "skip_reason": null,
+        "stage_id": "lean_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/faithfulness.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/32808746-cdce-41b0-b57c-6cc3d08bbbbb/review_loop/faithfulness.json",
+        "manifest_output": "review_loop/faithfulness.json",
+        "skip_reason": null,
+        "stage_id": "lean_faithfulness_check",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/semantic_adequacy.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/32808746-cdce-41b0-b57c-6cc3d08bbbbb/review_loop/semantic_adequacy.json",
+        "manifest_output": "review_loop/semantic_adequacy.json",
+        "skip_reason": null,
+        "stage_id": "semantic_adequacy_checker",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/citation_validation_report.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/32808746-cdce-41b0-b57c-6cc3d08bbbbb/review_loop/citation_validation_report.json",
+        "manifest_output": "citation_validation_report.json",
+        "skip_reason": null,
+        "stage_id": "citation_validation",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/citation_validation_adjudication.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/32808746-cdce-41b0-b57c-6cc3d08bbbbb/review_loop/citation_validation_adjudication.json",
+        "manifest_output": "citation_validation_adjudication.json",
+        "skip_reason": "citation-validation adjudication is not materialized separately by the current review-loop runtime; citation_validation_report.json carries the deterministic citation evidence.",
+        "stage_id": "citation_validation",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/pr_fixes.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/32808746-cdce-41b0-b57c-6cc3d08bbbbb/review_loop/pr_fixes.json",
+        "manifest_output": "review_loop/pr_fixes.json",
+        "skip_reason": null,
+        "stage_id": "pr_fixer",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/fixed/review.md",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/32808746-cdce-41b0-b57c-6cc3d08bbbbb/review_loop/fixed/review.md",
+        "manifest_output": "review_loop/fixed/review.md",
+        "skip_reason": null,
+        "stage_id": "pr_fixer",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/pr_review/results.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/32808746-cdce-41b0-b57c-6cc3d08bbbbb/review_loop/pr_review/results.json",
+        "manifest_output": "review_loop/pr_review/results.json",
+        "skip_reason": null,
+        "stage_id": "pr_review_fix_code",
+        "status": "present"
+      },
+      {
+        "artifact_path": "review_loop/pr_review/fix_rounds.json",
+        "fs_path": ".agenthero/artifacts/grokrxiv/reviews/32808746-cdce-41b0-b57c-6cc3d08bbbbb/review_loop/pr_review/fix_rounds.json",
+        "manifest_output": "review_loop/pr_review/fix_rounds.json",
+        "skip_reason": null,
+        "stage_id": "pr_review_fix_code",
+        "status": "present"
+      }
+    ],
+    "declared_artifact_count": 28,
+    "failures": [
+      "declared artifact `review_loop/lean/env/env_result.json` is missing and has no skip_reason",
+      "declared artifact `review_loop/lean/library/library_manifest.json` is missing and has no skip_reason",
+      "declared artifact `review_loop/lean/library/compile.json` is missing and has no skip_reason"
+    ],
+    "missing_count": 3,
+    "present_count": 25,
+    "skipped_count": 0,
+    "status": "fail"
+  },
+  "dag_type": "review-loop",
+  "deterministic_status": "fail",
+  "fix_attempts": {
+    "lean": [
+      {
+        "attempt": 0,
+        "semantic_validation": {
+          "issues": [
+            "Lean formalization runs asynchronously via the `formalize` job; queue with --with-lean."
+          ],
+          "status": "skipped"
+        },
+        "skipped": true,
+        "status": "skipped"
+      }
+    ],
+    "pr_review": []
+  },
+  "pr_evidence": {
+    "artifact_worktree": ".agenthero/artifacts/grokrxiv/reviews/32808746-cdce-41b0-b57c-6cc3d08bbbbb/review_loop/fixed",
+    "compile_review_loop": {
+      "agent_output_audit_summary": {
+        "accepted": 0,
+        "by_role": {},
+        "rejected": 0,
+        "total": 0
+      },
+      "attempts": [],
+      "filename": "review.md",
+      "final_path": ".agenthero/artifacts/grokrxiv/reviews/32808746-cdce-41b0-b57c-6cc3d08bbbbb/review_loop/fixed/review.md",
+      "harness": {
+        "branch": null,
+        "path": ".agenthero/artifacts/grokrxiv/reviews/32808746-cdce-41b0-b57c-6cc3d08bbbbb/review_loop/fixed"
+      },
+      "language": "markdown",
+      "skip_reason": "Markdown is the canonical PR review artifact; TeX/PDF exports are optional and outside the default review-loop gate.",
+      "stage": "pr_review_fix_code",
+      "status": "skipped",
+      "target": "pr"
+    },
+    "fixed_markdown": "review_loop/fixed/review.md",
+    "fixed_pdf": null,
+    "fixed_tex": null,
+    "issues": [],
+    "stage": "pr_fixer",
+    "status": "pass"
+  },
+  "publish_decision": {
+    "action": "revision_needed_pr",
+    "auto_publish": false,
+    "publisher_ready": false
+  },
+  "publishability_vector": {
+    "citation": "needs_remediation",
+    "formal": "failed",
+    "integrity": "fail",
+    "reproducibility": "not_run",
+    "safety": "pass",
+    "semantic_adequacy": "skipped"
+  },
+  "publisher_ready": false,
+  "release_tier": {
+    "lifecycle_state": "needs_update",
+    "tier": "in_review"
+  },
+  "review_id": "32808746-cdce-41b0-b57c-6cc3d08bbbbb",
+  "semantic_adequacy": {
+    "operator_status": "AWAITING_FORMALIZATION",
+    "schema_version": "1.0.0",
+    "skip_reason": "lean_not_run",
+    "source": "review_loop/semantic_ir.json",
+    "status": "skipped",
+    "theorem_map": "review_loop/lean/theorem_map.json",
+    "verdicts": []
+  },
+  "theorem_formalization": {
+    "entries": [
+      {
+        "emitted_statement": null,
+        "kind": "theorem_formalization",
+        "lean_attempt_status": "failed_typecheck",
+        "lean_declaration": "thm_1",
+        "obligation_id": "formalize_theorem_thm_1",
+        "source_claim_id": "thm-1",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "thm-1",
+          "paper_source_id": "thm-1",
+          "section_id": "sec-1-1",
+          "text_excerpt": "\\cite{Belyi79}\\cite{Belyi02}\\cite[Theorem~1.3]{Jones16}\nLet $X$ be a compact Riemann surface, that is, a smooth projective algebraic curve in\n$\\Pj_{\\C}^{N}$ for some $N$.\nThen $X$ can be defined over the field of algebraic numbers $\\Qb$ if and only if there e..."
+        },
+        "statement": "\\cite{Belyi79}\\cite{Belyi02}\\cite[Theorem~1.3]{Jones16}\nLet $X$ be a compact Riemann surface, that is, a smooth projective algebraic curve in\n$\\Pj_{\\C}^{N}$ for some $N$.\nThen $X$ can be defined over the field of algebraic numbers $\\Qb$ if and only if there exists a non-constant meromorphic\nfunction $\\B\\colon X \\to \\Ch\\ (\\ceq \\C \\cup \\{ \\infty \\})$ ramified over at most three points.",
+        "status": "FAILED",
+        "verified_statement": null
+      },
+      {
+        "emitted_statement": null,
+        "kind": "theorem_formalization",
+        "lean_attempt_status": "failed_typecheck",
+        "lean_declaration": "thm_2",
+        "obligation_id": "formalize_theorem_thm_2",
+        "source_claim_id": "thm-2",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "thm-2",
+          "paper_source_id": "thm-2",
+          "section_id": "sec-1-1",
+          "text_excerpt": "\\label{sec:belyi} \\begin{theorem}[\\belyi's Theorem]\\cite{Belyi79}\\cite{Belyi02}\\cite[Theorem~1.3]{Jones16} Let $X$ be a compact Riemann surface, that is, a smooth projective algebraic curve in $\\Pj_{\\C}^{N}$ for some $N$. Then $X$ can be defined over the fiel..."
+        },
+        "statement": "\\label{sec:belyi} \\begin{theorem}[\\belyi's Theorem]\\cite{Belyi79}\\cite{Belyi02}\\cite[Theorem~1.3]{Jones16} Let $X$ be a compact Riemann surface, that is, a smooth projective algebraic curve in $\\Pj_{\\C}^{N}$ for some $N$. Then $X$ can be defined over the field of algebraic numbers $\\Qb$ if and only if there exists a non-constant meromorphic function $\\B\\colon X \\to \\Ch\\ (\\ceq \\C \\cup \\{ \\infty \\})$ ramified over at most three points. \\end{theorem}",
+        "status": "FAILED",
+        "verified_statement": null
+      },
+      {
+        "emitted_statement": null,
+        "kind": "theorem_formalization",
+        "lean_attempt_status": "failed_typecheck",
+        "lean_declaration": "lem_order_n",
+        "obligation_id": "formalize_theorem_lem_order_n",
+        "source_claim_id": "lem:order-n",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "lem:order-n",
+          "paper_source_id": "lem:order-n",
+          "section_id": "sec-2",
+          "text_excerpt": "A \\dde with $n$ edges is regular if and only if the order of its monodromy group is $n$."
+        },
+        "statement": "A \\dde with $n$ edges is regular if and only if the order of its monodromy group is $n$.",
+        "status": "FAILED",
+        "verified_statement": null
+      },
+      {
+        "emitted_statement": null,
+        "kind": "theorem_formalization",
+        "lean_attempt_status": "failed_typecheck",
+        "lean_declaration": "prop_regaut",
+        "obligation_id": "formalize_theorem_prop_regaut",
+        "source_claim_id": "prop:regaut",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "prop:regaut",
+          "paper_source_id": "prop:regaut",
+          "section_id": "sec-2",
+          "text_excerpt": "A \\dde $\\msD$ is regular if and only if its monodromy group $G$ is isomorphic to $\\AD$."
+        },
+        "statement": "A \\dde $\\msD$ is regular if and only if its monodromy group $G$ is isomorphic to $\\AD$.",
+        "status": "FAILED",
+        "verified_statement": null
+      },
+      {
+        "emitted_statement": null,
+        "kind": "theorem_formalization",
+        "lean_attempt_status": "failed_typecheck",
+        "lean_declaration": "prop_reguni",
+        "obligation_id": "formalize_theorem_prop_reguni",
+        "source_claim_id": "prop:reguni",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "prop:reguni",
+          "paper_source_id": "prop:reguni",
+          "section_id": "sec-2",
+          "text_excerpt": "If a \\dde is regular, then it has a uniform passport."
+        },
+        "statement": "If a \\dde is regular, then it has a uniform passport.",
+        "status": "FAILED",
+        "verified_statement": null
+      },
+      {
+        "emitted_statement": null,
+        "kind": "theorem_formalization",
+        "lean_attempt_status": "failed_typecheck",
+        "lean_declaration": "prop_tbq",
+        "obligation_id": "formalize_theorem_prop_tbq",
+        "source_claim_id": "prop:tbq",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "prop:tbq",
+          "paper_source_id": "prop:tbq",
+          "section_id": "sec-3-1",
+          "text_excerpt": "The number of elements in $S_{n}$ of cycle type $(b^{q})$ $(n = bq)$ is given by\n\n\\begin{align}\n\\vt{T(b, q)} = \\f{n!}{b^{q}q!}.\n\\end{align}"
+        },
+        "statement": "The number of elements in $S_{n}$ of cycle type $(b^{q})$ $(n = bq)$ is given by\n\n\\begin{align}\n\\vt{T(b, q)} = \\f{n!}{b^{q}q!}.\n\\end{align}",
+        "status": "FAILED",
+        "verified_statement": null
+      },
+      {
+        "emitted_statement": null,
+        "kind": "theorem_formalization",
+        "lean_attempt_status": "failed_typecheck",
+        "lean_declaration": "lem_Nbqblower",
+        "obligation_id": "formalize_theorem_lem_Nbqblower",
+        "source_claim_id": "lem:Nbqblower",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "lem:Nbqblower",
+          "paper_source_id": "lem:Nbqblower",
+          "section_id": "sec-3-2",
+          "text_excerpt": "Let $[n,b^{q},b^{q}]$ be a passport with $n=qb$, and suppose that it has genus at least~$1$.\nFix an $n$-cycle $x \\in S_n$, and let $N(b,q,b)$\ndenote the set of permutations $y \\in S_n$ of cycle type $(b^{q})$ such that $(xy)^{-1}$ also has cycle type $(b^{q})..."
+        },
+        "statement": "Let $[n,b^{q},b^{q}]$ be a passport with $n=qb$, and suppose that it has genus at least~$1$.\nFix an $n$-cycle $x \\in S_n$, and let $N(b,q,b)$\ndenote the set of permutations $y \\in S_n$ of cycle type $(b^{q})$ such that $(xy)^{-1}$ also has cycle type $(b^{q})$.\nThen\n\\begin{align}\n\\vt{N(b, q, b)} \\ge \\f{(n-q)!}{2^{q(b-2)}\\left(\\f{q+1}{2}\\right)!\\left(\\f{q-1}{2}\\right)!}\\left(\\f{b-1}{2b}\\right)^{\\f{q-1}{2}}.\n\\end{align}",
+        "status": "FAILED",
+        "verified_statement": null
+      },
+      {
+        "emitted_statement": null,
+        "kind": "theorem_formalization",
+        "lean_attempt_status": "failed_typecheck",
+        "lean_declaration": "lem_Dupper",
+        "obligation_id": "formalize_theorem_lem_Dupper",
+        "source_claim_id": "lem:Dupper",
+        "source_span": {
+          "artifact": "theorem_graph.json",
+          "claim_id": "lem:Dupper",
+          "paper_source_id": "lem:Dupper",
+          "section_id": "sec-3-3",
+          "text_excerpt": "Let $n \\in \\Zp$ with $n \\ge 2$, $x \\in S_{n}$ be an $n$-cycle, and for each $1 \\le k \\le n-1$, define $D_{k}$ by \\eqref{eq:defDk}.\nLet\n\\begin{align}\n\\kappa_{1} \\ceq \\f{2623}{1894} = 1.384\\ldots, \\q \\kappa_{2} \\ceq \\f{972}{947} = 1.026\\ldots.\n\\end{align}\nThen\n..."
+        },
+        "statement": "Let $n \\in \\Zp$ with $n \\ge 2$, $x \\in S_{n}$ be an $n$-cycle, and for each $1 \\le k \\le n-1$, define $D_{k}$ by \\eqref{eq:defDk}.\nLet\n\\begin{align}\n\\kappa_{1} \\ceq \\f{2623}{1894} = 1.384\\ldots, \\q \\kappa_{2} \\ceq \\f{972}{947} = 1.026\\ldots.\n\\end{align}\nThen\n\\begin{align}\n\\label{eq:Dupper}\n\\vt{D} \\le \\kappa_{1}\\cdot 2^{\\f{n}{2}}\\left(\\f{n}{2}\\right)!,\n\\end{align}\nwhere, for non-integer $M$, we define $M! \\ceq \\Gamma(M+1)$.\n\nIn particular, if $n$ is odd, then\n\\begin{align}\n\\label{eq:Dupperodd}\n\\vt{D} \\le \\kappa_{2}\\cdot3^{\\f{n}{3}}\\left(\\f{n}{3}\\right)!.\n\\end{align}",
+        "status": "FAILED",
+        "verified_statement": null
+      }
+    ],
+    "lean_attempt_status": "failed_typecheck",
+    "lean_results": "review_loop/lean/results.json",
+    "schema_version": "1.0.0",
+    "source": "review_loop/proof_obligations.json",
+    "status": "FAILED"
+  }
+}
