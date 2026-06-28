@@ -1,0 +1,407 @@
+{
+  "claims": [
+    {
+      "id": "claim_1",
+      "role": "citation",
+      "text": "The paper's citation hygiene is generally sound: the core persistent homology literature is cited consistently and appropriately throughout the text, and the references to topology-in-ML works correctly contextualize the prescriptive optimization setting. A potential key-mismatch concern arises for the Gyurik et al. quantum reference: the in-text key '@gyurik2022towards' differs from the bibliography entry 'gyurik2024quantum', suggesting two distinct works by overlapping authors that should be …",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_2",
+      "role": "citation",
+      "text": "Seminal paper introducing topological persistence; cited repeatedly as the foundational reference for persistent homology, which the paper's spectral-surrogate framework is designed to complement.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_3",
+      "role": "citation",
+      "text": "Foundational algorithm for computing persistent homology via boundary-matrix reduction; correctly cited alongside the other core PH papers as background for the methods the paper builds upon.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_4",
+      "role": "citation",
+      "text": "Establishes the bottleneck stability of persistence diagrams under perturbations; its context is directly relevant when the paper distinguishes descriptor uses (where stability matters) from optimization uses.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_5",
+      "role": "citation",
+      "text": "Survey of persistent homology cited as standard background; appropriate and high-relevance reference for the PH fundamentals described in the Preliminaries section.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_6",
+      "role": "citation",
+      "text": "Comprehensive survey of algorithms and software for persistent homology; cited appropriately to orient readers unfamiliar with the computational side of TDA.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_7",
+      "role": "citation",
+      "text": "Not cited in visible citation contexts; appears only in the bibliography. Its relevance is peripheral—it describes a materials-science TDA software tool rather than addressing optimization or spectral methods.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_8",
+      "role": "citation",
+      "text": "Materials-science-focused PH software paper; if cited in truncated sections it would serve as a domain-application example, but its connection to the paper's spectral optimization framework is tenuous.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_9",
+      "role": "citation",
+      "text": "Materials science application of PH not cited in visible text; appears peripheral to the paper's mathematical optimization focus.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_10",
+      "role": "citation",
+      "text": "Application of persistent homology to atomic glass structure; only marginally connected to the optimization and spectral surrogate framework developed in this paper.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_11",
+      "role": "citation",
+      "text": "Materials science application not cited in visible text; possibly included to motivate real-world TDA applications.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_12",
+      "role": "citation",
+      "text": "PNAS study using PH to characterize amorphous solids; while it demonstrates PH utility, it is not directly connected to the spectral optimization contributions of this paper.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_13",
+      "role": "citation",
+      "text": "Introduces topology-regularized autoencoders using persistent homology as a loss; directly cited as a representative example of topology used prescriptively (controlled rather than only observed) in deep learning.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_14",
+      "role": "citation",
+      "text": "Cited as arXiv preprint; may remain unpublished in a peer-reviewed venue as of the paper's writing.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_15",
+      "role": "citation",
+      "text": "Uses topological regularization for embedding quality; cited as an example of prescriptive topology in optimization, supporting the paper's motivating context.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_16",
+      "role": "citation",
+      "text": "Introduces a differentiable topology layer based on persistent homology for integration into ML pipelines; directly in scope as a prior approach to topology-as-loss-function that the present paper's spectral surrogates are designed to complement.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_17",
+      "role": "citation",
+      "text": "Not cited in visible citation contexts; may appear in truncated sections on graph learning.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_18",
+      "role": "citation",
+      "text": "Learns filtration functions on graphs for topological ML tasks; related to the paper's graph clique complex setting but not cited in the visible portions of text.",
+      "verifier_status": "warn"
+    },
+    {
+      "id": "claim_19",
+      "role": "meta_reviewer",
+      "text": "The five specialist reviews converge on a paper with a sound theoretical core but critically inadequate empirical support. The theoretical framework—Propositions 1–3 and Lemma 4—is mostly correct (overall_correctness: mostly_sound): the ambient Hodge-spectral relaxation, hard-limit consistency, soft-weight convergence, and trace-type Betti surrogate are all mathematically coherent. Two minor gaps remain: Proposition 1 lacks a machine-checked proof artifact, and the polynomial-moment Betti bound…",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_20",
+      "role": "meta_reviewer",
+      "text": "major_revision",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_21",
+      "role": "meta_reviewer",
+      "text": "The Hodge-spectral relaxation framework is theoretically principled: the ambient operator decomposes correctly in the hard limit (Proposition 1), converges in operator norm as soft weights approach hard indicators (Proposition 2), and the trace-type Betti surrogate error is bounded explicitly in terms of the spectral filter's suppression of positive eigenvalues (Proposition 3).",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_22",
+      "role": "meta_reviewer",
+      "text": "The paper explicitly acknowledges in Remark 1 that soft boundary operators do not satisfy B²=0, correctly scoping all soft-regime results as spectral surrogates rather than exact homological quantities—a significant mathematical-honesty contribution that prevents overclaiming.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_23",
+      "role": "meta_reviewer",
+      "text": "The prescriptive framing—topology as an optimization objective rather than a post-hoc descriptor—is clearly articulated and the gradient-localization and pairing-instability motivations for spectral surrogates are well-stated and address a genuine limitation of barcode-based losses.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_24",
+      "role": "meta_reviewer",
+      "text": "The connection to quantum trace estimation (Lloyd 2016, Akhalwaya) is correctly identified and positions a computationally viable scaling path via stochastic trace estimation, which is a concrete future direction rather than a vague claim.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_25",
+      "role": "meta_reviewer",
+      "text": "All six load-bearing empirical claims—gradient localization (TC7), pairing instability (TC8), shape synthesis (TC9), path-integral estimator convergence (TC10), Betti-loss optimization (TC11), and joint objective control (TC12)—are unsupported at major severity because no executable code or data artifacts are provided; the paper's favorable empirical conclusions cannot be independently verified.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_26",
+      "role": "meta_reviewer",
+      "text": "The pairing-instability smoothness advantage (Section 5.5, Figure 5) is presented misleadingly: the raw maximum derivative jump is larger for the Hodge loss (15.8489) than for PH (1.1773), and the favorable conclusion holds only after dividing each loss by its own value range—a loss-specific normalization chosen by the authors that is not independently justified and whose effect on the conclusion is not analyzed.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_27",
+      "role": "meta_reviewer",
+      "text": "Critical connections to graph signal processing prior art are absent: the Chebyshev polynomial filter and recursive matrix-vector evaluation (Section 4) are the same computational structure as ChebNet (Defferrard et al. 2016), and the spectral-filter toolkit on Hodge Laplacians is developed in topological signal processing works (Schaub et al.; Barbarossa and Sardellitti) that directly precede the paper's filter formalism.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_28",
+      "role": "meta_reviewer",
+      "text": "The polynomial-moment Betti bound (Section 4, TC4) requires α < 2/λ_max for all positive eigenvalues of the ambient operator, but no spectral bound on λ_max is provided or checked for the soft/ambient Hodge Laplacians used in experiments, leaving the bound's precondition unverified in practice.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_29",
+      "role": "meta_reviewer",
+      "text": "The bibliography omits two foundational references directly implied by the paper's technical content: a Hodge Laplacian on graphs reference (e.g., Lim, SIAM Review 2020) and a stochastic trace estimation reference (e.g., Hutchinson 1989/1990 or Avron and Toledo 2011), despite both being standard citations for the techniques the paper builds on.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_30",
+      "role": "meta_reviewer",
+      "text": "The runtime cost of the spectral approach (17.5× slower than PH at n=100 with dense matrix operations) is a substantial practical limitation; no scalable implementation via sparse operations or stochastic trace estimation is demonstrated, making the computational route to larger problems currently speculative.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_31",
+      "role": "meta_reviewer",
+      "text": "Can the authors release a public repository with executable scripts reproducing all figures and tables—including fixed random seeds, data generation code, optimizer settings, filter hyperparameters (α, d, temperature/epsilon), and evaluation protocols—so that the headline empirical claims (gradient localization, shape synthesis, Betti loss optimization) can be independently verified?",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_32",
+      "role": "meta_reviewer",
+      "text": "For the pairing-instability comparison (Section 5.5, Figure 5): why is per-loss normalization by loss-range the appropriate smoothness measure when the raw Hodge jump (15.8489) exceeds the raw PH jump (1.1773)? Would a normalization-invariant measure such as a relative Lipschitz constant or curvature of the optimization trajectory over the same parameter interval change the conclusion?",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_33",
+      "role": "meta_reviewer",
+      "text": "How does the proposed Chebyshev/polynomial filter formalism (Section 4) differ technically from ChebNet (Defferrard et al. 2016) and from topological signal processing on simplicial complexes (Schaub et al.; Barbarossa and Sardellitti)? If the computational route is the same, the paper should characterize its novelty as the application to topology optimization rather than the filter formalism itself.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_34",
+      "role": "meta_reviewer",
+      "text": "For the polynomial-moment Betti bound: how is α chosen to satisfy α < 2/λ_max for the soft/ambient operators in experiments, and how sensitive are the Betti-control results (Tables 3–4) to the choice of α and polynomial degree d near this boundary?",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_35",
+      "role": "meta_reviewer",
+      "text": "The Gyurik et al. quantum reference has a citation-key mismatch: the in-text key @gyurik2022towards differs in year and key from the bibliography entry gyurik2024quantum; are these two distinct works by overlapping authors, and if so, are both present in the full bibliography with distinct keys?",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_36",
+      "role": "meta_reviewer",
+      "text": "What is the per-target soft-target s̄₁* selection rule in Section 6.5? The paper acknowledges there is no analytic conversion from a desired hard β₁ to a soft surrogate target, but the experimental results in Tables 3–4 depend on a manual choice that is not described reproducibly.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_37",
+      "role": "novelty",
+      "text": "incremental",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_38",
+      "role": "novelty",
+      "text": "prior_art",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_39",
+      "role": "novelty",
+      "text": "This paper introduces persistent Laplacians as a family of operators whose spectra encode homological information across filtrations. The present work constructs a soft, differentiable version of the Hodge Laplacian on a fixed ambient chain space—essentially a weighted generalization of this prior framework—and repurposes the spectral structure as a differentiable optimization loss rather than a topological descriptor.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_40",
+      "role": "novelty",
+      "text": "competing",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_41",
+      "role": "novelty",
+      "text": "Davies et al. evaluate persistent Laplacian spectra as features for data science tasks at ICML 2023. The present work overlaps in using Hodge-spectral structure derived from filtrations but focuses on the prescriptive (optimization) setting rather than the descriptive (feature extraction) setting, and introduces soft edge activations to make the construction fully differentiable.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_42",
+      "role": "novelty",
+      "text": "competing",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_43",
+      "role": "novelty",
+      "text": "Nigmetov and Morozov directly address gradient localization in persistence-based topology optimization, proposing a method that uses larger optimization steps. The present paper addresses the same limitation (localized, discontinuous gradients) via a fundamentally different mechanism—spectral surrogate losses—rather than modified step-size or pairing strategies.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_44",
+      "role": "novelty",
+      "text": "competing",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_45",
+      "role": "novelty",
+      "text": "Also targets gradient discontinuities and localization in PH-based optimization via persistence-sensitive methods. The present work provides an alternative route using Hodge spectral filters rather than modifying the persistence-based gradient computation, claiming more spatially distributed update directions.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_46",
+      "role": "novelty",
+      "text": "builds_on",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_47",
+      "role": "novelty",
+      "text": "Introduces differentiable topology control in deep learning via barcode-based losses for autoencoders. The present work takes the same prescriptive goal but replaces barcode losses with Hodge-spectral surrogates to address gradient localization and pairing instability.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_48",
+      "role": "novelty",
+      "text": "builds_on",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_49",
+      "role": "novelty",
+      "text": "Proposes a differentiable topology layer using persistence diagrams embedded in an ML pipeline. The present work addresses identified limitations of such barcode-based layers (gradient localization, pairing discontinuities) by substituting a spectral approach.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_50",
+      "role": "novelty",
+      "text": "builds_on",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_51",
+      "role": "novelty",
+      "text": "Introduces learnable filtrations on graphs to make topology differentiable. The present work takes a complementary approach by constructing soft clique complexes from edge logits and using Hodge Laplacian spectra rather than optimizing filtration functions.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_52",
+      "role": "novelty",
+      "text": "prior_art",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_53",
+      "role": "novelty",
+      "text": "Uses polynomial trace estimation to approximate normalized Betti numbers, the same mathematical form as the paper's Laplacian moment Tr(I−αL)^d. The present paper adapts this trace form as a differentiable loss inside a gradient-based optimization loop rather than as a one-shot estimation procedure.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_54",
+      "role": "novelty",
+      "text": "prior_art",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_55",
+      "role": "novelty",
+      "text": "Formulates Betti numbers via null-space projection operators on combinatorial Laplacians, establishing the mathematical connection this paper exploits. The present work uses the same spectral-projection viewpoint but in a classical, differentiable optimization context.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_56",
+      "role": "novelty",
+      "text": "prior_art",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_57",
+      "role": "novelty",
+      "text": "An early influential application of PH-based topology losses to image segmentation. The present work targets the same class of prescriptive topology control problems but proposes spectral surrogates as an alternative to the barcode losses used here.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_58",
+      "role": "novelty",
+      "text": "prior_art",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_59",
+      "role": "novelty",
+      "text": "Establishes barcode-based topological losses for segmentation, a prime motivating application. The present framework offers an alternative loss mechanism that, it is argued, provides more distributed gradients for the same class of tasks.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_60",
+      "role": "summary",
+      "text": "The paper introduces a differentiable framework for optimizing topology by using Hodge-Laplacian spectral filters as smooth surrogates for discrete topological constraints like Betti numbers and persistent homology.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_61",
+      "role": "summary",
+      "text": "Topological properties—the global shape and connectivity of data—are important for many applications but difficult to control during optimization because they are discrete and combinatorial. This paper proposes a new approach: instead of directly counting topological features like Betti numbers or tracking homology births and deaths, the authors use the spectrum (eigenvalues and eigenmodes) of a Hodge Laplacian operator to create smooth, differentiable approximations of topological information.…",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_62",
+      "role": "summary",
+      "text": "Construction of an ambient Hodge-spectral relaxation that recovers the ordinary Hodge Laplacian on active subcomplexes in the hard limit and provides differentiable spectral surrogates in the soft regime.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_63",
+      "role": "summary",
+      "text": "Definition of differentiable topological loss functions using heat filters, resolvent filters, and polynomial Laplacian moments to control homological structure.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_64",
+      "role": "summary",
+      "text": "Empirical demonstration that Hodge spectral-filter losses provide more distributed gradients, smoother behavior under pairing changes, and geometry-aware updates compared to persistent-homology-based losses on Vietoris–Rips point-cloud complexes.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_65",
+      "role": "summary",
+      "text": "Application of Laplacian moments to control normalized first-Betti-type quantities in graph clique complexes, showing integration with ordinary graph-feature objectives.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_66",
+      "role": "summary",
+      "text": "Discussion of computational trade-offs and identification of polynomial filtering and trace-estimation methods as routes toward scaling to larger problems.",
+      "verifier_status": "pass"
+    },
+    {
+      "id": "claim_67",
+      "role": "technical_correctness",
+      "text": "mostly_sound",
+      "verifier_status": "pass"
+    }
+  ],
+  "review_id": "94ca8016-3adb-4475-af86-96a02a732fc9"
+}
