@@ -1,6 +1,7 @@
 {
   "artifact_sources": [
-    "review_inputs.artifact"
+    "review_inputs.artifact",
+    "formalize:theorem_graph_extractor_typed_ir"
   ],
   "body": {
     "artifact": "review_inputs.artifact",
@@ -47,8 +48,1005 @@
   "source": "paper_extract_artifacts",
   "theorem_graph": {
     "artifact": "theorem_graph.json",
-    "nodes": [],
-    "reason": "not_loaded"
+    "arxiv_id": "2606.25943",
+    "failed_batches": [],
+    "failed_count": 0,
+    "inventory_artifact": "review_loop/theorem_inventory.json",
+    "inventory_count": 48,
+    "nodes": [
+      {
+        "depends_on": [
+          "thm:damnisasmodunderlr"
+        ],
+        "id": "main_tex:thm*:15574",
+        "section": "main.tex:15574",
+        "source_tex": "\\begin{thm*}[\\Cref{thm:damnisasmodunderlr}]\nLet $S$ be a connected, noetherian scheme of finite Krull dimension. Then there is a symmetric monoidal equivalence\n$$\\mcal{DAM}_\\tn{Nis}(S;R) \\simeq \\cD\\tsf{Perm}(\\pi_1^{\\tn{ét}}(S,s);R),$$\nwhere $s: \\Spec(k) \\to S$ is a geometric point of $S$.\n\\end{thm*}",
+        "statement": "Let S be a connected, noetherian scheme of finite Krull dimension. Then there is a symmetric monoidal equivalence DAM_Nis(S;R) ≃ DPerm(π_1^ét(S,s);R), where s: Spec(k) → S is a geometric point of S.",
+        "theorem_ir": {
+          "assumptions": [
+            {
+              "args": [
+                {
+                  "kind": "var",
+                  "name": "S"
+                }
+              ],
+              "kind": "uninterpreted_predicate",
+              "name": "IsConnected"
+            },
+            {
+              "args": [
+                {
+                  "kind": "var",
+                  "name": "S"
+                }
+              ],
+              "kind": "uninterpreted_predicate",
+              "name": "IsNoetherian"
+            },
+            {
+              "args": [
+                {
+                  "kind": "var",
+                  "name": "S"
+                }
+              ],
+              "kind": "uninterpreted_predicate",
+              "name": "HasFiniteKrullDimension"
+            }
+          ],
+          "binders": [
+            {
+              "name": "S",
+              "type": {
+                "kind": "custom",
+                "name": "ConnectedNoetherianSchemeFiniteKrullDimension"
+              }
+            },
+            {
+              "name": "R",
+              "type": {
+                "kind": "custom",
+                "name": "Ring"
+              }
+            },
+            {
+              "name": "s",
+              "type": {
+                "kind": "custom",
+                "name": "GeometricPoint"
+              }
+            }
+          ],
+          "conclusion": {
+            "args": [
+              {
+                "kind": "var",
+                "name": "DAM_Nis(S;R)"
+              },
+              {
+                "kind": "var",
+                "name": "DPerm(π_1^ét(S,s);R)"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "SymmetricMonoidalEquivalence"
+          },
+          "theorem_name": "DAM_Nis_symmonoidal_equiv_DPerm"
+        },
+        "type": "theorem",
+        "typed_transcription": {
+          "assumptions": [
+            {
+              "args": [
+                {
+                  "kind": "var",
+                  "name": "S"
+                }
+              ],
+              "kind": "uninterpreted_predicate",
+              "name": "IsConnected"
+            },
+            {
+              "args": [
+                {
+                  "kind": "var",
+                  "name": "S"
+                }
+              ],
+              "kind": "uninterpreted_predicate",
+              "name": "IsNoetherian"
+            },
+            {
+              "args": [
+                {
+                  "kind": "var",
+                  "name": "S"
+                }
+              ],
+              "kind": "uninterpreted_predicate",
+              "name": "HasFiniteKrullDimension"
+            }
+          ],
+          "binders": [
+            {
+              "name": "S",
+              "type": {
+                "kind": "custom",
+                "name": "ConnectedNoetherianSchemeFiniteKrullDimension"
+              }
+            },
+            {
+              "name": "R",
+              "type": {
+                "kind": "custom",
+                "name": "Ring"
+              }
+            },
+            {
+              "name": "s",
+              "type": {
+                "kind": "custom",
+                "name": "GeometricPoint",
+                "reason": "s: Spec(k) → S is a geometric point of S"
+              }
+            }
+          ],
+          "conclusion": {
+            "args": [
+              {
+                "kind": "var",
+                "name": "DAM_Nis(S;R)"
+              },
+              {
+                "kind": "var",
+                "name": "DPerm(π_1^ét(S,s);R)"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "SymmetricMonoidalEquivalence"
+          },
+          "math_objects": [
+            {
+              "name": "S",
+              "type": {
+                "kind": "custom",
+                "name": "ConnectedNoetherianSchemeFiniteKrullDimension"
+              }
+            },
+            {
+              "name": "R",
+              "type": {
+                "kind": "custom",
+                "name": "Ring"
+              }
+            },
+            {
+              "name": "s",
+              "type": {
+                "kind": "custom",
+                "name": "GeometricPoint"
+              }
+            },
+            {
+              "name": "DAM_Nis(S;R)",
+              "type": {
+                "kind": "custom",
+                "name": "DerivedCategoryNisnevichMotives"
+              }
+            },
+            {
+              "name": "DPerm(π_1^ét(S,s);R)",
+              "type": {
+                "kind": "custom",
+                "name": "DerivedCategoryPermutationModules"
+              }
+            },
+            {
+              "name": "π_1^ét(S,s)",
+              "type": {
+                "kind": "custom",
+                "name": "ProfiniteEtaleFundamentalGroup"
+              }
+            }
+          ],
+          "source_text": "Let S be a connected, noetherian scheme of finite Krull dimension. Then there is a symmetric monoidal equivalence DAM_Nis(S;R) ≃ DPerm(π_1^ét(S,s);R), where s: Spec(k) → S is a geometric point of S.",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [
+          "thm:borelandhyperlewelwise"
+        ],
+        "id": "main_tex:thm*:21529",
+        "section": "main.tex:21529",
+        "source_tex": "\\begin{thm*}[\\Cref{thm:borelandhyperlewelwise}]\nThere is a symmetric monoidal equivalence\n$$\\specg_{\\tn{Borel}} \\simeq (\\specg_{\\tn{lwBorel}})^h.$$\n\\end{thm*}",
+        "statement": "There is a symmetric monoidal equivalence between the ∞-category of Borel G-spectra (Spec_G^Borel) and the homotopy fixed points of the lw-Borel G-spectra, i.e., Spec_G^Borel ≃ (Spec_G^lwBorel)^h, as symmetric monoidal ∞-categories.",
+        "theorem_ir": {
+          "assumptions": [],
+          "binders": [],
+          "conclusion": {
+            "args": [
+              {
+                "kind": "var",
+                "name": "specg_Borel"
+              },
+              {
+                "kind": "var",
+                "name": "specg_lwBorel_homotopy_fixed_points"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "symmetric_monoidal_equivalence"
+          },
+          "theorem_name": "Borel_lwBorel_symmetric_monoidal_equivalence"
+        },
+        "type": "theorem",
+        "typed_transcription": {
+          "assumptions": [],
+          "binders": [],
+          "conclusion": {
+            "args": [
+              {
+                "kind": "var",
+                "name": "specg_Borel"
+              },
+              {
+                "kind": "var",
+                "name": "specg_lwBorel_homotopy_fixed_points"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "symmetric_monoidal_equivalence"
+          },
+          "math_objects": [
+            {
+              "name": "\\specg_{Borel}",
+              "type": {
+                "kind": "custom",
+                "name": "SymmetricMonoidalInftyCat"
+              }
+            },
+            {
+              "name": "(\\specg_{lwBorel})^h",
+              "type": {
+                "kind": "custom",
+                "name": "SymmetricMonoidalInftyCat"
+              }
+            }
+          ],
+          "source_text": "\\begin{thm*}[\\Cref{thm:borelandhyperlewelwise}]\nThere is a symmetric monoidal equivalence\n$$\\specg_{\\tn{Borel}} \\simeq (\\specg_{\\tn{lwBorel}})^h.$$\n\\end{thm*}",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [
+          "prop:sheavesborelcomplete",
+          "prop:sheavesgrmodules"
+        ],
+        "id": "main_tex:prop*:22191",
+        "section": "main.tex:22191",
+        "source_tex": "\\begin{prop*}[\\Cref{prop:sheavesborelcomplete} and \\Cref{prop:sheavesgrmodules}]\nThere is a commutative diagram with horizontal equivalences and fully faithful vertical functors\n\\[\\begin{tikzcd}\n\t{\\Mod_{R_G}(\\specg)_{\\tn{Borel}}} & {\\sheaves^{\\wedge}(\\gset;R)} & {\\cD(\\modgr)} \\\\\n\t{\\Mod_{R_G}(\\specg)_{\\tn{lwBorel}}} & {\\sheaves(\\gset;R)} & {\\tn{colim}_i \\; \\cD(\\Mod(G_i;R)).}\n\t\\arrow[\"\\sim\", from=1-1, to=1-2]\n\t\\arrow[hook, from=1-1, to=2-1]\n\t\\arrow[\"\\sim\", from=1-2, to=1-3]\n\t\\arrow[hook, from=1-2, to=2-2]\n\t\\arrow[hook, from=1-3, to=2-3]\n\t\\arrow[\"\\sim\", from=2-1, to=2-2]\n\t\\arrow[\"\\sim\", from=2-2, to=2-3]\n\\end{tikzcd}\\]\n\\end{prop*}",
+        "statement": "There is a commutative diagram with horizontal equivalences and fully faithful vertical functors relating the categories: (top row) Borel R_G-modules on Spec G, completed sheaves on G-sets with R-coefficients, and the derived category of graded modules; (bottom row) locally-weakly-Borel R_G-modules on Spec G, sheaves on G-sets with R-coefficients, and the colimit of derived categories of G_i-equivariant R-modules. All horizontal arrows are equivalences and all vertical arrows are fully faithful inclusions.",
+        "theorem_ir": {
+          "assumptions": [],
+          "binders": [],
+          "conclusion": {
+            "args": [
+              {
+                "kind": "var",
+                "name": "Mod_{R_G}(Spec G)_{Borel}"
+              },
+              {
+                "kind": "var",
+                "name": "sheaves^wedge(G-Set; R)"
+              },
+              {
+                "kind": "var",
+                "name": "D(mod_gr)"
+              },
+              {
+                "kind": "var",
+                "name": "Mod_{R_G}(Spec G)_{lwBorel}"
+              },
+              {
+                "kind": "var",
+                "name": "sheaves(G-Set; R)"
+              },
+              {
+                "kind": "var",
+                "name": "colim_i D(Mod(G_i; R))"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "commutative_diagram_horizontal_equivalences_fully_faithful_verticals"
+          },
+          "theorem_name": "CommutativeDiagramBorelLwBorelModules"
+        },
+        "type": "proposition",
+        "typed_transcription": {
+          "assumptions": [],
+          "binders": [],
+          "conclusion": {
+            "args": [
+              {
+                "kind": "var",
+                "name": "Mod_{R_G}(Spec G)_{Borel}"
+              },
+              {
+                "kind": "var",
+                "name": "sheaves^wedge(G-Set; R)"
+              },
+              {
+                "kind": "var",
+                "name": "D(mod_gr)"
+              },
+              {
+                "kind": "var",
+                "name": "Mod_{R_G}(Spec G)_{lwBorel}"
+              },
+              {
+                "kind": "var",
+                "name": "sheaves(G-Set; R)"
+              },
+              {
+                "kind": "var",
+                "name": "colim_i D(Mod(G_i; R))"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "commutative_diagram_horizontal_equivalences_fully_faithful_verticals"
+          },
+          "math_objects": [
+            {
+              "name": "Mod_{R_G}(Spec G)_{Borel}",
+              "type": {
+                "kind": "custom",
+                "name": "DerivedCategory"
+              }
+            },
+            {
+              "name": "sheaves^wedge(G-Set; R)",
+              "type": {
+                "kind": "custom",
+                "name": "DerivedCategory"
+              }
+            },
+            {
+              "name": "D(mod_gr)",
+              "type": {
+                "kind": "custom",
+                "name": "DerivedCategory"
+              }
+            },
+            {
+              "name": "Mod_{R_G}(Spec G)_{lwBorel}",
+              "type": {
+                "kind": "custom",
+                "name": "DerivedCategory"
+              }
+            },
+            {
+              "name": "sheaves(G-Set; R)",
+              "type": {
+                "kind": "custom",
+                "name": "DerivedCategory"
+              }
+            },
+            {
+              "name": "colim_i D(Mod(G_i; R))",
+              "type": {
+                "kind": "custom",
+                "name": "DerivedCategory"
+              }
+            }
+          ],
+          "source_text": "There is a commutative diagram with horizontal equivalences and fully faithful vertical functors. Top row: Mod_{R_G}(Spec G)_{Borel} ~> sheaves^∧(G-Set; R) ~> D(mod_gr). Bottom row: Mod_{R_G}(Spec G)_{lwBorel} ~> sheaves(G-Set; R) ~> colim_i D(Mod(G_i; R)). Vertical arrows (hook) are fully faithful inclusions. All horizontal arrows are equivalences.",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [
+          "thm:bigdiagram"
+        ],
+        "id": "main_tex:thm*:25354",
+        "section": "main.tex:25354",
+        "source_tex": "\\begin{thm*}[\\Cref{thm:bigdiagram}]\nThere is a commutative diagram of left adjoints in which all horizontal functors are equivalences.\n\\[\\begin{tikzcd}\n\t{\\cD\\Perm(G;R)} & {\\Mod_{\\underl{R}}(\\specg)} & {\\sheaves_{\\tn{Nis}}(\\corfets{R};\\spec)}  \\\\\n\t{\\tn{colim}_i \\, \\cD(\\Mod(G_i;R))} & {\\Mod_{R_G}(\\specg)_{\\tn{lwBorel}}} & {\\sheaves_{\\tn{ét}}(\\corfets{R};\\spec)}  \\\\\n\t{\\cD(\\Mod(G;R))} & {\\Mod_{R_G}(\\specg)_{\\tn{Borel}}} & {\\sheaves_{\\tn{ét}}^{\\wedge}(\\corfets{R};\\spec)} \n\t\\arrow[\"\\sim\", from=1-1, to=1-2]\n\t\\arrow[from=1-1, to=2-1]\n\t\\arrow[\"\\sim\", from=1-2, to=1-3]\n\t\\arrow[from=1-2, to=2-2]\n\t\\arrow[\"\\tsf{a}_{\\tn{ét}}\", from=1-3, to=2-3]\n\t\\arrow[\"\\sim\", from=2-1, to=2-2]\n\t\\arrow[\"L^h\", from=2-1, to=3-1]\n\t\\arrow[\"\\sim\", from=2-2, to=2-3]\n\t\\arrow[\"L^h\", from=2-2, to=3-2]\n\t\\arrow[\"(-)^{\\wedge}_\\tn{ét}\", from=2-3, to=3-3]\n\t\\arrow[\"\\sim\", from=3-1, to=3-2]\n\t\\arrow[\"\\sim\", from=3-2, to=3-3]\n\\end{tikzcd}\\]\n\\end{thm*}",
+        "statement": "There is a commutative diagram of left adjoint functors in which all horizontal functors are equivalences of infinity-categories, forming a 3×3 grid that relates (top row) the derived infinity-category of permutation G-modules over R, modules over the underlined R in the G-spectrum category, and Nisnevich sheaves on finite étale R-correspondences with spectra; (middle row) the colimit over i of derived categories of G_i-modules over R, locally-weakly-Borel R_G-module spectra, and étale sheaves; and (bottom row) the derived category of G-modules over R, Borel R_G-module spectra, and étale-completed spectra sheaves, with vertical functors given by étale sheafification and hypercompletion.",
+        "theorem_ir": {
+          "assumptions": [],
+          "binders": [],
+          "conclusion": {
+            "args": [
+              {
+                "kind": "var",
+                "name": "cDPerm(G;R)"
+              },
+              {
+                "kind": "var",
+                "name": "Mod_{underl{R}}(Sp^G)"
+              },
+              {
+                "kind": "var",
+                "name": "Sh_Nis(CorrFEt_R;Sp)"
+              },
+              {
+                "kind": "var",
+                "name": "colim_i cD(Mod(G_i;R))"
+              },
+              {
+                "kind": "var",
+                "name": "Mod_{R_G}(Sp^G)_{lwBorel}"
+              },
+              {
+                "kind": "var",
+                "name": "Sh_et(CorrFEt_R;Sp)"
+              },
+              {
+                "kind": "var",
+                "name": "cD(Mod(G;R))"
+              },
+              {
+                "kind": "var",
+                "name": "Mod_{R_G}(Sp^G)_{Borel}"
+              },
+              {
+                "kind": "var",
+                "name": "Sh_et^wedge(CorrFEt_R;Sp)"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "CommutativeDiagramOfEquivalences",
+            "text": "There is a commutative 3x3 diagram of left adjoint functors among derived categories of permutation modules, Borel and locally-weakly-Borel module spectra, and Nisnevich/étale sheaves on finite étale correspondences, with all horizontal functors being equivalences of infinity-categories."
+          },
+          "theorem_name": "BigDiagramEquivalences"
+        },
+        "type": "theorem",
+        "typed_transcription": {
+          "assumptions": [],
+          "binders": [],
+          "conclusion": {
+            "args": [
+              {
+                "kind": "var",
+                "name": "cDPerm(G;R)"
+              },
+              {
+                "kind": "var",
+                "name": "Mod_{underl{R}}(Sp^G)"
+              },
+              {
+                "kind": "var",
+                "name": "Sh_Nis(CorrFEt_R;Sp)"
+              },
+              {
+                "kind": "var",
+                "name": "colim_i cD(Mod(G_i;R))"
+              },
+              {
+                "kind": "var",
+                "name": "Mod_{R_G}(Sp^G)_{lwBorel}"
+              },
+              {
+                "kind": "var",
+                "name": "Sh_et(CorrFEt_R;Sp)"
+              },
+              {
+                "kind": "var",
+                "name": "cD(Mod(G;R))"
+              },
+              {
+                "kind": "var",
+                "name": "Mod_{R_G}(Sp^G)_{Borel}"
+              },
+              {
+                "kind": "var",
+                "name": "Sh_et^wedge(CorrFEt_R;Sp)"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "CommutativeDiagramOfLeftAdjoints",
+            "text": "There exists a commutative 3x3 diagram of left adjoint functors between nine infinity-categories (cDPerm(G;R), Mod_{underl{R}}(Sp^G), Sh_Nis, colim_i cD(Mod(G_i;R)), Mod_{R_G}(Sp^G)_{lwBorel}, Sh_et, cD(Mod(G;R)), Mod_{R_G}(Sp^G)_{Borel}, Sh_et^wedge) in which all six horizontal functors are equivalences of infinity-categories."
+          },
+          "math_objects": [
+            {
+              "name": "cDPerm(G;R)",
+              "type": {
+                "kind": "custom",
+                "name": "InfinityCategory"
+              }
+            },
+            {
+              "name": "Mod_{underl{R}}(Sp^G)",
+              "type": {
+                "kind": "custom",
+                "name": "InfinityCategory"
+              }
+            },
+            {
+              "name": "Sh_Nis(CorrFEt_R;Sp)",
+              "type": {
+                "kind": "custom",
+                "name": "InfinityCategory"
+              }
+            },
+            {
+              "name": "colim_i cD(Mod(G_i;R))",
+              "type": {
+                "kind": "custom",
+                "name": "InfinityCategory"
+              }
+            },
+            {
+              "name": "Mod_{R_G}(Sp^G)_{lwBorel}",
+              "type": {
+                "kind": "custom",
+                "name": "InfinityCategory"
+              }
+            },
+            {
+              "name": "Sh_et(CorrFEt_R;Sp)",
+              "type": {
+                "kind": "custom",
+                "name": "InfinityCategory"
+              }
+            },
+            {
+              "name": "cD(Mod(G;R))",
+              "type": {
+                "kind": "custom",
+                "name": "InfinityCategory"
+              }
+            },
+            {
+              "name": "Mod_{R_G}(Sp^G)_{Borel}",
+              "type": {
+                "kind": "custom",
+                "name": "InfinityCategory"
+              }
+            },
+            {
+              "name": "Sh_et^wedge(CorrFEt_R;Sp)",
+              "type": {
+                "kind": "custom",
+                "name": "InfinityCategory"
+              }
+            }
+          ],
+          "source_text": "There is a commutative diagram of left adjoints in which all horizontal functors are equivalences.",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [],
+        "id": "lem:completionexplicit",
+        "section": "main.tex:43379",
+        "source_tex": "\\begin{lem}\\label{lem:completionexplicit}\nLet $X \\in \\Mod_R(\\specg)$. The map $X \\to \\imap_{\\Mod_R(\\specg)}(\\Sigma^{\\infty}_+EG \\otimes R, X)$ exhibits the target as the Borel completion of $X$.\n\\end{lem}",
+        "statement": "Let X be an object in Mod_R(BG). The natural map X → imap_{Mod_R(BG)}(Σ^∞_+ EG ⊗ R, X) exhibits the target as the Borel completion of X.",
+        "theorem_ir": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "X",
+              "type": {
+                "kind": "custom",
+                "name": "Mod_R(BG)"
+              }
+            }
+          ],
+          "conclusion": {
+            "args": [
+              {
+                "kind": "var",
+                "name": "X"
+              },
+              {
+                "kind": "var",
+                "name": "imap_{Mod_R(BG)}(Σ^∞_+ EG ⊗ R, X)"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "exhibits_Borel_completion",
+            "text": "The map X → imap_{Mod_R(BG)}(Σ^∞_+ EG ⊗ R, X) exhibits the target as the Borel completion of X"
+          },
+          "theorem_name": "lem:completionexplicit"
+        },
+        "type": "lemma",
+        "typed_transcription": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "X",
+              "type": {
+                "kind": "custom",
+                "name": "Mod_R(BG)"
+              }
+            }
+          ],
+          "conclusion": {
+            "args": [
+              {
+                "kind": "var",
+                "name": "X"
+              },
+              {
+                "kind": "var",
+                "name": "imap_{Mod_R(BG)}(Σ^∞_+ EG ⊗ R, X)"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "exhibits_Borel_completion",
+            "text": "The map X → imap_{Mod_R(BG)}(Σ^∞_+ EG ⊗ R, X) exhibits the target as the Borel completion of X"
+          },
+          "math_objects": [
+            {
+              "name": "X",
+              "type": {
+                "kind": "custom",
+                "name": "Mod_R(BG)-object"
+              }
+            },
+            {
+              "name": "imap_{Mod_R(BG)}(Σ^∞_+ EG ⊗ R, X)",
+              "type": {
+                "kind": "custom",
+                "name": "Mod_R(BG)-object"
+              }
+            },
+            {
+              "name": "Borel completion of X",
+              "type": {
+                "kind": "custom",
+                "name": "Mod_R(BG)-object"
+              }
+            }
+          ],
+          "source_text": "Let $X \\in \\Mod_R(\\specg)$. The map $X \\to \\imap_{\\Mod_R(\\specg)}(\\Sigma^{\\infty}_+EG \\otimes R, X)$ exhibits the target as the Borel completion of $X$.",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [],
+        "id": "cor:completionunderlying",
+        "section": "main.tex:44409",
+        "source_tex": "\\begin{cor}\\label{cor:completionunderlying}\nA module $X \\in \\Mod_R(\\specg)$ is Borel complete if and only if the underlying $G$-spectrum $U_R(X)$ is.\n\\end{cor}",
+        "statement": "A module X in Mod_R(Sp_G) is Borel complete if and only if the underlying G-spectrum U_R(X) is Borel complete.",
+        "theorem_ir": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "X",
+              "type": {
+                "kind": "custom",
+                "name": "Mod_R(Sp_G)"
+              }
+            }
+          ],
+          "conclusion": {
+            "items": [
+              {
+                "conclusion": {
+                  "args": [
+                    {
+                      "kind": "raw_term",
+                      "text": "U_R(X)"
+                    }
+                  ],
+                  "kind": "uninterpreted_predicate",
+                  "name": "BorelComplete"
+                },
+                "kind": "implies",
+                "premise": {
+                  "args": [
+                    {
+                      "kind": "var",
+                      "name": "X"
+                    }
+                  ],
+                  "kind": "uninterpreted_predicate",
+                  "name": "BorelComplete"
+                }
+              },
+              {
+                "conclusion": {
+                  "args": [
+                    {
+                      "kind": "var",
+                      "name": "X"
+                    }
+                  ],
+                  "kind": "uninterpreted_predicate",
+                  "name": "BorelComplete"
+                },
+                "kind": "implies",
+                "premise": {
+                  "args": [
+                    {
+                      "kind": "raw_term",
+                      "text": "U_R(X)"
+                    }
+                  ],
+                  "kind": "uninterpreted_predicate",
+                  "name": "BorelComplete"
+                }
+              }
+            ],
+            "kind": "and"
+          },
+          "theorem_name": "cor:completionunderlying"
+        },
+        "type": "corollary",
+        "typed_transcription": {
+          "assumptions": [],
+          "binders": [
+            {
+              "name": "X",
+              "type": {
+                "kind": "custom",
+                "name": "Mod_R(Sp_G)"
+              }
+            }
+          ],
+          "conclusion": {
+            "items": [
+              {
+                "conclusion": {
+                  "args": [
+                    {
+                      "kind": "raw_term",
+                      "text": "U_R(X)"
+                    }
+                  ],
+                  "kind": "uninterpreted_predicate",
+                  "name": "BorelComplete"
+                },
+                "kind": "implies",
+                "premise": {
+                  "args": [
+                    {
+                      "kind": "var",
+                      "name": "X"
+                    }
+                  ],
+                  "kind": "uninterpreted_predicate",
+                  "name": "BorelComplete"
+                }
+              },
+              {
+                "conclusion": {
+                  "args": [
+                    {
+                      "kind": "var",
+                      "name": "X"
+                    }
+                  ],
+                  "kind": "uninterpreted_predicate",
+                  "name": "BorelComplete"
+                },
+                "kind": "implies",
+                "premise": {
+                  "args": [
+                    {
+                      "kind": "raw_term",
+                      "text": "U_R(X)"
+                    }
+                  ],
+                  "kind": "uninterpreted_predicate",
+                  "name": "BorelComplete"
+                }
+              }
+            ],
+            "kind": "and"
+          },
+          "math_objects": [
+            {
+              "name": "X",
+              "type": {
+                "kind": "custom",
+                "name": "Mod_R(Sp_G)"
+              }
+            },
+            {
+              "name": "U_R(X)",
+              "type": {
+                "kind": "custom",
+                "name": "G-spectrum"
+              }
+            },
+            {
+              "name": "U_R",
+              "type": {
+                "kind": "custom",
+                "name": "Mod_R(Sp_G) -> G-spectrum"
+              }
+            }
+          ],
+          "source_text": "A module $X \\in \\Mod_R(\\specg)$ is Borel complete if and only if the underlying $G$-spectrum $U_R(X)$ is.",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [],
+        "id": "lem:resasbasechange",
+        "section": "main.tex:45270",
+        "source_tex": "\\begin{lem}\\label{lem:resasbasechange}\nThere is a symmetric monoidal equivalence \n$$\\Mod_{\\bD(G)\\otimes R}(\\specg) \\stackrel{\\sim}{\\longrightarrow} \\Mod_{\\tn{res}^G_1(R)}(\\spec),$$\nand the equivalence functor fits into the following commutative diagram:\n\\[\\begin{tikzcd}\n\t{\\Mod_{R}(\\specg)} & \\\\\n\t{\\Mod_{\\tn{res}^G_1(R)}(\\spec)} & {\\Mod_{\\bD(G)\\otimes R}(\\specg)}\n\t\\arrow[\"{\\tn{res}^G_1}\"', from=1-1, to=2-1]\n\t\\arrow[\"{F_{\\bD(G) \\otimes R}}\", from=1-1, to=2-2]\n\t\\arrow[\"\\sim\"', from=2-2, to=2-1]\n\\end{tikzcd}\\]\n\\end{lem}",
+        "statement": "There is a symmetric monoidal equivalence from Mod_{D(G)⊗R}(Sp_G) to Mod_{res^G_1(R)}(Sp), and the equivalence functor fits into a commutative diagram where the restriction functor res^G_1 and the forgetful functor F_{D(G)⊗R} from Mod_R(Sp_G) make the triangle commute.",
+        "theorem_ir": {
+          "assumptions": [],
+          "binders": [],
+          "conclusion": {
+            "args": [
+              {
+                "kind": "var",
+                "name": "Mod_{D(G)⊗R}(Sp_G)"
+              },
+              {
+                "kind": "var",
+                "name": "Mod_{res^G_1(R)}(Sp)"
+              },
+              {
+                "kind": "var",
+                "name": "Mod_R(Sp_G)"
+              },
+              {
+                "kind": "var",
+                "name": "res^G_1"
+              },
+              {
+                "kind": "var",
+                "name": "F_{D(G)⊗R}"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "symmetric_monoidal_equivalence_with_commutative_diagram"
+          },
+          "theorem_name": "lem:resasbasechange"
+        },
+        "type": "lemma",
+        "typed_transcription": {
+          "assumptions": [],
+          "binders": [],
+          "conclusion": {
+            "args": [
+              {
+                "kind": "var",
+                "name": "Mod_{D(G)⊗R}(Sp_G)"
+              },
+              {
+                "kind": "var",
+                "name": "Mod_{res^G_1(R)}(Sp)"
+              },
+              {
+                "kind": "var",
+                "name": "Mod_R(Sp_G)"
+              },
+              {
+                "kind": "var",
+                "name": "res^G_1"
+              },
+              {
+                "kind": "var",
+                "name": "F_{D(G)⊗R}"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "symmetric_monoidal_equivalence_with_commutative_diagram"
+          },
+          "math_objects": [
+            {
+              "name": "Mod_{D(G)⊗R}(Sp_G)",
+              "type": {
+                "kind": "custom",
+                "name": "SymmetricMonoidalCategory"
+              }
+            },
+            {
+              "name": "Mod_{res^G_1(R)}(Sp)",
+              "type": {
+                "kind": "custom",
+                "name": "SymmetricMonoidalCategory"
+              }
+            },
+            {
+              "name": "Mod_R(Sp_G)",
+              "type": {
+                "kind": "custom",
+                "name": "SymmetricMonoidalCategory"
+              }
+            },
+            {
+              "name": "res^G_1",
+              "type": {
+                "kind": "custom",
+                "name": "SymmetricMonoidalFunctor"
+              }
+            },
+            {
+              "name": "F_{D(G)⊗R}",
+              "type": {
+                "kind": "custom",
+                "name": "SymmetricMonoidalFunctor"
+              }
+            }
+          ],
+          "source_text": "There is a symmetric monoidal equivalence from Mod_{D(G)⊗R}(Sp_G) to Mod_{res^G_1(R)}(Sp), and the equivalence functor fits into a commutative diagram where the restriction functor res^G_1 and the forgetful functor F_{D(G)⊗R} from Mod_R(Sp_G) make the triangle commute.",
+          "status": "transcribed"
+        }
+      },
+      {
+        "depends_on": [],
+        "id": "prop:borelcompleteasfun",
+        "section": "main.tex:46746",
+        "source_tex": "\\begin{prop}\\label{prop:borelcompleteasfun}\nThere is an equivalence of symmetric monoidal $\\infty$-categories $$\\Mod_R(\\specg)_{\\tn{Borel}} \\simeq \\fun(BG,\\Mod_{\\tn{res}^G_1(R)}(\\spec)),$$\nwhere the right-hand side carries the pointwise monoidal structure.\n\\end{prop}",
+        "statement": "There is an equivalence of symmetric monoidal ∞-categories between Mod_R(SpecG)_Borel and Fun(BG, Mod_{res^G_1(R)}(Spec)), where the right-hand side carries the pointwise monoidal structure.",
+        "theorem_ir": {
+          "assumptions": [],
+          "binders": [],
+          "conclusion": {
+            "args": [
+              {
+                "kind": "var",
+                "name": "Mod_R(SpecG)_Borel"
+              },
+              {
+                "kind": "var",
+                "name": "Fun(BG, Mod_{res^G_1(R)}(Spec))"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "SymMonoidalEquivalence"
+          },
+          "theorem_name": "prop:borelcompleteasfun"
+        },
+        "type": "proposition",
+        "typed_transcription": {
+          "assumptions": [],
+          "binders": [],
+          "conclusion": {
+            "args": [
+              {
+                "kind": "var",
+                "name": "Mod_R(SpecG)_Borel"
+              },
+              {
+                "kind": "var",
+                "name": "Fun(BG, Mod_{res^G_1(R)}(Spec))"
+              }
+            ],
+            "kind": "uninterpreted_predicate",
+            "name": "SymMonoidalEquivalence"
+          },
+          "math_objects": [
+            {
+              "name": "Mod_R(SpecG)_Borel",
+              "type": {
+                "kind": "custom",
+                "name": "SymmetricMonoidalInftyCat"
+              }
+            },
+            {
+              "name": "Fun(BG, Mod_{res^G_1(R)}(Spec))",
+              "type": {
+                "kind": "custom",
+                "name": "SymmetricMonoidalInftyCat"
+              }
+            }
+          ],
+          "source_text": "There is an equivalence of symmetric monoidal $\\infty$-categories $$\\Mod_R(\\specg)_{\\tn{Borel}} \\simeq \\fun(BG,\\Mod_{\\tn{res}^G_1(R)}(\\spec)),$$\nwhere the right-hand side carries the pointwise monoidal structure.",
+          "status": "transcribed"
+        }
+      }
+    ],
+    "partial": false,
+    "source": "formalize_source_inventory_typed_transcriber",
+    "theorem_level_count": 39,
+    "typed_count": 8
+  },
+  "theorem_inventory": {
+    "artifact": "review_loop/theorem_inventory.json",
+    "inventory_count": 48,
+    "theorem_level_count": 39,
+    "typed_count": 8
   },
   "warnings": [
     "review_input.json not loaded at /Users/mlong/Documents/Development/grokrxiv-data/papers/2606.25943/review_input.json: read /Users/mlong/Documents/Development/grokrxiv-data/papers/2606.25943/theorem_graph.json: No such file or directory (os error 2)",
