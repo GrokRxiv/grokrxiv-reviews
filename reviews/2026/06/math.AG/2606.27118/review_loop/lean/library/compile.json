@@ -1,7 +1,28 @@
 {
-  "artifact": "review_loop/lean/library/compile.json",
-  "deferred_to": "formalize",
+  "compile": {
+    "command": [
+      "lake",
+      "build",
+      "GrokRxiv.Paper"
+    ],
+    "duration_ms": 2247,
+    "exit_code": 0,
+    "status": "pass",
+    "stderr": "",
+    "stdout": "Build completed successfully (8480 jobs).\n"
+  },
+  "compile_target": "GrokRxiv.Paper",
+  "files": [
+    "GrokRxiv/Paper/Notation.lean",
+    "GrokRxiv/Paper/Definitions.lean",
+    "GrokRxiv/Paper/Interfaces.lean",
+    "GrokRxiv/Paper/Statements.lean",
+    "GrokRxiv/Paper/Lemmas.lean"
+  ],
+  "manifest": "review_loop/lean/library/library_manifest.json",
   "schema_version": "1.0.0",
-  "skip_reason": "Lean formalization runs asynchronously via the `formalize` job; queue with --with-lean.",
-  "status": "pending"
+  "stage": "library-check",
+  "status": "pass",
+  "upstream": null,
+  "validation_issues": []
 }

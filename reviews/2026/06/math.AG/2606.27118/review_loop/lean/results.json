@@ -1,199 +1,207 @@
 {
-  "agent_output_audit_summary": {
-    "accepted": 0,
-    "by_role": {},
-    "rejected": 0,
-    "total": 0
-  },
-  "attempts": [
-    {
-      "attempt": 0,
-      "semantic_validation": {
-        "issues": [
-          "Lean formalization runs asynchronously via the `formalize` job; queue with --with-lean."
-        ],
-        "status": "skipped"
-      },
-      "skipped": true,
-      "status": "skipped"
-    }
-  ],
-  "author_role": "lean_proof_author",
-  "deferred_outputs": [
-    {
-      "artifact": "review_loop/lean/env/env_result.json",
-      "deferred_to": "formalize",
-      "skip_reason": "Lean formalization runs asynchronously via the `formalize` job; queue with --with-lean."
-    },
-    {
-      "artifact": "review_loop/lean/library/compile.json",
-      "deferred_to": "formalize",
-      "skip_reason": "Lean formalization runs asynchronously via the `formalize` job; queue with --with-lean."
-    },
-    {
-      "artifact": "review_loop/lean/library/library_manifest.json",
-      "deferred_to": "formalize",
-      "skip_reason": "Lean formalization runs asynchronously via the `formalize` job; queue with --with-lean."
-    }
-  ],
+  "blocked_count": 3,
   "entries": [
     {
-      "emitted_statement": null,
-      "kind": "theorem_formalization",
-      "lean_attempt_status": "failed_typecheck",
-      "lean_declaration": "thm_1",
-      "obligation_id": "formalize_theorem_thm_1",
-      "source_claim_id": "thm-1",
-      "source_span": {
-        "artifact": "theorem_graph.json",
-        "claim_id": "thm-1",
-        "paper_source_id": "thm-1",
-        "section_id": "sec-1-1",
-        "text_excerpt": "\\cite{Belyi79}\\cite{Belyi02}\\cite[Theorem~1.3]{Jones16}\nLet $X$ be a compact Riemann surface, that is, a smooth projective algebraic curve in\n$\\Pj_{\\C}^{N}$ for some $N$.\nThen $X$ can be defined over the field of algebraic numbers $\\Qb$ if and only if there e..."
+      "claim_status": "blocked",
+      "compile": "review_loop/lean/targets/AGUDDGALT_arXiv_tex_thm_11263/check/compile.json",
+      "compile_status": "pass",
+      "failure_reason": "status=faithfulness_failed | faithfulness_verdict=unfaithful | faithfulness_status=completed | issues=[{\"message\":\"The reviewed declaration proves only `belyiTheorem <-> (forall X, X.DefinableOverAlgebraicNumbers <-> X.HasBelyiFunction)`, a definitional unfolding, not the paper theorem's biconditional result.\",\"severity\":\"critical\"},{\"message\":\"The proof is `Iff.rfl`, making the declaration a tautological statement about how `belyiTheorem` is defined rather than a proof or statement of Belyi's theorem as an external mathematical claim.\",\"severity\":\"critical\"},{\"message\":\"The paper's concrete notions of compact Riemann surface, smooth projective curve, algebraic definability over `Qbar`, non-constant meromorphic function, target `C-hat`, and ramification over at most three points are all hidden behind opaque types or predicates.\",\"severity\":\"warning\"}]",
+      "faithfulness": "review_loop/lean/targets/AGUDDGALT_arXiv_tex_thm_11263/faithfulness/faithfulness.json",
+      "faithfulness_status": "completed",
+      "faithfulness_verdict": "unfaithful",
+      "library_feedback": {
+        "reason": "parallel target execution keeps the checked paper-local library immutable during target jobs",
+        "status": "deferred_parallel_batch"
       },
-      "statement": "\\cite{Belyi79}\\cite{Belyi02}\\cite[Theorem~1.3]{Jones16}\nLet $X$ be a compact Riemann surface, that is, a smooth projective algebraic curve in\n$\\Pj_{\\C}^{N}$ for some $N$.\nThen $X$ can be defined over the field of algebraic numbers $\\Qb$ if and only if there exists a non-constant meromorphic\nfunction $\\B\\colon X \\to \\Ch\\ (\\ceq \\C \\cup \\{ \\infty \\})$ ramified over at most three points.",
-      "status": "FAILED",
-      "verified_statement": null
+      "library_feedback_candidate": true,
+      "parallel_target": true,
+      "proofs_lean": "review_loop/lean/targets/AGUDDGALT_arXiv_tex_thm_11263/GrokRxiv/Proofs.lean",
+      "source_claim_id": "AGUDDGALT_arXiv_tex:thm:11263",
+      "source_faithfulness_feedback": null,
+      "source_packet": "review_loop/lean/targets/AGUDDGALT_arXiv_tex_thm_11263/packet.json",
+      "status": "faithfulness_failed",
+      "target_fix_status": null
     },
     {
-      "emitted_statement": null,
-      "kind": "theorem_formalization",
-      "lean_attempt_status": "failed_typecheck",
-      "lean_declaration": "thm_2",
-      "obligation_id": "formalize_theorem_thm_2",
-      "source_claim_id": "thm-2",
-      "source_span": {
-        "artifact": "theorem_graph.json",
-        "claim_id": "thm-2",
-        "paper_source_id": "thm-2",
-        "section_id": "sec-1-1",
-        "text_excerpt": "\\label{sec:belyi} \\begin{theorem}[\\belyi's Theorem]\\cite{Belyi79}\\cite{Belyi02}\\cite[Theorem~1.3]{Jones16} Let $X$ be a compact Riemann surface, that is, a smooth projective algebraic curve in $\\Pj_{\\C}^{N}$ for some $N$. Then $X$ can be defined over the fiel..."
+      "claim_status": "blocked",
+      "compile": "review_loop/lean/targets/lem_order_n/check/compile.json",
+      "compile_status": "pass",
+      "failure_reason": "status=faithfulness_failed | faithfulness_verdict=unfaithful | faithfulness_status=completed | issues=[{\"message\":\"The Lean declaration is conditional: it proves the paper biconditional only assuming three global bridge facts, while the paper lemma states the biconditional unconditionally for a dessin with n edges.\",\"severity\":\"critical\"},{\"message\":\"One added hypothesis, `hregular : ∀ D, D.monodromyOrder = D.edges → D.IsRegular`, is already the reverse implication of the target theorem, so the Lean theorem delegates a substantive half of the paper claim to an assumption.\",\"severity\":\"critical\"},{\"message\":\"The statement is a reduction to missing interface facts rather than a direct formalization of the paper lemma as stated.\",\"severity\":\"warning\"}]",
+      "faithfulness": "review_loop/lean/targets/lem_order_n/faithfulness/faithfulness.json",
+      "faithfulness_status": "completed",
+      "faithfulness_verdict": "unfaithful",
+      "library_feedback": {
+        "reason": "parallel target execution keeps the checked paper-local library immutable during target jobs",
+        "status": "deferred_parallel_batch"
       },
-      "statement": "\\label{sec:belyi} \\begin{theorem}[\\belyi's Theorem]\\cite{Belyi79}\\cite{Belyi02}\\cite[Theorem~1.3]{Jones16} Let $X$ be a compact Riemann surface, that is, a smooth projective algebraic curve in $\\Pj_{\\C}^{N}$ for some $N$. Then $X$ can be defined over the field of algebraic numbers $\\Qb$ if and only if there exists a non-constant meromorphic function $\\B\\colon X \\to \\Ch\\ (\\ceq \\C \\cup \\{ \\infty \\})$ ramified over at most three points. \\end{theorem}",
-      "status": "FAILED",
-      "verified_statement": null
-    },
-    {
-      "emitted_statement": null,
-      "kind": "theorem_formalization",
-      "lean_attempt_status": "failed_typecheck",
-      "lean_declaration": "lem_order_n",
-      "obligation_id": "formalize_theorem_lem_order_n",
+      "library_feedback_candidate": true,
+      "parallel_target": true,
+      "proofs_lean": "review_loop/lean/targets/lem_order_n/GrokRxiv/Proofs.lean",
       "source_claim_id": "lem:order-n",
-      "source_span": {
-        "artifact": "theorem_graph.json",
-        "claim_id": "lem:order-n",
-        "paper_source_id": "lem:order-n",
-        "section_id": "sec-2",
-        "text_excerpt": "A \\dde with $n$ edges is regular if and only if the order of its monodromy group is $n$."
-      },
-      "statement": "A \\dde with $n$ edges is regular if and only if the order of its monodromy group is $n$.",
-      "status": "FAILED",
-      "verified_statement": null
+      "source_faithfulness_feedback": null,
+      "source_packet": "review_loop/lean/targets/lem_order_n/packet.json",
+      "status": "faithfulness_failed",
+      "target_fix_status": null
     },
     {
-      "emitted_statement": null,
-      "kind": "theorem_formalization",
-      "lean_attempt_status": "failed_typecheck",
-      "lean_declaration": "prop_regaut",
-      "obligation_id": "formalize_theorem_prop_regaut",
+      "claim_status": "blocked",
+      "compile": "review_loop/lean/targets/prop_regaut/check/compile.json",
+      "compile_status": "pass",
+      "failure_reason": "status=faithfulness_failed | faithfulness_verdict=unfaithful | faithfulness_status=completed | issues=[{\"message\":\"The paper theorem is an unconditional equivalence for a dessin, while propRegaut_of_characterizations assumes two additional equivalences, hOrder and hAut, before deriving the claimed result.\",\"severity\":\"critical\"},{\"message\":\"The Lean declaration is a reduction through a shared numeric criterion rather than the paper theorem itself; it shifts the substantive mathematical content into hypotheses.\",\"severity\":\"critical\"},{\"message\":\"The paper statement quantifies the theorem as the regularity criterion for a dessin's monodromy group and automorphism group, whereas this declaration only proves the equivalence for a fixed D under supplied bridge assumptions.\",\"severity\":\"warning\"}]",
+      "faithfulness": "review_loop/lean/targets/prop_regaut/faithfulness/faithfulness.json",
+      "faithfulness_status": "completed",
+      "faithfulness_verdict": "unfaithful",
+      "library_feedback": {
+        "reason": "parallel target execution keeps the checked paper-local library immutable during target jobs",
+        "status": "deferred_parallel_batch"
+      },
+      "library_feedback_candidate": true,
+      "parallel_target": true,
+      "proofs_lean": "review_loop/lean/targets/prop_regaut/GrokRxiv/Proofs.lean",
       "source_claim_id": "prop:regaut",
-      "source_span": {
-        "artifact": "theorem_graph.json",
-        "claim_id": "prop:regaut",
-        "paper_source_id": "prop:regaut",
-        "section_id": "sec-2",
-        "text_excerpt": "A \\dde $\\msD$ is regular if and only if its monodromy group $G$ is isomorphic to $\\AD$."
-      },
-      "statement": "A \\dde $\\msD$ is regular if and only if its monodromy group $G$ is isomorphic to $\\AD$.",
-      "status": "FAILED",
-      "verified_statement": null
-    },
-    {
-      "emitted_statement": null,
-      "kind": "theorem_formalization",
-      "lean_attempt_status": "failed_typecheck",
-      "lean_declaration": "prop_reguni",
-      "obligation_id": "formalize_theorem_prop_reguni",
-      "source_claim_id": "prop:reguni",
-      "source_span": {
-        "artifact": "theorem_graph.json",
-        "claim_id": "prop:reguni",
-        "paper_source_id": "prop:reguni",
-        "section_id": "sec-2",
-        "text_excerpt": "If a \\dde is regular, then it has a uniform passport."
-      },
-      "statement": "If a \\dde is regular, then it has a uniform passport.",
-      "status": "FAILED",
-      "verified_statement": null
-    },
-    {
-      "emitted_statement": null,
-      "kind": "theorem_formalization",
-      "lean_attempt_status": "failed_typecheck",
-      "lean_declaration": "prop_tbq",
-      "obligation_id": "formalize_theorem_prop_tbq",
-      "source_claim_id": "prop:tbq",
-      "source_span": {
-        "artifact": "theorem_graph.json",
-        "claim_id": "prop:tbq",
-        "paper_source_id": "prop:tbq",
-        "section_id": "sec-3-1",
-        "text_excerpt": "The number of elements in $S_{n}$ of cycle type $(b^{q})$ $(n = bq)$ is given by\n\n\\begin{align}\n\\vt{T(b, q)} = \\f{n!}{b^{q}q!}.\n\\end{align}"
-      },
-      "statement": "The number of elements in $S_{n}$ of cycle type $(b^{q})$ $(n = bq)$ is given by\n\n\\begin{align}\n\\vt{T(b, q)} = \\f{n!}{b^{q}q!}.\n\\end{align}",
-      "status": "FAILED",
-      "verified_statement": null
-    },
-    {
-      "emitted_statement": null,
-      "kind": "theorem_formalization",
-      "lean_attempt_status": "failed_typecheck",
-      "lean_declaration": "lem_Nbqblower",
-      "obligation_id": "formalize_theorem_lem_Nbqblower",
-      "source_claim_id": "lem:Nbqblower",
-      "source_span": {
-        "artifact": "theorem_graph.json",
-        "claim_id": "lem:Nbqblower",
-        "paper_source_id": "lem:Nbqblower",
-        "section_id": "sec-3-2",
-        "text_excerpt": "Let $[n,b^{q},b^{q}]$ be a passport with $n=qb$, and suppose that it has genus at least~$1$.\nFix an $n$-cycle $x \\in S_n$, and let $N(b,q,b)$\ndenote the set of permutations $y \\in S_n$ of cycle type $(b^{q})$ such that $(xy)^{-1}$ also has cycle type $(b^{q})..."
-      },
-      "statement": "Let $[n,b^{q},b^{q}]$ be a passport with $n=qb$, and suppose that it has genus at least~$1$.\nFix an $n$-cycle $x \\in S_n$, and let $N(b,q,b)$\ndenote the set of permutations $y \\in S_n$ of cycle type $(b^{q})$ such that $(xy)^{-1}$ also has cycle type $(b^{q})$.\nThen\n\\begin{align}\n\\vt{N(b, q, b)} \\ge \\f{(n-q)!}{2^{q(b-2)}\\left(\\f{q+1}{2}\\right)!\\left(\\f{q-1}{2}\\right)!}\\left(\\f{b-1}{2b}\\right)^{\\f{q-1}{2}}.\n\\end{align}",
-      "status": "FAILED",
-      "verified_statement": null
-    },
-    {
-      "emitted_statement": null,
-      "kind": "theorem_formalization",
-      "lean_attempt_status": "failed_typecheck",
-      "lean_declaration": "lem_Dupper",
-      "obligation_id": "formalize_theorem_lem_Dupper",
-      "source_claim_id": "lem:Dupper",
-      "source_span": {
-        "artifact": "theorem_graph.json",
-        "claim_id": "lem:Dupper",
-        "paper_source_id": "lem:Dupper",
-        "section_id": "sec-3-3",
-        "text_excerpt": "Let $n \\in \\Zp$ with $n \\ge 2$, $x \\in S_{n}$ be an $n$-cycle, and for each $1 \\le k \\le n-1$, define $D_{k}$ by \\eqref{eq:defDk}.\nLet\n\\begin{align}\n\\kappa_{1} \\ceq \\f{2623}{1894} = 1.384\\ldots, \\q \\kappa_{2} \\ceq \\f{972}{947} = 1.026\\ldots.\n\\end{align}\nThen\n..."
-      },
-      "statement": "Let $n \\in \\Zp$ with $n \\ge 2$, $x \\in S_{n}$ be an $n$-cycle, and for each $1 \\le k \\le n-1$, define $D_{k}$ by \\eqref{eq:defDk}.\nLet\n\\begin{align}\n\\kappa_{1} \\ceq \\f{2623}{1894} = 1.384\\ldots, \\q \\kappa_{2} \\ceq \\f{972}{947} = 1.026\\ldots.\n\\end{align}\nThen\n\\begin{align}\n\\label{eq:Dupper}\n\\vt{D} \\le \\kappa_{1}\\cdot 2^{\\f{n}{2}}\\left(\\f{n}{2}\\right)!,\n\\end{align}\nwhere, for non-integer $M$, we define $M! \\ceq \\Gamma(M+1)$.\n\nIn particular, if $n$ is odd, then\n\\begin{align}\n\\label{eq:Dupperodd}\n\\vt{D} \\le \\kappa_{2}\\cdot3^{\\f{n}{3}}\\left(\\f{n}{3}\\right)!.\n\\end{align}",
-      "status": "FAILED",
-      "verified_statement": null
+      "source_faithfulness_feedback": null,
+      "source_packet": "review_loop/lean/targets/prop_regaut/packet.json",
+      "status": "faithfulness_failed",
+      "target_fix_status": null
     }
   ],
-  "filename": "GrokRxiv/Proofs.lean",
-  "final_path": ".agenthero/artifacts/grokrxiv/reviews/d90b4719-7328-4839-83d2-f77fea96dcde/review_loop/lean/GrokRxiv/Proofs.lean",
-  "fixer_role": "lean_code_fixer",
-  "language": "lean",
-  "lean_attempt_status": "failed_typecheck",
-  "max_attempts": 2,
-  "proof_status": "FAILED",
-  "reviewer_role": "lean_code_reviewer",
-  "skip_reason": "lean_deferred_to_formalize",
-  "skipped": true,
-  "stage": "lean_review_fix_code",
-  "status": "skipped",
-  "target": "lean",
-  "verdict": "NOT_PROVED"
+  "external_actions_enabled": true,
+  "failed_count": 0,
+  "harness": {
+    "env": {
+      "cwd": ".agenthero/artifacts/grokrxiv/reviews/d90b4719-7328-4839-83d2-f77fea96dcde/review_loop/lean/env",
+      "mathlib_env": null,
+      "schema_version": "1.0.0",
+      "smoke": {
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "GrokRxiv/HarnessSmoke.lean"
+        ],
+        "duration_ms": 22369,
+        "exit_code": 0,
+        "status": "pass",
+        "stderr": "",
+        "stdout": "Nat : Type\nPolynomial.{u_1} (R : Type u_1) [Semiring R] : Type u_1\n"
+      },
+      "stage": "env",
+      "status": "pass"
+    },
+    "library": {
+      "compile": {
+        "command": [
+          "lake",
+          "build",
+          "GrokRxiv.Paper"
+        ],
+        "duration_ms": 2247,
+        "exit_code": 0,
+        "status": "pass",
+        "stderr": "",
+        "stdout": "Build completed successfully (8480 jobs).\n"
+      },
+      "compile_target": "GrokRxiv.Paper",
+      "files": [
+        "GrokRxiv/Paper/Notation.lean",
+        "GrokRxiv/Paper/Definitions.lean",
+        "GrokRxiv/Paper/Interfaces.lean",
+        "GrokRxiv/Paper/Statements.lean",
+        "GrokRxiv/Paper/Lemmas.lean"
+      ],
+      "manifest": "review_loop/lean/library/library_manifest.json",
+      "schema_version": "1.0.0",
+      "stage": "library-check",
+      "status": "pass",
+      "upstream": null,
+      "validation_issues": []
+    },
+    "parallel": {
+      "library_feedback_batch": {
+        "candidate_count": 3,
+        "candidates": [
+          {
+            "claim_status": "blocked",
+            "compile": "review_loop/lean/targets/AGUDDGALT_arXiv_tex_thm_11263/check/compile.json",
+            "compile_status": "pass",
+            "failure_reason": "status=faithfulness_failed | faithfulness_verdict=unfaithful | faithfulness_status=completed | issues=[{\"message\":\"The reviewed declaration proves only `belyiTheorem <-> (forall X, X.DefinableOverAlgebraicNumbers <-> X.HasBelyiFunction)`, a definitional unfolding, not the paper theorem's biconditional result.\",\"severity\":\"critical\"},{\"message\":\"The proof is `Iff.rfl`, making the declaration a tautological statement about how `belyiTheorem` is defined rather than a proof or statement of Belyi's theorem as an external mathematical claim.\",\"severity\":\"critical\"},{\"message\":\"The paper's concrete notions of compact Riemann surface, smooth projective curve, algebraic definability over `Qbar`, non-constant meromorphic function, target `C-hat`, and ramification over at most three points are all hidden behind opaque types or predicates.\",\"severity\":\"warning\"}]",
+            "faithfulness": "review_loop/lean/targets/AGUDDGALT_arXiv_tex_thm_11263/faithfulness/faithfulness.json",
+            "faithfulness_status": "completed",
+            "faithfulness_verdict": "unfaithful",
+            "library_feedback": {
+              "reason": "parallel target execution keeps the checked paper-local library immutable during target jobs",
+              "status": "deferred_parallel_batch"
+            },
+            "library_feedback_candidate": true,
+            "parallel_target": true,
+            "proofs_lean": "review_loop/lean/targets/AGUDDGALT_arXiv_tex_thm_11263/GrokRxiv/Proofs.lean",
+            "source_claim_id": "AGUDDGALT_arXiv_tex:thm:11263",
+            "source_faithfulness_feedback": null,
+            "source_packet": "review_loop/lean/targets/AGUDDGALT_arXiv_tex_thm_11263/packet.json",
+            "status": "faithfulness_failed",
+            "target_fix_status": null
+          },
+          {
+            "claim_status": "blocked",
+            "compile": "review_loop/lean/targets/lem_order_n/check/compile.json",
+            "compile_status": "pass",
+            "failure_reason": "status=faithfulness_failed | faithfulness_verdict=unfaithful | faithfulness_status=completed | issues=[{\"message\":\"The Lean declaration is conditional: it proves the paper biconditional only assuming three global bridge facts, while the paper lemma states the biconditional unconditionally for a dessin with n edges.\",\"severity\":\"critical\"},{\"message\":\"One added hypothesis, `hregular : ∀ D, D.monodromyOrder = D.edges → D.IsRegular`, is already the reverse implication of the target theorem, so the Lean theorem delegates a substantive half of the paper claim to an assumption.\",\"severity\":\"critical\"},{\"message\":\"The statement is a reduction to missing interface facts rather than a direct formalization of the paper lemma as stated.\",\"severity\":\"warning\"}]",
+            "faithfulness": "review_loop/lean/targets/lem_order_n/faithfulness/faithfulness.json",
+            "faithfulness_status": "completed",
+            "faithfulness_verdict": "unfaithful",
+            "library_feedback": {
+              "reason": "parallel target execution keeps the checked paper-local library immutable during target jobs",
+              "status": "deferred_parallel_batch"
+            },
+            "library_feedback_candidate": true,
+            "parallel_target": true,
+            "proofs_lean": "review_loop/lean/targets/lem_order_n/GrokRxiv/Proofs.lean",
+            "source_claim_id": "lem:order-n",
+            "source_faithfulness_feedback": null,
+            "source_packet": "review_loop/lean/targets/lem_order_n/packet.json",
+            "status": "faithfulness_failed",
+            "target_fix_status": null
+          },
+          {
+            "claim_status": "blocked",
+            "compile": "review_loop/lean/targets/prop_regaut/check/compile.json",
+            "compile_status": "pass",
+            "failure_reason": "status=faithfulness_failed | faithfulness_verdict=unfaithful | faithfulness_status=completed | issues=[{\"message\":\"The paper theorem is an unconditional equivalence for a dessin, while propRegaut_of_characterizations assumes two additional equivalences, hOrder and hAut, before deriving the claimed result.\",\"severity\":\"critical\"},{\"message\":\"The Lean declaration is a reduction through a shared numeric criterion rather than the paper theorem itself; it shifts the substantive mathematical content into hypotheses.\",\"severity\":\"critical\"},{\"message\":\"The paper statement quantifies the theorem as the regularity criterion for a dessin's monodromy group and automorphism group, whereas this declaration only proves the equivalence for a fixed D under supplied bridge assumptions.\",\"severity\":\"warning\"}]",
+            "faithfulness": "review_loop/lean/targets/prop_regaut/faithfulness/faithfulness.json",
+            "faithfulness_status": "completed",
+            "faithfulness_verdict": "unfaithful",
+            "library_feedback": {
+              "reason": "parallel target execution keeps the checked paper-local library immutable during target jobs",
+              "status": "deferred_parallel_batch"
+            },
+            "library_feedback_candidate": true,
+            "parallel_target": true,
+            "proofs_lean": "review_loop/lean/targets/prop_regaut/GrokRxiv/Proofs.lean",
+            "source_claim_id": "prop:regaut",
+            "source_faithfulness_feedback": null,
+            "source_packet": "review_loop/lean/targets/prop_regaut/packet.json",
+            "status": "faithfulness_failed",
+            "target_fix_status": null
+          }
+        ],
+        "parallel_target_concurrency": 3,
+        "reason": "target jobs ran in isolated workdirs against a checked library snapshot; shared library mutation is deferred to a later batch implementation",
+        "schema_version": "1.0.0",
+        "stage": "parallel-library-feedback-batch",
+        "status": "deferred"
+      },
+      "target_concurrency": 3
+    }
+  },
+  "kernel_proved_count": 3,
+  "paper_claim_proved_count": 0,
+  "proof_author_invoked_count": 3,
+  "proofs_lean_created_count": 3,
+  "schema_version": "1.0.0",
+  "selected_count": 3,
+  "source": "theorem_inventory_direct",
+  "stage": "all",
+  "statement_preflight_passed_count": 0,
+  "status": "fail",
+  "theorem_proved": 0
 }

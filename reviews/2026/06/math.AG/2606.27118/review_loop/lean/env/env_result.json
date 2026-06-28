@@ -1,7 +1,20 @@
 {
-  "artifact": "review_loop/lean/env/env_result.json",
-  "deferred_to": "formalize",
+  "cwd": ".agenthero/artifacts/grokrxiv/reviews/d90b4719-7328-4839-83d2-f77fea96dcde/review_loop/lean/env",
+  "mathlib_env": null,
   "schema_version": "1.0.0",
-  "skip_reason": "Lean formalization runs asynchronously via the `formalize` job; queue with --with-lean.",
-  "status": "pending"
+  "smoke": {
+    "command": [
+      "lake",
+      "env",
+      "lean",
+      "GrokRxiv/HarnessSmoke.lean"
+    ],
+    "duration_ms": 22369,
+    "exit_code": 0,
+    "status": "pass",
+    "stderr": "",
+    "stdout": "Nat : Type\nPolynomial.{u_1} (R : Type u_1) [Semiring R] : Type u_1\n"
+  },
+  "stage": "env",
+  "status": "pass"
 }
