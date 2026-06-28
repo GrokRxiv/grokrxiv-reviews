@@ -1,0 +1,378 @@
+{
+  "declarations": [
+    {
+      "import": "GrokRxiv.Paper.Interfaces",
+      "kind": "interface",
+      "lean_decl": "opaque MWCarrier : Type := PUnit",
+      "name": "GrokRxiv.Paper.MWCarrier",
+      "signature": "opaque MWCarrier : Type",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": "main_thm",
+          "source_tex": "Let $Z_0$ be the zero section and $MW(A/C)$ the Mordell-Weil group."
+        }
+      ],
+      "source_terms": [
+        "MW(A/C)",
+        "Mordell-Weil group",
+        "section"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Interfaces",
+      "kind": "interface",
+      "lean_decl": "opaque N1Carrier : Type := PUnit",
+      "name": "GrokRxiv.Paper.N1Carrier",
+      "signature": "opaque N1Carrier : Type",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": "thm_KS",
+          "source_tex": "where $N_1$ denotes the group of complete $1$-cycles modulo numerical equivalence."
+        }
+      ],
+      "source_terms": [
+        "N_1(A)",
+        "numerical equivalence",
+        "complete 1-cycles"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Interfaces",
+      "kind": "interface",
+      "lean_decl": "opaque N1genCarrier : Type := PUnit",
+      "name": "GrokRxiv.Paper.N1genCarrier",
+      "signature": "opaque N1genCarrier : Type",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": "def_N1gen",
+          "source_tex": "The group of complete $1$-cycles modulo generic numerical equivalence is denoted by $N_{1,\\gen}(A)$."
+        }
+      ],
+      "source_terms": [
+        "N_{1,gen}(A)",
+        "generic numerical equivalence"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Interfaces",
+      "kind": "interface",
+      "lean_decl": "opaque PicRigCarrier : Type := PUnit",
+      "name": "GrokRxiv.Paper.PicRigCarrier",
+      "signature": "opaque PicRigCarrier : Type",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": null,
+          "source_tex": "The group of rigidified invertible sheaves on $A$ modulo isomorphism is denoted by $\\Pic(A)_{\\rig}$."
+        }
+      ],
+      "source_terms": [
+        "Pic(A)_rig",
+        "rigidified invertible sheaves"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Interfaces",
+      "kind": "interface",
+      "lean_decl": "opaque PicEtaCarrier : Type := PUnit",
+      "name": "GrokRxiv.Paper.PicEtaCarrier",
+      "signature": "opaque PicEtaCarrier : Type",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": "item_lift",
+          "source_tex": "the restriction $$\\Pic(A)_{\\rig} \\to \\Pic(A_\\eta)$$ is a group isomorphism."
+        }
+      ],
+      "source_terms": [
+        "Pic(A_\\eta)",
+        "generic fibre"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Interfaces",
+      "kind": "interface",
+      "lean_decl": "opaque KSSection : Type := PUnit",
+      "name": "GrokRxiv.Paper.KSSection",
+      "signature": "opaque KSSection : Type",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": "thm_KS",
+          "source_tex": "Let $Z \\subset J_L$ be a section whose cohomology class is contained in the image of the restriction map"
+        }
+      ],
+      "source_terms": [
+        "section",
+        "J_L",
+        "Z"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Interfaces",
+      "kind": "interface",
+      "lean_decl": "opaque H2gTotal : Type := PUnit",
+      "name": "GrokRxiv.Paper.H2gTotal",
+      "signature": "opaque H2gTotal : Type",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": "thm_KS",
+          "source_tex": "$$H^{2g}(J(S, H), \\Z) \\to H^{2g}(J_L, \\Z).$$"
+        }
+      ],
+      "source_terms": [
+        "H^{2g}(J(S,H),Z)"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Interfaces",
+      "kind": "interface",
+      "lean_decl": "opaque H2gJL : Type := PUnit",
+      "name": "GrokRxiv.Paper.H2gJL",
+      "signature": "opaque H2gJL : Type",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": "thm_KS",
+          "source_tex": "$$H^{2g}(J(S, H), \\Z) \\to H^{2g}(J_L, \\Z).$$"
+        }
+      ],
+      "source_terms": [
+        "H^{2g}(J_L,Z)"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Definitions",
+      "kind": "definition",
+      "lean_decl": "structure Setup where ...",
+      "name": "GrokRxiv.Paper.Setup",
+      "signature": "structure Setup : Type",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": "main_thm",
+          "source_tex": "Let $C$ be a geometrically connected, smooth projective curve over a field $k$, and $A/C$ a smooth commutative group scheme with connected fibres, whose generic fibre $A_\\eta$ is an abelian variety."
+        }
+      ],
+      "source_terms": [
+        "A/C",
+        "smooth commutative group scheme",
+        "abelian variety generic fibre",
+        "phi",
+        "psi",
+        "restrict"
+      ],
+      "trust_status": "lean_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Definitions",
+      "kind": "definition",
+      "lean_decl": "structure KSSetup where ...",
+      "name": "GrokRxiv.Paper.KSSetup",
+      "signature": "structure KSSetup : Type",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": "thm_KS",
+          "source_tex": "a section whose cohomology class is contained in the image of the restriction map ... Then $Z$ is the zero section."
+        }
+      ],
+      "source_terms": [
+        "restriction map",
+        "cohomology class",
+        "zero section"
+      ],
+      "trust_status": "lean_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Definitions",
+      "kind": "definition",
+      "lean_decl": "def IsTors (S : Setup) (Z : MWCarrier) : Prop := letI := S.mwGroup; ∃ n : ℕ, 0 < n ∧ n • Z = 0",
+      "name": "GrokRxiv.Paper.IsTors",
+      "signature": "def IsTors (S : Setup) (Z : MWCarrier) : Prop",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": "main_thm",
+          "source_tex": "$\\ker \\psi = \\MW(A/C)_{\\tors}$."
+        }
+      ],
+      "source_terms": [
+        "MW(A/C)_tors",
+        "torsion"
+      ],
+      "trust_status": "lean_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Statements",
+      "kind": "statement",
+      "lean_decl": "def itemLift (S : Setup) : Prop",
+      "name": "GrokRxiv.Paper.itemLift",
+      "signature": "def itemLift (S : Setup) : Prop",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": "item_lift",
+          "source_tex": "the restriction $$\\Pic(A)_{\\rig} \\to \\Pic(A_\\eta)$$ is a group isomorphism."
+        }
+      ],
+      "source_terms": [
+        "item_lift",
+        "group isomorphism",
+        "restriction"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Statements",
+      "kind": "statement",
+      "lean_decl": "def mainThmHom (S : Setup) : Prop",
+      "name": "GrokRxiv.Paper.mainThmHom",
+      "signature": "def mainThmHom (S : Setup) : Prop",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": "main_thm",
+          "source_tex": "The map $\\psi\\colon \\MW(A/C) \\to  N_{1,\\gen}(A)$ ... is a group homomorphism."
+        }
+      ],
+      "source_terms": [
+        "main_thm",
+        "psi",
+        "group homomorphism"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Statements",
+      "kind": "statement",
+      "lean_decl": "def mainThmKernel (S : Setup) : Prop",
+      "name": "GrokRxiv.Paper.mainThmKernel",
+      "signature": "def mainThmKernel (S : Setup) : Prop",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": "main_thm",
+          "source_tex": "Assume that $A_\\eta$ has no abelian subvarieties defined over $k$, then $\\ker \\psi = \\MW(A/C)_{\\tors}$."
+        }
+      ],
+      "source_terms": [
+        "main_thm",
+        "ker psi",
+        "torsion",
+        "no abelian subvarieties"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Statements",
+      "kind": "statement",
+      "lean_decl": "def mainThm (S : Setup) : Prop := mainThmHom S ∧ mainThmKernel S",
+      "name": "GrokRxiv.Paper.mainThm",
+      "signature": "def mainThm (S : Setup) : Prop",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": "main_thm",
+          "source_tex": "\\begin{theorem}\\label{main_thm} ... is a group homomorphism. ... $\\ker \\psi = \\MW(A/C)_{\\tors}$."
+        }
+      ],
+      "source_terms": [
+        "main_thm"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Statements",
+      "kind": "statement",
+      "lean_decl": "def corMain (S : Setup) : Prop",
+      "name": "GrokRxiv.Paper.corMain",
+      "signature": "def corMain (S : Setup) : Prop",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": "main_thm",
+          "source_tex": "Then the set map $$\\MW(A/C)/{\\tors} \\to  N_{1}(A)$$ $$Z \\mapsto [Z]-[Z_0]$$ is injective."
+        }
+      ],
+      "source_terms": [
+        "cor_main",
+        "injective",
+        "MW(A/C)/tors",
+        "N_1(A)"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Statements",
+      "kind": "statement",
+      "lean_decl": "def thmKS (K : KSSetup) : Prop",
+      "name": "GrokRxiv.Paper.thmKS",
+      "signature": "def thmKS (K : KSSetup) : Prop",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": "thm_KS",
+          "source_tex": "Let $Z \\subset J_L$ be a section whose cohomology class is contained in the image of the restriction map ... Then $Z$ is the zero section."
+        }
+      ],
+      "source_terms": [
+        "thm_KS",
+        "cohomology class",
+        "restriction map",
+        "zero section"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Lemmas",
+      "kind": "lemma",
+      "lean_decl": "theorem isTorsion_zero (S : Setup) : letI := S.mwGroup; IsTors S 0",
+      "name": "GrokRxiv.Paper.isTorsion_zero",
+      "signature": "theorem isTorsion_zero (S : Setup) : IsTors S 0",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": "main_thm",
+          "source_tex": "$\\ker \\psi = \\MW(A/C)_{\\tors}$."
+        }
+      ],
+      "source_terms": [
+        "torsion",
+        "zero section"
+      ],
+      "trust_status": "lean_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Lemmas",
+      "kind": "lemma",
+      "lean_decl": "theorem mainThm_iff (S : Setup) : mainThm S ↔ (mainThmHom S ∧ mainThmKernel S) := Iff.rfl",
+      "name": "GrokRxiv.Paper.mainThm_iff",
+      "signature": "theorem mainThm_iff (S : Setup) : mainThm S ↔ (mainThmHom S ∧ mainThmKernel S)",
+      "source_evidence": [
+        {
+          "artifact": "main.tex",
+          "claim_id": "main_thm",
+          "source_tex": "\\begin{theorem}\\label{main_thm} ... \\begin{enumerate} \\item ... homomorphism. \\item ... $\\ker \\psi = \\MW(A/C)_{\\tors}$. \\end{enumerate}"
+        }
+      ],
+      "source_terms": [
+        "main_thm"
+      ],
+      "trust_status": "lean_checked"
+    }
+  ],
+  "schema_version": "1.0.0"
+}

@@ -1,0 +1,557 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\title{On a conjecture by Koll\textbackslash{}'ar and Sacc\textbackslash{}`a}
+\author{Pascal Autissier \and Andrea Fanelli}
+\date{}
+\begin{document}
+\maketitle
+
+\noindent\textbf{Source:} \href{https://arxiv.org/abs/2606.26983}{arXiv:2606.26983} \quad \textbf{Field:} math.AG\\
+
+\section*{TL;DR}
+This short research note proves a modified version of Conjecture 7 from Kollár--Saccà (KS25), establishing injectivity modulo torsion of the map from the Mordell-Weil group of a smooth commutative group scheme with connected fibres over a curve into the group of numerical 1-cycles. The paper introduces the notion of generic numerical equivalence and shows that the natural Mordell-Weil-to-cycles map is a group homomorphism with respect to this weakened equivalence, with kernel equal to the torsion subgroup under a no-abelian-subvariety hypothesis. The five specialists broadly agree on the paper's scope and contribution but differ on depth of concern. Technical correctness assessed the paper as mostly sound (confidence 0.58), identifying one major gap (claim C7): the critical step that all (L.Z)=0 implies torsion relies on non-degeneracy of the Néron-Tate height pairing for odd rigidified line bundles, a claim asserted but not independently justified in-text, and the equivalence between the geometric hypothesis and K/k-trace vanishing is not made explicit. A second major gap (C8) concerns the absence of any machine-checkable proof artifact in a code-amenable field (math.AG): the headline injectivity result and the theorem-of-the-square identity rely on classical cited results (Moret-Bailly Ch.2 Thm 1.1, Lang Ch.6 Thm 5.4.2) without reproducing their statements or supplying formal verification. The reproducibility specialist concurs, rating reproducibility at 0.30 and flagging a critical concern about the missing formalization of prop\_main, main\_thm, and cor\_main. Per the recommendation gate: math.AG is in the code-amenable set, and both technical correctness and reproducibility flagged missing proof-as-code artifacts at major/critical severity; accordingly the default is major\_revision. The novelty score (0.5, 'incremental') is consistent with a focused conjecture-resolution note; the citation review found the bibliography compact and appropriately targeted, with one anomaly (C06 present but uncited in text) and one missing standard reference (Néron Models, Bosch--Lütkebohmert--Raynaud). No specialist reported a critical logical error that would block the headline claim outright, so rejection is not warranted; the mathematical approach appears sound at a structural level and the generalization from KS25's special case is non-trivial.
+
+\textbf{Recommendation:} Major revision \quad \textbf{Confidence:} 78\%\\
+
+\section*{Strengths}
+\begin{itemize}[leftmargin=*]
+  \item The paper settles KS25 Conjecture 7 in full generality over any field and for any smooth commutative group scheme with connected fibres, a genuine extension beyond the Jacobian-over-line setting of the original conjecture.
+  \item The introduction of generic numerical equivalence is a technically clean fix to the inherent quadratic obstruction, and the homomorphism property of psi into N\_\{1,gen\}(A) is established through a logically coherent chain from prop\_main(3) via projection-formula and bilinearity arguments.
+  \item The five classical references are cited with precise chapter and theorem pointers (e.g. L83 Ch.12 Prop 3.5, M85 Ch.2 Thm 1.1), indicating genuine engagement with the source material rather than pro-forma citation.
+  \item The worked example demonstrating that the unmodified map is not a group homomorphism (via the 4(L.Z) vs 2(L.Z) computation) is internally consistent and motivates the generic numerical equivalence construction effectively.
+\end{itemize}
+
+\section*{Weaknesses}
+\begin{itemize}[leftmargin=*]
+  \item The kernel computation in main\_thm(2) asserts non-degeneracy of the Néron-Tate height pairing for odd rigidified line bundles without proving or precisely citing it, and the equivalence 'A\_eta has no k-defined abelian subvarieties iff K/k-trace is trivial' is invoked but not justified (cf. C7, major severity).
+  \item No machine-checkable proof artifact is provided for the headline injectivity result; the algebraic core---the theorem-of-the-square identity and the eq\_num reduction---could be encoded in a formal proof system but is absent, constituting a verification gap for a math.AG submission (cf. C8, major severity; reproducibility score 0.30).
+  \item The relation between the generic numerical class [Z] in N\_\{1,gen\}(A) and the standard numerical class [Z] in N\_1(A) used in the corollary is not made explicit; the step that injectivity into N\_\{1,gen\}(A) implies injectivity into N\_1(A) requires that the comparison map N\_\{1,gen\}(A) -> N\_1(A) is injective, which is not stated or proved (cf. C1).
+  \item The standard reference Néron Models (Bosch--Lütkebohmert--Raynaud, 1990) is absent despite the paper working with smooth commutative group schemes over Dedekind schemes, leaving implicit foundational claims about Néron models and smooth group scheme properties without standard backing.
+  \item C06 (Conrad's comprehensive account of K/k-trace and Lang--Néron) appears in the bibliography but has no citation context in the rendered text, even though K/k-trace vanishing is the load-bearing step in main\_thm(2); this is either an uncited use or an erroneous bibliography entry.
+\end{itemize}
+
+\section*{Revision Targets}
+\begin{itemize}[leftmargin=*]
+  \item [open] paper\_tex `corrections/2606.26983/paper.tex` at `Section 'The conjecture', Theorem main\_thm, part 2`: Add an explicit lemma that the canonical heights h\_L for L\_eta in Pic\^{}0(A\_eta) (equivalently the symmetric/antisymmetric height pairing) are non-degenerate on MW(A/C)/tors when the K/k-trace is trivial, with a precise citation, and justify the equivalence 'A\_eta has no k-defined abelian subvarieties <=> K/k-trace of A\_eta is trivial' (cf. Conrad [C06]). Check: Re-review should confirm `Section 'The conjecture', Theorem main\_thm, part 2` is corrected or justified.
+  \item [open] paper\_tex `corrections/2606.26983/paper.tex` at `Whole paper (proofs of prop\_main and main\_thm)`: Provide a formal verification of the algebraic core (e.g. src/proofs/TheoremOfSquare.lean for prop\_main(3) and the eq\_num reduction, and src/proofs/KernelPsi.lean encoding the height non-degeneracy step), or at minimum reproduce the verbatim statements of [M85 Ch.2 Thm 1.1] and [L83 Ch.6 Thm 5.4.2] inline so the deductions can be checked. Check: Re-review should confirm `Whole paper (proofs of prop\_main and main\_thm)` is corrected or justified.
+  \item [open] paper\_tex `corrections/2606.26983/paper.tex` at `Section 'The conjecture', Corollary cor\_main (and Introduction Theorem*)`: State explicitly that injectivity into N\_1(A) (not only N\_\{1,gen\}(A)) follows because the comparison map N\_\{1,gen\}(A) -> N\_1(A) factors the cycle classes; clarify the relation between [Z] in N\_1(A) and the generic numerical class used in main\_thm. Check: Re-review should confirm `Section 'The conjecture', Corollary cor\_main (and Introduction Theorem*)` is corrected or justified.
+  \item [open] bibliography at `Néron Models (Bosch, Lütkebohmert, Raynaud, Springer 1990)`: Add or discuss missing prior art `Néron Models (Bosch, Lütkebohmert, Raynaud, Springer 1990)`. This standard reference for smooth commutative group schemes over Dedekind schemes---the precise setting of the paper---is absent. It would normally be cited when establishing properties of smooth group schemes with connected fibres over a curve, and its omission leaves an implicit foundational gap. Check: Re-review should confirm the related-work discussion addresses this prior art.
+  \item [open] paper\_tex `corrections/2606.26983/paper.tex` at `Whole paper (proofs of prop\_main and main\_thm)`: Provide a formal verification of the algebraic core (e.g. src/proofs/TheoremOfSquare.lean for prop\_main(3) and the eq\_num reduction, and src/proofs/KernelPsi.lean encoding the height non-degeneracy step), or at minimum reproduce the verbatim statements of [M85 Ch.2 Thm 1.1] and [L83 Ch.6 Thm 5.4.2] inline so the deductions can be checked. Check: Re-review should confirm `Whole paper (proofs of prop\_main and main\_thm)` is corrected or justified.
+\end{itemize}
+
+\section*{Open Questions}
+\begin{itemize}[leftmargin=*]
+  \item Can the authors supply an explicit lemma---with a precise citation to Conrad [C06] or Lang [L83]---establishing that the canonical Néron-Tate height pairing for odd rigidified line bundles is non-degenerate on MW(A/C)/tors when the K/k-trace of A\_eta vanishes, and separately justify the equivalence between the no-k-abelian-subvariety hypothesis and K/k-trace triviality?
+  \item Does the comparison map N\_\{1,gen\}(A) -> N\_1(A) inject? If not, the passage from main\_thm(1) (homomorphism into N\_\{1,gen\}) to cor\_main (injectivity into N\_1) requires additional argument; can the authors clarify this relationship?
+  \item Why is C06 included in the bibliography if it is not cited in the text? If it is cited in a portion of the manuscript not captured in the review inputs, authors should verify its explicit appearance; if it is uncited, it should be removed or its role in the proof of main\_thm(2) should be made explicit.
+  \item Can the authors provide formal proofs (e.g., Lean/Coq statements) for at least prop\_main(3) and the kernel step in main\_thm(2), or reproduce verbatim the statements of [M85 Ch.2 Thm 1.1] and [L83 Ch.6 Thm 5.4.2] so that reviewers can verify the deductions without access to the source texts?
+  \item The paper generalizes KS25 from Jacobians over lines to arbitrary smooth commutative group schemes over curves; are there cases where the no-abelian-subvariety hypothesis fails and the kernel strictly contains the torsion, and does the example in the text illustrate this boundary case?
+\end{itemize}
+
+\section*{Per-Agent Reviews}
+\subsection*{citation (\texttt{sonnet[1m]})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "confidence": 0.82,\\
+  "entries": [\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": "2508.09819",\\
+        "authors": [\\
+          "Kollár, János",\\
+          "Saccà, Giulia"\\
+        ],\\
+        "doi": null,\\
+        "key": "KS25",\\
+        "raw": "author = Kollár, János and Saccà, Giulia, journal = arXiv preprints, note = Available at \textbackslash{}\textbackslash{}href\{https://arxiv.org/pdf/2508.09819\} arXiv:2508.09819, title = Sections of Jacobian fibrations over lines, year = 2025",\\
+        "title": "Sections of Jacobian fibrations over lines",\\
+        "url": "https://arxiv.org/pdf/2508.09819",\\
+        "venue": "arXiv preprints",\\
+        "year": 2025\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Central reference: the entire paper is organised around resolving KS25 Conjecture 7. KS25 supplies the motivating rigidity theorem (Proposition 1), the conjecture being settled (Conjecture 7), and a proof strategy (§8) partially reused here. Multiple specific citations across all sections.",\\
+      "notes": "Preprint. The paper directly proves a modified version of KS25 Conjecture 7 and borrows the first part of the proof strategy from KS25 §8. Specific pointer to Proposition 1 and §8 indicates careful engagement.",\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": "2407.07877",\\
+        "authors": [\\
+          "Bogomolov, Fedor",\\
+          "Kamenova, Ljudmila",\\
+          "Verbitsky, Misha"\\
+        ],\\
+        "doi": null,\\
+        "key": "BFK25",\\
+        "raw": "author = Bogomolov, Fedor and Kamenova, Ljudmila and Verbitsky, Misha, journal = arXiv preprints, note = Available at \textbackslash{}\textbackslash{}href\{https://arxiv.org/pdf/2407.07877\} arXiv:2407.07877, title = Sections of Lagrangian fibrations on holomorphic symplectic manifolds, year = 2025",\\
+        "title": "Sections of Lagrangian fibrations on holomorphic symplectic manifolds",\\
+        "url": "https://arxiv.org/pdf/2407.07877",\\
+        "venue": "arXiv preprints",\\
+        "year": 2025\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited as the work that motivated KS25's rigidity result for Jacobian fibrations. Provides intellectual context for why the injectivity question was raised, but plays no direct role in the proofs of this note.",\\
+      "notes": "arXiv ID 2407.07877 indicates a July 2024 submission; listed year 2025 may reflect a revised version or publication date. Cited only once as motivation for KS25; not used in any proof.",\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "Conrad, Brian"\\
+        ],\\
+        "doi": null,\\
+        "key": "C06",\\
+        "raw": "AUTHOR = Conrad, Brian, TITLE = Chow's \$K/k\$-image and \$K/k\$-trace, and the Lang-Néron theorem, JOURNAL = Enseign. Math. (2), FJOURNAL = L'Enseignement Mathématique. Revue Internationale. 2e Série, VOLUME = 52, YEAR = 2006, NUMBER = 1-2, PAGES = 37--108, ISSN = 0013-8584, MRCLASS = 14K05 (11G10 11G50), MRNUMBER = 2255529, MRREVIEWER = Alessandra Bertapelle",\\
+        "title": "Chow's K/k-image and K/k-trace, and the Lang-Néron theorem",\\
+        "url": null,\\
+        "venue": "Enseign. Math. (2)",\\
+        "year": 2006\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Conrad's modern account of the Lang-Néron theorem and K/k-trace is directly relevant to the kernel computation in Theorem 2, yet no [@C06] call appears in any rendered citation context. The same results are cited from L83 instead.",\\
+      "notes": "C06 is present in the bibliography but has no citation context in the rendered paper text. The paper invokes the vanishing of the K/k-trace (in the proof of the main theorem) and the Lang-Néron theorem, both of which C06 treats comprehensively, so topical relevance is clear. It may be cited in an omitted portion, or could be an inadvertent bibliography inclusion.",\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "Lang, Serge"\\
+        ],\\
+        "doi": "10.1007/978-1-4757-1810-2",\\
+        "key": "L83",\\
+        "raw": "AUTHOR = Lang, Serge, TITLE = Fundamentals of Diophantine geometry, PUBLISHER = Springer-Verlag, New York, YEAR = 1983, PAGES = xviii+370, ISBN = 0-387-90837-4, MRCLASS = 11-02 (11Dxx 11Gxx 14G25), MRNUMBER = 715605, MRREVIEWER = Gerd Faltings, DOI = 10.1007/978-1-4757-1810-2, URL = https://doi-org.ezproxy.math.cnrs.fr/10.1007/978-1-4757-1810-2",\\
+        "title": "Fundamentals of Diophantine geometry",\\
+        "url": "https://doi-org.ezproxy.math.cnrs.fr/10.1007/978-1-4757-1810-2",\\
+        "venue": "Springer-Verlag, New York",\\
+        "year": 1983\\
+      \},\\
+      "exists": null,\\
+      "explanation": "The most frequently cited reference. Provides the characterisation of Pic° via the [-1]-involution (Ch. 5, Prop. 2.3), the theory of heights underlying the Lang-Néron theorem (Ch. 6), the Néron-Tate height interpretation of intersection numbers (Ch. 12, Prop. 3.5), and the injectivity of the height pairing (Ch. 6, Thm. 5.4.2) used to identify the kernel of \ensuremath{\psi}.",\\
+      "notes": "The URL uses a CNRS institutional proxy (doi-org.ezproxy.math.cnrs.fr) that will not resolve for external readers; the DOI alone is sufficient. Multiple distinct chapters are cited with precise theorem references, indicating genuine use.",\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "Moret-Bailly, Laurent"\\
+        ],\\
+        "doi": null,\\
+        "key": "M85",\\
+        "raw": "AUTHOR = Moret-Bailly, Laurent, TITLE = Pinceaux de variétés abéliennes, JOURNAL = Astérisque, FJOURNAL = Astérisque, NUMBER = 129, YEAR = 1985, PAGES = 266, ISSN = 0303-1179,2492-5926, MRCLASS = 14K05 (11G10 14K10), MRNUMBER = 797982, MRREVIEWER = Ching-li Chai",\\
+        "title": "Pinceaux de variétés abéliennes",\\
+        "url": null,\\
+        "venue": "Astérisque 129",\\
+        "year": 1985\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Core reference for the cubist line bundle theory on families of abelian varieties. Cited for the definition of cubist structures (Ch. I, Def. 2.4.5) and, crucially, for the equivalence-of-categories result (Ch. 2, Thm. 1.1) that guarantees unique cubist extensions when the base is a curve with connected fibres---the key step in proving Proposition 1.",\\
+      "notes": null,\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "Mumford, David"\\
+        ],\\
+        "doi": null,\\
+        "key": "M70",\\
+        "raw": "AUTHOR = Mumford, David, TITLE = Abelian varieties, SERIES = Tata Institute of Fundamental Research Studies in Mathematics, VOLUME = 5, PUBLISHER = Tata Institute of Fundamental Research, Bombay; by Oxford University Press, London, YEAR = 1970, PAGES = viii+242, MRCLASS = 14.51, MRNUMBER = 282985, MRREVIEWER = James Milne",\\
+        "title": "Abelian varieties",\\
+        "url": null,\\
+        "venue": "Tata Institute of Fundamental Research Studies in Mathematics, vol. 5",\\
+        "year": 1970\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited for the Theorem of the Cube (Corollary 2, page 58), the foundational result explaining why line bundles on abelian varieties carry a cubist structure and why the natural map \ensuremath{\phi} is quadratic rather than linear. The page reference is precise and appropriate.",\\
+      "notes": null,\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "Breen, Lawrence"\\
+        ],\\
+        "doi": null,\\
+        "key": "B83",\\
+        "raw": "AUTHOR = Breen, Lawrence, TITLE = Fonctions thêta et théorème du cube, SERIES = Lecture Notes in Mathematics, VOLUME = 980, PUBLISHER = Springer-Verlag, Berlin, YEAR = 1983, PAGES = xiii+115, ISBN = 3-540-12002-5, MRCLASS = 14K25, MRNUMBER = 823233, MRREVIEWER = N. Yui",\\
+        "title": "Fonctions thêta et théorème du cube",\\
+        "url": null,\\
+        "venue": "Lecture Notes in Mathematics 980, Springer-Verlag",\\
+        "year": 1983\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited as the primary source establishing the existence of cubist extensions of line bundles from the generic fibre to a family over a curve with connected fibres. Paired with M85 as the theoretical foundation for Section 1.",\\
+      "notes": null,\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [\\
+          "Shioda, Tetsuji"\\
+        ],\\
+        "doi": "10.1017/CBO9780511721540.015",\\
+        "key": "S99",\\
+        "raw": "AUTHOR = Shioda, Tetsuji, TITLE = Mordell-Weil lattices for higher genus fibration over a curve, BOOKTITLE = New trends in algebraic geometry (Warwick, 1996), SERIES = London Math. Soc. Lecture Note Ser., VOLUME = 264, PAGES = 359--373, PUBLISHER = Cambridge Univ. Press, Cambridge, YEAR = 1999, ISBN = 0-521-64659-6, MRCLASS = 11G10 (11G30 14H40), MRNUMBER = 1714831, MRREVIEWER = Takashi Ichikawa, DOI = 10.1017/CBO9780511721540.015, URL = https://doi.org/10.1017/CBO9780511721540.015",\\
+        "title": "Mordell-Weil lattices for higher genus fibration over a curve",\\
+        "url": "https://doi.org/10.1017/CBO9780511721540.015",\\
+        "venue": "London Math. Soc. Lecture Note Ser. 264, Cambridge Univ. Press",\\
+        "year": 1999\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited for Theorem 3, which provides the torsion-freeness of MW(J\_L/L) and the triviality of the K/C-trace in the setting of the worked example. Used to justify a step in the example showing the natural map is not a group homomorphism. Well-targeted single citation.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \}\\
+  ],\\
+  "missing\_references": [\\
+    \{\\
+      "reason": "The paper works with smooth commutative group schemes over curves and invokes properties---connected fibres, Mordell-Weil structure---that are systematically developed in BLR. While L83 and C06 cover the Lang-Néron theorem, BLR is the standard reference for the scheme-theoretic properties of Néron models and their smooth locus used implicitly throughout.",\\
+      "title": "Néron Models (Bosch, Lütkebohmert, Raynaud, 1990)"\\
+    \}\\
+  ],\\
+  "summary": "The eight-entry bibliography is compact and well-matched to a focused research note. The five classical references (L83, M85, M70, B83, S99) are cited with precise chapter and theorem pointers, indicating genuine engagement rather than pro-forma inclusion. KS25 is appropriately central, appearing throughout with specific section references. One anomaly stands out: C06 (Conrad's comprehensive treatment of K/k-trace and Lang-Néron) is present in the bibliography but has no citation context in the rendered text, despite the paper's direct invocation of K/k-trace vanishing; authors should verify whether this entry is cited in an omitted portion or can be removed. The proxy-based URL for L83 will fail for non-CNRS readers but the DOI is present and sufficient."\\
+\}\\
+\end{quote}
+
+\subsection*{meta\_reviewer (\texttt{sonnet[1m]})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "confidence": 0.78,\\
+  "questions": [\\
+    "Can the authors supply an explicit lemma---with a precise citation to Conrad [C06] or Lang [L83]---establishing that the canonical Néron-Tate height pairing for odd rigidified line bundles is non-degenerate on MW(A/C)/tors when the K/k-trace of A\_eta vanishes, and separately justify the equivalence between the no-k-abelian-subvariety hypothesis and K/k-trace triviality?",\\
+    "Does the comparison map N\_\{1,gen\}(A) -> N\_1(A) inject? If not, the passage from main\_thm(1) (homomorphism into N\_\{1,gen\}) to cor\_main (injectivity into N\_1) requires additional argument; can the authors clarify this relationship?",\\
+    "Why is C06 included in the bibliography if it is not cited in the text? If it is cited in a portion of the manuscript not captured in the review inputs, authors should verify its explicit appearance; if it is uncited, it should be removed or its role in the proof of main\_thm(2) should be made explicit.",\\
+    "Can the authors provide formal proofs (e.g., Lean/Coq statements) for at least prop\_main(3) and the kernel step in main\_thm(2), or reproduce verbatim the statements of [M85 Ch.2 Thm 1.1] and [L83 Ch.6 Thm 5.4.2] so that reviewers can verify the deductions without access to the source texts?",\\
+    "The paper generalizes KS25 from Jacobians over lines to arbitrary smooth commutative group schemes over curves; are there cases where the no-abelian-subvariety hypothesis fails and the kernel strictly contains the torsion, and does the example in the text illustrate this boundary case?"\\
+  ],\\
+  "recommendation": "major\_revision",\\
+  "revision\_targets": [\\
+    \{\\
+      "evidence": "The kernel argument identifies (L.Z)=h\_L(Z\_eta) for rigidified L and invokes [L83 Ch.6, Thm 5.4.2] to conclude that vanishing of all such heights forces Z torsion, using that the K/k-trace vanishes under the no-abelian-subvariety hypothesis. This is the load-bearing step of the whole paper and rests on (a) the non-degeneracy of the Neron-Tate height pairing restricted to the family of odd rigidified L, and (b) the trace-vanishing equivalence. Neither the cited reference's exact statement nor the claim that the relevant L's separate non-torsion points is verifiable from the provided text; the inference 'all (L.Z)=0 => Z torsion' needs that odd rigidified line bundles induce a non-degenerate height, which is asserted, not proven here. The geometric hypothesis 'no abelian subvarieties defined over k' is used as a proxy for trace-vanishing without full justification.",\\
+      "id": "weakness-1",\\
+      "locator": "Section 'The conjecture', Theorem main\_thm, part 2",\\
+      "required\_update": "Add an explicit lemma that the canonical heights h\_L for L\_eta in Pic\^{}0(A\_eta) (equivalently the symmetric/antisymmetric height pairing) are non-degenerate on MW(A/C)/tors when the K/k-trace is trivial, with a precise citation, and justify the equivalence 'A\_eta has no k-defined abelian subvarieties <=> K/k-trace of A\_eta is trivial' (cf. Conrad [C06]).",\\
+      "source\_path": "corrections/2606.26983/paper.tex",\\
+      "source\_role": "technical\_correctness",\\
+      "status": "open",\\
+      "target\_kind": "paper\_tex",\\
+      "verification\_check": "Re-review should confirm `Section 'The conjecture', Theorem main\_thm, part 2` is corrected or justified.",\\
+      "weakness\_index": 0\\
+    \},\\
+    \{\\
+      "evidence": "Per the proof-as-code axiom for math.* fields: the headline injectivity result is gated on cited classical theorems (M85 Ch.2 Thm 1.1, L83 Ch.6 Thm 5.4.2) whose precise statements are not reproduced, and the formal-algebraic core (theorem-of-the-square identity, generic numerical equivalence homomorphism) could be encoded as an executable formal proof but is not shipped. Absence of such an artifact is a verification gap in this field.",\\
+      "id": "weakness-2",\\
+      "locator": "Whole paper (proofs of prop\_main and main\_thm)",\\
+      "required\_update": "Provide a formal verification of the algebraic core (e.g. src/proofs/TheoremOfSquare.lean for prop\_main(3) and the eq\_num reduction, and src/proofs/KernelPsi.lean encoding the height non-degeneracy step), or at minimum reproduce the verbatim statements of [M85 Ch.2 Thm 1.1] and [L83 Ch.6 Thm 5.4.2] inline so the deductions can be checked.",\\
+      "source\_path": "corrections/2606.26983/paper.tex",\\
+      "source\_role": "technical\_correctness",\\
+      "status": "open",\\
+      "target\_kind": "paper\_tex",\\
+      "verification\_check": "Re-review should confirm `Whole paper (proofs of prop\_main and main\_thm)` is corrected or justified.",\\
+      "weakness\_index": 1\\
+    \},\\
+    \{\\
+      "evidence": "The corollary follows formally from main\_thm: main\_thm gives [Z\_1]=[Z\_2] in N\_1(A) iff Z\_1 ominus Z\_2 in MW(A/C)\_tors, so injectivity modulo torsion is immediate. The deduction is correct GIVEN main\_thm, but its soundness rests entirely on the two parts of main\_thm (the homomorphism property into N\_\{1,gen\} and the kernel computation), which in turn rely on cited external results not reproduced here.",\\
+      "id": "weakness-3",\\
+      "locator": "Section 'The conjecture', Corollary cor\_main (and Introduction Theorem*)",\\
+      "required\_update": "State explicitly that injectivity into N\_1(A) (not only N\_\{1,gen\}(A)) follows because the comparison map N\_\{1,gen\}(A) -> N\_1(A) factors the cycle classes; clarify the relation between [Z] in N\_1(A) and the generic numerical class used in main\_thm.",\\
+      "source\_path": "corrections/2606.26983/paper.tex",\\
+      "source\_role": "technical\_correctness",\\
+      "status": "open",\\
+      "target\_kind": "paper\_tex",\\
+      "verification\_check": "Re-review should confirm `Section 'The conjecture', Corollary cor\_main (and Introduction Theorem*)` is corrected or justified.",\\
+      "weakness\_index": 2\\
+    \},\\
+    \{\\
+      "evidence": "This standard reference for smooth commutative group schemes over Dedekind schemes---the precise setting of the paper---is absent. It would normally be cited when establishing properties of smooth group schemes with connected fibres over a curve, and its omission leaves an implicit foundational gap.",\\
+      "id": "weakness-4",\\
+      "locator": "Néron Models (Bosch, Lütkebohmert, Raynaud, Springer 1990)",\\
+      "required\_update": "Add or discuss missing prior art `Néron Models (Bosch, Lütkebohmert, Raynaud, Springer 1990)`. This standard reference for smooth commutative group schemes over Dedekind schemes---the precise setting of the paper---is absent. It would normally be cited when establishing properties of smooth group schemes with connected fibres over a curve, and its omission leaves an implicit foundational gap.",\\
+      "source\_path": null,\\
+      "source\_role": "novelty",\\
+      "status": "open",\\
+      "target\_kind": "bibliography",\\
+      "verification\_check": "Re-review should confirm the related-work discussion addresses this prior art.",\\
+      "weakness\_index": 3\\
+    \},\\
+    \{\\
+      "evidence": "Per the proof-as-code axiom for math.* fields: the headline injectivity result is gated on cited classical theorems (M85 Ch.2 Thm 1.1, L83 Ch.6 Thm 5.4.2) whose precise statements are not reproduced, and the formal-algebraic core (theorem-of-the-square identity, generic numerical equivalence homomorphism) could be encoded as an executable formal proof but is not shipped. Absence of such an artifact is a verification gap in this field.",\\
+      "id": "weakness-5",\\
+      "locator": "Whole paper (proofs of prop\_main and main\_thm)",\\
+      "required\_update": "Provide a formal verification of the algebraic core (e.g. src/proofs/TheoremOfSquare.lean for prop\_main(3) and the eq\_num reduction, and src/proofs/KernelPsi.lean encoding the height non-degeneracy step), or at minimum reproduce the verbatim statements of [M85 Ch.2 Thm 1.1] and [L83 Ch.6 Thm 5.4.2] inline so the deductions can be checked.",\\
+      "source\_path": "corrections/2606.26983/paper.tex",\\
+      "source\_role": "technical\_correctness",\\
+      "status": "open",\\
+      "target\_kind": "paper\_tex",\\
+      "verification\_check": "Re-review should confirm `Whole paper (proofs of prop\_main and main\_thm)` is corrected or justified.",\\
+      "weakness\_index": 4\\
+    \}\\
+  ],\\
+  "strengths": [\\
+    "The paper settles KS25 Conjecture 7 in full generality over any field and for any smooth commutative group scheme with connected fibres, a genuine extension beyond the Jacobian-over-line setting of the original conjecture.",\\
+    "The introduction of generic numerical equivalence is a technically clean fix to the inherent quadratic obstruction, and the homomorphism property of psi into N\_\{1,gen\}(A) is established through a logically coherent chain from prop\_main(3) via projection-formula and bilinearity arguments.",\\
+    "The five classical references are cited with precise chapter and theorem pointers (e.g. L83 Ch.12 Prop 3.5, M85 Ch.2 Thm 1.1), indicating genuine engagement with the source material rather than pro-forma citation.",\\
+    "The worked example demonstrating that the unmodified map is not a group homomorphism (via the 4(L.Z) vs 2(L.Z) computation) is internally consistent and motivates the generic numerical equivalence construction effectively."\\
+  ],\\
+  "summary": "This short research note proves a modified version of Conjecture 7 from Kollár--Saccà (KS25), establishing injectivity modulo torsion of the map from the Mordell-Weil group of a smooth commutative group scheme with connected fibres over a curve into the group of numerical 1-cycles. The paper introduces the notion of generic numerical equivalence and shows that the natural Mordell-Weil-to-cycles map is a group homomorphism with respect to this weakened equivalence, with kernel equal to the torsion subgroup under a no-abelian-subvariety hypothesis. The five specialists broadly agree on the paper's scope and contribution but differ on depth of concern. Technical correctness assessed the paper as mostly sound (confidence 0.58), identifying one major gap (claim C7): the critical step that all (L.Z)=0 implies torsion relies on non-degeneracy of the Néron-Tate height pairing for odd rigidified line bundles, a claim asserted but not independently justified in-text, and the equivalence between the geometric hypothesis and K/k-trace vanishing is not made explicit. A second major gap (C8) concerns the absence of any machine-checkable proof artifact in a code-amenable field (math.AG): the headline injectivity result and the theorem-of-the-square identity rely on classical cited results (Moret-Bailly Ch.2 Thm 1.1, Lang Ch.6 Thm 5.4.2) without reproducing their statements or supplying formal verification. The reproducibility specialist concurs, rating reproducibility at 0.30 and flagging a critical concern about the missing formalization of prop\_main, main\_thm, and cor\_main. Per the recommendation gate: math.AG is in the code-amenable set, and both technical correctness and reproducibility flagged missing proof-as-code artifacts at major/critical severity; accordingly the default is major\_revision. The novelty score (0.5, 'incremental') is consistent with a focused conjecture-resolution note; the citation review found the bibliography compact and appropriately targeted, with one anomaly (C06 present but uncited in text) and one missing standard reference (Néron Models, Bosch--Lütkebohmert--Raynaud). No specialist reported a critical logical error that would block the headline claim outright, so rejection is not warranted; the mathematical approach appears sound at a structural level and the generalization from KS25's special case is non-trivial.",\\
+  "weaknesses": [\\
+    "The kernel computation in main\_thm(2) asserts non-degeneracy of the Néron-Tate height pairing for odd rigidified line bundles without proving or precisely citing it, and the equivalence 'A\_eta has no k-defined abelian subvarieties iff K/k-trace is trivial' is invoked but not justified (cf. C7, major severity).",\\
+    "No machine-checkable proof artifact is provided for the headline injectivity result; the algebraic core---the theorem-of-the-square identity and the eq\_num reduction---could be encoded in a formal proof system but is absent, constituting a verification gap for a math.AG submission (cf. C8, major severity; reproducibility score 0.30).",\\
+    "The relation between the generic numerical class [Z] in N\_\{1,gen\}(A) and the standard numerical class [Z] in N\_1(A) used in the corollary is not made explicit; the step that injectivity into N\_\{1,gen\}(A) implies injectivity into N\_1(A) requires that the comparison map N\_\{1,gen\}(A) -> N\_1(A) is injective, which is not stated or proved (cf. C1).",\\
+    "The standard reference Néron Models (Bosch--Lütkebohmert--Raynaud, 1990) is absent despite the paper working with smooth commutative group schemes over Dedekind schemes, leaving implicit foundational claims about Néron models and smooth group scheme properties without standard backing.",\\
+    "C06 (Conrad's comprehensive account of K/k-trace and Lang--Néron) appears in the bibliography but has no citation context in the rendered text, even though K/k-trace vanishing is the load-bearing step in main\_thm(2); this is either an uncited use or an erroneous bibliography entry."\\
+  ]\\
+\}\\
+\end{quote}
+
+\subsection*{novelty (\texttt{sonnet[1m]})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "confidence": 0.6,\\
+  "missing\_prior\_art": [\\
+    \{\\
+      "reason": "This standard reference for smooth commutative group schemes over Dedekind schemes---the precise setting of the paper---is absent. It would normally be cited when establishing properties of smooth group schemes with connected fibres over a curve, and its omission leaves an implicit foundational gap.",\\
+      "title": "Néron Models (Bosch, Lütkebohmert, Raynaud, Springer 1990)"\\
+    \},\\
+    \{\\
+      "reason": "Raynaud's work on the Picard functor for group schemes over curves underpins several properties of Pic(A)\_rig used implicitly; its absence makes it harder to verify that the rigidified Picard group behaves as claimed without tracing back through Moret-Bailly.",\\
+      "title": "Raynaud, 'Spécialisation du foncteur de Picard' (1970)"\\
+    \}\\
+  ],\\
+  "novelty\_score": 0.5,\\
+  "related\_work": [\\
+    \{\\
+      "citation\_key": "KS25",\\
+      "delta": "This paper directly proves Conjecture 7 of KS25 in its full generality over any field and for any smooth commutative group scheme with connected fibres (not just Jacobians over lines). The authors also adopt and extend the injectivity argument from KS25 §8, which covered only a special projective-surface setting over C.",\\
+      "relation": "prior\_art",\\
+      "title": "Sections of Jacobian fibrations over lines"\\
+    \},\\
+    \{\\
+      "citation\_key": "BFK25",\\
+      "delta": "BFK25 motivated KS25's rigidity result and hence this note; the present paper operates in the more general algebro-geometric setting of group schemes over curves and does not use BFK25's symplectic geometry methods.",\\
+      "relation": "prior\_art",\\
+      "title": "Sections of Lagrangian fibrations on holomorphic symplectic manifolds"\\
+    \},\\
+    \{\\
+      "citation\_key": "M85",\\
+      "delta": "The key result that the restriction functor CUB(A,G\_m) \ensuremath{\to} CUB(A\_\ensuremath{\eta},G\_m) is an equivalence of categories (Theorem 1.1, Ch. 2) is used as the foundation for Proposition 1 of the paper, which in turn underpins the group-homomorphism property of \ensuremath{\psi}.",\\
+      "relation": "builds\_on",\\
+      "title": "Pinceaux de variétés abéliennes"\\
+    \},\\
+    \{\\
+      "citation\_key": "B83",\\
+      "delta": "Breen's work on cubist G\_m-torsors provides the theoretical grounding for the notion of cubist invertible sheaves used throughout Section 1 and the proof of the main theorem.",\\
+      "relation": "builds\_on",\\
+      "title": "Fonctions thêta et théorème du cube"\\
+    \},\\
+    \{\\
+      "citation\_key": "L83",\\
+      "delta": "The identification (L \ensuremath{\cdot} Z) = h\_L(Z\_\ensuremath{\eta}) via the canonical Néron-Tate height (Ch. 12, Prop. 3.5) and the Lang-Néron theorem (Ch. 6, Thm. 5.4.2) are the two pillars used to identify ker \ensuremath{\psi} with the torsion subgroup.",\\
+      "relation": "builds\_on",\\
+      "title": "Fundamentals of Diophantine geometry"\\
+    \},\\
+    \{\\
+      "citation\_key": "M70",\\
+      "delta": "Mumford's Theorem of the Cube (Corollary 2, p. 58) guarantees that all line bundles on an abelian variety satisfy the cubist condition; this is the starting point for the extension results in Section 1.",\\
+      "relation": "builds\_on",\\
+      "title": "Abelian varieties"\\
+    \},\\
+    \{\\
+      "citation\_key": "S99",\\
+      "delta": "Cited for the torsion-freeness of MW(J\_L/L) in the motivating example from KS25; the Mordell-Weil lattice framework is not used in the main proof but contextualises the application.",\\
+      "relation": "orthogonal",\\
+      "title": "Mordell-Weil lattices for higher genus fibration over a curve"\\
+    \},\\
+    \{\\
+      "citation\_key": "C06",\\
+      "delta": "Conrad's detailed exposition of the Lang-Néron theorem and the K/k-trace provides the modern reference for the vanishing of the trace used in the kernel computation, complementing the older Lang reference.",\\
+      "relation": "builds\_on",\\
+      "title": "Chow's K/k-image and K/k-trace, and the Lang-Néron theorem"\\
+    \}\\
+  ],\\
+  "verdict": "incremental"\\
+\}\\
+\end{quote}
+
+\subsection*{reproducibility (\texttt{gpt-5.5})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "code\_availability": "unspecified",\\
+  "code\_url": null,\\
+  "concerns": [\\
+    \{\\
+      "area": "other",\\
+      "description": "No machine-checkable proof artifact is provided for the headline injectivity result, especially main theorem and corollary; a formalization such as Proofs.lean covering Proposition prop\_main, Theorem main\_thm, and Corollary cor\_main would close this gap.",\\
+      "severity": "critical"\\
+    \},\\
+    \{\\
+      "area": "other",\\
+      "description": "The argument relies on external results on cubist extensions and Neron-Tate heights without a reproducible dependency graph or formalized statements of the imported lemmas; a proof artifact should include explicit formal interfaces for the cited Moret-Bailly and Lang results.",\\
+      "severity": "major"\\
+    \},\\
+    \{\\
+      "area": "code",\\
+      "description": "No repository, versioned source archive, license, or commit is stated for any formal proof, computational check, or manuscript build artifact.",\\
+      "severity": "major"\\
+    \},\\
+    \{\\
+      "area": "data",\\
+      "description": "No empirical dataset is required for the paper's claims; reproducibility is primarily proof-based.",\\
+      "severity": "info"\\
+    \}\\
+  ],\\
+  "confidence": 0.82,\\
+  "data\_availability": "unspecified",\\
+  "data\_url": null,\\
+  "environment": null,\\
+  "reproducibility\_score": 0.3\\
+\}\\
+\end{quote}
+
+\subsection*{summary (\texttt{claude-haiku-4-5})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "audience": "Arithmetic geometers and algebraic geometers specializing in abelian varieties, Jacobian fibrations, and the arithmetic of group schemes; researchers interested in Mordell-Weil groups and cycle theory.",\\
+  "key\_contributions": [\\
+    "Proves injectivity modulo torsion of the map from Mordell-Weil group to numerical cycles for smooth commutative group schemes",\\
+    "Introduces generic numerical equivalence, a weakened notion of numerical equivalence defined via line bundles from the generic fiber",\\
+    "Establishes that the Mordell-Weil to numerical cycles map becomes a group homomorphism with respect to generic numerical equivalence",\\
+    "Shows the kernel of this homomorphism is precisely the torsion subgroup under a non-degeneracy hypothesis"\\
+  ],\\
+  "plain\_language\_summary": "This paper studies smooth commutative group schemes over curves (generalizations of abelian varieties) and proves a version of a recent conjecture. The main contribution is showing that a natural map from the Mordell-Weil group (the group of rational points) to the numerical equivalence class group of 1-cycles is injective when restricted to non-torsion points, under the condition that the generic fiber is an abelian variety with no abelian subvarieties over the base field.\textbackslash{}n\textbackslash{}nThe key technical innovation is the introduction of a weakened notion of numerical equivalence called \textbackslash{}"generic numerical equivalence,\textbackslash{}" which is defined using only line bundles that come from the generic fiber. With this definition, the authors show that the map from rational points to numerical cycles becomes a genuine group homomorphism, and its kernel consists precisely of the torsion points in the Mordell-Weil group. This resolves an obstruction in the original conjecture arising from the fact that the map is inherently quadratic rather than linear.\textbackslash{}n\textbackslash{}nThe proof combines extension results for cubist invertible sheaves (a technical structure from algebraic geometry) with classical height theory, particularly the Lang-Néron theorem which connects arithmetic heights to geometric intersection numbers.",\\
+  "tldr": "The paper proves a modified version of a conjecture by Kollár and Saccà about the injectivity of a certain map from rational points on group schemes to the numerical cycle group."\\
+\}\\
+\end{quote}
+
+\subsection*{technical\_correctness (\texttt{opus[1m]})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "claims": [\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "Main result (cor\_main): For C a geometrically connected smooth projective curve over k and A/C a smooth commutative group scheme with connected fibres whose generic fibre A\_eta is an abelian variety with no abelian subvarieties defined over k, the set map MW(A/C)/tors -> N\_1(A), Z |-> [Z]-[Z\_0], is injective.",\\
+      "evidence": "The corollary follows formally from main\_thm: main\_thm gives [Z\_1]=[Z\_2] in N\_1(A) iff Z\_1 ominus Z\_2 in MW(A/C)\_tors, so injectivity modulo torsion is immediate. The deduction is correct GIVEN main\_thm, but its soundness rests entirely on the two parts of main\_thm (the homomorphism property into N\_\{1,gen\} and the kernel computation), which in turn rely on cited external results not reproduced here.",\\
+      "id": "C1",\\
+      "location": "Section 'The conjecture', Corollary cor\_main (and Introduction Theorem*)",\\
+      "severity": "minor",\\
+      "suggested\_fix": "State explicitly that injectivity into N\_1(A) (not only N\_\{1,gen\}(A)) follows because the comparison map N\_\{1,gen\}(A) -> N\_1(A) factors the cycle classes; clarify the relation between [Z] in N\_1(A) and the generic numerical class used in main\_thm."\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "prop\_main(1): The restriction Pic(A)\_rig -> Pic(A\_eta) is a group isomorphism.",\\
+      "evidence": "The proof asserts that for C a curve and A/C with connected fibres the restriction functor CUB(A,G\_\{m,C\}) -> CUB(A\_eta,G\_\{m,eta\}) is an equivalence (cited as [M85 Ch.2, Thm 1.1]) and composes with the forgetful functor to rigidified torsors. The argument that the composite with forgetting cubist structure yields an isomorphism onto Pic(A)\_rig is sketched but the identification of essential image / faithfulness of the forgetful step is not verified from the provided text; it depends on the cited equivalence which cannot be checked here.",\\
+      "id": "C2",\\
+      "location": "Section 'Extensions of cubist invertible sheaves', Proposition prop\_main, item\_lift",\\
+      "severity": "minor",\\
+      "suggested\_fix": "Spell out why the forgetful functor CUB -> TORSRIG induces a bijection on isomorphism classes (every rigidified torsor on A\_eta acquires a unique cubist structure since A\_eta is abelian), and confirm surjectivity onto Pic(A)\_rig."\\
+    \},\\
+    \{\\
+      "assessment": "supported",\\
+      "claim": "prop\_main(2): For L in Pic(A)\_rig, L\_eta in Pic\^{}0(A\_eta) iff [-1]\^{}*L cong L\^{}vee (L is odd).",\\
+      "evidence": "Given the isomorphism of item\_lift, this transfers the standard abelian-variety characterization L\_eta in Pic\^{}0 iff [-1]\^{}*L\_eta cong L\_eta\^{}vee ([L83 Ch.5 Prop 2.3]) back to A via rigidity. The logical step is correct as stated.",\\
+      "id": "C3",\\
+      "location": "Section 'Extensions of cubist invertible sheaves', Proposition prop\_main, item\_sum",\\
+      "severity": "info",\\
+      "suggested\_fix": null\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "prop\_main(3): For L in Pic(A) with L\_eta in Pic\^{}0(A\_eta) and sections with Z\_3 = Z\_1 (+) Z\_2, tau\_1\^{}*L (x) tau\_2\^{}*L cong tau\_3\^{}*L (x) L.",\\
+      "evidence": "The proof derives the theorem-of-the-square identity f\^{}*L (x) g\^{}*L cong (f+g)\^{}*L (x) 0\^{}*L from the generic-fibre relation lifted via the cubist equivalence eq\_cub, then specializes f,g to translations. The derivation is standard and plausible, but the key extension step relies on the cited equivalence eq\_cub ([M85]); the passage from the A\_eta x A\_eta identity to A x A is asserted rather than fully justified in-text.",\\
+      "id": "C4",\\
+      "location": "Section 'Extensions of cubist invertible sheaves', Proposition prop\_main, item\_square",\\
+      "severity": "minor",\\
+      "suggested\_fix": "Add a sentence justifying that the isomorphism on A\_eta x A\_eta extends uniquely to A x A because A x A / C also satisfies the connected-fibre/curve-base hypotheses guaranteeing unique cubist extension."\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "Example: the natural map eq\_1 MW(J\_L/L) -> N\_1(J\_L) is not a group homomorphism, shown via 2[Z] != [[2]\_*Z]+[Z\_0] using [2]\^{}*L = L\^{}\{(x)4\}, (L.Z)=h\_L(Z\_eta)>0 and the projection formula giving (L.[2]\_*Z)=4(L.Z) while (L.2Z)=2(L.Z).",\\
+      "evidence": "The numerical computation is internally consistent: for an even rigidified L, [2]\^{}*L = L\^{}\{(x)4\} (since [n]\^{}*L = L\^{}\{(n\^{}2+n)/2\}(x)([-1]\^{}*L)\^{}\{(n\^{}2-n)/2\} = L\^{}\{(x)4\} for even L, n=2), and the height/projection-formula identities give the strict inequality 4(L.Z) != 2(L.Z) for (L.Z)>0. Positivity (L.Z)=h\_L(Z\_eta)>0 relies on Z non-torsion and the cited Neron-Tate height theory [L83 Ch.12]; this is plausible but not independently verifiable from the text.",\\
+      "id": "C5",\\
+      "location": "Section 'The conjecture', Example",\\
+      "severity": "minor",\\
+      "suggested\_fix": "State the genus/relative-ampleness assumptions ensuring h\_L is positive-definite on the non-torsion part, and cite the precise positivity statement for h\_L on MW(J\_L/L) modulo torsion."\\
+    \},\\
+    \{\\
+      "assessment": "supported",\\
+      "claim": "main\_thm(1): The map psi: MW(A/C) -> N\_\{1,gen\}(A), Z |-> [Z]-[Z\_0], is a group homomorphism.",\\
+      "evidence": "The proof reduces psi(Z\_1)+psi(Z\_2) equiv\_gen psi(Z\_3) to eq\_num (L.Z\_1)+(L.Z\_2)=(L.Z\_3)+(L.Z\_0) for all L with L\_eta in Pic\^{}0, then via the projection formula to (tau\_1\^{}*L (x) tau\_2\^{}*L (x) tau\_3\^{}*L\^{}vee (x) L\^{}vee . Z\_0)=0, which is exactly prop\_main(3). The chain is logically valid given prop\_main(3) and the definition of N\_\{1,gen\}.",\\
+      "id": "C6",\\
+      "location": "Section 'The conjecture', Theorem main\_thm, part 1",\\
+      "severity": "info",\\
+      "suggested\_fix": null\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "main\_thm(2): If A\_eta has no abelian subvarieties defined over k, then ker psi = MW(A/C)\_tors.",\\
+      "evidence": "The kernel argument identifies (L.Z)=h\_L(Z\_eta) for rigidified L and invokes [L83 Ch.6, Thm 5.4.2] to conclude that vanishing of all such heights forces Z torsion, using that the K/k-trace vanishes under the no-abelian-subvariety hypothesis. This is the load-bearing step of the whole paper and rests on (a) the non-degeneracy of the Neron-Tate height pairing restricted to the family of odd rigidified L, and (b) the trace-vanishing equivalence. Neither the cited reference's exact statement nor the claim that the relevant L's separate non-torsion points is verifiable from the provided text; the inference 'all (L.Z)=0 => Z torsion' needs that odd rigidified line bundles induce a non-degenerate height, which is asserted, not proven here. The geometric hypothesis 'no abelian subvarieties defined over k' is used as a proxy for trace-vanishing without full justification.",\\
+      "id": "C7",\\
+      "location": "Section 'The conjecture', Theorem main\_thm, part 2",\\
+      "severity": "major",\\
+      "suggested\_fix": "Add an explicit lemma that the canonical heights h\_L for L\_eta in Pic\^{}0(A\_eta) (equivalently the symmetric/antisymmetric height pairing) are non-degenerate on MW(A/C)/tors when the K/k-trace is trivial, with a precise citation, and justify the equivalence 'A\_eta has no k-defined abelian subvarieties <=> K/k-trace of A\_eta is trivial' (cf. Conrad [C06])."\\
+    \},\\
+    \{\\
+      "assessment": "unsupported",\\
+      "claim": "Reliance on external/cited theorems for every load-bearing step (cubist extension equivalence [M85], height non-degeneracy and trace [L83 Ch.6/Ch.12], Theorem of the Cube [M70]) with no machine-checkable or self-contained verification artifact in a code-amenable field (math.AG).",\\
+      "evidence": "Per the proof-as-code axiom for math.* fields: the headline injectivity result is gated on cited classical theorems (M85 Ch.2 Thm 1.1, L83 Ch.6 Thm 5.4.2) whose precise statements are not reproduced, and the formal-algebraic core (theorem-of-the-square identity, generic numerical equivalence homomorphism) could be encoded as an executable formal proof but is not shipped. Absence of such an artifact is a verification gap in this field.",\\
+      "id": "C8",\\
+      "location": "Whole paper (proofs of prop\_main and main\_thm)",\\
+      "severity": "major",\\
+      "suggested\_fix": "Provide a formal verification of the algebraic core (e.g. src/proofs/TheoremOfSquare.lean for prop\_main(3) and the eq\_num reduction, and src/proofs/KernelPsi.lean encoding the height non-degeneracy step), or at minimum reproduce the verbatim statements of [M85 Ch.2 Thm 1.1] and [L83 Ch.6 Thm 5.4.2] inline so the deductions can be checked."\\
+    \}\\
+  ],\\
+  "confidence": 0.58,\\
+  "overall\_correctness": "mostly\_sound"\\
+\}\\
+\end{quote}
+
+\section*{Corrections}
+% corrections rendered from corrections table; empty on first publish
+No corrections have been recorded.
+
+\section*{Bibliography}
+\begin{enumerate}[leftmargin=*]
+  \item KS25: author = Kollár, János and Saccà, Giulia, journal = arXiv preprints, note = Available at \textbackslash{}hrefhttps://arxiv.org/pdf/2508.09819 arXiv:2508.09819, title = Sections of Jacobian fibrations over lines, year = 2025 \href{https://arxiv.org/abs/2508.09819}{arXiv:2508.09819}
+  \item BFK25: author = Bogomolov, Fedor and Kamenova, Ljudmila and Verbitsky, Misha, journal = arXiv preprints, note = Available at \textbackslash{}hrefhttps://arxiv.org/pdf/2407.07877 arXiv:2407.07877, title = Sections of Lagrangian fibrations on holomorphic symplectic manifolds, year = 2025 \href{https://arxiv.org/abs/2407.07877}{arXiv:2407.07877}
+  \item C06: AUTHOR = Conrad, Brian, TITLE = Chow's \$K/k\$-image and \$K/k\$-trace, and the Lang-N\textbackslash{}'eron theorem, JOURNAL = Enseign. Math. (2), FJOURNAL = L'Enseignement Math\textbackslash{}'ematique. Revue Internationale. 2e S\textbackslash{}'erie, VOLUME = 52, YEAR = 2006, NUMBER = 1-2, PAGES = 37--108, ISSN = 0013-8584, MRCLASS = 14K05 (11G10 11G50), MRNUMBER = 2255529, MRREVIEWER = Alessandra\textbackslash{} Bertapelle,
+  \item L83: AUTHOR = Lang, Serge, TITLE = Fundamentals of Diophantine geometry, PUBLISHER = Springer-Verlag, New York, YEAR = 1983, PAGES = xviii+370, ISBN = 0-387-90837-4, MRCLASS = 11-02 (11Dxx 11Gxx 14G25), MRNUMBER = 715605, MRREVIEWER = Gerd\textbackslash{} Faltings, DOI = 10.1007/978-1-4757-1810-2, URL = https://doi-org.ezproxy.math.cnrs.fr/10.1007/978-1-4757-1810-2, \href{https://doi.org/10.1007/978-1-4757-1810-2}{doi:10.1007/978-1-4757-1810-2}
+  \item M85: AUTHOR = Moret-Bailly, Laurent, TITLE = Pinceaux de vari\textbackslash{}'et\textbackslash{}'es ab\textbackslash{}'eliennes, JOURNAL = Ast\textbackslash{}'erisque, FJOURNAL = Ast\textbackslash{}'erisque, NUMBER = 129, YEAR = 1985, PAGES = 266, ISSN = 0303-1179,2492-5926, MRCLASS = 14K05 (11G10 14K10), MRNUMBER = 797982, MRREVIEWER = Ching-li\textbackslash{} Chai,
+  \item M70: AUTHOR = Mumford, David, TITLE = Abelian varieties, SERIES = Tata Institute of Fundamental Research Studies in Mathematics, VOLUME = 5, PUBLISHER = Tata Institute of Fundamental Research, Bombay; by Oxford University Press, London, YEAR = 1970, PAGES = viii+242, MRCLASS = 14.51, MRNUMBER = 282985, MRREVIEWER = James\textbackslash{} Milne,
+  \item B83: AUTHOR = Breen, Lawrence, TITLE = Fonctions th\textbackslash{}\^{}eta et th\textbackslash{}'eor\textbackslash{}`eme du cube, SERIES = Lecture Notes in Mathematics, VOLUME = 980, PUBLISHER = Springer-Verlag, Berlin, YEAR = 1983, PAGES = xiii+115, ISBN = 3-540-12002-5, MRCLASS = 14K25, MRNUMBER = 823233, MRREVIEWER = N.\textbackslash{} Yui,
+  \item S99: AUTHOR = Shioda, Tetsuji, TITLE = Mordell-Weil lattices for higher genus fibration over a curve, BOOKTITLE = New trends in algebraic geometry (Warwick, 1996), SERIES = London Math. Soc. Lecture Note Ser., VOLUME = 264, PAGES = 359--373, PUBLISHER = Cambridge Univ. Press, Cambridge, YEAR = 1999, ISBN = 0-521-64659-6, MRCLASS = 11G10 (11G30 14H40), MRNUMBER = 1714831, MRREVIEWER = Takashi\textbackslash{} Ichikawa, DOI = 10.1017/CBO9780511721540.015, URL = https://doi.org/10.1017/CBO9780511721540.015, \href{https://doi.org/10.1017/CBO9780511721540.015}{doi:10.1017/CBO9780511721540.015}
+\end{enumerate}
+
+% \bibliographystyle{plain}
+% \bibliography{references}
+\end{document}

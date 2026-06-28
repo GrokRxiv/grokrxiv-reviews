@@ -1,0 +1,70 @@
+{
+  "entries": [
+    {
+      "claim_status": "failed",
+      "compile": "review_loop/lean/targets/item_lift/check/compile.json",
+      "compile_status": "lean_compile_error",
+      "failure_reason": "status=lean_compile_error | command_status=fail | exit_code=1 | stderr=error: build failed | stdout=✖ [8481/8481] Building GrokRxiv.Proofs (4.3s)\ntrace: .> LEAN_PATH=/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/targets/item_lift/.lake/packages/Cli/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/targets/item_lift/.lake/packages/batteries/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/targets/item_lift/.lake/packages/Qq/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/targets/item_lift/.lake/packages/aesop/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop…",
+      "faithfulness": "review_loop/lean/targets/item_lift/faithfulness/faithfulness.json",
+      "faithfulness_status": "skipped",
+      "faithfulness_verdict": "unknown",
+      "library_feedback": {
+        "reason": "parallel target execution keeps the checked paper-local library immutable during target jobs",
+        "status": "deferred_parallel_batch"
+      },
+      "library_feedback_candidate": true,
+      "parallel_target": true,
+      "proofs_lean": "review_loop/lean/targets/item_lift/GrokRxiv/Proofs.lean",
+      "source_claim_id": "item_lift",
+      "source_faithfulness_feedback": null,
+      "source_packet": "review_loop/lean/targets/item_lift/packet.json",
+      "status": "lean_compile_error",
+      "target_fix_status": "pass"
+    },
+    {
+      "claim_status": "failed",
+      "compile": "review_loop/lean/targets/thm_KS/check/compile.json",
+      "compile_status": "lean_compile_error",
+      "failure_reason": "status=lean_compile_error | command_status=fail | exit_code=1 | stderr=error: build failed | stdout=✖ [8481/8481] Building GrokRxiv.Proofs (12s)\ntrace: .> LEAN_PATH=/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/targets/thm_KS/.lake/packages/Cli/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/targets/thm_KS/.lake/packages/batteries/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/targets/thm_KS/.lake/packages/Qq/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/targets/thm_KS/.lake/packages/aesop/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/targets…",
+      "faithfulness": "review_loop/lean/targets/thm_KS/faithfulness/faithfulness.json",
+      "faithfulness_status": "skipped",
+      "faithfulness_verdict": "unknown",
+      "library_feedback": {
+        "reason": "parallel target execution keeps the checked paper-local library immutable during target jobs",
+        "status": "deferred_parallel_batch"
+      },
+      "library_feedback_candidate": true,
+      "parallel_target": true,
+      "proofs_lean": "review_loop/lean/targets/thm_KS/GrokRxiv/Proofs.lean",
+      "source_claim_id": "thm_KS",
+      "source_faithfulness_feedback": null,
+      "source_packet": "review_loop/lean/targets/thm_KS/packet.json",
+      "status": "lean_compile_error",
+      "target_fix_status": "pass"
+    },
+    {
+      "claim_status": "blocked",
+      "compile": "review_loop/lean/targets/main_thm/check/compile.json",
+      "compile_status": "pass",
+      "failure_reason": "status=faithfulness_failed | faithfulness_verdict=unfaithful | faithfulness_status=completed | issues=[{\"message\":\"The Lean theorem assumes mainThmHom S and mainThmKernel S, which are precisely the two substantive conclusions of the paper theorem. This makes the statement a conditional reassembly of the theorem rather than a proof of the paper's unconditional claim from the setup hypotheses.\",\"severity\":\"critical\"},{\"message\":\"Because mainThmHom and mainThmKernel are opaque Props, the statement does not expose or verify the actual homomorphism and kernel assertions except by assuming them.\",\"severity\":\"warning\"}]",
+      "faithfulness": "review_loop/lean/targets/main_thm/faithfulness/faithfulness.json",
+      "faithfulness_status": "completed",
+      "faithfulness_verdict": "unfaithful",
+      "library_feedback": {
+        "reason": "parallel target execution keeps the checked paper-local library immutable during target jobs",
+        "status": "deferred_parallel_batch"
+      },
+      "library_feedback_candidate": true,
+      "parallel_target": true,
+      "proofs_lean": "review_loop/lean/targets/main_thm/GrokRxiv/Proofs.lean",
+      "source_claim_id": "main_thm",
+      "source_faithfulness_feedback": null,
+      "source_packet": "review_loop/lean/targets/main_thm/packet.json",
+      "status": "faithfulness_failed",
+      "target_fix_status": null
+    }
+  ],
+  "schema_version": "1.0.0",
+  "source": "theorem_inventory_direct",
+  "status": "fail"
+}
