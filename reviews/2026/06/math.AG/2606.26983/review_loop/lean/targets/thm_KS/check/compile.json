@@ -1,0 +1,26 @@
+{
+  "claim_id": "thm_KS",
+  "code_path": "review_loop/lean/targets/thm_KS/check/GrokRxiv/Proofs.lean",
+  "compile": {
+    "command": [
+      "lake",
+      "build",
+      "GrokRxiv.Proofs"
+    ],
+    "duration_ms": 14219,
+    "exit_code": 1,
+    "status": "fail",
+    "stderr": "error: build failed\n",
+    "stdout": "✖ [8481/8481] Building GrokRxiv.Proofs (12s)\ntrace: .> LEAN_PATH=/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/targets/thm_KS/.lake/packages/Cli/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/targets/thm_KS/.lake/packages/batteries/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/targets/thm_KS/.lake/packages/Qq/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/targets/thm_KS/.lake/packages/aesop/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/targets/thm_KS/.lake/packages/proofwidgets/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/targets/thm_KS/.lake/packages/importGraph/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/targets/thm_KS/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/targets/thm_KS/.lake/packages/plausible/.lake/build/lib/lean:/Users/mlong\n...[truncated 844 chars]...\n.olean -i /Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/targets/thm_KS/.lake/build/lib/lean/GrokRxiv/Proofs.ilean -c /Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/targets/thm_KS/.lake/build/ir/GrokRxiv/Proofs.c --setup /Users/mlong/Documents/Development/grokrxiv/agenthero/apps/grokrxiv/crates/orchestrator/.agenthero/artifacts/grokrxiv/reviews/12437148-f0b4-49cb-a409-67874774952d/review_loop/lean/targets/thm_KS/.lake/build/ir/GrokRxiv/Proofs.setup.json --json\nerror: GrokRxiv/Proofs.lean:48:6: expected '{' or indented tactic sequence\nerror: GrokRxiv/Proofs.lean:47:29: unsolved goals\nrestrictH✝ : H2gTotal → H2gJL\ncohClass✝ : KSSection → H2gJL\nzeroSection✝ Z : KSSection\nx :\n  ∃ c,\n    { restrictH := restrictH✝, cohClass := cohClass✝, zeroSection := zeroSection✝ }.restrictH c =\n      { restrictH := restrictH✝, cohClass := cohClass✝, zeroSection := zeroSection✝ }.cohClass Z\nh : ?m.25 Z x\n⊢ ?m.26 Z x h\nerror: GrokRxiv/Proofs.lean:47:10: Type mismatch\n  fun Z x h => ?m.24\nhas type\n  (Z : KSSection) →\n    (x :\n        ∃ c,\n          { restrictH := restrictH✝, cohClass := cohClass✝, zeroSection := zeroSection✝ }.restrictH c =\n            { restrictH := restrictH✝, cohClass := cohClass✝, zeroSection := zeroSection✝ }.cohClass Z) →\n      (h : ?m.25 Z x) → ?m.26 Z x h\nbut is expected to have type\n  ∀ (Z : KSSection),\n    (∃ c,\n        { restrictH := restrictH✝, cohClass := cohClass✝, zeroSection := zeroSection✝ }.restrictH c =\n          { restrictH := restrictH✝, cohClass := cohClass✝, zeroSection := zeroSection✝ }.cohClass Z) →\n      Z = { restrictH := restrictH✝, cohClass := cohClass✝, zeroSection := zeroSection✝ }.zeroSection\nerror: Lean exited with code 1\nSome required targets logged failures:\n- GrokRxiv.Proofs\n"
+  },
+  "diagnostic_only": true,
+  "forbidden_terms": [],
+  "formal_claim_present": true,
+  "note": "Lean/Lake compile is a diagnostic for this MVP; GrokRxiv/Proofs.lean is preserved even when compile fails because paper-local or Mathlib support may be incomplete.",
+  "paper_library_imports_present": true,
+  "proofs_lean": "review_loop/lean/targets/thm_KS/GrokRxiv/Proofs.lean",
+  "proofs_lean_saved": true,
+  "schema_version": "1.0.0",
+  "stage": "lean-check",
+  "status": "lean_compile_error"
+}
