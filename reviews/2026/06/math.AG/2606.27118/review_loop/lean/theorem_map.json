@@ -1,0 +1,70 @@
+{
+  "entries": [
+    {
+      "claim_status": "blocked",
+      "compile": "review_loop/lean/targets/AGUDDGALT_arXiv_tex_thm_11263/check/compile.json",
+      "compile_status": "pass",
+      "failure_reason": "status=faithfulness_failed | faithfulness_verdict=unfaithful | faithfulness_status=completed | issues=[{\"message\":\"The reviewed declaration proves only `belyiTheorem <-> (forall X, X.DefinableOverAlgebraicNumbers <-> X.HasBelyiFunction)`, a definitional unfolding, not the paper theorem's biconditional result.\",\"severity\":\"critical\"},{\"message\":\"The proof is `Iff.rfl`, making the declaration a tautological statement about how `belyiTheorem` is defined rather than a proof or statement of Belyi's theorem as an external mathematical claim.\",\"severity\":\"critical\"},{\"message\":\"The paper's concrete notions of compact Riemann surface, smooth projective curve, algebraic definability over `Qbar`, non-constant meromorphic function, target `C-hat`, and ramification over at most three points are all hidden behind opaque types or predicates.\",\"severity\":\"warning\"}]",
+      "faithfulness": "review_loop/lean/targets/AGUDDGALT_arXiv_tex_thm_11263/faithfulness/faithfulness.json",
+      "faithfulness_status": "completed",
+      "faithfulness_verdict": "unfaithful",
+      "library_feedback": {
+        "reason": "parallel target execution keeps the checked paper-local library immutable during target jobs",
+        "status": "deferred_parallel_batch"
+      },
+      "library_feedback_candidate": true,
+      "parallel_target": true,
+      "proofs_lean": "review_loop/lean/targets/AGUDDGALT_arXiv_tex_thm_11263/GrokRxiv/Proofs.lean",
+      "source_claim_id": "AGUDDGALT_arXiv_tex:thm:11263",
+      "source_faithfulness_feedback": null,
+      "source_packet": "review_loop/lean/targets/AGUDDGALT_arXiv_tex_thm_11263/packet.json",
+      "status": "faithfulness_failed",
+      "target_fix_status": null
+    },
+    {
+      "claim_status": "blocked",
+      "compile": "review_loop/lean/targets/lem_order_n/check/compile.json",
+      "compile_status": "pass",
+      "failure_reason": "status=faithfulness_failed | faithfulness_verdict=unfaithful | faithfulness_status=completed | issues=[{\"message\":\"The Lean declaration is conditional: it proves the paper biconditional only assuming three global bridge facts, while the paper lemma states the biconditional unconditionally for a dessin with n edges.\",\"severity\":\"critical\"},{\"message\":\"One added hypothesis, `hregular : ∀ D, D.monodromyOrder = D.edges → D.IsRegular`, is already the reverse implication of the target theorem, so the Lean theorem delegates a substantive half of the paper claim to an assumption.\",\"severity\":\"critical\"},{\"message\":\"The statement is a reduction to missing interface facts rather than a direct formalization of the paper lemma as stated.\",\"severity\":\"warning\"}]",
+      "faithfulness": "review_loop/lean/targets/lem_order_n/faithfulness/faithfulness.json",
+      "faithfulness_status": "completed",
+      "faithfulness_verdict": "unfaithful",
+      "library_feedback": {
+        "reason": "parallel target execution keeps the checked paper-local library immutable during target jobs",
+        "status": "deferred_parallel_batch"
+      },
+      "library_feedback_candidate": true,
+      "parallel_target": true,
+      "proofs_lean": "review_loop/lean/targets/lem_order_n/GrokRxiv/Proofs.lean",
+      "source_claim_id": "lem:order-n",
+      "source_faithfulness_feedback": null,
+      "source_packet": "review_loop/lean/targets/lem_order_n/packet.json",
+      "status": "faithfulness_failed",
+      "target_fix_status": null
+    },
+    {
+      "claim_status": "blocked",
+      "compile": "review_loop/lean/targets/prop_regaut/check/compile.json",
+      "compile_status": "pass",
+      "failure_reason": "status=faithfulness_failed | faithfulness_verdict=unfaithful | faithfulness_status=completed | issues=[{\"message\":\"The paper theorem is an unconditional equivalence for a dessin, while propRegaut_of_characterizations assumes two additional equivalences, hOrder and hAut, before deriving the claimed result.\",\"severity\":\"critical\"},{\"message\":\"The Lean declaration is a reduction through a shared numeric criterion rather than the paper theorem itself; it shifts the substantive mathematical content into hypotheses.\",\"severity\":\"critical\"},{\"message\":\"The paper statement quantifies the theorem as the regularity criterion for a dessin's monodromy group and automorphism group, whereas this declaration only proves the equivalence for a fixed D under supplied bridge assumptions.\",\"severity\":\"warning\"}]",
+      "faithfulness": "review_loop/lean/targets/prop_regaut/faithfulness/faithfulness.json",
+      "faithfulness_status": "completed",
+      "faithfulness_verdict": "unfaithful",
+      "library_feedback": {
+        "reason": "parallel target execution keeps the checked paper-local library immutable during target jobs",
+        "status": "deferred_parallel_batch"
+      },
+      "library_feedback_candidate": true,
+      "parallel_target": true,
+      "proofs_lean": "review_loop/lean/targets/prop_regaut/GrokRxiv/Proofs.lean",
+      "source_claim_id": "prop:regaut",
+      "source_faithfulness_feedback": null,
+      "source_packet": "review_loop/lean/targets/prop_regaut/packet.json",
+      "status": "faithfulness_failed",
+      "target_fix_status": null
+    }
+  ],
+  "schema_version": "1.0.0",
+  "source": "theorem_inventory_direct",
+  "status": "fail"
+}

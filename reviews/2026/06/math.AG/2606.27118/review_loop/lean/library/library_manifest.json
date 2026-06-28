@@ -1,0 +1,504 @@
+{
+  "declarations": [
+    {
+      "import": "GrokRxiv.Paper.Notation",
+      "kind": "notation",
+      "lean_decl": "abbrev Sym (n : ℕ) : Type := Equiv.Perm (Fin n)",
+      "name": "Sym",
+      "signature": "Sym (n : ℕ) : Type",
+      "source_evidence": [
+        {
+          "artifact": "AGUDDGALT-arXiv.tex",
+          "claim_id": null,
+          "source_tex": "the symmetric group $\\Sym(E)$ of all permutations of $E$ ... Let $S_n$ be the symmetric group on $\\{1,\\ldots,n\\}$, and fix an $n$-cycle $x\\in S_n$"
+        }
+      ],
+      "source_terms": [
+        "Sym(E)",
+        "S_n",
+        "symmetric group"
+      ],
+      "trust_status": "lean_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Definitions",
+      "kind": "definition",
+      "lean_decl": "noncomputable def T (n b q : ℕ) : Finset (Sym n) := Finset.univ.filter fun y => (y : Perm (Fin n)).cycleType = Multiset.replicate q b",
+      "name": "T",
+      "signature": "T (n b q : ℕ) : Finset (Sym n)",
+      "source_evidence": [
+        {
+          "artifact": "AGUDDGALT-arXiv.tex",
+          "claim_id": null,
+          "source_tex": "T(b,q) \\ceq \\{ y\\in S_{n} \\mid y \\text{ has cycle type } (b^{q}) \\}"
+        }
+      ],
+      "source_terms": [
+        "T(b,q)",
+        "cycle type",
+        "(b^q)"
+      ],
+      "trust_status": "lean_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Definitions",
+      "kind": "definition",
+      "lean_decl": "noncomputable def N (n : ℕ) (x : Sym n) (b q a p : ℕ) : Finset (Sym n) := (T n b q).filter fun y => ((x * y)⁻¹ : Perm (Fin n)).cycleType = Multiset.replicate p a",
+      "name": "N",
+      "signature": "N (n : ℕ) (x : Sym n) (b q a p : ℕ) : Finset (Sym n)",
+      "source_evidence": [
+        {
+          "artifact": "AGUDDGALT-arXiv.tex",
+          "claim_id": null,
+          "source_tex": "N(b,q,a) \\ceq \\{ y \\in T(b,q) \\mid (xy)^{-1} \\text{ has cycle type } (a^{p}) \\}"
+        }
+      ],
+      "source_terms": [
+        "N(b,q,a)",
+        "(xy)^{-1}",
+        "cycle type (a^p)"
+      ],
+      "trust_status": "lean_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Definitions",
+      "kind": "definition",
+      "lean_decl": "def Tcount (n b q : ℕ) : ℕ := n.factorial / (b ^ q * q.factorial)",
+      "name": "Tcount",
+      "signature": "Tcount (n b q : ℕ) : ℕ",
+      "source_evidence": [
+        {
+          "artifact": "AGUDDGALT-arXiv.tex",
+          "claim_id": "prop:tbq",
+          "source_tex": "\\vt{T(b, q)} = \\f{n!}{b^{q}q!}."
+        }
+      ],
+      "source_terms": [
+        "n!/(b^q q!)",
+        "|T(b,q)|"
+      ],
+      "trust_status": "lean_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Definitions",
+      "kind": "definition",
+      "lean_decl": "noncomputable def goupilSolutionCount (n : ℕ) (x : Sym n) (lam mu : Multiset ℕ) : ℕ := (Finset.univ.filter fun p : Sym n × Sym n => (p.1 : Perm (Fin n)).cycleType = lam ∧ (p.2 : Perm (Fin n)).cycleType = mu ∧ p.1 * p.2 = x).card",
+      "name": "goupilSolutionCount",
+      "signature": "goupilSolutionCount (n : ℕ) (x : Sym n) (lam mu : Multiset ℕ) : ℕ",
+      "source_evidence": [
+        {
+          "artifact": "AGUDDGALT-arXiv.tex",
+          "claim_id": "thm:goupil",
+          "source_tex": "Let $c_{\\lambda \\mu}^{n}$ denote the number of solutions $(\\sigma, \\rho) \\in C_{\\lambda} \\times C_{\\mu}$ to the equation $\\sigma \\rho = \\pi$, where $\\pi$ is a fixed $n$-cycle in $S_{n}$."
+        }
+      ],
+      "source_terms": [
+        "c_{λμ}^n",
+        "solutions (σ,ρ)",
+        "σρ = π"
+      ],
+      "trust_status": "lean_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Interfaces",
+      "kind": "interface",
+      "lean_decl": "opaque RiemannSurface : Type",
+      "name": "RiemannSurface",
+      "signature": "RiemannSurface : Type",
+      "source_evidence": [
+        {
+          "artifact": "AGUDDGALT-arXiv.tex",
+          "claim_id": "AGUDDGALT_arXiv_tex:thm:11263",
+          "source_tex": "Let $X$ be a compact Riemann surface, that is, a smooth projective algebraic curve in $\\Pj_{\\C}^{N}$ for some $N$."
+        }
+      ],
+      "source_terms": [
+        "compact Riemann surface",
+        "smooth projective algebraic curve"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Interfaces",
+      "kind": "interface",
+      "lean_decl": "opaque RiemannSurface.DefinableOverAlgebraicNumbers : RiemannSurface → Prop",
+      "name": "RiemannSurface.DefinableOverAlgebraicNumbers",
+      "signature": "RiemannSurface.DefinableOverAlgebraicNumbers : RiemannSurface → Prop",
+      "source_evidence": [
+        {
+          "artifact": "AGUDDGALT-arXiv.tex",
+          "claim_id": "AGUDDGALT_arXiv_tex:thm:11263",
+          "source_tex": "Then $X$ can be defined over the field of algebraic numbers $\\Qb$ if and only if ..."
+        }
+      ],
+      "source_terms": [
+        "defined over",
+        "field of algebraic numbers",
+        "Qbar"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Interfaces",
+      "kind": "interface",
+      "lean_decl": "opaque RiemannSurface.HasBelyiFunction : RiemannSurface → Prop",
+      "name": "RiemannSurface.HasBelyiFunction",
+      "signature": "RiemannSurface.HasBelyiFunction : RiemannSurface → Prop",
+      "source_evidence": [
+        {
+          "artifact": "AGUDDGALT-arXiv.tex",
+          "claim_id": "AGUDDGALT_arXiv_tex:thm:11263",
+          "source_tex": "there exists a non-constant meromorphic function $\\B\\colon X \\to \\Ch$ ramified over at most three points."
+        }
+      ],
+      "source_terms": [
+        "meromorphic function",
+        "ramified over at most three points",
+        "Belyi function"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Interfaces",
+      "kind": "interface",
+      "lean_decl": "opaque Dessin : Type",
+      "name": "Dessin",
+      "signature": "Dessin : Type",
+      "source_evidence": [
+        {
+          "artifact": "AGUDDGALT-arXiv.tex",
+          "claim_id": "def:dessin",
+          "source_tex": "A \\emph{\\dde}, or simply a \\emph{dessin}, is a map consisting of a connected, finite, bipartite graph embedded in a connected, compact, oriented surface without boundary."
+        }
+      ],
+      "source_terms": [
+        "dessin d'enfant",
+        "dessin",
+        "bipartite graph embedded in a surface"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Interfaces",
+      "kind": "interface",
+      "lean_decl": "opaque Dessin.edges : Dessin → ℕ",
+      "name": "Dessin.edges",
+      "signature": "Dessin.edges : Dessin → ℕ",
+      "source_evidence": [
+        {
+          "artifact": "AGUDDGALT-arXiv.tex",
+          "claim_id": "lem:order-n",
+          "source_tex": "A \\dde with $n$ edges is regular if and only if the order of its monodromy group is $n$."
+        }
+      ],
+      "source_terms": [
+        "number of edges",
+        "n edges"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Interfaces",
+      "kind": "interface",
+      "lean_decl": "opaque Dessin.IsRegular : Dessin → Prop",
+      "name": "Dessin.IsRegular",
+      "signature": "Dessin.IsRegular : Dessin → Prop",
+      "source_evidence": [
+        {
+          "artifact": "AGUDDGALT-arXiv.tex",
+          "claim_id": "def:regular",
+          "source_tex": "A \\dde is called \\emph{regular} if its monodromy group acts freely (that is, semiregularly) on the set of its edges."
+        }
+      ],
+      "source_terms": [
+        "regular",
+        "acts freely",
+        "semiregularly"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Interfaces",
+      "kind": "interface",
+      "lean_decl": "opaque Dessin.monodromyOrder : Dessin → ℕ",
+      "name": "Dessin.monodromyOrder",
+      "signature": "Dessin.monodromyOrder : Dessin → ℕ",
+      "source_evidence": [
+        {
+          "artifact": "AGUDDGALT-arXiv.tex",
+          "claim_id": "def:monog",
+          "source_tex": "The \\emph{monodromy group} of $\\msD$ is the subgroup $G = \\gen{x, y}$ generated by $x$ and $y$ in the symmetric group $\\Sym(E)$."
+        }
+      ],
+      "source_terms": [
+        "order of its monodromy group",
+        "monodromy group $G = \\gen{x,y}$"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Interfaces",
+      "kind": "interface",
+      "lean_decl": "opaque Dessin.MonodromyIsoAut : Dessin → Prop",
+      "name": "Dessin.MonodromyIsoAut",
+      "signature": "Dessin.MonodromyIsoAut : Dessin → Prop",
+      "source_evidence": [
+        {
+          "artifact": "AGUDDGALT-arXiv.tex",
+          "claim_id": "prop:regaut",
+          "source_tex": "A \\dde $\\msD$ is regular if and only if its monodromy group $G$ is isomorphic to $\\AD$."
+        }
+      ],
+      "source_terms": [
+        "monodromy group $G$ is isomorphic to $\\AD$"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Interfaces",
+      "kind": "interface",
+      "lean_decl": "opaque Dessin.HasUniformPassport : Dessin → Prop",
+      "name": "Dessin.HasUniformPassport",
+      "signature": "Dessin.HasUniformPassport : Dessin → Prop",
+      "source_evidence": [
+        {
+          "artifact": "AGUDDGALT-arXiv.tex",
+          "claim_id": "prop:reguni",
+          "source_tex": "A \\dde is called \\emph{uniform} if it has a uniform passport. ... If a \\dde is regular, then it has a uniform passport."
+        }
+      ],
+      "source_terms": [
+        "uniform passport",
+        "[a^p, b^q, c^r]"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Interfaces",
+      "kind": "interface",
+      "lean_decl": "opaque goupilClosedForm : Multiset ℕ → Multiset ℕ → ℕ → ℚ",
+      "name": "goupilClosedForm",
+      "signature": "goupilClosedForm : Multiset ℕ → Multiset ℕ → ℕ → ℚ",
+      "source_evidence": [
+        {
+          "artifact": "AGUDDGALT-arXiv.tex",
+          "claim_id": "thm:goupil",
+          "source_tex": "c_{\\la \\mu}^{n} = \\f{n}{z_{\\la}z_{\\mu}2^{2g}}\\sum_{g_{1}+g_{2}=g}(l+2g_{1}-1)!(m+2g_{2}-1)!\\sum_{(i)\\vDash g_1,(j)\\vDash g_2}\\prod\\binom{\\la_k}{2i_k+1}\\prod\\binom{\\mu_k}{2j_k+1}."
+        }
+      ],
+      "source_terms": [
+        "c_{λμ}^n closed form",
+        "z_λ z_μ 2^{2g}",
+        "compositions",
+        "binomials"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Interfaces",
+      "kind": "interface",
+      "lean_decl": "opaque NbqbLowerBound : ℕ → ℕ → ℕ → ℚ",
+      "name": "NbqbLowerBound",
+      "signature": "NbqbLowerBound : ℕ → ℕ → ℕ → ℚ",
+      "source_evidence": [
+        {
+          "artifact": "AGUDDGALT-arXiv.tex",
+          "claim_id": "lem:Nbqblower",
+          "source_tex": "\\vt{N(b, q, b)} \\ge \\f{(n-q)!}{2^{q(b-2)}\\left(\\f{q+1}{2}\\right)!\\left(\\f{q-1}{2}\\right)!}\\left(\\f{b-1}{2b}\\right)^{\\f{q-1}{2}}."
+        }
+      ],
+      "source_terms": [
+        "(n-q)!/(2^{q(b-2)}((q+1)/2)!((q-1)/2)!) ((b-1)/2b)^{(q-1)/2}"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Statements",
+      "kind": "statement",
+      "lean_decl": "def belyiTheorem : Prop := ∀ X : RiemannSurface, X.DefinableOverAlgebraicNumbers ↔ X.HasBelyiFunction",
+      "name": "belyiTheorem",
+      "signature": "belyiTheorem : Prop",
+      "source_evidence": [
+        {
+          "artifact": "AGUDDGALT-arXiv.tex",
+          "claim_id": "AGUDDGALT_arXiv_tex:thm:11263",
+          "source_tex": "Then $X$ can be defined over the field of algebraic numbers $\\Qb$ if and only if there exists a non-constant meromorphic function $\\B\\colon X \\to \\Ch$ ramified over at most three points."
+        }
+      ],
+      "source_terms": [
+        "Belyi's Theorem",
+        "defined over Qbar if and only if a Belyi function exists"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Statements",
+      "kind": "statement",
+      "lean_decl": "def lemOrderN : Prop := ∀ D : Dessin, D.IsRegular ↔ D.monodromyOrder = D.edges",
+      "name": "lemOrderN",
+      "signature": "lemOrderN : Prop",
+      "source_evidence": [
+        {
+          "artifact": "AGUDDGALT-arXiv.tex",
+          "claim_id": "lem:order-n",
+          "source_tex": "A \\dde with $n$ edges is regular if and only if the order of its monodromy group is $n$."
+        }
+      ],
+      "source_terms": [
+        "regular if and only if the order of its monodromy group is n"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Statements",
+      "kind": "statement",
+      "lean_decl": "def propRegaut : Prop := ∀ D : Dessin, D.IsRegular ↔ D.MonodromyIsoAut",
+      "name": "propRegaut",
+      "signature": "propRegaut : Prop",
+      "source_evidence": [
+        {
+          "artifact": "AGUDDGALT-arXiv.tex",
+          "claim_id": "prop:regaut",
+          "source_tex": "A \\dde $\\msD$ is regular if and only if its monodromy group $G$ is isomorphic to $\\AD$."
+        }
+      ],
+      "source_terms": [
+        "regular if and only if its monodromy group $G$ is isomorphic to $\\AD$"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Statements",
+      "kind": "statement",
+      "lean_decl": "def propReguni : Prop := ∀ D : Dessin, D.IsRegular → D.HasUniformPassport",
+      "name": "propReguni",
+      "signature": "propReguni : Prop",
+      "source_evidence": [
+        {
+          "artifact": "AGUDDGALT-arXiv.tex",
+          "claim_id": "prop:reguni",
+          "source_tex": "If a \\dde is regular, then it has a uniform passport."
+        }
+      ],
+      "source_terms": [
+        "If a dessin is regular, then it has a uniform passport"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Statements",
+      "kind": "statement",
+      "lean_decl": "def propTbq : Prop := ∀ n b q : ℕ, 0 < b → n = b * q → (T n b q).card = n.factorial / (b ^ q * q.factorial)",
+      "name": "propTbq",
+      "signature": "propTbq : Prop",
+      "source_evidence": [
+        {
+          "artifact": "AGUDDGALT-arXiv.tex",
+          "claim_id": "prop:tbq",
+          "source_tex": "The number of elements in $S_{n}$ of cycle type $(b^{q})$ $(n = bq)$ is given by \\vt{T(b, q)} = \\f{n!}{b^{q}q!}."
+        }
+      ],
+      "source_terms": [
+        "|T(b,q)| = n!/(b^q q!)",
+        "n = bq"
+      ],
+      "trust_status": "lean_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Statements",
+      "kind": "statement",
+      "lean_decl": "def thmGoupil : Prop := ∀ (n : ℕ) (x : Sym n) (lam mu : Multiset ℕ), lam.sum = n → mu.sum = n → ((goupilSolutionCount n x lam mu : ℚ)) = goupilClosedForm lam mu n",
+      "name": "thmGoupil",
+      "signature": "thmGoupil : Prop",
+      "source_evidence": [
+        {
+          "artifact": "AGUDDGALT-arXiv.tex",
+          "claim_id": "thm:goupil",
+          "source_tex": "Then $c_{\\lambda \\mu}^{n}$ is given by c_{\\la \\mu}^{n} = \\f{n}{z_{\\la}z_{\\mu}2^{2g}}\\sum ... \\prod_{k}\\binom{\\la_{k}}{2i_{k}+1}\\prod_{k}\\binom{\\mu_{k}}{2j_{k}+1}."
+        }
+      ],
+      "source_terms": [
+        "c_{λμ}^n is given by ...",
+        "Goupil's formula"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Statements",
+      "kind": "statement",
+      "lean_decl": "def thmMN : Prop := ∀ (n b q : ℕ) (x : Sym n), 3 ≤ n → 2 ≤ b → n = b * q → n % 2 = q % 2 → (n + 2) * (N n x b q n 1).card ≥ 2 * (T n b q).card",
+      "name": "thmMN",
+      "signature": "thmMN : Prop",
+      "source_evidence": [
+        {
+          "artifact": "AGUDDGALT-arXiv.tex",
+          "claim_id": "thm:MN",
+          "source_tex": "Let $n \\ge 3$ be an integer such that $n = bq$, with $b \\ge 2$, and assume that $n \\equiv q \\pmod{2}$. Fix $x = \\sigman \\in S_{n}$. Then \\f{N(b, q, n)}{T(b, q)} \\ge \\f{2}{n+2}."
+        }
+      ],
+      "source_terms": [
+        "N(b,q,n)/T(b,q) ≥ 2/(n+2)",
+        "n = bq, b ≥ 2, n ≡ q (mod 2)"
+      ],
+      "trust_status": "lean_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Statements",
+      "kind": "statement",
+      "lean_decl": "def lemNbqblower : Prop := ∀ (n b q : ℕ) (x : Sym n), n = q * b → 1 ≤ q → ((N n x b q b q).card : ℚ) ≥ NbqbLowerBound b q n",
+      "name": "lemNbqblower",
+      "signature": "lemNbqblower : Prop",
+      "source_evidence": [
+        {
+          "artifact": "AGUDDGALT-arXiv.tex",
+          "claim_id": "lem:Nbqblower",
+          "source_tex": "Let $[n,b^{q},b^{q}]$ be a passport with $n=qb$, and suppose that it has genus at least~$1$. ... Then \\vt{N(b, q, b)} \\ge \\f{(n-q)!}{2^{q(b-2)}\\left(\\f{q+1}{2}\\right)!\\left(\\f{q-1}{2}\\right)!}\\left(\\f{b-1}{2b}\\right)^{\\f{q-1}{2}}."
+        }
+      ],
+      "source_terms": [
+        "|N(b,q,b)| ≥ explicit lower bound",
+        "genus at least 1"
+      ],
+      "trust_status": "interface_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Lemmas",
+      "kind": "lemma",
+      "lean_decl": "lemma N_subset_T (n : ℕ) (x : Sym n) (b q a p : ℕ) : N n x b q a p ⊆ T n b q := by intro y hy; unfold N at hy; exact Finset.mem_of_mem_filter _ hy",
+      "name": "N_subset_T",
+      "signature": "N_subset_T (n : ℕ) (x : Sym n) (b q a p : ℕ) : N n x b q a p ⊆ T n b q",
+      "source_evidence": [
+        {
+          "artifact": "AGUDDGALT-arXiv.tex",
+          "claim_id": null,
+          "source_tex": "N(b,q,a) \\ceq \\{ y \\in T(b,q) \\mid ... \\} ... Since $C  = D \\cap T$ and $N \\subset T$"
+        }
+      ],
+      "source_terms": [
+        "N(b,q,a) ⊆ T(b,q)",
+        "N \\subset T"
+      ],
+      "trust_status": "lean_checked"
+    },
+    {
+      "import": "GrokRxiv.Paper.Lemmas",
+      "kind": "lemma",
+      "lean_decl": "lemma card_N_le_card_T (n : ℕ) (x : Sym n) (b q a p : ℕ) : (N n x b q a p).card ≤ (T n b q).card := Finset.card_le_card (N_subset_T n x b q a p)",
+      "name": "card_N_le_card_T",
+      "signature": "card_N_le_card_T (n : ℕ) (x : Sym n) (b q a p : ℕ) : (N n x b q a p).card ≤ (T n b q).card",
+      "source_evidence": [
+        {
+          "artifact": "AGUDDGALT-arXiv.tex",
+          "claim_id": null,
+          "source_tex": "N \\subset T ... \\f{\\vt{N}}{\\vt{T}}"
+        }
+      ],
+      "source_terms": [
+        "|N| ≤ |T|",
+        "N \\subset T"
+      ],
+      "trust_status": "lean_checked"
+    }
+  ],
+  "schema_version": "1.0.0"
+}
