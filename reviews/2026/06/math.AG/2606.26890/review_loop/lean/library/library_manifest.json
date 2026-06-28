@@ -1,9 +1,362 @@
 {
   "artifact": "review_loop/lean/library/library_manifest.json",
-  "declarations": [],
-  "deferred_to": "formalize",
-  "files": [],
   "schema_version": "1.0.0",
-  "skip_reason": "Lean formalization runs asynchronously via the `formalize` job; queue with --with-lean.",
-  "status": "pending"
+  "status": "authored",
+  "language": "lean",
+  "arxiv_id": "2606.26890",
+  "title": "Generalized Zariski cancellation for Brieskorn--Pham varieties",
+  "source_file": "B-P_Cancellation.tex",
+  "toolchain": "leanprover/lean4:v4.30.0",
+  "files": [
+    "GrokRxiv/Paper/Notation.lean",
+    "GrokRxiv/Paper/Definitions.lean",
+    "GrokRxiv/Paper/Interfaces.lean",
+    "GrokRxiv/Paper/Statements.lean",
+    "GrokRxiv/Paper/Lemmas.lean"
+  ],
+  "declarations": [
+    {
+      "name": "GrokRxiv.Paper.SchemeCarrier",
+      "file": "GrokRxiv/Paper/Interfaces.lean",
+      "kind": "interface",
+      "lean_kind": "opaque (NonemptyType carrier)",
+      "carrier_for": "GrokRxiv.Paper.Sch",
+      "models": "type of separated k-schemes (paper 'varieties': reduced separated finite-type k-schemes, and the auxiliary test schemes Z)",
+      "gap": "Mathlib has AlgebraicGeometry.Scheme but not a packaged 'separated finite-type k-variety' object with the k-isomorphism/product API used by the paper.",
+      "nonempty_via": "NonemptyType.property (no axiom/sorry)",
+      "source_evidence": [
+        "by a \\emph{variety} over a field $k$ we mean a reduced separated scheme of finite type over $k$"
+      ]
+    },
+    {
+      "name": "GrokRxiv.Paper.IsoOverBase",
+      "file": "GrokRxiv/Paper/Interfaces.lean",
+      "kind": "interface",
+      "lean_kind": "opaque relation (Prop)",
+      "models": "isomorphism of k-schemes, V ≅_k W",
+      "source_evidence": [
+        "V\\times Z \\cong_{\\C} W\\times Z",
+        "V_\\ba\\cong_{\\C} V_\\bb",
+        "V_{\\ba,k} \\cong_k V_{\\bb,k}"
+      ]
+    },
+    {
+      "name": "GrokRxiv.Paper.SchProd",
+      "file": "GrokRxiv/Paper/Interfaces.lean",
+      "kind": "interface",
+      "lean_kind": "noncomputable opaque",
+      "models": "fiber product of k-schemes over k, V x Z",
+      "noncomputable_reason": "bodyless opaque landing in the Nonempty-carrier type Sch k",
+      "source_evidence": [
+        "V\\times Z",
+        "V_\\ba\\times Z"
+      ]
+    },
+    {
+      "name": "GrokRxiv.Paper.HasSmoothPoint",
+      "file": "GrokRxiv/Paper/Interfaces.lean",
+      "kind": "interface",
+      "lean_kind": "opaque relation (Prop)",
+      "models": "the scheme Z has a smooth point",
+      "source_evidence": [
+        "a separated scheme $Z$ over $\\C$ (not necessarily connected) having a smooth point"
+      ]
+    },
+    {
+      "name": "GrokRxiv.Paper.IsGoodCStarUnique",
+      "file": "GrokRxiv/Paper/Interfaces.lean",
+      "kind": "interface",
+      "lean_kind": "opaque relation (Prop)",
+      "models": "V is Spec of a positively graded affine domain over C, i.e. a complex affine irreducible variety with a good Gm-action whose vertex is its unique singularity (Theorem A hypothesis)",
+      "source_evidence": [
+        "Let $R$ and $S$ be positively graded affine domains over $\\C$ ... admitting good $\\C^*$-actions with vertices $p$ and $q$ ... Assume that $p$ and $q$ are the unique singularities of $V$ and $W$"
+      ]
+    },
+    {
+      "name": "GrokRxiv.Paper.CStarIso",
+      "file": "GrokRxiv/Paper/Interfaces.lean",
+      "kind": "interface",
+      "lean_kind": "opaque relation (Prop)",
+      "models": "isomorphism as C*-varieties (Gm-equivariant isomorphism)",
+      "source_evidence": [
+        "$V_\\ba$ and $V_\\bb$ are isomorphic as $\\C^*$-varieties"
+      ]
+    },
+    {
+      "name": "GrokRxiv.Paper.bpVariety",
+      "file": "GrokRxiv/Paper/Interfaces.lean",
+      "kind": "interface",
+      "lean_kind": "noncomputable opaque",
+      "models": "the Brieskorn-Pham variety V_{a,k} = Spec(B_{a,k})",
+      "noncomputable_reason": "bodyless opaque landing in the Nonempty-carrier type Sch k",
+      "source_evidence": [
+        "V_{\\ba,k}:=\\Spec(B_{\\ba,k})\\subseteq \\A^n_k"
+      ]
+    },
+    {
+      "name": "GrokRxiv.Paper.AnGermCarrier",
+      "file": "GrokRxiv/Paper/Interfaces.lean",
+      "kind": "interface",
+      "lean_kind": "opaque (NonemptyType carrier)",
+      "carrier_for": "GrokRxiv.Paper.AnGerm",
+      "models": "type of complex analytic space germs (V, o)",
+      "gap": "Mathlib lacks complex analytic space germs and biholomorphic-equivalence-of-germs theory.",
+      "nonempty_via": "NonemptyType.property (no axiom/sorry)",
+      "source_evidence": [
+        "V^{\\rm an}_\\ba:=(V_\\ba,\\oo_\\ba)"
+      ]
+    },
+    {
+      "name": "GrokRxiv.Paper.FormalGermCarrier",
+      "file": "GrokRxiv/Paper/Interfaces.lean",
+      "kind": "interface",
+      "lean_kind": "opaque (NonemptyType carrier)",
+      "carrier_for": "GrokRxiv.Paper.FormalGerm",
+      "models": "type of formal completions / algebroid space germs",
+      "gap": "Mathlib lacks formal/algebroid germs and their biholomorphic equivalence.",
+      "nonempty_via": "NonemptyType.property (no axiom/sorry)",
+      "source_evidence": [
+        "\\widehat{V}_\\ba:=\\widehat{(V_\\ba,\\oo_\\ba)}"
+      ]
+    },
+    {
+      "name": "GrokRxiv.Paper.bpAnGerm",
+      "file": "GrokRxiv/Paper/Interfaces.lean",
+      "kind": "interface",
+      "lean_kind": "noncomputable opaque",
+      "models": "analytic germ V_a^{an} = (V_a, o_a)",
+      "noncomputable_reason": "bodyless opaque landing in the Nonempty-carrier type AnGerm",
+      "source_evidence": [
+        "V^{\\rm an}_\\ba:=(V_\\ba,\\oo_\\ba)"
+      ]
+    },
+    {
+      "name": "GrokRxiv.Paper.bpFormalGerm",
+      "file": "GrokRxiv/Paper/Interfaces.lean",
+      "kind": "interface",
+      "lean_kind": "noncomputable opaque",
+      "models": "formal completion germ \\hat V_a",
+      "noncomputable_reason": "bodyless opaque landing in the Nonempty-carrier type FormalGerm",
+      "source_evidence": [
+        "\\widehat{V}_\\ba:=\\widehat{(V_\\ba,\\oo_\\ba)}"
+      ]
+    },
+    {
+      "name": "GrokRxiv.Paper.BiholAn",
+      "file": "GrokRxiv/Paper/Interfaces.lean",
+      "kind": "interface",
+      "lean_kind": "opaque relation (Prop)",
+      "models": "biholomorphic equivalence of analytic germs, ≅_bihol",
+      "source_evidence": [
+        "V_\\ba^{\\rm an} \\cong_{\\rm bihol} V_\\bb^{\\rm an}"
+      ]
+    },
+    {
+      "name": "GrokRxiv.Paper.BiholFormal",
+      "file": "GrokRxiv/Paper/Interfaces.lean",
+      "kind": "interface",
+      "lean_kind": "opaque relation (Prop)",
+      "models": "biholomorphic equivalence of formal germs, ≅_bihol",
+      "source_evidence": [
+        "\\widehat{V}_\\ba \\cong_{\\rm bihol} \\widehat{V}_\\bb"
+      ]
+    },
+    {
+      "name": "GrokRxiv.Paper.FormalRingIso",
+      "file": "GrokRxiv/Paper/Interfaces.lean",
+      "kind": "interface",
+      "lean_kind": "opaque relation (Prop)",
+      "models": "C-algebra isomorphism of formal completions, \\hat B_a ≅_{C-alg} \\hat B_b (where \\hat B_a = C[[X_1..X_n]]/(f_a))",
+      "gap": "The quotient of a multivariate formal power series ring by (f_a) and its C-algebra isomorphisms are not used in this form in Mathlib; modelled as an opaque relation to stay faithful without introducing an unverified concrete construction.",
+      "source_evidence": [
+        "\\widehat{B}_\\ba \\cong_{\\C\\text{-alg}} \\widehat{B}_\\bb"
+      ]
+    }
+  ],
+  "concrete_declarations": [
+    {
+      "name": "GrokRxiv.Paper.ExponentTuple",
+      "file": "GrokRxiv/Paper/Notation.lean",
+      "kind": "abbrev",
+      "models": "exponent tuple a = (a_1,...,a_n)",
+      "source_evidence": "\\ba=(a_1,\\ldots,a_n)\\in(\\N_{\\geq 2})^n"
+    },
+    {
+      "name": "GrokRxiv.Paper.ValidExponent",
+      "file": "GrokRxiv/Paper/Definitions.lean",
+      "kind": "def",
+      "models": "the constraint a in (N_{>=2})^n (every entry >= 2)",
+      "source_evidence": "\\ba\\in(\\N_{\\geq 2})^n"
+    },
+    {
+      "name": "GrokRxiv.Paper.PermEquiv",
+      "file": "GrokRxiv/Paper/Definitions.lean",
+      "kind": "def",
+      "models": "the relation a ~ b: equality up to permutation of entries",
+      "source_evidence": "where $\\ba\\sim\\bb$ denotes equality up to permutation of entries"
+    },
+    {
+      "name": "GrokRxiv.Paper.brieskornPoly",
+      "file": "GrokRxiv/Paper/Definitions.lean",
+      "kind": "def",
+      "models": "Brieskorn polynomial f_a = X_1^{a_1} + ... + X_n^{a_n}",
+      "source_evidence": "f_\\ba=X_1^{a_1}+\\cdots+X_n^{a_n}"
+    },
+    {
+      "name": "GrokRxiv.Paper.BPRing",
+      "file": "GrokRxiv/Paper/Definitions.lean",
+      "kind": "abbrev",
+      "models": "Brieskorn-Pham hypersurface ring B_{a,k} = k[X_1,...,X_n]/(f_a) as a k-algebra",
+      "source_evidence": "B_{\\ba,k}:=\\frac{k[X_1,\\ldots,X_n]}{(X_1^{a_1}+\\cdots+X_n^{a_n})}"
+    }
+  ],
+  "opaque_interfaces": [
+    {
+      "name": "GrokRxiv.Paper.SchemeCarrier",
+      "carrier_for": "GrokRxiv.Paper.Sch",
+      "kind": "opaque (NonemptyType carrier)",
+      "models": "type of separated k-schemes (paper 'varieties': reduced separated finite-type k-schemes, and the auxiliary test schemes Z)",
+      "source_evidence": "by a \\emph{variety} over a field $k$ we mean a reduced separated scheme of finite type over $k$",
+      "gap": "Mathlib has AlgebraicGeometry.Scheme but not a packaged 'separated finite-type k-variety' object with the k-isomorphism/product API used by the paper.",
+      "nonempty_via": "NonemptyType.property (no axiom/sorry)"
+    },
+    {
+      "name": "GrokRxiv.Paper.IsoOverBase",
+      "kind": "opaque relation (Prop)",
+      "models": "isomorphism of k-schemes, V ≅_k W",
+      "source_evidence": "V\\times Z \\cong_{\\C} W\\times Z ; V_\\ba\\cong_{\\C} V_\\bb ; V_{\\ba,k} \\cong_k V_{\\bb,k}"
+    },
+    {
+      "name": "GrokRxiv.Paper.SchProd",
+      "kind": "noncomputable opaque",
+      "models": "fiber product of k-schemes over k, V x Z",
+      "source_evidence": "V\\times Z ; V_\\ba\\times Z",
+      "noncomputable_reason": "bodyless opaque landing in the Nonempty-carrier type Sch k"
+    },
+    {
+      "name": "GrokRxiv.Paper.HasSmoothPoint",
+      "kind": "opaque relation (Prop)",
+      "models": "the scheme Z has a smooth point",
+      "source_evidence": "a separated scheme $Z$ over $\\C$ (not necessarily connected) having a smooth point"
+    },
+    {
+      "name": "GrokRxiv.Paper.IsGoodCStarUnique",
+      "kind": "opaque relation (Prop)",
+      "models": "V is Spec of a positively graded affine domain over C, i.e. a complex affine irreducible variety with a good Gm-action whose vertex is its unique singularity (Theorem A hypothesis)",
+      "source_evidence": "Let $R$ and $S$ be positively graded affine domains over $\\C$ ... admitting good $\\C^*$-actions with vertices $p$ and $q$ ... Assume that $p$ and $q$ are the unique singularities of $V$ and $W$"
+    },
+    {
+      "name": "GrokRxiv.Paper.CStarIso",
+      "kind": "opaque relation (Prop)",
+      "models": "isomorphism as C*-varieties (Gm-equivariant isomorphism)",
+      "source_evidence": "$V_\\ba$ and $V_\\bb$ are isomorphic as $\\C^*$-varieties"
+    },
+    {
+      "name": "GrokRxiv.Paper.bpVariety",
+      "kind": "noncomputable opaque",
+      "models": "the Brieskorn-Pham variety V_{a,k} = Spec(B_{a,k})",
+      "source_evidence": "V_{\\ba,k}:=\\Spec(B_{\\ba,k})\\subseteq \\A^n_k",
+      "noncomputable_reason": "bodyless opaque landing in the Nonempty-carrier type Sch k"
+    },
+    {
+      "name": "GrokRxiv.Paper.AnGermCarrier",
+      "carrier_for": "GrokRxiv.Paper.AnGerm",
+      "kind": "opaque (NonemptyType carrier)",
+      "models": "type of complex analytic space germs (V, o)",
+      "source_evidence": "V^{\\rm an}_\\ba:=(V_\\ba,\\oo_\\ba)",
+      "gap": "Mathlib lacks complex analytic space germs and biholomorphic-equivalence-of-germs theory.",
+      "nonempty_via": "NonemptyType.property (no axiom/sorry)"
+    },
+    {
+      "name": "GrokRxiv.Paper.FormalGermCarrier",
+      "carrier_for": "GrokRxiv.Paper.FormalGerm",
+      "kind": "opaque (NonemptyType carrier)",
+      "models": "type of formal completions / algebroid space germs",
+      "source_evidence": "\\widehat{V}_\\ba:=\\widehat{(V_\\ba,\\oo_\\ba)}",
+      "gap": "Mathlib lacks formal/algebroid germs and their biholomorphic equivalence.",
+      "nonempty_via": "NonemptyType.property (no axiom/sorry)"
+    },
+    {
+      "name": "GrokRxiv.Paper.bpAnGerm",
+      "kind": "noncomputable opaque",
+      "models": "analytic germ V_a^{an} = (V_a, o_a)",
+      "source_evidence": "V^{\\rm an}_\\ba:=(V_\\ba,\\oo_\\ba)",
+      "noncomputable_reason": "bodyless opaque landing in the Nonempty-carrier type AnGerm"
+    },
+    {
+      "name": "GrokRxiv.Paper.bpFormalGerm",
+      "kind": "noncomputable opaque",
+      "models": "formal completion germ \\hat V_a",
+      "source_evidence": "\\widehat{V}_\\ba:=\\widehat{(V_\\ba,\\oo_\\ba)}",
+      "noncomputable_reason": "bodyless opaque landing in the Nonempty-carrier type FormalGerm"
+    },
+    {
+      "name": "GrokRxiv.Paper.BiholAn",
+      "kind": "opaque relation (Prop)",
+      "models": "biholomorphic equivalence of analytic germs, ≅_bihol",
+      "source_evidence": "V_\\ba^{\\rm an} \\cong_{\\rm bihol} V_\\bb^{\\rm an}"
+    },
+    {
+      "name": "GrokRxiv.Paper.BiholFormal",
+      "kind": "opaque relation (Prop)",
+      "models": "biholomorphic equivalence of formal germs, ≅_bihol",
+      "source_evidence": "\\widehat{V}_\\ba \\cong_{\\rm bihol} \\widehat{V}_\\bb"
+    },
+    {
+      "name": "GrokRxiv.Paper.FormalRingIso",
+      "kind": "opaque relation (Prop)",
+      "models": "C-algebra isomorphism of formal completions, \\hat B_a ≅_{C-alg} \\hat B_b (where \\hat B_a = C[[X_1..X_n]]/(f_a))",
+      "source_evidence": "\\widehat{B}_\\ba \\cong_{\\C\\text{-alg}} \\widehat{B}_\\bb",
+      "gap": "The quotient of a multivariate formal power series ring by (f_a) and its C-algebra isomorphisms are not used in this form in Mathlib; modelled as an opaque relation to stay faithful without introducing an unverified concrete construction."
+    }
+  ],
+  "targets": [
+    {
+      "inventory_id": "thm:mainA",
+      "statement_decl": "GrokRxiv.Paper.CancellationCStar",
+      "file": "GrokRxiv/Paper/Statements.lean",
+      "proved": false,
+      "note": "Statement only (Prop-valued def); not proved, per authoring rules."
+    },
+    {
+      "inventory_id": "thm:mainB",
+      "statement_decl": "GrokRxiv.Paper.CancellationBP",
+      "file": "GrokRxiv/Paper/Statements.lean",
+      "proved": false,
+      "note": "TFAE of the four equivalent conditions; statement only, not proved."
+    },
+    {
+      "inventory_id": "thm:mainC",
+      "statement_decl": "GrokRxiv.Paper.ExponentRigidityField",
+      "file": "GrokRxiv/Paper/Statements.lean",
+      "proved": false,
+      "note": "Part (1): exponent rigidity over a characteristic-zero field; statement only, not proved."
+    },
+    {
+      "inventory_id": "thm:mainC",
+      "statement_decl": "GrokRxiv.Paper.ExponentRigidityComplex",
+      "file": "GrokRxiv/Paper/Statements.lean",
+      "proved": false,
+      "note": "Part (2): exponent rigidity over C in the formal and analytic settings; statement only, not proved."
+    }
+  ],
+  "proved_lemmas": [
+    {
+      "name": "GrokRxiv.Paper.PermEquiv.refl",
+      "file": "GrokRxiv/Paper/Lemmas.lean",
+      "axioms": ["propext", "Quot.sound"]
+    },
+    {
+      "name": "GrokRxiv.Paper.PermEquiv.symm",
+      "file": "GrokRxiv/Paper/Lemmas.lean",
+      "axioms": ["Quot.sound"]
+    }
+  ],
+  "notes": [
+    "No sorry / admit / axiom used anywhere in the library.",
+    "Opaque abstract carrier types (Sch, AnGerm, FormalGerm) are introduced via NonemptyType so their guaranteed inhabitant comes from a proof, not an axiom; bodyless opaque values/maps that land in these types are declared `noncomputable opaque` and dependent type defs `noncomputable`.",
+    "Concrete algebraic layer (exponent tuples, permutation equivalence, Brieskorn polynomial, B_{a,k} as a k-algebra) is modelled directly in Mathlib; the geometric/analytic/formal layer is opaque because Mathlib lacks the separated-k-variety, good Gm-action, C*-variety, complex analytic germ, and formal/algebroid germ APIs used by the paper.",
+    "Target theorems thm:mainA, thm:mainB, thm:mainC are recorded as Prop-valued statement defs and are intentionally not proved.",
+    "Gap: Theorem C(2)'s formal-completion ring isomorphism (\\hat B_a) is represented by the opaque relation FormalRingIso rather than a concrete MvPowerSeries quotient, to avoid asserting an unverified concrete construction; this is a source/library gap, not a change of the paper claim."
+  ]
 }
