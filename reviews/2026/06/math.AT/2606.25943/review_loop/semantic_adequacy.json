@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0.0",
+  "source": "review_loop/semantic_ir.json",
+  "status": "fail",
+  "theorem_map": "review_loop/lean/theorem_map.json",
+  "verdicts": [
+    {
+      "claim_id": "main_tex:thm*:15574",
+      "emitted_statement": "theorem main_tex_thm_15574 (S : ConnectedNoetherianSchemeFiniteKrullDimension) (R : Ring) (s : GeometricPoint) : SymmetricMonoidalEquivalence DAM_Nis_S_R DPerm_1_t_S_s_R := by",
+      "lean_declaration": "main_tex_thm_15574",
+      "proof_status": "FAILED",
+      "statement": "Let S be a connected, noetherian scheme of finite Krull dimension. Then there is a symmetric monoidal equivalence DAM_Nis(S;R) ≃ DPerm(π_1^ét(S,s);R), where s: Spec(k) → S is a geometric point of S.",
+      "theorem_id": "theorem_main_tex_thm_15574",
+      "verdict": "OVERCLAIMED",
+      "verified_statement": "theorem main_tex_thm_15574 (S : ConnectedNoetherianSchemeFiniteKrullDimension) (R : Ring) (s : GeometricPoint) : SymmetricMonoidalEquivalence DAM_Nis_S_R DPerm_1_t_S_s_R := by"
+    },
+    {
+      "claim_id": "main_tex:thm*:21529",
+      "emitted_statement": "theorem main_tex_thm_21529 : symmetric_monoidal_equivalence specg_Borel specg_lwBorel_homotopy_fixed_points := by",
+      "lean_declaration": "main_tex_thm_21529",
+      "proof_status": "TYPE_ERROR",
+      "statement": "There is a symmetric monoidal equivalence between the ∞-category of Borel G-spectra (Spec_G^Borel) and the homotopy fixed points of the lw-Borel G-spectra, i.e., Spec_G^Borel ≃ (Spec_G^lwBorel)^h, as symmetric monoidal ∞-categories.",
+      "theorem_id": "theorem_main_tex_thm_21529",
+      "verdict": "OVERCLAIMED",
+      "verified_statement": "theorem main_tex_thm_21529 : symmetric_monoidal_equivalence specg_Borel specg_lwBorel_homotopy_fixed_points := by"
+    },
+    {
+      "claim_id": "main_tex:prop*:22191",
+      "emitted_statement": "theorem main_tex_prop_22191 : commutative_diagram_horizontal_equivalences_fully_faithful_verticals Mod_R_G_Spec_G_Borel sheaves_wedge_G_Set_R D_mod_gr Mod_R_G_Spec_G_lwBorel sheaves_G_Set_R colim_i_D_Mod_G_i_R := by",
+      "lean_declaration": "main_tex_prop_22191",
+      "proof_status": "TYPE_ERROR",
+      "statement": "There is a commutative diagram with horizontal equivalences and fully faithful vertical functors relating the categories: (top row) Borel R_G-modules on Spec G, completed sheaves on G-sets with R-coefficients, and the derived category of graded modules; (bottom row) locally-weakly-Borel R_G-modules on Spec G, sheaves on G-sets with R-coefficients, and the colimit of derived categories of G_i-equivariant R-modules. All horizontal arrows are equivalences and all vertical arrows are fully faithful inclusions.",
+      "theorem_id": "theorem_main_tex_prop_22191",
+      "verdict": "OVERCLAIMED",
+      "verified_statement": "theorem main_tex_prop_22191 : commutative_diagram_horizontal_equivalences_fully_faithful_verticals Mod_R_G_Spec_G_Borel sheaves_wedge_G_Set_R D_mod_gr Mod_R_G_Spec_G_lwBorel sheaves_G_Set_R colim_i_D_Mod_G_i_R := by"
+    },
+    {
+      "claim_id": "main_tex:thm*:25354",
+      "emitted_statement": "theorem main_tex_thm_25354 : CommutativeDiagramOfEquivalences cDPerm_G_R Mod_underl_R_Sp_G Sh_Nis_CorrFEt_R_Sp colim_i_cD_Mod_G_i_R Mod_R_G_Sp_G_lwBorel Sh_et_CorrFEt_R_Sp cD_Mod_G_R Mod_R_G_Sp_G_Borel Sh_et_wedge_CorrFEt_R_Sp := by",
+      "lean_declaration": "main_tex_thm_25354",
+      "proof_status": "TYPE_ERROR",
+      "statement": "There is a commutative diagram of left adjoint functors in which all horizontal functors are equivalences of infinity-categories, forming a 3×3 grid that relates (top row) the derived infinity-category of permutation G-modules over R, modules over the underlined R in the G-spectrum category, and Nisnevich sheaves on finite étale R-correspondences with spectra; (middle row) the colimit over i of derived categories of G_i-modules over R, locally-weakly-Borel R_G-module spectra, and étale sheaves; and (bottom row) the derived category of G-modules over R, Borel R_G-module spectra, and étale-completed spectra sheaves, with vertical functors given by étale sheafification and hypercompletion.",
+      "theorem_id": "theorem_main_tex_thm_25354",
+      "verdict": "OVERCLAIMED",
+      "verified_statement": "theorem main_tex_thm_25354 : CommutativeDiagramOfEquivalences cDPerm_G_R Mod_underl_R_Sp_G Sh_Nis_CorrFEt_R_Sp colim_i_cD_Mod_G_i_R Mod_R_G_Sp_G_lwBorel Sh_et_CorrFEt_R_Sp cD_Mod_G_R Mod_R_G_Sp_G_Borel Sh_et_wedge_CorrFEt_R_Sp := by"
+    },
+    {
+      "claim_id": "lem:completionexplicit",
+      "emitted_statement": "theorem lem_completionexplicit (X : Mod_R_BG) : exhibits_Borel_completion X imap_Mod_R_BG_EG_R_X := by",
+      "lean_declaration": "lem_completionexplicit",
+      "proof_status": "TYPE_ERROR",
+      "statement": "Let X be an object in Mod_R(BG). The natural map X → imap_{Mod_R(BG)}(Σ^∞_+ EG ⊗ R, X) exhibits the target as the Borel completion of X.",
+      "theorem_id": "theorem_lem_completionexplicit",
+      "verdict": "OVERCLAIMED",
+      "verified_statement": "theorem lem_completionexplicit (X : Mod_R_BG) : exhibits_Borel_completion X imap_Mod_R_BG_EG_R_X := by"
+    },
+    {
+      "claim_id": "cor:completionunderlying",
+      "emitted_statement": "theorem cor_completionunderlying (X : Mod_R_Sp_G) : (BorelComplete X -> BorelComplete 0) ∧ (BorelComplete 0 -> BorelComplete X) := by",
+      "lean_declaration": "cor_completionunderlying",
+      "proof_status": "USES_SORRY",
+      "statement": "A module X in Mod_R(Sp_G) is Borel complete if and only if the underlying G-spectrum U_R(X) is Borel complete.",
+      "theorem_id": "theorem_cor_completionunderlying",
+      "verdict": "OVERCLAIMED",
+      "verified_statement": "theorem cor_completionunderlying (X : Mod_R_Sp_G) : (BorelComplete X -> BorelComplete 0) ∧ (BorelComplete 0 -> BorelComplete X) := by"
+    },
+    {
+      "claim_id": "lem:resasbasechange",
+      "emitted_statement": "theorem lem_resasbasechange : symmetric_monoidal_equivalence_with_commutative_diagram Mod_D_G_R_Sp_G Mod_res_G_1_R_Sp Mod_R_Sp_G res_G_1 F_D_G_R := by",
+      "lean_declaration": "lem_resasbasechange",
+      "proof_status": "TYPE_ERROR",
+      "statement": "There is a symmetric monoidal equivalence from Mod_{D(G)⊗R}(Sp_G) to Mod_{res^G_1(R)}(Sp), and the equivalence functor fits into a commutative diagram where the restriction functor res^G_1 and the forgetful functor F_{D(G)⊗R} from Mod_R(Sp_G) make the triangle commute.",
+      "theorem_id": "theorem_lem_resasbasechange",
+      "verdict": "OVERCLAIMED",
+      "verified_statement": "theorem lem_resasbasechange : symmetric_monoidal_equivalence_with_commutative_diagram Mod_D_G_R_Sp_G Mod_res_G_1_R_Sp Mod_R_Sp_G res_G_1 F_D_G_R := by"
+    }
+  ]
+}
