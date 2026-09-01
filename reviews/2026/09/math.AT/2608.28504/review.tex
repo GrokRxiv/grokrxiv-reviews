@@ -1,0 +1,1642 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\title{Global \$\textbackslash{}bm\textbackslash{}infty\$-categories and global Thom spectra}
+\author{Emma Brink \and Tobias Lenz}
+\date{}
+\begin{document}
+\maketitle
+
+\noindent\textbf{Source:} \href{https://arxiv.org/abs/2608.28504}{arXiv:2608.28504} \quad \textbf{Field:} math.AT\\
+
+\section*{TL;DR}
+The paper extends the Fin-global (finite-group) universal-property framework for equivariant/global homotopy theory to arbitrary compact Lie groups, establishing unstable and stable universal properties (Theorems A-D) and a model-independent theory of global Thom spectra recovering MO and classical constructions. Novelty is assessed as significant (score 0.75): the work meaningfully generalizes CLL\_Global/CLL\_Clefts, gives an independent complete proof superseding a gapped argument announced by Gepner-Nikolaus, and is corroborated as directly technically load-bearing rather than incremental. Technical correctness is rated mostly\_sound overall, but the specialist could verify only a minority of results in full (TC-12, TC-13, supported) because the proofs of the headline Theorems A-D and the MO/Thom comparison (TC-01-TC-06, TC-09, TC-10) fall in sections that were not present in the bounded review context; this is a review-input completeness limitation, not evidence the proofs are wrong, and should not by itself be read as a paper defect. Independent of that limitation, reproducibility flags a genuine and severe gap: no code, formalization, or machine-checkable proof artifact accompanies any of the categorical or comparison arguments (reproducibility\_score 0.22, one concern at critical severity), and two appendix arguments (the Thom space/spectrum adjunction and a localization lemma) are visibly incomplete or contain unresolved notational errors in the text itself, independent of truncation. Per the recommendation gate for code-amenable fields (this is a math.AT-type paper), the critical-severity missing proof-as-code artifact combined with major-severity unverifiable headline claims defaults the recommendation to major\_revision; nothing in the visible material indicates the missing artifact outright falsifies a headline claim, so reject is not warranted.
+
+\textbf{Recommendation:} Major revision \quad \textbf{Confidence:} 55\%\\
+
+\section*{Strengths}
+\begin{itemize}[leftmargin=*]
+  \item The paper generalizes the Fin-global universal-property framework from finite groups to all compact Lie groups via the Gepner-Henriques global orbit category Glo, a significant extension (novelty\_score 0.75, verdict 'significant') requiring genuinely new representation-stability techniques since the finite-group notion is insufficient in this generality.
+  \item It supplies an independent, complete proof of a stable global-spectra characterization where a previously announced argument (Gepner-Nikolaus) is reported by the authors to contain a gap, resolving an open question via a different route (parametrized representation stabilization as a smashing localization).
+  \item Two fully checkable technical results -- the infinity-categorical global Elmendorf theorem (TC-12) and the free-quotient weak-equivalence/pullback lemmas (TC-13) -- were verified as correctly and completely proved in the visible text.
+  \item Citation usage reflects careful scholarship: prior Fin-global work is credited explicitly as the basis being extended, classical pointset models are cited for specific propositions actually used in proofs, and motivating examples are discussed in enough depth to justify their relevance, with few vague or padded citations.
+  \item The framework connects abstract universal properties back to classical, concrete constructions (Thom spectra, MO, G-global spectra), giving the categorical machinery direct payoff in recovering and explaining known results.
+\end{itemize}
+
+\section*{Weaknesses}
+\begin{itemize}[leftmargin=*]
+  \item No code repository, formalization, or other machine-checkable proof artifact is provided for any of the paper's categorical arguments or the Thom/MO comparison results, despite this being a code-amenable field; reproducibility\_score is 0.22 and one concern is rated critical severity.
+  \item Two appendix arguments that other results depend on are visibly incomplete or contain notational errors independent of any context truncation: the Thom space/spectrum adjunction (Theorem thm:Thom-marvelous-appendix) explicitly omits verification of well-definedness and the triangle identities, and a localization lemma (Lemma lemma:localization-on-homs) displays an undefined category C' and an incomplete sentence in its proof.
+  \item The claim that global spectra are not the naive pointwise stabilization of global spaces -- which motivates the harder proof strategy for the paper's central stable theorem -- is asserted in a remark without an explicit counterexample or obstruction argument in the visible text.
+  \item A decisive homology input used in the group-completion argument for the Thom space map (Theorem thm:Gr-oup-completion) is quoted from inside another paper's proof rather than as a citable, hypothesis-explicit statement, and its claimed generality (all compact Lie groups and complete G-universes) is not confirmed to be covered by the source.
+\end{itemize}
+
+\section*{Revision Targets}
+\begin{itemize}[leftmargin=*]
+  \item [open] code `Thom/MO` at `code release and execution entrypoints`: Release the source code, scripts, model configuration, and execution entrypoints needed to regenerate the reported tables, or document why those artifacts cannot be released. Check: Re-review should confirm runnable code or a documented non-release justification is present.
+  \item [open] paper\_tex `corrections/2608.28504/paper.tex` at `Appendix\~{}\textbackslash{}ref\{app:thom-Stefan-functor\} (by S. Schwede), Theorem\~{}\textbackslash{}ref\{thm:Thom-marvelous-appendix\} and Construction\~{}\textbackslash{}ref\{constr:thom-level-right-adjt\}`: Include the omitted verifications (at least well-definedness of \$\textbackslash{}eta(f)\$ under the \$\textbackslash{}O(d)\$-quotient and the two triangle identities), write the fibre as \$\textbackslash{}Omega\^{}L X=\textbackslash{}maps\_*(S\^{}L,X)\$ consistently, and correct the unit condition to refer to the structure map of \$q\_V(T(f))\textbackslash{}to\textbackslash{}Gr(V)\$. Check: Re-review should confirm `Appendix\~{}\textbackslash{}ref\{app:thom-Stefan-functor\} (by S. Schwede), Theorem\~{}\textbackslash{}ref\{thm:Thom-marvelous-appendix\} and Construction\~{}\textbackslash{}ref\{constr:thom-level-right-adjt\}` is corrected or justified.
+  \item [open] paper\_tex `corrections/2608.28504/paper.tex` at `Introduction, 'Stable results'; Remark\~{}\textbackslash{}ref\{rk:not-naive-stab\}`: Promote the remark to a proposition with an explicit counterexample (e.g. a compact Lie group \$G\$ and a global spectrum where the pointwise stabilization visibly differs), so the necessity of representation stability is demonstrated rather than asserted. Check: Re-review should confirm `Introduction, 'Stable results'; Remark\~{}\textbackslash{}ref\{rk:not-naive-stab\}` is corrected or justified.
+  \item [open] paper\_tex `corrections/2608.28504/paper.tex` at `§\textbackslash{}ref\{subsec:model-thom\}, Theorem\~{}\textbackslash{}ref\{thm:Gr-oup-completion\}`: Quote the needed consequence of \textbackslash{}cite\{schwede2018global\}*\{Theorem 2.5.33\} as a displayed statement with its hypotheses, and confirm explicitly that it applies for all compact Lie groups \$G\$ and all complete \$G\$-universes \$\textbackslash{}Uu\_G\$. Check: Re-review should confirm `§\textbackslash{}ref\{subsec:model-thom\}, Theorem\~{}\textbackslash{}ref\{thm:Gr-oup-completion\}` is corrected or justified.
+\end{itemize}
+
+\section*{Open Questions}
+\begin{itemize}[leftmargin=*]
+  \item Can the authors provide a machine-checkable or formalized artifact (e.g. Lean/Coq) for the categorical skeleton of Theorems A-D and the Thom/MO comparison results, or explain why none is planned for a result set of this technical depth?
+  \item What specific step in the Gepner-Nikolaus argument (discussed in Remark rk:gepner-nikolaus) contains the gap, and how precisely does the paper's alternative route avoid it?
+  \item Can an explicit counterexample be added to Remark rk:not-naive-stab demonstrating that global spectra are not the naive pointwise stabilization of global spaces?
+  \item Can the omitted well-definedness and triangle-identity verifications for the Thom space/spectrum adjunction (Appendix, Theorem thm:Thom-marvelous-appendix) be supplied?
+  \item Can the group-completion argument (Theorem thm:Gr-oup-completion) state the needed consequence of schwede2018global as a displayed, hypothesis-explicit statement, and confirm it holds for every compact Lie group and complete G-universe as claimed?
+\end{itemize}
+
+\section*{Per-Agent Reviews}
+\subsection*{citation (\texttt{sonnet[1m]})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "confidence": 0.45,\\
+  "entries": [\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "CLL\_Global",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Central prior work on Fin-global infinity-categories that this paper directly extends and refines to compact Lie groups; cited repeatedly for definitions, lemmas, and universal properties being generalized.",\\
+      "notes": null,\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "CLL\_Clefts",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Companion prior work introducing equivariant presentability and universal properties for finite groups; the paper's stable/unstable results are explicit generalizations of results from this source.",\\
+      "notes": null,\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "carlsson1984SegalConjecture",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited as a historical example of equivariant methods yielding non-equivariant results (Segal conjecture); illustrative but not load-bearing for the paper's technical results.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "manolescu",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited as a historical example (disproof of the triangulation conjecture) illustrating the impact of equivariant methods; illustrative, not technically load-bearing.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "HHR2016Kervaire",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited as a historical example (Kervaire invariant one) motivating the study of equivariant homotopy theory; illustrative rather than technically used.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "LMS",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited as the classical pointset-model foundation of equivariant homotopy theory that the paper's infinity-categorical framework builds upon and generalizes.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "barwick2017spectral",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Grouped with several works as prior infinity-categorical descriptions of equivariant homotopy theory; cited in a list without individual elaboration.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "cmnn",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Grouped with several works as prior infinity-categorical descriptions of equivariant homotopy theory; cited in a list without individual elaboration.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "CLL\_Spans",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited both as prior work on infinity-categorical equivariant descriptions and later noted as insufficient (along with CLL\_Global) for the paper's needed universal properties.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "CHLL\_NRings",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited for infinity-categorical descriptions and for the Fin-global framework's application to multiplicative refinements of equivariant algebraic K-theory.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "LLP",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited repeatedly for prior Fin-global infinity-category constructions (norms, geometric fixed points) and applications to K-theory; supporting rather than central.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "nardin2016exposeIV",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Grouped among works establishing universal properties for equivariant infinity-categories, cited in a list.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "shah2021parametrized",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Grouped among works establishing universal properties for equivariant infinity-categories, cited in a list.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "exposeI",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Foundational reference for the language of parametrized higher category theory used throughout the paper, including the general T-infinity-category framework specialized in this work.",\\
+      "notes": null,\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "equiv-motives",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Briefly grouped with CHLL\_NRings as an application of multiplicative K-theory refinements; minimal individual context given.",\\
+      "notes": null,\\
+      "relevance": "low",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "GLP24",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited as an example application of the parametrized perspective to global TMF and tempered cohomology; illustrative context only.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "global-ambidextrous",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited alongside GLP24 as an example application to tempered cohomology; illustrative context only.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "hilman2024equivariantpoincaredualitycyclic",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Grouped in a list of geometric applications (group actions on manifolds) with minimal individual elaboration.",\\
+      "notes": null,\\
+      "relevance": "low",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "hilman2024parametrisedpoincaredualityequivariant",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Grouped in a list of geometric applications (group actions on manifolds) with minimal individual elaboration.",\\
+      "notes": null,\\
+      "relevance": "low",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "kirstein2025semifreeisovariantpoincarespaces",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Grouped in a list of geometric applications (group actions on manifolds) with minimal individual elaboration.",\\
+      "notes": null,\\
+      "relevance": "low",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "ben-moshe",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited as an example of the parametrized perspective's impact outside equivariant homotopy theory (chromatic homotopy theory); illustrative.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "CLL\_Span2",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited as an example of impact on 6-functor formalisms; illustrative context only.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "BEL2023Kasparov",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited as a brief aside example of analogous global-type structures (equivariant Kasparov infinity-categories) in a different area.",\\
+      "notes": null,\\
+      "relevance": "low",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "g-global",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited as the pointset model (G-global spectra) in terms of which the free globally presentable Fin-global infinity-category is completely described; directly technically relevant.",\\
+      "notes": null,\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "swan",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited as an application of the Fin-global framework to equivariant algebraic K-theory, used to motivate the need for the paper's generalization.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "gepnerhenriques2007orbispaces",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Defines the global orbit category Glo that is the central indexing category underlying the paper's definition of global infinity-categories.",\\
+      "notes": null,\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "martiniwolf2021limits",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Repeatedly cited for core technical results (limits, adjunctions, Kan extensions, pointwise criteria) in parametrized higher category theory that underpin the paper's proofs.",\\
+      "notes": null,\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "martiniwolf2022presentable",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Repeatedly cited for the general theory of parametrized presentability specialized in this paper to equivariant/global presentability; technically load-bearing.",\\
+      "notes": null,\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "martini2021yoneda",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited for foundational results (parametrized Yoneda embedding, local smallness) used in developing the paper's T-infinity-category framework.",\\
+      "notes": null,\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "schwede2018global",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Central classical/pointset reference for global spaces and global spectra; repeatedly cited for definitions and technical propositions the paper's infinity-categorical results recover.",\\
+      "notes": null,\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "LNP",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited for making precise the relation between global spectra and the heuristic notion of a compatible family of equivariant spectra; supporting context.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "hausmann2022global",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Discussed in detail as a motivating example (global group laws, universal formal group laws) illustrating the utility of the global perspective.",\\
+      "notes": null,\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "schwede-euler",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited as an example application (regularity results in equivariant homotopy rings) motivating the global perspective; illustrative.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "lavecchia",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited as a downstream application (Atiyah-Segal completion theorem) building on Schwede's regularity results; illustrative context.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "GM-MU",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited parenthetically as earlier work generalized by La Vecchia's result; minimal direct relevance to the paper's own contributions.",\\
+      "notes": null,\\
+      "relevance": "low",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "schwede-chern",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited as another downstream application computing equivariant homotopy rings after completion; illustrative context.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "schwede2025snaith",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Discussed in detail as a motivating forthcoming result (equivariant Snaith's theorem) explicitly requiring non-discrete compact Lie group data, directly motivating the paper's generalization.",\\
+      "notes": null,\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "snaith",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited as the classical (non-equivariant) Snaith's theorem being generalized in the cited forthcoming work; background reference.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "Linskens2023globalization",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited as the source of an idea (representation stability definition) adapted by the paper for its stable global infinity-category framework.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "twisted-ambidexterity",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited as prior work built upon to show representation stabilization is a pointwise construction, used in the proof of a main stable result.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "gepnermeier2020equivTMF",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited both for combining with the paper's unstable theorem to prove a symmetric monoidal result and for an identification of pointed Glo objects; moderately technical use.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "gepner-nikolaus",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited as an independently announced similar characterization of global spectra, providing corroborating context rather than being built upon.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "thom-oo",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited as the non-equivariant Thom spectrum functor construction that the paper's global Thom spectrum functor construction directly generalizes.",\\
+      "notes": null,\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "horev-klang-zou",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited as a brief 'cf.' cross-reference alongside the main Thom spectrum construction citation; tangential support.",\\
+      "notes": null,\\
+      "relevance": "low",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "sagave-schlichtkrull-thom",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited as the classical construction that the paper's pointset description of the global Thom spectrum functor is shown to be a global refinement of.",\\
+      "notes": null,\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "barrero2021",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Central reference for the G-global generalization of Schwede's orthogonal spaces model; repeatedly cited for technical propositions (model structures, cofibrations) underlying the paper's constructions.",\\
+      "notes": null,\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "schwede\_orbispaces\_2020",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Central reference for Schwede's global Elmendorf theorem and presheaf model of global spaces, technically load-bearing for the paper's comparison results.",\\
+      "notes": null,\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "MMSS",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited as the source of the topological category of orthogonal spectra used to construct the global infinity-category of spectra.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "mandell-may",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited as the source of the equivariant weak equivalences used to localize orthogonal spectra in the paper's construction of genuine G-spectra.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "schwede-stiefel",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited as the source of the notion of G-global spectra that the paper's finer localization is identified with.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "cisinski-book",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited for a specific technical corollary (localization inducing a slice localization) directly used in an appendix lemma's proof.",\\
+      "notes": null,\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "rezk-proper",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited for a specific proposition used to prove the fibrancy-free case of a localization/slice lemma in the appendix.",\\
+      "notes": null,\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "hirschhorn-book",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited for specific propositions on simplicial model categories (homotopy equivalences as weak equivalences) used directly in appendix lemmas.",\\
+      "notes": null,\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "dk-modern",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited for a specific corollary establishing localization is an equivalence on cofibrant-fibrant objects, used directly in a mapping-space lemma's proof.",\\
+      "notes": null,\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "HTT",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited for specific technical results (e.g. Lemma 6.2.3.16, Proposition 1.3.4.7) used directly in proofs throughout the paper; standard higher category theory reference.",\\
+      "notes": null,\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "HA",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited for a general smashing localization result and a specific proposition used in constructions involving module structures.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "koerschgen",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited for specific theorems on free compact Lie group actions on Hausdorff spaces (quotient maps as fibrations) used directly in appendix lemmas.",\\
+      "notes": null,\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "tom-Dieck-trafo",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited for a specific proposition (Hausdorff quotients, compactness of preimages) used directly in the proof of a pullback lemma.",\\
+      "notes": null,\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "illman-triangle",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited for Illman's triangulation theorem, used to support a technical claim about compact Lie group actions.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "kelly-enriched",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited briefly for a background fact (cartesian closedness of the topologically enriched category); minor supporting role.",\\
+      "notes": null,\\
+      "relevance": "low",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "rezk-classifying",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited for a theorem of Rezk characterizing the classifying space functor, used to support a technical remark about the topological nerve.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "CLL\_Adams",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited alongside CLL\_Clefts as a reference for general facts about Beck-Chevalley maps used in constructing an enriched functor.",\\
+      "notes": null,\\
+      "relevance": "medium",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \},\\
+    \{\\
+      "citation": \{\\
+        "arxiv\_id": null,\\
+        "authors": [],\\
+        "doi": null,\\
+        "key": "elmendorf",\\
+        "raw": null,\\
+        "title": null,\\
+        "url": null,\\
+        "venue": null,\\
+        "year": null\\
+      \},\\
+      "exists": null,\\
+      "explanation": "Cited for Elmendorf's Theorem, invoked as the key classical result explaining why the pointwise equivalence between the paper's model and the free presentable global infinity-category holds at a fixed group.",\\
+      "notes": null,\\
+      "relevance": "high",\\
+      "resolved\_doi": null,\\
+      "resolved\_url": null\\
+    \}\\
+  ],\\
+  "missing\_references": [],\\
+  "summary": "The paper's citation usage is consistent with careful mathematical scholarship: prior Fin-global infinity-category work (CLL\_Global, CLL\_Clefts) is credited explicitly as the basis being extended, classical pointset models (schwede2018global, barrero2021, schwede\_orbispaces\_2020) are cited precisely for specific propositions used in proofs, and motivating examples (hausmann2022global, schwede2025snaith) are discussed in enough detail to justify their relevance. No formal bibliography metadata (titles, authors, years, DOIs) was included in this bounded context, so existence and resolved-identifier fields could not be populated and are left null pending the deterministic verifier. Most citations are precise, in-line references to specific results (propositions, theorems, lemmas) rather than vague or padded citation lists, indicating good citation hygiene overall."\\
+\}\\
+\end{quote}
+
+\subsection*{meta\_reviewer (\texttt{sonnet[1m]})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "confidence": 0.55,\\
+  "questions": [\\
+    "Can the authors provide a machine-checkable or formalized artifact (e.g. Lean/Coq) for the categorical skeleton of Theorems A-D and the Thom/MO comparison results, or explain why none is planned for a result set of this technical depth?",\\
+    "What specific step in the Gepner-Nikolaus argument (discussed in Remark rk:gepner-nikolaus) contains the gap, and how precisely does the paper's alternative route avoid it?",\\
+    "Can an explicit counterexample be added to Remark rk:not-naive-stab demonstrating that global spectra are not the naive pointwise stabilization of global spaces?",\\
+    "Can the omitted well-definedness and triangle-identity verifications for the Thom space/spectrum adjunction (Appendix, Theorem thm:Thom-marvelous-appendix) be supplied?",\\
+    "Can the group-completion argument (Theorem thm:Gr-oup-completion) state the needed consequence of schwede2018global as a displayed, hypothesis-explicit statement, and confirm it holds for every compact Lie group and complete G-universe as claimed?"\\
+  ],\\
+  "recommendation": "major\_revision",\\
+  "revision\_targets": [\\
+    \{\\
+      "evidence": "No code repository, formalization, or proof artifact is provided. For this math/code-amenable theory paper, reproducing the headline universal-property claims would require machine-checkable files such as `Proofs/GlobalInfinityCategories.lean` or an equivalent Coq/Agda development formalizing the definitions and main equivalences.",\\
+      "id": "weakness-1",\\
+      "locator": "code release and execution entrypoints",\\
+      "required\_update": "Release the source code, scripts, model configuration, and execution entrypoints needed to regenerate the reported tables, or document why those artifacts cannot be released.",\\
+      "source\_path": "Thom/MO",\\
+      "source\_role": "reproducibility",\\
+      "status": "open",\\
+      "target\_kind": "code",\\
+      "verification\_check": "Re-review should confirm runnable code or a documented non-release justification is present.",\\
+      "weakness\_index": 0\\
+    \},\\
+    \{\\
+      "evidence": "The right adjoint \$\textbackslash{}\textbackslash{}Omega\_V(X)=\textbackslash{}\textbackslash{}coprod\_\{d\textbackslash{}\textbackslash{}ge0\}\textbackslash{}\textbackslash{}cat L(\textbackslash{}\textbackslash{}R\^{}d,V)\textbackslash{}\textbackslash{}times\_\{\textbackslash{}\textbackslash{}O(d)\}\textbackslash{}\textbackslash{}Omega\^{}dX\$ and the unit/counit formulas are given explicitly and look correct, but the appendix explicitly omits the verifications that \$\textbackslash{}\textbackslash{}eta(f)\$ is well defined, that \$\textbackslash{}\textbackslash{}eta(f)\$ and \$\textbackslash{}\textbackslash{}epsilon\_Z\$ are continuous, and that they satisfy the triangle identities --- i.e. the adjunction on which the whole appendix (and hence left-adjointness of \$\textbackslash{}\textbackslash{}ul\{\textbackslash{}\textbackslash{}mathfrak\{Th\}\}\_\{gl\}\$ used in TC-09) rests is asserted rather than proved. The passage also contains notational slips that obstruct checking: the fibre is written '\$\textbackslash{}\textbackslash{}Omega\^{}L=\textbackslash{}\textbackslash{}maps\_*(S\^{}L,Z)\$' with the target named \$Z\$ while the ambient functor is applied to \$X\$ and the \$Z\$ argument is dropped, and the unit condition is written '\$q\_\{T(f)\}\textbackslash{}\textbackslash{}circ\textbackslash{}\textbackslash{}eta(f)=f\$' where the structure map of \$q\_V(T(f))\$ over \$\textbackslash{}\textbackslash{}Gr(V)\$ is meant. Well-definedness of \$\textbackslash{}\textbackslash{}eta(f)\$ in particular is not obvious since \$\textbackslash{}\textbackslash{}psi\$ is only 'any' isometric embedding with image \$f(a)\$, so independence of the choice modulo the \$\textbackslash{}\textbackslash{}O(d)\$-action needs an argument.",\\
+      "id": "weakness-2",\\
+      "locator": "Appendix\~{}\textbackslash{}\textbackslash{}ref\{app:thom-Stefan-functor\} (by S. Schwede), Theorem\~{}\textbackslash{}\textbackslash{}ref\{thm:Thom-marvelous-appendix\} and Construction\~{}\textbackslash{}\textbackslash{}ref\{constr:thom-level-right-adjt\}",\\
+      "required\_update": "Include the omitted verifications (at least well-definedness of \$\textbackslash{}\textbackslash{}eta(f)\$ under the \$\textbackslash{}\textbackslash{}O(d)\$-quotient and the two triangle identities), write the fibre as \$\textbackslash{}\textbackslash{}Omega\^{}L X=\textbackslash{}\textbackslash{}maps\_*(S\^{}L,X)\$ consistently, and correct the unit condition to refer to the structure map of \$q\_V(T(f))\textbackslash{}\textbackslash{}to\textbackslash{}\textbackslash{}Gr(V)\$.",\\
+      "source\_path": "corrections/2608.28504/paper.tex",\\
+      "source\_role": "technical\_correctness",\\
+      "status": "open",\\
+      "target\_kind": "paper\_tex",\\
+      "verification\_check": "Re-review should confirm `Appendix\~{}\textbackslash{}\textbackslash{}ref\{app:thom-Stefan-functor\} (by S. Schwede), Theorem\~{}\textbackslash{}\textbackslash{}ref\{thm:Thom-marvelous-appendix\} and Construction\~{}\textbackslash{}\textbackslash{}ref\{constr:thom-level-right-adjt\}` is corrected or justified.",\\
+      "weakness\_index": 1\\
+    \},\\
+    \{\\
+      "evidence": "This negative claim is what forces the different (harder) proof strategy for Theorem\~{}\textbackslash{}\textbackslash{}ref\{introthm:stable-main\} and is used to justify the whole framework of representation stability. Its justification is entirely delegated to Remark\~{}\textbackslash{}\textbackslash{}ref\{rk:not-naive-stab\}, which is in the truncated region; no counterexample or obstruction argument appears in the provided text.",\\
+      "id": "weakness-3",\\
+      "locator": "Introduction, 'Stable results'; Remark\~{}\textbackslash{}\textbackslash{}ref\{rk:not-naive-stab\}",\\
+      "required\_update": "Promote the remark to a proposition with an explicit counterexample (e.g. a compact Lie group \$G\$ and a global spectrum where the pointwise stabilization visibly differs), so the necessity of representation stability is demonstrated rather than asserted.",\\
+      "source\_path": "corrections/2608.28504/paper.tex",\\
+      "source\_role": "technical\_correctness",\\
+      "status": "open",\\
+      "target\_kind": "paper\_tex",\\
+      "verification\_check": "Re-review should confirm `Introduction, 'Stable results'; Remark\~{}\textbackslash{}\textbackslash{}ref\{rk:not-naive-stab\}` is corrected or justified.",\\
+      "weakness\_index": 2\\
+    \},\\
+    \{\\
+      "evidence": "The visible proof is well-structured and the individual steps are correctly deployed: closedness of \$\textbackslash{}\textbackslash{}cat\{Gr\}\$ and \$\textbackslash{}\textbackslash{}cat\{BOP\}\$ via continuous injections between compact spaces; reduction (through Lemma\~{}\textbackslash{}\textbackslash{}ref\{lemma:id-g-fixed-points-vs-ev\}) to \$i(\textbackslash{}\textbackslash{}Uu\_G)\^{}G\$ being a group completion in \$\textbackslash{}\textbackslash{}CMon(\textbackslash{}\textbackslash{}Spc)\$; the homology-localization input from \textbackslash{}\textbackslash{}cite\{schwede2018global\}*\{Theorem 2.5.33\}; McDuff--Segal in the form of \textbackslash{}\textbackslash{}cite\{nikolaus-group-completion\}*\{Theorem 1\}; and a homological Whitehead argument that correctly notes that both \$X\$ (the group completion) and \$\textbackslash{}\textbackslash{}cat\{BOP\}(\textbackslash{}\textbackslash{}Uu\_G)\^{}G\$ are grouplike, so \$\textbackslash{}\textbackslash{}pi\_1\$ acts trivially on higher homotopy. The gap is dependency, not logic: the decisive homology statement is quoted from the interior of another paper's proof rather than as a citable statement, and it is asserted for every compact Lie group \$G\$ and every complete \$G\$-universe without indicating that the cited proof covers that generality.",\\
+      "id": "weakness-4",\\
+      "locator": "§\textbackslash{}\textbackslash{}ref\{subsec:model-thom\}, Theorem\~{}\textbackslash{}\textbackslash{}ref\{thm:Gr-oup-completion\}",\\
+      "required\_update": "Quote the needed consequence of \textbackslash{}\textbackslash{}cite\{schwede2018global\}*\{Theorem 2.5.33\} as a displayed statement with its hypotheses, and confirm explicitly that it applies for all compact Lie groups \$G\$ and all complete \$G\$-universes \$\textbackslash{}\textbackslash{}Uu\_G\$.",\\
+      "source\_path": "corrections/2608.28504/paper.tex",\\
+      "source\_role": "technical\_correctness",\\
+      "status": "open",\\
+      "target\_kind": "paper\_tex",\\
+      "verification\_check": "Re-review should confirm `§\textbackslash{}\textbackslash{}ref\{subsec:model-thom\}, Theorem\~{}\textbackslash{}\textbackslash{}ref\{thm:Gr-oup-completion\}` is corrected or justified.",\\
+      "weakness\_index": 3\\
+    \}\\
+  ],\\
+  "strengths": [\\
+    "The paper generalizes the Fin-global universal-property framework from finite groups to all compact Lie groups via the Gepner-Henriques global orbit category Glo, a significant extension (novelty\_score 0.75, verdict 'significant') requiring genuinely new representation-stability techniques since the finite-group notion is insufficient in this generality.",\\
+    "It supplies an independent, complete proof of a stable global-spectra characterization where a previously announced argument (Gepner-Nikolaus) is reported by the authors to contain a gap, resolving an open question via a different route (parametrized representation stabilization as a smashing localization).",\\
+    "Two fully checkable technical results -- the infinity-categorical global Elmendorf theorem (TC-12) and the free-quotient weak-equivalence/pullback lemmas (TC-13) -- were verified as correctly and completely proved in the visible text.",\\
+    "Citation usage reflects careful scholarship: prior Fin-global work is credited explicitly as the basis being extended, classical pointset models are cited for specific propositions actually used in proofs, and motivating examples are discussed in enough depth to justify their relevance, with few vague or padded citations.",\\
+    "The framework connects abstract universal properties back to classical, concrete constructions (Thom spectra, MO, G-global spectra), giving the categorical machinery direct payoff in recovering and explaining known results."\\
+  ],\\
+  "summary": "The paper extends the Fin-global (finite-group) universal-property framework for equivariant/global homotopy theory to arbitrary compact Lie groups, establishing unstable and stable universal properties (Theorems A-D) and a model-independent theory of global Thom spectra recovering MO and classical constructions. Novelty is assessed as significant (score 0.75): the work meaningfully generalizes CLL\_Global/CLL\_Clefts, gives an independent complete proof superseding a gapped argument announced by Gepner-Nikolaus, and is corroborated as directly technically load-bearing rather than incremental. Technical correctness is rated mostly\_sound overall, but the specialist could verify only a minority of results in full (TC-12, TC-13, supported) because the proofs of the headline Theorems A-D and the MO/Thom comparison (TC-01-TC-06, TC-09, TC-10) fall in sections that were not present in the bounded review context; this is a review-input completeness limitation, not evidence the proofs are wrong, and should not by itself be read as a paper defect. Independent of that limitation, reproducibility flags a genuine and severe gap: no code, formalization, or machine-checkable proof artifact accompanies any of the categorical or comparison arguments (reproducibility\_score 0.22, one concern at critical severity), and two appendix arguments (the Thom space/spectrum adjunction and a localization lemma) are visibly incomplete or contain unresolved notational errors in the text itself, independent of truncation. Per the recommendation gate for code-amenable fields (this is a math.AT-type paper), the critical-severity missing proof-as-code artifact combined with major-severity unverifiable headline claims defaults the recommendation to major\_revision; nothing in the visible material indicates the missing artifact outright falsifies a headline claim, so reject is not warranted.",\\
+  "weaknesses": [\\
+    "No code repository, formalization, or other machine-checkable proof artifact is provided for any of the paper's categorical arguments or the Thom/MO comparison results, despite this being a code-amenable field; reproducibility\_score is 0.22 and one concern is rated critical severity.",\\
+    "Two appendix arguments that other results depend on are visibly incomplete or contain notational errors independent of any context truncation: the Thom space/spectrum adjunction (Theorem thm:Thom-marvelous-appendix) explicitly omits verification of well-definedness and the triangle identities, and a localization lemma (Lemma lemma:localization-on-homs) displays an undefined category C' and an incomplete sentence in its proof.",\\
+    "The claim that global spectra are not the naive pointwise stabilization of global spaces -- which motivates the harder proof strategy for the paper's central stable theorem -- is asserted in a remark without an explicit counterexample or obstruction argument in the visible text.",\\
+    "A decisive homology input used in the group-completion argument for the Thom space map (Theorem thm:Gr-oup-completion) is quoted from inside another paper's proof rather than as a citable, hypothesis-explicit statement, and its claimed generality (all compact Lie groups and complete G-universes) is not confirmed to be covered by the source."\\
+  ]\\
+\}\\
+\end{quote}
+
+\subsection*{novelty (\texttt{sonnet[1m]})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "confidence": 0.55,\\
+  "missing\_prior\_art": [],\\
+  "novelty\_score": 0.75,\\
+  "related\_work": [\\
+    \{\\
+      "citation\_key": "CLL\_Global",\\
+      "delta": "This paper generalizes the Fin-global universal property (finite groups only) to the full framework of compact Lie groups via the Gepner-Henriques global orbit category Glo, requiring new notions of representation stability since the Fin-global genuine stability notion is insufficient in this generality.",\\
+      "relation": "builds\_on",\\
+      "title": "Fin-global infinity-categories (global homotopy theory for finite groups)"\\
+    \},\\
+    \{\\
+      "citation\_key": "CLL\_Clefts",\\
+      "delta": "Extends the equivariant presentability framework and universal property machinery from finite groups to arbitrary compact Lie groups, and reduces the compact-Lie-group case to full subcategories of the globally presentable case analogous to the finite-group argument.",\\
+      "relation": "builds\_on",\\
+      "title": "Equivariant presentability and universal properties for Fin-global infinity-categories"\\
+    \},\\
+    \{\\
+      "citation\_key": "schwede2018global",\\
+      "delta": "The paper's global infinity-category of global spaces/spectra recovers Schwede's pointset-model definition of global spectra as a special value (at the trivial group) and provides the missing infinity-categorical universal property and full Glo-functoriality that the pointset model itself does not supply.",\\
+      "relation": "prior\_art",\\
+      "title": "Global homotopy theory (pointset model of global spectra/spaces)"\\
+    \},\\
+    \{\\
+      "citation\_key": "barrero2021",\\
+      "delta": "Uses Barrero's pointset G-global spaces as the model whose Dwyer-Kan localization is identified with the free globally presentable global infinity-category, giving this pointset construction a universal-property characterization it previously lacked.",\\
+      "relation": "prior\_art",\\
+      "title": "G-global spaces (pointset model for compact Lie groups)"\\
+    \},\\
+    \{\\
+      "citation\_key": "schwede-stiefel",\\
+      "delta": "Identifies the value of the global infinity-category of global spectra at a compact Lie group G with the classical model category of G-global spectra, and supplies the missing infinity-categorical universal property for this pointset construction.",\\
+      "relation": "prior\_art",\\
+      "title": "G-global spectra"\\
+    \},\\
+    \{\\
+      "citation\_key": "gepner-nikolaus",\\
+      "delta": "Gepner and Nikolaus had announced a similar characterization of global spectra as a stabilization internal to S\_gl-modules, but the authors report (per communication with Gepner and Nikolaus) that the original argument contained a gap and it is unclear whether the claim is true; this paper supplies an independent, complete proof via a different route (representation stabilization as a smashing localization).",\\
+      "relation": "competing",\\
+      "title": "Announced stabilization characterization of global spectra (Gepner-Nikolaus)"\\
+    \},\\
+    \{\\
+      "citation\_key": "thom-oo",\\
+      "delta": "Generalizes the non-equivariant infinity-categorical construction of the Thom spectrum functor as a symmetric monoidal left adjoint extending the J-homomorphism to the equivariant and global settings via the new global infinity-category framework.",\\
+      "relation": "builds\_on",\\
+      "title": "The infinity-categorical (non-equivariant) Thom spectrum functor"\\
+    \},\\
+    \{\\
+      "citation\_key": "sagave-schlichtkrull-thom",\\
+      "delta": "Shows that the new infinity-categorical global Thom spectrum functor admits a pointset description agreeing with Schwede's global refinement of the Sagave-Schlichtkrull construction, thereby connecting the abstract universal construction to the classical explicit model.",\\
+      "relation": "prior\_art",\\
+      "title": "Pointset Thom spectrum construction of Sagave-Schlichtkrull (globalized by Schwede)"\\
+    \},\\
+    \{\\
+      "citation\_key": "gepnerhenriques2007orbispaces",\\
+      "delta": "Adopts the Gepner-Henriques global orbit category Glo as the indexing infinity-category for global infinity-categories, replacing the 2-categorical Glo\_Fin used in the finite-group theory; the paper must develop new techniques since Glo is not an n-category for any finite n, unlike Glo\_Fin.",\\
+      "relation": "prior\_art",\\
+      "title": "The global orbit category Glo (Gepner-Henriques)"\\
+    \},\\
+    \{\\
+      "citation\_key": "Linskens2023globalization",\\
+      "delta": "Adapts an idea from this work to define representation stability for pointed equivariantly presentable global infinity-categories, extending the technique to the compact-Lie-group and Thom-spectrum setting.",\\
+      "relation": "builds\_on",\\
+      "title": "Globalization techniques for parametrized stability (Linskens)"\\
+    \}\\
+  ],\\
+  "verdict": "significant"\\
+\}\\
+\end{quote}
+
+\subsection*{reproducibility (\texttt{gpt-5.5})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "code\_availability": "unspecified",\\
+  "code\_url": null,\\
+  "concerns": [\\
+    \{\\
+      "area": "code",\\
+      "description": "No code repository, formalization, or proof artifact is provided. For this math/code-amenable theory paper, reproducing the headline universal-property claims would require machine-checkable files such as `Proofs/GlobalInfinityCategories.lean` or an equivalent Coq/Agda development formalizing the definitions and main equivalences.",\\
+      "severity": "critical"\\
+    \},\\
+    \{\\
+      "area": "other",\\
+      "description": "The main unstable and stable global homotopy theory theorems are supported only by prose proofs in the paper context. Independent reproduction requires substantial expert manual verification rather than executable or formally checkable artifacts.",\\
+      "severity": "major"\\
+    \},\\
+    \{\\
+      "area": "other",\\
+      "description": "The Thom spectrum comparison and MO colimit results depend on long chains of categorical and point-set model-category arguments, but no companion proof scripts, notebooks, or minimal formal dependency graph are supplied to audit these dependencies mechanically.",\\
+      "severity": "major"\\
+    \},\\
+    \{\\
+      "area": "code",\\
+      "description": "No version-pinned source artifact, license, or release is stated for any reproducibility materials.",\\
+      "severity": "minor"\\
+    \}\\
+  ],\\
+  "confidence": 0.84,\\
+  "data\_availability": "unspecified",\\
+  "data\_url": null,\\
+  "environment": null,\\
+  "reproducibility\_score": 0.22\\
+\}\\
+\end{quote}
+
+\subsection*{summary (\texttt{claude-haiku-4-5})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "audience": "Algebraic topologists and homotopy theorists, particularly those working in equivariant homotopy theory, representation theory, and categorical foundations of topology",\\
+  "key\_contributions": [\\
+    "Framework of (Lie-)global \ensuremath{\infty}-categories formalizing families of \ensuremath{\infty}-categories indexed by compact Lie groups with restriction functors along group homomorphisms",\\
+    "Proof that unstable equivariant and global homotopy theory admit universal properties, extending results from finite groups to all compact Lie groups",\\
+    "Proof that stable equivariant and global homotopy theory admit universal properties in this framework",\\
+    "Characterization of the passage from unstable to stable equivariant and global homotopy theory as universally inverting the action of representation spheres",\\
+    "Definition of parametrized equivariant and global Thom spectrum functors that recover classical Thom spectrum constructions",\\
+    "Universal properties for symmetric monoidal enhancements of global and equivariant \ensuremath{\infty}-categories"\\
+  ],\\
+  "plain\_language\_summary": "In algebraic topology, researchers study how spaces and spectra (generalizations of spaces used to detect cohomology) behave when they have symmetries under group actions. This paper formalizes a framework called 'global \ensuremath{\infty}-categories' for handling families of such symmetric objects indexed by compact Lie groups (like circles and higher-dimensional rotation groups). These objects come with natural 'restriction' maps that send data from larger groups to smaller subgroups, which is essential for understanding how symmetries relate to each other.\textbackslash{}n\textbackslash{}nThe main achievement is proving that classical equivariant and global homotopy theory---the study of symmetric topological spaces---admits universal properties within this abstract categorical framework. This means there exists a canonical, most general object from which all others can be derived. The authors show that moving from 'unstable' to 'stable' equivariant homotopy (involving suspensions and stabilization) corresponds to formally inverting the action of representation spheres---a key technical result.\textbackslash{}n\textbackslash{}nAs an application, the paper develops a model-independent theory of Thom spectra (fundamental objects in algebraic topology like the bordism spectrum MO), showing that classical constructions are recovered from their modern abstract setting. This both simplifies theoretical foundations and opens doors to new generalizations and applications.",\\
+  "tldr": "The paper extends the theory of global \ensuremath{\infty}-categories from finite groups to all compact Lie groups, establishing universal properties for equivariant and global homotopy theory and providing a model-independent approach to Thom spectra."\\
+\}\\
+\end{quote}
+
+\subsection*{technical\_correctness (\texttt{opus[1m]})}
+\begin{quote}\small\ttfamily\raggedright
+\{\\
+  "claims": [\\
+    \{\\
+      "assessment": "unsupported",\\
+      "claim": "The global \ensuremath{\infty}-category \$\textbackslash{}\textbackslash{}ul\{\textbackslash{}\textbackslash{}mathfrak S\}\_\{gl\}\$ (built from Barrero's pointset model of \$G\$-global spaces) is the free globally presentable global \ensuremath{\infty}-category: for any globally presentable \$\textbackslash{}\textbackslash{}mathcal C\$, evaluation at the terminal object gives an equivalence \$\textbackslash{}\textbackslash{}ul\{Fun\}\^{}L(\textbackslash{}\textbackslash{}ul\{\textbackslash{}\textbackslash{}mathfrak S\}\_\{gl\},\textbackslash{}\textbackslash{}mathcal C)\textbackslash{}\textbackslash{}xrightarrow\{\textbackslash{}\textbackslash{}sim\}\textbackslash{}\textbackslash{}mathcal C\$.",\\
+      "evidence": "This is the paper's first headline result and the input to every later universal property (Theorems\~{}\textbackslash{}\textbackslash{}ref\{introthm:stable-equiv-main\}, \textbackslash{}\textbackslash{}ref\{introthm:stable-main\}, and the Thom comparison). The provided context contains only the statement and a prose sketch ('the proofs proceed by comparing the pointset models to certain global \ensuremath{\infty}-categories provided by the general theory'); the actual proof in Section\~{}\textbackslash{}\textbackslash{}ref\{sec:unstable-univ-prop\} falls inside the truncated region of the rendered body (marker at prompt line 1267), so no step of it could be checked. The paper ships no machine-checkable artifact for this statement either, in a field (math.AT) where at least the formal category-theoretic core --- free objects in a parametrized presentable setting, adjoint-functor/localization bookkeeping --- is amenable to proof assistants.",\\
+      "id": "TC-01",\\
+      "location": "Introduction, Theorem A (= Theorem\~{}\textbackslash{}\textbackslash{}ref\{thm:unstable-main\}), proved in Section\~{}\textbackslash{}\textbackslash{}ref\{sec:unstable-univ-prop\}",\\
+      "severity": "major",\\
+      "suggested\_fix": "Ship a formalization of the categorical skeleton of the argument (free globally presentable object, \$\textbackslash{}\textbackslash{}ul\{Fun\}\^{}L\$ evaluation equivalence) as e.g. `src/proofs/UnstableUniversalProperty.lean`, together with a reproducible dependency graph of the cited results (`proofs/dependency\_graph/unstable\_main.json`); at minimum, include the full proof text of Theorem\~{}\textbackslash{}\textbackslash{}ref\{thm:unstable-main\} in any version submitted for review."\\
+    \},\\
+    \{\\
+      "assessment": "unsupported",\\
+      "claim": "The global \ensuremath{\infty}-category \$\textbackslash{}\textbackslash{}ul\{\textbackslash{}\textbackslash{}mathfrak S\}\$ of \$G\$-equivariant spaces is the free equivariantly presentable global \ensuremath{\infty}-category.",\\
+      "evidence": "The paper states that this follows from TC-01 by exhibiting the pointset model of \$G\$-spaces as a full subcategory of \$G\$-global spaces and checking compatibility with the identification of Theorem\~{}\textbackslash{}\textbackslash{}ref\{thm:unstable-main\}. That reduction is plausible and matches the finite-group precedent in \textbackslash{}\textbackslash{}cite\{CLL\_Clefts\}, but the compatibility check is in the truncated portion of the text, and it inherits the unverified status of TC-01. No executable/formal artifact accompanies the claim.",\\
+      "id": "TC-02",\\
+      "location": "Introduction, Theorem B (= Corollary\~{}\textbackslash{}\textbackslash{}ref\{cor:equiv-spaces-universal\})",\\
+      "severity": "major",\\
+      "suggested\_fix": "Add the full-subcategory-plus-compatibility argument explicitly, and formalize the reduction step (free equivariantly presentable object as a full subcategory of the free globally presentable one) in e.g. `src/proofs/EquivariantSpacesUniversal.lean`."\\
+    \},\\
+    \{\\
+      "assessment": "unsupported",\\
+      "claim": "The box product of \textbackslash{}\textbackslash{}cites\{schwede2018global,barrero2021\} derives to the cartesian symmetric monoidal structure on \$\textbackslash{}\textbackslash{}ul\{\textbackslash{}\textbackslash{}mathfrak S\}\_\{gl\}\$, and this yields the initial globally presentably symmetric monoidal global \ensuremath{\infty}-category.",\\
+      "evidence": "Two distinct assertions are bundled: (i) the derived box product is cartesian, and (ii) the resulting object is initial among globally presentably symmetric monoidal global \ensuremath{\infty}-categories. Only fragments bearing on (i) are visible (Corollary\~{}\textbackslash{}\textbackslash{}ref\{cor:box-product-bifun\}, Corollary\~{}\textbackslash{}\textbackslash{}ref\{cor:cart-prod-homotopical\}); the proof of (ii) is truncated. The corollary is load-bearing: it is invoked verbatim later (e.g. the unique symmetric monoidal equivalence \$\textbackslash{}\textbackslash{}Phi\^{}\textbackslash{}\textbackslash{}otimes\textbackslash{}\textbackslash{}colon\textbackslash{}\textbackslash{}ul\{\textbackslash{}\textbackslash{}mathfrak S\}\_\{gl\}\^{}\textbackslash{}\textbackslash{}otimes\textbackslash{}\textbackslash{}iso\textbackslash{}\textbackslash{}ul\{Spc\}\_\{\textbackslash{}\textbackslash{}Glo\}\^{}\textbackslash{}\textbackslash{}times\$ used throughout §\textbackslash{}\textbackslash{}ref\{subsec:model-thom\}). No executable artifact is provided.",\\
+      "id": "TC-03",\\
+      "location": "Introduction, Corollary\~{}\textbackslash{}\textbackslash{}ref\{cor:S-gl-times-initial\} (equivariant analogue: Corollary\~{}\textbackslash{}\textbackslash{}ref\{cor:S-equiv-times-initial\})",\\
+      "severity": "major",\\
+      "suggested\_fix": "Separate (i) and (ii) into two statements with independent proofs, and formalize the initiality half in e.g. `src/proofs/GlobalSpacesSymMonInitial.lean`."\\
+    \},\\
+    \{\\
+      "assessment": "unsupported",\\
+      "claim": "The categories of representation stable equivariantly (resp. globally) presentable global \ensuremath{\infty}-categories are smashing localizations of the corresponding categories of presentable global \ensuremath{\infty}-categories; in particular free representation stable objects exist.",\\
+      "evidence": "This existence result is what makes Theorems\~{}\textbackslash{}\textbackslash{}ref\{introthm:stable-equiv-main\} and\~{}\textbackslash{}\textbackslash{}ref\{introthm:stable-main\} meaningful (there is nothing to identify with \$\textbackslash{}\textbackslash{}ul\{\textbackslash{}\textbackslash{}mathfrak Sp\}\$/\$\textbackslash{}\textbackslash{}ul\{\textbackslash{}\textbackslash{}mathfrak Sp\}\_\{gl\}\$ unless the free objects exist). Its proof --- a parametrized Lurie tensor product plus the smashing-localization machinery of \textbackslash{}\textbackslash{}cite\{HA\} --- lies entirely in the truncated Section\~{}\textbackslash{}\textbackslash{}ref\{sec:rep-stable\} and could not be checked; no formal artifact accompanies it. The definition of representation stability (\$S\^{}V\textbackslash{}\textbackslash{}otimes-\$ invertible on \$\textbackslash{}\textbackslash{}mathcal C(G)\$ for all \$G\$ and all finite-dimensional \$G\$-representations \$V\$) is itself stated only informally in the introduction.",\\
+      "id": "TC-04",\\
+      "location": "Introduction, 'Stable results'; Proposition\~{}\textbackslash{}\textbackslash{}ref\{prop:lurie-tensor-exists\} and Corollary\~{}\textbackslash{}\textbackslash{}ref\{cor:stabilization-exists\}, Section\~{}\textbackslash{}\textbackslash{}ref\{sec:rep-stable\}",\\
+      "severity": "major",\\
+      "suggested\_fix": "State the smashing-localization criterion being verified and formalize the idempotent-algebra/smashing-localization step in e.g. `src/proofs/RepresentationStability.lean`; include the existence proof of the parametrized Lurie tensor product in full."\\
+    \},\\
+    \{\\
+      "assessment": "unsupported",\\
+      "claim": "\$\textbackslash{}\textbackslash{}ul\{\textbackslash{}\textbackslash{}mathfrak Sp\}\$ (orthogonal spectra localized at Mandell--May equivariant weak equivalences) is the free representation stable equivariantly presentable global \ensuremath{\infty}-category, and the smash product makes it the initial representation stable equivariantly presentably symmetric monoidal global \ensuremath{\infty}-category.",\\
+      "evidence": "The stated strategy --- Cnossen's \textbackslash{}\textbackslash{}cite\{twisted-ambidexterity\} pointwise description of representation stabilization, combined with Theorem\~{}\textbackslash{}\textbackslash{}ref\{introthm:unstable-equiv\} and Gepner--Meier \textbackslash{}\textbackslash{}cite\{gepnermeier2020equivTMF\} --- is coherent, but the whole of Section\~{}\textbackslash{}\textbackslash{}ref\{sec:equiv-spectra\} is truncated from the provided context, so neither the pointwise-stabilization reduction nor the monoidal upgrade could be verified. The result also depends on the unverified TC-02 and TC-04. No machine-checkable artifact is shipped.",\\
+      "id": "TC-05",\\
+      "location": "Introduction, Theorem C (= Theorem\~{}\textbackslash{}\textbackslash{}ref\{thm:equiv-main\} and Corollary\~{}\textbackslash{}\textbackslash{}ref\{cor:equiv-spectra-smash\}), Section\~{}\textbackslash{}\textbackslash{}ref\{sec:equiv-spectra\}",\\
+      "severity": "major",\\
+      "suggested\_fix": "Formalize the reduction 'representation stabilization is computed pointwise in the equivariantly presentable setting' (the load-bearing new input) as e.g. `src/proofs/EquivariantSpectraUniversal.lean`, and state explicitly which hypotheses of \textbackslash{}\textbackslash{}cite\{twisted-ambidexterity\} are being used."\\
+    \},\\
+    \{\\
+      "assessment": "unsupported",\\
+      "claim": "\$\textbackslash{}\textbackslash{}ul\{\textbackslash{}\textbackslash{}mathfrak Sp\}\_\{gl\}\$ (orthogonal spectra localized at the \$G\$-global weak equivalences of \textbackslash{}\textbackslash{}cite\{schwede-stiefel\}) is the free representation stable globally presentable global \ensuremath{\infty}-category, and the smash product makes it the initial such symmetric monoidal one.",\\
+      "evidence": "This is the paper's most delicate result: the authors themselves stress that global representation stabilization is 'a genuinely parametrized phenomenon' and not the pointwise stabilization of global spaces, and they note that a closely related claim announced by Gepner--Nikolaus \textbackslash{}\textbackslash{}cite\{gepner-nikolaus\} turned out to have a gap. Precisely this argument (Section\~{}\textbackslash{}\textbackslash{}ref\{sec:global-spectra\}) is absent from the provided context, so the step that distinguishes the correct statement from the gapped one could not be inspected. No formal or computational artifact supports it.",\\
+      "id": "TC-06",\\
+      "location": "Introduction, Theorem D (= Theorem\~{}\textbackslash{}\textbackslash{}ref\{thm:stable-main\} and Corollary\~{}\textbackslash{}\textbackslash{}ref\{cor:global-spectra-smash\}), Section\~{}\textbackslash{}\textbackslash{}ref\{sec:global-spectra\}",\\
+      "severity": "major",\\
+      "suggested\_fix": "Isolate the key non-pointwise step as a standalone proposition with its own proof, formalize the parametrized-stabilization argument in e.g. `src/proofs/GlobalSpectraUniversal.lean`, and state in Remark\~{}\textbackslash{}\textbackslash{}ref\{rk:gepner-nikolaus\} exactly which hypothesis the Gepner--Nikolaus argument was missing and where the present proof supplies it."\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "A similar characterization of global spectra announced by Gepner and Nikolaus \textbackslash{}\textbackslash{}cite\{gepner-nikolaus\} rests on a gapped argument, and 'it is not clear whether their original claim is true.'",\\
+      "evidence": "The only support offered in the visible text is 'as we learned from them' --- i.e. private communication, corroborated by the acknowledgement thanking Thomas Nikolaus for discussions. This is a negative claim about a third party's unpublished work; the substantive justification is deferred to Remark\~{}\textbackslash{}\textbackslash{}ref\{rk:gepner-nikolaus\}, which lies in the truncated region and could not be checked. Nothing in the provided text identifies the gap.",\\
+      "id": "TC-07",\\
+      "location": "Introduction, paragraph following Theorem\~{}\textbackslash{}\textbackslash{}ref\{introthm:stable-main\}; cf. Remark\~{}\textbackslash{}\textbackslash{}ref\{rk:gepner-nikolaus\}",\\
+      "severity": "minor",\\
+      "suggested\_fix": "In Remark\~{}\textbackslash{}\textbackslash{}ref\{rk:gepner-nikolaus\}, state the specific step that fails and what would be needed to repair it, and note explicitly that the assessment is based on communication with the authors of \textbackslash{}\textbackslash{}cite\{gepner-nikolaus\}."\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "Global spectra are not the naive pointwise stabilization of global spaces.",\\
+      "evidence": "This negative claim is what forces the different (harder) proof strategy for Theorem\~{}\textbackslash{}\textbackslash{}ref\{introthm:stable-main\} and is used to justify the whole framework of representation stability. Its justification is entirely delegated to Remark\~{}\textbackslash{}\textbackslash{}ref\{rk:not-naive-stab\}, which is in the truncated region; no counterexample or obstruction argument appears in the provided text.",\\
+      "id": "TC-08",\\
+      "location": "Introduction, 'Stable results'; Remark\~{}\textbackslash{}\textbackslash{}ref\{rk:not-naive-stab\}",\\
+      "severity": "minor",\\
+      "suggested\_fix": "Promote the remark to a proposition with an explicit counterexample (e.g. a compact Lie group \$G\$ and a global spectrum where the pointwise stabilization visibly differs), so the necessity of representation stability is demonstrated rather than asserted."\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "The \ensuremath{\infty}-categorically defined global Thom spectrum functor \$\textbackslash{}\textbackslash{}ul\{Th\}\_\{gl\}\^{}\textbackslash{}\textbackslash{}otimes\$ agrees, under the equivalences \$\textbackslash{}\textbackslash{}psi\^{}\textbackslash{}\textbackslash{}otimes,\textbackslash{}\textbackslash{}Psi\^{}\textbackslash{}\textbackslash{}otimes\$, with the pointset (Sagave--Schlichtkrull/Schwede) construction \$\textbackslash{}\textbackslash{}ul\{\textbackslash{}\textbackslash{}mathfrak\{Th\}\}\_\{gl\}\^{}\textbackslash{}\textbackslash{}otimes\$.",\\
+      "evidence": "The proof is visible and its skeleton is sound: both functors are (global) symmetric monoidal left adjoints, so the comparison reduces to \$\textbackslash{}\textbackslash{}ul\{Rep\}\^{}\textbackslash{}\textbackslash{}oplus\$ (resp. \$\textbackslash{}\textbackslash{}ul\{Vect\}\^{}\textbackslash{}\textbackslash{}oplus\$) by the universal property of symmetric monoidal cocompletion and of group completion, and the residual data is a natural equivalence between two functors landing in terminal objects, hence unique. However, every load-bearing input --- Theorem\~{}\textbackslash{}\textbackslash{}ref\{thm:comparing-inputs\}, Proposition\~{}\textbackslash{}\textbackslash{}ref\{prop:gl-Thom-space-la\}, Proposition\~{}\textbackslash{}\textbackslash{}ref\{prop:th-on-corep-sym-mon\}, Corollary\~{}\textbackslash{}\textbackslash{}ref\{cor:thom-space-vs-thom-spectra\}, and the left-adjointness of \$\textbackslash{}\textbackslash{}ul\{\textbackslash{}\textbackslash{}mathfrak\{Th\}\}\_\{gl\}\$ supplied by Appendix\~{}\textbackslash{}\textbackslash{}ref\{app:thom-Stefan-functor\} --- is either truncated or itself only partially checkable here, and no executable artifact validates the comparison on any concrete example.",\\
+      "id": "TC-09",\\
+      "location": "§\textbackslash{}\textbackslash{}ref\{subsec:model-thom\}, Theorem\~{}\textbackslash{}\textbackslash{}ref\{thm:comparison-Thom\}",\\
+      "severity": "major",\\
+      "suggested\_fix": "Add a sanity-check artifact computing both sides on a small family of examples (e.g. `experiments/thom\_comparison/check\_MO\_MU\_low\_degrees.py` verifying agreement of \$\textbackslash{}\textbackslash{}pi\_*\^{}G\$ for \$G\$ trivial, \$C\_2\$, \$U(1)\$ in low degrees), and make the dependency list of Theorem\~{}\textbackslash{}\textbackslash{}ref\{thm:comparison-Thom\} explicit at the head of the proof."\\
+    \},\\
+    \{\\
+      "assessment": "unsupported",\\
+      "claim": "\$\textbackslash{}\textbackslash{}cat\{MO\}\textbackslash{}\textbackslash{}simeq\textbackslash{}\textbackslash{}colim\_\{\textbackslash{}\textbackslash{}ul\{VRep\}\_\{[0]\}\}\textbackslash{}\textbackslash{}ul\{\textbackslash{}\textbackslash{}mathfrak J\}\_\{gl\}\$: the global real bordism spectrum is the globally parametrized colimit of the global \$J\$-homomorphism restricted to zero-dimensional virtual representations (and the \$G\$-equivariant analogue \$\textbackslash{}\textbackslash{}cat\{MO\}\_G\$, Corollary\~{}\textbackslash{}\textbackslash{}ref\{cor:MOG-as-colim\}).",\\
+      "evidence": "The visible proof is internally coherent: \$\textbackslash{}\textbackslash{}ul\{VRep\}=\textbackslash{}\textbackslash{}coprod\_\{d\textbackslash{}\textbackslash{}in\textbackslash{}\textbackslash{}Z\}\textbackslash{}\textbackslash{}ul\{VRep\}\_\{[d]\}\$, the total colimit is terminal by Proposition\~{}\textbackslash{}\textbackslash{}ref\{prop:MOP-as-colim\}, and a coproduct of maps in the \ensuremath{\infty}-topos \$\textbackslash{}\textbackslash{}mathfrak S\_\{gl\}[\textbackslash{}\textbackslash{}cat\{BOP\}]\textbackslash{}\textbackslash{}simeq(\textbackslash{}\textbackslash{}mathfrak S\_\{gl\})\_\{/\textbackslash{}\textbackslash{}cat\{BOP\}\}\$ is an equivalence iff each summand is --- a valid \ensuremath{\infty}-topos argument. But the conclusion rests on Proposition\~{}\textbackslash{}\textbackslash{}ref\{prop:MOP-as-colim\}, which in turn rests on Theorem\~{}\textbackslash{}\textbackslash{}ref\{thm:comparison-Thom\} (TC-09) and on the truncated identification of the global Thom spectrum functor, and this headline identification of a classical bordism spectrum is exactly the kind of statement that admits independent verification (comparison of homotopy/homology of the two sides) but ships with none.",\\
+      "id": "TC-10",\\
+      "location": "Introduction, Theorem E; §\textbackslash{}\textbackslash{}ref\{subsec:model-thom\}, Theorem\~{}\textbackslash{}\textbackslash{}ref\{thm:MO-as-colim\}, Theorem\~{}\textbackslash{}\textbackslash{}ref\{thm:MOP-Orb-colim\}, Corollary\~{}\textbackslash{}\textbackslash{}ref\{cor:MOG-as-colim\}",\\
+      "severity": "major",\\
+      "suggested\_fix": "Add a verification artifact, e.g. `experiments/MO\_as\_colim/verify\_homotopy.py`, comparing \$\textbackslash{}\textbackslash{}pi\_*\^{}G(\textbackslash{}\textbackslash{}cat\{MO\})\$ against the computed parametrized colimit for \$G\textbackslash{}\textbackslash{}in\textbackslash{}\textbackslash{}\{1,C\_2,O(1),U(1)\textbackslash{}\textbackslash{}\}\$ in a range of degrees, and cross-check the cocone against the Thom classes of \textbackslash{}\textbackslash{}cite\{schwede2018global\}*\{Construction 6.1.15\} as described in Remark\~{}\textbackslash{}\textbackslash{}ref\{rk:univ-cocone-thom-classes\}."\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "The map \$i\textbackslash{}\textbackslash{}colon\textbackslash{}\textbackslash{}cat\{Gr\}\textbackslash{}\textbackslash{}to\textbackslash{}\textbackslash{}cat\{BOP\}\$ of ultra-commutative monoids is a global group completion.",\\
+      "evidence": "The visible proof is well-structured and the individual steps are correctly deployed: closedness of \$\textbackslash{}\textbackslash{}cat\{Gr\}\$ and \$\textbackslash{}\textbackslash{}cat\{BOP\}\$ via continuous injections between compact spaces; reduction (through Lemma\~{}\textbackslash{}\textbackslash{}ref\{lemma:id-g-fixed-points-vs-ev\}) to \$i(\textbackslash{}\textbackslash{}Uu\_G)\^{}G\$ being a group completion in \$\textbackslash{}\textbackslash{}CMon(\textbackslash{}\textbackslash{}Spc)\$; the homology-localization input from \textbackslash{}\textbackslash{}cite\{schwede2018global\}*\{Theorem 2.5.33\}; McDuff--Segal in the form of \textbackslash{}\textbackslash{}cite\{nikolaus-group-completion\}*\{Theorem 1\}; and a homological Whitehead argument that correctly notes that both \$X\$ (the group completion) and \$\textbackslash{}\textbackslash{}cat\{BOP\}(\textbackslash{}\textbackslash{}Uu\_G)\^{}G\$ are grouplike, so \$\textbackslash{}\textbackslash{}pi\_1\$ acts trivially on higher homotopy. The gap is dependency, not logic: the decisive homology statement is quoted from the interior of another paper's proof rather than as a citable statement, and it is asserted for every compact Lie group \$G\$ and every complete \$G\$-universe without indicating that the cited proof covers that generality.",\\
+      "id": "TC-11",\\
+      "location": "§\textbackslash{}\textbackslash{}ref\{subsec:model-thom\}, Theorem\~{}\textbackslash{}\textbackslash{}ref\{thm:Gr-oup-completion\}",\\
+      "severity": "minor",\\
+      "suggested\_fix": "Quote the needed consequence of \textbackslash{}\textbackslash{}cite\{schwede2018global\}*\{Theorem 2.5.33\} as a displayed statement with its hypotheses, and confirm explicitly that it applies for all compact Lie groups \$G\$ and all complete \$G\$-universes \$\textbackslash{}\textbackslash{}Uu\_G\$."\\
+    \},\\
+    \{\\
+      "assessment": "supported",\\
+      "claim": "For every compact Lie group \$G\$, the inclusion \$\textbackslash{}\textbackslash{}mathfrak O\_\{G\textbackslash{}\textbackslash{}text\{-\}gl\}\textbackslash{}\textbackslash{}hookrightarrow\textbackslash{}\textbackslash{}mathfrak S\_\{G\textbackslash{}\textbackslash{}text\{-\}gl\}\$ extends to an equivalence \$\textbackslash{}\textbackslash{}PSh(\textbackslash{}\textbackslash{}mathfrak O\_\{G\textbackslash{}\textbackslash{}text\{-\}gl\})\textbackslash{}\textbackslash{}iso\textbackslash{}\textbackslash{}mathfrak S\_\{G\textbackslash{}\textbackslash{}text\{-\}gl\}\$ (\ensuremath{\infty}-categorical global Elmendorf theorem).",\\
+      "evidence": "The proof is complete in the provided text and each step is valid: \$\textbackslash{}\textbackslash{}cat L(V,-)\textbackslash{}\textbackslash{}times\_\textbackslash{}\textbackslash{}phi G\$ is cofibrant and enriched-corepresents \$(-)\^{}\textbackslash{}\textbackslash{}phi\textbackslash{}\textbackslash{}circ\textbackslash{}\textbackslash{}ev\_V\$, so by Corollary\~{}\textbackslash{}\textbackslash{}ref\{cor:corep-Top\} it corepresents the right-derived functor; the identification \$X(V)\^{}\textbackslash{}\textbackslash{}phi\textbackslash{}\textbackslash{}simeq X(\textbackslash{}\textbackslash{}Uu\_H)\^{}\textbackslash{}\textbackslash{}phi\$ uses an exhaustive filtration by finite-dimensional subrepresentations with fibrancy giving weak equivalences and cofibrancy giving closed embeddings, plus \textbackslash{}\textbackslash{}cite\{schwede2018global\}*\{Proposition B.1(ii)\} to commute fixed points past the sequential colimit; cocontinuity is reduced to coproducts and pushouts via h-cofibrancy. The endgame (conservative right adjoint plus cocontinuity of \$\textbackslash{}\textbackslash{}hom(X,-)\$ giving full faithfulness by \textbackslash{}\textbackslash{}cite\{HTT\}*\{Proposition 5.1.6.10\}) is the standard and correct criterion. Remark\~{}\textbackslash{}\textbackslash{}ref\{rk:mathfrak-O-gl-vs-Stefan\} also reconciles \$\textbackslash{}\textbackslash{}mathfrak O\_\{gl\}\$ with Schwede's \$\textbackslash{}\textbackslash{}cat O\_\{gl\}\$.",\\
+      "id": "TC-12",\\
+      "location": "§ 'A presheaf model', Proposition\~{}\textbackslash{}\textbackslash{}ref\{prop:global-Elmendorf\} with Lemma\~{}\textbackslash{}\textbackslash{}ref\{lemma:fixed-point-corep\}",\\
+      "severity": "info",\\
+      "suggested\_fix": null\\
+    \},\\
+    \{\\
+      "assessment": "supported",\\
+      "claim": "For a free action of a compact Lie group \$G\$ on Hausdorff spaces, a \$G\$-map \$f\textbackslash{}\textbackslash{}colon X\textbackslash{}\textbackslash{}to Y\$ is a non-equivariant weak homotopy equivalence iff \$f/G\textbackslash{}\textbackslash{}colon X/G\textbackslash{}\textbackslash{}to Y/G\$ is (Lemma\~{}\textbackslash{}\textbackslash{}ref\{lemma:quotient-we\}), the square \$X\textbackslash{}\textbackslash{}to X/G\$, \$Y\textbackslash{}\textbackslash{}to Y/G\$ being a pullback (Lemma\~{}\textbackslash{}\textbackslash{}ref\{lemma:quotient-pb\}).",\\
+      "evidence": "Fully proved in the provided text and correct as stated. Lemma\~{}\textbackslash{}\textbackslash{}ref\{lemma:quotient-pb\} first checks bijectivity of the comparison map on underlying sets fibrewise (free orbits; an equivariant self-map of \$G\$ is bijective), then upgrades to a homeomorphism in compactly generated weak Hausdorff spaces by testing against compact \$K\$, reducing to the compact case via \textbackslash{}\textbackslash{}cite\{tom-Dieck-trafo\}*\{Propositions 3.1(v), 3.6(ii)\} and \textbackslash{}\textbackslash{}cite\{schwede2018global\}*\{Proposition B.13(iii)\}, and closing with 'continuous bijection from a compact space to a weak Hausdorff space is a homeomorphism'. Lemma\~{}\textbackslash{}\textbackslash{}ref\{lemma:quotient-we\} then combines the Serre fibration input of \textbackslash{}\textbackslash{}cite\{koerschgen\}*\{Theorem A.9\} with the pullback to get a homotopy pullback in \$\textbackslash{}\textbackslash{}Spc\$, and applies \textbackslash{}\textbackslash{}cite\{HTT\}*\{Lemma 6.2.3.16\} using that \$Y\textbackslash{}\textbackslash{}to Y/G\$ is surjective, hence an effective epimorphism. The Hausdorff hypotheses are used exactly where needed.",\\
+      "id": "TC-13",\\
+      "location": "Appendix\~{}\textbackslash{}\textbackslash{}ref\{app:here-be-pointsets\}, Lemmas\~{}\textbackslash{}\textbackslash{}ref\{lemma:quotient-map-is-fib\}, \textbackslash{}\textbackslash{}ref\{lemma:quotient-pb\}, \textbackslash{}\textbackslash{}ref\{lemma:quotient-we\}",\\
+      "severity": "info",\\
+      "suggested\_fix": null\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "The pointset Thom space functor \$T\textbackslash{}\textbackslash{}colon\textbackslash{}\textbackslash{}cat\{\$\textbackslash{}\textbackslash{}bm G\$-Top\}\_\{/\textbackslash{}\textbackslash{}Gr(V)\}\textbackslash{}\textbackslash{}rightleftarrows\textbackslash{}\textbackslash{}cat\{\$\textbackslash{}\textbackslash{}bm G\$-Top\}\_*\textbackslash{}\textbackslash{}colon q\_V\$ is an adjunction, and globally the Thom space/Thom spectrum functors are left Quillen and fully homotopical for the \$G\$-global model structures.",\\
+      "evidence": "The right adjoint \$\textbackslash{}\textbackslash{}Omega\_V(X)=\textbackslash{}\textbackslash{}coprod\_\{d\textbackslash{}\textbackslash{}ge0\}\textbackslash{}\textbackslash{}cat L(\textbackslash{}\textbackslash{}R\^{}d,V)\textbackslash{}\textbackslash{}times\_\{\textbackslash{}\textbackslash{}O(d)\}\textbackslash{}\textbackslash{}Omega\^{}dX\$ and the unit/counit formulas are given explicitly and look correct, but the appendix explicitly omits the verifications that \$\textbackslash{}\textbackslash{}eta(f)\$ is well defined, that \$\textbackslash{}\textbackslash{}eta(f)\$ and \$\textbackslash{}\textbackslash{}epsilon\_Z\$ are continuous, and that they satisfy the triangle identities --- i.e. the adjunction on which the whole appendix (and hence left-adjointness of \$\textbackslash{}\textbackslash{}ul\{\textbackslash{}\textbackslash{}mathfrak\{Th\}\}\_\{gl\}\$ used in TC-09) rests is asserted rather than proved. The passage also contains notational slips that obstruct checking: the fibre is written '\$\textbackslash{}\textbackslash{}Omega\^{}L=\textbackslash{}\textbackslash{}maps\_*(S\^{}L,Z)\$' with the target named \$Z\$ while the ambient functor is applied to \$X\$ and the \$Z\$ argument is dropped, and the unit condition is written '\$q\_\{T(f)\}\textbackslash{}\textbackslash{}circ\textbackslash{}\textbackslash{}eta(f)=f\$' where the structure map of \$q\_V(T(f))\$ over \$\textbackslash{}\textbackslash{}Gr(V)\$ is meant. Well-definedness of \$\textbackslash{}\textbackslash{}eta(f)\$ in particular is not obvious since \$\textbackslash{}\textbackslash{}psi\$ is only 'any' isometric embedding with image \$f(a)\$, so independence of the choice modulo the \$\textbackslash{}\textbackslash{}O(d)\$-action needs an argument.",\\
+      "id": "TC-14",\\
+      "location": "Appendix\~{}\textbackslash{}\textbackslash{}ref\{app:thom-Stefan-functor\} (by S. Schwede), Theorem\~{}\textbackslash{}\textbackslash{}ref\{thm:Thom-marvelous-appendix\} and Construction\~{}\textbackslash{}\textbackslash{}ref\{constr:thom-level-right-adjt\}",\\
+      "severity": "minor",\\
+      "suggested\_fix": "Include the omitted verifications (at least well-definedness of \$\textbackslash{}\textbackslash{}eta(f)\$ under the \$\textbackslash{}\textbackslash{}O(d)\$-quotient and the two triangle identities), write the fibre as \$\textbackslash{}\textbackslash{}Omega\^{}L X=\textbackslash{}\textbackslash{}maps\_*(S\^{}L,X)\$ consistently, and correct the unit condition to refer to the structure map of \$q\_V(T(f))\textbackslash{}\textbackslash{}to\textbackslash{}\textbackslash{}Gr(V)\$."\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "Automorphism computation: \$\textbackslash{}\textbackslash{}Aut(\textbackslash{}\textbackslash{}ul\{Vect\}\^{}\textbackslash{}\textbackslash{}oplus)\textbackslash{}\textbackslash{}simeq K(\textbackslash{}\textbackslash{}Z/2,1)\$ and \$\textbackslash{}\textbackslash{}ev\_\textbackslash{}\textbackslash{}R\textbackslash{}\textbackslash{}colon\textbackslash{}\textbackslash{}Aut(\textbackslash{}\textbackslash{}ul\{Vect\}\^{}\textbackslash{}\textbackslash{}oplus)\textbackslash{}\textbackslash{}to B\textbackslash{}\textbackslash{}Aut(\textbackslash{}\textbackslash{}R)\$ is an equivalence, so the fibre over \$\textbackslash{}\textbackslash{}R\$ is contractible (Theorem\~{}\textbackslash{}\textbackslash{}ref\{thm:Aut-Vect-oplus\}).",\\
+      "evidence": "The endgame is checkable and essentially right: both source and target are \$K(\textbackslash{}\textbackslash{}Z/2,1)\$'s, and scalar multiplication by \$-1\$ on each representation gives an automorphism evaluating to the non-trivial automorphism of \$\textbackslash{}\textbackslash{}R\$, so the induced map on \$\textbackslash{}\textbackslash{}pi\_1\$ is a non-trivial endomorphism of \$\textbackslash{}\textbackslash{}Z/2\$ and hence an isomorphism. Two caveats: the wording 'the evaluation map is non-zero and hence an equivalence' elides that the argument is about \$\textbackslash{}\textbackslash{}pi\_1\$ and uses that \$\textbackslash{}\textbackslash{}Z/2\$ has no non-trivial proper quotients; and both inputs identifying the source as \$K(\textbackslash{}\textbackslash{}Z/2,1)\$ (Propositions\~{}\textbackslash{}\textbackslash{}ref\{prop:Aut-Vect-delta\} and\~{}\textbackslash{}\textbackslash{}ref\{prop:comparing-Aut\}, the latter comparing \$\textbackslash{}\textbackslash{}Aut(\textbackslash{}\textbackslash{}ul\{Vect\}\^{}\textbackslash{}\textbackslash{}oplus)\$ with the discretized \$\textbackslash{}\textbackslash{}ul\{Vect\}\^{}\textbackslash{}\textbackslash{}amalg\_\textbackslash{}\textbackslash{}delta\$) lie in the truncated region and could not be verified.",\\
+      "id": "TC-15",\\
+      "location": "§\textbackslash{}\textbackslash{}ref\{subsubsec:comparison\}, proof of Theorem\~{}\textbackslash{}\textbackslash{}ref\{thm:Aut-Vect-oplus\} (via Propositions\~{}\textbackslash{}\textbackslash{}ref\{prop:Aut-Vect-delta\} and\~{}\textbackslash{}\textbackslash{}ref\{prop:comparing-Aut\})",\\
+      "severity": "minor",\\
+      "suggested\_fix": "Rephrase as 'induces a non-trivial, hence bijective, map on \$\textbackslash{}\textbackslash{}pi\_1\textbackslash{}\textbackslash{}cong\textbackslash{}\textbackslash{}Z/2\$, and both spaces are \$1\$-truncated with trivial \$\textbackslash{}\textbackslash{}pi\_0\$', and state which of Propositions\~{}\textbackslash{}\textbackslash{}ref\{prop:Aut-Vect-delta\}/\textbackslash{}\textbackslash{}ref\{prop:comparing-Aut\} supplies each of \$\textbackslash{}\textbackslash{}pi\_0\$ and \$\textbackslash{}\textbackslash{}pi\_1\$."\\
+    \},\\
+    \{\\
+      "assessment": "partially\_supported",\\
+      "claim": "Localization on hom-spaces: for a locally fibrant simplicial model category \$\textbackslash{}\textbackslash{}cat C\$ with cofibrant replacement \$\textbackslash{}\textbackslash{}alpha\textbackslash{}\textbackslash{}colon X'\textbackslash{}\textbackslash{}iso X\$ and fibrant replacement \$\textbackslash{}\textbackslash{}beta\textbackslash{}\textbackslash{}colon Y\textbackslash{}\textbackslash{}iso Y'\$, the map \$\textbackslash{}\textbackslash{}maps\_\{\textbackslash{}\textbackslash{}cat C\}(X,Y)\textbackslash{}\textbackslash{}simeq\textbackslash{}\textbackslash{}hom\_\{N\_\textbackslash{}\textbackslash{}Delta(\textbackslash{}\textbackslash{}cat C)\}(X,Y)\textbackslash{}\textbackslash{}to\textbackslash{}\textbackslash{}hom\_\{N\_\textbackslash{}\textbackslash{}Delta(\textbackslash{}\textbackslash{}cat C)[\textbackslash{}\textbackslash{}Ww\^{}\{-1\}]\}(X,Y)\$ agrees up to equivalence with \$\textbackslash{}\textbackslash{}beta\textbackslash{}\textbackslash{}circ-\textbackslash{}\textbackslash{}circ\textbackslash{}\textbackslash{}alpha\$ (Lemma\~{}\textbackslash{}\textbackslash{}ref\{lemma:localization-on-homs\}), and a functor corepresented by a cofibrant object is right Quillen with corepresented derived functor (Corollary\~{}\textbackslash{}\textbackslash{}ref\{cor:corep-Top\}).",\\
+      "evidence": "The mathematical content is standard and the reduction is correct (replace by cofibrant--fibrant, use that \$\textbackslash{}\textbackslash{}maps\$ is a right Quillen bifunctor, invoke \textbackslash{}\textbackslash{}cite\{dk-modern\}*\{Corollary 1.4.3\} for the localization being an equivalence on cofibrant--fibrant objects). Two defects in the write-up matter for checking: the displayed target is typeset as \$\textbackslash{}\textbackslash{}hom\_\{N\_\textbackslash{}\textbackslash{}Delta(\textbackslash{}\textbackslash{}cat C')[\textbackslash{}\textbackslash{}Ww\^{}\{-1\}]\}(X,Y)\$, i.e. over an undefined category \$\textbackslash{}\textbackslash{}cat C'\$ rather than \$\textbackslash{}\textbackslash{}cat C\$; and the corollary's proof sentence 'it suffices to show that the two functors \$\textbackslash{}\textbackslash{}cat\{C\}[\textbackslash{}\textbackslash{}Ww\^{}\{-1\}]\$ agree after restriction to the full subcategory spanned by the cofibrant-fibrant objects' is grammatically incomplete (the two functors *out of* \$\textbackslash{}\textbackslash{}cat C[\textbackslash{}\textbackslash{}Ww\^{}\{-1\}]\$), leaving the intended comparison implicit. These results are load-bearing: Corollary\~{}\textbackslash{}\textbackslash{}ref\{cor:corep-Top\} is used in the proof of Lemma\~{}\textbackslash{}\textbackslash{}ref\{lemma:fixed-point-corep\} (TC-12).",\\
+      "id": "TC-16",\\
+      "location": "Appendix\~{}\textbackslash{}\textbackslash{}ref\{app:model-cat\}, Lemma\~{}\textbackslash{}\textbackslash{}ref\{lemma:localization-on-homs\} and the following Corollary / Corollary\~{}\textbackslash{}\textbackslash{}ref\{cor:corep-Top\}",\\
+      "severity": "minor",\\
+      "suggested\_fix": "Fix the typo \$\textbackslash{}\textbackslash{}cat C'\textbackslash{}\textbackslash{}to\textbackslash{}\textbackslash{}cat C\$ in the display, and rewrite the corollary's proof to name the two functors \$\textbackslash{}\textbackslash{}cat C[\textbackslash{}\textbackslash{}Ww\^{}\{-1\}]\textbackslash{}\textbackslash{}to\textbackslash{}\textbackslash{}Spc\$ being compared (the derived \$G\$ and the corepresented functor \$\textbackslash{}\textbackslash{}hom(X,-)\$)."\\
+    \},\\
+    \{\\
+      "assessment": "supported",\\
+      "claim": "The paper makes no algorithmic complexity assertions; the \$O(\textbackslash{}\textbackslash{}cdot)\$ symbols occurring throughout denote orthogonal groups of inner product spaces, not asymptotic complexity.",\\
+      "evidence": "Every extracted token in the artifact's complexity list (\$O(V)\$, \$O(W-V)\$, \$O(n\_1|\textbackslash{}\textbackslash{}cdots|n\_r)\$, \$O(m+n)\$, …) resolves in context to an orthogonal group or to Schwede's block-sum notation for subgroups of \$\textbackslash{}\textbackslash{}O(n\_1+\textbackslash{}\textbackslash{}cdots+n\_r)\$; there is no runtime, memory, or asymptotic-cost claim anywhere in the provided text, so there is no complexity assertion to audit and none is needed.",\\
+      "id": "TC-17",\\
+      "location": "Throughout (e.g. \$\textbackslash{}\textbackslash{}cat L(V,W)\$, \$\textbackslash{}\textbackslash{}O(n)\$, \$\textbackslash{}\textbackslash{}O(V)\$, \$\textbackslash{}\textbackslash{}Sig(n)=\textbackslash{}\textbackslash{}Sigma\_n\textbackslash{}\textbackslash{}wr C\_2\textbackslash{}\textbackslash{}hookrightarrow\textbackslash{}\textbackslash{}O(n)\$, \$\textbackslash{}\textbackslash{}ul\{Vect\}\^{}\textbackslash{}\textbackslash{}oplus=\textbackslash{}\textbackslash{}coprod\_\{n\textbackslash{}\textbackslash{}ge0\}\textbackslash{}\textbackslash{}BGcat\{\textbackslash{}\textbackslash{}O(n)\}\$); cf. the 'Complexity notations found' block of the audit artifact",\\
+      "severity": "info",\\
+      "suggested\_fix": null\\
+    \}\\
+  ],\\
+  "confidence": 0.42,\\
+  "overall\_correctness": "mostly\_sound"\\
+\}\\
+\end{quote}
+
+\section*{Corrections}
+% corrections rendered from corrections table; empty on first publish
+No corrections have been recorded.
+
+\section*{Bibliography}
+No bibliography extracted.
+
+% \bibliographystyle{plain}
+% \bibliography{references}
+\end{document}

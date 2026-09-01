@@ -1,0 +1,55 @@
+{
+  "agent_output_audit_summary": {
+    "accepted": 0,
+    "by_role": {},
+    "rejected": 0,
+    "total": 0
+  },
+  "attempts": [
+    {
+      "attempt": 0,
+      "semantic_validation": {
+        "issues": [
+          "Lean formalization runs asynchronously via the `formalize` job; queue with --with-lean."
+        ],
+        "status": "skipped"
+      },
+      "skipped": true,
+      "status": "skipped"
+    }
+  ],
+  "author_role": "lean_proof_author",
+  "deferred_outputs": [
+    {
+      "artifact": "review_loop/lean/env/env_result.json",
+      "deferred_to": "formalize",
+      "skip_reason": "Lean formalization runs asynchronously via the `formalize` job; queue with --with-lean."
+    },
+    {
+      "artifact": "review_loop/lean/library/compile.json",
+      "deferred_to": "formalize",
+      "skip_reason": "Lean formalization runs asynchronously via the `formalize` job; queue with --with-lean."
+    },
+    {
+      "artifact": "review_loop/lean/library/library_manifest.json",
+      "deferred_to": "formalize",
+      "skip_reason": "Lean formalization runs asynchronously via the `formalize` job; queue with --with-lean."
+    }
+  ],
+  "entries": [],
+  "filename": "GrokRxiv/Proofs.lean",
+  "final_path": "/Users/mlong/.local/state/agenthero/artifacts/grokrxiv/reviews/ae394883-7bd6-4f43-b032-c3341cfe37cb/review_loop/lean/GrokRxiv/Proofs.lean",
+  "fixer_role": "lean_code_fixer",
+  "language": "lean",
+  "lean_attempt_status": "no_math_found",
+  "max_attempts": 2,
+  "operator_status": "NOT_CONDUCIVE_TO_LEAN_PROOF",
+  "proof_status": "SKIPPED",
+  "reviewer_role": "lean_code_reviewer",
+  "skip_reason": "lean_deferred_to_formalize",
+  "skipped": true,
+  "stage": "lean_review_fix_code",
+  "status": "skipped",
+  "target": "lean",
+  "verdict": "NOT_PROVED"
+}
